@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim Jong-myung | Portfolio Presentation</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. Global Reset --- */
+        :root {
+            --bg-body: #1a1a1a;
+            --bg-slide: #FFFFFF;
+            --primary-color: #2563EB;
+            --text-main: #1F2937;
+            --text-sub: #4B5563;
+            --border-color: #E5E7EB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-body);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- 2. PPT Container --- */
+        .ppt-container {
+            width: 100%;
+            max-width: 100vw;
+            aspect-ratio: 16 / 9;
+            background: var(--bg-slide);
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        @media (min-aspect-ratio: 16/9) { .ppt-container { height: 100vh; width: auto; } }
+        @media (max-aspect-ratio: 16/9) { .ppt-container { width: 100vw; height: auto; } }
+
+        /* --- 3. Slide Common Styles --- */
+        .slide {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            padding: 50px 70px;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            background: #fff;
+            z-index: 0;
+        }
+        .slide.active { opacity: 1; visibility: visible; z-index: 10; }
+
+        h2.slide-header {
+            font-size: 2.2rem; color: var(--primary-color); margin-bottom: 30px;
+            font-weight: 700; display: flex; align-items: center; gap: 15px;
+        }
+        h2.slide-header::after { content: ''; flex-grow: 1; height: 2px; background: #eee; margin-left: 20px; }
+
+        /* --- 4. Content Layouts --- */
+        .split-layout { display: flex; height: calc(100% - 80px); gap: 50px; }
+        
+        /* Left Panel */
+        .left-panel {
+            width: 35%; display: flex; flex-direction: column;
+            border-right: 1px solid #eee; padding-right: 30px;
+        }
+        .project-img {
+            width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 25px; object-fit: cover; border: 1px solid #eee;
+        }
+        .meta-box { background: #F9FAFB; padding: 20px; border-radius: 8px; font-size: 0.95rem; }
+        .meta-row { margin-bottom: 12px; display: flex; gap: 10px; }
+        .meta-label { font-weight: 600; color: var(--text-main); min-width: 60px; }
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag { font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; background: #EFF6FF; color: var(--primary-color); font-weight: 600; }
+        .btn-github {
+            margin-top: auto; display: flex; align-items: center; justify-content: center;
+            background: #24292e; color: white; padding: 12px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; transition: transform 0.2s;
+        }
+        .btn-github:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        /* Right Panel */
+        .right-panel { width: 65%; overflow-y: auto; padding-right: 10px; }
+        .right-panel::-webkit-scrollbar { width: 6px; }
+        .right-panel::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
+
+        /* Content Typography */
+        .content-section { margin-bottom: 30px; }
+        .content-title {
+            font-size: 1.3rem; font-weight: 700; color: var(--text-main);
+            margin-bottom: 15px; border-left: 4px solid var(--primary-color); padding-left: 12px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .content-text { font-size: 1rem; color: #374151; line-height: 1.6; margin-bottom: 10px; }
+        
+        /* New Role List Styles (Added for Detail View) */
+        .role-list { list-style: none; padding: 0; }
+        .role-item { margin-bottom: 15px; border-left: 3px solid #BFDBFE; padding-left: 15px; }
+        .role-name { display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px; font-size: 1.05rem; }
+        .role-desc { font-size: 0.95rem; color: #555; line-height: 1.5; }
+
+        /* Troubleshooting Box Styles */
+        .trouble-box { background: #FFF5F5; border: 1px solid #FECACA; padding: 15px; border-radius: 8px; }
+        .trouble-header { font-weight: 700; color: #991B1B; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .trouble-solution { font-weight: 700; color: #065F46; margin-top: 10px; display: flex; align-items: center; gap: 8px; }
+        .trouble-text { font-size: 0.95rem; color: #374151; line-height: 1.5; margin-left: 24px; }
+
+        /* --- Specific Slides --- */
+        #slide-1 {
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background: radial-gradient(circle, #ffffff 0%, #f3f4f6 100%);
+        }
+        .hero-title { font-size: 4rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: -1px; }
+        .hero-sub { font-size: 1.5rem; color: var(--primary-color); margin-bottom: 2rem; }
+
+        .about-layout { 
+            display: flex; 
+            gap: 50px; 
+            height: calc(100% - 80px); /* 제목 높이 제외 */
+            align-items: center; 
+        }
+        .profile-section { text-align: center; min-width: 300px; }
+        .profile-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 5px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .info-section { flex-grow: 1; background: #F9FAFB; padding: 40px; border-radius: 16px; height: auto; }
+        .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        .tech-category { font-weight: 700; color: #6B7280; margin-bottom: 10px; font-size: 0.9rem; }
+
+        /* Nav Controls */
+        .nav-controls { position: absolute; bottom: 30px; right: 50px; display: flex; gap: 20px; z-index: 100; align-items: center; }
+        .page-indicator { font-family: 'Fira Code', monospace; font-size: 1.2rem; color: var(--text-sub); }
+        .btn-nav { width: 45px; height: 45px; border-radius: 50%; border: none; background: #F3F4F6; cursor: pointer; transition: all 0.2s; font-size: 1rem; }
+        .btn-nav:hover { background: var(--primary-color); color: white; }
+
+    </style>
+</head>
+<body>
+
+    <div class="ppt-container">
+
+        <div class="slide active" id="slide-1">
+            <p class="hero-sub">Robot Software Engineer</p>
+            <h1 class="hero-title">KIM JONG MYUNG</h1>
+            <div style="font-size: 1.8rem; color: #6B7280; height: 2rem;">
+                <span id="typing-text"></span><span style="animation: blink 1s infinite">|</span>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-2">
+            <h2 class="slide-header">About Me</h2>
+            
+            <div class="about-layout"> 
+                
+                <div class="profile-section">
+                    <img src="./assets/images/profile.jpg" class="profile-img" onerror="this.src='https://via.placeholder.com/220'">
+                    <h3 style="margin-top:20px; font-size:1.5rem; font-weight:700;">김 종 명</h3>
+                    <p style="color:#6B7280; margin-bottom:20px;">Robot Software Engineer</p>
+                    <div style="text-align:left; font-size:0.95rem; line-height:1.8; color:#4B5563; display:inline-block;">
+                        <div><i class="fas fa-map-marker-alt fa-fw"></i> Seoul, Republic of Korea</div>
+                        <div><i class="fas fa-envelope fa-fw"></i> jongbob1918@gmail.com</div>
+                        <div><i class="fas fa-phone fa-fw"></i> 010-2605-5735</div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size:1.2rem; margin-bottom:15px; display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-graduation-cap" style="color:var(--primary-color)"></i> Education
+                        </h3>
+                        <div style="margin-bottom:15px; border-left:3px solid #E5E7EB; padding-left:15px;">
+                            <h4 style="font-size:1.05rem;">인하공업전문대학 | 항공기계공학과</h4>
+                        </div>
+                        <div style="border-left:3px solid #E5E7EB; padding-left:15px;">
+                            <h4 style="font-size:1.05rem;">애드인에듀 | AI 로봇 자율주행 과정 9기 수료</h4>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="font-size:1.2rem; margin-bottom:15px; display:flex; align-items:center; gap:10px;">
+                            <i class="fas fa-code" style="color:var(--primary-color)"></i> Tech Stacks
+                        </h3>
+                        <div class="tech-grid">
+                            <div>
+                                <div class="tech-category">ROBOTICS & SIMULATION</div>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                                    <span class="tag">ROS 2</span> <span class="tag">Nav2</span> 
+                                    <span class="tag">Gazebo</span> <span class="tag">Isaac Sim</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="tech-category">LANGUAGE & OS</div>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                                    <span class="tag">Python</span> <span class="tag">C++</span> 
+                                    <span class="tag">Ubuntu</span> <span class="tag">Linux</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="tech-category">AI & VISION</div>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                                    <span class="tag">YOLO</span> <span class="tag">OpenCV</span> 
+                                    <span class="tag">PyTorch</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="tech-category">COLLABORATION</div>
+                                <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                                    <span class="tag">Git</span> <span class="tag">Jira</span> 
+                                    <span class="tag">Docker</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="slide" id="slide-3">
+            <h2 class="slide-header">01. JAVIS (자비스)</h2>
+            <div class="split-layout">
+                <div class="left-panel">
+                    <img src="./assets/images/project_javis.png" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=JAVIS'">
+                    <div class="meta-box">
+                        <div class="meta-row"><span class="meta-label">Type</span> <span class="meta-value">Team Project (9인)</span></div>
+                        <div class="meta-row"><span class="meta-label">Period</span> <span class="meta-value">2024.09 - 2024.10</span></div>
+                        <div class="tag-container">
+                            <span class="tag">ROS 2</span> <span class="tag">Nav2</span> <span class="tag">Python</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/jongbob1918/JAVIS" target="_blank" class="btn-github"><i class="fab fa-github"></i> &nbsp;GitHub Repository</a>
+                </div>
+                <div class="right-panel">
+                    <div class="content-section">
+                        <div class="content-title">Project Overview</div>
+                        <p class="content-text">도서관 및 카페 환경에서 안내, 서가 정리, 청소를 수행하는 다목적 모바일 매니퓰레이터입니다. 로봇팔과 주행부를 통합 제어하는 메인 시스템을 구축했습니다.</p>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="content-title">My Main Roles</div>
+                        <ul class="role-list">
+                            <li class="role-item">
+                                <span class="role-name">1. Robot Main Controller 개발</span>
+                                <span class="role-desc">로봇의 행동을 State로 정의하여 시나리오 꼬임과 예외 상황을 방지하는 중앙 제어 시스템을 설계했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">2. 하드웨어 추상화 (Interface Design)</span>
+                                <span class="role-desc">HW 개발 지연에 대비해 Mock 객체 기반의 인터페이스를 설계, 장비 없이도 로직 검증이 가능한 환경을 구축했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">3. Navigation 최적화</span>
+                                <span class="role-desc">좁은 통로(60cm) 주행을 위해 Costmap Inflation을 0.4m로 축소하고 MPPI 컨트롤러를 도입했습니다.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="content-title">Troubleshooting</div>
+                        <div class="trouble-box">
+                            <div class="trouble-header"><i class="fas fa-exclamation-circle"></i> Problem: 좁은 통로 진입 불가</div>
+                            <div class="trouble-text">로봇 폭과 비슷한 좁은 통로에서 Costmap이 겹쳐 경로 생성이 실패하거나 제자리 회전 발생.</div>
+                            
+                            <div class="trouble-solution"><i class="fas fa-check-circle"></i> Solution</div>
+                            <div class="trouble-text">
+                                • <strong>Smac Planner Hybrid</strong> 도입으로 기구학적 제약을 고려한 경로 생성.<br>
+                                • Cost Penalty 완화 및 Inflation Radius 정밀 튜닝.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-4">
+            <h2 class="slide-header">02. ROOMIE (루미)</h2>
+            <div class="split-layout">
+                <div class="left-panel">
+                    <img src="./assets/images/project_roomie.png" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=ROOMIE'">
+                    <div class="meta-box">
+                        <div class="meta-row"><span class="meta-label">Type</span> <span class="meta-value">Team Project (4인)</span></div>
+                        <div class="meta-row"><span class="meta-label">Role</span> <span class="meta-value">Arm Control, GUI, PM</span></div>
+                        <div class="tag-container">
+                            <span class="tag">ROS 2</span> <span class="tag">Ikpy</span> <span class="tag">PyQt</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/jongbob1918/ROMMIE" target="_blank" class="btn-github"><i class="fab fa-github"></i> &nbsp;GitHub Repository</a>
+                </div>
+                <div class="right-panel">
+                    <div class="content-section">
+                        <div class="content-title">Project Overview</div>
+                        <p class="content-text">로봇팔을 이용해 스스로 엘리베이터 버튼을 조작하고 탑승하여 호텔 룸서비스를 수행하는 자율주행 배송 로봇입니다.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="content-title">My Main Roles</div>
+                        <ul class="role-list">
+                            <li class="role-item">
+                                <span class="role-name">1. Robot Arm Controller (IK)</span>
+                                <span class="role-desc">ikpy를 활용해 카메라 좌표(Vision)를 관절 각도(Joint)로 변환하는 역기구학 솔루션을 구현했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">2. Motion Profile 구현</span>
+                                <span class="role-desc">버튼 타격 시 떨림 방지를 위해 가우시안 함수 기반의 S-Curve 속도 프로파일을 적용했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">3. 통합 관제 GUI & PM</span>
+                                <span class="role-desc">PyQt 기반 다중 로봇 관제 대시보드 개발 및 Jira를 활용한 Agile 스프린트 관리를 수행했습니다.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="content-title">Troubleshooting</div>
+                        <div class="trouble-box">
+                            <div class="trouble-header"><i class="fas fa-exclamation-circle"></i> Problem: 버튼 타격 오차 (Open-loop)</div>
+                            <div class="trouble-text">저가형 모터와 카메라 장착 오차로 인해 버튼을 헛누르는 현상 발생.</div>
+                            
+                            <div class="trouble-solution"><i class="fas fa-check-circle"></i> Solution</div>
+                            <div class="trouble-text">
+                                • <strong>Hand-Eye Calibration:</strong> 마커를 이용해 좌표 변환 행렬 정밀 보정.<br>
+                                • <strong>Action 분리:</strong> '정렬(Align)' 후 '누르기(Push)'를 수행하도록 동작 시퀀스 분리.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-5">
+            <h2 class="slide-header">03. FALCON (팔콘)</h2>
+            <div class="split-layout">
+                <div class="left-panel">
+                    <img src="./assets/images/project_falcon.png" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=FALCON'">
+                    <div class="meta-box">
+                        <div class="meta-row"><span class="meta-label">Type</span> <span class="meta-value">Team Project (4인)</span></div>
+                        <div class="meta-row"><span class="meta-label">Role</span> <span class="meta-value">AI Logic</span></div>
+                        <div class="tag-container">
+                            <span class="tag">YOLO v8</span> <span class="tag">ByteTrack</span> <span class="tag">OpenCV</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/jongbob1918/FALCON" target="_blank" class="btn-github"><i class="fab fa-github"></i> &nbsp;GitHub Repository</a>
+                </div>
+                <div class="right-panel">
+                    <div class="content-section">
+                        <div class="content-title">Project Overview</div>
+                        <p class="content-text">공항 활주로 내 이물질(FOD) 및 침입자를 실시간으로 탐지/추적하여 관제탑에 경고를 보내는 AI 안전 관제 시스템입니다.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <div class="content-title">My Main Roles</div>
+                        <ul class="role-list">
+                            <li class="role-item">
+                                <span class="role-name">1. 위험물 감지 및 추적</span>
+                                <span class="role-desc">YOLO v8 커스텀 학습으로 90% 이상의 탐지율을 확보하고, ByteTrack으로 객체 이동 경로를 시각화했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">2. 좌표 변환 (Homography)</span>
+                                <span class="role-desc">CCTV 영상의 2D 픽셀 좌표를 실제 활주로의 GPS 좌표로 변환하는 로직을 구현했습니다. (오차 ±0.5cm)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="content-title">Insight</div>
+                        <p class="content-text" style="background:#f3f4f6; padding:15px; border-radius:8px;">
+                            특수 데이터(활주로) 확보의 어려움을 Data Augmentation으로 극복하고, 작업자 조끼 인식을 위해 HSV 필터링을 병행하는 하이브리드 접근법을 사용했습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-6">
+            <h2 class="slide-header">04. Visual SLAM Study</h2>
+            <div class="split-layout">
+                <div class="left-panel">
+                    <img src="./assets/images/project_slam2.png" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=Visual+SLAM'">
+                    <div class="meta-box">
+                        <div class="meta-row"><span class="meta-label">Type</span> <span class="meta-value">Personal Study</span></div>
+                        <div class="tag-container">
+                            <span class="tag">RTAB-Map</span> <span class="tag">RGB-D</span> <span class="tag">Sensor Fusion</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/jongbob1918/vicpinky-rtabmap" target="_blank" class="btn-github"><i class="fab fa-github"></i> &nbsp;GitHub Repository</a>
+                </div>
+                <div class="right-panel">
+                    <div class="content-section">
+                        <div class="content-title">Study Overview</div>
+                        <p class="content-text">2D LiDAR의 한계를 극복하기 위해 RGB-D 카메라를 활용한 Visual SLAM을 연구하고, RTAB-Map 패키지로 Sensor Fusion을 검증했습니다.</p>
+                    </div>
+                    <div class="content-section">
+                        <div class="content-title"><i class="fas fa-microscope"></i> My Focus</div>
+                        <ul class="role-list">
+                            <li class="role-item">
+                                <span class="role-name">Sensor Fusion</span>
+                                <span class="role-desc">특징점이 부족한 복도(LiDAR 유리)와 넓은 공간(Visual 유리) 모두에서 강인한 매핑을 위해 다중 센서를 융합했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">TF Tree & Calibration</span>
+                                <span class="role-desc">URDF 모델링을 통해 센서 간 정확한 좌표 변환(Extrinsic Calibration) 관계를 정의했습니다.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide-7">
+            <h2 class="slide-header">05. TRON 1 (3D SLAM)</h2>
+            <div class="split-layout">
+                <div class="left-panel">
+                    <img src="./assets/images/project_tron.png" class="project-img" onerror="this.src='https://via.placeholder.com/400x300?text=TRON+1'">
+                    <div class="meta-box">
+                        <div class="meta-row"><span class="meta-label">Type</span> <span class="meta-value">Personal Research</span></div>
+                        <div class="tag-container">
+                            <span class="tag">FAST-LIO2</span> <span class="tag">Point Cloud</span> <span class="tag">ROS</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/jongbob1918" target="_blank" class="btn-github"><i class="fab fa-github"></i> &nbsp;GitHub Repository</a>
+                </div>
+                <div class="right-panel">
+                    <div class="content-section">
+                        <div class="content-title">Research Overview</div>
+                        <p class="content-text">2족 보행 로봇 TRON 1과 Livox 3D LiDAR를 활용하여 최신 3D SLAM 알고리즘(FAST-LIO2)을 실습한 프로젝트입니다.</p>
+                    </div>
+                    <div class="content-section">
+                        <div class="content-title"><i class="fas fa-microscope"></i> My Focus</div>
+                        <ul class="role-list">
+                            <li class="role-item">
+                                <span class="role-name">Open Source Analysis</span>
+                                <span class="role-desc">제조사 SDK 및 오픈소스 패키지를 분석하여 하드웨어 아키텍처 및 센서 데이터 흐름을 파악했습니다.</span>
+                            </li>
+                            <li class="role-item">
+                                <span class="role-name">Robust Mapping</span>
+                                <span class="role-desc">보행 로봇 특유의 상하 진동에도 불구하고 IMU 결합 방식을 통해 정밀한 3D Point Cloud 지도를 작성했습니다.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-controls">
+            <div class="page-indicator" id="page-num">01 / 07</div>
+            <button class="btn-nav" onclick="changeSlide(-1)"><i class="fas fa-arrow-left"></i></button>
+            <button class="btn-nav" onclick="changeSlide(1)"><i class="fas fa-arrow-right"></i></button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 7;
+        const pageNumEl = document.getElementById('page-num');
+
+        function updateSlide() {
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            pageNumEl.innerText = `0${currentSlide} / 0${totalSlides}`;
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            updateSlide();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        const text = "I build Intelligence for Machines.";
+        const typeEl = document.getElementById('typing-text');
+        let idx = 0;
+        
+        function typeWriter() {
+            if (idx < text.length) {
+                typeEl.innerHTML += text.charAt(idx);
+                idx++;
+                setTimeout(typeWriter, 80);
+            }
+        }
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>

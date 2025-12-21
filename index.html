@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kim Jong-myung | Robot Software Engineer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. Global Variables & Reset --- */
+        :root {
+            --bg-color: #F8F9FA;
+            --surface-color: #FFFFFF;
+            --primary-color: #4285F4; /* Google Blue */
+            --text-primary: #202124;
+            --text-secondary: #5F6368;
+            --border-color: #DADCE0;
+            --shadow-sm: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+            --shadow-md: 0 4px 6px rgba(60,64,67,0.3);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 2. Layout & Typography --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 { font-weight: 700; letter-spacing: -0.5px; }
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 4px;
+            background: var(--primary-color);
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        section { padding: 80px 0; }
+
+        /* --- 3. Header (Sticky) --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: box-shadow 0.3s;
+        }
+        header.scrolled { box-shadow: var(--shadow-sm); }
+        
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); }
+        .nav-links a {
+            margin-left: 20px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary-color); }
+
+        /* --- 4. Hero Section --- */
+        #hero {
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--bg-color);
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+        .hero-desc {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            height: 1.6em; /* Prevent layout shift */
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--text-secondary);
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+            transition: var(--transition);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4); }
+
+        /* --- 5. About & Tech Stack --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .profile-card {
+            background: var(--surface-color);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid var(--bg-color);
+        }
+        .contact-info { text-align: left; margin-top: 20px; font-size: 0.95rem; }
+        .contact-info i { width: 25px; color: var(--text-secondary); }
+        .contact-info a { color: var(--primary-color); text-decoration: underline; }
+
+        .edu-item, .tech-group { margin-bottom: 25px; }
+        .edu-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .edu-item span { font-size: 0.9rem; color: var(--text-secondary); display: block; }
+        
+        .tech-category {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+            background: #E8F0FE;
+            color: #1967D2;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .tag:hover { transform: translateY(-2px); background: #D2E3FC; }
+
+        /* --- 6. Projects (Grid) --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--surface-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        
+        .card-thumb {
+            height: 180px;
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.25rem; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .card-desc { font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 15px; flex-grow: 1; }
+        
+        .card-badges { margin-bottom: 15px; display: flex; gap: 6px; flex-wrap: wrap; }
+        .badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .badge.team { background: #FCE8E6; color: #C5221F; }
+        .badge.personal { background: #E6F4EA; color: #137333; }
+        .badge.role { background: #F1F3F4; color: #5F6368; }
+
+        .btn-github {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            z-index: 2;
+        }
+        .btn-github:hover { color: var(--primary-color); }
+
+        /* --- 7. Modal (Popup) --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-content {
+            background: var(--surface-color);
+            width: 100%; max-width: 800px;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            padding: 40px;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px; right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        
+        .modal-header h2 { font-size: 2rem; margin-bottom: 10px; }
+        .modal-meta { color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem; }
+        
+        .modal-body h3 { font-size: 1.3rem; margin-top: 30px; margin-bottom: 15px; color: var(--text-primary); border-left: 4px solid var(--primary-color); padding-left: 10px; }
+        .modal-body p { margin-bottom: 10px; color: #3c4043; }
+        .modal-body ul { list-style: disc; margin-left: 20px; margin-bottom: 15px; color: #3c4043; }
+        .modal-body li { margin-bottom: 6px; }
+
+        /* --- 8. Footer --- */
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-links { margin-bottom: 15px; }
+        .footer-links a { margin: 0 10px; font-size: 1.5rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--primary-color); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .modal-content { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container nav-content">
+            <div class="logo">KIM JONG-MYUNG</div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <p class="hero-subtitle">Robot Software Engineer</p>
+            <h1 class="hero-title">Hello, I'm Kim Jong-myung.</h1>
+            <div class="hero-desc">
+                <span id="typing-text"></span><span class="typing-cursor">&nbsp;</span>
+            </div>
+            <a href="#projects" class="btn-primary">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="profile-card">
+                    <img src="./assets/images/profile.jpg" alt="Profile" class="profile-img">
+                    <h3>김 종 명 (Kim Jong-myung)</h3>
+                    <p style="color:var(--text-secondary); margin-bottom: 20px;">Based in Seoul, KR</p>
+                    
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> 010-2605-5735</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:jongbob1918@gmail.com">jongbob1918@gmail.com</a></p>
+                        <p><i class="fab fa-github"></i> <a href="https://github.com/jongbob1918" target="_blank">github.com/jongbob1918</a></p>
+                        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank">LinkedIn Profile</a></p>
+                        <p><i class="fab fa-youtube"></i> <a href="https://www.youtube.com/channel/UCVbvniwYb2V2equijzjjt0Q" target="_blank">YouTube Channel</a></p>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="margin-bottom: 40px;">
+                        <h3 style="margin-bottom: 20px;">Education & Training</h3>
+                        <div class="edu-item">
+                            <h4>인하공업전문대학 | 항공기계공학과 졸업</h4>
+                        </div>
+                        <div class="edu-item">
+                            <h4>애드인에듀 | AI 로봇 자율주행 개발자 과정 9기 수료</h4>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="margin-bottom: 20px;">Tech Stacks</h3>
+                        <div class="tech-group">
+                            <div class="tech-category">Robotics</div>
+                            <div class="tech-tags">
+                                <span class="tag">ROS</span><span class="tag">ROS 2</span><span class="tag">Nav2</span><span class="tag">Gazebo</span><span class="tag">Isaac Sim</span>
+                            </div>
+                        </div>
+                        <div class="tech-group">
+                            <div class="tech-category">AI & Vision</div>
+                            <div class="tech-tags">
+                                <span class="tag">PyTorch</span><span class="tag">OpenCV</span><span class="tag">Object Detection</span><span class="tag">Pose Estimation</span>
+                            </div>
+                        </div>
+                        <div class="tech-group">
+                            <div class="tech-category">Languages & DevOps</div>
+                            <div class="tech-tags">
+                                <span class="tag">Python</span><span class="tag">C++(기초)</span><span class="tag">Linux(Ubuntu)</span><span class="tag">Docker</span><span class="tag">Git</span>
+                            </div>
+                        </div>
+                         <div class="tech-group">
+                            <div class="tech-category">Backend & Data & Collaboration</div>
+                            <div class="tech-tags">
+                                <span class="tag">Flask</span><span class="tag">MySQL</span><span class="tag">Selenium</span><span class="tag">Jira</span><span class="tag">Confluence</span><span class="tag">Slack</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" style="background-color: #fff;">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid" id="project-list">
+                </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/jongbob1918" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCVbvniwYb2V2equijzjjt0Q" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="mailto:jongbob1918@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2025 Kim Jong-myung. Built with HTML/CSS & GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="project-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body-content">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Project Data (JSON) ---
+        const projects = [
+            {
+                id: 1,
+                title: "JAVIS (자비스)",
+                summary: "복합 환경(도서관, 카페)에서 안내 및 서가 정리를 수행하는 다목적 모바일 매니퓰레이터.",
+                type: "Team Project (9인)",
+                role: "robotarm과 mobile robot을 통합 제어하는 robot main controller 개발, Navigation 최적화",
+                tags: ["#ROS2", "#Nav2", "#Python", "#System_Integration"],
+                github: "https://github.com/jongbob1918/JAVIS",
+                image: "./assets/images/project_javis.png", 
+                details: `
+                    <div class="modal-header">
+                        <img src="https://github.com/user-attachments/assets/d0d0bd77-5cb5-4fc8-9e47-9b23468030de"/>
+                        <h2>JAVIS (자비스)</h2>
+                        <p class="modal-meta">Type: Team Project (9인) | Role: robotarm과 mobile robot을 통합 제어하는 robot main controller 개발, Navigation 최적화</p>
+                    </div>
+                    <div class="modal-body">
+                        <h3>1. 프로젝트 개요 (Overview)</h3>
+                        <p><strong>개발 목표:</strong> 도서관, 카페 등 복합 환경에서 안내, 서가 정리, 청소 등 다양한 임무를 수행하는 로봇 시스템 구축</p>
+                        <p><strong>주요 역할:</strong></p>
+                        <ul>
+                            <li>시스템 통합 제어: 로봇의 두뇌 역할을 하는 메인 컨트롤러(DMC) 설계 및 개발</li>
+                            <li>유연한 아키텍처 구축: 하드웨어 개발 지연 시에도 로직 검증이 가능한 인터페이스 기반 구조 설계</li>
+                            <li>자율주행 최적화: 좁은 통로 주행 문제를 해결하기 위한 Nav2 제어기 튜닝</li>
+                        </ul>
+                        <p><strong>사용 기술:</strong> ROS 2 (Python, C++), Navigation2, Ubuntu 24.04</p>
+                        
+                        <h3>2. 핵심 기능 및 구현 내용 (Key Features)</h3>
+                        <p><strong>① 체계적인 로봇 상태 관리 (State Management)</strong></p>
+                        <ul>
+                            <li>구현: 로봇의 움직임을 State로 세분화하여 설계함.</li>
+                            <li>효과: 상태 정의를 통해 로봇이 임무 수행 중 꼬이거나 멈추는 현상을 방지하고, 배터리 부족 시 작업을 거절하고 복귀하는 등 안정적인 시나리오 흐름을 구현함.</li>
+                        </ul>
+                        <p><strong>② 하드웨어 의존성 제거 및 협업 유연성 확보 (Interface & Mock)</strong></p>
+                        <ul>
+                            <li>배경: 팀원들이 담당한 하드웨어(로봇팔, AI, 서버) 개발이 완료되지 않아 통합 테스트가 지연되는 상황 발생.</li>
+                            <li>구현: 로봇의 행동 로직과 하드웨어 제어 코드 사이에 추상 인터페이스(Abstract Interface) 계층을 두어 의존성을 분리함. 실제 장비가 없을 때는 <strong>가상 모듈(Mock)</strong>이 응답하도록 설계.</li>
+                            <li>성과: 하드웨어가 준비되지 않은 상황에서도 메인 로직 개발과 시뮬레이션 검증을 먼저 진행할 수 있었으며, 추후 하드웨어가 완성되었을 때 코드 수정 없이 즉시 연동에 성공함.</li>
+                        </ul>
+                        <p><strong>③ 자율주행 안정성 최적화 (Nav2 Optimization)</strong></p>
+                        <ul>
+                            <li>Planner 최적화: cost_penalty 및 reverse_penalty를 조정하여 좁은 공간에서도 후진 없이 한 번에 진입하는 부드러운 경로를 생성함.</li>
+                            <li>Controller 최적화: 장애물이 많고 좁은 서가 사이를 로봇이 잘 빠져나갈 수 있도록, 기존 DWB 방식을 MPPI (Model Predictive Path Integral) 방식으로 변경하여 동적 장애물 대응력을 높임.</li>
+                            <li>Costmap 개선: 좁은 통로 진입 실패 문제를 해결하기 위해 Local Costmap의 inflation_radius를 0.4m로 축소하고, cost_scaling_factor를 3.0으로 조정하여 주행 안전 마진을 확보하면서도 통행 가능 구역을 넓힘.</li>
+                        </ul>
+
+                        <h3>3. 트러블슈팅 (Troubleshooting)</h3>
+                        <p><strong>Issue 1: 좁은 통로 진입 불가 및 경로 생성 실패</strong></p>
+                        <ul>
+                            <li>문제: 로봇 폭보다 약간 넓은 좁은 통로(Narrow Passage)를 지나가야 할 때, Costmap의 팽창(Inflation) 영역이 겹쳐 경로 생성이 차단되거나 로봇이 진입을 거부하는 현상.</li>
+                            <li>해결:
+                                <ul>
+                                    <li>Global Planner 교체: <strong>로봇이 직사각형 형태여서 일반적인 홀로노믹(Holonomic) 위주의 플래너보다는 로봇 모델(Footprint)에 맞는 경로 생성이 중요하다고 판단함.</strong> 이에 기구학적 제약 조건을 고려할 수 있는 <strong>Smac Planner Hybrid</strong>를 도입하여 진입 각도를 개선함.</li>
+                                    <li>Inflation Layer 튜닝: inflation_radius를 과도하게 크게 잡았던 기존 설정을 로봇 반경 대비 최적값(0.4m)으로 줄여 좁은 길을 '열린 공간'으로 인식시킴.</li>
+                                    <li>Cost Penalty 조정: 장애물 근처 주행 시 발생하는 비용(cost_penalty)을 낮추어, 필요시 장애물에 근접해서라도 통과하도록 유도함.</li>
+                                </ul>
+                            </li>
+                            <li>결과: 기존에는 진입조차 못 하던 60cm 폭의 좁은 통로를 충돌 없이 매끄럽게 통과 성공.</li>
+                        </ul>
+                        <p><strong>Issue 2: 좁은 통로에서 로봇이 갇히는 문제 (Stuck & Oscillation)</strong></p>
+                        <ul>
+                            <li>문제: 서가 사이의 좁은 통로에서 로봇이 경로를 찾지 못하고 제자리에서 회전하거나 멈추는(Recovery Behavior) 현상 발생.</li>
+                            <li>원인: 기존 DWA 컨트롤러는 단일 최적 경로만 계산하다 보니, 비정형 장애물이 많은 환경에서 탈출 경로를 찾는 데 한계가 있음.</li>
+                            <li>해결: 다수의 경로를 확률적으로 예측하여 최적의 이동 방향을 찾는 MPPI 컨트롤러를 도입하여 지역 최솟값(Local Minima) 탈출 성능을 개선.</li>
+                            <li>결과: 복잡한 좁은 서가 환경에서도 멈춤 없이 유연하게 주행하는 데 성공함.</li>
+                        </ul>
+                        
+                        <h3>4. 성과 (Results)</h3>
+                        <ul>
+                            <li>시스템 통합: 서로 다른 담당자가 개발한 구동부, 로봇팔, AI 모듈을 DMC(중앙 제어)로 통합하여 끊김 없는 시나리오 동작(Pick → Place → Move) 구현 성공.</li>
+                            <li>주행 안정성: 좁은 통로 및 장애물 회피 테스트에서 로봇이 갇히는 빈도를 현저히 줄여 주행 신뢰성 확보.</li>
+                            <li>협업 효율 증대: 인터페이스 분리 설계를 통해 하드웨어 개발 일정에 종속되지 않고 소프트웨어 개발을 병행하는 병렬 개발 프로세스를 확립함.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                title: "ROOMIE (루미)",
+                summary: "엘리베이터 버튼 조작이 가능한 로봇팔 제어 및 웹/앱 관제 시스템을 갖춘 호텔 룸서비스 로봇.",
+                type: "Team Project (4인)",
+                role: "Robot Arm Controller 개발, GUI 개발, 프로젝트 일정관리",
+                tags: ["#ROS2", "#Ikpy", "#PyQt", "#IBVS"],
+                github: "https://github.com/jongbob1918/ROMMIE",
+                image: "./assets/images/project_roomie.png",
+                details: `
+                    <div class="modal-header">
+                        <img src="./assets/images/elevator-alignbutton.gif" alt="Visual SLAM Basic" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                        <img src="./assets/images/elevator-pushouterbutton2.gif" alt="Visual SLAM Basic" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                        <h2>ROOMIE (루미)</h2>
+                        <p class="modal-meta">Type: Team Project (4인) | Role: Robot Arm Controller 개발, GUI 개발, 프로젝트 일정관리</p>
+                    </div>
+                    <div class="modal-body">
+                        <h3>1. 프로젝트 개요 (Overview)</h3>
+                        <ul>
+                            <li>개발 목표: 호텔 내 반복 업무(배송, 안내)를 대체하기 위해, 자율주행과 엘리베이터 탑승이 가능한 다목적 서비스 로봇 개발</li>
+                            <li>개발 기간: 2025.07.07 ~ 2025.08.13 (총 38일, 4인 팀 프로젝트)</li>
+                            <li>주요 역할:
+                                <ul>
+                                    <li>Robot Arm Control: 엘리베이터 버튼 조작을 위한 3축 로봇팔 제어기(ROS 2) 및 궤적 생성 알고리즘 개발</li>
+                                    <li>GUI Development: 투숙객용(Mobile Web) 및 직원용(PC App) 실시간 관제 인터페이스 구현</li>
+                                    <li>Project Management: Jira를 활용한 Agile 스프린트 일정 관리 (총 6회 스프린트)</li>
+                                </ul>
+                            </li>
+                            <li>사용 기술: ROS 2, Python, C++, PyQt, JavaScript, FreeRTOS, YOLOv8</li>
+                        </ul>
+                        
+                        <h3>2. 핵심 기능 및 구현 내용 (Key Features)</h3>
+                        <p><strong>① 정밀 로봇팔 제어 시스템 (Arm Controller)</strong></p>
+                        <ul>
+                            <li>기능: 엘리베이터 버튼을 인식하고 정확하게 누르기 위한 역기구학(IK) 풀이 및 모션 제어 담당.</li>
+                            <li>구현:
+                                <ul>
+                                    <li>Action Server 구축: PushElevatorButton, HandAlign 등 상위 제어 명령을 처리하는 ROS 2 Action Server를 구현하여 비동기적 작업 처리가 가능하도록 설계.</li>
+                                    <li>IK & 좌표 변환: ikpy 라이브러리를 활용한 역기구학 해(Solution) 도출 및 카메라 좌표계(Vision)를 로봇 베이스 좌표계(Base)로 변환하는 CoordinateTransformer 구현.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><strong>② 부드러운 모션 생성 (Gaussian Velocity Profile)</strong></p>
+                        <ul>
+                            <li>문제: 단순 등속 제어 시 로봇팔 끝단(End-effector)에서 급격한 가감속으로 인한 떨림(Jitter) 발생.</li>
+                            <li>해결: 가우시안 함수(Gaussian Function) 기반의 S-Curve 속도 프로파일을 적용하여, 시작과 끝점에서 부드럽게 가감속하는 궤적 생성 알고리즘을 구현함.</li>
+                            <li>성과: 버튼 타격 정확도 향상 및 기구적 충격 최소화.</li>
+                        </ul>
+                        <p><strong>③ 실시간 통합 관제 GUI (Guest & Staff)</strong></p>
+                        <ul>
+                            <li>Guest GUI: HTML/JS/CSS 기반의 반응형 웹으로 구현하여, 별도 앱 설치 없이 QR코드로 주문 및 요청 가능. WebSocket을 통해 로봇의 위치 및 상태(도착 알림 등)를 실시간 수신.</li>
+                            <li>Staff GUI: PyQt 기반의 관리자 대시보드로, 다중 로봇의 배터리 상태, 작업 현황, 위치(Map)를 한눈에 모니터링하고 제어하도록 구현.</li>
+                        </ul>
+
+                        <h3>3. 트러블슈팅 (Troubleshooting)</h3>
+                        <p><strong>Issue: 로봇팔의 버튼 타격 정밀도 저하</strong></p>
+                        <ul>
+                            <li>문제: 카메라로 인식한 버튼 좌표와 실제 로봇팔이 도달하는 위치 간에 오차가 발생하여 버튼을 헛누르는 현상.</li>
+                            <li>원인: 카메라와 로봇팔 베이스 사이의 물리적 장착 오차 및 렌즈 왜곡.</li>
+                            <li>해결:
+                                <ul>
+                                    <li>Hand-Eye Calibration: 로봇팔 끝에 마커를 부착하고 여러 각도에서 촬영하여 카메라와 로봇팔 간의 변환 행렬(Transformation Matrix)을 정밀 보정함.</li>
+                                    <li>정렬 액션(Align Action): 버튼을 누르기 전, HandAlign 액션을 통해 버튼 정면으로 엔드이펙터를 1차 정렬시킨 후 누르는 동작(Push)을 수행하도록 시퀀스 분리.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>4. 성과 (Results)</h3>
+                        <ul>
+                            <li>기술적 성과: 엘리베이터 버튼 인식부터 실제 탑승 시퀀스까지 일관된 동작을 구현함.</li>
+                            <li>프로젝트 관리: Jira를 활용한 일정 관리로 38일이라는 짧은 기간 내에 하드웨어 제작부터 SW 통합까지 완수.</li>
+                            <li>사용자 경험: 데모 시연 과정에서 사용자 접근성과 직관성 측면에서 좋은 피드백을 받음.</li>
+                        </ul>
+
+                        <h3>5. 한계점</h3>
+                        <p><strong>하드웨어 정밀도 한계</strong></p>
+                        <ul>
+                            <li>한계: 사용된 서보모터가 엔코더 피드백이 없는 모델이라, 명령을 보낸 후 실제 도달 위치를 확인할 수 없는 개루프(Open-loop Control) 방식으로 구현됨. 이로 인해 장시간 운용 시 미세한 위치 오차가 누적되거나 외란에 취약한 문제가 있음.</li>
+                            <li>개선안: 엔코더가 내장된 스마트 액추에이터(예: Dynamixel)로 모터를 교체하거나, 관절별 포텐쇼미터를 추가하여 실시간 위치 피드백을 받는 PID 기반 폐루프(Closed-loop) 제어 시스템으로 고도화 필요함.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                title: "FALCON (팔콘)",
+                summary: "공항 활주로 내 위험물(FOD), 동물, 작업자를 실시간 탐지하고 추적하는 AI 안전 관제 시스템.",
+                type: "Team Project (4인)",
+                role: "지상 위험 요소 감지 모델 학습, 위험판단 로직 구현",
+                tags: ["#PyTorch", "#Object Detection", "#Object Tracking", "#OpenCV"],
+                github: "https://github.com/jongbob1918/FALCON",
+                image: "./assets/images/project_falcon.png",
+                details: `
+                    <div class="modal-header">
+                        <img src="./assets/images/hawkeye_mainpage.gif" alt="Visual SLAM Basic" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                        <h2>FALCON (팔콘)</h2>
+                        <p class="modal-meta">Type: Team Project (4인) | Role: 지상 위험 요소 감지 모델 학습, 위험판단 로직 구현</p>
+                    </div>
+                    <div class="modal-body">
+                        <h3>1. 프로젝트 개요 (Overview)</h3>
+                        <p>항공 안전을 위해 활주로의 이물질(FOD) 및 침입자를 감지하여 관제사에게 경고를 보내는 비전 시스템 개발. (기여도 25%)</p>
+                        
+                        <h3>2. 핵심 기능 (Key Features)</h3>
+                        <ul>
+                            <li><strong>Object Detection:</strong> YOLO v8 모델을 커스텀 데이터셋으로 학습시켜 위험 요소 탐지 (정확도 90%+).</li>
+                            <li><strong>Object Tracking:</strong> ByteTrack 알고리즘을 적용하여 끊김 없는 객체 이동 경로 추적 구현.</li>
+                            <li><strong>Coord Transformation:</strong> ArUco 마커를 활용한 호모그래피(Homography) 변환으로 활주로 구역의 영상 좌표를 실제 지도 좌표(GPS/Map)로 정밀 변환 (오차 ±0.5cm).</li>
+                            <li><strong>Feature Extraction:</strong> HSV 색상 분할로 작업자의 형광 조끼를 인식하여 인가/비인가 인원 구분.</li>
+                        </ul>
+
+                        <h3>3. 성과 (Results)</h3>
+                        <ul>
+                            <li>다양한 환경(날씨, 조도)에서의 데이터셋 확보 중요성을 학습하고, 가설-검증 프로세스를 통한 성능 개선 경험.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 4,
+                title: "Visual SLAM Basic (개인)",
+                summary: "RGB-D 카메라와 LiDAR 센서 퓨전을 활용한 RTAB-Map Visual SLAM 실습 및 검증 프로젝트.",
+                type: "Personal Study",
+                role: "Visual SLAM, Sensor Fusion", 
+                tags: ["#ROS2", "#RTAB-Map","#Sensor_Fusion", "#Gazebo"],
+                github: "https://github.com/jongbob1918/vicpinky-rtabmap",
+                image: "./assets/images/project_slam2.png",
+                details: `
+                    <div class="modal-header">
+                        <img src="./assets/images/project_slam.gif" alt="Visual SLAM Basic" style="width:100%; border-radius:8px; margin-bottom:15px;">
+                        <h2>Visual SLAM Basic (개인)</h2>
+                        <p class="modal-meta">Type: Personal Study | Role: Visual SLAM, Sensor Fusion</p>
+                    </div>
+                    <div class="modal-body">
+                        <h3>1. 프로젝트 개요 (Overview)</h3>
+                        <p>2D LiDAR의 한계를 극복하기 위해 Visual SLAM을 도입하고, 하드웨어 셋업부터 매핑, 내비게이션 연동까지 전체 프로세스를 검증함.</p>
+                        
+                        <h3>2. 구현 내용 (Implementation)</h3>
+                        <ul>
+                            <li><strong>Hardware Setup:</strong> Orbbec Astra 카메라 장착 및 URDF 모델링을 통한 정확한 TF(좌표계) 트리 구성.</li>
+                            <li><strong>Sensor Fusion:</strong> LiDAR 데이터와 RGB-D 데이터를 결합하여 특징점이 부족한 복도 환경에서도 강인한 매핑 구현.</li>
+                        </ul>
+
+                        <h3>3. 트러블슈팅 (Troubleshooting)</h3>
+                        <ul>
+                            <li><strong>Issue:</strong> Visual Odometry 단독 사용 시 회전 구간에서 지도 틀어짐 발생.</li>
+                            <li><strong>Solution:</strong> Wheel Odometry + LiDAR + Visual 데이터를 융합하도록 RTAB-Map 파라미터 튜닝.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            {
+                id: 5,
+                title: "TRON 1 (개인)",
+                summary: "2족 보행/주행 로봇을 활용한 실내외 3D LiDAR SLAM 실습 및 검증.",
+                type: "Personal Research",
+                role: "3D SLAM Study",
+                tags: ["#ROS", "#FAST_LIO2", "#TRON1", "#3D_LiDAR"],
+                github: "https://github.com/jongbob1918", /* 필요 시 LimX 공식 포크한 개인 레포 링크 */
+                image: "./assets/images/project_tron.png",
+                details: `
+                    <div class="modal-header">
+                        <img src="./assets/images/tron_test.gif" alt="TRON 1 SLAM" style="width:100%; border-radius:8px; margin-bottom:20px; object-fit: cover;">
+                        <h2>TRON 1 (Personal Research)</h2>
+                        <p class="modal-meta">Personal Research | Role: 3D SLAM Study, Open Source Utilization</p>
+                    </div>
+                    <div class="modal-body">
+                        <h3>1. 프로젝트 개요 (Overview)</h3>
+                        <p>LimX Dynamics사의 <strong>오픈소스 패키지</strong>를 활용하여, 2족 보행/주행 로봇(TRON 1)과 Livox 3D LiDAR 환경에서 <strong>3D SLAM(FAST_LIO2)</strong> 알고리즘을 직접 구동하고 매핑 성능을 검증한 개인 학습 프로젝트입니다.</p>
+                      
+                        <h3>2. 핵심 기술 및 구현 (Key Technologies)</h3>
+                        <ul>
+                            <li><strong>3D SLAM (FAST_LIO):</strong> 빠르고 강인한 FAST_LIO2를 적용하여, 복잡한 실내외 환경에서 정밀한 3D Point Cloud 지도를 작성.</li>
+                            <li><strong>Open Source Analysis:</strong> 제조사(LimX) 제공 SDK와 ROS 패키지를 분석하여 로봇 하드웨어와 센서 간의 TF(좌표계) 트리를 이해하고 시각화.</li>
+                        </ul>
+                        
+                    </div>
+                `
+            }
+        ];
+
+        // --- 2. Render Projects ---
+        const projectList = document.getElementById('project-list');
+        
+        projects.forEach(p => {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.onclick = (e) => {
+                if(!e.target.closest('.btn-github')) openModal(p.id);
+            };
+            
+            // Badge Styles
+            const typeClass = p.type.includes('Team') ? 'team' : 'personal';
+            
+            card.innerHTML = `
+                <div class="card-thumb">
+                    <img src="${p.image}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/600x300?text=Project+Image'">
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        ${p.title}
+                    </div>
+                    <div class="card-badges">
+                        <span class="badge ${typeClass}">${p.type}</span>
+                    </div>
+                    <div style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:8px; font-weight:500;">
+                        <i class="fas fa-user-tag"></i> ${p.role}
+                    </div>
+                    
+                    <p class="card-desc">${p.summary}</p>
+                    <div class="card-badges">
+                        ${p.tags.map(tag => `<span class="badge" style="background:#f1f3f4; font-weight:400;">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${p.github}" target="_blank" class="btn-github">
+                        <i class="fab fa-github"></i> View Code
+                    </a>
+                </div>
+            `;
+            projectList.appendChild(card);
+        });
+
+        // --- 3. Modal Logic ---
+        const modal = document.getElementById('project-modal');
+        const modalBody = document.getElementById('modal-body-content');
+        const closeBtn = document.querySelector('.close-modal');
+
+        function openModal(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+            
+            modalBody.innerHTML = project.details;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // --- 4. Typing Effect ---
+        const textToType = "I build Intelligence for Machines.";
+        const typeEl = document.getElementById('typing-text');
+        let typeIndex = 0;
+
+        function typeWriter() {
+            if (typeIndex < textToType.length) {
+                typeEl.innerHTML += textToType.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // --- 5. Scroll Header Effect ---
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>

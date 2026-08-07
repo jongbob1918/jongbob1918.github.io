@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "javis",
+    "group": "key",
+    "detailUrl": "projects/javis.html",
+    "image": "assets/images/project_javis.png",
+    "imageAlt": "JAVIS library service robot",
+    "title": "JAVIS — Multipurpose Mobile Manipulator",
+    "keywords": ["ROS 2", "Nav2", "Smac Planner", "MPPI", "System Integration"],
+    "description": "Designed the main controller and optimized Nav2 in a nine-person team. Integrated Smac Planner and MPPI, validating collision-free navigation through a 60 cm-wide passage."
+  },
+  {
+    "slug": "roomie",
+    "group": "key",
+    "detailUrl": "projects/roomie.html",
+    "image": "assets/images/elevator-alignbutton.gif",
+    "imageAlt": "ROOMIE robot arm aligning with an elevator button",
+    "title": "ROOMIE — Hotel Room-Service Robot",
+    "keywords": ["ROS 2", "Robot Arm", "Inverse Kinematics", "Hand-Eye Calibration"],
+    "description": "Developed a controller and trajectory generator for a three-axis arm that operates elevator buttons. Completed the integrated demonstration in 38 days by separating calibration and alignment actions."
+  },
+  {
+    "slug": "falcon",
+    "group": "side",
+    "detailUrl": "projects/falcon.html",
+    "image": "assets/images/hawkeye_mainpage.gif",
+    "imageAlt": "FALCON runway hazard detection interface",
+    "title": "FALCON — Runway Safety Monitoring System",
+    "keywords": ["PyTorch", "YOLOv8", "ByteTrack", "Object Tracking"],
+    "description": "Custom-trained a runway hazard detection model and verified accuracy above 90%. Integrated ByteTrack-based trajectory tracking with hazard assessment logic."
+  }
+]

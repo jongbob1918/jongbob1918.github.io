@@ -24,18 +24,66 @@ if (menuButton && nav) {
   });
 }
 
-document.querySelectorAll('.project-row[data-href]').forEach(row => {
-  const openProject = () => { window.location.href = row.dataset.href; };
-  row.addEventListener('click', event => {
-    if (!event.target.closest('a')) openProject();
+const escapeHtml = value => String(value).replace(/[&<>"]/g, character => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
+})[character]);
+
+const bindProjectRows = () => {
+  document.querySelectorAll('.project-row[data-href]').forEach(row => {
+    const openProject = () => { window.location.href = row.dataset.href; };
+    row.addEventListener('click', event => {
+      if (!event.target.closest('a')) openProject();
+    });
+    row.addEventListener('keydown', event => {
+      if ((event.key === 'Enter' || event.key === ' ') && event.target === row) {
+        event.preventDefault();
+        openProject();
+      }
+    });
   });
-  row.addEventListener('keydown', event => {
-    if ((event.key === 'Enter' || event.key === ' ') && event.target === row) {
-      event.preventDefault();
-      openProject();
-    }
-  });
-});
+};
+
+const projectContainers = [...document.querySelectorAll('[data-project-group]')];
+
+if (projectContainers.length) {
+  fetch('projects.json?v=20260808-1')
+    .then(response => {
+      if (!response.ok) throw new Error(`Project data request failed: ${response.status}`);
+      return response.json();
+    })
+    .then(projects => {
+      projectContainers.forEach(container => {
+        const group = container.dataset.projectGroup;
+        const groupProjects = projects.filter(project => project.group === group);
+        container.innerHTML = groupProjects.map((project, index) => {
+          const url = escapeHtml(project.detailUrl);
+          const title = escapeHtml(project.title);
+          const sideClass = group === 'side' ? ' side-project' : '';
+          const loading = group === 'key' && index === 0 ? 'eager' : 'lazy';
+          return `<article class="project-row${sideClass}" data-href="${url}" tabindex="0" role="link" aria-label="Open the ${escapeHtml(project.slug.toUpperCase())} project">
+            <a class="project-media" href="${url}" aria-label="Open the ${escapeHtml(project.slug.toUpperCase())} project">
+              <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}">
+              <span class="project-overlay"><span>View Project ↗</span></span>
+            </a>
+            <div class="project-copy">
+              <a class="project-title" href="${url}">${title} <span class="arrow">↗</span></a>
+              <p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>
+              <p class="result">${escapeHtml(project.description)}</p>
+            </div>
+          </article>`;
+        }).join('');
+      });
+      bindProjectRows();
+    })
+    .catch(error => {
+      projectContainers.forEach(container => {
+        container.innerHTML = '<p class="project-data-error">Project data could not be loaded.</p>';
+      });
+      console.error(error);
+    });
+} else {
+  bindProjectRows();
+}
 
 const progress = document.querySelector('.reading-progress');
 const sections = [...document.querySelectorAll('.case-section[id]')];

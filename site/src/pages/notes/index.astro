@@ -6,6 +6,7 @@ import { categories, categoryMap, contentTypeLabels } from '../../data/taxonomy'
 const notes = (await getCollection('notes', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 
+const featuredNote = notes.find(note => note.data.featured) ?? notes[0];
 const counts = new Map(categories.map(category => [
   category.id,
   notes.filter(note => note.data.category === category.id).length
@@ -17,60 +18,100 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
 ---
 
 <BaseLayout title="Engineering Notes — Jongmyung Kim" description="로봇공학의 원리와 실제 시스템 구현을 연결하는 엔지니어링 노트">
-  <section class="notes-hero">
-    <div class="wrap">
+  <div class="notes-home wrap-narrow">
+    <header class="notes-intro">
       <p class="eyebrow">Robotics Engineering Notes</p>
-      <h1>원리에서 실제 로봇까지</h1>
-      <p class="hero-description">로봇공학의 핵심 개념을 정리하고, 구현과 실험에서 확인한 근거를 연결합니다.</p>
-    </div>
-  </section>
+      <h1>Engineering Notes</h1>
+      <p>로봇공학의 원리와 구현을 연결하고, 실제 시스템에서 다시 확인할 수 있는 지식으로 정리합니다.</p>
+    </header>
 
-  <section class="knowledge-section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Knowledge Index</h2>
-        <p>분야별로 처음부터 순서대로 읽을 수 있습니다.</p>
-      </div>
-      <div class="category-grid">
-        {categories.map(category => (
-          <a class="category-card" href={`/notes/category/${category.id}/`}>
-            <span class="category-number">{category.number}</span>
-            <h2>{category.title}</h2>
-            <p>{category.description}</p>
-            <ul class="topic-list" aria-label={`${category.title} 주요 주제`}>
-              {category.topics.map(topic => <li>{topic}</li>)}
-            </ul>
-            <span class="card-foot">
-              <span>{counts.get(category.id)}개의 글</span>
-              <span class="arrow">살펴보기 →</span>
-            </span>
-          </a>
-        ))}
-      </div>
+    <div class="search-box">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
+      <label class="sr-only" for="note-search">글 검색</label>
+      <input id="note-search" type="search" placeholder="제목, 분야, 태그로 검색" autocomplete="off" />
+      <kbd>/</kbd>
     </div>
-  </section>
 
-  <section class="recent-section">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Recent Notes</h2>
-        <p>최근 공개한 글</p>
+    <nav class="category-nav" aria-label="노트 분야">
+      {categories.map(category => (
+        <a class="search-item" data-search={`${category.title} ${category.topics.join(' ')}`} href={`/notes/category/${category.id}/`}>
+          <span>{category.title}</span>
+          {counts.get(category.id) ? <small>{counts.get(category.id)}</small> : null}
+        </a>
+      ))}
+    </nav>
+
+    {featuredNote && (
+      <section class="home-section featured-section search-item" data-search={`${featuredNote.data.title} ${featuredNote.data.description} ${featuredNote.data.tags.join(' ')}`}>
+        <div class="section-title">
+          <p class="section-kicker">Start here</p>
+          <h2>처음 읽는 글</h2>
+        </div>
+        <a class="featured-post" href={`/notes/${featuredNote.id}/`}>
+          <div>
+            <span class="post-category">{categoryMap.get(featuredNote.data.category)?.title}</span>
+            <h3>{featuredNote.data.title}</h3>
+            <p>{featuredNote.data.description}</p>
+          </div>
+          <span class="read-more">읽어보기 <span aria-hidden="true">→</span></span>
+        </a>
+      </section>
+    )}
+
+    <section class="home-section all-notes">
+      <div class="section-title section-title-row">
+        <div>
+          <p class="section-kicker">Archive</p>
+          <h2>전체 글</h2>
+        </div>
+        <span>{notes.length} notes</span>
       </div>
-      <div class="post-list">
-        {notes.length ? notes.slice(0, 8).map(note => {
+      <div class="compact-post-list">
+        {notes.map(note => {
           const category = categoryMap.get(note.data.category);
           return (
-            <a class="post-row" href={`/notes/${note.id}/`}>
-              <span class="post-meta">{formatDate(note.data.publishedAt)}<br />{category?.title}</span>
-              <span class="post-copy">
+            <a
+              class="compact-post search-item"
+              data-search={`${note.data.title} ${note.data.description} ${category?.title ?? ''} ${note.data.tags.join(' ')}`}
+              href={`/notes/${note.id}/`}
+            >
+              <time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time>
+              <div>
                 <h3>{note.data.title}</h3>
                 <p>{note.data.description}</p>
-              </span>
-              <span class="post-type">{contentTypeLabels[note.data.type]}</span>
+                <span>{category?.title} · {contentTypeLabels[note.data.type]}</span>
+              </div>
+              <span class="list-arrow" aria-hidden="true">→</span>
             </a>
           );
-        }) : <p class="empty-state">첫 번째 엔지니어링 노트를 준비하고 있습니다.</p>}
+        })}
       </div>
-    </div>
-  </section>
+      <p class="search-empty" hidden>검색 결과가 없습니다.</p>
+    </section>
+  </div>
+
+  <script>
+    const input = document.querySelector<HTMLInputElement>('#note-search');
+    const items = [...document.querySelectorAll<HTMLElement>('.search-item')];
+    const empty = document.querySelector<HTMLElement>('.search-empty');
+
+    const filterNotes = () => {
+      const query = input?.value.trim().toLocaleLowerCase('ko') ?? '';
+      let visiblePosts = 0;
+      items.forEach(item => {
+        const matches = !query || (item.dataset.search ?? '').toLocaleLowerCase('ko').includes(query);
+        item.hidden = !matches;
+        if (matches && item.classList.contains('compact-post')) visiblePosts += 1;
+      });
+      if (empty) empty.hidden = visiblePosts > 0;
+    };
+
+    input?.addEventListener('input', filterNotes);
+    document.addEventListener('keydown', event => {
+      if (event.key === '/' && document.activeElement !== input) {
+        event.preventDefault();
+        input?.focus();
+      }
+    });
+  </script>
 </BaseLayout>

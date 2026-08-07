@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 }
 
 const { note } = Astro.props;
-const { Content } = await render(note);
+const { Content, headings } = await render(note);
 const category = categoryMap.get(note.data.category);
 const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric', month: 'long', day: 'numeric'
@@ -28,7 +28,19 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
       {note.data.tags.length > 0 && <span>{note.data.tags.join(' · ')}</span>}
     </div>
   </header>
-  <article class="article">
-    <Content />
-  </article>
+  <div class="article-layout">
+    <article class="article">
+      <Content />
+    </article>
+    {headings.length > 1 && (
+      <aside class="article-toc" aria-label="이 글의 목차">
+        <p>이 글의 목차</p>
+        <ol>
+          {headings.filter(heading => heading.depth <= 3).map(heading => (
+            <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>
+          ))}
+        </ol>
+      </aside>
+    )}
+  </div>
 </BaseLayout>

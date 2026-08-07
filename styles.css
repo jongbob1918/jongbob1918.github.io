@@ -29,6 +29,11 @@ a:focus-visible, button:focus-visible, [role="link"]:focus-visible { outline: 3p
 .nav a:hover { color: var(--ink); }
 .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav .disabled { color: #a7adb6; cursor: default; }
+.nav .nav-icon { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; }
+.nav .nav-icon::after { display: none; }
+.nav .nav-icon[aria-label="GitHub"] { margin-left: 4px; color: #181717; }
+.nav .nav-icon[aria-label="LinkedIn"] { color: #0a66c2; }
+.nav-icon svg { width: 15px; height: 15px; fill: currentColor; }
 .menu-toggle { display: none; width: 42px; height: 42px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; cursor: pointer; }
 .menu-toggle span, .menu-toggle::before, .menu-toggle::after { content: ""; display: block; width: 17px; height: 1.5px; margin: 4px auto; background: var(--ink); transition: transform .2s, opacity .2s; }
 
@@ -66,15 +71,9 @@ h3 { font-size: 1rem; }
 .result { max-width: 650px; margin-bottom: 18px; color: var(--text); font-size: .94rem; }
 .side-project-list .project-row { grid-template-columns: minmax(190px, 27%) 1fr; }
 
-.skills, .about { padding-top: 94px; }
-.skill-grid { display: grid; grid-template-columns: repeat(2,1fr); column-gap: 48px; }
-.skill-domain { padding: 22px 0; border-top: 1px solid var(--line); }
-.skill-domain:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
-.skill-domain h3 { margin: 0 0 7px; font-size: .96rem; letter-spacing: -.015em; }
-.skill-domain p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.75; }
+.about { padding-top: 94px; }
 .about-grid { display: grid; grid-template-columns: minmax(220px, .8fr) 1.5fr; gap: clamp(38px, 8vw, 100px); align-items: start; }
 .about-name h3 { margin: 10px 0 0; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: -.045em; }
-.about-name p { margin: 2px 0 0; color: var(--muted); }
 .about-facts { margin: 0; }
 .about-facts > div { display: grid; grid-template-columns: 110px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
 .about-facts > div:first-child { padding-top: 0; }
@@ -90,7 +89,7 @@ h3 { font-size: 1rem; }
 .site-footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .social-links { display: flex; gap: 8px; }
-.social-links a { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid currentColor; border-radius: 50%; background: white; transition: transform .2s, box-shadow .2s; }
+.social-links a { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: white; transition: transform .2s, box-shadow .2s; }
 .social-links a:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(16,24,40,.12); }
 .social-links a[aria-label="Email"] { color: #EA4335; }
 .social-links a[aria-label="GitHub"] { color: #181717; }
@@ -172,10 +171,9 @@ h3 { font-size: 1rem; }
   .project-row:hover, .project-row:focus-within { padding-right: 12px; padding-left: 12px; }
   .project-overlay { align-items: end; justify-items: end; padding: 12px; background: linear-gradient(transparent 45%, rgba(16,24,40,.74)); opacity: 1; }
   .project-overlay span { padding: 6px 10px; font-size: .68rem; transform: none; }
-  .skills, .about { padding-top: 68px; }
-  .skill-grid { grid-template-columns: 1fr; }
-  .skill-domain:nth-last-child(2) { border-bottom: 0; }
-  .skill-domain p { font-size: .73rem; }
+  .about { padding-top: 68px; }
+  .nav .nav-icon { width: 38px; height: 38px; padding: 0; border-bottom: 1px solid var(--line); }
+  .nav .nav-icon[aria-label="GitHub"] { margin-top: 10px; margin-left: 0; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .about-facts > div { grid-template-columns: 88px 1fr; }
   .footer-inner { align-items: flex-start; flex-direction: column-reverse; }

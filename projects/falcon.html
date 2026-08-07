@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FALCON — Kim Jong-myung</title><link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">KIM JONG-MYUNG</a><nav class="nav"><a href="../index.html#projects">Projects</a><span class="disabled">Blog</span><a href="../index.html#about">About</a><a href="../index.html#resume">Resume</a><a href="https://github.com/jongbob1918" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer">LinkedIn</a></nav></div></header>
+  <main class="wrap">
+    <a class="back" href="../index.html#projects">← Projects</a>
+    <header class="project-header"><h1>FALCON — 활주로 안전 관제 시스템</h1><p class="lead">활주로의 FOD와 침입자를 탐지·추적하고 위험 상황을 관제 화면에 전달하는 비전 시스템입니다.</p><div class="meta"><span><strong>팀</strong> 4명</span><span><strong>담당</strong> 지상 위험요소 모델 학습, 위험 판단 로직</span><span><strong>기술</strong> PyTorch, YOLOv8, ByteTrack</span></div></header>
+    <figure class="feature-media"><img src="../assets/images/hawkeye_mainpage.gif" alt="FALCON 위험요소 탐지 및 관제 화면 시연"></figure>
+    <section class="detail-section"><h2>탐지 결과를 추적 가능한 위험 정보로 변환</h2><div><p>커스텀 데이터셋으로 YOLOv8을 학습하고, 프레임 간 객체 ID를 유지하도록 ByteTrack을 연결했습니다. 탐지 결과와 이동 경로를 위험 판단 로직에 전달해 관제 화면에서 확인할 수 있게 했습니다.</p><div class="diagram" role="img" aria-label="FALCON 시스템 블록 다이어그램"><div class="diagram-node">활주로 영상<br>Camera</div><div class="diagram-arrow">→</div><div class="diagram-node">YOLOv8<br>Detection</div><div class="diagram-arrow">→</div><div class="diagram-node">ByteTrack<br>Tracking</div><div class="diagram-arrow">→</div><div class="diagram-node">위험 판단<br>Dashboard</div></div></div></section>
+    <section class="detail-section"><h2>커스텀 모델 정확도 90% 이상 확인</h2><div><p>FOD·동물·작업자 등 활주로 위험요소를 대상으로 모델을 학습해 정확도 90% 이상을 확인했습니다. 이동 객체는 ByteTrack으로 연속 추적해 단일 프레임 탐지를 이동 경로 정보로 확장했습니다.</p><p>정확도의 평가 지표와 데이터 분할 조건은 공개 전 저장소 README에 함께 명시할 예정입니다.</p></div></section>
+    <section class="detail-section"><h2>재현과 소스</h2><div><p><a class="repo-link" href="https://github.com/jongbob1918/FALCON" target="_blank" rel="noreferrer">FALCON GitHub 저장소 ↗</a></p><p>학습 데이터 공개 범위와 재현 절차는 저장소 README에서 확인할 수 있습니다.</p></div></section>
+  </main>
+</body>
+</html>

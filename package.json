@@ -1,0 +1,14 @@
+{
+  "name": "jongbob1918-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --root site",
+    "build:notes": "astro build --root site",
+    "build": "npm run build:notes && mkdir -p dist/projects dist/assets && cp index.html styles.css script.js projects.json dist/ && cp -R projects/. dist/projects/ && cp -R assets/. dist/assets/",
+    "preview": "astro preview --root site"
+  },
+  "devDependencies": {
+    "astro": "^7.2.0"
+  }
+}

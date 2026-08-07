@@ -2,22 +2,46 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="JAVIS 다목적 모바일 매니퓰레이터 프로젝트 케이스 스터디">
   <title>JAVIS — Kim Jong-myung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;750&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-  <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">KIM JONG-MYUNG</a><nav class="nav"><a href="../index.html#projects">Projects</a><span class="disabled">Blog</span><a href="../index.html#about">About</a><a href="../index.html#resume">Resume</a><a href="https://github.com/jongbob1918" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer">LinkedIn</a></nav></div></header>
+  <div class="reading-progress" aria-hidden="true"></div>
+  <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">KIM JONG-MYUNG</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#projects">Projects</a><span class="disabled">Blog</span><a href="../index.html#about">About</a><a href="../index.html#resume">Resume</a><a href="https://github.com/jongbob1918" target="_blank" rel="noreferrer">GitHub</a><a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer">LinkedIn</a></nav></div></header>
   <main class="wrap">
-    <a class="back" href="../index.html#projects">← Projects</a>
+    <a class="back" href="../index.html#projects">← 프로젝트 목록</a>
     <header class="project-header">
+      <span class="eyebrow">Mobile Manipulation · Case Study 01</span>
       <h1>JAVIS — 다목적 모바일 매니퓰레이터</h1>
       <p class="lead">도서관·카페 환경에서 안내와 서가 정리를 수행하는 서비스 로봇의 중앙 제어와 자율주행을 통합했습니다.</p>
-      <div class="meta"><span><strong>팀</strong> 9명</span><span><strong>담당</strong> 메인 컨트롤러 설계, Nav2 최적화</span><span><strong>기술</strong> ROS2, Nav2, Smac Planner, MPPI</span></div>
+      <div class="meta"><span><strong>팀</strong> 9명</span><span><strong>담당</strong> 메인 컨트롤러·Nav2</span><span><strong>검증</strong> 폭 60cm 협로</span><span><strong>기술</strong> ROS2 · Smac Planner · MPPI</span></div>
+      <div class="header-actions"><a class="button primary" href="https://github.com/jongbob1918/JAVIS" target="_blank" rel="noreferrer">GitHub Repository ↗</a><a class="button" href="#results">검증 결과 보기 ↓</a></div>
     </header>
-    <div class="feature-media"><div class="media-placeholder"><strong>풀런 영상 촬영 예정</strong><span>외부 시점 + RViz · v2 업데이트</span></div></div>
-    <section class="detail-section"><h2>시스템을 하나의 상태 흐름으로 통합</h2><div><p>구동부·로봇팔·AI·서버를 중앙 제어기(DMC)에 연결하고 임무 상태를 분리했습니다. 하드웨어가 준비되지 않은 동안에는 같은 인터페이스의 Mock 모듈로 시나리오를 먼저 검증했습니다.</p><div class="diagram" role="img" aria-label="JAVIS 시스템 블록 다이어그램"><div class="diagram-node">사용자 요청<br>Server</div><div class="diagram-arrow">→</div><div class="diagram-node">중앙 제어<br>DMC / State</div><div class="diagram-arrow">→</div><div class="diagram-node">Nav2<br>Mobile Base</div><div class="diagram-arrow">+</div><div class="diagram-node">Robot Arm<br>AI Module</div></div></div></section>
-    <section class="detail-section"><h2>60cm 협로 통과를 검증</h2><div><h3>증상</h3><p>Costmap 팽창 영역이 겹치며 협로 진입 경로가 생성되지 않거나 내부에서 정지했습니다.</p><h3>원인과 해결</h3><p>Smac Planner Hybrid로 기구학적 제약을 반영하고, MPPI Controller로 국소 경로 탐색을 개선했습니다. Inflation radius와 cost penalty도 실제 로봇 폭에 맞춰 조정했습니다.</p><h3>결과</h3><p>기존에 진입하지 못하던 폭 60cm 통로를 충돌 없이 통과했습니다.</p></div></section>
-    <section class="detail-section"><h2>재현과 소스</h2><div><p><a class="repo-link" href="https://github.com/jongbob1918/JAVIS" target="_blank" rel="noreferrer">JAVIS GitHub 저장소 ↗</a></p><p>실행 환경과 재현 절차는 저장소 README에서 확인할 수 있습니다.</p></div></section>
+
+    <figure class="feature-media"><div class="media-placeholder"><strong>다층 미션 풀런 영상 촬영 예정</strong><span>외부 시점 + RViz · v2 업데이트</span></div><figcaption>촬영 후 복도 주행, 구간 전환, 맵 스위칭, 최종 도착을 한 영상으로 교체합니다.</figcaption></figure>
+
+    <div class="case-layout">
+      <aside class="toc" aria-label="페이지 목차"><span class="toc-title">On this page</span><a href="#overview">Overview</a><a href="#role">My Role</a><a href="#architecture">Architecture</a><a href="#implementation">Implementation</a><a href="#troubleshooting">Troubleshooting</a><a href="#results">Results</a><a href="#reproduction">Reproduction</a></aside>
+      <article class="case-study">
+        <section class="case-section" id="overview"><div class="case-heading"><span class="case-number">01</span><h2>하나의 임무로 움직이는 서비스 로봇</h2></div><p>JAVIS는 이동 베이스, 로봇팔, AI 모듈과 서버를 결합해 안내·운반·서가 정리 시나리오를 수행하는 모바일 매니퓰레이터입니다. 핵심 과제는 서로 다른 개발 일정의 모듈을 하나의 상태 흐름으로 묶고, 좁은 서가 환경에서도 이동을 멈추지 않게 하는 것이었습니다.</p><p class="note">핵심 결과 — 기존에 진입하지 못하던 폭 60cm 협로를 충돌 없이 통과했습니다.</p></section>
+
+        <section class="case-section" id="role"><div class="case-heading"><span class="case-number">02</span><h2>내 책임 범위</h2></div><div class="role-grid"><div class="info-card"><strong>중앙 제어</strong><span>DMC 상태와 임무 전환 흐름 설계</span></div><div class="info-card"><strong>통합 인터페이스</strong><span>실장비와 Mock이 같은 계약을 사용하도록 분리</span></div><div class="info-card"><strong>자율주행</strong><span>Planner·Controller·Costmap 조정</span></div></div><h3>Team</h3><p>김규환, 김우영, 김영석, 김종명, 이주빈, 박병규, 유지환, 장연호, 박훈민 — 9인 팀. 이 페이지는 그중 제가 직접 담당한 중앙 제어와 자율주행 최적화를 중심으로 설명합니다.</p></section>
+
+        <section class="case-section" id="architecture"><div class="case-heading"><span class="case-number">03</span><h2>요청과 하드웨어 사이의 의존성을 분리</h2></div><p>서버 요청은 DMC의 임무 상태로 변환되고, DMC가 자율주행·로봇팔·AI 모듈의 실행 순서를 관리합니다. 파란 테두리는 제가 설계하거나 최적화한 범위입니다.</p><div class="diagram" role="img" aria-label="JAVIS 시스템 블록 다이어그램"><div class="diagram-node">사용자 요청<br>Server</div><div class="diagram-arrow">→</div><div class="diagram-node owner">중앙 제어<br>DMC / State</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Nav2<br>Mobile Base</div><div class="diagram-arrow">+</div><div class="diagram-node">Robot Arm<br>AI Module</div></div></section>
+
+        <section class="case-section" id="implementation"><div class="case-heading"><span class="case-number">04</span><h2>세 가지 설계 판단</h2></div><h3>상태 기반 임무 제어</h3><p>이동, 조작, 대기, 복귀를 상태로 분리하고 각 모듈의 완료 응답을 다음 전환 조건으로 사용했습니다. 배터리 부족이나 작업 실패도 같은 상태 흐름에서 처리하도록 구성했습니다.</p><h3>Mock 기반 병렬 개발</h3><p>행동 로직과 하드웨어 제어 사이에 인터페이스를 두었습니다. 실제 장비가 준비되지 않았을 때 Mock 응답으로 시나리오를 검증하고, 실장비 연결 시 상위 로직을 바꾸지 않도록 했습니다.</p><h3>Smac Planner + MPPI</h3><p>직사각형 로봇의 기구학적 제약을 반영하기 위해 Smac Planner Hybrid를 사용하고, 협로에서 국소 최솟값에 갇히는 현상을 줄이기 위해 MPPI Controller를 적용했습니다.</p></section>
+
+        <section class="case-section" id="troubleshooting"><div class="case-heading"><span class="case-number">05</span><h2>협로 진입 실패를 경로계획 문제로 분해</h2></div><dl class="flow"><dt>증상</dt><dd>Costmap 팽창 영역이 겹치면서 경로 생성이 차단되거나, 협로 내부에서 회전과 정지를 반복했습니다.</dd><dt>원인</dt><dd>로봇 형상과 맞지 않는 진입 경로, 과도한 Inflation, 단일 국소 경로가 함께 통행 가능 영역을 제한했습니다.</dd><dt>변경</dt><dd>Smac Planner Hybrid와 MPPI를 도입하고, inflation radius를 0.4m로 축소했습니다. cost scaling factor와 cost penalty도 실제 통로 조건에 맞춰 조정했습니다.</dd><dt>재검증</dt><dd>동일한 폭 60cm 통로에서 충돌 없이 진입과 통과를 완료했습니다.</dd></dl></section>
+
+        <section class="case-section" id="results"><div class="case-heading"><span class="case-number">06</span><h2>현재 공개 가능한 검증 결과</h2></div><div class="metric-grid"><div class="metric-card"><span class="metric-value">60cm</span><span class="metric-label">충돌 없이 통과한 협로 폭</span></div><div class="metric-card"><span class="metric-value">9명</span><span class="metric-label">통합한 팀 프로젝트 규모</span></div><div class="metric-card"><span class="metric-value">3개 계층</span><span class="metric-label">Planner · Controller · Costmap 조정</span></div></div><p>미션 성공률과 총 수행 시간은 최소 5회 반복 측정 후 추가합니다. 측정 전 수치는 공개하지 않습니다.</p></section>
+
+        <section class="case-section" id="reproduction"><div class="case-heading"><span class="case-number">07</span><h2>소스와 재현</h2></div><p><a class="repo-link" href="https://github.com/jongbob1918/JAVIS" target="_blank" rel="noreferrer">JAVIS GitHub 저장소 ↗</a></p><p>패키지 의존성, 빌드 명령, 실행 순서와 테스트 환경은 저장소 README를 기준으로 관리합니다.</p></section>
+      </article>
+    </div>
   </main>
+  <script src="../script.js"></script>
 </body>
 </html>

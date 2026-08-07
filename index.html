@@ -7,13 +7,14 @@
   <title>Kim Jong-myung — Robot Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;750&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;750&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="name" href="#top">KIM JONG-MYUNG</a>
+      <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button>
       <nav class="nav" aria-label="주요 메뉴">
         <a href="#projects">Projects</a>
         <span class="disabled" title="v4에서 공개 예정">Blog</span>
@@ -29,40 +30,46 @@
     <section class="wrap" id="projects" aria-labelledby="projects-title">
       <div class="section-head">
         <h1 id="projects-title">Projects</h1>
-        <span class="section-label">Selected work</span>
+        <p class="section-note">중요도 순으로 배치한 로봇 소프트웨어 프로젝트입니다.</p>
       </div>
 
       <div class="project-list">
-        <article class="project-row">
+        <article class="project-row" data-href="projects/javis.html" tabindex="0" role="link" aria-label="JAVIS 상세 페이지 열기">
           <a class="project-media" href="projects/javis.html" aria-label="JAVIS 상세 페이지">
             <img src="assets/images/project_javis.png" alt="도서관 서비스 로봇 JAVIS" loading="eager">
           </a>
           <div class="project-copy">
+            <span class="project-index">01 / 03</span>
             <a class="project-title" href="projects/javis.html">JAVIS — 다목적 모바일 매니퓰레이터 <span class="arrow">↗</span></a>
             <p class="keywords">ROS2 · Nav2 · Smac Planner · MPPI · System Integration</p>
             <p class="result">9인 팀의 메인 컨트롤러를 설계하고 Nav2를 최적화했습니다. Smac Planner와 MPPI를 적용해 폭 60cm 협로를 충돌 없이 통과하도록 검증했습니다.</p>
+            <a class="text-link" href="projects/javis.html">Case study <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="project-row">
+        <article class="project-row" data-href="projects/roomie.html" tabindex="0" role="link" aria-label="ROOMIE 상세 페이지 열기">
           <a class="project-media" href="projects/roomie.html" aria-label="ROOMIE 상세 페이지">
             <img src="assets/images/elevator-alignbutton.gif" alt="ROOMIE 로봇팔의 엘리베이터 버튼 정렬 시연" loading="lazy">
           </a>
           <div class="project-copy">
+            <span class="project-index">02 / 03</span>
             <a class="project-title" href="projects/roomie.html">ROOMIE — 호텔 룸서비스 로봇 <span class="arrow">↗</span></a>
             <p class="keywords">ROS2 · Robot Arm · IK · Hand-Eye Calibration</p>
             <p class="result">엘리베이터 버튼 조작용 3축 로봇팔 제어기와 궤적 생성을 개발했습니다. Hand-Eye 보정과 정렬 액션 분리로 버튼 조작 시연을 38일 안에 완성했습니다.</p>
+            <a class="text-link" href="projects/roomie.html">Case study <span aria-hidden="true">→</span></a>
           </div>
         </article>
 
-        <article class="project-row">
+        <article class="project-row" data-href="projects/falcon.html" tabindex="0" role="link" aria-label="FALCON 상세 페이지 열기">
           <a class="project-media" href="projects/falcon.html" aria-label="FALCON 상세 페이지">
             <img src="assets/images/hawkeye_mainpage.gif" alt="FALCON 활주로 위험요소 탐지 화면" loading="lazy">
           </a>
           <div class="project-copy">
+            <span class="project-index">03 / 03</span>
             <a class="project-title" href="projects/falcon.html">FALCON — 활주로 안전 관제 시스템 <span class="arrow">↗</span></a>
             <p class="keywords">PyTorch · YOLOv8 · ByteTrack · Object Tracking</p>
             <p class="result">활주로 위험요소 탐지 모델을 커스텀 학습해 정확도 90% 이상을 확인했습니다. ByteTrack 기반 이동 경로 추적과 위험 판단 로직까지 통합했습니다.</p>
+            <a class="text-link" href="projects/falcon.html">Case study <span aria-hidden="true">→</span></a>
           </div>
         </article>
       </div>
@@ -79,7 +86,7 @@
     </section>
 
     <section class="wrap resume" id="resume" aria-labelledby="resume-title">
-      <div class="section-head"><h2 id="resume-title">Resume & Contact</h2></div>
+      <div class="section-head"><h2 id="resume-title">Resume &amp; Contact</h2></div>
       <div class="resume-links">
         <a href="mailto:jongbob1918@gmail.com">Email</a>
         <a href="https://github.com/jongbob1918" target="_blank" rel="noreferrer">GitHub ↗</a>
@@ -91,5 +98,6 @@
   </main>
 
   <footer class="site-footer"><div class="wrap">© 2026 Kim Jong-myung</div></footer>
+  <script src="script.js"></script>
 </body>
 </html>

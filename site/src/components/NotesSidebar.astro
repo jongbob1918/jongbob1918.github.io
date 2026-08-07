@@ -10,21 +10,16 @@ const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '
 ---
 
 <aside class="notes-sidebar">
-  <a class="sidebar-brand" href="/notes/">
-    <span>Robotics</span>
-    <strong>Notes</strong>
-  </a>
   <form class="sidebar-search" action="/notes/" method="get" role="search">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
     <label class="sr-only" for="desktop-note-search">글 검색</label>
     <input id="desktop-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
   </form>
-  <p class="sidebar-label">Explore</p>
+  <p class="sidebar-label">분야</p>
   <nav class="sidebar-nav" aria-label="노트 분야">
     <a class:list={[{ active: !activeCategory }]} href="/notes/">최근 글</a>
     {categories.map(category => (
       <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
-        <span class={`category-dot dot-${category.id}`}></span>
         {category.title}
       </a>
     ))}
@@ -47,7 +42,6 @@ const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '
       <a class:list={[{ active: !activeCategory }]} href="/notes/">최근 글</a>
       {categories.map(category => (
         <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
-          <span class={`category-dot dot-${category.id}`}></span>
           {category.title}
         </a>
       ))}

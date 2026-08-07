@@ -1,12 +1,12 @@
 :root {
-  --ink: #151923;
-  --text: #3f4757;
-  --muted: #737b89;
-  --line: #e1e5ea;
-  --paper: #fff;
-  --soft: #f6f7f9;
-  --accent: #2563eb;
-  --accent-soft: #edf4ff;
+  --ink: #18201b;
+  --text: #38443c;
+  --muted: #667169;
+  --line: #dce4de;
+  --paper: #fbfcfb;
+  --soft: #f2f5f3;
+  --accent: #2f6b4f;
+  --accent-soft: #e6f0e9;
   --max: 1240px;
   --sidebar: 220px;
   --content: 720px;
@@ -14,14 +14,14 @@
 }
 
 :root[data-theme="dark"] {
-  --ink: #f1f3f6;
-  --text: #c6cbd4;
-  --muted: #969eaa;
-  --line: #303640;
-  --paper: #12151b;
-  --soft: #1a1e26;
-  --accent: #79a6ff;
-  --accent-soft: #172744;
+  --ink: #f1f5f2;
+  --text: #c8d0cb;
+  --muted: #9ca8a0;
+  --line: #344139;
+  --paper: #111713;
+  --soft: #18211b;
+  --accent: #83c7a2;
+  --accent-soft: #1d3427;
   --shadow: 0 12px 28px rgba(0, 0, 0, .26);
   color-scheme: dark;
 }
@@ -52,24 +52,17 @@ h1, h2, h3, p { margin-top: 0; }
 
 /* Shared notes layout */
 .notes-page-shell { width: min(calc(100% - 40px), var(--max)); display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); gap: 58px; margin: 0 auto; padding: 54px 0 100px; }
-.notes-sidebar { position: sticky; top: 104px; align-self: start; }
-.sidebar-brand { display: inline-flex; flex-direction: column; margin-bottom: 28px; line-height: 1; }
-.sidebar-brand span { color: var(--muted); font-size: .69rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
-.sidebar-brand strong { margin-top: 7px; font-size: 1.55rem; letter-spacing: -.05em; }
-.sidebar-search { height: 40px; display: flex; align-items: center; gap: 9px; margin-bottom: 31px; padding: 0 11px; color: var(--muted); border: 1px solid var(--line); background: var(--soft); }
+.notes-sidebar { position: sticky; top: 104px; align-self: start; padding: 22px 18px 25px; border-top: 3px solid var(--accent); background: var(--soft); }
+.sidebar-search { height: 40px; display: flex; align-items: center; gap: 9px; margin-bottom: 31px; padding: 0 11px; color: var(--muted); border: 1px solid var(--line); background: var(--paper); }
 .sidebar-search:focus-within { border-color: var(--accent); background: var(--paper); }
 .sidebar-search svg { width: 16px; height: 16px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
 .sidebar-search input { min-width: 0; width: 100%; padding: 0; color: var(--ink); border: 0; outline: 0; background: transparent; font-size: .75rem; }
 .sidebar-search input::placeholder { color: var(--muted); }
 .sidebar-label { margin-bottom: 10px; color: var(--muted); font-size: .63rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .sidebar-nav { display: grid; gap: 2px; }
-.sidebar-nav a { display: flex; align-items: center; gap: 10px; padding: 9px 11px; color: var(--text); border-left: 2px solid transparent; font-size: .78rem; transition: color .15s, background .15s, border-color .15s; }
-.sidebar-nav a:hover { color: var(--ink); background: var(--soft); }
+.sidebar-nav a { display: flex; align-items: center; padding: 9px 11px; color: var(--text); border-left: 2px solid transparent; font-size: .78rem; transition: color .15s, background .15s, border-color .15s; }
+.sidebar-nav a:hover { color: var(--ink); background: color-mix(in srgb, var(--accent-soft) 65%, var(--paper)); }
 .sidebar-nav a.active { color: var(--ink); border-left-color: var(--accent); background: var(--accent-soft); font-weight: 650; }
-.category-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: #46688d; }
-.dot-localization-slam { background: #168b91; }
-.dot-planning-control { background: #8b5db7; }
-.dot-ros2-systems { background: #c06b3e; }
 .mobile-notes-nav { display: none; }
 
 /* Listing and NVIDIA-inspired technical cards */

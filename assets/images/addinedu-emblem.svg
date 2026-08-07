@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">ADDINEDU emblem</title>
+  <rect width="64" height="64" rx="15" fill="#005aaa"/>
+  <circle cx="43" cy="21" r="12" fill="#23a2db"/>
+  <path d="M12 24h8v24h-8zm4-11a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm11 11h8v3c2-3 5-4 9-4 7 0 10 4 10 12v13h-8V36c0-4-1-6-5-6s-6 3-6 7v11h-8z" fill="#fff"/>
+</svg>

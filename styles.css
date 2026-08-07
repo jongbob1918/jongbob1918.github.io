@@ -29,11 +29,17 @@ a:focus-visible, button:focus-visible, [role="link"]:focus-visible { outline: 3p
 .nav a:hover { color: var(--ink); }
 .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
 .nav .disabled { color: #a7adb6; cursor: default; }
-.nav .nav-icon { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; }
+.nav-social { display: flex; align-items: center; gap: 2px; margin-left: 22px; padding-left: 22px; border-left: 1px solid var(--line); }
+.nav .nav-icon { width: 32px; height: 32px; flex: 0 0 32px; display: grid; place-items: center; padding: 0; border: 1px solid transparent; border-radius: 50%; background: transparent; }
 .nav .nav-icon::after { display: none; }
-.nav .nav-icon[aria-label="GitHub"] { margin-left: 4px; color: #181717; }
+.nav .nav-icon[aria-label="Email"] { color: #ea4335; }
+.nav .nav-icon[aria-label="GitHub"] { color: #181717; }
 .nav .nav-icon[aria-label="LinkedIn"] { color: #0a66c2; }
+.nav .nav-icon[aria-label="YouTube"] { color: #f00; }
+.nav .nav-icon:hover { background: var(--soft); }
 .nav-icon svg { width: 15px; height: 15px; fill: currentColor; }
+.nav-icon[aria-label="Email"] svg { fill: none; stroke: currentColor; stroke-width: 1.7; }
+.nav-icon .play { fill: white; stroke: none; }
 .menu-toggle { display: none; width: 42px; height: 42px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: white; cursor: pointer; }
 .menu-toggle span, .menu-toggle::before, .menu-toggle::after { content: ""; display: block; width: 17px; height: 1.5px; margin: 4px auto; background: var(--ink); transition: transform .2s, opacity .2s; }
 
@@ -44,10 +50,11 @@ h1 { margin-bottom: 0; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; l
 h2 { font-size: 1.35rem; line-height: 1.35; letter-spacing: -.03em; }
 h3 { font-size: 1rem; }
 .section-label, .eyebrow { color: var(--accent); font-size: .73rem; font-weight: 700; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
-.project-group-head { display: flex; align-items: baseline; justify-content: space-between; padding: 18px 0 8px; }
-.project-group-head h2 { margin: 0; font-size: .9rem; text-transform: uppercase; letter-spacing: .08em; }
+.project-section { scroll-margin-top: 86px; }
+.project-section.side-section { margin-top: 76px; }
+.project-group-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; padding: 0 0 16px; border-bottom: 2px solid var(--ink); }
+.project-group-head h2 { margin: 0; font-size: clamp(1.25rem, 2.5vw, 1.55rem); text-transform: uppercase; letter-spacing: .045em; }
 .project-group-head span { color: var(--muted); font-size: .68rem; font-weight: 600; line-height: 1; }
-.project-group-head.side-head { margin-top: 52px; }
 
 .project-list { display: grid; }
 .project-row { position: relative; display: grid; grid-template-columns: minmax(230px, 34%) 1fr; gap: clamp(26px, 5vw, 60px); padding: 32px 18px; border-bottom: 1px solid var(--line); cursor: pointer; transition: background .22s ease, transform .22s ease, box-shadow .22s ease; }
@@ -79,17 +86,17 @@ h3 { font-size: 1rem; }
 .about-facts > div:first-child { padding-top: 0; }
 .about-facts dt { color: var(--muted); font-size: .7rem; font-weight: 700; line-height: 1.6; letter-spacing: .06em; text-transform: uppercase; }
 .about-facts dd { margin: 0; font-size: .95rem; font-weight: 650; }
-.org-entry { display: flex; align-items: center; gap: 14px; }
-.org-entry img { width: 42px; height: 52px; object-fit: contain; }
-.org-entry > span, .career-list > span { display: grid; gap: 2px; }
-.org-entry strong, .career-list strong { color: var(--ink); font-size: .9rem; }
-.org-entry small, .career-list small { color: var(--muted); font-size: .76rem; font-weight: 400; }
-.career-list { display: grid; gap: 15px; }
-.career-list > span + span { padding-top: 14px; border-top: 1px dashed var(--line); }
+.entry-list { display: grid; gap: 16px; }
+.entry-list > .org-entry + .org-entry { padding-top: 16px; border-top: 1px dashed var(--line); }
+.org-entry { display: flex; align-items: flex-start; gap: 14px; }
+.org-entry img { width: 44px; height: 50px; flex: 0 0 44px; object-fit: contain; }
+.org-entry > span { display: grid; gap: 2px; min-width: 0; }
+.org-entry strong { color: var(--ink); font-size: .9rem; }
+.org-entry small { color: var(--muted); font-size: .76rem; font-weight: 400; line-height: 1.6; }
 .site-footer { padding: 28px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .social-links { display: flex; gap: 8px; }
-.social-links a { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: white; transition: transform .2s, box-shadow .2s; }
+.social-links a { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; background: white; transition: transform .2s, box-shadow .2s; }
 .social-links a:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(16,24,40,.12); }
 .social-links a[aria-label="Email"] { color: #EA4335; }
 .social-links a[aria-label="GitHub"] { color: #181717; }
@@ -172,10 +179,10 @@ h3 { font-size: 1rem; }
   .project-overlay { align-items: end; justify-items: end; padding: 12px; background: linear-gradient(transparent 45%, rgba(16,24,40,.74)); opacity: 1; }
   .project-overlay span { padding: 6px 10px; font-size: .68rem; transform: none; }
   .about { padding-top: 68px; }
-  .nav .nav-icon { width: 38px; height: 38px; padding: 0; border-bottom: 1px solid var(--line); }
-  .nav .nav-icon[aria-label="GitHub"] { margin-top: 10px; margin-left: 0; }
+  .nav-social { gap: 4px; margin: 10px 0 0; padding: 4px 0 0; border-left: 0; }
+  .nav .nav-icon { width: 38px; height: 38px; padding: 0; border-bottom-color: transparent; }
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
-  .about-facts > div { grid-template-columns: 88px 1fr; }
+  .about-facts > div { grid-template-columns: 1fr; gap: 10px; }
   .footer-inner { align-items: flex-start; flex-direction: column-reverse; }
   .reading-progress { top: 57px; }
   .case-layout { grid-template-columns: 1fr; }

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Jongmyung Kim — Robot Software Engineer projects">
-  <title>Jongmyung Kim — Robot Software Engineer</title>
+  <meta name="description" content="Jongmyung Kim — Robotics Software Engineer projects">
+  <title>Jongmyung Kim — Robotics Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
@@ -21,19 +21,14 @@
         <span class="disabled" title="v4에서 공개 예정">Blog</span>
         <a href="#about">About</a>
         <span class="disabled" title="이력서 PDF 추가 후 활성화">Resume</span>
-        <a class="nav-icon" href="https://github.com/jongbob1918" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
-        <a class="nav-icon" href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="5" r="2"/><path d="M11 21V9h4v2c1-1.5 2.5-2.3 4.2-2 1.8.3 2.8 1.8 2.8 4.5V21h-4v-6.5c0-1.4-.5-2.5-1.8-2.5-1.5 0-2.2 1.1-2.2 3V21h-3Z"/></svg></a>
       </nav>
     </div>
   </header>
 
   <main id="top">
-    <section class="wrap" id="projects" aria-labelledby="projects-title">
-      <div class="section-head">
-        <h1 id="projects-title">Projects</h1>
-      </div>
-
-      <div class="project-group-head" id="key-projects"><h2>Key Projects</h2><span>01—02</span></div>
+    <div class="wrap" id="projects">
+      <section class="project-section" id="key-projects" aria-labelledby="key-projects-title">
+      <div class="project-group-head"><h2 id="key-projects-title">Key Projects</h2><span>01—02</span></div>
       <div class="project-list">
         <article class="project-row" data-href="projects/javis.html" tabindex="0" role="link" aria-label="JAVIS 상세 페이지 열기">
           <a class="project-media" href="projects/javis.html" aria-label="JAVIS 상세 페이지">
@@ -62,8 +57,10 @@
         </article>
 
       </div>
+      </section>
 
-      <div class="project-group-head side-head" id="side-projects"><h2>Side Projects</h2><span>03</span></div>
+      <section class="project-section side-section" id="side-projects" aria-labelledby="side-projects-title">
+      <div class="project-group-head"><h2 id="side-projects-title">Side Projects</h2><span>03</span></div>
       <div class="project-list side-project-list">
         <article class="project-row side-project" data-href="projects/falcon.html" tabindex="0" role="link" aria-label="FALCON 상세 페이지 열기">
           <a class="project-media" href="projects/falcon.html" aria-label="FALCON 상세 페이지">
@@ -78,15 +75,16 @@
           </div>
         </article>
       </div>
-    </section>
+      </section>
+    </div>
 
     <section class="wrap about" id="about" aria-labelledby="about-title">
       <div class="section-head"><h2 id="about-title">About</h2></div>
       <div class="about-grid">
-        <div class="about-name"><span class="eyebrow">Robot Software Engineer</span><h3>Jongmyung Kim</h3></div>
+        <div class="about-name"><span class="eyebrow">Robotics Software Engineer</span><h3>Jongmyung Kim</h3></div>
         <dl class="about-facts">
-          <div><dt>Education</dt><dd><span class="org-entry"><img src="assets/images/inhatc-emblem.svg" alt="Inha Technical College emblem"><span><strong>Inha Technical College</strong><small>Department of Aeronautical &amp; Mechanical Engineering</small></span></span></dd></div>
-          <div><dt>Career</dt><dd class="career-list"><span><strong>LKROBOTICS</strong><small>2025.10–Present · Autonomous Navigation</small></span><span><strong>Republic of Korea Air Force NCO</strong><small>5 years of aircraft maintenance experience · KF-16 avionics systems maintenance</small></span></dd></div>
+          <div><dt>Education</dt><dd class="entry-list"><span class="org-entry"><img src="assets/images/inhatc-emblem.svg" alt="Inha Technical College emblem"><span><strong>Inha Technical College</strong><small>Department of Aeronautical &amp; Mechanical Engineering</small></span></span><span class="org-entry"><img src="assets/images/addinedu-emblem.svg" alt="ADDINEDU emblem"><span><strong>ADDINEDU</strong><small>AI Robotics Bootcamp · 2025.02–2025.08</small><small>662-hour program in exploratory data analysis (EDA), machine and deep learning, computer vision, robotics systems, ROS 2 system integration, and autonomous mobile robot projects.</small></span></span></dd></div>
+          <div><dt>Career</dt><dd class="entry-list"><span class="org-entry"><img src="assets/images/lk-robotics-emblem.svg" alt="LK ROBOTICS emblem"><span><strong>LK ROBOTICS</strong><small>Robotics Software Engineer</small><small>2025.10–Present · Autonomous Navigation</small></span></span><span class="org-entry"><img src="assets/images/rokaf-emblem.svg" alt="Republic of Korea Air Force emblem"><span><strong>Republic of Korea Air Force</strong><small>Aircraft Maintenance Non-Commissioned Officer</small><small>5 years · KF-16 Avionics Systems Maintenance</small></span></span></dd></div>
         </dl>
       </div>
     </section>

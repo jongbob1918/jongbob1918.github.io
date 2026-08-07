@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">LK ROBOTICS emblem</title>
+  <rect width="512" height="512" rx="112" fill="#0e1329"/>
+  <g transform="translate(256 256) scale(1.6667) translate(-251 -212.5)">
+    <g transform="translate(0 504) scale(.1 -.1)" fill="#fff">
+      <path fill-rule="evenodd" d="M1938 3103l2-703h495l101-123c56-67 125-150 154-184l52-63H1550v1780l193-2 192-3 3-702zm1532 692c0-3-155-212-346-466-190-253-347-466-350-473-3-7 152-195 345-420 193-224 351-409 351-412 0-2-112-4-248-4h-248l-347 410c-191 225-347 414-347 420s170 222 377 480l378 470h217c120 0 218-2 218-5z"/>
+    </g>
+  </g>
+</svg>

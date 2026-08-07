@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 170" role="img" aria-labelledby="title">
+  <title id="title">Inha Technical College emblem</title>
+  <path fill="#1D398D" d="M7 27h34L45 6h46l4 21h34l-3 115-58 24-58-24Z"/>
+  <path fill="none" stroke="#fff" stroke-width="5" d="M14 34h34l4-21h32l4 21h34l-3 103-51 21-51-21Z"/>
+  <path fill="#009A44" d="M17 36h34l4-17h26l4 17h34l-.5 20H17.5Z"/>
+  <path fill="#fff" d="M50 21h15v25h24v14H65v24c0 17-10 28-29 30V99c9-2 14-7 14-16Z"/>
+  <text x="68" y="137" fill="#fff" font-family="Arial,sans-serif" font-size="28" font-weight="700" text-anchor="middle">1958</text>
+</svg>

@@ -1,116 +1,60 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { categories, categoryMap, contentTypeLabels } from '../../data/taxonomy';
+import NotesSidebar from '../../components/NotesSidebar.astro';
+import NoteCard from '../../components/NoteCard.astro';
 
 const notes = (await getCollection('notes', ({ data }) => !data.draft))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-
-const featuredNote = notes.find(note => note.data.featured) ?? notes[0];
-const counts = new Map(categories.map(category => [
-  category.id,
-  notes.filter(note => note.data.category === category.id).length
-]));
-
-const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
-  year: 'numeric', month: '2-digit', day: '2-digit'
-}).format(date);
 ---
 
-<BaseLayout title="Engineering Notes — Jongmyung Kim" description="로봇공학의 원리와 실제 시스템 구현을 연결하는 엔지니어링 노트">
-  <div class="notes-home wrap-narrow">
-    <header class="notes-intro">
-      <p class="eyebrow">Robotics Engineering Notes</p>
-      <h1>Engineering Notes</h1>
-      <p>로봇공학의 원리와 구현을 연결하고, 실제 시스템에서 다시 확인할 수 있는 지식으로 정리합니다.</p>
-    </header>
-
-    <div class="search-box">
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
-      <label class="sr-only" for="note-search">글 검색</label>
-      <input id="note-search" type="search" placeholder="제목, 분야, 태그로 검색" autocomplete="off" />
-      <kbd>/</kbd>
-    </div>
-
-    <nav class="category-nav" aria-label="노트 분야">
-      {categories.map(category => (
-        <a class="search-item" data-search={`${category.title} ${category.topics.join(' ')}`} href={`/notes/category/${category.id}/`}>
-          <span>{category.title}</span>
-          {counts.get(category.id) ? <small>{counts.get(category.id)}</small> : null}
-        </a>
-      ))}
-    </nav>
-
-    {featuredNote && (
-      <section class="home-section featured-section search-item" data-search={`${featuredNote.data.title} ${featuredNote.data.description} ${featuredNote.data.tags.join(' ')}`}>
-        <div class="section-title">
-          <p class="section-kicker">Start here</p>
-          <h2>처음 읽는 글</h2>
-        </div>
-        <a class="featured-post" href={`/notes/${featuredNote.id}/`}>
-          <div>
-            <span class="post-category">{categoryMap.get(featuredNote.data.category)?.title}</span>
-            <h3>{featuredNote.data.title}</h3>
-            <p>{featuredNote.data.description}</p>
-          </div>
-          <span class="read-more">읽어보기 <span aria-hidden="true">→</span></span>
-        </a>
-      </section>
-    )}
-
-    <section class="home-section all-notes">
-      <div class="section-title section-title-row">
+<BaseLayout title="Robotics Notes — Jongmyung Kim" description="로봇공학 기술 노트와 프로젝트에서 검증한 구현 기록">
+  <div class="notes-page-shell">
+    <NotesSidebar />
+    <main class="notes-listing">
+      <header class="listing-header">
         <div>
-          <p class="section-kicker">Archive</p>
-          <h2>전체 글</h2>
+          <p>Robotics Technical Blog</p>
+          <h1>최근 글</h1>
         </div>
-        <span>{notes.length} notes</span>
-      </div>
-      <div class="compact-post-list">
-        {notes.map(note => {
-          const category = categoryMap.get(note.data.category);
-          return (
-            <a
-              class="compact-post search-item"
-              data-search={`${note.data.title} ${note.data.description} ${category?.title ?? ''} ${note.data.tags.join(' ')}`}
-              href={`/notes/${note.id}/`}
-            >
-              <time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time>
-              <div>
-                <h3>{note.data.title}</h3>
-                <p>{note.data.description}</p>
-                <span>{category?.title} · {contentTypeLabels[note.data.type]}</span>
-              </div>
-              <span class="list-arrow" aria-hidden="true">→</span>
-            </a>
-          );
-        })}
+        <span>{notes.length}개의 글</span>
+      </header>
+      <div class="note-card-grid">
+        {notes.map(note => <NoteCard note={note} />)}
       </div>
       <p class="search-empty" hidden>검색 결과가 없습니다.</p>
-    </section>
+    </main>
   </div>
 
   <script>
-    const input = document.querySelector<HTMLInputElement>('#note-search');
-    const items = [...document.querySelectorAll<HTMLElement>('.search-item')];
+    const inputs = [...document.querySelectorAll<HTMLInputElement>('.sidebar-search input')];
+    const cards = [...document.querySelectorAll<HTMLElement>('.note-card')];
     const empty = document.querySelector<HTMLElement>('.search-empty');
+    const initialQuery = new URLSearchParams(window.location.search).get('q') ?? '';
 
-    const filterNotes = () => {
-      const query = input?.value.trim().toLocaleLowerCase('ko') ?? '';
-      let visiblePosts = 0;
-      items.forEach(item => {
-        const matches = !query || (item.dataset.search ?? '').toLocaleLowerCase('ko').includes(query);
-        item.hidden = !matches;
-        if (matches && item.classList.contains('compact-post')) visiblePosts += 1;
+    const filterCards = (query: string) => {
+      let visible = 0;
+      cards.forEach(card => {
+        const matches = !query || (card.dataset.search ?? '').toLocaleLowerCase('ko').includes(query.toLocaleLowerCase('ko'));
+        card.hidden = !matches;
+        if (matches) visible += 1;
       });
-      if (empty) empty.hidden = visiblePosts > 0;
+      if (empty) empty.hidden = visible > 0;
     };
 
-    input?.addEventListener('input', filterNotes);
+    inputs.forEach(input => {
+      input.value = initialQuery;
+      input.addEventListener('input', () => {
+        inputs.forEach(other => { if (other !== input) other.value = input.value; });
+        filterCards(input.value.trim());
+      });
+    });
+    filterCards(initialQuery);
+
     document.addEventListener('keydown', event => {
-      if (event.key === '/' && document.activeElement !== input) {
+      if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
         event.preventDefault();
-        input?.focus();
+        inputs.find(input => input.offsetParent !== null)?.focus();
       }
     });
   </script>

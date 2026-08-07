@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import NotesSidebar from '../../components/NotesSidebar.astro';
 import { categoryMap, contentTypeLabels } from '../../data/taxonomy';
 
 export async function getStaticPaths() {
@@ -17,30 +18,35 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
 ---
 
 <BaseLayout title={`${note.data.title} — Engineering Notes`} description={note.data.description}>
-  <header class="article-header">
-    <a class="back-link" href={`/notes/category/${note.data.category}/`}>← {category?.title}</a>
-    <p class="eyebrow">{category?.title} · {contentTypeLabels[note.data.type]}</p>
-    <h1>{note.data.title}</h1>
-    <p class="article-lead">{note.data.description}</p>
-    <div class="article-meta">
-      <span><time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time></span>
-      {note.data.updatedAt && <span>수정 {formatDate(note.data.updatedAt)}</span>}
-      {note.data.tags.length > 0 && <span>{note.data.tags.join(' · ')}</span>}
-    </div>
-  </header>
-  <div class="article-layout">
-    <article class="article">
-      <Content />
-    </article>
-    {headings.length > 1 && (
-      <aside class="article-toc" aria-label="이 글의 목차">
-        <p>이 글의 목차</p>
-        <ol>
-          {headings.filter(heading => heading.depth <= 3).map(heading => (
-            <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>
-          ))}
-        </ol>
-      </aside>
-    )}
+  <div class="notes-page-shell article-shell">
+    <NotesSidebar activeCategory={note.data.category} />
+    <main class="article-main">
+      <header class="article-header">
+        <a class="back-link" href={`/notes/category/${note.data.category}/`}>← {category?.title}</a>
+        <p class="article-category">{category?.title} · {contentTypeLabels[note.data.type]}</p>
+        <h1>{note.data.title}</h1>
+        <p class="article-lead">{note.data.description}</p>
+        <div class="article-meta">
+          <span><time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time></span>
+          {note.data.updatedAt && <span>수정 {formatDate(note.data.updatedAt)}</span>}
+          {note.data.tags.length > 0 && <span>{note.data.tags.join(' · ')}</span>}
+        </div>
+      </header>
+      <div class="article-layout">
+        <article class="article">
+          <Content />
+        </article>
+        {headings.length > 1 && (
+          <aside class="article-toc" aria-label="이 글의 목차">
+            <p>이 글의 목차</p>
+            <ol>
+              {headings.filter(heading => heading.depth <= 3).map(heading => (
+                <li class={`depth-${heading.depth}`}><a href={`#${heading.slug}`}>{heading.text}</a></li>
+              ))}
+            </ol>
+          </aside>
+        )}
+      </div>
+    </main>
   </div>
 </BaseLayout>

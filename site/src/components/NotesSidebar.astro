@@ -1,0 +1,56 @@
+---
+import { categories, categoryMap } from '../data/taxonomy';
+
+interface Props {
+  activeCategory?: string;
+}
+
+const { activeCategory } = Astro.props;
+const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '최근 글';
+---
+
+<aside class="notes-sidebar">
+  <a class="sidebar-brand" href="/notes/">
+    <span>Robotics</span>
+    <strong>Notes</strong>
+  </a>
+  <form class="sidebar-search" action="/notes/" method="get" role="search">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
+    <label class="sr-only" for="desktop-note-search">글 검색</label>
+    <input id="desktop-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
+  </form>
+  <p class="sidebar-label">Explore</p>
+  <nav class="sidebar-nav" aria-label="노트 분야">
+    <a class:list={[{ active: !activeCategory }]} href="/notes/">최근 글</a>
+    {categories.map(category => (
+      <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
+        <span class={`category-dot dot-${category.id}`}></span>
+        {category.title}
+      </a>
+    ))}
+  </nav>
+</aside>
+
+<details class="mobile-notes-nav">
+  <summary>
+    <span>분야 메뉴</span>
+    <strong>{currentLabel}</strong>
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></svg>
+  </summary>
+  <div>
+    <form class="sidebar-search" action="/notes/" method="get" role="search">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
+      <label class="sr-only" for="mobile-note-search">글 검색</label>
+      <input id="mobile-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
+    </form>
+    <nav class="sidebar-nav" aria-label="모바일 노트 분야">
+      <a class:list={[{ active: !activeCategory }]} href="/notes/">최근 글</a>
+      {categories.map(category => (
+        <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
+          <span class={`category-dot dot-${category.id}`}></span>
+          {category.title}
+        </a>
+      ))}
+    </nav>
+  </div>
+</details>

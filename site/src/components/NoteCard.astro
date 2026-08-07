@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { categoryMap, contentTypeLabels } from '../data/taxonomy';
+
+interface Props {
+  note: CollectionEntry<'notes'>;
+}
+
+const { note } = Astro.props;
+const category = categoryMap.get(note.data.category);
+const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric', month: '2-digit', day: '2-digit'
+}).format(date);
+const searchText = `${note.data.title} ${note.data.description} ${category?.title ?? ''} ${note.data.tags.join(' ')}`;
+---
+
+<article class="note-card search-item" data-search={searchText}>
+  <a class={`card-cover cover-${note.data.category}`} href={`/notes/${note.id}/`} tabindex="-1" aria-hidden="true">
+    <span class="cover-grid"></span>
+    <svg viewBox="0 0 320 170" role="presentation">
+      <path d="M28 132 88 78l48 27 70-70 85 52" />
+      <circle cx="88" cy="78" r="8" />
+      <circle cx="136" cy="105" r="8" />
+      <circle cx="206" cy="35" r="8" />
+      <path d="M50 35h74M50 49h45M236 124h45M251 109v30" />
+    </svg>
+    <span>{category?.title}</span>
+  </a>
+  <div class="card-body">
+    <div class="card-meta">
+      <time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time>
+      <span>{contentTypeLabels[note.data.type]}</span>
+    </div>
+    <h2><a href={`/notes/${note.id}/`}>{note.data.title}</a></h2>
+    <p>{note.data.description}</p>
+    <div class="card-foot">
+      <span>{note.data.tags.slice(0, 2).join(' · ') || category?.title}</span>
+      <a href={`/notes/${note.id}/`} aria-label={`${note.data.title} 읽기`}>읽기 <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</article>

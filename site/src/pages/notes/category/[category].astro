@@ -1,7 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { categories, categoryMap, contentTypeLabels } from '../../../data/taxonomy';
+import NotesSidebar from '../../../components/NotesSidebar.astro';
+import NoteCard from '../../../components/NoteCard.astro';
+import { categories, categoryMap } from '../../../data/taxonomy';
 
 export function getStaticPaths() {
   return categories.map(category => ({ params: { category: category.id } }));
@@ -12,42 +14,33 @@ if (!category) return Astro.redirect('/notes/');
 
 const notes = (await getCollection('notes', ({ data }) => !data.draft && data.category === category.id))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
-
-const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
-  year: 'numeric', month: '2-digit', day: '2-digit'
-}).format(date);
 ---
 
-<BaseLayout title={`${category.title} — Engineering Notes`} description={category.description}>
-  <section class="category-header">
-    <div class="wrap">
-      <a class="back-link" href="/notes/">← Knowledge Index</a>
-      <p class="eyebrow">{category.number} · Engineering Notes</p>
-      <h1>{category.title}</h1>
-      <p class="hero-description">{category.description}</p>
-      <div class="category-topics">
-        {category.topics.map(topic => <span class="tag">{topic}</span>)}
+<BaseLayout title={`${category.title} — Robotics Notes`} description={category.description}>
+  <div class="notes-page-shell">
+    <NotesSidebar activeCategory={category.id} />
+    <main class="notes-listing">
+      <header class="listing-header category-listing-header">
+        <div>
+          <p>{category.number} · Category</p>
+          <h1>{category.title}</h1>
+          <span class="listing-description">{category.description}</span>
+        </div>
+        <span>{notes.length}개의 글</span>
+      </header>
+      <div class="topic-chips" aria-label="주요 주제">
+        {category.topics.map(topic => <span>{topic}</span>)}
       </div>
-    </div>
-  </section>
-  <section class="category-posts">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>전체 글</h2>
-        <p>{notes.length}개의 글</p>
-      </div>
-      <div class="post-list">
-        {notes.length ? notes.map(note => (
-          <a class="post-row" href={`/notes/${note.id}/`}>
-            <span class="post-meta">{formatDate(note.data.publishedAt)}</span>
-            <span class="post-copy">
-              <h3>{note.data.title}</h3>
-              <p>{note.data.description}</p>
-            </span>
-            <span class="post-type">{contentTypeLabels[note.data.type]}</span>
-          </a>
-        )) : <p class="empty-state">이 분야의 첫 번째 글을 준비하고 있습니다.</p>}
-      </div>
-    </div>
-  </section>
+      {notes.length ? (
+        <div class="note-card-grid">
+          {notes.map(note => <NoteCard note={note} />)}
+        </div>
+      ) : (
+        <div class="empty-category">
+          <strong>아직 공개된 글이 없습니다.</strong>
+          <p>이 분야의 글이 추가되면 이곳에 카드로 표시됩니다.</p>
+        </div>
+      )}
+    </main>
+  </div>
 </BaseLayout>

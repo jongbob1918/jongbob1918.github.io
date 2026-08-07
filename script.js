@@ -1,6 +1,9 @@
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.nav');
 
+const rokafLogo = document.querySelector('.rokaf-logo');
+if (rokafLogo) rokafLogo.src = 'assets/images/rokaf-emblem.png';
+
 const headerSocialLinks = `
   <span class="nav-social" aria-label="소셜 링크">
     <a class="nav-icon" href="mailto:jongbob1918@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a>

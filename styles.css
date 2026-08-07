@@ -94,8 +94,8 @@ h3 { font-size: 1rem; }
 .entry-list > .org-entry + .org-entry { padding-top: 0; border: 0; }
 .org-entry { display: flex; align-items: flex-start; gap: 14px; }
 .org-entry img { width: 44px; height: 50px; flex: 0 0 44px; object-fit: contain; }
-.org-icon { width: 44px; height: 50px; flex: 0 0 44px; display: grid; place-items: center; overflow: hidden; }
-.org-entry .rokaf-logo { width: 72px; height: 72px; max-width: none; flex: none; object-fit: cover; }
+.org-icon { width: 44px; height: 50px; flex: 0 0 44px; display: grid; place-items: center; }
+.org-entry .rokaf-logo { width: 44px; height: 50px; max-width: none; flex: none; object-fit: contain; }
 .org-entry > span { display: grid; gap: 2px; min-width: 0; }
 .org-entry strong { color: var(--ink); font-size: .9rem; }
 .org-entry small { color: var(--muted); font-size: .76rem; font-weight: 400; line-height: 1.6; }

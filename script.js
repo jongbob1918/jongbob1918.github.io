@@ -42,3 +42,15 @@ if (progress) {
   updateReadingState();
   window.addEventListener('scroll', updateReadingState, { passive: true });
 }
+
+if (!document.querySelector('.site-footer')) {
+  document.body.insertAdjacentHTML('beforeend', `
+    <footer class="site-footer">
+      <div class="wrap footer-inner"><span>© 2026 Kim Jong-myung</span><div class="social-links">
+        <a href="mailto:jongbob1918@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></a>
+        <a href="https://github.com/jongbob1918" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+        <a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="5" r="2"/><path d="M11 21V9h4v2c1-1.5 2.5-2.3 4.2-2 1.8.3 2.8 1.8 2.8 4.5V21h-4v-6.5c0-1.4-.5-2.5-1.8-2.5-1.5 0-2.2 1.1-2.2 3V21h-3Z"/></svg></a>
+        <a href="https://www.youtube.com/channel/UCVbvniwYb2V2equijzjjt0Q" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7.5a3 3 0 0 0-2.1-2.1C17.1 5 12 5 12 5s-5.1 0-6.9.4A3 3 0 0 0 3 7.5 31 31 0 0 0 2.6 12 31 31 0 0 0 3 16.5a3 3 0 0 0 2.1 2.1c1.8.4 6.9.4 6.9.4s5.1 0 6.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5Z"/><path class="play" d="m10 9 5 3-5 3Z"/></svg></a>
+      </div></div>
+    </footer>`);
+}

@@ -1,0 +1,76 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categories, categoryMap, contentTypeLabels } from '../../data/taxonomy';
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+
+const counts = new Map(categories.map(category => [
+  category.id,
+  notes.filter(note => note.data.category === category.id).length
+]));
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric', month: '2-digit', day: '2-digit'
+}).format(date);
+---
+
+<BaseLayout title="Engineering Notes — Jongmyung Kim" description="로봇공학의 원리와 실제 시스템 구현을 연결하는 엔지니어링 노트">
+  <section class="notes-hero">
+    <div class="wrap">
+      <p class="eyebrow">Robotics Engineering Notes</p>
+      <h1>원리에서 실제 로봇까지</h1>
+      <p class="hero-description">로봇공학의 핵심 개념을 정리하고, 구현과 실험에서 확인한 근거를 연결합니다.</p>
+    </div>
+  </section>
+
+  <section class="knowledge-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Knowledge Index</h2>
+        <p>분야별로 처음부터 순서대로 읽을 수 있습니다.</p>
+      </div>
+      <div class="category-grid">
+        {categories.map(category => (
+          <a class="category-card" href={`/notes/category/${category.id}/`}>
+            <span class="category-number">{category.number}</span>
+            <h2>{category.title}</h2>
+            <p>{category.description}</p>
+            <ul class="topic-list" aria-label={`${category.title} 주요 주제`}>
+              {category.topics.map(topic => <li>{topic}</li>)}
+            </ul>
+            <span class="card-foot">
+              <span>{counts.get(category.id)}개의 글</span>
+              <span class="arrow">살펴보기 →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="recent-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Recent Notes</h2>
+        <p>최근 공개한 글</p>
+      </div>
+      <div class="post-list">
+        {notes.length ? notes.slice(0, 8).map(note => {
+          const category = categoryMap.get(note.data.category);
+          return (
+            <a class="post-row" href={`/notes/${note.id}/`}>
+              <span class="post-meta">{formatDate(note.data.publishedAt)}<br />{category?.title}</span>
+              <span class="post-copy">
+                <h3>{note.data.title}</h3>
+                <p>{note.data.description}</p>
+              </span>
+              <span class="post-type">{contentTypeLabels[note.data.type]}</span>
+            </a>
+          );
+        }) : <p class="empty-state">첫 번째 엔지니어링 노트를 준비하고 있습니다.</p>}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

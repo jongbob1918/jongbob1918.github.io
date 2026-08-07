@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { categoryMap, contentTypeLabels } from '../../data/taxonomy';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map(note => ({ params: { slug: note.id }, props: { note } }));
+}
+
+const { note } = Astro.props;
+const { Content } = await render(note);
+const category = categoryMap.get(note.data.category);
+const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
+  year: 'numeric', month: 'long', day: 'numeric'
+}).format(date);
+---
+
+<BaseLayout title={`${note.data.title} — Engineering Notes`} description={note.data.description}>
+  <header class="article-header">
+    <a class="back-link" href={`/notes/category/${note.data.category}/`}>← {category?.title}</a>
+    <p class="eyebrow">{category?.title} · {contentTypeLabels[note.data.type]}</p>
+    <h1>{note.data.title}</h1>
+    <p class="article-lead">{note.data.description}</p>
+    <div class="article-meta">
+      <span><time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time></span>
+      {note.data.updatedAt && <span>수정 {formatDate(note.data.updatedAt)}</span>}
+      {note.data.tags.length > 0 && <span>{note.data.tags.join(' · ')}</span>}
+    </div>
+  </header>
+  <article class="article">
+    <Content />
+  </article>
+</BaseLayout>

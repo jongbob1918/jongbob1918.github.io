@@ -69,7 +69,7 @@ if (projectContainers.length) {
               <span class="project-overlay"><span>View Project ↗</span></span>
             </a>
             <div class="project-copy">
-              <a class="project-title" href="${url}">${title} <span class="arrow">↗</span></a>
+              <a class="project-title" href="${url}">${title}</a>
               <p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>
               <p class="result">${escapeHtml(project.description)}</p>
             </div>

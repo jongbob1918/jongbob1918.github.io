@@ -46,6 +46,18 @@ export const categories = [
       { id: 'navigation2', title: 'Navigation2' },
       { id: 'deployment', title: 'Deployment' }
     ]
+  },
+  {
+    id: 'projects',
+    number: '05',
+    title: '프로젝트',
+    description: '로봇 소프트웨어 프로젝트의 설계, 구현, 검증 내용을 정리합니다.',
+    topics: ['JAVIS', 'ROOMIE', 'FALCON'],
+    children: [
+      { id: 'javis', title: 'JAVIS' },
+      { id: 'roomie', title: 'ROOMIE' },
+      { id: 'falcon', title: 'FALCON' }
+    ]
   }
 ] as const;
 

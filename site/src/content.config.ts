@@ -12,7 +12,8 @@ const notes = defineCollection({
       'robotics-foundations',
       'localization-slam',
       'planning-control',
-      'ros2-systems'
+      'ros2-systems',
+      'projects'
     ]),
     type: z.enum(['overview', 'concept', 'algorithm', 'implementation', 'experiment', 'case-study']),
     tags: z.array(z.string()).default([]),

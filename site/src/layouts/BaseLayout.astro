@@ -99,13 +99,15 @@ const structuredData = article ? {
       </div>
     </footer>
     <script is:inline>
-      const savedTheme = localStorage.getItem('notes-theme');
+      const savedTheme = localStorage.getItem('portfolio-theme') || localStorage.getItem('notes-theme');
       const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (savedTheme === 'dark' || (!savedTheme && preferredDark)) document.documentElement.dataset.theme = 'dark';
       document.querySelector('.theme-toggle')?.addEventListener('click', () => {
         const dark = document.documentElement.dataset.theme !== 'dark';
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-        localStorage.setItem('notes-theme', dark ? 'dark' : 'light');
+        const nextTheme = dark ? 'dark' : 'light';
+        localStorage.setItem('portfolio-theme', nextTheme);
+        localStorage.setItem('notes-theme', nextTheme);
       });
     </script>
   </body>

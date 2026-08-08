@@ -69,20 +69,18 @@ JAVIS는 2D LiDAR로 작성한 지도에서 위치를 추정하고, Nav2를 사�
 
 <dl class="flow"><dt>경로 계획</dt><dd>점 모델 중심의 NavFn 대신 로봇의 직사각형 형상, 회전 반경과 후진 경로를 고려하는 Smac Planner Hybrid를 적용했습니다.</dd><dt>장애물 인식</dt><dd>실제 로봇보다 넓게 설정돼 근접 장애물을 제거하던 LiDAR 필터 범위를 다시 설정하고 Costmap Inflation 가중치를 조정했습니다.</dd><dt>경로 추종</dt><dd>복잡한 공간에서 유효한 회피 궤적을 찾기 어려웠던 DWB 대신 샘플링 기반 예측 제어를 사용하는 MPPI Controller를 적용했습니다.</dd></dl>
 
-## 로봇의 상태와 임무 흐름 관리하기
+## 서비스 서버와 로봇 모듈 연결하기
 
-주행, 비전과 로봇팔 모듈은 서로 독립적으로 동작합니다. ROS 2 기반 메인 컨트롤러는 Task Executor와 State Machine을 사용해 각 모듈의 실행 순서를 관리하고, 완료·실패 응답에 따라 다음 동작을 결정합니다.
+JAVIS는 서비스 서버와 로봇 내부 제어 모듈이 ROS 2 인터페이스를 통해 요청과 상태를 양방향으로 교환하는 구조입니다. DMC는 서버에서 받은 임무를 Drive·Arm·AI 모듈에 전달하고, 각 모듈의 실행 결과와 로봇 상태를 다시 서버에 전달합니다.
 
-<div class="diagram" role="img" aria-label="JAVIS 중앙 제어 구조"><div class="diagram-node">중앙 시스템<br>작업 요청</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Task Executor<br>임무 실행</div><div class="diagram-arrow">→</div><div class="diagram-node owner">DMC<br>상태 · 예외</div><div class="diagram-arrow">→</div><div class="diagram-node owner">공통 Interface</div><div class="diagram-arrow">→</div><div class="diagram-node">Drive · Arm · AI</div></div>
+<div class="system-architecture" role="img" aria-label="JAVIS Server와 AI Image Server가 로봇 내부 DMC, Drive, Arm, AI 모듈과 양방향으로 통신하는 구조"><section class="system-domain service-domain"><h3>Service</h3><div class="system-module"><strong>JAVIS Server</strong><small>Task · Robot Status</small></div><div class="system-module"><strong>AI Image Server</strong><small>Image Inference</small></div></section><div class="bidirectional-links" aria-hidden="true"><div><span>Task · Status</span><b>⇄</b></div><div><span>Image · Result</span><b>⇄</b></div></div><section class="system-domain robot-domain"><h3>Robot · JAVIS</h3><div class="system-module system-core"><strong>DMC</strong><small>State Machine · Mission Control</small></div><div class="internal-links" aria-hidden="true">⇅ &nbsp; ⇅ &nbsp; ⇅</div><div class="robot-modules"><div class="system-module"><strong>Drive Controller</strong><small>Navigation · LiDAR</small></div><div class="system-module"><strong>Arm Controller</strong><small>Pick · Place</small></div><div class="system-module"><strong>AI · Device</strong><small>Camera · Voice · Display</small></div></div></section></div>
 
-메인 컨트롤러는 초기화, 충전, 작업 대기, 작업 수행과 충전소 이동 상태를 관리합니다. 배터리 조건이나 긴급 정지 요청이 발생하면 현재 작업에서 별도의 상태로 전환하며, 전용 GUI에서 메인 상태와 세부 임무, 배터리 및 ROS 로그를 함께 확인할 수 있습니다.
-
-<div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 충전, 대기, 작업과 긴급 정지 상태 전이도" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="JAVIS의 상태와 로그를 확인하는 DMC 상태 GUI" loading="lazy"></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 충전, 대기, 작업과 긴급 정지 상태 전이도" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="JAVIS의 메인 상태, 세부 임무, 배터리와 ROS 로그를 확인하는 모니터링 GUI" loading="lazy"></figure></div>
 
 ## 실제 장비 없이 제어 흐름 검증하기
 
 AI, 주행과 로봇팔 모듈이 모두 준비될 때까지 기다리지 않고 통합 개발을 진행할 수 있도록 공통 인터페이스를 정의했습니다. 실제 모듈과 Mock 모듈이 같은 명령과 응답 구조를 사용하므로 메인 컨트롤러를 변경하지 않고 실행 대상을 교체할 수 있습니다.
 
-<div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="실제 모듈과 Mock 모듈을 분리한 JAVIS 인터페이스 구조" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="Mock 응답을 조작해 JAVIS 제어 흐름을 시험하는 GUI" loading="lazy"></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="실제 모듈과 Mock 모듈을 분리한 JAVIS 인터페이스 구조" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="Mock 응답을 조작해 JAVIS 제어 흐름을 시험하는 GUI" loading="lazy"></figure></div>
 
 Mock의 응답을 통해 정상 완료뿐 아니라 실행 실패와 작업 취소 상황을 재현했습니다. 이를 통해 실제 장비를 연결하기 전에 State Machine의 전이, 예외 처리와 하위 모듈 호출 순서를 반복적으로 확인했습니다.

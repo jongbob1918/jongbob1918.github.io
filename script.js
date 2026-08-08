@@ -168,7 +168,7 @@ document.querySelector('.language-toggle')?.addEventListener('click', () => {
 applyLanguage();
 
 if (projectContainers.length) {
-  fetch('projects.json?v=20260808-2')
+  fetch('projects.json', { cache: 'no-store' })
     .then(response => {
       if (!response.ok) throw new Error(`Project data request failed: ${response.status}`);
       return response.json();

@@ -3,16 +3,16 @@ slug: roomie
 shortName: ROOMIE
 group: key
 order: 2
-title: ROOMIE — 엘리베이터 버튼 조작 로봇
-description: ROOMIE 4축 로봇팔 좌표변환, IK, FreeRTOS 제어 프로젝트
+title: ROOMIE — 호텔 서비스 로봇
+description: 자율주행, 룸서비스 배송, 길 안내와 엘리베이터 층간 이동을 통합한 호텔 서비스 로봇
 team: 4명
 period: 2025.07.07–08.13
 skills:
   - ROS 2
-  - 4-DOF Arm
-  - Hand-Eye Calibration
-  - IK
-  - FreeRTOS
+  - Python
+  - Inverse Kinematics
+  - IBVS
+  - Object Detection
   - ESP32
 repository: https://github.com/jongbob1918/ROOMIE
 card:
@@ -27,13 +27,18 @@ card:
   descriptionKo: 카메라로 인식한 엘리베이터 버튼 위치를 4축 로봇팔의 관절각으로 변환하고, ESP32 제어기와 연결해 실제 버튼 조작을 구현했습니다.
   descriptionEn: Built a 4-DOF arm pipeline from Hand-Eye coordinate transforms and IK to ESP32 motion control. Separated communication and 6 ms target motion-update tasks with FreeRTOS.
 overview: >-
-  카메라에서 얻은 버튼 위치를 로봇 기준 좌표와 4개 관절각으로 변환하고,
-  통신과 모션 갱신을 분리한 ESP32 제어기로 실제 버튼 조작까지 연결했습니다.
+  호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생하며, 서비스 로봇이 이를 수행하려면 엘리베이터를 스스로 이용해야 합니다. ROOMIE는 자율주행, 룸서비스 배송, 길 안내와 엘리베이터 층간 이동을 통합한 호텔 서비스 로봇입니다. 층간 이동 요청이 발생하면 엘리베이터 앞까지 이동하고, 버튼을 인식해 로봇팔로 호출·층 선택 버튼을 조작한 뒤 목적층까지 이동합니다.
 demo:
   type: image
   src: ../assets/images/elevator-pushouterbutton2.gif
   alt: ROOMIE 로봇팔의 엘리베이터 버튼 조작
 ---
+
+## 팀 구성과 담당 기능
+
+팀원은 장진혁, 김지연, 김종명, 박효진입니다. Vision Service에서 인식한 엘리베이터 버튼 위치를 받아 로봇 베이스 기준의 3차원 목표 좌표로 변환하고, Inverse Kinematics로 4축 로봇팔의 관절각을 계산해 실제 버튼을 누르는 기능을 담당했습니다.
+
+<div class="diagram" role="img" aria-label="ROOMIE 담당 기능 범위"><div class="diagram-node">Elevator Button<br>Detection</div><div class="diagram-arrow">→</div><div class="diagram-node owner">3D Coordinate<br>Transformation</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Inverse<br>Kinematics</div><div class="diagram-arrow">→</div><div class="diagram-node owner">4-DOF Arm<br>Control</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Physical Button<br>Press</div></div>
 
 ## 버튼 인식에서 모터 명령까지
 

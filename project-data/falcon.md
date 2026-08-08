@@ -69,9 +69,3 @@ demo:
 <div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9672</span><span class="metric-label">Recall</span></div></div>
 
 <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">ARTIFACT</span><strong>학습 결과</strong><p>PR/F1 Curve, Confusion Matrix와 results.csv가 저장되어 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>IDS 실행 코드</strong><p>Detector·Tracker·Inference 코드가 공개되어 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>관제 통합</strong><p>지도 Marker와 관제 UI 연동을 확인할 수 있습니다.</p></div></div>
-
-## 관련 코드
-
-[Ground IDS 구현 보기 ↗](https://github.com/jongbob1918/FALCON/tree/main/src/systems/ids)
-
-학습·평가 Script와 결과 Artifact가 공개되어 있습니다.

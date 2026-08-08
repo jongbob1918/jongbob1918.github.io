@@ -75,10 +75,10 @@
     "order": 4,
     "detailUrl": "projects/physical-ai-hackathon.html",
     "image": "https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif",
-    "imageAlt": "Two SO-101 robot arms manipulating colored balls during the Physical AI Hackathon",
+    "imageAlt": "제1회 Physical AI 해커톤에서 두 대의 SO-101 로봇팔이 색상 공을 전달하고 분류하는 모습",
     "imageSequence": [],
-    "titleKo": "PHYSICAL AI — 양팔 모방학습 조작",
-    "titleEn": "PHYSICAL AI — Bimanual Imitation Learning",
+    "titleKo": "한성대×로보시지 제1회 Physical AI 해커톤",
+    "titleEn": "PHYSICAL AI HACKATHON — Bimanual Imitation Learning",
     "keywords": [
       "LeRobot",
       "ACT",
@@ -86,8 +86,8 @@
       "Bimanual Manipulation",
       "SO-101"
     ],
-    "descriptionKo": "3개 카메라와 12차원 상태를 사용하는 ACT 정책을 50,000 step 학습해 SO-101 양팔 공 조작을 시연했습니다.",
-    "descriptionEn": "Trained a three-camera bimanual ACT policy for 50,000 steps and demonstrated colored-ball manipulation on two SO-101 arms."
+    "descriptionKo": "5개 연속 동작을 색상별 단일 태스크로 재구성하고 복구 시연을 더해, 심사에서 5개 공 중 3개 분류에 성공했습니다.",
+    "descriptionEn": "Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging."
   },
   {
     "slug": "elevator-mcu",

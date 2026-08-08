@@ -3,8 +3,8 @@ slug: physical-ai-hackathon
 shortName: PHYSICAL AI
 group: side
 order: 4
-title: PHYSICAL AI — 양팔 모방학습 조작
-description: LeRobot과 ACT를 이용한 SO-101 양팔 공 전달·분류 프로젝트
+title: 한성대×로보시지 제1회 Physical AI 해커톤
+description: ACT 모방학습으로 SO-101 양팔의 공 전달·색상 분류 미션에 도전한 해커톤 참가 기록
 team: 4명
 period: 2026.02
 skills:
@@ -16,52 +16,78 @@ skills:
 repository: https://github.com/TheMomentLab/physical_ai_hackathon
 card:
   image: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
-  imageAlt: Two SO-101 robot arms manipulating colored balls during the Physical AI Hackathon
-  titleEn: PHYSICAL AI — Bimanual Imitation Learning
+  imageAlt: 제1회 Physical AI 해커톤에서 두 대의 SO-101 로봇팔이 색상 공을 전달하고 분류하는 모습
+  titleEn: PHYSICAL AI HACKATHON — Bimanual Imitation Learning
   keywords:
     - LeRobot
     - ACT
     - Imitation Learning
     - Bimanual Manipulation
     - SO-101
-  descriptionKo: 3개 카메라와 12차원 상태를 사용하는 ACT 정책을 50,000 step 학습해 SO-101 양팔 공 조작을 시연했습니다.
-  descriptionEn: Trained a three-camera bimanual ACT policy for 50,000 steps and demonstrated colored-ball manipulation on two SO-101 arms.
+  descriptionKo: 5개 연속 동작을 색상별 단일 태스크로 재구성하고 복구 시연을 더해, 심사에서 5개 공 중 3개 분류에 성공했습니다.
+  descriptionEn: Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging.
 overview: >-
-  제1회 Physical AI 해커톤의 과제는 한쪽 팔로 공을 집고 반대쪽 그리퍼로 전달한 뒤 색상별 수납함에 분류하는 양팔 조작이었습니다.
-  4인 팀에서 LeRobot 기반 텔레오퍼레이션 데이터 수집부터 ACT 정책 학습과 실제 로봇 추론까지 연결했습니다.
-  공개 체크포인트는 3개 카메라 영상과 12차원 로봇 상태를 입력받아 두 SO-101 팔의 12차원 행동을 100-step chunk로 출력합니다.
+  한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가해, 두 로봇팔이 공을 주고받아 색상별 수납함에 넣는 1종목 미션에 도전했습니다.
+  짧은 준비 시간 안에 정밀한 양팔 조작을 학습시키기 위해 ACT를 선택하고, 1차 실패를 바탕으로 연속 동작을 색상별 단일 태스크로 나누며 데이터 수집 방식을 다시 설계했습니다.
+  약 200개의 시연 데이터와 15,000-step 체크포인트로 심사에 참가해 5개의 공 중 3개를 분류했으며, 네 번째 동작 중 오른팔이 수납함을 넘어뜨려 시연을 종료했습니다.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
-  alt: Physical AI Hackathon dual-arm colored-ball manipulation demo
+  alt: 두 대의 SO-101 로봇팔이 색상 공을 전달하고 수납함에 분류하는 해커톤 시연
 ---
 
-## 공 집기에서 색상 분류까지
+## 도전 과제: 두 팔이 공을 건네 색상별로 분류하기
 
-대회 미션은 공을 한쪽 팔로 집은 뒤 반대쪽 그리퍼로 전달하고, 전달받은 팔이 색상에 맞는 수납함으로 옮기는 순서로 구성됩니다.
+1종목의 미션은 **“한쪽 팔로 공을 집어 반대쪽 팔의 그리퍼로 전달한 뒤, 색상별로 수납함에 정확히 분류”**하는 것이었습니다. 한 번의 시연 안에 다음 세 동작을 끊김 없이 수행해야 했습니다.
 
-<div class="diagram" role="img" aria-label="Physical AI 양팔 조작 파이프라인"><div class="diagram-node">3 Camera Views<br>640 × 480</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ACT Policy<br>Visual · State</div><div class="diagram-arrow">→</div><div class="diagram-node owner">100-step<br>Action Chunk</div><div class="diagram-arrow">→</div><div class="diagram-node">Dual SO-101<br>12-DoF Action</div><div class="diagram-arrow">→</div><div class="diagram-node">Grasp · Handover<br>Color Sorting</div></div>
+<div class="role-grid"><div class="info-card"><strong>Pick & Place</strong><span>한쪽 팔로 테이블 위의 공을 집습니다.</span></div><div class="info-card"><strong>Transfer</strong><span>집은 공을 반대편 팔의 그리퍼로 안정적으로 전달합니다.</span></div><div class="info-card"><strong>Classification</strong><span>전달받은 공을 색상에 맞는 지정 수납함에 넣습니다.</span></div></div>
 
-## 텔레오퍼레이션 데이터와 ACT 정책
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/mission_top_view.jpg" alt="색상 공과 수납함, 두 대의 SO-101 로봇팔이 배치된 해커톤 미션 상단 모습" loading="lazy"><figcaption>미션 환경 · 두 로봇팔 사이에서 공을 전달한 뒤 색상별 수납함으로 분류</figcaption></figure>
 
-### 양팔 시연 데이터 구성
+## 왜 ACT를 선택했는가
 
-LeRobot의 `bi_so_leader`와 `bi_so_follower` 구성을 사용해 좌·우 팔을 텔레오퍼레이션하고, 상단과 전방 카메라 영상 및 관절 상태를 행동 명령과 함께 기록하는 파이프라인을 구성했습니다.
+여러 모방학습 모델 가운데 ACT(Action Chunking with Transformers)를 선택했습니다. 해커톤처럼 데이터 수집과 학습 시간이 제한된 상황에서, ACT는 비교적 적은 시연으로도 접촉이 많은 세분화 조작을 빠르게 학습시키기 좋은 출발점이었습니다.
 
-### 3개 시점에서 12차원 행동 예측
+ACT는 각 시점의 카메라 영상과 로봇 관절 상태를 입력받아 다음 한 동작만 예측하지 않고, 앞으로 실행할 연속 행동을 하나의 **action chunk**로 출력합니다. ResNet-18이 여러 카메라의 시각 특징을 추출하고 Transformer가 이 특징과 양팔의 관절 상태를 결합해 두 팔의 관절·그리퍼 명령을 함께 생성합니다. 짧은 단위의 행동을 묶어 예측하므로 공을 집고, 건네고, 놓는 연속 동작을 더 매끄럽게 모방할 수 있다고 판단했습니다.
 
-공개된 최종 정책은 `left_top`, `left_front`, `right_front`의 3개 RGB 영상과 12차원 로봇 상태를 입력으로 사용합니다. ResNet-18 시각 백본과 ACT Transformer가 두 팔의 12차원 행동을 100-step chunk로 예측합니다.
+<div class="diagram" role="img" aria-label="ACT 기반 양팔 모방학습 동작 흐름"><div class="diagram-node">Camera Images<br>Robot State</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ResNet-18<br>Visual Features</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ACT Transformer<br>Action Chunk</div><div class="diagram-arrow">→</div><div class="diagram-node">Dual SO-101<br>Joint · Gripper</div><div class="diagram-arrow">→</div><div class="diagram-node">Pick · Transfer<br>Sort</div></div>
 
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">3</span><span class="metric-label">640 × 480 Camera Views</span></div><div class="metric-card"><span class="metric-value">12 → 12</span><span class="metric-label">State · Action Dimensions</span></div><div class="metric-card"><span class="metric-value">50K</span><span class="metric-label">Training Steps</span></div></div>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="리더 로봇팔을 조작해 두 대의 SO-101 팔의 시연 데이터를 기록하는 텔레오퍼레이션 모습" loading="lazy"><figcaption>텔레오퍼레이션 · 사람이 리더 팔을 움직이며 카메라 영상, 관절 상태와 행동을 에피소드로 기록</figcaption></figure>
 
-## 양팔 조작 시스템
+## 1차 시도: 다섯 개의 공을 한 번에 학습시키기
 
-<div class="role-grid"><div class="info-card"><strong>Dual SO-101</strong><span>좌·우 팔로 공 집기, 그리퍼 간 전달과 분류 동작 수행</span></div><div class="info-card"><strong>LeRobot Dataset</strong><span>카메라 관측, 관절 상태와 텔레오퍼레이션 행동을 에피소드로 기록</span></div><div class="info-card"><strong>ACT Inference</strong><span>시각·상태 입력을 정규화하고 연속 행동 chunk를 실제 팔 명령으로 변환</span></div></div>
+처음에는 실제 심사 순서와 동일하게 파란 공 2개, 빨간 공 2개, 노란 공 1개를 연속으로 집어 전달하고 분류하는 전체 과정을 하나의 에피소드로 기록했습니다. 이 방식으로 약 100개의 시연 데이터를 수집해 첫 학습을 진행했습니다.
 
-## 카메라와 USB 장치 매핑
+그러나 1차 테스트에서는 로봇이 동작 중 갑자기 멈추거나, 공과 그리퍼의 위치가 조금만 달라져도 집기 정확도가 크게 떨어졌습니다. 하나의 긴 에피소드 안에 공의 위치, 색상, 순서와 양팔 전달 단계가 모두 섞이면서 각 단계에 필요한 시연 밀도가 부족했고, 앞 단계의 작은 오차가 뒤 동작까지 누적됐습니다.
 
-<dl class="flow"><dt>증상</dt><dd>카메라 연결 순서가 바뀌거나 첫 프레임 읽기가 실패하면 학습과 추론의 관측 키가 달라질 수 있습니다.</dd><dt>원인</dt><dd>동적으로 할당되는 video·serial 장치 경로와 카메라 포맷 설정이 실행 환경마다 달라졌습니다.</dd><dt>해결</dt><dd>udev 규칙으로 팔과 카메라에 고정 심볼릭 링크를 부여하고 OpenCV 입력을 640×480, 30 FPS, MJPG로 통일했습니다.</dd><dt>검증</dt><dd>장치 매핑 문서와 텔레오퍼레이션 노트북에서 동일한 카메라 이름과 로봇 ID를 사용하도록 구성했습니다.</dd></dl>
+<dl class="flow"><dt>데이터</dt><dd>파랑 → 파랑 → 빨강 → 빨강 → 노랑의 다섯 공 전체 과정을 약 100개 에피소드로 기록</dd><dt>학습 단위</dt><dd>집기·전달·색상 분류를 하나의 긴 행동 시퀀스로 모방</dd><dt>관찰 결과</dt><dd>중간 정지와 불안정한 집기가 발생하고, 공 위치 변화에 대한 정확도가 기대에 미치지 못함</dd><dt>판단</dt><dd>긴 시퀀스를 반복하기보다 공 하나를 집어 해당 수납함에 넣는 단일 태스크의 품질을 먼저 높여야 함</dd></dl>
 
-## 공개 결과와 검증 범위
+## 2차 시도: 태스크를 나누고 실패까지 데이터로 만들기
 
-<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>ACT 최종 체크포인트</strong><p>50,000-step 학습 설정과 모델 가중치, 전처리·후처리 설정이 Hugging Face에 공개되어 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>실제 공 조작</strong><p>두 SO-101 팔과 색상 공을 사용한 실제 조작 장면을 저장소 GIF에서 확인할 수 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">SCOPE</span><strong>4인 팀 프로젝트</strong><p>공개 README에는 김종명을 포함한 4명의 팀원이 명시되어 있으며 세부 개인 담당 범위는 별도로 공개되어 있지 않습니다.</p></div></div>
+추가 기술 조사를 거쳐 다섯 공을 한 번에 학습시키는 대신, **공 하나를 집어 색상에 맞는 수납함에 넣는 태스크**로 시연을 나눴습니다. 색상별 단일 태스크를 반복하면 모델이 한 번의 성공 동작을 더 조밀하게 관찰할 수 있고, 긴 시퀀스에서 발생하던 오차 누적도 줄일 수 있다고 판단했습니다.
+
+또한 사용한 카메라는 2D 영상만 제공하므로, 화면 속 위치가 같아 보여도 실제 깊이와 크기 차이로 스케일 왜곡이 생길 수밖에 없었습니다. 정면으로만 접근하는 동일한 궤적 대신 그리퍼가 공을 **대각선 방향으로 진입하도록** 시연 각도를 다양화해 위치 오차에 대한 대응 범위를 넓혔습니다.
+
+성공 궤적만 기록하지도 않았습니다. 텔레오퍼레이션 중 일부러 공을 놓친 뒤 다시 접근해 집는 복구 동작을 추가했습니다. 실제 추론에서 공이 미끄러지거나 예상 위치를 벗어나더라도 다음 행동으로 이어갈 수 있도록 실패 이후의 상태와 복구 과정을 데이터에 포함했습니다.
+
+<div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">공 하나·색상별 수납함 단위로 분리</span></div><div class="metric-card"><span class="metric-value">≈ 200</span><span class="metric-label">최종 시연 데이터</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">심사 시점 Training Steps</span></div></div>
+
+## 심사 결과: 5개 중 3개 성공
+
+최종적으로 약 200개의 시연 데이터를 확보했습니다. 마감이 오전 9시였기 때문에 학습을 더 이어가지 못하고, 당시 15,000 step까지 학습된 체크포인트로 심사를 진행했습니다.
+
+로봇은 다섯 개의 공 가운데 세 개를 집어 전달하고 색상별 수납함에 넣는 데 성공했습니다. 네 번째 공을 처리하는 과정에서 오른팔이 수납함을 넘어뜨렸고, 환경이 흐트러져 남은 시연은 더 이상 진행할 수 없었습니다. 완주에는 실패했지만, 데이터 전략을 바꾼 뒤 실제 심사 환경에서 세 번의 연속 성공을 확인했습니다.
+
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"><figcaption>실제 양팔 조작 · 공 집기, 그리퍼 간 전달, 색상별 수납함 분류</figcaption></figure>
+
+<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">RESULT</span><strong>3 / 5 분류 성공</strong><p>심사에서 세 개의 공을 연속으로 전달·분류한 뒤 네 번째 동작 중 수납함이 넘어져 종료했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">DATA</span><strong>100 → 200 시연</strong><p>전체 연속 시퀀스 중심의 1차 데이터에서 단일 태스크와 실패 복구를 포함한 데이터로 개선했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>15K 심사 체크포인트</strong><p>마감 시각까지 학습된 모델로 심사했으며, 저장소에는 이후 50K 설정의 공개 ACT 체크포인트도 연결돼 있습니다.</p></div></div>
+
+## 회고: 모방을 넘어 판단할 수 있는 구조가 필요했다
+
+ACT는 짧은 시간 안에 정밀한 양팔 동작을 학습시키는 데 효과적이었지만, 이번 미션에서는 모방학습만으로 해결하기 어려운 한계도 확인했습니다. 정책은 카메라 영상과 현재 관절 상태로 다음 행동을 생성하지만, “현재 몇 번째 공인지”, “어느 색을 다음에 처리해야 하는지”, “수납함이 넘어졌는지”와 같은 명시적인 작업 상태나 목표를 스스로 결정하는 구조는 아니었습니다. 따라서 정해진 순서를 데이터에서 암묵적으로 모방할 뿐, 상황에 따라 다음 행동을 결정론적으로 선택하거나 작업 계획을 다시 세우는 데는 취약했습니다.
+
+다시 설계한다면 ACT를 저수준 양팔 조작 정책으로 사용하되, 색상 인식과 공 개수·작업 진행 상태를 관리하는 상위 상태 머신을 분리하겠습니다. 여기에 수납함 전도나 집기 실패를 감지하는 조건을 추가해, 필요한 단일 태스크 정책을 선택하고 실패 시 복구 동작으로 전환하도록 구성할 수 있습니다. 이번 경험을 통해 모델 선택만큼이나 **태스크를 어떻게 나누고, 실패 상태까지 어떤 데이터로 보여주는가**가 실제 로봇의 강건성을 좌우한다는 점을 배웠습니다.
+
+## 함께한 팀
+
+<figure class="feature-media hackathon-team-media"><img src="https://github.com/TheMomentLab/.github/blob/main/1770642885261.jpg?raw=true" alt="한성대×로보시지 제1회 Physical AI 해커톤에 참가한 4인 팀 단체 사진" loading="lazy"><figcaption>김종명 · 장진혁 · 김재형 · 최원호, 4인 팀으로 참가</figcaption></figure>

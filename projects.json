@@ -6,6 +6,18 @@
     "detailUrl": "projects/javis.html",
     "image": "assets/images/javis_robot_drive.gif",
     "imageAlt": "도서관 환경을 자율주행하는 JAVIS",
+    "imageSequence": [
+      {
+        "src": "assets/images/javis_robot_drive.gif",
+        "alt": "도서관 환경을 자율주행하는 JAVIS",
+        "duration": 28000
+      },
+      {
+        "src": "assets/images/javis_nav_rviz.gif",
+        "alt": "RViz에서 협소한 서가 사이를 주행하는 JAVIS",
+        "duration": 7510
+      }
+    ],
     "titleKo": "JAVIS — 도서관 관리 로봇",
     "titleEn": "JAVIS — Library Management Robot",
     "keywords": [
@@ -26,6 +38,7 @@
     "detailUrl": "projects/roomie.html",
     "image": "assets/images/elevator-alignbutton.gif",
     "imageAlt": "ROOMIE robot arm aligning with an elevator button",
+    "imageSequence": [],
     "titleKo": "ROOMIE — 엘리베이터 버튼 조작 로봇",
     "titleEn": "ROOMIE — Hotel Room-Service Robot",
     "keywords": [
@@ -44,6 +57,7 @@
     "detailUrl": "projects/falcon.html",
     "image": "assets/images/hawkeye_mainpage.gif",
     "imageAlt": "FALCON runway hazard detection interface",
+    "imageSequence": [],
     "titleKo": "FALCON — 활주로 위험요소 관제",
     "titleEn": "FALCON — Runway Safety Monitoring System",
     "keywords": [
@@ -62,6 +76,7 @@
     "detailUrl": "projects/physical-ai-hackathon.html",
     "image": "https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif",
     "imageAlt": "Two SO-101 robot arms manipulating colored balls during the Physical AI Hackathon",
+    "imageSequence": [],
     "titleKo": "PHYSICAL AI — 양팔 모방학습 조작",
     "titleEn": "PHYSICAL AI — Bimanual Imitation Learning",
     "keywords": [

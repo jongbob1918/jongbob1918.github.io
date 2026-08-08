@@ -94,18 +94,18 @@
     "group": "side",
     "order": 5,
     "detailUrl": "projects/elevator-mcu.html",
-    "image": "https://raw.githubusercontent.com/jongbob1918/elevator-mcu/main/docs/images/test_demo.gif",
-    "imageAlt": "Arduino LED 엘리베이터 호출 및 이동 시뮬레이션",
+    "image": "assets/images/elevator-mcu-demo.gif",
+    "imageAlt": "Tinkercad에서 실행한 4층 LED 엘리베이터 호출·이동 시뮬레이션",
     "imageSequence": [],
-    "titleKo": "ELEVATOR MCU — LED 엘리베이터 제어",
-    "titleEn": "ELEVATOR MCU — LED Elevator Controller",
+    "titleKo": "ELEVATOR MCU — 호출 우선순위 LED 제어기",
+    "titleEn": "ELEVATOR MCU — Direction-Aware LED Controller",
     "keywords": [
       "Arduino",
       "C++",
-      "Non-blocking Timing",
+      "Scheduling",
       "Embedded Systems"
     ],
-    "descriptionKo": "버튼 상승 엣지로 4층 호출을 등록하고, 진행 방향을 우선해 목적층을 선택하며 500 ms 주기로 LED 위치를 갱신했습니다.",
-    "descriptionEn": "Built a four-floor Arduino controller that registers rising-edge button calls, prioritizes destinations in the current direction, and updates the LED position every 500 ms."
+    "descriptionKo": "큐 기반 호출 처리의 취소·중간 삽입 문제를 발견하고, 현재 진행 방향에 따라 목적층을 다시 탐색하는 구조로 개선했습니다.",
+    "descriptionEn": "Replaced a queue-first design with direction-aware request scanning to handle cancellation and mid-route calls."
   }
 ]

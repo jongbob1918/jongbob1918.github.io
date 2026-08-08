@@ -16,6 +16,10 @@ const renderDemo = demo => {
 
   const type = demo.type || 'image';
   const caption = demo.caption ? `<figcaption>${escapeHtml(demo.caption)}</figcaption>` : '';
+  const sequence = Array.isArray(demo.sequence) ? demo.sequence : [];
+  const sequenceAttribute = sequence.length > 1
+    ? ` data-media-sequence="${escapeHtml(JSON.stringify(sequence))}"`
+    : '';
   let media;
 
   if (type === 'video') {
@@ -24,7 +28,7 @@ const renderDemo = demo => {
   } else if (type === 'youtube') {
     media = `<div class="video-embed"><iframe src="${escapeHtml(demo.src)}" title="${escapeHtml(demo.alt || '프로젝트 시연 영상')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
   } else {
-    media = `<img src="${escapeHtml(demo.src)}" alt="${escapeHtml(demo.alt || '')}">`;
+    media = `<img src="${escapeHtml(demo.src)}" alt="${escapeHtml(demo.alt || '')}"${sequenceAttribute}>`;
   }
 
   return `<section class="demo-section" id="demo"><figure class="feature-media">${media}${caption}</figure></section>`;

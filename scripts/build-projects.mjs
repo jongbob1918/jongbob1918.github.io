@@ -53,6 +53,7 @@ const validateProject = (project, file) => {
     .filter(field => project.card[field] === undefined || project.card[field] === null || project.card[field] === '');
   if (missingCardFields.length) throw new Error(`${file}: missing card fields: ${missingCardFields.join(', ')}`);
   if (!Array.isArray(project.card.keywords)) throw new Error(`${file}: card.keywords must be a YAML list`);
+  if (project.card.sequence && !Array.isArray(project.card.sequence)) throw new Error(`${file}: card.sequence must be a YAML list`);
 };
 
 const catalog = [];
@@ -71,6 +72,7 @@ for (const file of files) {
     detailUrl: `projects/${project.slug}.html`,
     image: project.card.image,
     imageAlt: project.card.imageAlt,
+    imageSequence: project.card.sequence ?? [],
     titleKo: project.title,
     titleEn: project.card.titleEn,
     keywords: project.card.keywords,

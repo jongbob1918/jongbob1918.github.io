@@ -33,6 +33,11 @@ const renderDemo = demo => {
   return `<section class="demo-section" id="demo"><figure class="feature-media">${media}</figure></section>`;
 };
 
+const renderOverviewNote = note => {
+  if (!note?.title || !Array.isArray(note.paragraphs) || !note.paragraphs.length) return '';
+  return `<div class="overview-note"><h3>${escapeHtml(note.title)}</h3>${note.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div>`;
+};
+
 export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) => `<!doctype html>
 <!-- Generated from project-data/${sourceFile} by templates/project-detail.mjs. -->
 <html lang="ko">
@@ -62,7 +67,7 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
 
     <section class="project-overview" id="overview">
       <h2>Overview</h2>
-      <p class="lead">${escapeHtml(project.overview)}</p>
+      <p class="lead">${escapeHtml(project.overview)}</p>${renderOverviewNote(project.overviewNote)}
     </section>
 
     ${renderDemo(project.demo)}

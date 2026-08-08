@@ -164,6 +164,10 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .project-overview h2 { margin-bottom: 16px; font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
 .lead { margin-bottom: 16px; color: var(--text); font-size: clamp(1rem, 2vw, 1.14rem); }
 .overview-context { color: var(--text); }
+.overview-note { margin-top: 28px; padding: 20px 22px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
+.overview-note h3 { margin: 0 0 10px; font-size: 1rem; }
+.overview-note p { margin: 0; color: var(--text); font-size: .86rem; line-height: 1.75; }
+.overview-note p + p { margin-top: 9px; }
 .demo-section { margin-bottom: 64px; }
 .header-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 15px; border: 1px solid var(--ink); border-radius: 7px; font-size: .82rem; font-weight: 700; transition: transform .2s, box-shadow .2s, color .2s, background .2s; }

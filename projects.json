@@ -10,10 +10,11 @@
     "titleEn": "JAVIS — Library Management Robot",
     "keywords": [
       "ROS 2",
+      "Python",
       "Nav2",
-      "Smac Planner",
-      "MPPI",
-      "System Integration"
+      "2D LiDAR SLAM",
+      "Path Planning",
+      "State Machine"
     ],
     "descriptionKo": "자율주행, 로봇팔과 비전 AI를 ROS 2로 통합해 도서 픽업·반납과 사용자 안내를 수행하는 도서관 관리 로봇을 개발했습니다.",
     "descriptionEn": "Built a ROS 2 library management robot that integrates autonomous navigation, manipulation, and vision AI to pick up and return books and guide visitors."

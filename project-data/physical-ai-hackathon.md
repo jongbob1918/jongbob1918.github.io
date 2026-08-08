@@ -72,17 +72,17 @@ ACT(Action Chunking with Transformers)는 스탠퍼드 중심 공동 연구팀�
 
 성공 궤적만 기록하지도 않았습니다. 텔레오퍼레이션 중 일부러 공을 놓친 뒤 다시 접근해 집는 복구 동작을 추가했습니다. 실제 추론에서 공이 미끄러지거나 예상 위치를 벗어나더라도 다음 행동으로 이어갈 수 있도록 실패 이후의 상태와 복구 과정을 데이터에 포함했습니다.
 
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">공 하나·색상별 수납함 단위로 분리</span></div><div class="metric-card"><span class="metric-value">≈ 200</span><span class="metric-label">최종 시연 데이터</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">심사 시점 Training Steps</span></div></div>
+<div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">공 하나·색상별 수납함 단위로 분리</span></div><div class="metric-card"><span class="metric-value">≈ 1,000</span><span class="metric-label">공 5개 × 각 200회 시연</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">심사 시점 Training Steps</span></div></div>
 
 ## 심사 결과: 5개 중 3개 성공
 
-최종적으로 약 200개의 시연 데이터를 확보했습니다. 마감이 오전 9시였기 때문에 학습을 더 이어가지 못하고, 당시 15,000 step까지 학습된 체크포인트로 심사를 진행했습니다.
+최종적으로 공 5개를 각각 200회씩 기록해 약 1,000개의 단일 태스크 시연 데이터를 확보했습니다. 마감이 오전 9시였기 때문에 학습을 더 이어가지 못하고, 당시 15,000 step까지 학습된 체크포인트로 심사를 진행했습니다.
 
 로봇은 다섯 개의 공 가운데 세 개를 집어 전달하고 색상별 수납함에 넣는 데 성공했습니다. 네 번째 공을 처리하는 과정에서 오른팔이 수납함을 넘어뜨렸고, 환경이 흐트러져 남은 시연은 더 이상 진행할 수 없었습니다. 완주에는 실패했지만, 데이터 전략을 바꾼 뒤 실제 심사 환경에서 세 번의 연속 성공을 확인했습니다.
 
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"><figcaption>실제 양팔 조작 · 공 집기, 그리퍼 간 전달, 색상별 수납함 분류</figcaption></figure>
 
-<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">RESULT</span><strong>3 / 5 분류 성공</strong><p>심사에서 세 개의 공을 연속으로 전달·분류한 뒤 네 번째 동작 중 수납함이 넘어져 종료했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">DATA</span><strong>약 200개 시연</strong><p>전체 연속 시퀀스 중심의 1차 데이터에서 단일 태스크와 실패 복구를 포함한 데이터로 개선했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>15K 심사 체크포인트</strong><p>마감 시각까지 학습된 모델로 심사했으며, 저장소에는 이후 50K 설정의 공개 ACT 체크포인트도 연결돼 있습니다.</p></div></div>
+<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">RESULT</span><strong>3 / 5 분류 성공</strong><p>심사에서 세 개의 공을 연속으로 전달·분류한 뒤 네 번째 동작 중 수납함이 넘어져 종료했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">DATA</span><strong>약 1,000개 시연</strong><p>공 5개를 각각 200회 기록하고 단일 태스크와 실패 복구 동작을 데이터에 포함했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>15K 심사 체크포인트</strong><p>마감 시각까지 학습된 모델로 심사했으며, 저장소에는 이후 50K 설정의 공개 ACT 체크포인트도 연결돼 있습니다.</p></div></div>
 
 ## 회고: 모방을 넘어 판단할 수 있는 구조가 필요했다
 

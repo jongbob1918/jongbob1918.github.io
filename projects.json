@@ -39,16 +39,16 @@
     "image": "assets/images/elevator-alignbutton.gif",
     "imageAlt": "2D 카메라의 관측 결과로 엘리베이터 버튼 앞에 정렬하는 ROOMIE 로봇팔",
     "imageSequence": [],
-    "titleKo": "ROOMIE — 저비용 로봇팔의 시각 피드백 제어",
+    "titleKo": "ROOMIE — 저비용 로봇팔의 엘리베이터 버튼 조작",
     "titleEn": "ROOMIE — Vision-Guided Low-Cost Robot Arm",
     "keywords": [
       "ROS 2",
       "4-DOF Arm",
-      "Visual Feedback",
+      "Arm Control",
       "FreeRTOS"
     ],
-    "descriptionKo": "약 5만 원대 4축 로봇팔의 백래시와 2D 카메라의 깊이 한계를 반복 관측과 단계적 보정으로 다뤘습니다.",
-    "descriptionEn": "Compensated for 2D depth ambiguity and low-cost arm backlash through a repeat-observe-and-correct control loop."
+    "descriptionKo": "약 5만 원대 4축 로봇팔과 2D 카메라로 엘리베이터 버튼의 위치 계산부터 누르기까지 구현했습니다.",
+    "descriptionEn": "Built an elevator-button manipulation pipeline using a low-cost 4-DOF arm and a standard 2D camera."
   },
   {
     "slug": "falcon",

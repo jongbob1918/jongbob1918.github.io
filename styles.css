@@ -248,6 +248,7 @@ html[data-theme="dark"] .service-domain, html[data-theme="dark"] .robot-domain {
 .note { padding: 14px 16px; border-left: 3px solid var(--accent); background: var(--accent-soft); color: var(--text); font-size: .85rem; }
 .repo-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .evidence-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+.constraint-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .evidence-card { padding: 17px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
 .evidence-card strong { display: block; margin: 8px 0 5px; font-size: .9rem; }
 .evidence-card p { margin: 0; color: var(--muted); font-size: .78rem; line-height: 1.65; }

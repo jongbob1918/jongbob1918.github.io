@@ -172,11 +172,6 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .media-placeholder { aspect-ratio: 16/9; display: grid; place-content: center; gap: 6px; text-align: center; color: var(--muted); background: var(--soft); border: 1px dashed #b7bec8; }
 .media-placeholder strong { color: var(--ink); }
 .case-layout { max-width: 900px; margin: 0 auto; }
-.toc { display: grid; width: min(900px, 100%); grid-template-columns: repeat(4,minmax(0,1fr)); gap: 2px; margin: 0 auto 48px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); box-shadow: 0 10px 28px rgba(16,24,40,.07); }
-.toc-title { margin-bottom: 9px; color: var(--muted); font-size: .68rem; font-weight: 700; line-height: 1.4; letter-spacing: .08em; text-transform: uppercase; }
-.toc-title { grid-column: 1/-1; }
-.toc a { padding: 7px 10px; border-left: 2px solid var(--line); color: var(--muted); font-size: .77rem; transition: color .2s, border-color .2s, background .2s; }
-.toc a:hover, .toc a.active { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 .case-study { min-width: 0; }
 .case-section { padding: 0 0 58px; margin-bottom: 58px; border-bottom: 1px solid var(--line); }
 .case-section:last-child { margin-bottom: 0; border-bottom: 0; }
@@ -268,8 +263,6 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
   .project-overview { margin-bottom: 44px; }
   .demo-section { margin-bottom: 52px; }
   .case-layout { max-width: none; }
-  .toc { grid-template-columns: repeat(2,1fr); margin-bottom: 40px; padding: 12px; background: var(--soft); box-shadow: none; }
-  .toc-title { grid-column: 1/-1; }
   .role-grid, .metric-grid, .evidence-grid { grid-template-columns: 1fr; }
   .case-section { padding-bottom: 44px; margin-bottom: 44px; }
   .flow { grid-template-columns: 70px 1fr; }
@@ -277,11 +270,6 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
 
 @media (min-width: 761px) and (max-width: 1199px) {
   .side-project-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
-}
-
-@media (min-width: 1440px) {
-  .toc { position: fixed; top: 94px; left: max(12px, calc((100vw - var(--max)) / 2 - 172px)); z-index: 10; width: 160px; grid-template-columns: 1fr; margin: 0; padding: 16px 12px; box-shadow: 0 12px 30px rgba(16,24,40,.11); }
-  .toc-title { grid-column: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {

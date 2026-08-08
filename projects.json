@@ -4,8 +4,8 @@
     "group": "key",
     "order": 1,
     "detailUrl": "projects/javis.html",
-    "image": "https://github.com/user-attachments/assets/ce7e6dba-8987-49cb-96f2-9ed3a3f76779",
-    "imageAlt": "JAVIS navigating between library shelves in RViz",
+    "image": "assets/images/javis_robot_drive.gif",
+    "imageAlt": "도서관 환경을 자율주행하는 JAVIS",
     "titleKo": "JAVIS — 도서관 관리 로봇",
     "titleEn": "JAVIS — Library Management Robot",
     "keywords": [

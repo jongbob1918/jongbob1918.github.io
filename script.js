@@ -80,6 +80,46 @@ const bindProjectRows = () => {
   });
 };
 
+const bindMediaSequences = (root = document) => {
+  root.querySelectorAll('img[data-media-sequence]').forEach(image => {
+    if (image.dataset.mediaSequenceBound === 'true') return;
+
+    let items;
+    try {
+      items = JSON.parse(image.dataset.mediaSequence);
+    } catch {
+      return;
+    }
+    if (!Array.isArray(items) || items.length < 2) return;
+
+    image.dataset.mediaSequenceBound = 'true';
+    const caption = image.closest('figure')?.querySelector('figcaption');
+    let currentIndex = 0;
+
+    const scheduleNext = () => {
+      const duration = Number(items[currentIndex].duration) || 5000;
+      window.setTimeout(() => {
+        if (!image.isConnected) return;
+        currentIndex = (currentIndex + 1) % items.length;
+        const item = items[currentIndex];
+        const onReady = () => scheduleNext();
+
+        image.alt = item.alt || image.alt;
+        if (caption && item.caption) caption.textContent = item.caption;
+        image.addEventListener('load', onReady, { once: true });
+        image.src = item.src;
+        if (image.complete) {
+          image.removeEventListener('load', onReady);
+          onReady();
+        }
+      }, duration);
+    };
+
+    if (image.complete) scheduleNext();
+    else image.addEventListener('load', scheduleNext, { once: true });
+  });
+};
+
 const projectContainers = [...document.querySelectorAll('[data-project-group]')];
 
 const copyByLanguage = {
@@ -131,6 +171,7 @@ const renderProjects = () => {
     }).join('');
   });
   bindProjectRows();
+  projectContainers.forEach(container => bindMediaSequences(container));
 };
 
 const applyLanguage = () => {
@@ -186,6 +227,8 @@ if (projectContainers.length) {
 } else {
   bindProjectRows();
 }
+
+bindMediaSequences();
 
 const progress = document.querySelector('.reading-progress');
 const sections = [...document.querySelectorAll('.case-section[id]')];

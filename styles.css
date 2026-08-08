@@ -222,8 +222,10 @@ html[data-theme="dark"] .service-domain, html[data-theme="dark"] .robot-domain {
 .bidirectional-links span { color: var(--muted); font-size: .62rem; }
 .bidirectional-links b { color: var(--accent); font-size: 1.55rem; line-height: 1; }
 .internal-links { margin: 7px 0; color: var(--accent); text-align: center; font-size: 1.05rem; font-weight: 750; }
-.robot-modules { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; }
+.robot-modules { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
 .robot-modules .system-module { margin: 0; }
+.module-parts { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.module-parts span { padding: 3px 6px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: var(--soft); font-size: .52rem; line-height: 1.2; }
 .flow { display: grid; grid-template-columns: 88px 1fr; gap: 8px 18px; }
 .flow dt { color: var(--accent); font-size: .78rem; font-weight: 750; }
 .flow dd { margin: 0 0 16px; color: var(--text); }

@@ -44,9 +44,7 @@ demo:
 
 ## 모델 선택
 
-해커톤에서는 제한된 시간 안에 시연 데이터를 수집하고 학습과 로봇 구동까지 마쳐야 했습니다. LeRobot에서 학습과 추론을 바로 구성할 수 있고, 카메라 영상과 관절 상태를 바탕으로 연속 동작을 예측하는 [ACT(Action Chunking with Transformers)](https://arxiv.org/abs/2304.13705)를 선택했습니다.
-
-<dl class="flow"><dt>빠른 적용</dt><dd>LeRobot에서 ACT를 지원해 데이터 수집과 태스크 개선에 시간을 집중할 수 있었습니다.</dd><dt>연속 동작 제어</dt><dd>Action Chunking으로 여러 시점의 행동을 함께 예측해 집기·전달·분류로 이어지는 동작을 제어했습니다.</dd><dt>입력 데이터 구성</dt><dd>카메라 영상과 관절 상태를 함께 사용해 공의 위치와 두 로봇팔의 움직임을 학습했습니다.</dd></dl>
+제한된 시간 안에 구현과 테스트를 마치기 위해 LeRobot에서 지원하는 ACT를 사용했습니다. ACT는 카메라 영상과 관절 상태를 바탕으로 여러 동작을 한 번에 예측해 집기·전달·분류 같은 연속 동작을 제어합니다.
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure>
 

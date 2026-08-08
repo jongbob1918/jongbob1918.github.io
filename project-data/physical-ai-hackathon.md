@@ -46,9 +46,15 @@ demo:
 
 ## 왜 ACT를 선택했는가
 
-여러 모방학습 모델 가운데 ACT(Action Chunking with Transformers)를 선택했습니다. 해커톤처럼 데이터 수집과 학습 시간이 제한된 상황에서, ACT는 비교적 적은 시연으로도 접촉이 많은 세분화 조작을 빠르게 학습시키기 좋은 출발점이었습니다.
+여러 모방학습 모델 가운데 ACT(Action Chunking with Transformers)를 선택했습니다. ACT는 스탠퍼드의 Tony Zhao와 Chelsea Finn을 중심으로 UC Berkeley의 Sergey Levine, Meta의 Vikash Kumar가 함께 발표한 2023년 논문 [*Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware*](https://arxiv.org/abs/2304.13705)에서 제안된 모델입니다. 저비용 양팔 로봇 ALOHA와 함께 개발됐으며, 사람이 텔레오퍼레이션으로 보여준 정밀 조작을 적은 시연으로 학습하는 데 초점을 둡니다.
+
+해커톤처럼 데이터 수집과 학습 시간이 제한된 상황에서, ACT는 비교적 적은 시연으로도 접촉이 많은 세분화 조작을 빠르게 학습시키기 좋은 출발점이었습니다. 특히 한 스텝씩 행동을 예측하는 대신 여러 미래 행동을 묶어 출력해 긴 작업의 유효 길이를 줄이고, 앞 동작의 작은 오차가 뒤로 계속 누적되는 문제를 완화한다는 점이 양팔 전달 미션에 적합하다고 판단했습니다.
 
 ACT는 각 시점의 카메라 영상과 로봇 관절 상태를 입력받아 다음 한 동작만 예측하지 않고, 앞으로 실행할 연속 행동을 하나의 **action chunk**로 출력합니다. ResNet-18이 여러 카메라의 시각 특징을 추출하고 Transformer가 이 특징과 양팔의 관절 상태를 결합해 두 팔의 관절·그리퍼 명령을 함께 생성합니다. 짧은 단위의 행동을 묶어 예측하므로 공을 집고, 건네고, 놓는 연속 동작을 더 매끄럽게 모방할 수 있다고 판단했습니다.
+
+아래 구조의 왼쪽은 학습 단계입니다. 현재 관절 상태와 사람이 수행한 정답 행동 시퀀스를 Transformer Encoder에 넣어 시연의 동작 특성을 나타내는 잠재 변수 `z`를 학습합니다. 오른쪽의 실제 정책은 여러 카메라 영상을 CNN으로 처리한 시각 특징, 현재 관절 상태와 `z`를 결합하고, Transformer Encoder·Decoder를 거쳐 앞으로 실행할 행동 시퀀스를 한 번에 예측합니다. 학습에 사용되는 왼쪽 CVAE Encoder는 추론 시 제거되며, 실행 단계에서는 현재 관측으로부터 행동 chunk를 반복 생성합니다.
+
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"><figcaption>ACT 아키텍처 · 왼쪽은 시연 행동에서 잠재 변수 z를 학습하는 CVAE Encoder, 오른쪽은 카메라·관절 상태로 action chunk를 생성하는 실행 정책 · 출처: Zhao et al., 2023</figcaption></figure>
 
 <div class="diagram" role="img" aria-label="ACT 기반 양팔 모방학습 동작 흐름"><div class="diagram-node">Camera Images<br>Robot State</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ResNet-18<br>Visual Features</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ACT Transformer<br>Action Chunk</div><div class="diagram-arrow">→</div><div class="diagram-node">Dual SO-101<br>Joint · Gripper</div><div class="diagram-arrow">→</div><div class="diagram-node">Pick · Transfer<br>Sort</div></div>
 

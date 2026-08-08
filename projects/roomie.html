@@ -87,13 +87,13 @@
 
         <section class="case-section" id="최종-결과">
           <div class="case-heading"><h2>최종 결과</h2></div>
-          <div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 조작 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">버튼 눌림 성공</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">최종 성공률</span></div></div>
+          <div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 접근 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">버튼 접촉 성공</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">접촉 성공률</span></div></div>
         </section>
 
         <section class="case-section" id="한계">
           <div class="case-heading"><h2>한계</h2></div>
-          <p>실패한 7회에는 위치 정렬 오차와 누름 힘 부족이 함께 포함돼 있으며, 원인별 횟수는 따로 기록하지 못했습니다.</p>
-<div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D 깊이 추정</strong><p>버튼 크기로 거리를 근사했지만 검출 크기와 촬영 각도에 민감했습니다.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>백래시·프레임 변형</strong><p>관측 자세를 통일해도 실제 팔끝 위치에는 오차가 남았습니다.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>부족한 누름 힘</strong><p>버튼에 도달해도 토크와 프레임 강성 부족으로 입력되지 않았습니다.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>센서 피드백 부재</strong><p>Encoder와 Force Sensor가 없어 실패 원인을 직접 측정하지 못했습니다.</p></div></div>
+          <p>10회 중 로봇팔 끝단이 버튼에 정확히 닿은 경우는 3회였습니다. 나머지 7회는 목표 위치를 벗어나 버튼에 접촉하지 못했습니다.</p>
+<div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D 깊이 추정</strong><p>버튼 크기로 거리를 근사했지만 검출 크기와 촬영 각도에 민감했습니다.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>백래시·프레임 변형</strong><p>관측 자세를 통일해도 실제 팔끝 위치에는 오차가 남았습니다.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>제한적인 누름 힘</strong><p>접촉 정확도와 별개로, 팔을 펼친 자세에서는 토크와 프레임 강성이 제한적이었습니다.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>센서 피드백 부재</strong><p>Encoder와 Force Sensor가 없어 실제 팔끝 위치와 접촉력을 정량 측정하지 못했습니다.</p></div></div>
         </section>
       </article>
     </div>

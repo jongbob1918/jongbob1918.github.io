@@ -28,7 +28,6 @@ demo:
   type: image
   src: ../assets/images/project-image.png
   alt: 프로젝트 대표 이미지 설명
-  caption: 선택 입력 문구
 ---
 
 ## 원하는 첫 번째 섹션 제목

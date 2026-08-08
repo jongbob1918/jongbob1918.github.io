@@ -15,7 +15,6 @@ const renderDemo = demo => {
   if (!demo?.src) return '';
 
   const type = demo.type || 'image';
-  const caption = demo.caption ? `<figcaption>${escapeHtml(demo.caption)}</figcaption>` : '';
   const sequence = Array.isArray(demo.sequence) ? demo.sequence : [];
   const sequenceAttribute = sequence.length > 1
     ? ` data-media-sequence="${escapeHtml(JSON.stringify(sequence))}"`
@@ -31,7 +30,7 @@ const renderDemo = demo => {
     media = `<img src="${escapeHtml(demo.src)}" alt="${escapeHtml(demo.alt || '')}"${sequenceAttribute}>`;
   }
 
-  return `<section class="demo-section" id="demo"><figure class="feature-media">${media}${caption}</figure></section>`;
+  return `<section class="demo-section" id="demo"><figure class="feature-media">${media}</figure></section>`;
 };
 
 export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) => `<!doctype html>
@@ -46,7 +45,7 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-22">
+  <link rel="stylesheet" href="../styles.css?v=20260808-23">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -73,7 +72,7 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
       </article>
     </div>
   </main>
-  <script src="../script.js?v=20260808-9"></script>
+  <script src="../script.js?v=20260808-10"></script>
 </body>
 </html>
 `;

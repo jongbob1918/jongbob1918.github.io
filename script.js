@@ -83,8 +83,8 @@ const bindProjectRows = () => {
 const projectContainers = [...document.querySelectorAll('[data-project-group]')];
 const projectTranslations = {
   javis: {
-    title: 'JAVIS — 다목적 모바일 매니퓰레이터',
-    description: '9인 팀에서 메인 컨트롤러를 설계하고 Nav2를 최적화했습니다. Smac Planner와 MPPI를 통합해 폭 60cm 협로의 무충돌 주행을 검증했습니다.'
+    title: 'JAVIS — 도서관 관리 로봇',
+    description: '자율주행, 로봇팔과 비전 AI를 ROS 2로 통합해 도서 픽업·반납과 사용자 안내를 수행하는 도서관 관리 로봇을 개발했습니다.'
   },
   roomie: {
     title: 'ROOMIE — 호텔 룸서비스 로봇',

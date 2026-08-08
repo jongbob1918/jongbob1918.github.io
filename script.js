@@ -81,20 +81,6 @@ const bindProjectRows = () => {
 };
 
 const projectContainers = [...document.querySelectorAll('[data-project-group]')];
-const projectTranslations = {
-  javis: {
-    title: 'JAVIS — 도서관 관리 로봇',
-    description: '자율주행, 로봇팔과 비전 AI를 ROS 2로 통합해 도서 픽업·반납과 사용자 안내를 수행하는 도서관 관리 로봇을 개발했습니다.'
-  },
-  roomie: {
-    title: 'ROOMIE — 호텔 룸서비스 로봇',
-    description: '엘리베이터 버튼을 조작하는 3축 로봇팔의 제어기와 궤적 생성기를 개발했습니다. 캘리브레이션과 정렬 액션을 분리해 38일 안에 통합 시연을 완료했습니다.'
-  },
-  falcon: {
-    title: 'FALCON — 활주로 안전 관제 시스템',
-    description: '활주로 위험요소 탐지 모델을 커스텀 학습해 정확도 90% 이상을 검증했습니다. ByteTrack 기반 이동 경로 추적과 위험 판단 로직을 통합했습니다.'
-  }
-};
 
 const copyByLanguage = {
   en: {
@@ -124,10 +110,9 @@ const renderProjects = () => {
     const group = container.dataset.projectGroup;
     const groupProjects = loadedProjects.filter(project => project.group === group);
     container.innerHTML = groupProjects.map((project, index) => {
-      const localized = activeLanguage === 'ko' ? projectTranslations[project.slug] : null;
       const url = escapeHtml(project.detailUrl);
-      const title = escapeHtml(localized?.title || project.title);
-      const description = escapeHtml(localized?.description || project.description);
+      const title = escapeHtml(activeLanguage === 'ko' ? project.titleKo : project.titleEn);
+      const description = escapeHtml(activeLanguage === 'ko' ? project.descriptionKo : project.descriptionEn);
       const projectName = escapeHtml(project.slug.toUpperCase());
       const sideClass = group === 'side' ? ' side-project' : '';
       const loading = group === 'key' && index === 0 ? 'eager' : 'lazy';
@@ -183,7 +168,7 @@ document.querySelector('.language-toggle')?.addEventListener('click', () => {
 applyLanguage();
 
 if (projectContainers.length) {
-  fetch('projects.json?v=20260808-1')
+  fetch('projects.json?v=20260808-2')
     .then(response => {
       if (!response.ok) throw new Error(`Project data request failed: ${response.status}`);
       return response.json();

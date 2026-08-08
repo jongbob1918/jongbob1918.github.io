@@ -28,8 +28,8 @@ card:
   descriptionEn: Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging.
 overview: >-
   한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가했습니다.
-  두 대의 SO-101 로봇팔로 공을 전달하고 색상별 수납함에 분류하는 미션을 수행했습니다.
-  제한된 시간 안에 텔레오퍼레이션으로 양팔 동작 데이터를 수집하고 LeRobot과 ACT로 학습해 실제 로봇 심사를 진행했습니다.
+  120만 원대 SO-101 로봇팔 두 대와 2D 카메라를 사용해 색상 공을 집어 수납함에 분류하는 미션에 도전했습니다.
+  LeRobot 라이브러리와 ACT 모델을 활용해 실제 로봇 심사에서 공 5개 중 3개 분류에 성공했습니다.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif

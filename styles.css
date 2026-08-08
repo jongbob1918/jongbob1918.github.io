@@ -141,7 +141,8 @@ html[data-theme="dark"] .social-icon[aria-label="GitHub"] { color: #f2f4f7; }
 
 /* Case study */
 .reading-progress { position: fixed; top: 61px; left: 0; z-index: 21; width: 0; height: 3px; background: var(--accent); }
-.case-page { padding: 38px 0 84px; }
+.case-page { --accent: #175cd3; --accent-soft: #eff8ff; padding: 38px 0 84px; }
+html[data-theme="dark"] .case-page { --accent: #84adff; --accent-soft: #102a56; }
 .back { width: 42px; height: 42px; display: grid; place-items: center; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); transition: color .2s, border-color .2s, transform .2s; }
 .back svg { width: 21px; height: 21px; fill: currentColor; }
 .back:hover { color: var(--ink); border-color: var(--muted); transform: translateX(-3px); }
@@ -151,7 +152,7 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 14px; }
 .meta span { padding: 0; border: 0; color: #d3d8d5; background: transparent; font-size: .83rem; }
 .meta strong { margin-right: 4px; color: #fff; }
-.project-skills { margin: 0 0 20px; color: #9fc7b2; font-size: .86rem; font-weight: 700; }
+.project-skills { margin: 0 0 20px; color: var(--accent); font-size: .86rem; font-weight: 700; }
 .project-repository { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; color: #fff; transition: color .2s, border-color .2s, background .2s, transform .2s; }
 .project-repository svg { width: 20px; height: 20px; fill: currentColor; }
 .project-repository:hover { color: #303633; border-color: #fff; background: #fff; transform: translateY(-2px); }

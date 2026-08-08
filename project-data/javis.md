@@ -61,7 +61,7 @@ demo:
 
 ## 픽업·반납 자율주행
 
-JAVIS가 도서를 픽업하고 반납하려면 폭이 좁은 서가 사이를 지나 지정된 책장 앞까지 이동해야 했습니다. 먼저 Cartographer와 2D LiDAR로 도서관의 점유격자 지도를 작성하고, 지도 위에 픽업·반납 위치를 지정했습니다.
+JAVIS가 도서를 픽업하고 반납하려면 폭이 좁은 서가 사이를 지나 지정된 책장 앞까지 이동해야 했습니다. Cartographer와 2D LiDAR로 도서관의 점유격자 지도를 생성한 뒤, 편집 도구로 불필요한 영역과 벽면을 정리했습니다.
 
 <figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="서가 벽면과 통로, 지정 위치와 로봇 위치가 표시된 도서관 점유격자 지도" loading="lazy"><figcaption>Cartographer로 생성한 도서관의 2D 점유격자 지도</figcaption></figure>
 

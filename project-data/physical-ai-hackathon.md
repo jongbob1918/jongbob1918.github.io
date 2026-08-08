@@ -29,7 +29,7 @@ card:
 overview: >-
   한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가했습니다.
   120만 원대 SO-101 로봇팔 두 대와 2D 카메라를 사용해 색상 공을 집어 수납함에 분류하는 미션에 도전했습니다.
-  LeRobot 라이브러리와 ACT 모델을 활용해 실제 로봇 심사에서 공 5개 중 3개 분류에 성공했습니다.
+  LeRobot 라이브러리와 AI 모델을 사용하여 공 5개 중 3개 분류에 성공했습니다.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif

@@ -39,7 +39,7 @@
     "image": "assets/images/elevator-alignbutton.gif",
     "imageAlt": "ROOMIE robot arm aligning with an elevator button",
     "imageSequence": [],
-    "titleKo": "ROOMIE — 엘리베이터 버튼 조작 로봇",
+    "titleKo": "ROOMIE — 호텔 서비스 로봇",
     "titleEn": "ROOMIE — Hotel Room-Service Robot",
     "keywords": [
       "ROS 2",

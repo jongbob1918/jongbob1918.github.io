@@ -27,9 +27,9 @@ card:
   descriptionKo: 5개 연속 동작을 색상별 단일 태스크로 재구성하고 복구 시연을 더해, 심사에서 5개 공 중 3개 분류에 성공했습니다.
   descriptionEn: Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging.
 overview: >-
-  한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가해, 두 로봇팔이 공을 주고받아 색상별 수납함에 넣는 1종목 미션에 도전했습니다.
-  짧은 준비 시간 안에 정밀한 양팔 조작을 학습시키기 위해 ACT를 선택하고, 1차 실패를 바탕으로 연속 동작을 색상별 단일 태스크로 나누며 데이터 수집 방식을 다시 설계했습니다.
-  약 200개의 시연 데이터와 15,000-step 체크포인트로 심사에 참가해 5개의 공 중 3개를 분류했으며, 네 번째 동작 중 오른팔이 수납함을 넘어뜨려 시연을 종료했습니다.
+  한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가해, 두 로봇팔이 공을 전달하고 색상별로 분류하는 미션에 도전했습니다.
+  제한된 시간 안에 정밀한 양팔 조작을 학습하기 위해 ACT 기반 모방학습을 적용하고, 직접 수집한 시연 데이터로 태스크 분리와 실패 복구 방법을 실험했습니다.
+  실제 로봇에서 데이터 구성 방식이 동작의 정확도와 강건성에 미치는 영향을 확인한 해커톤 참가 기록입니다.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
@@ -46,17 +46,13 @@ demo:
 
 ## 왜 ACT를 선택했는가
 
-여러 모방학습 모델 가운데 ACT(Action Chunking with Transformers)를 선택했습니다. ACT는 스탠퍼드의 Tony Zhao와 Chelsea Finn을 중심으로 UC Berkeley의 Sergey Levine, Meta의 Vikash Kumar가 함께 발표한 2023년 논문 [*Learning Fine-Grained Bimanual Manipulation with Low-Cost Hardware*](https://arxiv.org/abs/2304.13705)에서 제안된 모델입니다. 저비용 양팔 로봇 ALOHA와 함께 개발됐으며, 사람이 텔레오퍼레이션으로 보여준 정밀 조작을 적은 시연으로 학습하는 데 초점을 둡니다.
+ACT(Action Chunking with Transformers)는 스탠퍼드 중심 공동 연구팀이 2023년 [ALOHA 연구](https://arxiv.org/abs/2304.13705)에서 제안한 모방학습 모델입니다. 카메라 영상과 로봇 관절 상태를 입력받아 다음 한 동작이 아닌 여러 미래 행동을 하나의 **action chunk**로 예측합니다.
 
-해커톤처럼 데이터 수집과 학습 시간이 제한된 상황에서, ACT는 비교적 적은 시연으로도 접촉이 많은 세분화 조작을 빠르게 학습시키기 좋은 출발점이었습니다. 특히 한 스텝씩 행동을 예측하는 대신 여러 미래 행동을 묶어 출력해 긴 작업의 유효 길이를 줄이고, 앞 동작의 작은 오차가 뒤로 계속 누적되는 문제를 완화한다는 점이 양팔 전달 미션에 적합하다고 판단했습니다.
+해커톤처럼 데이터와 학습 시간이 제한된 환경에서도 텔레오퍼레이션 시연으로 정밀한 동작을 빠르게 학습할 수 있고, 긴 작업에서 오차가 누적되는 문제를 줄일 수 있어 공 집기·전달·분류 미션에 적합하다고 판단했습니다.
 
-ACT는 각 시점의 카메라 영상과 로봇 관절 상태를 입력받아 다음 한 동작만 예측하지 않고, 앞으로 실행할 연속 행동을 하나의 **action chunk**로 출력합니다. ResNet-18이 여러 카메라의 시각 특징을 추출하고 Transformer가 이 특징과 양팔의 관절 상태를 결합해 두 팔의 관절·그리퍼 명령을 함께 생성합니다. 짧은 단위의 행동을 묶어 예측하므로 공을 집고, 건네고, 놓는 연속 동작을 더 매끄럽게 모방할 수 있다고 판단했습니다.
+그림 왼쪽의 Encoder는 학습 중 시연 행동에서 잠재 변수 `z`를 만들고, 오른쪽의 실행 정책은 카메라 특징과 현재 관절 상태를 결합해 양팔의 행동 시퀀스를 생성합니다. 학습용 Encoder는 실제 추론 단계에서는 사용하지 않습니다.
 
-아래 구조의 왼쪽은 학습 단계입니다. 현재 관절 상태와 사람이 수행한 정답 행동 시퀀스를 Transformer Encoder에 넣어 시연의 동작 특성을 나타내는 잠재 변수 `z`를 학습합니다. 오른쪽의 실제 정책은 여러 카메라 영상을 CNN으로 처리한 시각 특징, 현재 관절 상태와 `z`를 결합하고, Transformer Encoder·Decoder를 거쳐 앞으로 실행할 행동 시퀀스를 한 번에 예측합니다. 학습에 사용되는 왼쪽 CVAE Encoder는 추론 시 제거되며, 실행 단계에서는 현재 관측으로부터 행동 chunk를 반복 생성합니다.
-
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"><figcaption>ACT 아키텍처 · 왼쪽은 시연 행동에서 잠재 변수 z를 학습하는 CVAE Encoder, 오른쪽은 카메라·관절 상태로 action chunk를 생성하는 실행 정책 · 출처: Zhao et al., 2023</figcaption></figure>
-
-<div class="diagram" role="img" aria-label="ACT 기반 양팔 모방학습 동작 흐름"><div class="diagram-node">Camera Images<br>Robot State</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ResNet-18<br>Visual Features</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ACT Transformer<br>Action Chunk</div><div class="diagram-arrow">→</div><div class="diagram-node">Dual SO-101<br>Joint · Gripper</div><div class="diagram-arrow">→</div><div class="diagram-node">Pick · Transfer<br>Sort</div></div>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure>
 
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="리더 로봇팔을 조작해 두 대의 SO-101 팔의 시연 데이터를 기록하는 텔레오퍼레이션 모습" loading="lazy"><figcaption>텔레오퍼레이션 · 사람이 리더 팔을 움직이며 카메라 영상, 관절 상태와 행동을 에피소드로 기록</figcaption></figure>
 

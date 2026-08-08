@@ -89,11 +89,11 @@ h3 { font-size: 1rem; }
 .keywords { margin-bottom: 10px; color: var(--accent); font-size: .76rem; font-weight: 600; line-height: 1.6; letter-spacing: -.01em; }
 .result { max-width: 650px; margin-bottom: 18px; color: var(--text); font-size: .94rem; }
 .side-project-list { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 26px; }
-.side-project-list .project-row { display: flex; flex-direction: column; gap: 0; padding: 0; overflow: hidden; background: var(--paper); box-shadow: 0 10px 28px rgba(16,24,40,.07); transition: box-shadow .24s ease, transform .24s ease; }
+.side-project-list .project-row { display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: repeat(2,minmax(0,1fr)); gap: 0; height: clamp(480px,42vw,540px); padding: 0; overflow: hidden; background: var(--paper); box-shadow: 0 10px 28px rgba(16,24,40,.07); transition: box-shadow .24s ease, transform .24s ease; }
 .side-project-list .project-row:hover, .side-project-list .project-row:focus-within { box-shadow: var(--shadow); transform: translateY(-2px); }
-.side-project-list .project-copy { width: 100%; display: block; margin: 0; padding: 22px 24px 24px; box-shadow: none; transform: none; }
+.side-project-list .project-copy { width: 100%; height: 100%; min-height: 0; display: block; margin: 0; padding: 22px 24px 24px; box-shadow: none; transform: none; }
 .side-project-list .project-row:hover .project-copy, .side-project-list .project-row:focus-within .project-copy { box-shadow: none; transform: none; }
-.side-project-list .project-media { width: 100%; min-height: 0; height: auto; aspect-ratio: 16/9; border: 0; }
+.side-project-list .project-media { width: 100%; min-height: 0; height: 100%; aspect-ratio: auto; border: 0; }
 .side-project-list .result { margin-bottom: 0; }
 .project-data-error { margin: 0; padding: 24px; color: var(--muted); background: var(--paper); border-radius: 10px; }
 
@@ -249,7 +249,7 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
   .project-media { min-height: 0; height: auto; aspect-ratio: 16/9; }
   .project-copy { display: block; margin: -28px 14px 0; padding: 24px; box-shadow: 0 6px 16px rgba(0,0,0,.07); }
   .side-project-list { grid-template-columns: 1fr; }
-  .side-project-list .project-row { display: flex; padding: 0; }
+  .side-project-list .project-row { display: grid; padding: 0; }
   .project-overlay { align-items: end; justify-items: end; padding: 12px; background: linear-gradient(transparent 45%, rgba(16,24,40,.74)); opacity: 1; }
   .project-overlay span { padding: 6px 10px; font-size: .68rem; transform: none; }
   .about { padding: 52px 0 64px; }

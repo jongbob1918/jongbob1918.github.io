@@ -3,9 +3,8 @@ slug: roomie
 shortName: ROOMIE
 group: key
 order: 2
-title: ROOMIE — 저비용 로봇팔의 엘리베이터 버튼 조작
-description: 약 5만 원대 4축 로봇팔과 2D 카메라로 엘리베이터 버튼 조작에 도전한 Arm Controller
-team: 4명
+title: ROOMIE — 자율주행 호텔 서비스 로봇
+description: 자율주행, 물품 배송, 사용자 안내와 엘리베이터 연동을 통합한 ROS 2 기반 호텔 서비스 로봇
 period: 2025.07.07–08.13
 skills:
   - ROS 2
@@ -15,16 +14,16 @@ skills:
   - ESP32 · FreeRTOS
 repository: https://github.com/jongbob1918/ROOMIE
 card:
-  image: assets/images/elevator-alignbutton.gif
-  imageAlt: 2D 카메라의 관측 결과로 엘리베이터 버튼 앞에 정렬하는 ROOMIE 로봇팔
-  titleEn: ROOMIE — Vision-Guided Low-Cost Robot Arm
+  image: assets/images/project_roomie.png
+  imageAlt: 호텔 로비를 배경으로 한 자율주행 호텔 서비스 로봇 ROOMIE
+  titleEn: ROOMIE — Autonomous Hotel Service Robot
   keywords:
     - ROS 2
-    - 4-DOF Arm
-    - Arm Control
-    - FreeRTOS
-  descriptionKo: 약 5만 원대 4축 로봇팔과 2D 카메라로 엘리베이터 버튼의 위치 계산부터 누르기까지 구현했습니다.
-  descriptionEn: Built an elevator-button manipulation pipeline using a low-cost 4-DOF arm and a standard 2D camera.
+    - Autonomous Navigation
+    - Elevator Interaction
+    - Service Robot
+  descriptionKo: 자율주행, 물품 배송, 사용자 안내와 엘리베이터 이용을 하나의 서비스 흐름으로 구현했습니다.
+  descriptionEn: Integrated autonomous navigation, delivery, user guidance, and elevator interaction into a hotel service robot.
 overview: >-
   호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생합니다. ROOMIE는 자율주행, 물품 배송, 사용자 안내와 관리자 모니터링을 ROS 2로 연결한 호텔 서비스 로봇입니다. 엘리베이터 앞까지 이동한 뒤 버튼과 문 상태를 인식하고, 4축 로봇팔로 호출·목적층 버튼을 조작해 사람의 도움 없이 층간 임무를 이어갑니다.
 demo:

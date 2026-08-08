@@ -36,19 +36,19 @@
     "group": "key",
     "order": 2,
     "detailUrl": "projects/roomie.html",
-    "image": "assets/images/elevator-alignbutton.gif",
-    "imageAlt": "2D 카메라의 관측 결과로 엘리베이터 버튼 앞에 정렬하는 ROOMIE 로봇팔",
+    "image": "assets/images/project_roomie.png",
+    "imageAlt": "호텔 로비를 배경으로 한 자율주행 호텔 서비스 로봇 ROOMIE",
     "imageSequence": [],
-    "titleKo": "ROOMIE — 저비용 로봇팔의 엘리베이터 버튼 조작",
-    "titleEn": "ROOMIE — Vision-Guided Low-Cost Robot Arm",
+    "titleKo": "ROOMIE — 자율주행 호텔 서비스 로봇",
+    "titleEn": "ROOMIE — Autonomous Hotel Service Robot",
     "keywords": [
       "ROS 2",
-      "4-DOF Arm",
-      "Arm Control",
-      "FreeRTOS"
+      "Autonomous Navigation",
+      "Elevator Interaction",
+      "Service Robot"
     ],
-    "descriptionKo": "약 5만 원대 4축 로봇팔과 2D 카메라로 엘리베이터 버튼의 위치 계산부터 누르기까지 구현했습니다.",
-    "descriptionEn": "Built an elevator-button manipulation pipeline using a low-cost 4-DOF arm and a standard 2D camera."
+    "descriptionKo": "자율주행, 물품 배송, 사용자 안내와 엘리베이터 이용을 하나의 서비스 흐름으로 구현했습니다.",
+    "descriptionEn": "Integrated autonomous navigation, delivery, user guidance, and elevator interaction into a hotel service robot."
   },
   {
     "slug": "falcon",

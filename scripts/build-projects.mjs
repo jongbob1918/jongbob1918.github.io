@@ -41,7 +41,7 @@ const parseSections = markdown => {
   });
 };
 
-const requiredFields = ['slug', 'shortName', 'group', 'title', 'description', 'team', 'period', 'skills', 'repository', 'overview'];
+const requiredFields = ['slug', 'shortName', 'group', 'title', 'description', 'period', 'skills', 'repository', 'overview'];
 
 const validateProject = (project, file) => {
   const missing = requiredFields.filter(field => project[field] === undefined || project[field] === null || project[field] === '');

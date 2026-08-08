@@ -45,7 +45,7 @@ ROOMIE는 엘리베이터 앞까지 자율주행한 뒤 외부 호출 버튼을 
 
 <figure class="feature-media"><img src="../assets/images/roomie_system_architecture.png" alt="Guest, Staff, Admin GUI와 Roomie Main Server, 로봇 내부 제어 모듈을 연결한 ROOMIE 시스템 구성" loading="lazy"></figure>
 
-## 인식 결과를 물리 동작으로 연결한 Arm Controller
+## 층간 이동을 위한 엘리베이터 버튼 클릭
 
 4명으로 구성된 팀에서 Vision Service가 버튼을 검출한 이후부터 로봇팔이 조작 명령을 마치고 ROS 2 Action 결과를 반환할 때까지의 Arm Controller를 담당했습니다.
 
@@ -97,20 +97,22 @@ Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 �
 
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 엘리베이터 버튼 가까이 정밀하게 접근하는 과정" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE 로봇팔이 엘리베이터 외부 호출 버튼을 누르는 과정" loading="lazy"></figure></div>
 
-## ESP32 모션 제어
+## Gaussian 프로파일 기반 모션 제어
 
-초기 등속 제어에서 발생한 급격한 시작과 정지를 줄이기 위해, 오차함수 기반 누적 프로파일로 시작각과 목표각 사이를 부드럽게 보간했습니다. 모터 갱신과 명령 수신은 FreeRTOS의 서로 다른 태스크로 분리했습니다.
+등속 제어에서 발생한 팔끝 지터를 줄이기 위해 Gaussian 프로파일로 가감속을 부드럽게 만들었습니다. ESP32는 네 개 서보의 목표각을 6 ms 주기로 갱신하고, 동작이 끝나면 완료 ACK를 반환합니다.
 
-<div class="role-grid"><div class="info-card"><strong>6 ms 모션 갱신</strong><span>네 개 서보의 목표각을 일정한 주기로 갱신</span></div><div class="info-card"><strong>통신 태스크 분리</strong><span>팔이 움직이는 동안에도 새 명령과 오류를 처리</span></div><div class="info-card"><strong>완료·실패 반환</strong><span>완료 ACK를 확인하고 IK·통신 오류를 Action 결과로 반환</span></div></div>
+<figure class="feature-media"><img src="../assets/images/roomie_gaussian_motion.webp" alt="Gaussian 속도와 가속도 프로파일로 로봇팔의 가감속을 부드럽게 만든 모터 제어 방식" loading="lazy"></figure>
 
 ## 전체 시연
 
 <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="ROOMIE 전체 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
 
-## 최종 결과와 한계
+## 최종 결과
 
-10회의 버튼 조작 시도 중 실제 입력이 확인된 경우는 3회였습니다. 나머지 시도에는 위치 정렬 오차와 버튼을 누르는 힘이 부족했던 경우가 함께 포함돼 있으며, 두 원인을 별도로 집계하지는 못했습니다.
+<div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 조작 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">버튼 눌림 성공</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">최종 성공률</span></div></div>
 
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 조작 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">실제 버튼 입력 성공</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">입력 성공률</span></div></div>
+## 한계
+
+실패한 7회에는 위치 정렬 오차와 누름 힘 부족이 함께 포함돼 있으며, 원인별 횟수는 따로 기록하지 못했습니다.
 
 <div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D 깊이 추정</strong><p>버튼 크기로 거리를 근사했지만 검출 크기와 촬영 각도에 민감했습니다.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>백래시·프레임 변형</strong><p>관측 자세를 통일해도 실제 팔끝 위치에는 오차가 남았습니다.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>부족한 누름 힘</strong><p>버튼에 도달해도 토크와 프레임 강성 부족으로 입력되지 않았습니다.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>센서 피드백 부재</strong><p>Encoder와 Force Sensor가 없어 실패 원인을 직접 측정하지 못했습니다.</p></div></div>

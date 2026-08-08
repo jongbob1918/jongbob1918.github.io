@@ -71,9 +71,3 @@ Arduino Uno 또는 Nano의 디지털·아날로그 핀을 함께 사용합니다
 ## 검증 결과
 
 <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>방향별 호출 탐색</strong><p>상·하행에 따라 탐색 순서를 바꾸고 반대 방향 호출을 이어서 처리합니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>이동 중 입력 확인</strong><p>시간 차 기반 이동 갱신 사이에서 버튼 상태를 반복 확인합니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>회로 시뮬레이션</strong><p>호출 LED와 위치 LED가 입력·이동 상태에 따라 바뀌는 동작을 확인합니다.</p></div></div>
-
-## 관련 코드
-
-[Arduino 제어 코드 보기 ↗](https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino)
-
-[Tinkercad 시뮬레이션 실행 ↗](https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled)

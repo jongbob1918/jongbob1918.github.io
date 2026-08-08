@@ -16,8 +16,8 @@ skills:
   - State Machine
 repository: https://github.com/jongbob1918/JAVIS
 card:
-  image: https://github.com/user-attachments/assets/ce7e6dba-8987-49cb-96f2-9ed3a3f76779
-  imageAlt: JAVIS navigating between library shelves in RViz
+  image: assets/images/javis_robot_drive.gif
+  imageAlt: 도서관 환경을 자율주행하는 JAVIS
   titleEn: JAVIS — Library Management Robot
   keywords:
     - ROS 2
@@ -34,9 +34,9 @@ overview: >-
   사용자가 도서 픽업을 요청하면 중앙 시스템이 작업을 할당하고, JAVIS가 책장으로 이동해 도서를 인식한 뒤 로봇팔로 픽업합니다.
 demo:
   type: image
-  src: https://github.com/user-attachments/assets/ce7e6dba-8987-49cb-96f2-9ed3a3f76779
-  alt: RViz에서 협소한 서가 사이를 주행하는 JAVIS
-  caption: 2D LiDAR와 Nav2를 사용한 서가 환경 자율주행
+  src: ../assets/images/javis_robot_drive.gif
+  alt: 실제 도서관 환경을 주행하는 JAVIS
+  caption: 도서관 환경에서 수행한 JAVIS 자율주행 시연
 ---
 
 ## 도서 요청에서 픽업까지
@@ -64,6 +64,8 @@ Mock의 응답을 바꿔 정상 완료뿐 아니라 실패와 작업 취소 상�
 ## 좁은 서가를 통과하지 못했던 이유
 
 초기 Nav2 구성에서는 좁은 서가에 진입하지 못하거나 회전 과정에서 주변 장애물과 접촉하는 문제가 발생했습니다. 장애물의 Inflation 영역을 크게 설정하면 통로가 막힌 것으로 판단했고, 작게 설정하면 벽과 가까운 경로가 생성됐습니다.
+
+<figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="RViz에서 협소한 서가 사이를 주행하는 JAVIS" loading="lazy"><figcaption>2D LiDAR Costmap과 Nav2 경로를 함께 확인한 10배속 주행 화면</figcaption></figure>
 
 <dl class="flow"><dt>문제</dt><dd>경로 생성 실패, Recovery 반복과 회전 중 장애물 접촉이 발생했습니다.</dd><dt>원인</dt><dd>로봇의 비원형 Footprint와 회전 반경, LiDAR Sensor Filtering, Costmap Inflation과 협로 Trajectory 탐색이 함께 영향을 줬습니다.</dd><dt>개선</dt><dd>NavFn·DWB 구성과 비교해 Smac Planner Hybrid와 MPPI를 적용하고, Footprint·Sensor Filter·Inflation 값을 함께 조정했습니다.</dd><dt>확인</dt><dd>실제 테스트 통로에서 경로 생성과 진입, 회전 동작을 시연 영상으로 확인했습니다.</dd></dl>
 

@@ -102,10 +102,10 @@
     "keywords": [
       "Arduino",
       "C++",
-      "State Control",
+      "Non-blocking Timing",
       "Embedded Systems"
     ],
-    "descriptionKo": "Arduino의 버튼 입력과 LED 배열로 4층 호출을 관리하고, 진행 방향에 따라 목적층을 선택하는 엘리베이터 제어 로직을 구현했습니다.",
-    "descriptionEn": "Built a four-floor Arduino elevator controller that manages button calls and selects destinations according to its current travel direction."
+    "descriptionKo": "버튼 상승 엣지로 4층 호출을 등록하고, 진행 방향을 우선해 목적층을 선택하며 500 ms 주기로 LED 위치를 갱신했습니다.",
+    "descriptionEn": "Built a four-floor Arduino controller that registers rising-edge button calls, prioritizes destinations in the current direction, and updates the LED position every 500 ms."
   }
 ]

@@ -243,6 +243,9 @@ html[data-theme="dark"] .status-confirmed { color: #75e0a7; background: #173b2a;
 html[data-theme="dark"] .status-demo { color: #84adff; background: #102a56; }
 html[data-theme="dark"] .status-needed { color: #fec84b; background: #4e3511; }
 .formula-block { margin: 14px 0 20px; padding: 16px 18px; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: var(--soft); font-family: "SFMono-Regular", Consolas, monospace; font-size: .82rem; white-space: nowrap; }
+.algorithm-label { margin: 22px 0 0; padding: 10px 16px; border: 1px solid var(--line); border-bottom: 1px solid #303846; border-radius: 8px 8px 0 0; background: #111827; color: #aeb9c8; font-family: "SFMono-Regular", Consolas, monospace; font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; }
+.algorithm-label + pre { margin: 0 0 22px; padding: 18px; overflow-x: auto; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 8px 8px; background: #111827; color: #e5edf7; font-family: "SFMono-Regular", Consolas, monospace; font-size: .72rem; line-height: 1.7; tab-size: 2; }
+.algorithm-label + pre code { color: inherit; font: inherit; }
 .gap-panel { margin-top: 20px; padding: 20px; border: 1px solid #fec84b; border-radius: 8px; background: #fffaeb; }
 .gap-panel h3 { margin: 0 0 10px; color: #93370d; }
 .gap-panel ul { margin: 0; color: #7a2e0e; }

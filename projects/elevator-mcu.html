@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Arduino와 LED·버튼으로 4층 엘리베이터의 호출 우선순위와 이동 상태를 구현한 원데이 프로젝트">
+  <meta name="description" content="Arduino와 LED·버튼으로 4층 호출 스케줄링과 Non-blocking 이동 제어를 구현한 원데이 프로젝트">
   <title>ELEVATOR MCU — Jongmyung Kim</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-25">
+  <link rel="stylesheet" href="../styles.css?v=20260808-26">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -21,7 +21,7 @@
     <header class="project-header">
       <h1>ELEVATOR MCU — LED 엘리베이터 제어</h1>
       <div class="meta"><span><strong>팀:</strong> 1명</span><span><strong>기간:</strong> 2025.07.06</span></div>
-      <p class="project-skills">Arduino · C++ · Finite-State Control · Non-blocking Timing · Embedded Systems</p>
+      <p class="project-skills">Arduino · C++ · State-Based Control · Non-blocking Timing · Embedded Systems</p>
       <a class="project-repository" href="https://github.com/jongbob1918/elevator-mcu" target="_blank" rel="noreferrer" aria-label="ELEVATOR MCU GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
@@ -34,41 +34,45 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="버튼-입력에서-층-이동까지">
-          <div class="case-heading"><h2>버튼 입력에서 층 이동까지</h2></div>
-          <div class="diagram" role="img" aria-label="LED 엘리베이터 제어 흐름"><div class="diagram-node owner">Button Edge<br>Call Toggle</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Direction Scan<br>Target Floor</div><div class="diagram-arrow">→</div><div class="diagram-node owner">500 ms Timer<br>Move One Step</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Floor · Transit LED<br>Status Output</div></div><p>버튼의 상승 에지를 감지해 해당 층의 호출 상태를 토글하고, 현재 이동 방향에서 먼저 만나는 호출을 목적층으로 선택합니다. 이동은 한 번에 LED 한 칸씩 갱신하며 목적층에 도착하면 호출 표시를 해제합니다.</p>
+        <section class="case-section" id="동작-시나리오-버튼-호출에서-도착까지">
+          <div class="case-heading"><h2>동작 시나리오 — 버튼 호출에서 도착까지</h2></div>
+          <div class="diagram" role="img" aria-label="LED 엘리베이터 제어 흐름"><div class="diagram-node owner">Button Edge<br>Call Toggle</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Direction Scan<br>Target Floor</div><div class="diagram-arrow">→</div><div class="diagram-node owner">500 ms Timer<br>Move One Step</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Floor · Transit LED<br>Status Output</div></div><p>버튼의 상승 엣지를 감지해 해당 층의 호출 상태를 토글하고, 현재 이동 방향에서 먼저 만나는 호출을 목적층으로 선택합니다. 500 ms마다 위치 LED를 한 칸씩 이동시키고, 목적층에 도착하면 해당 호출과 GREEN LED를 해제합니다.</p>
 
         </section>
 
-        <section class="case-section" id="호출-우선순위와-상태-표현">
-          <div class="case-heading"><h2>호출 우선순위와 상태 표현</h2></div>
-          <h3>배열로 관리하는 4개 층</h3>
+        <section class="case-section" id="호출-입력-상승-엣지와-토글-상태">
+          <div class="case-heading"><h2>호출 입력 — 상승 엣지와 토글 상태</h2></div>
+          <p>이전 버튼 값과 현재 값을 비교해 <code>LOW → HIGH</code>가 발생한 순간에만 호출을 등록합니다. 같은 버튼을 다시 누르면 <code>floorList</code> 상태를 반전시켜 호출을 취소하고 GREEN LED를 끄도록 구성했습니다.</p>
 <p><code>floorList</code>에 각 층의 호출 여부를 저장하고 <code>nowFloor</code>, <code>wantFloor</code>, <code>upMode</code>로 현재 위치, 목적 위치와 진행 방향을 관리합니다. 핀 번호와 층 수를 배열·상수로 분리해 배선이나 층 구성을 한곳에서 변경할 수 있도록 구성했습니다.</p>
-<h3>진행 방향을 유지하는 목적층 탐색</h3>
-<p>상승 중에는 <code>scanTop()</code>으로 위쪽 호출을 먼저 찾고, 호출이 없을 때만 아래쪽을 탐색합니다. 하강 중에는 반대 순서를 적용해 이동 방향의 요청을 우선 처리합니다.</p>
+
+        </section>
+
+        <section class="case-section" id="호출-스케줄링-진행-방향-우선-탐색">
+          <div class="case-heading"><h2>호출 스케줄링 — 진행 방향 우선 탐색</h2></div>
+          <p>상승 중에는 <code>scanTop()</code>으로 위쪽 호출을 먼저 찾고, 호출이 없을 때만 아래쪽을 탐색합니다. 하강 중에는 반대 순서를 적용해 이동 방향의 요청을 우선 처리합니다.</p>
 <div class="formula-block">상승: 위쪽 호출 → 아래쪽 호출 · 하강: 아래쪽 호출 → 위쪽 호출</div>
         </section>
 
-        <section class="case-section" id="타이머-기반-이동-제어">
-          <div class="case-heading"><h2>타이머 기반 이동 제어</h2></div>
-          <p><code>millis()</code>로 이전 갱신 시각과 현재 시각의 차이를 비교해 500 ms마다 <code>moveElevator()</code>를 호출합니다. 긴 대기 함수로 이동 주기를 만들지 않기 때문에 이동 중에도 메인 루프가 버튼 입력을 반복 확인하고 새 호출을 목적층 계산에 반영할 수 있습니다.</p>
+        <section class="case-section" id="non-blocking-timing-이동-중-추가-입력-처리">
+          <div class="case-heading"><h2>Non-blocking Timing — 이동 중 추가 입력 처리</h2></div>
+          <p><code>millis()</code>로 이전 갱신 시각과 현재 시각의 차이를 비교해 500 ms마다 <code>moveElevator()</code>를 호출합니다. 이동 주기를 긴 <code>delay()</code>로 대기하지 않아, LED 위치 갱신 사이에도 메인 루프가 버튼을 계속 확인하고 추가 호출을 다음 목적층 계산에 반영합니다.</p>
 
         </section>
 
-        <section class="case-section" id="하드웨어-구성">
-          <div class="case-heading"><h2>하드웨어 구성</h2></div>
-          <div class="role-grid"><div class="info-card"><strong>현재 층</strong><span>RED LED 4개로 층 위치 표시</span></div><div class="info-card"><strong>층간 이동</strong><span>YELLOW LED 6개로 이동 과정 표시</span></div><div class="info-card"><strong>호출 상태</strong><span>버튼 4개와 GREEN LED 4개로 등록·취소 표시</span></div></div><p>Arduino Uno 또는 Nano의 디지털·아날로그 핀을 함께 사용합니다. 실제 승강기 모터가 아닌 LED 시퀀스로 제어 로직을 시뮬레이션한 프로젝트이며, 회로와 동작은 Tinkercad에서도 실행할 수 있습니다.</p>
+        <section class="case-section" id="입력과-출력-4개-버튼과-14개-led">
+          <div class="case-heading"><h2>입력과 출력 — 4개 버튼과 14개 LED</h2></div>
+          <div class="role-grid"><div class="info-card"><strong>현재 층</strong><span>RED LED 4개로 층 위치 표시</span></div><div class="info-card"><strong>층간 이동</strong><span>YELLOW LED 6개로 이동 과정 표시</span></div><div class="info-card"><strong>호출 상태</strong><span>버튼 4개와 GREEN LED 4개로 등록·취소 표시</span></div></div><p>Arduino Uno 또는 Nano의 디지털·아날로그 핀을 함께 사용합니다. 4개 RED LED는 현재 층, 6개 YELLOW LED는 층간 이동, 4개 GREEN LED는 호출 등록 상태를 표시합니다. 실제 승강기 모터 대신 LED 시퀀스로 제어 로직을 시뮬레이션한 프로젝트입니다.</p>
 
         </section>
 
-        <section class="case-section" id="초기-설계-개선">
-          <div class="case-heading"><h2>초기 설계 개선</h2></div>
+        <section class="case-section" id="제어-로직-분리-입력-탐색-이동">
+          <div class="case-heading"><h2>제어 로직 분리 — 입력·탐색·이동</h2></div>
           <dl class="flow"><dt>증상</dt><dd>초기 순차 조건문 구조에서는 호출 방향과 목적층 선택 흐름이 분산되어 동작을 추적하기 어려웠습니다.</dd><dt>원인</dt><dd>버튼 확인, 호출 탐색과 이동 처리가 하나의 흐름에 섞여 있었습니다.</dd><dt>해결</dt><dd><code>buttonPress()</code>, <code>scanTop()</code>·<code>scanBottom()</code>, <code>getWantFloor()</code>, <code>moveElevator()</code>로 역할을 분리했습니다.</dd><dt>검증</dt><dd>단일 호출, 이동 중 추가 호출, 호출 취소와 모든 호출 처리 후 대기 시나리오를 정의하고 시뮬레이션으로 동작을 확인했습니다.</dd></dl>
         </section>
 
-        <section class="case-section" id="검증-결과">
-          <div class="case-heading"><h2>검증 결과</h2></div>
-          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>방향별 호출 탐색</strong><p>상·하행에 따라 탐색 순서를 바꾸고 반대 방향 호출을 이어서 처리합니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>이동 중 입력 확인</strong><p>시간 차 기반 이동 갱신 사이에서 버튼 상태를 반복 확인합니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>회로 시뮬레이션</strong><p>호출 LED와 위치 LED가 입력·이동 상태에 따라 바뀌는 동작을 확인합니다.</p></div></div>
+        <section class="case-section" id="검증-결과와-한계">
+          <div class="case-heading"><h2>검증 결과와 한계</h2></div>
+          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>방향별 호출 탐색</strong><p>상·하행에 따라 탐색 순서를 바꾸고 반대 방향 호출을 이어서 처리합니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>이동 중 입력 확인</strong><p>시간 차 기반 이동 갱신 사이에서 버튼 상태를 반복 확인합니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>회로 시뮬레이션</strong><p>호출 LED와 위치 LED가 입력·이동 상태에 따라 바뀌는 동작을 확인합니다.</p></div></div><div class="limitation"><strong>한계</strong> 실제 승강기의 모터, 문 센서와 안전 인터락은 연결하지 않았으며, 공개 저장소에는 정의된 8개 시나리오의 자동 테스 로그가 포함되어 있지 않습니다.</div>
         </section>
       </article>
     </div>

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-25">
+  <link rel="stylesheet" href="../styles.css?v=20260808-26">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -48,22 +48,67 @@
 
         <section class="case-section" id="화면-속-버튼을-로봇팔의-목표로-바꾸기">
           <div class="case-heading"><h2>화면 속 버튼을 로봇팔의 목표로 바꾸기</h2></div>
-          <p>Vision Service에서 버튼의 바운딩 박스와 네 모서리 좌표를 받으면 <code>solvePnPRansac</code>으로 카메라 기준 버튼 자세를 계산합니다. 이 결과에 Hand–Eye Calibration 행렬과 현재 관절의 Forward Kinematics를 결합해 로봇 베이스 기준의 목표 좌표를 얻습니다.</p>
-<div class="formula-block">T<sub>base→button</sub> = T<sub>base→tool</sub> · T<sub>tool→camera</sub> · T<sub>camera→button</sub></div><figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 픽셀 좌표를 추출해 위치를 추정하고 로봇팔 관절 제어로 연결하는 구조" loading="lazy"></figure><p>변환된 목표 위치는 <code>ikpy</code> 기반 4관절 역기구학으로 계산합니다. 계산 결과를 Forward Kinematics로 다시 검산해 위치 오차가 1 mm를 넘거나 관절 제한을 벗어나면 모터 명령을 보내지 않도록 했습니다.</p>
+          <p>Arm Controller는 Vision Service의 결과를 두 방식으로 처리할 수 있게 구성했습니다. 저장소의 기본 설정인 <code>normal</code> 모드는 버튼 중심과 화면상 크기, 실제 버튼 지름 35 mm와 카메라 내부 파라미터를 사용해 깊이를 근사합니다. <code>corner</code> 모드는 네 모서리 좌표가 제공될 때 <code>solvePnPRansac</code>으로 카메라 기준 6D 자세를 계산하는 대안 경로입니다.</p>
+<p>두 방식의 결과는 카메라 좌표계의 버튼 변환행렬로 통일됩니다. 현재 관절각의 Forward Kinematics, Hand–Eye Calibration 행렬과 OpenCV–로봇 축 보정행렬을 순서대로 적용해 로봇 베이스 기준 목표를 계산합니다.</p>
+<div class="formula-block">T<sub>base→button</sub> = T<sub>base→tool</sub> · T<sub>tool→camera</sub> · T<sub>camera→button</sub></div><figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 픽셀 좌표를 추출해 위치를 추정하고 로봇팔 관절 제어로 연결하는 구조" loading="lazy"></figure><p>변환된 목표 위치는 <code>ikpy</code> 기반 4관절 역기구학으로 계산합니다. 현재 관절각을 초기값으로 사용하고, 계산 결과를 Forward Kinematics로 다시 검산해 위치 잔차가 1 mm를 넘거나 관절 제한을 벗어나면 해당 이동을 실패 처리합니다. 여기서 1 mm는 IK 수치해의 허용 잔차이며 로봇팔 끝단의 실제 절대정확도를 의미하지 않습니다.</p>
 
         </section>
 
-        <section class="case-section" id="정렬하고-누른-뒤-안전하게-복귀하기">
-          <div class="case-heading"><h2>정렬하고 누른 뒤 안전하게 복귀하기</h2></div>
-          <p>버튼 클릭은 하나의 ROS 2 Action으로 구성했습니다. 로봇팔이 관측 자세로 이동하면 PBVS가 버튼 정면의 준비 위치를 계산하고, 준비 위치에서 버튼 방향으로 전진해 접촉한 뒤 저장한 관절각으로 후퇴합니다. 작업 성공 여부와 관계없이 마지막에는 관측 자세로 복귀하도록 실행 흐름을 묶었습니다.</p>
-<div class="diagram" role="img" aria-label="ROOMIE 버튼 조작 제어 흐름"><div class="diagram-node">Button Pose<br>Vision Service</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PnP · Hand–Eye<br>3D Target</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PBVS<br>Alignment</div><div class="diagram-arrow">→</div><div class="diagram-node owner">4-DOF IK<br>Press · Retreat</div><div class="diagram-arrow">→</div><div class="diagram-node">Action Result<br>Success · Abort</div></div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 카메라로 엘리베이터 버튼 위치에 로봇팔을 정렬하는 과정" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE의 4축 로봇팔이 엘리베이터 외부 호출 버튼을 누르는 동작" loading="lazy"></figure></div><p>동시에 들어온 클릭 요청은 실행 잠금으로 차단하고, 같은 버튼의 반복 요청에는 쿨다운을 적용했습니다. 비전 응답이나 IK 계산, ESP32 완료 응답이 실패하면 Action을 중단해 다음 단계가 잘못 이어지지 않도록 했습니다.</p>
+        <section class="case-section" id="반복-위치-보정으로-버튼-앞에-정렬하기">
+          <div class="case-heading"><h2>반복 위치 보정으로 버튼 앞에 정렬하기</h2></div>
+          <p>버튼 클릭은 하나의 ROS 2 Action으로 구성했습니다. 로봇팔이 관측 자세로 이동한 뒤 매 반복마다 버튼 위치를 다시 요청하고, 버튼 표면 법선 방향으로 80 mm 떨어진 준비 위치와 현재 끝단 위치의 오차를 계산합니다. 오차가 2 mm보다 크면 한 번에 최대 30 mm만 이동한 뒤 다시 관측합니다. 다만 다음 이동량이 5 mm 미만이면 불필요한 미세 반복을 중단하고 누르기 단계로 넘어갑니다.</p>
+<p>현재 IK 호출은 위치만 구속하고 End-effector 방향은 최적화 조건에 포함하지 않습니다. 따라서 이 구현은 버튼의 3차원 위치를 반복 보정하는 PBVS이며, 완전한 6D Pose 제어로 설명하지 않습니다.</p>
+<div class="diagram" role="img" aria-label="ROOMIE 버튼 조작 제어 흐름"><div class="diagram-node">Button Pose<br>Vision Service</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Depth · Hand–Eye<br>3D Target</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PBVS<br>Alignment</div><div class="diagram-arrow">→</div><div class="diagram-node owner">4-DOF IK<br>Press · Retreat</div><div class="diagram-arrow">→</div><div class="diagram-node">Action Result<br>Success · Abort</div></div><div class="algorithm-label">Button Click Action</div><pre><code class="language-text">if arm_is_busy or same_button_requested_within(2 s):
+    abort
+
+try:
+    move_to(OBSERVE_POSE)
+
+    repeat up to MAX_ATTEMPTS:
+        detection = request_button_pose(button_id)
+        if detection is invalid:
+            continue
+
+        T_base_button = transform_to_base(detection, current_joint_angles)
+        p_standby = p_button - 0.08 × button_normal
+        error = p_standby - FK(current_joint_angles).position
+
+        if norm(error) &lt; 0.002:
+            break
+
+        step_distance = min(norm(error), 0.03)
+        if step_distance &lt; 0.005:
+            break
+
+        p_step = current_position + normalize(error) × step_distance
+        q_step = solve_position_IK(p_step, current_joint_angles)
+        require FK_position_error(q_step) ≤ 0.001 and joints_within_limits(q_step)
+        require send_to_esp32(q_step) and receive_motion_done_ack()
+
+    require alignment_completed
+    move_to_IK(p_standby + 0.10 × button_normal)
+    move_to_IK(p_standby)
+    succeed_action
+except perception, IK, serial, or timeout error:
+    abort_action
+finally:
+    move_to(OBSERVE_POSE)
+</code></pre>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 카메라로 엘리베이터 버튼 위치에 로봇팔을 정렬하는 과정" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE의 4축 로봇팔이 엘리베이터 외부 호출 버튼을 누르는 동작" loading="lazy"></figure></div><p>정렬이 완료되면 준비 위치에서 버튼 법선 방향으로 100 mm 전진하고 같은 준비 위치로 후퇴합니다. 동시에 들어온 클릭 요청은 실행 잠금으로 차단하고, 같은 버튼의 반복 요청에는 2초 쿨다운을 적용했습니다. 비전 응답, IK 계산 또는 ESP32 완료 응답이 실패하면 Action을 중단하며, 성공·실패와 관계없이 마지막에는 관측 자세 복귀를 시도합니다.</p>
 
         </section>
 
-        <section class="case-section" id="정지-진동과-통신-지연-줄이기">
-          <div class="case-heading"><h2>정지 진동과 통신 지연 줄이기</h2></div>
-          <p>초기 등속 제어에서는 목표 각도에 도달할 때 팔끝이 떨리거나 동작이 끊기는 현상이 나타났습니다. ESP32에서 Gaussian 누적함수 기반 가감속 프로파일을 적용하고 네 관절의 목표각을 6 ms 주기로 함께 갱신해 급격한 속도 변화를 줄였습니다.</p>
+        <section class="case-section" id="정지-진동을-완화하고-제어-주기-분리하기">
+          <div class="case-heading"><h2>정지 진동을 완화하고 제어 주기 분리하기</h2></div>
+          <p>초기 등속 제어에서는 목표 각도에 도달할 때 팔끝이 떨리거나 동작이 끊기는 현상이 나타났습니다. ESP32에서 오차함수 기반 Gaussian 누적 프로파일로 시작각과 목표각을 보간하고, 마지막 스텝에서는 목표각을 직접 기록해 누적 오차가 남지 않게 했습니다. 이 변경은 진동을 정량 측정한 결과가 아니라 실제 시연에서 관찰한 급격한 움직임을 완화하기 위한 설계입니다.</p>
 <dl class="flow"><dt>모션 제어</dt><dd>FreeRTOS Motion Task를 한 코어에 고정해 6 ms 주기로 네 개의 서보 목표각을 갱신합니다.</dd><dt>명령 수신</dt><dd>Communication Task를 별도 코어에서 실행해 모터 이동 중에도 시리얼 입력 처리가 제어 주기를 막지 않도록 했습니다.</dd><dt>완료 확인</dt><dd>460800 baud로 관절 명령을 전송하고 ESP32의 완료 ACK를 받은 경우에만 다음 동작으로 전환합니다.</dd><dt>예외 처리</dt><dd>오래된 수신 버퍼를 비우고 타임아웃·IK 실패·중복 요청을 각각 실패 결과로 반환합니다.</dd></dl>
+        </section>
+
+        <section class="case-section" id="현재-구현의-검증-범위와-한계">
+          <div class="case-heading"><h2>현재 구현의 검증 범위와 한계</h2></div>
+          <p>ESP32의 완료 ACK는 서보 각도 보간이 끝났다는 뜻이며, 버튼이 실제로 눌렸는지를 의미하지는 않습니다. 현재 로봇팔에는 관절 Encoder와 End-effector Force Sensor가 없어 Actuator 제어는 명령각 기반 Open-loop 방식입니다. 따라서 Action의 성공은 <code>정렬 → 전진 → 후퇴</code> 명령 시퀀스가 오류 없이 완료됐다는 의미로 제한해 설명합니다.</p>
+<p>또한 저장소 기본 설정은 버튼 중심과 크기를 이용한 거리 근사 모드이며, PnP 경로는 네 모서리 정보가 제공될 때 선택할 수 있는 구현입니다. 향후에는 버튼 조명 상태나 Vision 재검출로 실제 클릭을 확인하고, 관절 피드백 또는 Force Sensor를 추가해 접촉 여부와 물리 오차를 폐루프로 검증할 수 있습니다.</p>
+
         </section>
 
         <section class="case-section" id="서비스-화면과-로봇-제어-연결하기">

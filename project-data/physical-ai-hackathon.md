@@ -62,11 +62,11 @@ ACT는 각 시점의 카메라 영상과 로봇 관절 상태를 입력받아 �
 
 ## 1차 시도: 다섯 개의 공을 한 번에 학습시키기
 
-처음에는 실제 심사 순서와 동일하게 파란 공 2개, 빨간 공 2개, 노란 공 1개를 연속으로 집어 전달하고 분류하는 전체 과정을 하나의 에피소드로 기록했습니다. 이 방식으로 약 100개의 시연 데이터를 수집해 첫 학습을 진행했습니다.
+처음에는 실제 심사 순서와 동일하게 파란 공 2개, 빨간 공 2개, 노란 공 1개를 연속으로 집어 전달하고 분류하는 전체 과정을 하나의 에피소드로 기록했습니다. 이 방식으로 약 200개의 시연 데이터를 수집해 첫 학습을 진행했습니다.
 
 그러나 1차 테스트에서는 로봇이 동작 중 갑자기 멈추거나, 공과 그리퍼의 위치가 조금만 달라져도 집기 정확도가 크게 떨어졌습니다. 하나의 긴 에피소드 안에 공의 위치, 색상, 순서와 양팔 전달 단계가 모두 섞이면서 각 단계에 필요한 시연 밀도가 부족했고, 앞 단계의 작은 오차가 뒤 동작까지 누적됐습니다.
 
-<dl class="flow"><dt>데이터</dt><dd>파랑 → 파랑 → 빨강 → 빨강 → 노랑의 다섯 공 전체 과정을 약 100개 에피소드로 기록</dd><dt>학습 단위</dt><dd>집기·전달·색상 분류를 하나의 긴 행동 시퀀스로 모방</dd><dt>관찰 결과</dt><dd>중간 정지와 불안정한 집기가 발생하고, 공 위치 변화에 대한 정확도가 기대에 미치지 못함</dd><dt>판단</dt><dd>긴 시퀀스를 반복하기보다 공 하나를 집어 해당 수납함에 넣는 단일 태스크의 품질을 먼저 높여야 함</dd></dl>
+<dl class="flow"><dt>데이터</dt><dd>파랑 → 파랑 → 빨강 → 빨강 → 노랑의 다섯 공 전체 과정을 약 200개 에피소드로 기록</dd><dt>학습 단위</dt><dd>집기·전달·색상 분류를 하나의 긴 행동 시퀀스로 모방</dd><dt>관찰 결과</dt><dd>중간 정지와 불안정한 집기가 발생하고, 공 위치 변화에 대한 정확도가 기대에 미치지 못함</dd></dl>
 
 ## 2차 시도: 태스크를 나누고 실패까지 데이터로 만들기
 
@@ -86,7 +86,7 @@ ACT는 각 시점의 카메라 영상과 로봇 관절 상태를 입력받아 �
 
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"><figcaption>실제 양팔 조작 · 공 집기, 그리퍼 간 전달, 색상별 수납함 분류</figcaption></figure>
 
-<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">RESULT</span><strong>3 / 5 분류 성공</strong><p>심사에서 세 개의 공을 연속으로 전달·분류한 뒤 네 번째 동작 중 수납함이 넘어져 종료했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">DATA</span><strong>100 → 200 시연</strong><p>전체 연속 시퀀스 중심의 1차 데이터에서 단일 태스크와 실패 복구를 포함한 데이터로 개선했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>15K 심사 체크포인트</strong><p>마감 시각까지 학습된 모델로 심사했으며, 저장소에는 이후 50K 설정의 공개 ACT 체크포인트도 연결돼 있습니다.</p></div></div>
+<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">RESULT</span><strong>3 / 5 분류 성공</strong><p>심사에서 세 개의 공을 연속으로 전달·분류한 뒤 네 번째 동작 중 수납함이 넘어져 종료했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">DATA</span><strong>약 200개 시연</strong><p>전체 연속 시퀀스 중심의 1차 데이터에서 단일 태스크와 실패 복구를 포함한 데이터로 개선했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>15K 심사 체크포인트</strong><p>마감 시각까지 학습된 모델로 심사했으며, 저장소에는 이후 50K 설정의 공개 ACT 체크포인트도 연결돼 있습니다.</p></div></div>
 
 ## 회고: 모방을 넘어 판단할 수 있는 구조가 필요했다
 
@@ -96,4 +96,4 @@ ACT는 짧은 시간 안에 정밀한 양팔 동작을 학습시키는 데 효�
 
 ## 함께한 팀
 
-<figure class="feature-media hackathon-team-media"><img src="https://github.com/TheMomentLab/.github/blob/main/1770642885261.jpg?raw=true" alt="한성대×로보시지 제1회 Physical AI 해커톤에 참가한 4인 팀 단체 사진" loading="lazy"><figcaption>김종명 · 장진혁 · 김재형 · 최원호, 4인 팀으로 참가</figcaption></figure>
+<figure class="feature-media hackathon-team-media"><img src="https://github.com/TheMomentLab/.github/blob/main/1770642885261.jpg?raw=true" alt="한성대×로보시지 제1회 Physical AI 해커톤에 참가한 4인 팀 단체 사진" loading="lazy"></figure>

@@ -73,11 +73,11 @@ demo:
 
 <figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 초기화, 충전, 대기, 작업, 복귀와 긴급 정지 상태 전이도" loading="lazy"></figure>
 
-## 관제·자율주행·로봇팔 연동
+## 서버 요청을 주행·로봇팔 동작으로 연결하기
 
-여러 팀원이 개발한 관제 서버, 퍼셉션과 로봇팔 모듈을 Robot State Machine에 연결하기 위해 요청·응답·상태 인터페이스를 정의했습니다. JAVIS Device의 DMC는 서버에서 받은 임무를 자율주행·로봇팔 제어기에 전달하고, 각 모듈의 실행 결과와 로봇 상태를 다시 서버에 반환합니다. AI Image Server의 인식 결과도 동일한 임무 흐름에서 다음 동작을 결정하는 상태 입력으로 사용했습니다.
+`DMC(Dobby Main Controller)`는 로봇 내부에서 작업 순서와 상태를 관리하는 메인 제어기입니다. 관제 서버가 임무를 보내면 DMC가 자율주행·비전·로봇팔 모듈을 순서대로 실행하고, 성공·실패 결과와 로봇 상태를 서버에 반환합니다.
 
-<div class="system-architecture" role="img" aria-label="JAVIS Server와 AI Image Server가 로봇 내부 JAVIS Device, Arm Controller, Drive Controller와 양방향으로 통신하는 시스템 구성"><section class="system-domain service-domain"><h3>Service</h3><div class="system-module"><strong>JAVIS Server</strong><small>작업 요청 · 로봇 상태</small></div><div class="system-module"><strong>AI Image Server</strong><small>영상 분석 · 인식 결과</small></div></section><div class="bidirectional-links" aria-hidden="true"><div><span>Task · Status</span><b>⇄</b></div><div><span>Image · Result</span><b>⇄</b></div></div><section class="system-domain robot-domain"><h3>Robot · JAVIS</h3><div class="system-module system-core"><strong>JAVIS Device · DMC</strong><small>상태 관리 · 임무 제어</small><div class="module-parts"><span>Speaker</span><span>LCD</span><span>Web Cam</span><span>Mic</span></div></div><div class="internal-links" aria-hidden="true">⇅</div><div class="robot-modules"><div class="system-module"><strong>Arm Controller · RP5</strong><small>도서 픽업 제어</small><div class="module-parts"><span>Joint Motor</span><span>Gripper</span><span>Web Cam</span></div></div><div class="system-module"><strong>Drive Controller · RP5</strong><small>자율주행 제어</small><div class="module-parts"><span>BLDC Motor</span><span>Impact Sensor</span><span>LiDAR</span><span>Temp Sensor</span></div></div></div></section></div>
+<div class="diagram" role="img" aria-label="관제 서버의 임무가 DMC를 거쳐 자율주행, 비전과 로봇팔 동작으로 실행되고 결과가 반환되는 흐름"><div class="diagram-node">관제 서버<br>임무 할당</div><div class="diagram-arrow">→</div><div class="diagram-node owner">DMC<br>상태 · 작업 순서 관리</div><div class="diagram-arrow">→</div><div class="diagram-node owner">주행 · 비전 · 로봇팔<br>임무 실행</div><div class="diagram-arrow">→</div><div class="diagram-node">관제 서버<br>결과 · 상태 반환</div></div>
 
 ## 로봇 상태 모니터링
 

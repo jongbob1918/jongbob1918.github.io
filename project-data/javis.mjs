@@ -6,8 +6,7 @@ export default {
   skills: ['ROS 2', 'Nav2', 'Smac Planner', 'MPPI', 'System Integration'],
   repository: 'https://github.com/jongbob1918/JAVIS',
   overview: {
-    summary: '서로 다른 개발 일정의 주행·로봇팔·AI 모듈을 하나의 임무 흐름으로 연결하고, 협소 공간에서 발생한 주행 실패를 Planner·Controller·Costmap 계층으로 나눠 분석했습니다.',
-    role: '메인 컨트롤러 · Interface/Mock · Nav2', validation: '폭 60cm 협로 단일 통과 시연'
+    summary: '서로 다른 개발 일정의 주행·로봇팔·AI 모듈을 하나의 임무 흐름으로 연결하고, 협소 공간에서 발생한 주행 실패를 Planner·Controller·Costmap 계층으로 나눠 분석했습니다.'
   },
   demo: { src: '../assets/images/project_javis.png', alt: 'JAVIS 도서관 서비스 로봇', caption: '도서 픽업 임무를 수행하는 JAVIS 시스템. 중앙 제어와 주행 실패 분석에 한정해 설명합니다.' },
   sections: [

@@ -6,8 +6,7 @@ export default {
   skills: ['PyTorch', 'YOLO', 'ByteTrack', 'OpenCV', 'Homography'],
   repository: 'https://github.com/jongbob1918/FALCON',
   overview: {
-    summary: '6종 지상 위험요소를 탐지하고 객체 ID와 이동 경로를 유지한 뒤, 영상 좌표를 실제 맵 좌표로 변환해 관제 화면에 전달했습니다.',
-    role: 'Ground IDS · Model Evaluation · ArUco Test', validation: 'Ground Model mAP@0.5 0.9902'
+    summary: '6종 지상 위험요소를 탐지하고 객체 ID와 이동 경로를 유지한 뒤, 영상 좌표를 실제 맵 좌표로 변환해 관제 화면에 전달했습니다.'
   },
   demo: { src: '../assets/images/hawkeye_mainpage.gif', alt: 'FALCON 위험요소 탐지 및 관제 화면', caption: '탐지된 객체의 종류, 위치와 이동 상태를 관제 화면에 표시한 통합 시연입니다.' },
   sections: [

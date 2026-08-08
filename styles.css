@@ -158,12 +158,9 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .project-repository svg { width: 20px; height: 20px; fill: currentColor; }
 .project-repository:hover { color: #303633; border-color: #fff; background: #fff; transform: translateY(-2px); }
 .project-overview { max-width: 900px; margin: 0 0 56px; }
-.project-overview h2, .demo-section > h2 { margin-bottom: 16px; font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
+.project-overview h2 { margin-bottom: 16px; font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
 .lead { max-width: 850px; margin-bottom: 16px; color: var(--text); font-size: clamp(1rem, 2vw, 1.14rem); }
 .overview-context { color: var(--text); }
-.overview-facts { display: grid; grid-template-columns: max-content 1fr; gap: 5px 18px; margin: 22px 0 0; }
-.overview-facts dt { color: var(--accent); font-size: .8rem; font-weight: 750; }
-.overview-facts dd { margin: 0; color: var(--text); font-size: .86rem; }
 .demo-section { margin-bottom: 64px; }
 .header-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 15px; border: 1px solid var(--ink); border-radius: 7px; font-size: .82rem; font-weight: 700; transition: transform .2s, box-shadow .2s, color .2s, background .2s; }

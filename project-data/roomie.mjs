@@ -6,8 +6,7 @@ export default {
   skills: ['ROS 2', '4-DOF Arm', 'Hand-Eye Calibration', 'IK', 'FreeRTOS', 'ESP32'],
   repository: 'https://github.com/jongbob1918/ROOMIE',
   overview: {
-    summary: '카메라에서 얻은 버튼 위치를 로봇 기준 좌표와 4개 관절각으로 변환하고, 통신과 모션 갱신을 분리한 ESP32 제어기로 실제 버튼 조작까지 연결했습니다.',
-    role: 'Arm Control · GUI · 일정 관리', validation: '버튼 인식부터 실제 누르기까지 통합 시연'
+    summary: '카메라에서 얻은 버튼 위치를 로봇 기준 좌표와 4개 관절각으로 변환하고, 통신과 모션 갱신을 분리한 ESP32 제어기로 실제 버튼 조작까지 연결했습니다.'
   },
   demo: { src: '../assets/images/elevator-pushouterbutton2.gif', alt: 'ROOMIE 로봇팔의 엘리베이터 버튼 조작', caption: '버튼 인식, 접근, 정렬, 누르기를 연속 실행한 통합 시연입니다.' },
   sections: [

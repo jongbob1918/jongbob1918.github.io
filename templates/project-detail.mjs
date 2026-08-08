@@ -19,7 +19,7 @@ export const renderProjectDetail = project => `<!doctype html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-17">
+  <link rel="stylesheet" href="../styles.css?v=20260808-18">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -37,11 +37,9 @@ export const renderProjectDetail = project => `<!doctype html>
     <section class="project-overview" id="overview">
       <h2>Overview</h2>
       <p class="lead">${project.overview.summary}</p>
-      <dl class="overview-facts"><dt>담당</dt><dd>${project.overview.role}</dd><dt>검증</dt><dd>${project.overview.validation}</dd></dl>
     </section>
 
     <section class="demo-section" id="demo">
-      <h2>Demo</h2>
       <figure class="feature-media"><img src="${project.demo.src}" alt="${project.demo.alt}"><figcaption>${project.demo.caption}</figcaption></figure>
     </section>
 

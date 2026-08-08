@@ -280,7 +280,8 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
   .project-list { gap: 36px; }
   .project-row { display: block; padding: 0 0 20px; background: transparent; }
   .project-media { min-height: 0; height: auto; aspect-ratio: 16/9; }
-  .project-copy { display: block; margin: -28px 14px 0; padding: 24px; box-shadow: 0 6px 16px rgba(0,0,0,.07); }
+  .project-copy { display: block; margin: 0 14px; padding: 24px; box-shadow: 0 6px 16px rgba(0,0,0,.07); }
+  .project-row:hover .project-copy, .project-row:focus-within .project-copy { transform: none; }
   .side-project-list { grid-template-columns: 1fr; }
   .side-project-list .project-row { display: grid; height: auto; aspect-ratio: auto; padding: 0; }
   .project-overlay { align-items: end; justify-items: end; padding: 12px; background: linear-gradient(transparent 45%, rgba(16,24,40,.74)); opacity: 1; }

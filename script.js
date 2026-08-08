@@ -93,7 +93,6 @@ const bindMediaSequences = (root = document) => {
     if (!Array.isArray(items) || items.length < 2) return;
 
     image.dataset.mediaSequenceBound = 'true';
-    const caption = image.closest('figure')?.querySelector('figcaption');
     let currentIndex = 0;
 
     const scheduleNext = () => {
@@ -105,7 +104,6 @@ const bindMediaSequences = (root = document) => {
         const onReady = () => scheduleNext();
 
         image.alt = item.alt || image.alt;
-        if (caption && item.caption) caption.textContent = item.caption;
         image.addEventListener('load', onReady, { once: true });
         image.src = item.src;
         if (image.complete) {

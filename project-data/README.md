@@ -31,7 +31,6 @@ demo:
   type: image
   src: ../assets/images/project-name.png
   alt: 프로젝트 대표 이미지 설명
-  caption: 선택 입력 문구
 ```
 
 로컬 영상은 `assets/videos`에 넣고 다음과 같이 설정합니다.
@@ -41,7 +40,6 @@ demo:
   type: video
   src: ../assets/videos/project-demo.mp4
   poster: ../assets/images/project-poster.png
-  caption: 프로젝트 대표 시연
 ```
 
 YouTube 영상은 Embed 주소를 사용합니다.
@@ -51,10 +49,9 @@ demo:
   type: youtube
   src: https://www.youtube.com/embed/VIDEO_ID
   alt: 프로젝트 시연 영상
-  caption: 프로젝트 대표 시연
 ```
 
-대표 미디어가 필요 없으면 `demo` 항목 전체를 삭제합니다. 본문 중간에 이미지를 추가할 때는 일반 Markdown 이미지 문법을 사용합니다.
+대표 미디어가 필요 없으면 `demo` 항목 전체를 삭제합니다. 이미지와 영상 아래에는 별도 캡션을 표시하지 않습니다. 본문 중간에 이미지를 추가할 때는 일반 Markdown 이미지 문법을 사용합니다.
 
 ```md
 ![이미지 설명](../assets/images/example.png)

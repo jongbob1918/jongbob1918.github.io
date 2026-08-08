@@ -46,7 +46,7 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-21">
+  <link rel="stylesheet" href="../styles.css?v=20260808-22">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -56,7 +56,7 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
     <a class="back" href="../index.html#${project.group === 'key' ? 'key-projects' : 'side-projects'}" aria-label="프로젝트 목록으로 돌아가기">${backIcon}</a>
     <header class="project-header">
       <h1>${escapeHtml(project.title)}</h1>
-      <div class="meta"><span><strong>팀:</strong> ${escapeHtml(project.team)}</span><span><strong>기간:</strong> ${escapeHtml(project.period)}</span></div>
+      <div class="meta"><span><strong>팀:</strong> ${escapeHtml(project.team)}</span><span><strong>기간:</strong> ${escapeHtml(project.period)}</span>${project.role ? `<span><strong>담당:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
       <p class="project-skills">${project.skills.map(escapeHtml).join(' · ')}</p>
       <a class="project-repository" href="${escapeHtml(project.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(project.shortName)} GitHub 저장소 열기">${githubIcon}</a>
     </header>

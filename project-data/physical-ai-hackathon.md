@@ -24,8 +24,8 @@ card:
     - Imitation Learning
     - Bimanual Manipulation
     - SO-101
-  descriptionKo: 3개 카메라와 12차원 양팔 상태를 입력으로 하는 ACT 정책을 50,000 step 학습했습니다. 두 SO-101 로봇팔의 공 집기·팔 간 전달·색상별 분류 미션과 실제 공 조작을 시연했습니다.
-  descriptionEn: Trained a bimanual ACT policy for 50,000 steps using three camera views and a 12-dimensional robot state. Demonstrated colored-ball manipulation with two SO-101 arms for a grasp, handover, and sorting mission.
+  descriptionKo: 3개 카메라와 12차원 상태를 사용하는 ACT 정책을 50,000 step 학습해 SO-101 양팔 공 조작을 시연했습니다.
+  descriptionEn: Trained a three-camera bimanual ACT policy for 50,000 steps and demonstrated colored-ball manipulation on two SO-101 arms.
 overview: >-
   제1회 Physical AI 해커톤의 과제는 한쪽 팔로 공을 집고 반대쪽 그리퍼로 전달한 뒤 색상별 수납함에 분류하는 양팔 조작이었습니다.
   4인 팀에서 LeRobot 기반 텔레오퍼레이션 데이터 수집부터 ACT 정책 학습과 실제 로봇 추론까지 연결했습니다.

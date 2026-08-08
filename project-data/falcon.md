@@ -23,8 +23,8 @@ card:
     - YOLOv8
     - ByteTrack
     - Object Tracking
-  descriptionKo: 활주로 위험요소 탐지 모델을 커스텀 학습해 정확도 90% 이상을 검증했습니다. ByteTrack 기반 이동 경로 추적과 위험 판단 로직을 통합했습니다.
-  descriptionEn: Trained a six-class runway hazard detector and integrated detection, tracking, and map-coordinate conversion. The repository reports mAP@0.5:0.95 of 0.9005.
+  descriptionKo: YOLOv8과 ByteTrack으로 활주로 위험요소를 탐지·추적해 mAP@0.5:0.95 0.9005를 기록했습니다.
+  descriptionEn: Built a YOLOv8–ByteTrack runway hazard pipeline that achieved 0.9005 mAP@0.5:0.95.
 overview: >-
   6종 지상 위험요소를 탐지하고 객체 ID와 이동 경로를 유지한 뒤,
   영상 좌표를 실제 맵 좌표로 변환해 관제 화면에 전달했습니다.

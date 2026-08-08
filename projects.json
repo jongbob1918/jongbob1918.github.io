@@ -52,8 +52,8 @@
       "ByteTrack",
       "Object Tracking"
     ],
-    "descriptionKo": "활주로 위험요소 탐지 모델을 커스텀 학습해 정확도 90% 이상을 검증했습니다. ByteTrack 기반 이동 경로 추적과 위험 판단 로직을 통합했습니다.",
-    "descriptionEn": "Trained a six-class runway hazard detector and integrated detection, tracking, and map-coordinate conversion. The repository reports mAP@0.5:0.95 of 0.9005."
+    "descriptionKo": "YOLOv8과 ByteTrack으로 활주로 위험요소를 탐지·추적해 mAP@0.5:0.95 0.9005를 기록했습니다.",
+    "descriptionEn": "Built a YOLOv8–ByteTrack runway hazard pipeline that achieved 0.9005 mAP@0.5:0.95."
   },
   {
     "slug": "physical-ai-hackathon",
@@ -71,7 +71,7 @@
       "Bimanual Manipulation",
       "SO-101"
     ],
-    "descriptionKo": "3개 카메라와 12차원 양팔 상태를 입력으로 하는 ACT 정책을 50,000 step 학습했습니다. 두 SO-101 로봇팔의 공 집기·팔 간 전달·색상별 분류 미션과 실제 공 조작을 시연했습니다.",
-    "descriptionEn": "Trained a bimanual ACT policy for 50,000 steps using three camera views and a 12-dimensional robot state. Demonstrated colored-ball manipulation with two SO-101 arms for a grasp, handover, and sorting mission."
+    "descriptionKo": "3개 카메라와 12차원 상태를 사용하는 ACT 정책을 50,000 step 학습해 SO-101 양팔 공 조작을 시연했습니다.",
+    "descriptionEn": "Trained a three-camera bimanual ACT policy for 50,000 steps and demonstrated colored-ball manipulation on two SO-101 arms."
   }
 ]

@@ -38,7 +38,7 @@ demo:
 
 ## 도전 과제: 두 팔이 공을 건네 색상별로 분류하기
 
-1종목의 미션은 **“한쪽 팔로 공을 집어 반대쪽 팔의 그리퍼로 전달한 뒤, 색상별로 수납함에 정확히 분류”**하는 것이었습니다. 한 번의 시연 안에 다음 세 동작을 끊김 없이 수행해야 했습니다.
+1종목의 미션은 한쪽 팔로 공을 집어 반대쪽 팔의 그리퍼로 전달한 뒤, 색상별로 수납함에 정확히 분류하는 것이었습니다.
 
 <div class="role-grid"><div class="info-card"><strong>Pick & Place</strong><span>한쪽 팔로 테이블 위의 공을 집습니다.</span></div><div class="info-card"><strong>Transfer</strong><span>집은 공을 반대편 팔의 그리퍼로 안정적으로 전달합니다.</span></div><div class="info-card"><strong>Classification</strong><span>전달받은 공을 색상에 맞는 지정 수납함에 넣습니다.</span></div></div>
 

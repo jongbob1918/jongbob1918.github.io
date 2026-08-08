@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import { categories } from '../data/taxonomy';
+
+interface Props {
+  activeCategory?: string;
+}
+
+const { activeCategory } = Astro.props;
+const notes = await getCollection('notes', ({ data }) => !data.draft);
+const countByCategory = new Map(categories.map(category => [
+  category.id,
+  notes.filter(note => note.data.category === category.id).length
+]));
+---
+
+<nav class="sidebar-nav" aria-label="카테고리 메뉴">
+  <a class:list={['all-notes-link', { active: !activeCategory }]} href="/notes/">
+    <span>전체보기</span><small>({notes.length})</small>
+  </a>
+  <div class="category-tree">
+    {categories.map(category => (
+      <details class="category-folder" open={activeCategory === category.id}>
+        <summary>
+          <span class="folder-icon" aria-hidden="true"></span>
+          <strong>{category.title}</strong>
+          <small>({countByCategory.get(category.id) ?? 0})</small>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+        </summary>
+        <div class="category-children">
+          <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
+            <span>전체 글</span><small>({countByCategory.get(category.id) ?? 0})</small>
+          </a>
+          {category.children.map(child => (
+            <a href={`/notes/category/${category.id}/?topic=${child.id}`}>
+              <span>{child.title}</span>
+            </a>
+          ))}
+        </div>
+      </details>
+    ))}
+  </div>
+</nav>

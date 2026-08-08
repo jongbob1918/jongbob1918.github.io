@@ -1,5 +1,6 @@
 ---
-import { categories, categoryMap } from '../data/taxonomy';
+import { categoryMap } from '../data/taxonomy';
+import CategoryTree from './CategoryTree.astro';
 
 interface Props {
   activeCategory?: string;
@@ -15,20 +16,13 @@ const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '
     <label class="sr-only" for="desktop-note-search">글 검색</label>
     <input id="desktop-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
   </form>
-  <p class="sidebar-label">분야</p>
-  <nav class="sidebar-nav" aria-label="노트 분야">
-    <a class:list={[{ active: !activeCategory }]} href="/notes/">최근 글</a>
-    {categories.map(category => (
-      <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
-        {category.title}
-      </a>
-    ))}
-  </nav>
+  <p class="sidebar-label">Menu</p>
+  <CategoryTree activeCategory={activeCategory} />
 </aside>
 
 <details class="mobile-notes-nav">
   <summary>
-    <span>분야 메뉴</span>
+    <span>Menu</span>
     <strong>{currentLabel}</strong>
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></svg>
   </summary>
@@ -38,13 +32,6 @@ const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '
       <label class="sr-only" for="mobile-note-search">글 검색</label>
       <input id="mobile-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
     </form>
-    <nav class="sidebar-nav" aria-label="모바일 노트 분야">
-      <a class:list={[{ active: !activeCategory }]} href="/notes/">최근 글</a>
-      {categories.map(category => (
-        <a class:list={[{ active: activeCategory === category.id }]} href={`/notes/category/${category.id}/`}>
-          {category.title}
-        </a>
-      ))}
-    </nav>
+    <CategoryTree activeCategory={activeCategory} />
   </div>
 </details>

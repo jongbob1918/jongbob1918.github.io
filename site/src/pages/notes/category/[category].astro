@@ -22,15 +22,10 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft && data.ca
     <main class="notes-listing">
       <header class="listing-header category-listing-header">
         <div>
-          <p>{category.number} · Category</p>
           <h1>{category.title}</h1>
-          <span class="listing-description">{category.description}</span>
         </div>
         <span>{notes.length}개의 글</span>
       </header>
-      <div class="topic-chips" aria-label="주요 주제">
-        {category.topics.map(topic => <span>{topic}</span>)}
-      </div>
       {notes.length ? (
         <div class="note-card-grid">
           {notes.map(note => <NoteCard note={note} />)}

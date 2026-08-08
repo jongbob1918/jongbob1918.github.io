@@ -177,7 +177,7 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .feature-media { position: relative; margin: 0; overflow: hidden; border: 1px solid var(--line); background: #0b1220; }
 .feature-media img, .feature-media video { width: 100%; max-height: 620px; object-fit: cover; display: block; }
 .feature-media figcaption { padding: 11px 14px; border-top: 1px solid var(--line); color: var(--muted); background: var(--paper); font-size: .72rem; font-weight: 650; line-height: 1.55; }
-.portrait-evidence { max-width: 720px; margin: 24px auto; background: var(--soft); }
+.portrait-evidence { max-width: 360px; margin: 24px auto; background: var(--soft); }
 .portrait-evidence img { max-height: 760px; object-fit: contain; background: #12171e; }
 .evidence-video { max-width: 720px; margin: 24px auto; background: #0b1220; }
 .case-section .evidence-video video { width: 100%; max-height: 760px; aspect-ratio: 9 / 16; margin: 0; object-fit: contain; background: #0b1220; }

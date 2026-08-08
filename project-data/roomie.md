@@ -45,35 +45,25 @@ ROOMIE는 엘리베이터 앞까지 자율주행한 뒤 외부 호출 버튼을 
 
 <figure class="feature-media"><img src="../assets/images/roomie_system_architecture.png" alt="Guest, Staff, Admin GUI와 Roomie Main Server, 로봇 내부 제어 모듈을 연결한 ROOMIE 시스템 구성" loading="lazy"></figure>
 
-## 층간 이동을 위한 엘리베이터 버튼 클릭
-
-4명으로 구성된 팀에서 Vision Service가 버튼을 검출한 이후부터 로봇팔이 조작 명령을 마치고 ROS 2 Action 결과를 반환할 때까지의 Arm Controller를 담당했습니다.
-
-<div class="diagram" role="img" aria-label="Arm Controller 담당 범위"><div class="diagram-node">Vision Service<br>버튼 검출</div><div class="diagram-arrow">→</div><div class="diagram-node owner">3D 위치 추정<br>좌표계 변환</div><div class="diagram-arrow">→</div><div class="diagram-node owner">관측 자세<br>4-DOF IK</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ESP32 제어<br>ACK · 예외 처리</div><div class="diagram-arrow">→</div><div class="diagram-node">Action Result<br>Success · Abort</div></div>
-
-담당 범위에는 버튼 중심과 크기를 이용한 거리 추정, Forward Kinematics와 Hand–Eye Calibration을 이용한 좌표계 변환, 4축 역기구학, 관측 자세 기반 동작 계획, ESP32 모터 제어와 오류 처리가 포함됩니다. GUI와 팀 전체 기능을 나열하기보다 저비용 로봇팔의 불확실성을 실제 동작으로 연결한 과정에 집중했습니다.
-
 ## Arm Controller 하드웨어 구성
 
 본체 기준 약 5만 원대의 교육용 4축 로봇팔을 사용했습니다. 팔끝에는 일반 2D 카메라와 버튼 접촉부를 장착하고, 네 개의 서보모터를 ESP32에서 제어하도록 구성했습니다.
 
 <figure class="feature-media"><img src="../assets/images/roomie_arm_hardware.webp" alt="2D 카메라와 팔끝 버튼 클릭부, 서보모터로 구성된 ROOMIE의 4축 로봇팔" loading="lazy"></figure>
 
-## 2D 검출 결과를 로봇 기준 3차원 목표로 바꾸기
+## 2D 카메라로 버튼 목표 좌표 계산
 
-Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 제공합니다. 기본 실행 경로인 `normal` 모드에서는 실험 대상 버튼의 대표 지름을 35 mm로 설정하고, 화면상 버튼 크기와 카메라 내부 파라미터를 이용해 깊이를 근사했습니다.
+Vision Service가 검출한 버튼의 중심 픽셀 `(u, v)`와 Bounding Box 너비 `Wpx`를 입력으로 사용했습니다. 버튼의 실제 지름은 `D = 35 mm`로 설정하고, 카메라 내부 파라미터 `(fx, fy, cx, cy)`를 이용해 카메라에서 버튼까지의 거리와 방향을 계산했습니다.
 
-<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection.webp" alt="2D 카메라 영상에서 여러 엘리베이터 버튼을 검출한 결과" loading="lazy"><figcaption>실제 2D 카메라 입력에서 검출한 엘리베이터 버튼. 검출 박스의 중심과 크기가 Arm Controller의 위치 추정 입력이 됩니다.</figcaption></figure>
+<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="2D 카메라 영상에서 검출한 엘리베이터 버튼과 Bounding Box" loading="lazy"><figcaption>버튼 중심과 Bounding Box 크기를 위치 추정 입력으로 사용</figcaption></figure>
 
 <div class="formula-block">Z ≈ f<sub>x</sub>D / W<sub>px</sub> &nbsp;·&nbsp; X = (u-c<sub>x</sub>)Z/f<sub>x</sub> &nbsp;·&nbsp; Y = (v-c<sub>y</sub>)Z/f<sub>y</sub></div>
 
-버튼의 실제 지름 `D`, 영상에서의 버튼 너비 `Wpx`와 초점거리 `fx`로 깊이 `Z`를 근사하고, 버튼 중심 픽셀 `(u, v)`를 카메라 기준 `(X, Y, Z)`로 변환합니다.
+핀홀 카메라 모델에서 버튼의 실제 지름과 영상 속 크기의 비율로 깊이 `Z`를 근사합니다. 이후 중심 픽셀을 역투영해 카메라 좌표계의 버튼 위치 `p_camera = (X, Y, Z)`를 구했습니다.
 
-네 기준점이 제공되는 경우에는 `solvePnPRansac`으로 카메라 기준 Pose를 구하는 `corner` 경로도 구현했습니다. 다만 공개 저장소의 기본 설정은 중심과 크기를 이용하는 `normal` 모드이며, PnP를 기본 시연 결과로 설명하지 않습니다.
+<div class="formula-block">p<sub>base</sub> = T<sub>base←tool</sub>(q) · T<sub>tool←camera</sub> · p<sub>camera</sub></div>
 
-<div class="formula-block">T<sub>base→button</sub> = T<sub>base→tool</sub> · T<sub>tool→camera</sub> · T<sub>camera→button</sub></div>
-
-현재 명령 관절각의 Forward Kinematics, Hand–Eye Calibration과 OpenCV–로봇 좌표축 보정을 적용해 카메라 기준 버튼 위치를 로봇 베이스 기준 목표로 변환했습니다.
+현재 관절각 `q`의 Forward Kinematics로 `Tbase←tool`을 계산하고, Hand–Eye Calibration으로 구한 고정 변환 `Ttool←camera`를 적용했습니다. 그 결과 카메라 기준 버튼 위치를 로봇 베이스 기준 목표 `p_base`로 변환해 4축 역기구학의 입력으로 사용했습니다.
 
 <figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 좌표를 로봇 베이스 기준 목표와 관절 제어로 연결하는 원리" loading="lazy"><figcaption>버튼의 영상 좌표를 카메라·Tool·Base 좌표계를 거쳐 로봇팔의 목표로 변환하는 구조</figcaption></figure>
 

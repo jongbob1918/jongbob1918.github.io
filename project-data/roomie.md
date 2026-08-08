@@ -14,8 +14,8 @@ skills:
   - ESP32 · FreeRTOS
 repository: https://github.com/jongbob1918/ROOMIE
 card:
-  image: assets/images/project_roomie.png
-  imageAlt: 호텔 로비를 배경으로 한 자율주행 호텔 서비스 로봇 ROOMIE
+  image: assets/images/elevator-alignbutton.gif
+  imageAlt: 엘리베이터 버튼 앞에 정렬하는 호텔 서비스 로봇 ROOMIE
   titleEn: ROOMIE — Autonomous Hotel Service Robot
   keywords:
     - ROS 2

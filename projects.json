@@ -61,13 +61,13 @@
     "titleKo": "FALCON — 활주로 위험요소 관제",
     "titleEn": "FALCON — Runway Safety Monitoring System",
     "keywords": [
-      "PyTorch",
       "YOLOv8",
       "ByteTrack",
-      "Object Tracking"
+      "Homography",
+      "OpenCV"
     ],
-    "descriptionKo": "YOLOv8과 ByteTrack으로 활주로 위험요소를 탐지·추적해 mAP@0.5:0.95 0.9005를 기록했습니다.",
-    "descriptionEn": "Built a YOLOv8–ByteTrack runway hazard pipeline that achieved 0.9005 mAP@0.5:0.95."
+    "descriptionKo": "실사·합성·Negative Sample로 학습한 6종 탐지 모델이 mAP@0.5:0.95 0.9005를 기록했습니다. ByteTrack 추적과 ArUco 좌표변환을 관제 화면까지 연동했습니다.",
+    "descriptionEn": "Trained a six-class detector on real, synthetic, and negative samples, reaching 0.9005 mAP@0.5:0.95. Integrated ByteTrack and ArUco mapping with the control interface."
   },
   {
     "slug": "physical-ai-hackathon",

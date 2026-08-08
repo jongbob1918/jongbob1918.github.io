@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="FALCON 활주로 위험요소 탐지, 추적, 좌표변환 프로젝트">
+  <meta name="description" content="CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템">
   <title>FALCON — Jongmyung Kim</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-25">
+  <link rel="stylesheet" href="../styles.css?v=20260808-26">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -21,60 +21,67 @@
     <header class="project-header">
       <h1>FALCON — 활주로 위험요소 관제</h1>
       <div class="meta"><span><strong>팀:</strong> 4명</span><span><strong>기간:</strong> 2025.05.26–07.03</span></div>
-      <p class="project-skills">PyTorch · YOLO · ByteTrack · OpenCV · Homography</p>
+      <p class="project-skills">PyTorch · YOLOv8 · ByteTrack · OpenCV · Homography · TCP</p>
       <a class="project-repository" href="https://github.com/jongbob1918/FALCON" target="_blank" rel="noreferrer" aria-label="FALCON GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
     <section class="project-overview" id="overview">
       <h2>Overview</h2>
-      <p class="lead">6종 지상 위험요소를 탐지하고 객체 ID와 이동 경로를 유지한 뒤, 영상 좌표를 실제 맵 좌표로 변환해 관제 화면에 전달했습니다.</p>
+      <p class="lead">활주로의 조류, FOD, 사람과 차량은 작은 객체라도 항공기 운항에 직접적인 위험이 되지만 여러 CCTV를 관제사가 지속적으로 감시하는 데에는 한계가 있습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 픽셀 위치를 실제 활주로 좌표와 구역 정보로 변환해 관제 화면에 전달하는 AI 안전 관제 시스템입니다. 위험요소가 감지되면 객체 ID·클래스·좌표·신뢰도를 서버로 전송하고, 관제 GUI가 지도 마커와 팝업 경보를 갱신합니다.</p>
     </section>
 
-    <section class="demo-section" id="demo"><figure class="feature-media"><img src="../assets/images/hawkeye_mainpage.gif" alt="FALCON 위험요소 탐지 및 관제 화면"></figure></section>
+    <section class="demo-section" id="demo"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/lctXpBYrVsU" title="프로젝트 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="cctv-영상에서-지도-표시까지">
-          <div class="case-heading"><h2>CCTV 영상에서 지도 표시까지</h2></div>
-          <p>파란 테두리는 직접 담당한 범위, 회색은 팀 통합 범위입니다.</p>
-<div class="diagram" role="img" aria-label="FALCON 지상 위험요소 처리 파이프라인"><div class="diagram-node">CCTV Frame</div><div class="diagram-arrow">→</div><div class="diagram-node owner">YOLO<br>6 Classes</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ByteTrack<br>ID &amp; Trajectory</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ArUco Test<br>Pixel → Map</div><div class="diagram-arrow">→</div><div class="diagram-node">Server · Dashboard</div></div>
+        <section class="case-section" id="서비스-흐름-cctv-영상에서-관제-경보까지">
+          <div class="case-heading"><h2>서비스 흐름 — CCTV 영상에서 관제 경보까지</h2></div>
+          <p>카메라 프레임은 <code>탐지 → 추적 → 좌표변환 → 구역 판정 → 관제 표시</code> 순서로 처리됩니다. 단순히 Bounding Box를 보여주는 데서 끝내지 않고, 객체가 어느 구역에 있으며 같은 위험요소가 계속 이동 중인지 관제사가 판단할 수 있는 이벤트로 변환했습니다.</p>
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="CCTV 영상 수신부터 위험요소 탐지, 구역 판단과 관제 GUI 지도 표시까지 이어지는 FALCON 흐름" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="학습-데이터와-좌표변환">
-          <div class="case-heading"><h2>학습 데이터와 좌표변환</h2></div>
-          <h3>실제 이미지와 합성 데이터 결합</h3>
-<p>공항 모형 촬영 이미지와 팀이 생성한 Unity 기반 합성 이미지로 재학습했습니다. Ground Model v0.3은 <a href="mailto:mAP@0.5">mAP@0.5</a> 0.9902를 기록합니다.</p>
-<h3>ArUco 기준점 기반 평면 좌표변환</h3>
-<p>대응점으로 Homography를 계산하고 픽셀 좌표를 맵 좌표로 변환했습니다.</p>
-<div class="formula-block">λ [x_map, y_map, 1]ᵀ = H [u_pixel, v_pixel, 1]ᵀ</div>
-        </section>
-
-        <section class="case-section" id="탐지-추적-시스템-구성">
-          <div class="case-heading"><h2>탐지·추적 시스템 구성</h2></div>
-          <div class="role-grid"><div class="info-card"><strong>Ground IDS</strong><span>조류·FOD·사람·동물·항공기·차량 탐지</span></div><div class="info-card"><strong>Model Evaluation</strong><span>커스텀 학습과 지상 객체 성능 확인</span></div><div class="info-card"><strong>Coordinate Test</strong><span>ArUco 기반 픽셀–맵 좌표변환 시험</span></div></div>
-        </section>
-
-        <section class="case-section" id="cctv-기반-관제-환경">
-          <div class="case-heading"><h2>CCTV 기반 관제 환경</h2></div>
-          <p>고정 CCTV 시점의 프레임을 기준으로 탐지·추적하고 결과를 서버와 관제 화면으로 전달합니다. 공개 자료에서 확인되지 않는 카메라 모델, 렌즈, 추론 장치와 실제 공항 설치 사양은 성능 근거에 포함하지 않습니다.</p>
+        <section class="case-section" id="담당-범위-ground-ids와-좌표변환-검증">
+          <div class="case-heading"><h2>담당 범위 — Ground IDS와 좌표변환 검증</h2></div>
+          <p>4명으로 구성된 팀의 팀장으로 일정과 문서를 관리하고 Ground IDS 통합을 담당했습니다. 실사·합성 데이터를 이용한 지상 객체 모델의 조사·학습·검증, YOLOv8과 ByteTrack을 연결한 추론 파이프라인, ArUco Marker 기반 좌표변환 시험을 수행했습니다. 합성 데이터 생성은 장진혁, 서버와 좌표변환 로직 설계는 박효진, 관제 GUI는 김지연과 협업했습니다.</p>
 
         </section>
 
-        <section class="case-section" id="실제-영상에서-발생한-탐지-성능-저하">
-          <div class="case-heading"><h2>실제 영상에서 발생한 탐지 성능 저하</h2></div>
-          <dl class="flow"><dt>증상</dt><dd>공개 데이터 모델이 공항 모형·CCTV 시점에서 객체를 누락하거나 ArUco Marker를 오인했습니다.</dd><dt>원인</dt><dd>학습 데이터와 배치 환경의 조명·시점·배경 차이가 컸습니다.</dd><dt>해결</dt><dd>실사와 합성 데이터를 결합하고 Negative Sample을 포함해 재학습했습니다.</dd><dt>검증</dt><dd>PR Curve, Confusion Matrix와 Ground Model v0.3 평가 지표를 저장했습니다.</dd></dl>
+        <section class="case-section" id="데이터셋-개선-합성-실사-negative-sample-결합">
+          <div class="case-heading"><h2>데이터셋 개선 — 합성·실사·Negative Sample 결합</h2></div>
+          <p>공개 데이터로 학습한 초기 모델은 공항 모형의 고정 CCTV 시점에서 작은 객체를 놓치거나 배경의 ArUco Marker를 위험요소로 오인했습니다. 학습 이미지와 실제 배치 환경의 시점·조명·배경 차이가 컸기 때문입니다.</p>
+<p>팀이 Unity와 Blender로 생성한 합성 데이터에 실제 공항 모형 촬영 이미지와 객체가 없는 Negative Sample을 결합해 Hybrid Dataset을 구성했습니다. YOLOv8n-box를 960×960 입력, 150 epoch로 재학습해 조류·FOD·사람·동물·항공기·차량 6개 클래스를 하나의 모델에서 탐지했습니다.</p>
+<dl class="flow"><dt>문제</dt><dd>공개 데이터만으로 학습한 모델은 고정 CCTV 시점의 작은 객체와 공항 모형 배경에 충분히 대응하지 못했습니다.</dd><dt>데이터</dt><dd>Unity·Blender 합성 이미지, 실제 모형 촬영 이미지, 객체가 없는 Negative Sample을 결합했습니다.</dd><dt>학습</dt><dd>YOLOv8n-box를 960×960 입력과 150 epoch 조건으로 여섯 클래스에 맞춰 재학습했습니다.</dd><dt>검증</dt><dd>분리된 평가 데이터의 정량 지표와 실제 공항 모형 영상의 다중 객체 탐지 결과를 함께 확인했습니다.</dd></dl><figure class="feature-media"><img src="../assets/images/falcon_synthetic_dataset.gif" alt="Blender와 공항 모형을 활용해 지상 위험요소 학습 데이터를 구성하는 과정" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="성능-및-검증-결과">
-          <div class="case-heading"><h2>성능 및 검증 결과</h2></div>
-          <div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9672</span><span class="metric-label">Recall</span></div></div><div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">ARTIFACT</span><strong>학습 결과</strong><p>PR/F1 Curve, Confusion Matrix와 results.csv가 저장되어 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>IDS 실행 코드</strong><p>Detector·Tracker·Inference 코드가 공개되어 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>관제 통합</strong><p>지도 Marker와 관제 UI 연동을 확인할 수 있습니다.</p></div></div>
+        <section class="case-section" id="모델-검증-정량-지표와-실제-영상-확인">
+          <div class="case-heading"><h2>모델 검증 — 정량 지표와 실제 영상 확인</h2></div>
+          <div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Hybrid Dataset으로 학습한 FALCON 지상 객체 탐지 모델의 클래스별 PR Curve" loading="lazy"></figure><p>저장소의 Ground Model v0.3 평가에서 위 수치를 기록했습니다. PR Curve에서는 여섯 클래스별 Precision–Recall 관계를 비교하고, 실제 공항 모형 영상에서는 여러 클래스가 동시에 등장할 때의 검출 결과를 확인했습니다.</p>
+
         </section>
 
-        <section class="case-section" id="관련-코드">
-          <div class="case-heading"><h2>관련 코드</h2></div>
-          <p><a href="https://github.com/jongbob1918/FALCON/tree/main/src/systems/ids">Ground IDS 구현 보기 ↗</a></p>
-<p>학습·평가 Script와 결과 Artifact가 공개되어 있습니다.</p>
+        <section class="case-section" id="탐지와-추적-6개-클래스와-상태-후처리">
+          <div class="case-heading"><h2>탐지와 추적 — 6개 클래스와 상태 후처리</h2></div>
+          <p>프레임마다 새 객체로 처리하지 않도록 YOLOv8의 추론 결과를 ByteTrack에 연결하고 <code>persist</code> 옵션으로 Track ID를 유지했습니다. IDS는 모델의 기본 클래스에 후처리를 더해 관제 판단에 필요한 상태를 구분합니다.</p>
+<dl class="flow"><dt>객체 추적</dt><dd>ByteTrack의 ID를 FALCON 객체 ID로 변환해 프레임이 바뀌어도 같은 위험요소의 이동을 이어서 추적합니다.</dd><dt>작업자 구분</dt><dd>사람 Bounding Box 상단 60%의 HSV 영역에서 형광색 픽셀 비율을 계산해 일반인과 형광 조끼 작업자를 구분합니다.</dd><dt>작업 차량</dt><dd>차량 영역의 노란색과 검은색 비율을 함께 검사해 일반 차량과 작업 차량을 나눕니다.</dd><dt>쓰러짐 상태</dt><dd>사람 Bounding Box의 종횡비와 지속 시간을 이용해 구조 단계가 필요한 상황을 별도 이벤트로 만듭니다.</dd></dl><div class="media-grid"><figure class="feature-media"><img src="../assets/images/falcon_ground_detection.webp" alt="FALCON이 공항 모형에서 여섯 종류의 지상 위험요소를 탐지하는 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_worker_classification.gif" alt="형광 조끼 색상을 이용해 작업자와 일반인을 구분하는 FALCON 후처리" loading="lazy"></figure></div>
+        </section>
 
+        <section class="case-section" id="좌표변환-aruco-homography와-구역-판정">
+          <div class="case-heading"><h2>좌표변환 — ArUco Homography와 구역 판정</h2></div>
+          <p>Bounding Box만으로는 객체가 영상 안 어디에 보이는지만 알 수 있어 관제 지도에 정확히 표시할 수 없습니다. 카메라 화면에서 ID 0–3의 ArUco Marker 중심점을 찾고, 실측한 네 기준점과 대응시켜 Homography 행렬을 계산했습니다.</p>
+<div class="formula-block">λ [x<sub>map</sub>, y<sub>map</sub>, 1]ᵀ = H [u<sub>pixel</sub>, v<sub>pixel</sub>, 1]ᵀ</div><figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="활주로 모형의 ArUco Marker 실측 좌표와 OpenCV로 추출한 픽셀 좌표의 대응 관계" loading="lazy"></figure><p>검출 객체의 Bounding Box 중심점을 <code>perspectiveTransform</code>으로 mm 단위의 맵 좌표로 변환했습니다. 네 기준 Marker가 모두 보일 때만 보정 결과를 생성하고, 변환된 위치를 활주로·유도로·잔디 구역과 비교해 객체가 어느 구역에 있는지 판단하도록 구성했습니다.</p>
+
+        </section>
+
+        <section class="case-section" id="시스템-연동-map-object-mode와-tcp-이벤트">
+          <div class="case-heading"><h2>시스템 연동 — Map·Object Mode와 TCP 이벤트</h2></div>
+          <p>IDS는 보정용 Map Mode와 위험요소 탐지용 Object Mode를 분리합니다. 추론 프로세스가 만든 객체 ID·클래스·좌표·신뢰도는 JSON 이벤트로 변환되어 TCP Queue를 통해 Main Server에 전달되고, 서버 명령으로 두 모드를 전환할 수 있습니다.</p>
+<p>서버 연결이 끊기면 통신 스레드가 5초 간격으로 재연결하며, 줄바꿈을 메시지 경계로 사용해 여러 JSON 명령이 한 번에 수신돼도 순서대로 복원합니다. 이 구조를 통해 영상 추론 루프와 네트워크 지연을 분리하고 관제 GUI가 탐지 화면, 지도 마커와 경보 이력을 갱신할 수 있게 했습니다.</p>
+<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="CCTV 탐지 서버, FALCON Main Server, 관제 GUI와 조종사 시스템을 연결한 전체 소프트웨어 구조" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="검증-결과와-한계">
+          <div class="case-heading"><h2>검증 결과와 한계</h2></div>
+          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>Hybrid Dataset 평가</strong><p>여섯 클래스 Ground Model v0.3가 mAP@0.5:0.95 0.9005를 기록했고 클래스별 PR Curve를 저장했습니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>실제 모형 영상 탐지</strong><p>공항 모형 영상에서 조류·FOD·사람·동물·항공기·차량을 동시에 검출하고 Track ID를 유지했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">SYSTEM</span><strong>관제 시스템 연동</strong><p>좌표변환 결과와 객체 이벤트를 JSON으로 전송해 관제 GUI의 지도 마커와 경보 갱신에 연결했습니다.</p></div></div><div class="limitation"><strong>검증 범위</strong> 모델 지표는 Hybrid Dataset의 분리된 평가 데이터 기준이며 실제 운영 공항에서 측정한 결과가 아닙니다. 좌표변환은 네 개의 ArUco Marker가 모두 보이는 평면 공항 모형에서 검증했으며, 실제 공항 기준 좌표 오차와 전체 시스템 지연 시간은 별도로 측정하지 못했습니다.</div>
         </section>
       </article>
     </div>

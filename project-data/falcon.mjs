@@ -8,7 +8,7 @@ export default {
   overview: {
     summary: '6종 지상 위험요소를 탐지하고 객체 ID와 이동 경로를 유지한 뒤, 영상 좌표를 실제 맵 좌표로 변환해 관제 화면에 전달했습니다.'
   },
-  demo: { src: '../assets/images/hawkeye_mainpage.gif', alt: 'FALCON 위험요소 탐지 및 관제 화면', caption: '탐지된 객체의 종류, 위치와 이동 상태를 관제 화면에 표시한 통합 시연입니다.' },
+  demo: { src: '../assets/images/hawkeye_mainpage.gif', alt: 'FALCON 위험요소 탐지 및 관제 화면' },
   sections: [
     { id: 'pipeline', nav: 'Technical Pipeline', title: 'Technical Pipeline — Detection에서 Map Marker까지', body: `<p>파란 테두리는 직접 담당한 범위, 회색은 팀 통합 범위입니다.</p><div class="diagram" role="img" aria-label="FALCON 지상 위험요소 처리 파이프라인"><div class="diagram-node">CCTV Frame</div><div class="diagram-arrow">→</div><div class="diagram-node owner">YOLO<br>6 Classes</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ByteTrack<br>ID &amp; Trajectory</div><div class="diagram-arrow">→</div><div class="diagram-node owner">ArUco Test<br>Pixel → Map</div><div class="diagram-arrow">→</div><div class="diagram-node">Server · Dashboard</div></div>` },
     { id: 'technical-details', nav: 'Technical Details', title: 'Technical Details — Hybrid Data와 좌표변환', body: `<h3>실제 이미지와 합성 데이터 결합</h3><p>공항 모형 촬영 이미지와 팀이 생성한 Unity 기반 합성 이미지로 재학습했습니다. Ground Model v0.3은 mAP@0.5 0.9902를 기록합니다.</p><h3>ArUco 기준점 기반 평면 좌표변환</h3><p>대응점으로 homography를 계산하고 픽셀 좌표를 맵 좌표로 변환했습니다.</p><div class="formula-block">λ [x_map, y_map, 1]ᵀ = H [u_pixel, v_pixel, 1]ᵀ</div>` },

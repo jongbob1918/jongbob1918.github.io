@@ -8,7 +8,7 @@ export default {
   overview: {
     summary: '카메라에서 얻은 버튼 위치를 로봇 기준 좌표와 4개 관절각으로 변환하고, 통신과 모션 갱신을 분리한 ESP32 제어기로 실제 버튼 조작까지 연결했습니다.'
   },
-  demo: { src: '../assets/images/elevator-pushouterbutton2.gif', alt: 'ROOMIE 로봇팔의 엘리베이터 버튼 조작', caption: '버튼 인식, 접근, 정렬, 누르기를 연속 실행한 통합 시연입니다.' },
+  demo: { src: '../assets/images/elevator-pushouterbutton2.gif', alt: 'ROOMIE 로봇팔의 엘리베이터 버튼 조작' },
   sections: [
     { id: 'pipeline', nav: 'Technical Pipeline', title: 'Technical Pipeline — 인식부터 모터 명령까지', body: `<div class="diagram" role="img" aria-label="ROOMIE 버튼 조작 파이프라인"><div class="diagram-node">Button BBox<br>Vision</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PnP · Hand-Eye<br>3D Target</div><div class="diagram-arrow">→</div><div class="diagram-node owner">IK<br>4 Joint Angles</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Serial Command<br>ESP32</div><div class="diagram-arrow">→</div><div class="diagram-node owner">FreeRTOS<br>4 Servos</div></div><p>관측, 접근, 정렬, 누르기를 분리하고 IK 해가 허용 오차나 관절 범위를 벗어나면 명령을 보내지 않습니다.</p>` },
     { id: 'technical-details', nav: 'Technical Details', title: 'Technical Details — 좌표변환과 모션 프로파일', body: `<h3>카메라 좌표를 로봇 기준으로 변환</h3><p>solvePnPRansac과 Hand-Eye calibration, 현재 관절의 순기구학 결과를 결합합니다.</p><div class="formula-block">T_base→button = T_base→tool · T_tool→camera · T_camera→button</div><h3>IK 해 검증</h3><p>계산한 관절각으로 forward kinematics를 다시 수행하고 위치 오차와 관절 범위를 검사합니다.</p><div class="formula-block">e_IK = ‖p_FK(q*) − p_target‖₂ ≤ 0.001 m</div><h3>Gaussian 모션 보간</h3><p>ESP32의 모션 task는 시작각과 목표각 사이를 Gaussian 누적함수 기반으로 갱신합니다.</p>` },

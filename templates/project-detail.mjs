@@ -19,7 +19,7 @@ export const renderProjectDetail = project => `<!doctype html>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-18">
+  <link rel="stylesheet" href="../styles.css?v=20260808-19">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"></div>
@@ -40,11 +40,11 @@ export const renderProjectDetail = project => `<!doctype html>
     </section>
 
     <section class="demo-section" id="demo">
-      <figure class="feature-media"><img src="${project.demo.src}" alt="${project.demo.alt}"><figcaption>${project.demo.caption}</figcaption></figure>
+      <figure class="feature-media"><img src="${project.demo.src}" alt="${project.demo.alt}"></figure>
     </section>
 
+    <aside class="toc" aria-label="페이지 목차"><span class="toc-title">On this page</span>${project.sections.map(section => `<a href="#${section.id}">${section.nav}</a>`).join('')}</aside>
     <div class="case-layout">
-      <aside class="toc" aria-label="페이지 목차"><span class="toc-title">On this page</span>${project.sections.map(section => `<a href="#${section.id}">${section.nav}</a>`).join('')}</aside>
       <article class="case-study">${renderSections(project.sections)}
       </article>
     </div>

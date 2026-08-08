@@ -1,12 +1,12 @@
 export default {
   slug: 'javis', shortName: 'JAVIS', group: 'key',
-  title: 'JAVIS — 다목적 모바일 매니퓰레이터',
-  description: 'JAVIS ROS 2 시스템 통합과 Navigation 실패 분석 프로젝트',
+  title: 'JAVIS — 도서관 관리 로봇',
+  description: '자율주행, 로봇팔과 비전 AI를 통합한 ROS 2 기반 도서관 관리 로봇',
   team: '9명', period: '2024.09–11',
   skills: ['ROS 2', 'Nav2', 'Smac Planner', 'MPPI', 'System Integration'],
   repository: 'https://github.com/jongbob1918/JAVIS',
   overview: {
-    summary: '서로 다른 개발 일정의 주행·로봇팔·AI 모듈을 하나의 임무 흐름으로 연결하고, 협소 공간에서 발생한 주행 실패를 Planner·Controller·Costmap 계층으로 나눠 분석했습니다.'
+    summary: '도서관에서는 도서 픽업·반납과 길 안내 같은 반복 업무에 지속적인 인력이 필요합니다. 이를 자동화하기 위해 자율주행, 로봇팔과 비전 AI를 ROS 2로 연결한 도서관 관리 로봇 JAVIS를 개발했습니다. 사용자가 도서 픽업을 요청하면 중앙 시스템이 작업을 할당하고, JAVIS가 책장으로 이동해 도서를 인식한 뒤 로봇팔로 픽업합니다.'
   },
   demo: { src: '../assets/images/project_javis.png', alt: 'JAVIS 도서관 서비스 로봇' },
   sections: [

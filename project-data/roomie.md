@@ -26,7 +26,7 @@ card:
   descriptionKo: 약 5만 원대 4축 로봇팔과 2D 카메라로 엘리베이터 버튼의 위치 계산부터 누르기까지 구현했습니다.
   descriptionEn: Built an elevator-button manipulation pipeline using a low-cost 4-DOF arm and a standard 2D camera.
 overview: >-
-  상용 로봇팔이나 Depth Camera 없이 엘리베이터 버튼을 조작하는 Arm Controller를 구현했습니다. 약 5만 원대 4축 로봇팔과 일반 2D 카메라를 사용했기 때문에 깊이 정보 부족, 서보모터 백래시, 프레임 변형과 토크 부족을 함께 다뤄야 했습니다. 고정된 관측 자세에서 버튼의 3차원 위치를 근사한 뒤 준비·누르기·후퇴 동작으로 연결했습니다. 개발 당시 실제 버튼 활성화 성공률은 3/10이었으며, 위치 정렬과 물리적인 누름 힘을 서로 다른 문제로 분석했습니다.
+  호텔 서비스 로봇이 층간 이동을 수행하려면 사람의 도움 없이 엘리베이터 버튼을 조작해야 합니다. 이를 위해 2D 카메라의 버튼 인식 결과를 로봇팔의 목표 위치와 관절 명령으로 변환하는 ROS 2 Arm Controller를 구현했습니다. 버튼 조작 요청이 들어오면 관측 자세에서 위치를 계산하고, 준비 위치로 이동한 뒤 버튼을 누르고 후퇴합니다.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/CqO3OH661Os
@@ -53,13 +53,11 @@ ROOMIE는 엘리베이터 앞까지 자율주행한 뒤 외부 호출 버튼을 
 
 담당 범위에는 버튼 중심과 크기를 이용한 거리 추정, Forward Kinematics와 Hand–Eye Calibration을 이용한 좌표계 변환, 4축 역기구학, 관측 자세 기반 동작 계획, ESP32 모터 제어와 오류 처리가 포함됩니다. GUI와 팀 전체 기능을 나열하기보다 저비용 로봇팔의 불확실성을 실제 동작으로 연결한 과정에 집중했습니다.
 
-## 약 5만 원대 로봇팔과 2D 카메라라는 제약
+## 약 5만 원대 로봇팔과 2D 카메라
 
 사용한 교육용 4축 로봇팔은 본체 기준 약 5만 원대였으며, Depth Camera 대신 일반 2D 카메라를 장착했습니다. 제한된 예산 안에서 빠르게 프로토타입을 제작할 수 있었지만 다음 문제가 발생했습니다.
 
 <figure class="feature-media"><img src="../assets/images/roomie_arm_hardware.webp" alt="2D 카메라와 팔끝 버튼 클릭부, 서보모터로 구성된 ROOMIE의 4축 로봇팔" loading="lazy"></figure>
-
-<div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D 깊이 한계</strong><p>버튼까지의 거리를 직접 측정할 수 없었습니다.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>백래시·프레임 변형</strong><p>같은 명령각에서도 팔끝 위치가 달라졌습니다.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>토크 부족</strong><p>팔을 펼치면 버튼 반력을 이기기 어려웠습니다.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>센서 피드백 부재</strong><p>실제 관절각과 버튼 접촉력을 측정할 수 없었습니다.</p></div></div>
 
 ## 2D 검출 결과를 로봇 기준 3차원 목표로 바꾸기
 
@@ -69,7 +67,7 @@ Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 �
 
 <div class="formula-block">Z ≈ f<sub>x</sub>D / W<sub>px</sub> &nbsp;·&nbsp; X = (u-c<sub>x</sub>)Z/f<sub>x</sub> &nbsp;·&nbsp; Y = (v-c<sub>y</sub>)Z/f<sub>y</sub></div>
 
-버튼의 실제 지름 `D`, 영상에서의 버튼 너비 `Wpx`와 초점거리 `fx`로 깊이 `Z`를 근사하고, 버튼 중심 픽셀 `(u, v)`를 카메라 기준 `(X, Y, Z)`로 변환합니다. 이 방식은 Depth Camera 없이 동작하지만 검출 박스 크기와 촬영 각도에 민감하다는 한계가 있습니다.
+버튼의 실제 지름 `D`, 영상에서의 버튼 너비 `Wpx`와 초점거리 `fx`로 깊이 `Z`를 근사하고, 버튼 중심 픽셀 `(u, v)`를 카메라 기준 `(X, Y, Z)`로 변환합니다.
 
 네 기준점이 제공되는 경우에는 `solvePnPRansac`으로 카메라 기준 Pose를 구하는 `corner` 경로도 구현했습니다. 다만 공개 저장소의 기본 설정은 중심과 크기를 이용하는 `normal` 모드이며, PnP를 기본 시연 결과로 설명하지 않습니다.
 
@@ -79,13 +77,13 @@ Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 �
 
 <figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 좌표를 로봇 베이스 기준 목표와 관절 제어로 연결하는 원리" loading="lazy"><figcaption>버튼의 영상 좌표를 카메라·Tool·Base 좌표계를 거쳐 로봇팔의 목표로 변환하는 구조</figcaption></figure>
 
-## 4축 IK로 계산한 목표를 실제 로봇과 RViz에서 확인하기
+## 4축 IK 목표 검증
 
 변환된 목표 위치는 `ikpy` 기반 4관절 역기구학으로 계산했습니다. 현재 관절각을 초기값으로 사용하고, 계산 결과를 Forward Kinematics로 다시 검산해 수치 잔차가 1 mm를 넘거나 관절 제한을 벗어나면 이동을 실패 처리했습니다.
 
 <figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video><figcaption>IK 목표 제어 실험. 실제 로봇팔의 이동과 RViz 관절 모델을 함께 확인했습니다.</figcaption></figure>
 
-여기서 1 mm는 IK 수치해의 허용 잔차이며 실제 로봇팔 끝단의 절대 정확도가 아닙니다. 실제 위치에는 백래시, 프레임 변형과 명령각–실제각 차이가 추가됩니다.
+여기서 1 mm는 IK 수치해의 허용 잔차이며 실제 로봇팔 끝단의 절대 정확도를 의미하지는 않습니다.
 
 ## 관측 자세를 거쳐 버튼을 한 번에 누르기
 
@@ -97,15 +95,15 @@ Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 �
 
 <figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video><figcaption>개발 환경에서 관측 자세로 이동해 버튼 위치를 확인하는 과정</figcaption></figure>
 
-<figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 엘리베이터 버튼을 누르기 위해 관측 자세에서 접근하는 과정" loading="lazy"><figcaption>ROOMIE가 관측 자세를 거쳐 엘리베이터 버튼으로 접근하는 과정</figcaption></figure>
+로봇팔 링크의 전체 길이는 약 33.5 cm로, 팔만으로 확보할 수 있는 작업 범위가 제한적이었습니다. ROOMIE 본체가 버튼 가까이 정밀하게 접근한 뒤 관측 자세에서 클릭 동작을 실행하도록 구성했습니다.
 
-## 버튼 누르기 동작과 물리적 한계
+<figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 엘리베이터 버튼을 누르기 위해 관측 자세에서 접근하는 과정" loading="lazy"></figure>
+
+## 버튼 누르기 동작
 
 버튼 위치를 계산한 뒤 버튼 앞 80 mm 준비 위치로 이동하고, 버튼 방향으로 100 mm 전진한 다음 같은 준비 위치로 후퇴합니다.
 
-<figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE 로봇팔이 엘리베이터 외부 호출 버튼에 접근하는 모습" loading="lazy"><figcaption>ROOMIE 본체에 통합한 로봇팔의 엘리베이터 외부 호출 버튼 조작</figcaption></figure>
-
-버튼 위치까지 이동해 접촉하더라도 실제 버튼을 활성화하려면 버튼 반력을 이길 힘이 필요했습니다. 그러나 팔을 펼친 상태에서는 서보모터의 유효 토크가 감소했고, 버튼을 누르는 순간 저가형 프레임과 관절 연결부가 밀리거나 휘었습니다. 위치 정렬이 성공해도 실제 버튼이 눌리지 않는 경우가 발생한 이유입니다.
+<figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE 로봇팔이 엘리베이터 외부 호출 버튼에 접근하는 모습" loading="lazy"></figure>
 
 ## 실제 버튼 활성화 성공률 3/10
 
@@ -113,11 +111,7 @@ Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 �
 
 <div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 조작 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">실제 버튼 활성화</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">최종 클릭 성공률</span></div></div>
 
-이 수치는 로봇팔이 목표 위치로 이동한 비율이나 IK 정확도가 아니라, 버튼이 실제로 눌려 입력이 활성화된 비율입니다. 당시 실험에서는 위치 정렬 실패와 접촉 후 힘 부족을 별도 수치로 기록하지 않았기 때문에 두 원인의 비율까지 주장하지 않습니다.
-
-실패를 분석하면서 다음 두 문제를 분리했습니다.
-
-<dl class="flow"><dt>위치 문제</dt><dd>2D 깊이 근사, 시작 자세, 백래시와 프레임 변형으로 End-effector가 버튼 중심에서 벗어났습니다.</dd><dt>힘의 문제</dt><dd>버튼에 접촉해도 모터 토크와 프레임 강성이 부족해 버튼 반력을 이기지 못했습니다.</dd></dl>
+이 수치는 로봇팔의 이동 완료가 아니라 버튼이 실제로 눌려 입력이 활성화된 결과입니다.
 
 ## 정지 진동을 완화하고 제어 주기를 분리하기
 
@@ -129,6 +123,6 @@ Vision Service는 엘리베이터 버튼의 검출 박스와 중심 위치를 �
 
 <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="ROOMIE 전체 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
 
-## 남은 한계
+## 확인한 한계
 
-버튼 위치까지 팔을 이동시키는 것과 실제 버튼을 누르는 것은 다른 문제였습니다. 2D 카메라의 거리 근사 오차와 로봇팔의 백래시가 위치 정확도를 낮췄고, 팔을 펼쳤을 때 부족해지는 토크와 프레임 변형 때문에 버튼에 닿아도 입력되지 않는 경우가 있었습니다. 관절 Encoder와 Force Sensor가 없어 어느 단계에서 실패했는지를 수치로 나눠 확인하지 못한 점도 한계로 남았습니다.
+<div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D 깊이 한계</strong><p>버튼까지의 거리를 직접 측정할 수 없었습니다.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>백래시·프레임 변형</strong><p>같은 명령각에서도 팔끝 위치가 달라졌습니다.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>토크 부족</strong><p>팔을 펼치면 버튼 반력을 이기기 어려웠습니다.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>센서 피드백 부재</strong><p>실제 관절각과 버튼 접촉력을 측정할 수 없었습니다.</p></div></div>

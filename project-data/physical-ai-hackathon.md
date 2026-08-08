@@ -48,9 +48,7 @@ demo:
 
 ACT(Action Chunking with Transformers)는 스탠퍼드 중심 공동 연구팀이 2023년 [ALOHA 연구](https://arxiv.org/abs/2304.13705)에서 제안한 모방학습 모델입니다. 카메라 영상과 로봇 관절 상태를 입력받아 다음 한 동작이 아닌 여러 미래 행동을 하나의 **action chunk**로 예측합니다.
 
-해커톤처럼 데이터와 학습 시간이 제한된 환경에서도 텔레오퍼레이션 시연으로 정밀한 동작을 빠르게 학습할 수 있고, 긴 작업에서 오차가 누적되는 문제를 줄일 수 있어 공 집기·전달·분류 미션에 적합하다고 판단했습니다.
-
-그림 왼쪽의 Encoder는 학습 중 시연 행동에서 잠재 변수 `z`를 만들고, 오른쪽의 실행 정책은 카메라 특징과 현재 관절 상태를 결합해 양팔의 행동 시퀀스를 생성합니다. 학습용 Encoder는 실제 추론 단계에서는 사용하지 않습니다.
+제한된 시간 안에 양팔의 연속 동작을 학습해야 했기 때문에, LeRobot에서 바로 적용할 수 있고 여러 미래 행동을 묶어 예측하는 ACT를 선택했습니다. 별도의 모델 비교 실험보다는 시연 데이터 수집과 태스크 구성 개선에 집중했습니다.
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure>
 

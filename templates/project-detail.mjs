@@ -73,7 +73,7 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
       </article>
     </div>
   </main>
-  <script src="../script.js?v=20260808-8"></script>
+  <script src="../script.js?v=20260808-9"></script>
 </body>
 </html>
 `;

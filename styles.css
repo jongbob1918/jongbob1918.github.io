@@ -175,6 +175,8 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 22px 0; }
 .media-grid .feature-media { min-width: 0; background: var(--soft); }
 .media-grid .feature-media img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #fff; }
+.pr-comparison .feature-media img { aspect-ratio: 6 / 5; }
+.pr-comparison figcaption { padding: 10px 12px; border-top: 1px solid var(--line); color: var(--muted); background: var(--paper); font-size: .72rem; font-weight: 650; letter-spacing: .01em; }
 .media-stack { display: grid; gap: 28px; margin: 24px 0; }
 .media-stack .feature-media { width: 100%; background: var(--soft); }
 .media-stack .feature-media img { width: 100%; max-height: none; object-fit: contain; background: #fff; }

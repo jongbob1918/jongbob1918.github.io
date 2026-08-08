@@ -56,11 +56,13 @@ demo:
 
 ## 모델 검증 — 정량 지표와 실제 영상 확인
 
+공개 데이터로 학습한 기존 Segmentation 모델과 실사·합성·Negative Sample을 결합한 Hybrid Detection 모델의 PR Curve를 나란히 비교했습니다. 기존 모델은 여러 클래스의 Recall이 낮은 구간에서 Precision이 빠르게 하락했지만, Hybrid 모델은 여섯 클래스 모두 우측 상단에 가까운 곡선을 유지했습니다.
+
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="공개 데이터로 학습한 기존 FALCON Segmentation 모델의 클래스별 PR Curve" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="실사와 합성 데이터를 결합한 FALCON Hybrid Detection 모델의 클래스별 PR Curve" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
+
 <div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
 
-<figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Hybrid Dataset으로 학습한 FALCON 지상 객체 탐지 모델의 클래스별 PR Curve" loading="lazy"></figure>
-
-저장소의 Ground Model v0.3 평가에서 위 수치를 기록했습니다. PR Curve에서는 여섯 클래스별 Precision–Recall 관계를 비교하고, 실제 공항 모형 영상에서는 여러 클래스가 동시에 등장할 때의 검출 결과를 확인했습니다.
+최종 Ground Model v0.3는 위 지표를 기록했고, 실제 공항 모형 영상에서도 여러 클래스가 동시에 등장하는 상황을 확인했습니다. 기존 모델의 집계 지표와 동일 평가 데이터 사용 여부는 저장소에 남아 있지 않아 숫자 개선율은 계산하지 않고 PR Curve의 형태만 비교 근거로 사용했습니다.
 
 ## 탐지와 추적 — 6개 클래스와 상태 후처리
 

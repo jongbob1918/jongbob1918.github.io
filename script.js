@@ -16,10 +16,11 @@ const profilePhoto = document.querySelector('.profile-photo');
 if (profilePhoto && !document.querySelector('.profile-social')) profilePhoto.insertAdjacentHTML('afterend', socialLinks);
 
 const isHomePage = Boolean(document.querySelector('[data-project-group]'));
+const isProjectDetail = document.body.dataset.page === 'project-detail';
 const urlParameters = new URLSearchParams(window.location.search);
 const utilityControls = `
   <span class="nav-utilities" aria-label="Display settings">
-    ${isHomePage ? '<button class="language-toggle" type="button" aria-label="한국어로 전환"><span data-language="en">EN</span><span data-language="ko">한</span></button>' : ''}
+    <button class="language-toggle" type="button" aria-label="한국어로 전환"><span data-language="en">EN</span><span data-language="ko">한</span></button>
     <button class="theme-toggle" type="button" aria-label="다크 모드로 전환">
       <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
       <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg>
@@ -37,7 +38,10 @@ document.documentElement.dataset.theme = initialTheme;
 const themeToggle = document.querySelector('.theme-toggle');
 const updateThemeButton = () => {
   const dark = document.documentElement.dataset.theme === 'dark';
-  if (themeToggle) themeToggle.setAttribute('aria-label', dark ? '라이트 모드로 전환' : '다크 모드로 전환');
+  const korean = document.documentElement.lang === 'ko';
+  if (themeToggle) themeToggle.setAttribute('aria-label', dark
+    ? (korean ? '라이트 모드로 전환' : 'Switch to light mode')
+    : (korean ? '다크 모드로 전환' : 'Switch to dark mode'));
 };
 updateThemeButton();
 themeToggle?.addEventListener('click', () => {
@@ -195,6 +199,22 @@ const applyLanguage = () => {
   });
   const languageToggle = document.querySelector('.language-toggle');
   if (languageToggle) languageToggle.setAttribute('aria-label', activeLanguage === 'en' ? '한국어로 전환' : 'Switch to English');
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (menuToggle) menuToggle.setAttribute('aria-label', activeLanguage === 'ko' ? '메뉴 열기' : 'Open menu');
+  document.querySelectorAll('[data-language-content]').forEach(element => {
+    element.hidden = element.dataset.languageContent !== activeLanguage;
+  });
+  if (isProjectDetail) {
+    const title = document.body.dataset[activeLanguage === 'ko' ? 'titleKo' : 'titleEn'];
+    const description = document.body.dataset[activeLanguage === 'ko' ? 'descriptionKo' : 'descriptionEn'];
+    if (title) document.title = title;
+    const descriptionMeta = document.querySelector('meta[name="description"]');
+    if (descriptionMeta && description) descriptionMeta.setAttribute('content', description);
+    const back = document.querySelector('.back');
+    const backLabel = back?.dataset[activeLanguage === 'ko' ? 'labelKo' : 'labelEn'];
+    if (back && backLabel) back.setAttribute('aria-label', backLabel);
+  }
+  updateThemeButton();
   renderProjects();
 };
 
@@ -236,8 +256,9 @@ if (progress) {
   const updateReadingState = () => {
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = `${scrollable > 0 ? Math.min(100, window.scrollY / scrollable * 100) : 0}%`;
-    let current = sections[0]?.id;
-    sections.forEach(section => { if (section.getBoundingClientRect().top <= 150) current = section.id; });
+    const visibleSections = sections.filter(section => !section.closest('[hidden]'));
+    let current = visibleSections[0]?.id;
+    visibleSections.forEach(section => { if (section.getBoundingClientRect().top <= 150) current = section.id; });
     tocLinks.forEach(link => link.classList.toggle('active', link.hash === `#${current}`));
   };
   updateReadingState();

@@ -5,13 +5,13 @@ const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 })[character]);
 
-const renderSections = sections => sections.map(section => `
-        <section class="case-section" id="${escapeHtml(section.id)}">
+const renderSections = (sections, language) => sections.map(section => `
+        <section class="case-section" id="${escapeHtml(`${language}-${section.id}`)}">
           <div class="case-heading"><h2>${escapeHtml(section.title)}</h2></div>
           ${section.body}
         </section>`).join('\n');
 
-const renderDemo = demo => {
+const renderDemo = (demo, language) => {
   if (!demo?.src) return '';
 
   const type = demo.type || 'image';
@@ -23,14 +23,14 @@ const renderDemo = demo => {
 
   if (type === 'video') {
     const poster = demo.poster ? ` poster="${escapeHtml(demo.poster)}"` : '';
-    media = `<video controls preload="metadata"${poster}><source src="${escapeHtml(demo.src)}">이 브라우저는 동영상 재생을 지원하지 않습니다.</video>`;
+    media = `<video controls preload="metadata"${poster}><source src="${escapeHtml(demo.src)}">${language === 'ko' ? '이 브라우저는 동영상 재생을 지원하지 않습니다.' : 'Your browser does not support video playback.'}</video>`;
   } else if (type === 'youtube') {
-    media = `<div class="video-embed"><iframe src="${escapeHtml(demo.src)}" title="${escapeHtml(demo.alt || '프로젝트 시연 영상')}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
+    media = `<div class="video-embed"><iframe src="${escapeHtml(demo.src)}" title="${escapeHtml(demo.title || demo.alt || (language === 'ko' ? '프로젝트 시연 영상' : 'Project demonstration video'))}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
   } else {
     media = `<img src="${escapeHtml(demo.src)}" alt="${escapeHtml(demo.alt || '')}"${sequenceAttribute}>`;
   }
 
-  return `<section class="demo-section" id="demo"><figure class="feature-media">${media}</figure></section>`;
+  return `<section class="demo-section" id="demo-${language}"><figure class="feature-media">${media}</figure></section>`;
 };
 
 const renderOverviewNote = note => {
@@ -38,7 +38,35 @@ const renderOverviewNote = note => {
   return `<div class="overview-note"><h3>${escapeHtml(note.title)}</h3>${note.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('')}</div>`;
 };
 
-export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) => `<!doctype html>
+const renderLocalizedProject = (project, sharedProject, language) => {
+  const teamLabel = language === 'ko' ? '팀' : 'Team';
+  const periodLabel = language === 'ko' ? '기간' : 'Period';
+  const roleLabel = language === 'ko' ? '담당' : 'Role';
+  const repositoryLabel = language === 'ko' ? `${sharedProject.shortName} GitHub 저장소 열기` : `Open the ${sharedProject.shortName} GitHub repository`;
+  const demo = project.demo ?? sharedProject.demo;
+  return `<div class="project-language" data-language-content="${language}"${language === 'en' ? ' hidden' : ''}>
+    <header class="project-header">
+      <h1>${escapeHtml(project.title)}</h1>
+      <div class="meta">${project.team ? `<span><strong>${teamLabel}:</strong> ${escapeHtml(project.team)}</span>` : ''}<span><strong>${periodLabel}:</strong> ${escapeHtml(project.period)}</span>${project.role ? `<span><strong>${roleLabel}:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
+      <p class="project-skills">${sharedProject.skills.map(escapeHtml).join(' · ')}</p>
+      <a class="project-repository" href="${escapeHtml(sharedProject.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(repositoryLabel)}">${githubIcon}</a>
+    </header>
+
+    <section class="project-overview" id="overview-${language}">
+      <h2>Overview</h2>
+      <p class="lead">${escapeHtml(project.overview)}</p>${renderOverviewNote(project.overviewNote)}
+    </section>
+
+    ${renderDemo(demo, language)}
+
+    <div class="case-layout">
+      <article class="case-study">${renderSections(project.sections, language)}
+      </article>
+    </div>
+  </div>`;
+};
+
+export const renderProjectDetail = (project, translations, sourceFile = `${project.slug}.md`) => `<!doctype html>
 <!-- Generated from project-data/${sourceFile} by templates/project-detail.mjs. -->
 <html lang="ko">
 <head>
@@ -50,34 +78,18 @@ export const renderProjectDetail = (project, sourceFile = `${project.slug}.md`) 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-27">
+  <link rel="stylesheet" href="../styles.css?v=20260809-1">
 </head>
-<body>
+<body data-page="project-detail" data-title-ko="${escapeHtml(translations.ko.title)} — Jongmyung Kim" data-title-en="${escapeHtml(translations.en.title)} — Jongmyung Kim" data-description-ko="${escapeHtml(translations.ko.description)}" data-description-en="${escapeHtml(translations.en.description)}">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#key-projects">Key Projects</a><a href="../index.html#side-projects">Side Projects</a><a href="../notes/">Blog</a><a href="../index.html#about">About</a><span class="disabled" title="이력서 PDF 추가 후 활성화">Resume</span></nav></div></header>
 
   <main class="wrap case-page">
-    <a class="back" href="../index.html#${project.group === 'key' ? 'key-projects' : 'side-projects'}" aria-label="프로젝트 목록으로 돌아가기">${backIcon}</a>
-    <header class="project-header">
-      <h1>${escapeHtml(project.title)}</h1>
-      <div class="meta">${project.team ? `<span><strong>팀:</strong> ${escapeHtml(project.team)}</span>` : ''}<span><strong>기간:</strong> ${escapeHtml(project.period)}</span>${project.role ? `<span><strong>담당:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
-      <p class="project-skills">${project.skills.map(escapeHtml).join(' · ')}</p>
-      <a class="project-repository" href="${escapeHtml(project.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(project.shortName)} GitHub 저장소 열기">${githubIcon}</a>
-    </header>
-
-    <section class="project-overview" id="overview">
-      <h2>Overview</h2>
-      <p class="lead">${escapeHtml(project.overview)}</p>${renderOverviewNote(project.overviewNote)}
-    </section>
-
-    ${renderDemo(project.demo)}
-
-    <div class="case-layout">
-      <article class="case-study">${renderSections(project.sections)}
-      </article>
-    </div>
+    <a class="back" href="../index.html#${project.group === 'key' ? 'key-projects' : 'side-projects'}" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list">${backIcon}</a>
+    ${renderLocalizedProject(translations.ko, project, 'ko')}
+    ${renderLocalizedProject(translations.en, project, 'en')}
   </main>
-  <script src="../script.js?v=20260808-10"></script>
+  <script src="../script.js?v=20260809-1"></script>
 </body>
 </html>
 `;

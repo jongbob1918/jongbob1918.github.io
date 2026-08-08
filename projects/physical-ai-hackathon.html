@@ -10,14 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-27">
+  <link rel="stylesheet" href="../styles.css?v=20260809-1">
 </head>
-<body>
+<body data-page="project-detail" data-title-ko="한성대×로보시지 제1회 Physical AI 해커톤 — Jongmyung Kim" data-title-en="PHYSICAL AI HACKATHON — Bimanual Imitation Learning — Jongmyung Kim" data-description-ko="ACT 모방학습으로 SO-101 양팔의 공 전달·색상 분류 미션에 도전한 해커톤 참가 기록" data-description-en="A hackathon project using ACT imitation learning for bimanual ball transfer and color sorting">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#key-projects">Key Projects</a><a href="../index.html#side-projects">Side Projects</a><a href="../notes/">Blog</a><a href="../index.html#about">About</a><span class="disabled" title="이력서 PDF 추가 후 활성화">Resume</span></nav></div></header>
 
   <main class="wrap case-page">
-    <a class="back" href="../index.html#side-projects" aria-label="프로젝트 목록으로 돌아가기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <a class="back" href="../index.html#side-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>한성대×로보시지 제1회 Physical AI 해커톤</h1>
       <div class="meta"><span><strong>팀:</strong> 4명</span><span><strong>기간:</strong> 2026.02</span></div>
@@ -25,34 +26,34 @@
       <a class="project-repository" href="https://github.com/TheMomentLab/physical_ai_hackathon" target="_blank" rel="noreferrer" aria-label="PHYSICAL AI GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
-    <section class="project-overview" id="overview">
+    <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
       <p class="lead">한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가했습니다. 120만 원대 SO-101 로봇팔 두 대와 2D 카메라를 사용해 색상 공을 집어 수납함에 분류하는 미션에 도전했습니다. LeRobot 라이브러리와 AI 모델을 사용하여 공 5개 중 3개 분류에 성공했습니다.</p>
     </section>
 
-    <section class="demo-section" id="demo"><figure class="feature-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 대의 SO-101 로봇팔이 색상 공을 전달하고 수납함에 분류하는 해커톤 시연"></figure></section>
+    <section class="demo-section" id="demo-ko"><figure class="feature-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 대의 SO-101 로봇팔이 색상 공을 전달하고 수납함에 분류하는 해커톤 시연"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="도전-과제-두-팔이-공을-건네-색상별로-분류하기">
+        <section class="case-section" id="ko-도전-과제-두-팔이-공을-건네-색상별로-분류하기">
           <div class="case-heading"><h2>도전 과제: 두 팔이 공을 건네 색상별로 분류하기</h2></div>
           <div class="role-grid"><div class="info-card"><strong>Pick & Place</strong><span>한쪽 팔로 바닥의 공 집기</span></div><div class="info-card"><strong>Transfer</strong><span>반대쪽 팔의 그리퍼로 전달</span></div><div class="info-card"><strong>Classification</strong><span>색상별 수납함에 넣기</span></div></div><figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/mission_top_view.jpg" alt="색상 공과 수납함, 두 대의 SO-101 로봇팔이 배치된 해커톤 미션 상단 모습" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="모델-선택">
+        <section class="case-section" id="ko-모델-선택">
           <div class="case-heading"><h2>모델 선택</h2></div>
           <p>제한된 시간 안에 구현과 테스트를 마치기 위해 LeRobot에서 지원하는 ACT를 사용했습니다. ACT는 카메라 영상과 관절 상태를 바탕으로 여러 동작을 한 번에 예측해 집기·전달·분류 같은 연속 동작을 제어합니다.</p>
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure><figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="리더 로봇팔을 조작해 두 대의 SO-101 팔의 시연 데이터를 기록하는 텔레오퍼레이션 모습" loading="lazy"><figcaption>텔레오퍼레이션 · 사람이 리더 팔을 움직이며 카메라 영상, 관절 상태와 행동을 에피소드로 기록</figcaption></figure>
         </section>
 
-        <section class="case-section" id="1차-시도-다섯-개의-공을-한-번에-학습시키기">
+        <section class="case-section" id="ko-1차-시도-다섯-개의-공을-한-번에-학습시키기">
           <div class="case-heading"><h2>1차 시도: 다섯 개의 공을 한 번에 학습시키기</h2></div>
           <p>처음에는 실제 심사 순서와 동일하게 파란 공 2개, 빨간 공 2개, 노란 공 1개를 연속으로 집어 전달하고 분류하는 전체 과정을 하나의 에피소드로 기록했습니다. 이 방식으로 약 200개의 시연 데이터를 수집해 첫 학습을 진행했습니다.</p>
 <p>그러나 1차 테스트에서는 로봇이 동작 중 갑자기 멈추거나, 공과 그리퍼의 위치가 조금만 달라져도 집기 정확도가 크게 떨어졌습니다. 하나의 긴 에피소드 안에 공의 위치, 색상, 순서와 양팔 전달 단계가 모두 섞이면서 각 단계에 필요한 시연 밀도가 부족했고, 앞 단계의 작은 오차가 뒤 동작까지 누적됐습니다.</p>
 <dl class="flow"><dt>데이터</dt><dd>파랑 → 파랑 → 빨강 → 빨강 → 노랑의 다섯 공 전체 과정을 약 200개 에피소드로 기록</dd><dt>학습 단위</dt><dd>집기·전달·색상 분류를 하나의 긴 행동 시퀀스로 모방</dd><dt>관찰 결과</dt><dd>중간 정지와 불안정한 집기가 발생하고, 공 위치 변화에 대한 정확도가 기대에 미치지 못함</dd></dl>
         </section>
 
-        <section class="case-section" id="2차-시도-태스크를-나누고-실패까지-데이터로-만들기">
+        <section class="case-section" id="ko-2차-시도-태스크를-나누고-실패까지-데이터로-만들기">
           <div class="case-heading"><h2>2차 시도: 태스크를 나누고 실패까지 데이터로 만들기</h2></div>
           <p>추가 기술 조사를 거쳐 다섯 공을 한 번에 학습시키는 대신, <strong>공 하나를 집어 색상에 맞는 수납함에 넣는 태스크</strong>로 시연을 나눴습니다. 색상별 단일 태스크를 반복하면 모델이 한 번의 성공 동작을 더 조밀하게 관찰할 수 있고, 긴 시퀀스에서 발생하던 오차 누적도 줄일 수 있다고 판단했습니다.</p>
 <p>또한 사용한 카메라는 2D 영상만 제공하므로, 화면 속 위치가 같아 보여도 실제 깊이와 크기 차이로 스케일 왜곡이 생길 수밖에 없었습니다. 정면으로만 접근하는 동일한 궤적 대신 그리퍼가 공을 <strong>대각선 방향으로 진입하도록</strong> 시연 각도를 다양화해 위치 오차에 대한 대응 범위를 넓혔습니다.</p>
@@ -60,27 +61,92 @@
 <div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">공 하나·색상별 수납함 단위로 분리</span></div><div class="metric-card"><span class="metric-value">≈ 1,000</span><span class="metric-label">공 5개 × 각 200회 시연</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">심사 시점 Training Steps</span></div></div>
         </section>
 
-        <section class="case-section" id="심사-결과-5개-중-3개-성공">
+        <section class="case-section" id="ko-심사-결과-5개-중-3개-성공">
           <div class="case-heading"><h2>심사 결과: 5개 중 3개 성공</h2></div>
           <p>최종적으로 공 5개를 각각 200회씩 기록해 약 1,000개의 단일 태스크 시연 데이터를 확보했습니다. 마감이 오전 9시였기 때문에 학습을 더 이어가지 못하고, 당시 15,000 step까지 학습된 체크포인트로 심사를 진행했습니다.</p>
 <p>로봇은 다섯 개의 공 가운데 세 개를 집어 전달하고 색상별 수납함에 넣는 데 성공했습니다. 네 번째 공을 처리하는 과정에서 오른팔이 수납함을 넘어뜨렸고, 환경이 흐트러져 남은 시연은 더 이상 진행할 수 없었습니다. 완주에는 실패했지만, 데이터 전략을 바꾼 뒤 실제 심사 환경에서 세 번의 연속 성공을 확인했습니다.</p>
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"><figcaption>실제 양팔 조작 · 공 집기, 그리퍼 간 전달, 색상별 수납함 분류</figcaption></figure>
         </section>
 
-        <section class="case-section" id="회고-모방을-넘어-판단할-수-있는-구조가-필요했다">
+        <section class="case-section" id="ko-회고-모방을-넘어-판단할-수-있는-구조가-필요했다">
           <div class="case-heading"><h2>회고: 모방을 넘어 판단할 수 있는 구조가 필요했다</h2></div>
           <p>ACT는 짧은 시간 안에 정밀한 양팔 동작을 학습시키는 데 효과적이었지만, 이번 미션에서는 모방학습만으로 해결하기 어려운 한계도 확인했습니다. 정책은 카메라 영상과 현재 관절 상태로 다음 행동을 생성하지만, “현재 몇 번째 공인지”, “어느 색을 다음에 처리해야 하는지”, “수납함이 넘어졌는지”와 같은 명시적인 작업 상태나 목표를 스스로 결정하는 구조는 아니었습니다. 따라서 정해진 순서를 데이터에서 암묵적으로 모방할 뿐, 상황에 따라 다음 행동을 결정론적으로 선택하거나 작업 계획을 다시 세우는 데는 취약했습니다.</p>
 <p>다시 설계한다면 ACT를 저수준 양팔 조작 정책으로 사용하되, 색상 인식과 공 개수·작업 진행 상태를 관리하는 상위 상태 머신을 분리하겠습니다. 여기에 수납함 전도나 집기 실패를 감지하는 조건을 추가해, 필요한 단일 태스크 정책을 선택하고 실패 시 복구 동작으로 전환하도록 구성할 수 있습니다. 이번 경험을 통해 모델 선택만큼이나 <strong>태스크를 어떻게 나누고, 실패 상태까지 어떤 데이터로 보여주는가</strong>가 실제 로봇의 강건성을 좌우한다는 점을 배웠습니다.</p>
 
         </section>
 
-        <section class="case-section" id="함께한-팀">
+        <section class="case-section" id="ko-함께한-팀">
           <div class="case-heading"><h2>함께한 팀</h2></div>
           <figure class="feature-media hackathon-team-media"><img src="https://github.com/TheMomentLab/.github/blob/main/1770642885261.jpg?raw=true" alt="한성대×로보시지 제1회 Physical AI 해커톤에 참가한 4인 팀 단체 사진" loading="lazy"></figure>
         </section>
       </article>
     </div>
+  </div>
+    <div class="project-language" data-language-content="en" hidden>
+    <header class="project-header">
+      <h1>PHYSICAL AI HACKATHON — Bimanual Imitation Learning</h1>
+      <div class="meta"><span><strong>Team:</strong> 4 members</span><span><strong>Period:</strong> Feb 2026</span></div>
+      <p class="project-skills">LeRobot · ACT · Imitation Learning · Bimanual Manipulation · SO-101</p>
+      <a class="project-repository" href="https://github.com/TheMomentLab/physical_ai_hackathon" target="_blank" rel="noreferrer" aria-label="Open the PHYSICAL AI GitHub repository"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+    </header>
+
+    <section class="project-overview" id="overview-en">
+      <h2>Overview</h2>
+      <p class="lead">I joined a four-person team at the first Physical AI Hackathon hosted by Hansung University and ROBOSIZE. Using two SO-101 arms, each costing roughly KRW 1.2 million, and 2D cameras, we trained the robots to pick up colored balls, transfer them between grippers, and sort them into bins. The LeRobot-based system successfully sorted three of five balls during judging.</p>
+    </section>
+
+    <section class="demo-section" id="demo-en"><figure class="feature-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms transferring colored balls and sorting them into bins"></figure></section>
+
+    <div class="case-layout">
+      <article class="case-study">
+        <section class="case-section" id="en-challenge-transfer-and-sort-balls-with-two-arms">
+          <div class="case-heading"><h2>Challenge: transfer and sort balls with two arms</h2></div>
+          <div class="role-grid"><div class="info-card"><strong>Pick & Place</strong><span>Pick a ball from the floor with one arm</span></div><div class="info-card"><strong>Transfer</strong><span>Pass it to the opposite gripper</span></div><div class="info-card"><strong>Classification</strong><span>Place it in the color-matched bin</span></div></div><figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/mission_top_view.jpg" alt="Top view of the hackathon setup with colored balls, bins, and two SO-101 arms" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-model-selection">
+          <div class="case-heading"><h2>Model selection</h2></div>
+          <p>We chose ACT, supported by LeRobot, to finish implementation and testing within the limited event time. ACT predicts a chunk of actions from camera images and joint states, enabling continuous pick, transfer, and sorting motion.</p>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="ACT Transformer with a CVAE-style latent encoder and action-sequence output from cameras and joint state" loading="lazy"></figure><figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="Teleoperation setup recording demonstrations for two SO-101 arms" loading="lazy"><figcaption>Teleoperation · A human moves the leader arms while camera images, joint states, and actions are recorded as episodes</figcaption></figure>
+        </section>
+
+        <section class="case-section" id="en-first-attempt-learn-all-five-balls-in-one-sequence">
+          <div class="case-heading"><h2>First attempt: learn all five balls in one sequence</h2></div>
+          <p>Our first dataset copied the judging order: two blue balls, two red balls, and one yellow ball were picked, transferred, and sorted in a single episode. We recorded about 200 demonstrations and trained the first policy.</p>
+<p>In initial tests, the robot sometimes stopped mid-motion, and small changes in ball or gripper position sharply reduced grasp accuracy. Position, color, ordering, and the bimanual handoff were mixed into one long episode, leaving too few examples for each stage and allowing early errors to accumulate.</p>
+<dl class="flow"><dt>Data</dt><dd>About 200 episodes covering blue → blue → red → red → yellow</dd><dt>Training unit</dt><dd>Imitate grasping, transfer, and color sorting as one long action sequence</dd><dt>Observation</dt><dd>Mid-sequence stops, unstable grasps, and weak tolerance to ball-position changes</dd></dl>
+        </section>
+
+        <section class="case-section" id="en-second-attempt-split-tasks-and-include-recovery-data">
+          <div class="case-heading"><h2>Second attempt: split tasks and include recovery data</h2></div>
+          <p>After additional research, we replaced the five-ball sequence with a single-ball task: pick one ball and place it in the matching bin. Repeating each color-specific task gave the model denser examples of a successful action and reduced error accumulation.</p>
+<p>Because the cameras only provided 2D images, similar image positions could still represent different depths and scales. We varied the demonstrations so the gripper approached diagonally instead of always following one frontal trajectory.</p>
+<p>We also recorded recovery rather than only successful trajectories. During teleoperation, we intentionally missed a ball and then approached it again, adding the states and actions needed to continue after slippage or a displaced target.</p>
+<div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">One ball and one color-matched bin</span></div><div class="metric-card"><span class="metric-value">≈ 1,000</span><span class="metric-label">5 balls × 200 demonstrations</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">Training steps at judging</span></div></div>
+        </section>
+
+        <section class="case-section" id="en-judging-result-three-of-five-balls">
+          <div class="case-heading"><h2>Judging result: three of five balls</h2></div>
+          <p>We ultimately recorded about 1,000 single-task demonstrations, 200 for each of five balls. The 9 a.m. deadline prevented further training, so judging used the checkpoint at 15,000 steps.</p>
+<p>The robots successfully picked, transferred, and sorted three balls. While processing the fourth, the right arm knocked over a bin and disrupted the environment, ending the run. Although the full sequence was not completed, the revised data strategy produced three consecutive successes in the judging setup.</p>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"><figcaption>Physical bimanual manipulation · grasp, gripper-to-gripper transfer, and color sorting</figcaption></figure>
+        </section>
+
+        <section class="case-section" id="en-reflection-the-system-needed-decisions-beyond-imitation">
+          <div class="case-heading"><h2>Reflection: the system needed decisions beyond imitation</h2></div>
+          <p>ACT learned precise bimanual motion quickly, but the mission exposed limits of imitation learning alone. The policy generated actions from camera images and joint state, but did not explicitly represent which ball was current, which color should come next, or whether a bin had fallen. It imitated the sequence embedded in the data and was weak at deterministic replanning when conditions changed.</p>
+<p>In a redesign, I would use ACT as the low-level manipulation policy and add a high-level state machine for color recognition, ball count, and task progress. Conditions for a fallen bin or failed grasp could select the required single-task policy or trigger recovery. The project showed that task decomposition and failure-state demonstrations matter as much as model choice for real-robot robustness.</p>
+
+        </section>
+
+        <section class="case-section" id="en-team">
+          <div class="case-heading"><h2>Team</h2></div>
+          <figure class="feature-media hackathon-team-media"><img src="https://github.com/TheMomentLab/.github/blob/main/1770642885261.jpg?raw=true" alt="Four-person team at the first Hansung University and ROBOSIZE Physical AI Hackathon" loading="lazy"></figure>
+        </section>
+      </article>
+    </div>
+  </div>
   </main>
-  <script src="../script.js?v=20260808-10"></script>
+  <script src="../script.js?v=20260809-1"></script>
 </body>
 </html>

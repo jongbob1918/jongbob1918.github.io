@@ -7,6 +7,7 @@ import { renderProjectDetail } from '../templates/project-detail.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const dataDirectory = join(root, 'project-data');
+const englishDataDirectory = join(dataDirectory, 'en');
 const outputDirectory = join(root, 'projects');
 const catalogPath = join(root, 'projects.json');
 
@@ -42,6 +43,7 @@ const parseSections = markdown => {
 };
 
 const requiredFields = ['slug', 'shortName', 'group', 'title', 'description', 'period', 'skills', 'repository', 'overview'];
+const requiredTranslationFields = ['slug', 'title', 'description', 'period', 'overview'];
 
 const validateProject = (project, file) => {
   const missing = requiredFields.filter(field => project[field] === undefined || project[field] === null || project[field] === '');
@@ -56,6 +58,12 @@ const validateProject = (project, file) => {
   if (project.card.sequence && !Array.isArray(project.card.sequence)) throw new Error(`${file}: card.sequence must be a YAML list`);
 };
 
+const validateTranslation = (translation, file, project) => {
+  const missing = requiredTranslationFields.filter(field => translation[field] === undefined || translation[field] === null || translation[field] === '');
+  if (missing.length) throw new Error(`${file}: missing required fields: ${missing.join(', ')}`);
+  if (translation.slug !== project.slug) throw new Error(`${file}: slug must match ${project.slug}`);
+};
+
 const catalog = [];
 
 for (const file of files) {
@@ -63,7 +71,13 @@ for (const file of files) {
   const { data, content } = matter(source);
   const project = { ...data, sections: parseSections(content) };
   validateProject(project, file);
-  const html = renderProjectDetail(project, file);
+  const englishFile = `${project.slug}.md`;
+  const englishSource = await readFile(join(englishDataDirectory, englishFile), 'utf8');
+  const { data: englishData, content: englishContent } = matter(englishSource);
+  const englishProject = { ...englishData, sections: parseSections(englishContent) };
+  validateTranslation(englishProject, `en/${englishFile}`, project);
+  const translations = { ko: project, en: englishProject };
+  const html = renderProjectDetail(project, translations, file);
   await writeFile(join(outputDirectory, `${project.slug}.html`), html, 'utf8');
   catalog.push({
     slug: project.slug,

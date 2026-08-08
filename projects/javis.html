@@ -10,14 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-27">
+  <link rel="stylesheet" href="../styles.css?v=20260809-1">
 </head>
-<body>
+<body data-page="project-detail" data-title-ko="JAVIS — 도서관 관리 로봇 — Jongmyung Kim" data-title-en="JAVIS — Library Management Robot — Jongmyung Kim" data-description-ko="자율주행, 로봇팔과 비전 AI를 통합한 ROS 2 기반 도서관 관리 로봇" data-description-en="A ROS 2 library robot integrating autonomous navigation, manipulation, and vision AI">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#key-projects">Key Projects</a><a href="../index.html#side-projects">Side Projects</a><a href="../notes/">Blog</a><a href="../index.html#about">About</a><span class="disabled" title="이력서 PDF 추가 후 활성화">Resume</span></nav></div></header>
 
   <main class="wrap case-page">
-    <a class="back" href="../index.html#key-projects" aria-label="프로젝트 목록으로 돌아가기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <a class="back" href="../index.html#key-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>JAVIS — 도서관 관리 로봇</h1>
       <div class="meta"><span><strong>팀:</strong> 9명</span><span><strong>기간:</strong> 2024.09–11</span><span><strong>담당:</strong> 자율주행 안정화 · 로봇 상태 및 임무 제어</span></div>
@@ -25,22 +26,22 @@
       <a class="project-repository" href="https://github.com/jongbob1918/JAVIS" target="_blank" rel="noreferrer" aria-label="JAVIS GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
-    <section class="project-overview" id="overview">
+    <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
       <p class="lead">도서관에서는 도서 픽업·반납과 길 안내 같은 반복 업무에 지속적인 인력이 필요합니다. 이를 자동화하기 위해 VIC-PINKY 모바일 로봇과 myCobot 매니퓰레이터, 비전 AI를 ROS 2로 연결한 도서관 관리 로봇 JAVIS를 개발했습니다. VIC-PINKY는 목표 책장까지 자율주행하고, myCobot은 카메라로 인식한 도서를 픽업·반납합니다.</p>
     </section>
 
-    <section class="demo-section" id="demo"><figure class="feature-media"><img src="../assets/images/javis_robot_drive.gif" alt="실제 도서관 환경을 주행하는 JAVIS" data-media-sequence="[{&quot;src&quot;:&quot;../assets/images/javis_robot_drive.gif&quot;,&quot;alt&quot;:&quot;실제 도서관 환경을 주행하는 JAVIS&quot;,&quot;duration&quot;:28000},{&quot;src&quot;:&quot;../assets/images/javis_nav_rviz.gif&quot;,&quot;alt&quot;:&quot;RViz에서 협소한 서가 사이를 주행하는 JAVIS&quot;,&quot;duration&quot;:7510}]"></figure></section>
+    <section class="demo-section" id="demo-ko"><figure class="feature-media"><img src="../assets/images/javis_robot_drive.gif" alt="실제 도서관 환경을 주행하는 JAVIS" data-media-sequence="[{&quot;src&quot;:&quot;../assets/images/javis_robot_drive.gif&quot;,&quot;alt&quot;:&quot;실제 도서관 환경을 주행하는 JAVIS&quot;,&quot;duration&quot;:28000},{&quot;src&quot;:&quot;../assets/images/javis_nav_rviz.gif&quot;,&quot;alt&quot;:&quot;RViz에서 협소한 서가 사이를 주행하는 JAVIS&quot;,&quot;duration&quot;:7510}]"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="도서-픽업-서비스">
+        <section class="case-section" id="ko-도서-픽업-서비스">
           <div class="case-heading"><h2>도서 픽업 서비스</h2></div>
           <p>사용자가 도서를 요청하면 중앙 시스템이 로봇의 상태와 배터리를 확인해 작업을 할당합니다. JAVIS는 목표 책장으로 이동하고, 카메라로 도서를 인식한 뒤 로봇팔로 픽업합니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="도서 선택부터 인증, JAVIS 작업과 도서 수령까지의 서비스 흐름" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="픽업-반납-자율주행">
+        <section class="case-section" id="ko-픽업-반납-자율주행">
           <div class="case-heading"><h2>픽업·반납 자율주행</h2></div>
           <p>JAVIS가 도서를 픽업하고 반납하려면 폭이 좁은 서가 사이를 지나 지정된 책장 앞까지 이동해야 했습니다. Cartographer와 2D LiDAR로 도서관의 점유격자 지도를 생성한 뒤, 편집 도구로 불필요한 영역과 벽면을 정리했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="서가 벽면과 통로, 지정 위치와 로봇 위치가 표시된 도서관 점유격자 지도" loading="lazy"><figcaption>Cartographer로 생성한 도서관의 2D 점유격자 지도</figcaption></figure><p>초기에는 Nav2의 DWB Controller로 경로를 추종했습니다. 넓은 구간에서는 이동할 수 있었지만, 좁은 복도와 전방이 막힌 구간에서는 회전 궤적을 찾지 못하고 정지하는 문제가 반복됐습니다. Costmap의 Inflation 영역을 넓히면 서가 사이를 통과할 수 없는 공간으로 판단했고, 반대로 좁히면 로봇이 벽에 지나치게 가까워졌습니다.</p>
@@ -49,19 +50,19 @@
 
         </section>
 
-        <section class="case-section" id="로봇-상태-및-임무-제어">
+        <section class="case-section" id="ko-로봇-상태-및-임무-제어">
           <div class="case-heading"><h2>로봇 상태 및 임무 제어</h2></div>
           <p>로봇의 초기화, 충전, 작업 대기, 작업 수행과 충전소 이동을 상위 State로 구분했습니다. 각 임무 단계에서는 하위 모듈의 완료·실패·취소 응답을 확인해 다음 상태를 결정하고, 배터리 조건이나 긴급 정지 요청이 발생하면 현재 임무에서 복구 또는 안전 상태로 전환하도록 구성했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 초기화, 충전, 대기, 작업, 복귀와 긴급 정지 상태 전이도" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="로봇-상태-모니터링">
+        <section class="case-section" id="ko-로봇-상태-모니터링">
           <div class="case-heading"><h2>로봇 상태 모니터링</h2></div>
           <p>실물 로봇 통합 테스트 중 현재 State, 세부 임무, 배터리와 ROS 로그를 한 화면에서 확인하는 모니터링 GUI를 개발했습니다. 임무가 멈춘 단계와 모듈별 완료·실패 응답을 추적해 State Machine의 전이, 예외 처리와 통합 로직을 검증하는 데 사용했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="JAVIS의 메인 상태, 세부 임무, 배터리와 ROS 로그를 확인하는 모니터링 GUI" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="상태-전이-및-예외-처리-테스트">
+        <section class="case-section" id="ko-상태-전이-및-예외-처리-테스트">
           <div class="case-heading"><h2>상태 전이 및 예외 처리 테스트</h2></div>
           <p>AI, 주행과 로봇팔 모듈이 모두 준비될 때까지 기다리지 않고 통합 개발을 진행할 수 있도록 공통 인터페이스를 정의했습니다. 실제 모듈과 Mock 모듈이 같은 명령과 응답 구조를 사용하므로 메인 컨트롤러를 변경하지 않고 실행 대상을 교체할 수 있습니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="실제 모듈과 Mock 모듈을 분리한 JAVIS 인터페이스 구조" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="Mock 응답을 조작해 JAVIS 제어 흐름을 시험하는 GUI" loading="lazy"></figure></div><p>Mock의 응답을 통해 정상 완료뿐 아니라 실행 실패와 작업 취소 상황을 재현했습니다. 이를 통해 실제 장비를 연결하기 전에 State Machine의 전이, 예외 처리와 하위 모듈 호출 순서를 반복적으로 확인했습니다.</p>
@@ -69,7 +70,61 @@
         </section>
       </article>
     </div>
+  </div>
+    <div class="project-language" data-language-content="en" hidden>
+    <header class="project-header">
+      <h1>JAVIS — Library Management Robot</h1>
+      <div class="meta"><span><strong>Team:</strong> 9 members</span><span><strong>Period:</strong> Sep–Nov 2024</span><span><strong>Role:</strong> Navigation stabilization · Robot state and mission control</span></div>
+      <p class="project-skills">ROS 2 · Python · Nav2 · 2D LiDAR SLAM · Path Planning · State Machine</p>
+      <a class="project-repository" href="https://github.com/jongbob1918/JAVIS" target="_blank" rel="noreferrer" aria-label="Open the JAVIS GitHub repository"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+    </header>
+
+    <section class="project-overview" id="overview-en">
+      <h2>Overview</h2>
+      <p class="lead">Libraries require continuous staff time for repetitive work such as book pickup, returns, and visitor guidance. JAVIS connects a VIC-PINKY mobile base, a myCobot manipulator, and vision AI through ROS 2 to automate these tasks. The mobile base navigates to the target shelf, and the manipulator identifies, picks up, and returns books with its camera.</p>
+    </section>
+
+    <section class="demo-section" id="demo-en"><figure class="feature-media"><img src="../assets/images/javis_robot_drive.gif" alt="JAVIS navigating in a real library" data-media-sequence="[{&quot;src&quot;:&quot;../assets/images/javis_robot_drive.gif&quot;,&quot;alt&quot;:&quot;JAVIS navigating in a real library&quot;,&quot;duration&quot;:28000},{&quot;src&quot;:&quot;../assets/images/javis_nav_rviz.gif&quot;,&quot;alt&quot;:&quot;JAVIS navigating a narrow aisle in RViz&quot;,&quot;duration&quot;:7510}]"></figure></section>
+
+    <div class="case-layout">
+      <article class="case-study">
+        <section class="case-section" id="en-book-pickup-service">
+          <div class="case-heading"><h2>Book pickup service</h2></div>
+          <p>When a user requests a book, the central system checks the robot&#39;s status and battery level before assigning the task. JAVIS travels to the target shelf, identifies the book with a camera, and picks it up with the manipulator.</p>
+<figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="Service flow from book selection and authentication to JAVIS pickup and delivery" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-autonomous-navigation-for-pickup-and-return">
+          <div class="case-heading"><h2>Autonomous navigation for pickup and return</h2></div>
+          <p>JAVIS must pass through narrow aisles and stop at a designated shelf to pick up or return a book. We created an occupancy-grid map with Cartographer and a 2D LiDAR, then removed unnecessary regions and corrected shelf boundaries with a map editor.</p>
+<figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="Library occupancy map showing shelves, aisles, waypoints, and the robot position" loading="lazy"><figcaption>2D library occupancy map generated with Cartographer</figcaption></figure><p>The first configuration used Nav2&#39;s DWB Controller. It worked in open areas, but repeatedly stopped when it could not find a feasible turning trajectory in narrow or blocked spaces. Increasing costmap inflation made aisles appear impassable, while reducing it brought the robot too close to shelves.</p>
+<figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="Early DWB navigation test in which JAVIS cannot turn in a narrow space" loading="lazy"><figcaption>Early DWB test failing to turn in a narrow aisle</figcaption></figure><p>I replaced the global planner with Smac Planner Hybrid, which accounts for the rectangular footprint, turning radius, and reverse paths. I tuned the LiDAR filters and inflation values to the physical robot and applied the MPPI Controller to evaluate multiple candidate trajectories.</p>
+<figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="JAVIS following a narrow-aisle route with Smac Planner Hybrid and MPPI in RViz" loading="lazy"><figcaption>Navigating a narrow aisle after applying Smac Planner Hybrid and MPPI</figcaption></figure><p>Tests in the real library confirmed that JAVIS could pass narrow shelves and low-clearance turning areas to reach its pickup and return positions.</p>
+
+        </section>
+
+        <section class="case-section" id="en-robot-state-and-mission-control">
+          <div class="case-heading"><h2>Robot state and mission control</h2></div>
+          <p>I divided the top-level behavior into initialization, charging, idle, task execution, and return-to-charger states. Each mission step checks completion, failure, and cancellation responses from lower-level modules. Battery conditions or an emergency-stop request move the system from the active mission into a recovery or safe state.</p>
+<figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS state transitions for initialization, charging, idle, tasks, return, and emergency stop" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-robot-status-monitoring">
+          <div class="case-heading"><h2>Robot status monitoring</h2></div>
+          <p>During hardware integration, I developed a monitoring GUI that displays the current state, subtask, battery level, and ROS logs in one view. It helped identify the exact step where a mission stopped and trace module completion or failure responses while validating state transitions and exception handling.</p>
+<figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="Monitoring GUI displaying JAVIS state, subtask, battery, and ROS logs" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-state-transition-and-exception-tests">
+          <div class="case-heading"><h2>State-transition and exception tests</h2></div>
+          <p>We defined a shared interface so integration could continue without waiting for every AI, navigation, and manipulation module. Real and mock modules use the same command and response structure, allowing the main controller to switch implementations without code changes.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="JAVIS interface architecture separating real and mock modules" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="GUI for testing JAVIS control flow with configurable mock responses" loading="lazy"></figure></div><p>Mock responses reproduced successful completion, execution failure, and cancellation. This allowed repeated validation of state transitions, exception handling, and lower-level call order before connecting the physical equipment.</p>
+
+        </section>
+      </article>
+    </div>
+  </div>
   </main>
-  <script src="../script.js?v=20260808-10"></script>
+  <script src="../script.js?v=20260809-1"></script>
 </body>
 </html>

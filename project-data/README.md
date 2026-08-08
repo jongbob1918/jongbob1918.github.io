@@ -1,6 +1,6 @@
 # Project detail content
 
-프로젝트 상세페이지는 `project-data/*.md`에서 자동 생성합니다. 새 프로젝트는 `project-data/templates/project-template.md`를 복사해서 작성합니다.
+프로젝트 상세페이지는 한국어 `project-data/*.md`와 영어 `project-data/en/*.md`를 한 페이지로 합쳐 자동 생성합니다. 새 프로젝트는 `project-data/templates/project-template.md`와 `project-data/templates/project-template-en.md`를 함께 복사해서 작성합니다.
 
 - 제목, 팀, 기간, 기술, 저장소와 대표 미디어: Markdown 상단의 YAML 영역
 - 홈페이지 프로젝트 카드: YAML의 `card`
@@ -9,6 +9,9 @@
 - 섹션 안의 소제목: Markdown의 `### 원하는 소제목`
 - 공통 레이아웃과 미디어 출력: `templates/project-detail.mjs`
 - 공통 폰트, 너비, 색상, 간격과 반응형 스타일: `styles.css`의 `Case study` 영역
+- 공통 한·영 전환과 다크모드: `script.js`의 표시 설정 영역
+
+한국어 파일은 프로젝트의 공통 설정(`slug`, `group`, `skills`, `repository`, `card`)도 함께 관리합니다. 영어 파일은 동일한 `slug`와 영어 `title`, `description`, `period`, `overview`, 본문 섹션을 작성합니다. 빌드 시 두 언어 중 하나라도 없으면 오류로 처리합니다.
 
 `Technical Details`, `System`, `Hardware`, `Troubleshooting` 같은 고정 섹션 이름은 없습니다. `##` 제목을 추가·삭제하거나 순서를 바꾸면 생성된 상세페이지에도 그대로 반영됩니다.
 

@@ -10,14 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-27">
+  <link rel="stylesheet" href="../styles.css?v=20260809-1">
 </head>
-<body>
+<body data-page="project-detail" data-title-ko="ELEVATOR MCU — 호출 우선순위 LED 제어기 — Jongmyung Kim" data-title-en="ELEVATOR MCU — Direction-Aware LED Controller — Jongmyung Kim" data-description-ko="큐 기반 초기 설계의 한계를 방향·상태 기반 탐색으로 개선한 Arduino 원데이 프로젝트" data-description-en="A one-day Arduino project replacing a queue-first design with direction- and state-based request scanning">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#key-projects">Key Projects</a><a href="../index.html#side-projects">Side Projects</a><a href="../notes/">Blog</a><a href="../index.html#about">About</a><span class="disabled" title="이력서 PDF 추가 후 활성화">Resume</span></nav></div></header>
 
   <main class="wrap case-page">
-    <a class="back" href="../index.html#side-projects" aria-label="프로젝트 목록으로 돌아가기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <a class="back" href="../index.html#side-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>ELEVATOR MCU — 호출 우선순위 LED 제어기</h1>
       <div class="meta"><span><strong>팀:</strong> 1명</span><span><strong>기간:</strong> 2025.07.06</span></div>
@@ -25,23 +26,23 @@
       <a class="project-repository" href="https://github.com/jongbob1918/elevator-mcu" target="_blank" rel="noreferrer" aria-label="ELEVATOR MCU GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
-    <section class="project-overview" id="overview">
+    <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
       <p class="lead">4개 버튼과 14개 LED로 엘리베이터의 호출·이동·대기 규칙을 재현한 1인 원데이 프로젝트입니다. 처음에는 호출 순서를 큐에 저장하려 했지만, 이동 중 호출과 취소가 들어오면 중간 삽입과 우선순위 변경이 복잡해졌습니다. 호출 순서를 저장하는 대신 각 층의 호출 상태를 유지하고, 마지막 진행 방향에 따라 목적층을 매 루프 다시 탐색하는 구조로 변경했습니다. 실제 모터 제어가 아니라 Arduino와 Tinkercad에서 스케줄링 로직을 검증한 프로젝트입니다.</p>
     </section>
 
-    <section class="demo-section" id="demo"><figure class="feature-media"><img src="../assets/images/elevator-mcu-demo.gif" alt="Tinkercad에서 실행한 LED 엘리베이터 호출 및 이동 테스트"></figure></section>
+    <section class="demo-section" id="demo-ko"><figure class="feature-media"><img src="../assets/images/elevator-mcu-demo.gif" alt="Tinkercad에서 실행한 LED 엘리베이터 호출 및 이동 테스트"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="요구사항을-led-기반-제어-규칙으로-바꾸기">
+        <section class="case-section" id="ko-요구사항을-led-기반-제어-규칙으로-바꾸기">
           <div class="case-heading"><h2>요구사항을 LED 기반 제어 규칙으로 바꾸기</h2></div>
           <p>발표자료에서 정리한 요구사항은 최소 3층 이상의 엘리베이터, 현재 층을 나타내는 RED LED, 층 사이 이동을 나타내는 YELLOW LED, 층별 호출 버튼과 호출 상태를 나타내는 GREEN LED였습니다. 구현에서는 4층 구조를 선택했습니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-requirements.webp" alt="엘리베이터 층수, 층 표시, 층간 표시와 호출 버튼에 관한 프로젝트 요구사항" loading="lazy"><figcaption>발표자료에 정의한 사용자 요구사항과 표시·이동·호출 기능</figcaption></figure></div><div class="role-grid"><div class="info-card"><strong>현재 층</strong><span>RED LED 4개로 층 도착 위치 표시</span></div><div class="info-card"><strong>층간 이동</strong><span>YELLOW LED 6개로 이동 과정 표시</span></div><div class="info-card"><strong>호출 상태</strong><span>버튼 4개와 GREEN LED 4개로 등록·취소 표시</span></div></div><p>실제 승강기 모터 대신 LED 한 칸을 위치 단위로 사용했습니다. 한 층은 <code>RED → YELLOW → YELLOW</code>의 세 위치로 구성되며, <code>nowFloor</code>를 0부터 9까지 이동시켜 층과 층 사이의 진행 과정까지 표현했습니다.</p>
 
         </section>
 
-        <section class="case-section" id="초안-호출-순서를-큐에-저장하기">
+        <section class="case-section" id="ko-초안-호출-순서를-큐에-저장하기">
           <div class="case-heading"><h2>초안 — 호출 순서를 큐에 저장하기</h2></div>
           <p>초기에는 버튼을 누른 순서대로 층 번호를 큐에 저장하고, 먼저 들어온 호출부터 처리하려 했습니다.</p>
 <div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="호출된 층을 순서대로 큐에 저장하는 초기 설계" loading="lazy"><figcaption>초기 설계 — 호출 순서를 그대로 저장</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="호출 취소와 중간 삽입 때문에 큐 구조가 복잡해지는 문제" loading="lazy"><figcaption>발견한 문제 — 취소·중간 삽입·방향 변경 시 복잡도 증가</figcaption></figure></div><p>단순 호출에는 적합했지만 다음 상황에서 큐를 계속 수정해야 했습니다.</p>
@@ -55,14 +56,14 @@
 
         </section>
 
-        <section class="case-section" id="개선-호출-상태와-진행-방향으로-목적층-다시-계산하기">
+        <section class="case-section" id="ko-개선-호출-상태와-진행-방향으로-목적층-다시-계산하기">
           <div class="case-heading"><h2>개선 — 호출 상태와 진행 방향으로 목적층 다시 계산하기</h2></div>
           <p>큐 대신 <code>floorList[4]</code>에 각 층의 호출 여부만 저장했습니다. 이동 방향은 <code>upMode</code>, 현재 LED 위치는 <code>nowFloor</code>, 선택된 목표는 <code>wantFloor</code>로 관리하고, 메인 루프가 실행될 때마다 남아 있는 호출에서 다음 목적층을 다시 계산합니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-state-design.webp" alt="호출 이벤트와 상승, 하강, 정지 상태를 이용한 개선 설계" loading="lazy"><figcaption>발표자료의 개선안 — 호출 순서 저장에서 상태·방향 기반 탐색으로 전환</figcaption></figure></div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="상승 상태와 하강 상태에서 다음 호출을 결정하는 예시" loading="lazy"><figcaption>진행 방향별 처리 예시 — 같은 호출 목록도 현재 방향에 따라 다음 목적층이 달라집니다.</figcaption></figure></div><p>발표자료에서는 정지·상승·하강의 세 상태로 설명했지만, 실제 코드는 명시적인 FSM enum을 사용하지 않습니다. <code>upMode</code>가 마지막 이동 방향을 나타내고, <code>wantFloor == nowFloor</code>인 경우가 정지 동작에 해당합니다. 따라서 이 구현은 <strong>명시적 3-State FSM</strong>보다 <strong>방향 상태를 이용한 스케줄링</strong>으로 설명하는 것이 정확합니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-variables.webp" alt="현재 위치와 목표 위치, 방향과 층별 호출 상태를 저장하는 변수 설계" loading="lazy"><figcaption>상태 변수 — 현재 위치, 목적 위치, 진행 방향과 층별 호출 여부를 분리해 관리</figcaption></figure></div><div class="diagram" role="img" aria-label="방향 기반 호출 스케줄링 흐름"><div class="diagram-node owner">Button Edge<br>Call Toggle</div><div class="diagram-arrow">→</div><div class="diagram-node owner">floorList<br>Active Calls</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Direction Scan<br>Target Floor</div><div class="diagram-arrow">→</div><div class="diagram-node owner">500 ms Tick<br>Move One LED</div></div>
         </section>
 
-        <section class="case-section" id="버튼-상승-엣지로-호출-등록과-취소-구분하기">
+        <section class="case-section" id="ko-버튼-상승-엣지로-호출-등록과-취소-구분하기">
           <div class="case-heading"><h2>버튼 상승 엣지로 호출 등록과 취소 구분하기</h2></div>
           <p>버튼을 누르고 있는 동안 호출 상태가 매 루프 반복해서 바뀌지 않도록 이전 값과 현재 값을 비교했습니다. <code>LOW → HIGH</code>가 발생한 순간에만 <code>floorSensing()</code>을 호출합니다.</p>
 <div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-button-flow.webp" alt="이전 버튼 값과 현재 버튼 값을 비교하는 buttonPress 함수 흐름도" loading="lazy"><figcaption>buttonPress() — LOW → HIGH 상승 엣지만 감지</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-call-toggle-flow.webp" alt="층별 호출 상태와 초록색 LED를 토글하는 floorSensing 함수 흐름도" loading="lazy"><figcaption>floorSensing() — 호출 등록·취소와 GREEN LED를 함께 갱신</figcaption></figure></div><pre><code class="language-cpp">int current = digitalRead(buttons[button]);
@@ -78,32 +79,32 @@ prevButtons[button] = current;
 
         </section>
 
-        <section class="case-section" id="진행-방향에서-가까운-호출부터-탐색하기">
+        <section class="case-section" id="ko-진행-방향에서-가까운-호출부터-탐색하기">
           <div class="case-heading"><h2>진행 방향에서 가까운 호출부터 탐색하기</h2></div>
           <p>상승 중에는 <code>scanTop()</code>이 현재 위치보다 위에 있는 호출을 가까운 층부터 탐색합니다. 위쪽에 호출이 없으면 <code>scanBottom()</code>으로 반대 방향 요청을 찾습니다. 하강 중에는 아래쪽 호출을 먼저 탐색한 뒤 위쪽으로 전환합니다.</p>
 <div class="formula-block">상승: 가까운 위쪽 호출 → 아래쪽 호출 &nbsp;·&nbsp; 하강: 가까운 아래쪽 호출 → 위쪽 호출</div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-target-flow.webp" alt="진행 방향에 따라 scanTop과 scanBottom의 호출 순서를 결정하는 getWantFloor 흐름도" loading="lazy"><figcaption>getWantFloor() — 현재 방향의 호출을 먼저 찾고, 없을 때 반대 방향으로 전환</figcaption></figure></div><div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-scan-bottom.webp" alt="현재 위치 아래에서 가장 가까운 호출을 탐색하는 scanBottom 흐름도" loading="lazy"><figcaption>scanBottom() — 현재 위치 아래의 가까운 호출 탐색</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-scan-top.webp" alt="현재 위치 위에서 가장 가까운 호출을 탐색하는 scanTop 흐름도" loading="lazy"><figcaption>scanTop() — 현재 위치 위의 가까운 호출 탐색</figcaption></figure></div><p>호출이 하나도 없으면 현재 LED 위치를 가장 가까운 실제 층 위치로 반올림해 대기합니다. 이 방식은 실제 엘리베이터 군 제어 알고리즘이 아니라, 하나의 승강기가 진행 방향의 요청을 우선 처리하는 단순 스케줄러입니다.</p>
 
         </section>
 
-        <section class="case-section" id="500-ms-이동-주기-사이에도-호출-확인하기">
+        <section class="case-section" id="ko-500-ms-이동-주기-사이에도-호출-확인하기">
           <div class="case-heading"><h2>500 ms 이동 주기 사이에도 호출 확인하기</h2></div>
           <p>이동은 <code>millis()</code>의 시간 차가 500 ms를 넘었을 때만 <code>moveElevator()</code>를 호출해 LED를 한 칸 갱신합니다. 긴 <code>delay(500)</code>으로 이동 전체를 막지 않기 때문에 각 이동 Tick 사이에서 버튼 상태와 새 호출을 다시 확인할 수 있습니다.</p>
 <div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-move-flow.webp" alt="목적 위치와 현재 위치를 비교해 한 칸씩 이동하는 moveElevator 흐름도" loading="lazy"><figcaption>moveElevator() — 목표 방향으로 LED 위치를 한 칸 갱신</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="버튼 확인과 목적층 탐색, 500밀리초 이동 주기를 반복하는 메인 루프 흐름도" loading="lazy"><figcaption>loop() — 입력 확인은 계속 수행하고 이동만 500 ms 주기로 실행</figcaption></figure></div><p>다만 메인 루프 마지막에 <code>delay(10)</code>이 남아 있으므로 완전히 Blocking 호출이 없는 구조는 아닙니다. 정확히는 긴 이동 대기를 제거하고 짧은 폴링 주기와 <code>millis()</code>를 결합한 <strong>Cooperative Timing</strong>입니다.</p>
 
         </section>
 
-        <section class="case-section" id="하드웨어-구성과-위치-표현">
+        <section class="case-section" id="ko-하드웨어-구성과-위치-표현">
           <div class="case-heading"><h2>하드웨어 구성과 위치 표현</h2></div>
           <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-hardware.webp" alt="Arduino Uno, 네 개 버튼과 열네 개 LED로 구성한 엘리베이터 회로" loading="lazy"><figcaption>Arduino Uno/Nano에 4개 버튼, 4개 RED, 6개 YELLOW, 4개 GREEN LED를 연결한 구성</figcaption></figure></div><p>핀 번호는 <code>leds</code>, <code>ledGreens</code>, <code>buttons</code> 배열로 모았습니다. 층수를 확장하려면 핀 배열뿐 아니라 <code>totalfloor</code>, <code>floorHeight</code>, 호출 배열과 전체 위치 LED 수도 함께 변경해야 합니다. 속도는 <code>moveTime</code>을 변경해 조정할 수 있습니다.</p>
 
         </section>
 
-        <section class="case-section" id="입력-탐색-이동을-함수로-분리하기">
+        <section class="case-section" id="ko-입력-탐색-이동을-함수로-분리하기">
           <div class="case-heading"><h2>입력·탐색·이동을 함수로 분리하기</h2></div>
           <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-flow.webp" alt="버튼 감지, 호출 관리, 목적층 탐색과 이동으로 이어지는 전체 함수 흐름" loading="lazy"><figcaption>발표자료의 전체 함수 흐름도</figcaption></figure></div><dl class="flow"><dt>buttonPress()</dt><dd>버튼 상승 엣지를 감지하고 호출 상태 변경을 요청합니다.</dd><dt>floorSensing()</dt><dd>호출 상태를 토글하고 해당 층의 GREEN LED를 갱신합니다.</dd><dt>scanTop() / scanBottom()</dt><dd>현재 위치와 방향을 기준으로 가까운 활성 호출을 찾습니다.</dd><dt>getWantFloor()</dt><dd>진행 방향 우선순위와 반대 방향 전환을 적용해 목표 위치를 선택합니다.</dd><dt>moveElevator()</dt><dd>현재 위치를 목표 방향으로 한 칸 이동시키고 LED 출력을 갱신합니다.</dd></dl>
         </section>
 
-        <section class="case-section" id="발표자료에-정의한-8개-테스트-시나리오">
+        <section class="case-section" id="ko-발표자료에-정의한-8개-테스트-시나리오">
           <div class="case-heading"><h2>발표자료에 정의한 8개 테스트 시나리오</h2></div>
           <p>발표자료에는 다음 테스트 시나리오와 기대 결과를 정의했습니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="단일 호출, 이동 중 호출, 호출 취소와 대기 상태를 포함한 여덟 개 테스트 케이스 표" loading="lazy"><figcaption>TC01–08 — 발표자료에 작성한 입력 순서와 기대 동작</figcaption></figure></div><p><a href="https://docs.google.com/presentation/d/1m6TEW22ZXlsffNen36meO2qcAVfPnEL0svScLSEzju0/edit?usp=sharing">발표 슬라이드 보기</a> · <a href="https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled">Tinkercad 시뮬레이션</a> · <a href="https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino">전체 코드</a></p>
@@ -111,7 +112,103 @@ prevButtons[button] = current;
         </section>
       </article>
     </div>
+  </div>
+    <div class="project-language" data-language-content="en" hidden>
+    <header class="project-header">
+      <h1>ELEVATOR MCU — Direction-Aware LED Controller</h1>
+      <div class="meta"><span><strong>Team:</strong> Solo project</span><span><strong>Period:</strong> Jul 6, 2025</span></div>
+      <p class="project-skills">Arduino · C++ · State-based Scheduling · Edge Detection · Cooperative Timing · Tinkercad</p>
+      <a class="project-repository" href="https://github.com/jongbob1918/elevator-mcu" target="_blank" rel="noreferrer" aria-label="Open the ELEVATOR MCU GitHub repository"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+    </header>
+
+    <section class="project-overview" id="overview-en">
+      <h2>Overview</h2>
+      <p class="lead">This solo, one-day project models elevator calls, movement, and idle behavior with four buttons and fourteen LEDs. A queue-based first design became complicated when calls were added or canceled in transit. I replaced call order with per-floor request state and recompute the next target on every loop according to the last travel direction. The project validates scheduling logic in Arduino and Tinkercad rather than controlling a physical elevator motor.</p>
+    </section>
+
+    <section class="demo-section" id="demo-en"><figure class="feature-media"><img src="../assets/images/elevator-mcu-demo.gif" alt="Four-floor LED elevator call and movement test running in Tinkercad"></figure></section>
+
+    <div class="case-layout">
+      <article class="case-study">
+        <section class="case-section" id="en-turning-requirements-into-led-control-rules">
+          <div class="case-heading"><h2>Turning requirements into LED control rules</h2></div>
+          <p>The requirements called for at least three floors, red LEDs for the current floor, yellow LEDs for movement between floors, and a button and green call-status LED at each floor. I implemented a four-floor layout.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-requirements.webp" alt="Requirements for floors, position indicators, inter-floor movement, and call buttons" loading="lazy"><figcaption>User requirements for display, movement, and call functions</figcaption></figure></div><div class="role-grid"><div class="info-card"><strong>Current floor</strong><span>Four red LEDs indicate floor arrival</span></div><div class="info-card"><strong>Inter-floor motion</strong><span>Six yellow LEDs show movement</span></div><div class="info-card"><strong>Call state</strong><span>Four buttons and green LEDs register and cancel calls</span></div></div><p>Each LED position represents motion instead of a physical motor. One floor interval is <code>RED → YELLOW → YELLOW</code>; moving <code>nowFloor</code> from 0 to 9 visualizes both floors and the spaces between them.</p>
+
+        </section>
+
+        <section class="case-section" id="en-initial-design-storing-calls-in-a-queue">
+          <div class="case-heading"><h2>Initial design — storing calls in a queue</h2></div>
+          <p>The first design queued floor numbers in button-press order and served the earliest request first.</p>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="Initial design storing called floors in a queue" loading="lazy"><figcaption>Initial design · Preserve call order</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="Queue complexity caused by cancellation, insertion, and direction changes" loading="lazy"><figcaption>Problem · Cancellation, insertion, and direction changes complicate the queue</figcaption></figure></div><p>It handled simple calls but required continual queue edits when:</p>
+<ul>
+<li>a registered call was pressed again to cancel it;</li>
+<li>a second-floor request arrived while moving from floor 1 to floor 4;</li>
+<li>a nearby request in the current direction should take priority; or</li>
+<li>remaining calls in the opposite direction should be served after arrival.</li>
+</ul>
+<p>The next target therefore needed to depend on active calls and travel direction, not event order.</p>
+
+        </section>
+
+        <section class="case-section" id="en-improvement-recomputing-targets-from-calls-and-direction">
+          <div class="case-heading"><h2>Improvement — recomputing targets from calls and direction</h2></div>
+          <p>Instead of a queue, <code>floorList[4]</code> stores only whether each floor is active. <code>upMode</code> stores direction, <code>nowFloor</code> stores the current LED position, and <code>wantFloor</code> stores the selected target. Every main-loop iteration scans active calls again to choose the next target.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-state-design.webp" alt="Improved design using call, upward, downward, and stop behavior" loading="lazy"><figcaption>Moving from stored call order to state- and direction-aware scanning</figcaption></figure></div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="Examples of choosing the next call while moving upward or downward" loading="lazy"><figcaption>The same call list produces a different target based on current direction</figcaption></figure></div><p>The presentation described stop, upward, and downward states, but the code does not use an explicit FSM enum. <code>upMode</code> records the last direction, while <code>wantFloor == nowFloor</code> represents idle behavior. It is therefore more accurate to describe the implementation as direction-aware scheduling than as an explicit three-state FSM.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-variables.webp" alt="Variables storing current position, target position, direction, and floor calls" loading="lazy"><figcaption>State variables separate position, target, direction, and active calls</figcaption></figure></div><div class="diagram" role="img" aria-label="Direction-aware call scheduling flow"><div class="diagram-node owner">Button Edge<br>Call Toggle</div><div class="diagram-arrow">→</div><div class="diagram-node owner">floorList<br>Active Calls</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Direction Scan<br>Target Floor</div><div class="diagram-arrow">→</div><div class="diagram-node owner">500 ms Tick<br>Move One LED</div></div>
+        </section>
+
+        <section class="case-section" id="en-registering-and-canceling-calls-on-the-rising-edge">
+          <div class="case-heading"><h2>Registering and canceling calls on the rising edge</h2></div>
+          <p>The previous and current button values are compared so a held button does not toggle its call state on every loop. <code>floorSensing()</code> runs only on the <code>LOW → HIGH</code> transition.</p>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-button-flow.webp" alt="buttonPress flow comparing previous and current button values" loading="lazy"><figcaption>buttonPress() · Detect only the LOW → HIGH edge</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-call-toggle-flow.webp" alt="floorSensing flow toggling call state and the green LED" loading="lazy"><figcaption>floorSensing() · Update the call and green LED together</figcaption></figure></div><pre><code class="language-cpp">int current = digitalRead(buttons[button]);
+
+if (prevButtons[button] == LOW &amp;&amp; current == HIGH) {
+    floorSensing(button);
+}
+
+prevButtons[button] = current;
+</code></pre>
+<p><code>floorSensing()</code> inverts the selected <code>floorList</code> entry and updates its green LED. The first click registers a call and the next click cancels it.</p>
+<p>This detects a rising edge but has no software debounce interval or hardware filter. Only the main loop&#39;s 10 ms delay remains, so a physical mechanical button could still bounce and toggle more than once.</p>
+
+        </section>
+
+        <section class="case-section" id="en-scanning-the-nearest-call-in-the-current-direction">
+          <div class="case-heading"><h2>Scanning the nearest call in the current direction</h2></div>
+          <p>While moving upward, <code>scanTop()</code> searches active calls above the current position from nearest to farthest. If none exist, <code>scanBottom()</code> searches the other direction. Downward travel applies the reverse order.</p>
+<div class="formula-block">Upward: nearest call above → calls below &nbsp;·&nbsp; Downward: nearest call below → calls above</div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-target-flow.webp" alt="getWantFloor flow choosing scanTop or scanBottom from the current direction" loading="lazy"><figcaption>getWantFloor() · Search the current direction first, then reverse</figcaption></figure></div><div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-scan-bottom.webp" alt="scanBottom flow finding the nearest call below" loading="lazy"><figcaption>scanBottom() · Find the nearest call below</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-scan-top.webp" alt="scanTop flow finding the nearest call above" loading="lazy"><figcaption>scanTop() · Find the nearest call above</figcaption></figure></div><p>With no active calls, the current LED position is rounded to the nearest physical floor for idle. This is a simple single-elevator direction-priority scheduler, not a production multi-elevator dispatch algorithm.</p>
+
+        </section>
+
+        <section class="case-section" id="en-checking-calls-between-500-ms-movement-ticks">
+          <div class="case-heading"><h2>Checking calls between 500 ms movement ticks</h2></div>
+          <p>Movement calls <code>moveElevator()</code> only when the elapsed <code>millis()</code> time exceeds 500 ms, advancing one LED. Because the full motion is not blocked by <code>delay(500)</code>, button state and new calls can be checked between movement ticks.</p>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-move-flow.webp" alt="moveElevator flow advancing one LED toward the target" loading="lazy"><figcaption>moveElevator() · Advance one LED toward the target</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="Main loop checking buttons, selecting a target, and moving every 500 milliseconds" loading="lazy"><figcaption>loop() · Keep checking input while movement runs every 500 ms</figcaption></figure></div><p>The loop still ends with <code>delay(10)</code>, so the program is not completely free of blocking calls. More precisely, it combines a short polling interval with <code>millis()</code>-based cooperative timing.</p>
+
+        </section>
+
+        <section class="case-section" id="en-hardware-and-position-representation">
+          <div class="case-heading"><h2>Hardware and position representation</h2></div>
+          <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-hardware.webp" alt="Elevator circuit with an Arduino Uno, four buttons, and fourteen LEDs" loading="lazy"><figcaption>Arduino Uno/Nano with 4 buttons, 4 red, 6 yellow, and 4 green LEDs</figcaption></figure></div><p>Pin numbers are grouped in the <code>leds</code>, <code>ledGreens</code>, and <code>buttons</code> arrays. Adding floors requires updating the pin arrays as well as <code>totalfloor</code>, <code>floorHeight</code>, the call-state array, and total position LEDs. <code>moveTime</code> controls the speed.</p>
+
+        </section>
+
+        <section class="case-section" id="en-separating-input-scanning-and-movement">
+          <div class="case-heading"><h2>Separating input, scanning, and movement</h2></div>
+          <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-flow.webp" alt="Overall function flow from button detection and call management to target scanning and movement" loading="lazy"><figcaption>Overall function flow from the project presentation</figcaption></figure></div><dl class="flow"><dt>buttonPress()</dt><dd>Detects a rising edge and requests a call-state change.</dd><dt>floorSensing()</dt><dd>Toggles the call and updates that floor's green LED.</dd><dt>scanTop() / scanBottom()</dt><dd>Finds the nearest active call relative to position and direction.</dd><dt>getWantFloor()</dt><dd>Selects the target with direction priority and reversal.</dd><dt>moveElevator()</dt><dd>Moves the current position by one step and updates the LEDs.</dd></dl>
+        </section>
+
+        <section class="case-section" id="en-eight-defined-test-scenarios">
+          <div class="case-heading"><h2>Eight defined test scenarios</h2></div>
+          <p>The presentation defines eight input sequences and expected behaviors covering a single call, calls during movement, cancellation, and idle state.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="Eight elevator test cases covering calls, in-motion requests, cancellation, and idle behavior" loading="lazy"><figcaption>TC01–08 · Defined input sequences and expected behavior</figcaption></figure></div><p><a href="https://docs.google.com/presentation/d/1m6TEW22ZXlsffNen36meO2qcAVfPnEL0svScLSEzju0/edit?usp=sharing">View presentation</a> · <a href="https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled">Tinkercad simulation</a> · <a href="https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino">Full source</a></p>
+
+        </section>
+      </article>
+    </div>
+  </div>
   </main>
-  <script src="../script.js?v=20260808-10"></script>
+  <script src="../script.js?v=20260809-1"></script>
 </body>
 </html>

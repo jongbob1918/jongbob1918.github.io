@@ -10,14 +10,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260808-27">
+  <link rel="stylesheet" href="../styles.css?v=20260809-1">
 </head>
-<body>
+<body data-page="project-detail" data-title-ko="ROOMIE — 자율주행 호텔 서비스 로봇 — Jongmyung Kim" data-title-en="ROOMIE — Autonomous Hotel Service Robot — Jongmyung Kim" data-description-ko="자율주행, 물품 배송, 사용자 안내와 엘리베이터 연동을 통합한 ROS 2 기반 호텔 서비스 로봇" data-description-en="A ROS 2 hotel service robot integrating navigation, delivery, guidance, and elevator interaction">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#key-projects">Key Projects</a><a href="../index.html#side-projects">Side Projects</a><a href="../notes/">Blog</a><a href="../index.html#about">About</a><span class="disabled" title="이력서 PDF 추가 후 활성화">Resume</span></nav></div></header>
 
   <main class="wrap case-page">
-    <a class="back" href="../index.html#key-projects" aria-label="프로젝트 목록으로 돌아가기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <a class="back" href="../index.html#key-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>ROOMIE — 자율주행 호텔 서비스 로봇</h1>
       <div class="meta"><span><strong>기간:</strong> 2025.07.07–08.13</span></div>
@@ -25,34 +26,34 @@
       <a class="project-repository" href="https://github.com/jongbob1918/ROOMIE" target="_blank" rel="noreferrer" aria-label="ROOMIE GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
-    <section class="project-overview" id="overview">
+    <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
       <p class="lead">호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생합니다. ROOMIE는 자율주행, 물품 배송, 사용자 안내와 관리자 모니터링을 ROS 2로 연결한 호텔 서비스 로봇입니다. 엘리베이터 앞까지 이동한 뒤 버튼과 문 상태를 인식하고, 4축 로봇팔로 호출·목적층 버튼을 조작해 사람의 도움 없이 층간 임무를 이어갑니다.</p>
     </section>
 
-    <section class="demo-section" id="demo"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/CqO3OH661Os" title="프로젝트 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>
+    <section class="demo-section" id="demo-ko"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/CqO3OH661Os" title="ROOMIE 프로젝트 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="엘리베이터를-스스로-이용하는-서비스-흐름">
+        <section class="case-section" id="ko-엘리베이터를-스스로-이용하는-서비스-흐름">
           <div class="case-heading"><h2>엘리베이터를 스스로 이용하는 서비스 흐름</h2></div>
           <p>ROOMIE는 엘리베이터 앞까지 자율주행한 뒤 외부 호출 버튼을 누르고 문 열림을 확인합니다. 탑승 후에는 내부 목적층 버튼을 조작하고, 층수 표시기의 OCR 결과로 도착을 판단한 다음 하차해 기존 배송·안내 임무를 계속합니다.</p>
 <figure class="feature-media"><img src="../assets/images/roomie_elevator_flow.png" alt="엘리베이터 도착, 호출 버튼 조작, 탑승, 목적층 버튼 조작과 하차로 이어지는 ROOMIE 동작 흐름" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="시스템-설계">
+        <section class="case-section" id="ko-시스템-설계">
           <div class="case-heading"><h2>시스템 설계</h2></div>
           <p>투숙객은 Guest GUI에서 룸서비스를 주문하거나 목적지를 선택하고, 직원은 Staff GUI에서 주문을 확인한 뒤 픽업을 요청합니다. 요청은 Roomie Main Service를 거쳐 로봇에 할당되며, ROS 2 기반 Roomie Controller가 주행·비전·로봇팔·적재함 제어 모듈의 실행을 연결합니다.</p>
 <figure class="feature-media"><img src="../assets/images/roomie_system_architecture.png" alt="Guest, Staff, Admin GUI와 Roomie Main Server, 로봇 내부 제어 모듈을 연결한 ROOMIE 시스템 구성" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="arm-controller-하드웨어-구성">
+        <section class="case-section" id="ko-arm-controller-하드웨어-구성">
           <div class="case-heading"><h2>Arm Controller 하드웨어 구성</h2></div>
           <p>본체 기준 약 5만 원대의 교육용 4축 로봇팔을 사용했습니다. 팔끝에는 일반 2D 카메라와 버튼 접촉부를 장착하고, 네 개의 서보모터를 ESP32에서 제어하도록 구성했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/roomie_arm_hardware.webp" alt="2D 카메라와 팔끝 버튼 클릭부, 서보모터로 구성된 ROOMIE의 4축 로봇팔" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="2d-카메라로-버튼-목표-좌표-계산">
+        <section class="case-section" id="ko-2d-카메라로-버튼-목표-좌표-계산">
           <div class="case-heading"><h2>2D 카메라로 버튼 목표 좌표 계산</h2></div>
           <p>Vision Service가 검출한 버튼의 중심 픽셀 <code>(u, v)</code>와 Bounding Box 너비 <code>Wpx</code>를 입력으로 사용했습니다. 버튼의 실제 지름은 <code>D = 35 mm</code>로 설정하고, 카메라 내부 파라미터 <code>(fx, fy, cx, cy)</code>를 이용해 카메라에서 버튼까지의 거리와 방향을 계산했습니다.</p>
 <figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="2D 카메라 영상에서 검출한 엘리베이터 버튼과 Bounding Box" loading="lazy"><figcaption>버튼 중심과 Bounding Box 크기를 위치 추정 입력으로 사용</figcaption></figure><div class="formula-block">Z ≈ f<sub>x</sub>D / W<sub>px</sub> &nbsp;·&nbsp; X = (u-c<sub>x</sub>)Z/f<sub>x</sub> &nbsp;·&nbsp; Y = (v-c<sub>y</sub>)Z/f<sub>y</sub></div><p>핀홀 카메라 모델에서 버튼의 실제 지름과 영상 속 크기의 비율로 깊이 <code>Z</code>를 근사합니다. 이후 중심 픽셀을 역투영해 카메라 좌표계의 버튼 위치 <code>p_camera = (X, Y, Z)</code>를 구했습니다.</p>
@@ -60,44 +61,126 @@
 <figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 좌표를 로봇 베이스 기준 목표와 관절 제어로 연결하는 원리" loading="lazy"><figcaption>버튼의 영상 좌표를 카메라·Tool·Base 좌표계를 거쳐 로봇팔의 목표로 변환하는 구조</figcaption></figure>
         </section>
 
-        <section class="case-section" id="4축-ik-목표-검증">
+        <section class="case-section" id="ko-4축-ik-목표-검증">
           <div class="case-heading"><h2>4축 IK 목표 검증</h2></div>
           <p>변환된 목표 위치는 <code>ikpy</code> 기반 4관절 역기구학으로 계산했습니다. 현재 관절각을 초기값으로 사용하고, 계산 결과를 Forward Kinematics로 다시 검산해 수치 잔차가 1 mm를 넘거나 관절 제한을 벗어나면 이동을 실패 처리했습니다.</p>
 <figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video><figcaption>IK 목표 제어 실험. 실제 로봇팔의 이동과 RViz 관절 모델을 함께 확인했습니다.</figcaption></figure><p>여기서 1 mm는 IK 수치해의 허용 잔차이며 실제 로봇팔 끝단의 절대 정확도를 의미하지는 않습니다.</p>
 
         </section>
 
-        <section class="case-section" id="관측-자세에서-버튼-누르기">
+        <section class="case-section" id="ko-관측-자세에서-버튼-누르기">
           <div class="case-heading"><h2>관측 자세에서 버튼 누르기</h2></div>
           <p>초기에는 임의의 자세에서 버튼 위치를 계산해 시작 자세에 따라 팔끝의 도달 위치가 달라졌습니다. 이후 <code>ClickButton</code> 요청을 받으면 먼저 정해진 관측 자세로 이동하고, 같은 조건에서 버튼 위치를 계산하도록 순서를 고정했습니다.</p>
 <p>로봇팔 링크의 전체 길이는 약 33.5 cm이므로 팔만으로 확보할 수 있는 작업 범위가 제한적이었습니다. ROOMIE 본체가 버튼 가까이 정밀하게 접근한 뒤, 로봇팔이 관측 자세에서 클릭 동작을 실행하도록 구성했습니다.</p>
 <div class="diagram" role="img" aria-label="ROOMIE 본체 접근부터 버튼 클릭까지의 순서"><div class="diagram-node">본체 정밀 접근</div><div class="diagram-arrow">→</div><div class="diagram-node owner">OBSERVE_POSE</div><div class="diagram-arrow">→</div><div class="diagram-node owner">버튼 위치 계산</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Standby<br>80 mm</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Press<br>100 mm</div><div class="diagram-arrow">→</div><div class="diagram-node">Retreat</div></div><figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video><figcaption>개발 환경에서 관측 자세와 버튼 접근 동작을 확인한 실험</figcaption></figure><div class="media-grid"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 엘리베이터 버튼 가까이 정밀하게 접근하는 과정" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE 로봇팔이 엘리베이터 외부 호출 버튼을 누르는 과정" loading="lazy"></figure></div>
         </section>
 
-        <section class="case-section" id="gaussian-프로파일-기반-모션-제어">
+        <section class="case-section" id="ko-gaussian-프로파일-기반-모션-제어">
           <div class="case-heading"><h2>Gaussian 프로파일 기반 모션 제어</h2></div>
           <p>등속 제어에서 발생한 팔끝 지터를 줄이기 위해 Gaussian 프로파일로 가감속을 부드럽게 만들었습니다. ESP32는 네 개 서보의 목표각을 6 ms 주기로 갱신하고, 동작이 끝나면 완료 ACK를 반환합니다.</p>
 <figure class="feature-media"><img src="../assets/images/roomie_gaussian_motion.webp" alt="Gaussian 속도와 가속도 프로파일로 로봇팔의 가감속을 부드럽게 만든 모터 제어 방식" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="전체-시연">
+        <section class="case-section" id="ko-전체-시연">
           <div class="case-heading"><h2>전체 시연</h2></div>
           <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="ROOMIE 전체 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
         </section>
 
-        <section class="case-section" id="최종-결과">
+        <section class="case-section" id="ko-최종-결과">
           <div class="case-heading"><h2>최종 결과</h2></div>
           <div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 접근 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">버튼 접촉 성공</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">접촉 성공률</span></div></div>
         </section>
 
-        <section class="case-section" id="한계">
+        <section class="case-section" id="ko-한계">
           <div class="case-heading"><h2>한계</h2></div>
           <p>10회 중 로봇팔 끝단이 버튼에 정확히 닿은 경우는 3회였습니다. 나머지 7회는 목표 위치를 벗어나 버튼에 접촉하지 못했습니다.</p>
 <div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D 깊이 추정</strong><p>버튼 크기로 거리를 근사했지만 검출 크기와 촬영 각도에 민감했습니다.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>백래시·프레임 변형</strong><p>관측 자세를 통일해도 실제 팔끝 위치에는 오차가 남았습니다.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>제한적인 누름 힘</strong><p>접촉 정확도와 별개로, 팔을 펼친 자세에서는 토크와 프레임 강성이 제한적이었습니다.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>센서 피드백 부재</strong><p>Encoder와 Force Sensor가 없어 실제 팔끝 위치와 접촉력을 정량 측정하지 못했습니다.</p></div></div>
         </section>
       </article>
     </div>
+  </div>
+    <div class="project-language" data-language-content="en" hidden>
+    <header class="project-header">
+      <h1>ROOMIE — Autonomous Hotel Service Robot</h1>
+      <div class="meta"><span><strong>Period:</strong> Jul 7–Aug 13, 2025</span></div>
+      <p class="project-skills">ROS 2 · Python · OpenCV · 4-DOF Inverse Kinematics · Vision-Guided Control · ESP32 · FreeRTOS</p>
+      <a class="project-repository" href="https://github.com/jongbob1918/ROOMIE" target="_blank" rel="noreferrer" aria-label="Open the ROOMIE GitHub repository"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
+    </header>
+
+    <section class="project-overview" id="overview-en">
+      <h2>Overview</h2>
+      <p class="lead">Hotels have repetitive cross-floor work such as room-service delivery and guest guidance. ROOMIE connects autonomous navigation, delivery, guidance, and staff monitoring through ROS 2. At an elevator, it recognizes buttons and door state, operates the call and destination buttons with a four-axis arm, and continues its mission on another floor without human assistance.</p>
+    </section>
+
+    <section class="demo-section" id="demo-en"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/CqO3OH661Os" title="ROOMIE project demonstration" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>
+
+    <div class="case-layout">
+      <article class="case-study">
+        <section class="case-section" id="en-an-end-to-end-elevator-service-flow">
+          <div class="case-heading"><h2>An end-to-end elevator service flow</h2></div>
+          <p>ROOMIE navigates to the elevator, presses the external call button, and checks that the door has opened. After boarding, it presses the destination-floor button, uses OCR on the floor indicator to determine arrival, exits, and resumes the delivery or guidance mission.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_elevator_flow.png" alt="ROOMIE flow covering elevator arrival, call-button operation, boarding, destination selection, and exit" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-system-design">
+          <div class="case-heading"><h2>System design</h2></div>
+          <p>Guests order room service or select a destination in the Guest GUI, while staff confirm an order and request pickup in the Staff GUI. The Roomie Main Service assigns the request to a robot, and the ROS 2 Roomie Controller coordinates navigation, vision, manipulator, and cargo-box modules.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_system_architecture.png" alt="ROOMIE architecture connecting guest, staff, and admin GUIs with the main server and robot modules" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-arm-controller-hardware">
+          <div class="case-heading"><h2>Arm controller hardware</h2></div>
+          <p>We used an educational four-axis arm costing roughly KRW 50,000 for the bare mechanism. A standard 2D camera and button-contact tip were mounted at the end effector, and an ESP32 controlled four servo motors.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_arm_hardware.webp" alt="ROOMIE four-axis arm with a 2D camera, button-contact tip, and servo motors" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-estimating-a-button-target-from-a-2d-camera">
+          <div class="case-heading"><h2>Estimating a button target from a 2D camera</h2></div>
+          <p>The input consists of the detected button center <code>(u, v)</code> and bounding-box width <code>Wpx</code>. With the physical button diameter set to <code>D = 35 mm</code>, the camera intrinsics <code>(fx, fy, cx, cy)</code> estimate its distance and direction.</p>
+<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="Elevator button and bounding box detected in the 2D camera image" loading="lazy"><figcaption>The button center and bounding-box size are used for position estimation</figcaption></figure><div class="formula-block">Z ≈ f<sub>x</sub>D / W<sub>px</sub> &nbsp;·&nbsp; X = (u-c<sub>x</sub>)Z/f<sub>x</sub> &nbsp;·&nbsp; Y = (v-c<sub>y</sub>)Z/f<sub>y</sub></div><p>The pinhole model approximates depth <code>Z</code> from the ratio between the physical diameter and its image size. Back-projecting the center pixel gives the camera-frame position <code>p_camera = (X, Y, Z)</code>.</p>
+<div class="formula-block">p<sub>base</sub> = T<sub>base←tool</sub>(q) · T<sub>tool←camera</sub> · p<sub>camera</sub></div><p>Forward kinematics at joint state <code>q</code> provides <code>Tbase←tool</code>, and hand–eye calibration provides the fixed <code>Ttool←camera</code>. Their composition converts the camera-frame button location into the base-frame target <code>p_base</code> used by the four-axis inverse kinematics solver.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="Transformation from an image-space button coordinate through camera, tool, and base frames to arm control" loading="lazy"><figcaption>Converting image coordinates into a base-frame target for the manipulator</figcaption></figure>
+        </section>
+
+        <section class="case-section" id="en-validating-four-axis-ik-targets">
+          <div class="case-heading"><h2>Validating four-axis IK targets</h2></div>
+          <p>The target position is solved with <code>ikpy</code> for four joints. The current joint angles initialize the solver, and forward kinematics checks the result. A numerical residual above 1 mm or a joint-limit violation marks the motion as failed.</p>
+<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">Your browser does not support MP4 video.</video><figcaption>IK target-control test comparing physical arm motion with the RViz joint model</figcaption></figure><p>The 1 mm value is the numerical IK tolerance, not the absolute end-effector accuracy of the physical arm.</p>
+
+        </section>
+
+        <section class="case-section" id="en-pressing-from-a-repeatable-observation-pose">
+          <div class="case-heading"><h2>Pressing from a repeatable observation pose</h2></div>
+          <p>The first implementation estimated the button from an arbitrary pose, so the reached position changed with the arm&#39;s starting configuration. I changed the sequence so every <code>ClickButton</code> request first moves to a fixed observation pose and then estimates the target under the same conditions.</p>
+<p>The arm&#39;s total link length is about 33.5 cm, which limits its independent workspace. The ROOMIE base first performs a precise approach to the button, after which the arm executes the click from the observation pose.</p>
+<div class="diagram" role="img" aria-label="Sequence from ROOMIE base approach to button press"><div class="diagram-node">Precise base approach</div><div class="diagram-arrow">→</div><div class="diagram-node owner">OBSERVE_POSE</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Estimate button</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Standby<br>80 mm</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Press<br>100 mm</div><div class="diagram-arrow">→</div><div class="diagram-node">Retreat</div></div><figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">Your browser does not support MP4 video.</video><figcaption>Development test of the observation pose and button approach</figcaption></figure><div class="media-grid"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE approaching and aligning near an elevator button" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE arm pressing an external elevator call button" loading="lazy"></figure></div>
+        </section>
+
+        <section class="case-section" id="en-gaussian-profile-motion-control">
+          <div class="case-heading"><h2>Gaussian-profile motion control</h2></div>
+          <p>To reduce end-effector jitter from constant-speed motion, I applied a Gaussian profile for smoother acceleration and deceleration. The ESP32 updates all four servo targets every 6 ms and returns a completion acknowledgment when the motion ends.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_gaussian_motion.webp" alt="Gaussian velocity and acceleration profiles used to smooth ROOMIE arm motion" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="en-full-demonstration">
+          <div class="case-heading"><h2>Full demonstration</h2></div>
+          <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="Full ROOMIE demonstration" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
+        </section>
+
+        <section class="case-section" id="en-result">
+          <div class="case-heading"><h2>Result</h2></div>
+          <div class="metric-grid"><div class="metric-card"><span class="metric-value">10</span><span class="metric-label">Button-approach trials</span></div><div class="metric-card"><span class="metric-value">3</span><span class="metric-label">Successful contacts</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">Contact success rate</span></div></div>
+        </section>
+
+        <section class="case-section" id="en-limitations">
+          <div class="case-heading"><h2>Limitations</h2></div>
+          <p>The end effector contacted the button accurately in three of ten trials. The remaining seven missed the target.</p>
+<div class="evidence-grid constraint-grid"><div class="evidence-card"><span class="status-tag warning">PERCEPTION</span><strong>2D depth estimate</strong><p>Distance was inferred from button size and was sensitive to detection scale and viewing angle.</p></div><div class="evidence-card"><span class="status-tag warning">MECHANISM</span><strong>Backlash and frame flex</strong><p>Physical end-effector error remained even with a fixed observation pose.</p></div><div class="evidence-card"><span class="status-tag warning">ACTUATION</span><strong>Limited pressing force</strong><p>Torque and frame stiffness were limited when the arm was extended.</p></div><div class="evidence-card"><span class="status-tag warning">FEEDBACK</span><strong>No sensor feedback</strong><p>Without encoders or a force sensor, actual tip position and contact force could not be measured quantitatively.</p></div></div>
+        </section>
+      </article>
+    </div>
+  </div>
   </main>
-  <script src="../script.js?v=20260808-10"></script>
+  <script src="../script.js?v=20260809-1"></script>
 </body>
 </html>

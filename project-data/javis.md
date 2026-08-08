@@ -7,6 +7,7 @@ title: JAVIS — 도서관 관리 로봇
 description: 자율주행, 로봇팔과 비전 AI를 통합한 ROS 2 기반 도서관 관리 로봇
 team: 9명
 period: 2024.09–11
+role: 자율주행 안정화 · 로봇 상태 및 임무 제어
 skills:
   - ROS 2
   - Python
@@ -57,31 +58,37 @@ demo:
 
 ## 도서 요청에서 픽업까지
 
-사용자가 도서를 요청하면 중앙 시스템이 로봇의 상태와 배터리를 확인해 작업을 할당합니다. JAVIS는 목표 책장으로 이동하고, 카메라로 도서를 인식한 뒤 로봇팔로 픽업합니다. 각 단계의 진행 상태와 작업 결과는 다시 중앙 시스템으로 전달됩니다.
+사용자가 도서를 요청하면 중앙 시스템이 로봇의 상태와 배터리를 확인해 작업을 할당합니다. JAVIS는 목표 책장으로 이동하고, 카메라로 도서를 인식한 뒤 로봇팔로 픽업합니다.
 
-<div class="diagram" role="img" aria-label="JAVIS 도서 픽업 작동 파이프라인"><div class="diagram-node">도서 요청</div><div class="diagram-arrow">→</div><div class="diagram-node">작업 할당</div><div class="diagram-arrow">→</div><div class="diagram-node owner">책장까지<br>자율주행</div><div class="diagram-arrow">→</div><div class="diagram-node owner">도서 인식</div><div class="diagram-arrow">→</div><div class="diagram-node owner">로봇팔 픽업</div><div class="diagram-arrow">→</div><div class="diagram-node">결과 반환</div></div>
+<figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="도서 선택부터 인증, JAVIS 작업과 도서 수령까지의 서비스 흐름" loading="lazy"><figcaption>도서 선택부터 사용자 인증, 로봇 작업과 도서 수령까지의 서비스 흐름</figcaption></figure>
 
-## 여러 기능을 하나의 작업으로 연결하기
+## 좁은 서가에서도 안정적으로 이동하기
 
-주행, 비전과 로봇팔 모듈은 서로 독립적으로 동작합니다. 메인 컨트롤러는 ROS 2와 State Machine을 기반으로 각 모듈의 실행 순서를 관리하고, 완료·실패 응답을 다음 상태로 전환하는 조건으로 사용합니다.
+JAVIS는 2D LiDAR로 작성한 지도에서 위치를 추정하고, Nav2를 사용해 목표 책장까지의 경로를 생성합니다. Global Planner가 전체 이동 경로를 만들고 Local Controller가 LiDAR로 감지한 장애물과 Costmap을 반영해 로봇의 속도와 회전 방향을 결정합니다.
+
+초기 구성에서는 장애물의 Inflation 영역을 크게 설정하면 좁은 통로가 막힌 것으로 판단했고, 작게 설정하면 벽과 가까운 경로가 생성됐습니다. 회전이나 Recovery 과정에서 주변 장애물과 접촉하는 문제도 반복됐습니다.
+
+<div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="협소 공간에서 회전 중 장애물과 접촉하는 초기 주행" loading="lazy"><figcaption>초기 구성 — 협소 공간에서 발생한 경로 정체와 장애물 접촉</figcaption></figure><figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="개선 후 협소한 서가 사이를 주행하는 JAVIS의 RViz 화면" loading="lazy"><figcaption>개선 후 — Costmap을 반영해 서가 사이를 통과하는 주행</figcaption></figure></div>
+
+<dl class="flow"><dt>경로 계획</dt><dd>점 모델 중심의 NavFn 대신 로봇의 직사각형 형상, 회전 반경과 후진 경로를 고려하는 Smac Planner Hybrid를 적용했습니다.</dd><dt>장애물 인식</dt><dd>실제 로봇보다 넓게 설정돼 근접 장애물을 제거하던 LiDAR 필터 범위를 다시 설정하고 Costmap Inflation 가중치를 조정했습니다.</dd><dt>경로 추종</dt><dd>복잡한 공간에서 유효한 회피 궤적을 찾기 어려웠던 DWB 대신 샘플링 기반 예측 제어를 사용하는 MPPI Controller를 적용했습니다.</dd></dl>
+
+## 로봇의 상태와 임무 흐름 관리하기
+
+주행, 비전과 로봇팔 모듈은 서로 독립적으로 동작합니다. ROS 2 기반 메인 컨트롤러는 Task Executor와 State Machine을 사용해 각 모듈의 실행 순서를 관리하고, 완료·실패 응답에 따라 다음 동작을 결정합니다.
 
 <div class="diagram" role="img" aria-label="JAVIS 중앙 제어 구조"><div class="diagram-node">중앙 시스템<br>작업 요청</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Task Executor<br>임무 실행</div><div class="diagram-arrow">→</div><div class="diagram-node owner">DMC<br>상태 · 예외</div><div class="diagram-arrow">→</div><div class="diagram-node owner">공통 Interface</div><div class="diagram-arrow">→</div><div class="diagram-node">Drive · Arm · AI</div></div>
 
-메인 컨트롤러는 임무 상태와 배터리 상태를 함께 확인하고, 충돌이나 하위 모듈 응답 실패처럼 정상적으로 작업을 이어갈 수 없는 상황을 별도의 상태 전이로 처리합니다.
+메인 컨트롤러는 초기화, 충전, 작업 대기, 작업 수행과 충전소 이동 상태를 관리합니다. 배터리 조건이나 긴급 정지 요청이 발생하면 현재 작업에서 별도의 상태로 전환하며, 전용 GUI에서 메인 상태와 세부 임무, 배터리 및 ROS 로그를 함께 확인할 수 있습니다.
 
-## 실제 장비 없이 통합 흐름 검증하기
+<div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 충전, 대기, 작업과 긴급 정지 상태 전이도" loading="lazy"><figcaption>배터리와 작업 조건을 반영한 메인 State Machine</figcaption></figure><figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="JAVIS의 상태와 로그를 확인하는 DMC 상태 GUI" loading="lazy"><figcaption>메인 상태, 세부 임무와 이벤트 로그를 확인하는 상태 GUI</figcaption></figure></div>
 
-실제 주행 장치, 카메라와 로봇팔이 모두 준비될 때까지 기다리지 않고 통합 개발을 진행할 수 있도록 실제 모듈과 동일한 인터페이스를 사용하는 Mock 환경을 구현했습니다.
+## 실제 장비 없이 제어 흐름 검증하기
 
-<div class="role-grid"><div class="info-card"><strong>같은 명령 구조</strong><span>실제 모듈과 Mock이 동일한 인터페이스로 명령을 수신</span></div><div class="info-card"><strong>상태 전이 확인</strong><span>하위 모듈의 완료·실패 응답에 따른 다음 동작 검증</span></div><div class="info-card"><strong>독립적인 통합 개발</strong><span>장비 연결 전에도 전체 임무 흐름을 반복 실행</span></div></div>
+AI, 주행과 로봇팔 모듈이 모두 준비될 때까지 기다리지 않고 통합 개발을 진행할 수 있도록 공통 인터페이스를 정의했습니다. 실제 모듈과 Mock 모듈이 같은 명령과 응답 구조를 사용하므로 메인 컨트롤러를 변경하지 않고 실행 대상을 교체할 수 있습니다.
 
-Mock의 응답을 바꿔 정상 완료뿐 아니라 실패와 작업 취소 상황을 재현했습니다. 이를 통해 실제 로봇을 연결하기 전에 State Machine의 전이와 예외 처리 흐름을 반복적으로 확인했습니다.
+<div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="실제 모듈과 Mock 모듈을 분리한 JAVIS 인터페이스 구조" loading="lazy"><figcaption>AI·주행·로봇팔의 실제 구현과 Mock 구현을 분리한 구조</figcaption></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="Mock 응답을 조작해 JAVIS 제어 흐름을 시험하는 GUI" loading="lazy"><figcaption>Mock의 정상·실패 응답을 변경하며 상태 전이를 확인하는 테스트 GUI</figcaption></figure></div>
 
-## 좁은 서가를 통과하지 못했던 이유
-
-초기 Nav2 구성에서는 좁은 서가에 진입하지 못하거나 회전 과정에서 주변 장애물과 접촉하는 문제가 발생했습니다. 장애물의 Inflation 영역을 크게 설정하면 통로가 막힌 것으로 판단했고, 작게 설정하면 벽과 가까운 경로가 생성됐습니다.
-
-<dl class="flow"><dt>문제</dt><dd>경로 생성 실패, Recovery 반복과 회전 중 장애물 접촉이 발생했습니다.</dd><dt>원인</dt><dd>로봇의 비원형 Footprint와 회전 반경, LiDAR Sensor Filtering, Costmap Inflation과 협로 Trajectory 탐색이 함께 영향을 줬습니다.</dd><dt>개선</dt><dd>NavFn·DWB 구성과 비교해 Smac Planner Hybrid와 MPPI를 적용하고, Footprint·Sensor Filter·Inflation 값을 함께 조정했습니다.</dd><dt>확인</dt><dd>실제 테스트 통로에서 경로 생성과 진입, 회전 동작을 시연 영상으로 확인했습니다.</dd></dl>
+Mock의 응답을 통해 정상 완료뿐 아니라 실행 실패와 작업 취소 상황을 재현했습니다. 이를 통해 실제 장비를 연결하기 전에 State Machine의 전이, 예외 처리와 하위 모듈 호출 순서를 반복적으로 확인했습니다.
 
 ## JAVIS를 구성하는 장비와 모듈
 

@@ -40,15 +40,15 @@
     "imageAlt": "ROOMIE robot arm aligning with an elevator button",
     "imageSequence": [],
     "titleKo": "ROOMIE — 호텔 서비스 로봇",
-    "titleEn": "ROOMIE — Hotel Room-Service Robot",
+    "titleEn": "ROOMIE — Hotel Service Robot",
     "keywords": [
       "ROS 2",
       "4-DOF Arm",
-      "Inverse Kinematics",
+      "PBVS",
       "FreeRTOS"
     ],
-    "descriptionKo": "카메라로 인식한 엘리베이터 버튼 위치를 4축 로봇팔의 관절각으로 변환하고, ESP32 제어기와 연결해 실제 버튼 조작을 구현했습니다.",
-    "descriptionEn": "Built a 4-DOF arm pipeline from Hand-Eye coordinate transforms and IK to ESP32 motion control. Separated communication and 6 ms target motion-update tasks with FreeRTOS."
+    "descriptionKo": "카메라로 인식한 버튼을 로봇 기준 3차원 좌표로 변환하고, 4축 로봇팔과 ESP32를 제어해 엘리베이터 버튼을 직접 조작했습니다.",
+    "descriptionEn": "Built a vision-to-motion pipeline that transforms an elevator button into a robot-frame target and controls a 4-DOF arm through an ESP32."
   },
   {
     "slug": "falcon",

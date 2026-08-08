@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="자율주행, 룸서비스 배송, 길 안내와 엘리베이터 층간 이동을 통합한 호텔 서비스 로봇">
+  <meta name="description" content="룸서비스 배송과 길 안내, 엘리베이터 층간 이동을 하나의 서비스로 연결한 호텔 로봇">
   <title>ROOMIE — Jongmyung Kim</title>
   <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,68 +21,55 @@
     <header class="project-header">
       <h1>ROOMIE — 호텔 서비스 로봇</h1>
       <div class="meta"><span><strong>팀:</strong> 4명</span><span><strong>기간:</strong> 2025.07.07–08.13</span></div>
-      <p class="project-skills">ROS 2 · Python · Inverse Kinematics · IBVS · Object Detection · ESP32</p>
+      <p class="project-skills">ROS 2 · Python · OpenCV · Inverse Kinematics · PBVS · ESP32 · FreeRTOS</p>
       <a class="project-repository" href="https://github.com/jongbob1918/ROOMIE" target="_blank" rel="noreferrer" aria-label="ROOMIE GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     </header>
 
     <section class="project-overview" id="overview">
       <h2>Overview</h2>
-      <p class="lead">호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생하며, 서비스 로봇이 이를 수행하려면 엘리베이터를 스스로 이용해야 합니다. ROOMIE는 자율주행, 룸서비스 배송, 길 안내와 엘리베이터 층간 이동을 통합한 호텔 서비스 로봇입니다. 층간 이동 요청이 발생하면 엘리베이터 앞까지 이동하고, 버튼을 인식해 로봇팔로 호출·층 선택 버튼을 조작한 뒤 목적층까지 이동합니다.</p>
+      <p class="lead">호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생합니다. ROOMIE는 자율주행, 물품 배송, 사용자 안내와 관리자 모니터링을 ROS 2로 연결한 호텔 서비스 로봇입니다. 엘리베이터 앞까지 이동한 뒤 버튼과 문 상태를 인식하고, 4축 로봇팔로 호출·목적층 버튼을 조작해 사람의 도움 없이 층간 임무를 이어갑니다.</p>
     </section>
 
-    <section class="demo-section" id="demo"><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE 로봇팔의 엘리베이터 버튼 조작"></figure></section>
+    <section class="demo-section" id="demo"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="프로젝트 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="팀-구성과-담당-기능">
-          <div class="case-heading"><h2>팀 구성과 담당 기능</h2></div>
-          <p>팀원은 장진혁, 김지연, 김종명, 박효진입니다. Vision Service에서 인식한 엘리베이터 버튼 위치를 받아 로봇 베이스 기준의 3차원 목표 좌표로 변환하고, Inverse Kinematics로 4축 로봇팔의 관절각을 계산해 실제 버튼을 누르는 기능을 담당했습니다.</p>
-<div class="diagram" role="img" aria-label="ROOMIE 담당 기능 범위"><div class="diagram-node">Elevator Button<br>Detection</div><div class="diagram-arrow">→</div><div class="diagram-node owner">3D Coordinate<br>Transformation</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Inverse<br>Kinematics</div><div class="diagram-arrow">→</div><div class="diagram-node owner">4-DOF Arm<br>Control</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Physical Button<br>Press</div></div>
+        <section class="case-section" id="엘리베이터를-스스로-이용하는-서비스-흐름">
+          <div class="case-heading"><h2>엘리베이터를 스스로 이용하는 서비스 흐름</h2></div>
+          <p>ROOMIE는 엘리베이터 앞까지 자율주행한 뒤 외부 호출 버튼을 누르고 문 열림을 확인합니다. 탑승 후에는 내부 목적층 버튼을 조작하고, 층수 표시기의 OCR 결과로 도착을 판단한 다음 하차해 기존 배송·안내 임무를 계속합니다.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_elevator_flow.png" alt="엘리베이터 도착, 호출 버튼 조작, 탑승, 목적층 버튼 조작과 하차로 이어지는 ROOMIE 동작 흐름" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="버튼-인식에서-모터-명령까지">
-          <div class="case-heading"><h2>버튼 인식에서 모터 명령까지</h2></div>
-          <div class="diagram" role="img" aria-label="ROOMIE 버튼 조작 파이프라인"><div class="diagram-node">Button BBox<br>Vision</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PnP · Hand-Eye<br>3D Target</div><div class="diagram-arrow">→</div><div class="diagram-node owner">IK<br>4 Joint Angles</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Serial Command<br>ESP32</div><div class="diagram-arrow">→</div><div class="diagram-node owner">FreeRTOS<br>4 Servos</div></div><p>관측, 접근, 정렬, 누르기를 분리하고 IK 해가 허용 오차나 관절 범위를 벗어나면 명령을 보내지 않습니다.</p>
-
-        </section>
-
-        <section class="case-section" id="좌표변환과-모션-프로파일">
-          <div class="case-heading"><h2>좌표변환과 모션 프로파일</h2></div>
-          <h3>카메라 좌표를 로봇 기준으로 변환</h3>
-<p>solvePnPRansac과 Hand-Eye Calibration, 현재 관절의 순기구학 결과를 결합합니다.</p>
-<div class="formula-block">T_base→button = T_base→tool · T_tool→camera · T_camera→button</div><h3>IK 해 검증</h3>
-<p>계산한 관절각으로 Forward Kinematics를 다시 수행하고 위치 오차와 관절 범위를 검사합니다.</p>
-<div class="formula-block">e_IK = ‖p_FK(q*) − p_target‖₂ ≤ 0.001 m</div><h3>Gaussian 모션 보간</h3>
-<p>ESP32의 Motion Task는 시작각과 목표각 사이를 Gaussian 누적함수 기반으로 갱신합니다.</p>
+        <section class="case-section" id="my-role">
+          <div class="case-heading"><h2>My Role</h2></div>
+          <p>4명으로 구성된 팀에서 엘리베이터 버튼을 조작하는 Arm Controller를 담당했습니다. Vision Service의 버튼 검출 결과를 로봇 기준 3차원 목표로 변환하고, 4축 로봇팔의 역기구학과 PBVS 정렬, ESP32 모터 제어를 연결했습니다. 또한 HTML·CSS·JavaScript 기반 Guest GUI와 PyQt 기반 Staff GUI를 구현하고 로봇 하드웨어 제작에 참여했습니다.</p>
 
         </section>
 
-        <section class="case-section" id="제어-시스템-구성">
-          <div class="case-heading"><h2>제어 시스템 구성</h2></div>
-          <div class="role-grid"><div class="info-card"><strong>Pose &amp; IK</strong><span>Hand-Eye 좌표변환과 4관절 해 계산</span></div><div class="info-card"><strong>Motion Control</strong><span>ROS 2–Serial–ESP32 명령 흐름과 보간</span></div><div class="info-card"><strong>Integration</strong><span>접근·정렬·누르기 시퀀스와 GUI 연동</span></div></div>
-        </section>
-
-        <section class="case-section" id="4축-로봇팔과-esp32">
-          <div class="case-heading"><h2>4축 로봇팔과 ESP32</h2></div>
-          <p>4개의 서보 모터로 구성된 로봇팔을 ESP32가 구동하고, 카메라 관측값은 ROS 2 제어 노드에서 좌표변환과 IK를 거쳐 관절 명령으로 변환됩니다. Encoder나 Force Sensor 기반 접촉 피드백이 확인되지 않아 명령 기반 Open-loop Actuator Control로 설명합니다.</p>
+        <section class="case-section" id="화면-속-버튼을-로봇팔의-목표로-바꾸기">
+          <div class="case-heading"><h2>화면 속 버튼을 로봇팔의 목표로 바꾸기</h2></div>
+          <p>Vision Service에서 버튼의 바운딩 박스와 네 모서리 좌표를 받으면 <code>solvePnPRansac</code>으로 카메라 기준 버튼 자세를 계산합니다. 이 결과에 Hand–Eye Calibration 행렬과 현재 관절의 Forward Kinematics를 결합해 로봇 베이스 기준의 목표 좌표를 얻습니다.</p>
+<div class="formula-block">T<sub>base→button</sub> = T<sub>base→tool</sub> · T<sub>tool→camera</sub> · T<sub>camera→button</sub></div><figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 픽셀 좌표를 추출해 위치를 추정하고 로봇팔 관절 제어로 연결하는 구조" loading="lazy"></figure><p>변환된 목표 위치는 <code>ikpy</code> 기반 4관절 역기구학으로 계산합니다. 계산 결과를 Forward Kinematics로 다시 검산해 위치 오차가 1 mm를 넘거나 관절 제한을 벗어나면 모터 명령을 보내지 않도록 했습니다.</p>
 
         </section>
 
-        <section class="case-section" id="버튼-빗맞힘과-정지-진동">
-          <div class="case-heading"><h2>버튼 빗맞힘과 정지 진동</h2></div>
-          <dl class="flow"><dt>증상</dt><dd>정지 순간 팔끝이 흔들리고 계산된 버튼 위치와 실제 접촉점이 어긋났습니다.</dd><dt>원인</dt><dd>좌표계 장착 오차, 급격한 관절각 변화와 Blocking Serial 처리가 함께 영향을 줬습니다.</dd><dt>해결</dt><dd>Hand-Eye 변환을 적용하고 통신과 Motion Task를 서로 다른 Core에 배치했으며 Gaussian 보간을 적용했습니다.</dd><dt>검증</dt><dd>버튼 인식부터 실제 누르기까지 연속 동작을 완료했습니다.</dd></dl>
+        <section class="case-section" id="정렬하고-누른-뒤-안전하게-복귀하기">
+          <div class="case-heading"><h2>정렬하고 누른 뒤 안전하게 복귀하기</h2></div>
+          <p>버튼 클릭은 하나의 ROS 2 Action으로 구성했습니다. 로봇팔이 관측 자세로 이동하면 PBVS가 버튼 정면의 준비 위치를 계산하고, 준비 위치에서 버튼 방향으로 전진해 접촉한 뒤 저장한 관절각으로 후퇴합니다. 작업 성공 여부와 관계없이 마지막에는 관측 자세로 복귀하도록 실행 흐름을 묶었습니다.</p>
+<div class="diagram" role="img" aria-label="ROOMIE 버튼 조작 제어 흐름"><div class="diagram-node">Button Pose<br>Vision Service</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PnP · Hand–Eye<br>3D Target</div><div class="diagram-arrow">→</div><div class="diagram-node owner">PBVS<br>Alignment</div><div class="diagram-arrow">→</div><div class="diagram-node owner">4-DOF IK<br>Press · Retreat</div><div class="diagram-arrow">→</div><div class="diagram-node">Action Result<br>Success · Abort</div></div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 카메라로 엘리베이터 버튼 위치에 로봇팔을 정렬하는 과정" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE의 4축 로봇팔이 엘리베이터 외부 호출 버튼을 누르는 동작" loading="lazy"></figure></div><p>동시에 들어온 클릭 요청은 실행 잠금으로 차단하고, 같은 버튼의 반복 요청에는 쿨다운을 적용했습니다. 비전 응답이나 IK 계산, ESP32 완료 응답이 실패하면 Action을 중단해 다음 단계가 잘못 이어지지 않도록 했습니다.</p>
+
         </section>
 
-        <section class="case-section" id="검증-결과">
-          <div class="case-heading"><h2>검증 결과</h2></div>
-          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>4개 활성 관절</strong><p>URDF Chain의 Active Link와 4개 Servo 명령을 확인할 수 있습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>분리된 FreeRTOS Task</strong><p>Motion과 Serial 처리를 서로 다른 Core에 고정합니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>연속 버튼 조작</strong><p>접근·정렬·누르기의 End-to-end 동작을 영상으로 확인합니다.</p></div></div>
+        <section class="case-section" id="정지-진동과-통신-지연-줄이기">
+          <div class="case-heading"><h2>정지 진동과 통신 지연 줄이기</h2></div>
+          <p>초기 등속 제어에서는 목표 각도에 도달할 때 팔끝이 떨리거나 동작이 끊기는 현상이 나타났습니다. ESP32에서 Gaussian 누적함수 기반 가감속 프로파일을 적용하고 네 관절의 목표각을 6 ms 주기로 함께 갱신해 급격한 속도 변화를 줄였습니다.</p>
+<dl class="flow"><dt>모션 제어</dt><dd>FreeRTOS Motion Task를 한 코어에 고정해 6 ms 주기로 네 개의 서보 목표각을 갱신합니다.</dd><dt>명령 수신</dt><dd>Communication Task를 별도 코어에서 실행해 모터 이동 중에도 시리얼 입력 처리가 제어 주기를 막지 않도록 했습니다.</dd><dt>완료 확인</dt><dd>460800 baud로 관절 명령을 전송하고 ESP32의 완료 ACK를 받은 경우에만 다음 동작으로 전환합니다.</dd><dt>예외 처리</dt><dd>오래된 수신 버퍼를 비우고 타임아웃·IK 실패·중복 요청을 각각 실패 결과로 반환합니다.</dd></dl>
         </section>
 
-        <section class="case-section" id="관련-코드">
-          <div class="case-heading"><h2>관련 코드</h2></div>
-          <p><a href="https://github.com/jongbob1918/ROOMIE/tree/main/ros2_ws/src/roomie_ac">Arm Controller 구현 보기 ↗</a></p>
-<p>좌표변환, IK, Serial Manager, ESP32 Firmware와 Calibration 실행 파일이 공개되어 있습니다.</p>
-
+        <section class="case-section" id="서비스-화면과-로봇-제어-연결하기">
+          <div class="case-heading"><h2>서비스 화면과 로봇 제어 연결하기</h2></div>
+          <p>투숙객은 Guest GUI에서 룸서비스를 주문하거나 목적지를 선택하고, 직원은 Staff GUI에서 주문을 확인한 뒤 픽업을 요청합니다. 요청은 Roomie Main Service를 거쳐 로봇에 할당되며, ROS 2 기반 Roomie Controller가 주행·비전·로봇팔·적재함 제어 모듈의 실행을 연결합니다.</p>
+<figure class="feature-media"><img src="../assets/images/roomie_system_architecture.png" alt="Guest, Staff, Admin GUI와 Roomie Main Server, 로봇 내부 제어 모듈을 연결한 ROOMIE 시스템 구성" loading="lazy"></figure>
         </section>
       </article>
     </div>

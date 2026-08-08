@@ -27,9 +27,9 @@ card:
   descriptionKo: 5개 연속 동작을 색상별 단일 태스크로 재구성하고 복구 시연을 더해, 심사에서 5개 공 중 3개 분류에 성공했습니다.
   descriptionEn: Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging.
 overview: >-
-  한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가해, 두 로봇팔이 공을 전달하고 색상별로 분류하는 미션에 도전했습니다.
-  제한된 준비 시간 안에 LeRobot과 ACT를 적용하고, 텔레오퍼레이션으로 양팔 동작 데이터를 수집해 학습했습니다.
-  다섯 공의 연속 동작을 한 번에 학습하던 방식에서 공 하나씩 처리하는 단일 태스크 방식으로 데이터 구성을 바꿔 실제 로봇 심사를 진행했습니다.
+  한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가했습니다.
+  두 대의 SO-101 로봇팔로 공을 전달하고 색상별 수납함에 분류하는 미션을 수행했습니다.
+  제한된 시간 안에 텔레오퍼레이션으로 양팔 동작 데이터를 수집하고 LeRobot과 ACT로 학습해 실제 로봇 심사를 진행했습니다.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
@@ -38,17 +38,17 @@ demo:
 
 ## 도전 과제: 두 팔이 공을 건네 색상별로 분류하기
 
-1종목의 미션은 한쪽 팔로 공을 집어 반대쪽 팔의 그리퍼로 전달한 뒤, 색상별로 수납함에 정확히 분류하는 것이었습니다.
+<div class="role-grid"><div class="info-card"><strong>Pick & Place</strong><span>한쪽 팔로 바닥의 공 집기</span></div><div class="info-card"><strong>Transfer</strong><span>반대쪽 팔의 그리퍼로 전달</span></div><div class="info-card"><strong>Classification</strong><span>색상별 수납함에 넣기</span></div></div>
 
-<div class="role-grid"><div class="info-card"><strong>Pick & Place</strong><span>한쪽 팔로 테이블 위의 공을 집습니다.</span></div><div class="info-card"><strong>Transfer</strong><span>집은 공을 반대편 팔의 그리퍼로 안정적으로 전달합니다.</span></div><div class="info-card"><strong>Classification</strong><span>전달받은 공을 색상에 맞는 지정 수납함에 넣습니다.</span></div></div>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/mission_top_view.jpg" alt="색상 공과 수납함, 두 대의 SO-101 로봇팔이 배치된 해커톤 미션 상단 모습" loading="lazy"></figure>
 
-<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/mission_top_view.jpg" alt="색상 공과 수납함, 두 대의 SO-101 로봇팔이 배치된 해커톤 미션 상단 모습" loading="lazy"><figcaption>미션 환경 · 두 로봇팔 사이에서 공을 전달한 뒤 색상별 수납함으로 분류</figcaption></figure>
+## 모델 선택
 
-## 왜 ACT를 선택했는가
+[ACT(Action Chunking with Transformers)](https://arxiv.org/abs/2304.13705)는 카메라 영상과 로봇의 관절 상태를 입력받아 여러 미래 행동을 하나의 **action chunk**로 예측하는 모방학습 모델입니다.
 
-ACT(Action Chunking with Transformers)는 스탠퍼드 중심 공동 연구팀이 2023년 [ALOHA 연구](https://arxiv.org/abs/2304.13705)에서 제안한 모방학습 모델입니다. 카메라 영상과 로봇 관절 상태를 입력받아 다음 한 동작이 아닌 여러 미래 행동을 하나의 **action chunk**로 예측합니다.
+<dl class="flow"><dt>개발 환경</dt><dd>LeRobot에서 ACT 학습과 추론을 바로 구성할 수 있어 제한된 준비 시간을 데이터 수집과 태스크 개선에 사용할 수 있었습니다.</dd><dt>연속 동작</dt><dd>여러 시점의 행동을 묶어 예측하므로 집기·전달·분류로 이어지는 양팔 동작을 끊김 없이 제어하는 데 적합했습니다.</dd><dt>입력 정보</dt><dd>카메라 영상과 관절 상태를 함께 사용해 공의 위치와 두 로봇팔의 움직임을 하나의 정책으로 학습할 수 있었습니다.</dd></dl>
 
-제한된 시간 안에 양팔의 연속 동작을 학습해야 했기 때문에, LeRobot에서 바로 적용할 수 있고 여러 미래 행동을 묶어 예측하는 ACT를 선택했습니다. 별도의 모델 비교 실험보다는 시연 데이터 수집과 태스크 구성 개선에 집중했습니다.
+별도의 모델 비교 실험은 진행하지 않았으며, 해커톤의 개발 시간과 양팔 연속 제어 조건을 기준으로 ACT를 선택했습니다.
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure>
 

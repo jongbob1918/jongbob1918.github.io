@@ -34,29 +34,52 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="도서-요청에서-픽업까지">
-          <div class="case-heading"><h2>도서 요청에서 픽업까지</h2></div>
+        <section class="case-section" id="서비스-시나리오-도서-요청에서-픽업까지">
+          <div class="case-heading"><h2>서비스 시나리오 — 도서 요청에서 픽업까지</h2></div>
           <p>사용자가 도서를 요청하면 중앙 시스템이 로봇의 상태와 배터리를 확인해 작업을 할당합니다. JAVIS는 목표 책장으로 이동하고, 카메라로 도서를 인식한 뒤 로봇팔로 픽업합니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="도서 선택부터 인증, JAVIS 작업과 도서 수령까지의 서비스 흐름" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="좁은-서가에서도-안정적으로-이동하기">
-          <div class="case-heading"><h2>좁은 서가에서도 안정적으로 이동하기</h2></div>
+        <section class="case-section" id="협소-공간-자율주행-smac-hybrid와-mppi">
+          <div class="case-heading"><h2>협소 공간 자율주행 — Smac Hybrid와 MPPI</h2></div>
           <p>JAVIS는 2D LiDAR로 작성한 지도에서 위치를 추정하고, Nav2를 사용해 목표 책장까지의 경로를 생성합니다. Global Planner가 전체 이동 경로를 만들고 Local Controller가 LiDAR로 감지한 장애물과 Costmap을 반영해 로봇의 속도와 회전 방향을 결정합니다.</p>
 <p>초기 구성에서는 장애물의 Inflation 영역을 크게 설정하면 좁은 통로가 막힌 것으로 판단했고, 작게 설정하면 벽과 가까운 경로가 생성됐습니다. 회전이나 Recovery 과정에서 주변 장애물과 접촉하는 문제도 반복됐습니다.</p>
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="협소 공간에서 회전 중 장애물과 접촉하는 초기 주행" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="개선 후 협소한 서가 사이를 주행하는 JAVIS의 RViz 화면" loading="lazy"></figure></div><dl class="flow"><dt>경로 계획</dt><dd>점 모델 중심의 NavFn 대신 로봇의 직사각형 형상, 회전 반경과 후진 경로를 고려하는 Smac Planner Hybrid를 적용했습니다.</dd><dt>장애물 인식</dt><dd>실제 로봇보다 넓게 설정돼 근접 장애물을 제거하던 LiDAR 필터 범위를 다시 설정하고 Costmap Inflation 가중치를 조정했습니다.</dd><dt>경로 추종</dt><dd>복잡한 공간에서 유효한 회피 궤적을 찾기 어려웠던 DWB 대신 샘플링 기반 예측 제어를 사용하는 MPPI Controller를 적용했습니다.</dd></dl>
         </section>
 
-        <section class="case-section" id="서비스-서버와-로봇-모듈-연결하기">
-          <div class="case-heading"><h2>서비스 서버와 로봇 모듈 연결하기</h2></div>
-          <p>JAVIS는 서비스 서버와 로봇 내부 제어 모듈이 ROS 2 인터페이스를 통해 요청과 상태를 양방향으로 교환하는 구조입니다. JAVIS Device의 DMC는 서버에서 받은 임무를 주행·로봇팔 제어기에 전달하고, 각 모듈의 실행 결과와 로봇 상태를 다시 서버에 전달합니다. AI Image Server는 카메라 영상을 처리하고 인식 결과를 로봇에 반환합니다.</p>
-<div class="system-architecture" role="img" aria-label="JAVIS Server와 AI Image Server가 로봇 내부 JAVIS Device, Arm Controller, Drive Controller와 양방향으로 통신하는 시스템 구성"><section class="system-domain service-domain"><h3>Service</h3><div class="system-module"><strong>JAVIS Server</strong><small>작업 요청 · 로봇 상태</small></div><div class="system-module"><strong>AI Image Server</strong><small>영상 분석 · 인식 결과</small></div></section><div class="bidirectional-links" aria-hidden="true"><div><span>Task · Status</span><b>⇄</b></div><div><span>Image · Result</span><b>⇄</b></div></div><section class="system-domain robot-domain"><h3>Robot · JAVIS</h3><div class="system-module system-core"><strong>JAVIS Device · DMC</strong><small>상태 관리 · 임무 제어</small><div class="module-parts"><span>Speaker</span><span>LCD</span><span>Web Cam</span><span>Mic</span></div></div><div class="internal-links" aria-hidden="true">⇅</div><div class="robot-modules"><div class="system-module"><strong>Arm Controller · RP5</strong><small>도서 픽업 제어</small><div class="module-parts"><span>Joint Motor</span><span>Gripper</span><span>Web Cam</span></div></div><div class="system-module"><strong>Drive Controller · RP5</strong><small>자율주행 제어</small><div class="module-parts"><span>BLDC Motor</span><span>Impact Sensor</span><span>LiDAR</span><span>Temp Sensor</span></div></div></div></section></div><div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 충전, 대기, 작업과 긴급 정지 상태 전이도" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="JAVIS의 메인 상태, 세부 임무, 배터리와 ROS 로그를 확인하는 모니터링 GUI" loading="lazy"></figure></div>
+        <section class="case-section" id="robot-state-machine-상태와-임무-흐름-제어">
+          <div class="case-heading"><h2>Robot State Machine — 상태와 임무 흐름 제어</h2></div>
+          <p>로봇의 초기화, 충전, 작업 대기, 작업 수행과 충전소 이동을 상위 State로 구분했습니다. 각 임무 단계에서는 하위 모듈의 완료·실패·취소 응답을 확인해 다음 상태를 결정하고, 배터리 조건이나 긴급 정지 요청이 발생하면 현재 임무에서 복구 또는 안전 상태로 전환하도록 구성했습니다.</p>
+<figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 초기화, 충전, 대기, 작업, 복귀와 긴급 정지 상태 전이도" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="실제-장비-없이-제어-흐름-검증하기">
-          <div class="case-heading"><h2>실제 장비 없이 제어 흐름 검증하기</h2></div>
+        <section class="case-section" id="팀-모듈-인터페이스-state-machine과-하위-모듈-연결">
+          <div class="case-heading"><h2>팀 모듈 인터페이스 — State Machine과 하위 모듈 연결</h2></div>
+          <p>여러 팀원이 개발한 관제 서버, 퍼셉션과 로봇팔 모듈을 Robot State Machine에 연결하기 위해 요청·응답·상태 인터페이스를 정의했습니다. JAVIS Device의 DMC는 서버에서 받은 임무를 자율주행·로봇팔 제어기에 전달하고, 각 모듈의 실행 결과와 로봇 상태를 다시 서버에 반환합니다. AI Image Server의 인식 결과도 동일한 임무 흐름에서 다음 동작을 결정하는 상태 입력으로 사용했습니다.</p>
+<div class="system-architecture" role="img" aria-label="JAVIS Server와 AI Image Server가 로봇 내부 JAVIS Device, Arm Controller, Drive Controller와 양방향으로 통신하는 시스템 구성"><section class="system-domain service-domain"><h3>Service</h3><div class="system-module"><strong>JAVIS Server</strong><small>작업 요청 · 로봇 상태</small></div><div class="system-module"><strong>AI Image Server</strong><small>영상 분석 · 인식 결과</small></div></section><div class="bidirectional-links" aria-hidden="true"><div><span>Task · Status</span><b>⇄</b></div><div><span>Image · Result</span><b>⇄</b></div></div><section class="system-domain robot-domain"><h3>Robot · JAVIS</h3><div class="system-module system-core"><strong>JAVIS Device · DMC</strong><small>상태 관리 · 임무 제어</small><div class="module-parts"><span>Speaker</span><span>LCD</span><span>Web Cam</span><span>Mic</span></div></div><div class="internal-links" aria-hidden="true">⇅</div><div class="robot-modules"><div class="system-module"><strong>Arm Controller · RP5</strong><small>도서 픽업 제어</small><div class="module-parts"><span>Joint Motor</span><span>Gripper</span><span>Web Cam</span></div></div><div class="system-module"><strong>Drive Controller · RP5</strong><small>자율주행 제어</small><div class="module-parts"><span>BLDC Motor</span><span>Impact Sensor</span><span>LiDAR</span><span>Temp Sensor</span></div></div></div></section></div>
+        </section>
+
+        <section class="case-section" id="모니터링-gui-로봇-내부-상태-검증">
+          <div class="case-heading"><h2>모니터링 GUI — 로봇 내부 상태 검증</h2></div>
+          <p>실물 로봇 통합 테스트 중 현재 State, 세부 임무, 배터리와 ROS 로그를 한 화면에서 확인하는 모니터링 GUI를 개발했습니다. 임무가 멈춘 단계와 모듈별 완료·실패 응답을 추적해 State Machine의 전이, 예외 처리와 통합 로직을 검증하는 데 사용했습니다.</p>
+<figure class="feature-media"><img src="../assets/images/javis_status_gui.png" alt="JAVIS의 메인 상태, 세부 임무, 배터리와 ROS 로그를 확인하는 모니터링 GUI" loading="lazy"></figure>
+        </section>
+
+        <section class="case-section" id="mock-기반-상태-전이-테스트">
+          <div class="case-heading"><h2>Mock 기반 상태 전이 테스트</h2></div>
           <p>AI, 주행과 로봇팔 모듈이 모두 준비될 때까지 기다리지 않고 통합 개발을 진행할 수 있도록 공통 인터페이스를 정의했습니다. 실제 모듈과 Mock 모듈이 같은 명령과 응답 구조를 사용하므로 메인 컨트롤러를 변경하지 않고 실행 대상을 교체할 수 있습니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="실제 모듈과 Mock 모듈을 분리한 JAVIS 인터페이스 구조" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="Mock 응답을 조작해 JAVIS 제어 흐름을 시험하는 GUI" loading="lazy"></figure></div><p>Mock의 응답을 통해 정상 완료뿐 아니라 실행 실패와 작업 취소 상황을 재현했습니다. 이를 통해 실제 장비를 연결하기 전에 State Machine의 전이, 예외 처리와 하위 모듈 호출 순서를 반복적으로 확인했습니다.</p>
+
+        </section>
+
+        <section class="case-section" id="검증-결과와-한계">
+          <div class="case-heading"><h2>검증 결과와 한계</h2></div>
+          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>협소 공간 자율주행</strong><p>Smac Hybrid와 MPPI를 적용한 후 60 cm 협로를 충돌 없이 통과하는 주행을 시연했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>상태 전이와 예외 처리</strong><p>완료·실패·취소와 배터리 조건에 따른 State Machine 전이를 Mock 응답으로 확인했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">TOOL</span><strong>실물 로봇 모니터링</strong><p>현재 State, 세부 임무, 배터리와 ROS 로그를 모니터링 GUI에서 함께 확인했습니다.</p></div></div><div class="limitation"><strong>한계</strong> 반복 주행 성공률과 도서 요청부터 픽업까지의 전체 임무 시간은 별도로 측정하지 못했습니다.</div>
+        </section>
+
+        <section class="case-section" id="repository">
+          <div class="case-heading"><h2>Repository</h2></div>
+          <p><a href="https://github.com/jongbob1918/JAVIS/tree/main/javis_ros2/src/javis_dmc">JAVIS DMC 구현과 테스트 보기 ↗</a></p>
 
         </section>
       </article>

@@ -2,31 +2,56 @@
   {
     "slug": "javis",
     "group": "key",
+    "order": 1,
     "detailUrl": "projects/javis.html",
     "image": "assets/images/project_javis.png",
     "imageAlt": "JAVIS library service robot",
-    "title": "JAVIS — Library Management Robot",
-    "keywords": ["ROS 2", "Nav2", "Smac Planner", "MPPI", "System Integration"],
-    "description": "Built a ROS 2 library management robot that integrates autonomous navigation, manipulation, and vision AI to pick up and return books and guide visitors."
+    "titleKo": "JAVIS — 도서관 관리 로봇",
+    "titleEn": "JAVIS — Library Management Robot",
+    "keywords": [
+      "ROS 2",
+      "Nav2",
+      "Smac Planner",
+      "MPPI",
+      "System Integration"
+    ],
+    "descriptionKo": "자율주행, 로봇팔과 비전 AI를 ROS 2로 통합해 도서 픽업·반납과 사용자 안내를 수행하는 도서관 관리 로봇을 개발했습니다.",
+    "descriptionEn": "Built a ROS 2 library management robot that integrates autonomous navigation, manipulation, and vision AI to pick up and return books and guide visitors."
   },
   {
     "slug": "roomie",
     "group": "key",
+    "order": 2,
     "detailUrl": "projects/roomie.html",
     "image": "assets/images/elevator-alignbutton.gif",
     "imageAlt": "ROOMIE robot arm aligning with an elevator button",
-    "title": "ROOMIE — Hotel Room-Service Robot",
-    "keywords": ["ROS 2", "Robot Arm", "Inverse Kinematics", "Hand-Eye Calibration"],
-    "description": "Developed a controller and trajectory generator for a three-axis arm that operates elevator buttons. Completed the integrated demonstration in 38 days by separating calibration and alignment actions."
+    "titleKo": "ROOMIE — 엘리베이터 버튼 조작 로봇",
+    "titleEn": "ROOMIE — Hotel Room-Service Robot",
+    "keywords": [
+      "ROS 2",
+      "4-DOF Arm",
+      "Inverse Kinematics",
+      "FreeRTOS"
+    ],
+    "descriptionKo": "카메라로 인식한 엘리베이터 버튼 위치를 4축 로봇팔의 관절각으로 변환하고, ESP32 제어기와 연결해 실제 버튼 조작을 구현했습니다.",
+    "descriptionEn": "Built a 4-DOF arm pipeline from Hand-Eye coordinate transforms and IK to ESP32 motion control. Separated communication and 6 ms target motion-update tasks with FreeRTOS."
   },
   {
     "slug": "falcon",
     "group": "side",
+    "order": 3,
     "detailUrl": "projects/falcon.html",
     "image": "assets/images/hawkeye_mainpage.gif",
     "imageAlt": "FALCON runway hazard detection interface",
-    "title": "FALCON — Runway Safety Monitoring System",
-    "keywords": ["PyTorch", "YOLOv8", "ByteTrack", "Object Tracking"],
-    "description": "Custom-trained a runway hazard detection model and verified accuracy above 90%. Integrated ByteTrack-based trajectory tracking with hazard assessment logic."
+    "titleKo": "FALCON — 활주로 위험요소 관제",
+    "titleEn": "FALCON — Runway Safety Monitoring System",
+    "keywords": [
+      "PyTorch",
+      "YOLOv8",
+      "ByteTrack",
+      "Object Tracking"
+    ],
+    "descriptionKo": "활주로 위험요소 탐지 모델을 커스텀 학습해 정확도 90% 이상을 검증했습니다. ByteTrack 기반 이동 경로 추적과 위험 판단 로직을 통합했습니다.",
+    "descriptionEn": "Trained a six-class runway hazard detector and integrated detection, tracking, and map-coordinate conversion. The repository reports mAP@0.5:0.95 of 0.9005."
   }
 ]

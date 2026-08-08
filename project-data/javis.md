@@ -16,8 +16,8 @@ skills:
   - State Machine
 repository: https://github.com/jongbob1918/JAVIS
 card:
-  image: assets/images/project_javis.png
-  imageAlt: JAVIS library service robot
+  image: https://github.com/user-attachments/assets/ce7e6dba-8987-49cb-96f2-9ed3a3f76779
+  imageAlt: JAVIS navigating between library shelves in RViz
   titleEn: JAVIS — Library Management Robot
   keywords:
     - ROS 2
@@ -34,8 +34,9 @@ overview: >-
   사용자가 도서 픽업을 요청하면 중앙 시스템이 작업을 할당하고, JAVIS가 책장으로 이동해 도서를 인식한 뒤 로봇팔로 픽업합니다.
 demo:
   type: image
-  src: ../assets/images/project_javis.png
-  alt: JAVIS 도서관 서비스 로봇
+  src: https://github.com/user-attachments/assets/ce7e6dba-8987-49cb-96f2-9ed3a3f76779
+  alt: RViz에서 협소한 서가 사이를 주행하는 JAVIS
+  caption: 2D LiDAR와 Nav2를 사용한 서가 환경 자율주행
 ---
 
 ## 도서 요청에서 픽업까지

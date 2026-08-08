@@ -17,7 +17,15 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
 }).format(date);
 ---
 
-<BaseLayout title={`${note.data.title} — Engineering Notes`} description={note.data.description}>
+<BaseLayout
+  title={`${note.data.title} — Engineering Notes`}
+  description={note.data.description}
+  article={{
+    publishedAt: note.data.publishedAt,
+    updatedAt: note.data.updatedAt,
+    tags: note.data.tags
+  }}
+>
   <div class="notes-page-shell article-shell">
     <NotesSidebar activeCategory={note.data.category} />
     <main class="article-main">

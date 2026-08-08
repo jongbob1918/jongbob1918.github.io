@@ -42,11 +42,21 @@ h1, h2, h3, p { margin-top: 0; }
 .site-header { position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--paper) 94%, transparent); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
 .header-inner { min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .name { font-size: .9rem; font-weight: 750; letter-spacing: -.01em; }
-.nav { display: flex; align-items: center; gap: 22px; color: var(--muted); font-size: .84rem; }
-.nav a { position: relative; padding: 21px 0; }
-.nav a:hover, .nav .active { color: var(--ink); }
-.nav .active::after { content: ""; position: absolute; right: 0; bottom: 15px; left: 0; height: 2px; background: var(--ink); }
-.theme-toggle { width: 34px; height: 34px; display: grid; place-items: center; margin-left: -4px; padding: 0; color: var(--muted); border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
+.nav { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .84rem; }
+.projects-link { padding: 7px 12px; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; font-weight: 650; transition: transform .2s, background .2s, border-color .2s; }
+.projects-link:hover { border-color: var(--selection-line); background: var(--soft); transform: translateY(-1px); }
+.header-socials { display: flex; align-items: center; gap: 3px; margin-left: 2px; }
+.header-social-icon { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; background: transparent; transition: transform .2s, background .2s; }
+.header-social-icon:hover { background: var(--soft); transform: translateY(-2px); }
+.header-social-icon svg { width: 17px; height: 17px; fill: currentColor; stroke: none; }
+.header-social-icon[aria-label="Email"] { color: #ea4335; }
+.header-social-icon[aria-label="Email"] svg { fill: none; stroke: currentColor; stroke-width: 1.7; }
+.header-social-icon[aria-label="GitHub"] { color: #181717; }
+.header-social-icon[aria-label="LinkedIn"] { color: #0a66c2; }
+.header-social-icon[aria-label="YouTube"] { color: #f00; }
+.header-social-icon .play { fill: #fff; }
+:root[data-theme="dark"] .header-social-icon[aria-label="GitHub"] { color: #f2f4f7; }
+.theme-toggle { width: 34px; height: 34px; display: grid; place-items: center; padding: 0; color: var(--muted); border: 0; border-radius: 50%; background: transparent; cursor: pointer; }
 .theme-toggle:hover { color: var(--ink); background: var(--soft); }
 .theme-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .moon-icon, :root[data-theme="dark"] .sun-icon { display: none; }
@@ -179,8 +189,11 @@ h1, h2, h3, p { margin-top: 0; }
 @media (max-width: 640px) {
   .wrap { width: min(calc(100% - 28px), 1080px); }
   .header-inner { min-height: 58px; }
-  .nav { gap: 13px; font-size: .75rem; }
-  .nav a { padding: 18px 0; }
+  .nav { gap: 3px; font-size: .7rem; }
+  .projects-link { margin-right: 2px; padding: 6px 9px; }
+  .header-socials { gap: 0; margin-left: 0; }
+  .header-social-icon { width: 29px; height: 29px; }
+  .header-social-icon svg { width: 15px; height: 15px; }
   .theme-toggle { width: 30px; height: 30px; }
   .listing-header { margin-bottom: 24px; }
   .listing-header h1 { font-size: 2.25rem; }
@@ -193,7 +206,9 @@ h1, h2, h3, p { margin-top: 0; }
 }
 
 @media (max-width: 440px) {
-  .name { font-size: .8rem; }
-  .nav { gap: 10px; }
-  .nav a:first-child { display: none; }
+  .header-inner { gap: 6px; }
+  .name { font-size: .73rem; white-space: nowrap; }
+  .projects-link { padding-right: 7px; padding-left: 7px; }
+  .header-social-icon { width: 27px; height: 27px; }
+  .theme-toggle { width: 27px; height: 27px; }
 }

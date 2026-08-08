@@ -130,20 +130,4 @@ prevButtons[button] = current;
 
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="단일 호출, 이동 중 호출, 호출 취소와 대기 상태를 포함한 여덟 개 테스트 케이스 표" loading="lazy"><figcaption>TC01–08 — 발표자료에 작성한 입력 순서와 기대 동작</figcaption></figure></div>
 
-<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">TC01–03</span><strong>기본 호출과 이동 중 입력</strong><p>단일 층 호출, 3층·2층 순차 호출, 이동 중 2층 추가 호출</p></div><div class="evidence-card"><span class="status-tag status-demo">TC04–06</span><strong>취소와 빠른 다중 입력</strong><p>호출 재클릭 취소, 복합 호출·방향 변경, 빠른 연속 입력</p></div><div class="evidence-card"><span class="status-tag status-demo">TC07–08</span><strong>호출 해소 후 대기</strong><p>호출이 없을 때 가까운 층 복귀와 최종 위치 대기</p></div></div>
-
-<p class="note">PPT의 테스트 표에는 기대 결과가 작성돼 있지만 실제 결과와 오류 사항 열은 비어 있습니다. 따라서 8개 시나리오를 모두 통과했다고 주장하지 않고, Tinkercad 데모로 호출 등록·이동·도착의 대표 흐름을 확인한 범위로 제한합니다.</p>
-
 [발표 슬라이드 보기](https://docs.google.com/presentation/d/1m6TEW22ZXlsffNen36meO2qcAVfPnEL0svScLSEzju0/edit?usp=sharing) · [Tinkercad 시뮬레이션](https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled) · [전체 코드](https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino)
-
-## 검증 범위와 한계
-
-이 프로젝트는 실제 승강기를 제어한 것이 아니라 버튼과 LED로 호출 스케줄링을 시뮬레이션한 원데이 프로토타입입니다.
-
-- 실제 모터, 문 센서, 층 센서와 안전 인터락을 연결하지 않았습니다.
-- 정지 상태를 별도 enum으로 모델링하지 않고 마지막 진행 방향을 `upMode`에 유지합니다.
-- 기계식 버튼 Debounce와 입력 오류 처리가 없습니다.
-- 8개 테스트의 자동 실행 코드와 결과 로그가 저장소에 없습니다.
-- 호출이 없을 때 가까운 층으로 이동하는 정책은 실제 운영 요구사항에 따라 달라질 수 있습니다.
-
-다음 단계에서는 `STOPPED`, `MOVING_UP`, `MOVING_DOWN`, `DOOR_OPEN`을 명시적인 상태로 분리하고, 입력 이벤트와 상태 전이를 독립적으로 테스트할 수 있습니다. 테스트 시나리오를 시뮬레이터 입력으로 자동화하면 기대 경로와 실제 LED 위치를 비교하는 회귀 테스트도 구성할 수 있습니다.

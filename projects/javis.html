@@ -43,19 +43,13 @@
         <section class="case-section" id="픽업-반납-자율주행">
           <div class="case-heading"><h2>픽업·반납 자율주행</h2></div>
           <p>좁은 서가 사이에서 픽업·반납 임무를 수행할 수 있도록 지도 작성부터 경로 계획, 경로 추종까지 Nav2 주행 구성을 개선했습니다.</p>
-<dl class="flow"><dt>지도 작성</dt><dd>Cartographer와 2D LiDAR로 도서관 지도를 작성하고 픽업·반납 위치를 지정했습니다.</dd><dt>초기 테스트</dt><dd>DWB로 주행을 반복하자 좁은 복도와 앞이 막힌 구간에서 탈출하지 못했습니다. Inflation 값을 높이면 통로를 막힌 공간으로 판단하고, 낮추면 벽에 지나치게 가까워졌습니다.</dd><dt>주행 개선</dt><dd>로봇의 형상과 회전 반경, 후진을 고려하는 Smac Planner Hybrid를 적용했습니다. LiDAR 필터와 Inflation 값을 조정하고, 여러 후보 궤적을 비교해 움직임을 선택하는 MPPI를 튜닝했습니다.</dd><dt>결과</dt><dd>좁은 서가와 회피 여유가 적은 구간에서도 충돌 없이 픽업·반납 위치까지 주행했습니다.</dd></dl><div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="DWB 적용 후 좁은 공간에서 회전에 실패하는 초기 주행" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="Smac Hybrid와 MPPI 적용 후 좁은 서가를 통과하는 주행" loading="lazy"></figure></div>
+<figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="Cartographer와 2D LiDAR로 작성한 도서관 점유격자 지도와 로봇 위치" loading="lazy"><figcaption>Cartographer와 2D LiDAR로 작성한 도서관 지도와 로봇 위치</figcaption></figure><dl class="flow"><dt>지도 작성</dt><dd>Cartographer와 2D LiDAR로 도서관 지도를 작성하고 픽업·반납 위치를 지정했습니다.</dd><dt>초기 테스트</dt><dd>DWB로 주행을 반복하자 좁은 복도와 앞이 막힌 구간에서 탈출하지 못했습니다. Inflation 값을 높이면 통로를 막힌 공간으로 판단하고, 낮추면 벽에 지나치게 가까워졌습니다.</dd><dt>주행 개선</dt><dd>로봇의 형상과 회전 반경, 후진을 고려하는 Smac Planner Hybrid를 적용했습니다. LiDAR 필터와 Inflation 값을 조정하고, 여러 후보 궤적을 비교해 움직임을 선택하는 MPPI를 튜닝했습니다.</dd><dt>결과</dt><dd>좁은 서가와 회피 여유가 적은 구간에서도 충돌 없이 픽업·반납 위치까지 주행했습니다.</dd></dl><div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="DWB 적용 후 좁은 공간에서 회전에 실패하는 초기 주행" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="Smac Hybrid와 MPPI 적용 후 좁은 서가를 통과하는 주행" loading="lazy"></figure></div>
         </section>
 
         <section class="case-section" id="로봇-상태-및-임무-제어">
           <div class="case-heading"><h2>로봇 상태 및 임무 제어</h2></div>
           <p>로봇의 초기화, 충전, 작업 대기, 작업 수행과 충전소 이동을 상위 State로 구분했습니다. 각 임무 단계에서는 하위 모듈의 완료·실패·취소 응답을 확인해 다음 상태를 결정하고, 배터리 조건이나 긴급 정지 요청이 발생하면 현재 임무에서 복구 또는 안전 상태로 전환하도록 구성했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_state_machine.png" alt="JAVIS의 초기화, 충전, 대기, 작업, 복귀와 긴급 정지 상태 전이도" loading="lazy"></figure>
-        </section>
-
-        <section class="case-section" id="서버-요청을-주행-로봇팔-동작으로-연결하기">
-          <div class="case-heading"><h2>서버 요청을 주행·로봇팔 동작으로 연결하기</h2></div>
-          <p><code>DMC(Dobby Main Controller)</code>는 로봇 내부에서 작업 순서와 상태를 관리하는 메인 제어기입니다. 관제 서버가 임무를 보내면 DMC가 자율주행·비전·로봇팔 모듈을 순서대로 실행하고, 성공·실패 결과와 로봇 상태를 서버에 반환합니다.</p>
-<div class="diagram" role="img" aria-label="관제 서버의 임무가 DMC를 거쳐 자율주행, 비전과 로봇팔 동작으로 실행되고 결과가 반환되는 흐름"><div class="diagram-node">관제 서버<br>임무 할당</div><div class="diagram-arrow">→</div><div class="diagram-node owner">DMC<br>상태 · 작업 순서 관리</div><div class="diagram-arrow">→</div><div class="diagram-node owner">주행 · 비전 · 로봇팔<br>임무 실행</div><div class="diagram-arrow">→</div><div class="diagram-node">관제 서버<br>결과 · 상태 반환</div></div>
         </section>
 
         <section class="case-section" id="로봇-상태-모니터링">

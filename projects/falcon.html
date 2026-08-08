@@ -79,11 +79,6 @@
 <p>서버 연결이 끊기면 통신 스레드가 5초 간격으로 재연결하며, 줄바꿈을 메시지 경계로 사용해 여러 JSON 명령이 한 번에 수신돼도 순서대로 복원합니다. 이 구조를 통해 영상 추론 루프와 네트워크 지연을 분리하고 관제 GUI가 탐지 화면, 지도 마커와 경보 이력을 갱신할 수 있게 했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="CCTV 탐지 서버, FALCON Main Server, 관제 GUI와 조종사 시스템을 연결한 전체 소프트웨어 구조" loading="lazy"></figure>
         </section>
-
-        <section class="case-section" id="검증-결과와-한계">
-          <div class="case-heading"><h2>검증 결과와 한계</h2></div>
-          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>Hybrid Dataset 평가</strong><p>여섯 클래스 Ground Model v0.3가 mAP@0.5:0.95 0.9005를 기록했고 클래스별 PR Curve를 저장했습니다.</p></div><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>실제 모형 영상 탐지</strong><p>공항 모형 영상에서 조류·FOD·사람·동물·항공기·차량을 동시에 검출하고 Track ID를 유지했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">SYSTEM</span><strong>관제 시스템 연동</strong><p>좌표변환 결과와 객체 이벤트를 JSON으로 전송해 관제 GUI의 지도 마커와 경보 갱신에 연결했습니다.</p></div></div><div class="limitation"><strong>검증 범위</strong> 모델 지표는 Hybrid Dataset의 분리된 평가 데이터 기준이며 실제 운영 공항에서 측정한 결과가 아닙니다. 좌표변환은 네 개의 ArUco Marker가 모두 보이는 평면 공항 모형에서 검증했으며, 실제 공항 기준 좌표 오차와 전체 시스템 지연 시간은 별도로 측정하지 못했습니다.</div>
-        </section>
       </article>
     </div>
   </main>

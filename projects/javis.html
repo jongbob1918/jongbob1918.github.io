@@ -42,10 +42,8 @@
 
         <section class="case-section" id="픽업-반납-자율주행">
           <div class="case-heading"><h2>픽업·반납 자율주행</h2></div>
-          <p>Cartographer와 2D LiDAR로 도서관 지도를 작성하고, Nav2를 사용해 픽업·반납 위치까지 자율주행하도록 구성했습니다. Global Planner가 전체 경로를 만들고 Local Controller가 LiDAR와 Costmap을 바탕으로 장애물을 피하며 경로를 따라갑니다.</p>
-<p>초기에는 DWB Controller로 좁은 서가 공간의 주행을 테스트했습니다. 짧은 구간은 통과했지만 주행을 반복하면 좁은 복도나 앞이 막힌 구간에서 빠져나오지 못해 임무가 실패했습니다. Costmap의 Inflation 영역을 크게 설정하면 통로를 막힌 공간으로 판단하고, 작게 설정하면 벽에 지나치게 가까운 경로가 생성되는 문제도 있었습니다.</p>
-<div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="협소 공간에서 회전 중 장애물과 접촉하는 초기 주행" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="개선 후 협소한 서가 사이를 주행하는 JAVIS의 RViz 화면" loading="lazy"></figure></div><dl class="flow"><dt>경로 계획</dt><dd>로봇의 직사각형 형상과 회전 반경, 후진 경로를 고려하는 Smac Planner Hybrid를 적용했습니다.</dd><dt>장애물 인식</dt><dd>LiDAR 필터 범위를 다시 설정하고 Costmap Inflation 가중치를 조정해 벽과 장애물 사이의 안전거리를 맞췄습니다.</dd><dt>경로 추종</dt><dd>DWB 대신 여러 후보 궤적을 예측·평가해 제어값을 선택하는 MPPI Controller를 적용하고 주행 파라미터를 튜닝했습니다.</dd></dl><p>개선 후에는 좁은 서가와 회피 공간이 제한된 구간에서도 장애물을 피해 픽업·반납 위치까지 주행했습니다.</p>
-
+          <p>좁은 서가 사이에서 픽업·반납 임무를 수행할 수 있도록 지도 작성부터 경로 계획, 경로 추종까지 Nav2 주행 구성을 개선했습니다.</p>
+<dl class="flow"><dt>지도 작성</dt><dd>Cartographer와 2D LiDAR로 도서관 지도를 작성하고 픽업·반납 위치를 지정했습니다.</dd><dt>초기 테스트</dt><dd>DWB로 주행을 반복하자 좁은 복도와 앞이 막힌 구간에서 탈출하지 못했습니다. Inflation 값을 높이면 통로를 막힌 공간으로 판단하고, 낮추면 벽에 지나치게 가까워졌습니다.</dd><dt>주행 개선</dt><dd>로봇의 형상과 회전 반경, 후진을 고려하는 Smac Planner Hybrid를 적용했습니다. LiDAR 필터와 Inflation 값을 조정하고, 여러 후보 궤적을 비교해 움직임을 선택하는 MPPI를 튜닝했습니다.</dd><dt>결과</dt><dd>좁은 서가와 회피 여유가 적은 구간에서도 충돌 없이 픽업·반납 위치까지 주행했습니다.</dd></dl><div class="media-grid"><figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="DWB 적용 후 좁은 공간에서 회전에 실패하는 초기 주행" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="Smac Hybrid와 MPPI 적용 후 좁은 서가를 통과하는 주행" loading="lazy"></figure></div>
         </section>
 
         <section class="case-section" id="로봇-상태-및-임무-제어">
@@ -71,11 +69,6 @@
           <p>AI, 주행과 로봇팔 모듈이 모두 준비될 때까지 기다리지 않고 통합 개발을 진행할 수 있도록 공통 인터페이스를 정의했습니다. 실제 모듈과 Mock 모듈이 같은 명령과 응답 구조를 사용하므로 메인 컨트롤러를 변경하지 않고 실행 대상을 교체할 수 있습니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/javis_interface_mock_architecture.png" alt="실제 모듈과 Mock 모듈을 분리한 JAVIS 인터페이스 구조" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/javis_mock_test_gui.gif" alt="Mock 응답을 조작해 JAVIS 제어 흐름을 시험하는 GUI" loading="lazy"></figure></div><p>Mock의 응답을 통해 정상 완료뿐 아니라 실행 실패와 작업 취소 상황을 재현했습니다. 이를 통해 실제 장비를 연결하기 전에 State Machine의 전이, 예외 처리와 하위 모듈 호출 순서를 반복적으로 확인했습니다.</p>
 
-        </section>
-
-        <section class="case-section" id="검증-결과">
-          <div class="case-heading"><h2>검증 결과</h2></div>
-          <div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">DEMO</span><strong>픽업·반납 자율주행</strong><p>Smac Hybrid와 MPPI를 적용한 후 좁은 서가와 장애물이 밀집한 복잡한 공간을 충돌 없이 주행했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">CODE</span><strong>상태 전이와 예외 처리</strong><p>완료·실패·취소와 배터리 조건에 따른 State Machine 전이를 Mock 응답으로 확인했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">TOOL</span><strong>실물 로봇 모니터링</strong><p>현재 State, 세부 임무, 배터리와 ROS 로그를 모니터링 GUI에서 함께 확인했습니다.</p></div></div>
         </section>
       </article>
     </div>

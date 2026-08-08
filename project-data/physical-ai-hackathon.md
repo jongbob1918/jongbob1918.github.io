@@ -28,8 +28,8 @@ card:
   descriptionEn: Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging.
 overview: >-
   한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가해, 두 로봇팔이 공을 전달하고 색상별로 분류하는 미션에 도전했습니다.
-  제한된 시간 안에 정밀한 양팔 조작을 학습하기 위해 ACT 기반 모방학습을 적용하고, 직접 수집한 시연 데이터로 태스크 분리와 실패 복구 방법을 실험했습니다.
-  실제 로봇에서 데이터 구성 방식이 동작의 정확도와 강건성에 미치는 영향을 확인한 해커톤 참가 기록입니다.
+  제한된 준비 시간 안에 LeRobot과 ACT를 적용하고, 텔레오퍼레이션으로 양팔 동작 데이터를 수집해 학습했습니다.
+  다섯 공의 연속 동작을 한 번에 학습하던 방식에서 공 하나씩 처리하는 단일 태스크 방식으로 데이터 구성을 바꿔 실제 로봇 심사를 진행했습니다.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
@@ -79,8 +79,6 @@ ACT(Action Chunking with Transformers)는 스탠퍼드 중심 공동 연구팀�
 로봇은 다섯 개의 공 가운데 세 개를 집어 전달하고 색상별 수납함에 넣는 데 성공했습니다. 네 번째 공을 처리하는 과정에서 오른팔이 수납함을 넘어뜨렸고, 환경이 흐트러져 남은 시연은 더 이상 진행할 수 없었습니다. 완주에는 실패했지만, 데이터 전략을 바꾼 뒤 실제 심사 환경에서 세 번의 연속 성공을 확인했습니다.
 
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"><figcaption>실제 양팔 조작 · 공 집기, 그리퍼 간 전달, 색상별 수납함 분류</figcaption></figure>
-
-<div class="evidence-grid"><div class="evidence-card"><span class="status-tag status-demo">RESULT</span><strong>3 / 5 분류 성공</strong><p>심사에서 세 개의 공을 연속으로 전달·분류한 뒤 네 번째 동작 중 수납함이 넘어져 종료했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">DATA</span><strong>약 1,000개 시연</strong><p>공 5개를 각각 200회 기록하고 단일 태스크와 실패 복구 동작을 데이터에 포함했습니다.</p></div><div class="evidence-card"><span class="status-tag status-confirmed">MODEL</span><strong>15K 심사 체크포인트</strong><p>마감 시각까지 학습된 모델로 심사했으며, 저장소에는 이후 50K 설정의 공개 ACT 체크포인트도 연결돼 있습니다.</p></div></div>
 
 ## 회고: 모방을 넘어 판단할 수 있는 구조가 필요했다
 

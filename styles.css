@@ -125,7 +125,7 @@ html[data-theme="dark"] .social-icon[aria-label="GitHub"] { color: #f2f4f7; }
 .entry-list > .org-entry + .org-entry { padding-top: 0; border: 0; }
 .org-entry { display: flex; align-items: flex-start; gap: 14px; }
 .org-entry img { width: 44px; height: 50px; flex: 0 0 44px; object-fit: contain; }
-.org-entry .addinedu-logo { width: 96px; height: 50px; flex-basis: 96px; }
+.org-entry .addinedu-logo { width: 50px; height: 50px; flex-basis: 50px; }
 .org-icon { width: 44px; height: 50px; flex: 0 0 44px; display: grid; place-items: center; }
 .org-entry .rokaf-logo { width: 44px; height: 50px; max-width: none; flex: none; object-fit: contain; }
 .org-entry > span { display: grid; gap: 2px; min-width: 0; }

@@ -49,8 +49,6 @@ h1, h2, h3, p { margin-top: 0; }
 .header-social-icon { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid transparent; border-radius: 50%; background: transparent; transition: transform .2s, background .2s; }
 .header-social-icon:hover { background: var(--soft); transform: translateY(-2px); }
 .header-social-icon svg { width: 17px; height: 17px; fill: currentColor; stroke: none; }
-.header-social-icon[aria-label="Email"] { color: #ea4335; }
-.header-social-icon[aria-label="Email"] svg { fill: none; stroke: currentColor; stroke-width: 1.7; }
 .header-social-icon[aria-label="GitHub"] { color: #181717; }
 .header-social-icon[aria-label="LinkedIn"] { color: #0a66c2; }
 .header-social-icon[aria-label="YouTube"] { color: #f00; }

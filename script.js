@@ -129,13 +129,13 @@ const copyByLanguage = {
     keyProjects: 'Key Projects', sideProjects: 'Side Projects', blog: 'Blog', about: 'About',
     education: 'Education', career: 'Career', viewProject: 'View Project ↗', loadError: 'Project data could not be loaded.',
     educationDetails: ['Department of Aeronautical & Mechanical Engineering', 'AI Robotics Bootcamp · 2025.02–2025.08', 'ROS 2 · Navigation · SLAM · Deep Learning'],
-    careerDetails: ['Robotics Software Engineer', '2025.10–Present · Autonomous Navigation', 'Aircraft Maintenance Non-Commissioned Officer', '5 years · KF-16 Avionics Systems Maintenance']
+    careerDetails: ['Robotics Software Engineer', '2025.10–Present · Autonomous Navigation', 'Avionics Maintenance Non-Commissioned Officer', '2020.03–2025.03 · KF-16 Radar & Avionics Maintenance']
   },
   ko: {
     keyProjects: '주요 프로젝트', sideProjects: '사이드 프로젝트', blog: '블로그', about: '소개',
     education: '학력', career: '경력', viewProject: '프로젝트 보기 ↗', loadError: '프로젝트 정보를 불러오지 못했습니다.',
     educationDetails: ['항공기계공학과', 'AI 로보틱스 부트캠프 · 2025.02–2025.08', 'ROS 2 · Navigation · SLAM · Deep Learning'],
-    careerDetails: ['로보틱스 소프트웨어 엔지니어', '2025.10–현재 · 자율주행', '항공정비 부사관', '5년 · KF-16 항공전자시스템 정비']
+    careerDetails: ['로보틱스 소프트웨어 엔지니어', '2025.10–현재 · 자율주행', '항공전자제어 정비 부사관', '2020.03–2025.03 · KF-16 레이더·항공전자 계통 정비']
   }
 };
 

@@ -221,3 +221,5 @@ h1, h2, h3, p { margin-top: 0; }
   .header-social-icon { width: 27px; height: 27px; }
   .theme-toggle { width: 27px; height: 27px; }
 }
+
+.article .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.5em 0; }

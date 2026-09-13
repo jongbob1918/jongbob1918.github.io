@@ -146,6 +146,9 @@ h1, h2, h3, p { margin-top: 0; }
 .article pre code { padding: 0; background: transparent; }
 .article blockquote { margin: 28px 0; padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
 .article img { max-width: 100%; height: auto; }
+.article figure { margin: 28px 0; }
+.article figure img { display: block; margin: 0 auto; background: #fff; }
+.article figcaption { margin-top: 10px; color: var(--muted); font-size: .78rem; line-height: 1.6; }
 .article table { display: block; max-width: 100%; overflow-x: auto; margin: 24px 0; border-collapse: collapse; font-size: .88rem; }
 .article th, .article td { min-width: 110px; padding: 12px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
 .article th { color: var(--ink); background: var(--soft); }

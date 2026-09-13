@@ -27,7 +27,10 @@ featured: false
 
 딥러닝(Deep Learning)은 심층 신경망(Deep Neural Network)을 사용해 데이터에서 학습하는 머신러닝 방법이다.
 
-![AI 안에 머신러닝이, 머신러닝 안에 딥러닝이 포함된 관계](/images/notes/easy-deep-learning-ch01/ai-ml-dl.svg)
+<figure>
+  <img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-commons.svg" alt="AI 안에 머신러닝, 머신러닝 안에 딥러닝을 배치한 포함 관계 그림" width="480" loading="lazy" />
+  <figcaption>출처: Avimanyu786 · Tukijaaliwa, <a href="https://commons.wikimedia.org/wiki/File:AI-ML-DL.svg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. 원본 그대로 사용.</figcaption>
+</figure>
 
 ## 2. AI가 이미지와 번역을 처리하는 방식
 
@@ -41,6 +44,11 @@ featured: false
 4. 모델의 예측이 정답에 가까워지도록 학습한다.
 
 모델은 사진 자체를 사람처럼 보는 것이 아니라, 사진을 표현한 숫자를 계산한다.
+
+<figure>
+  <img src="/images/notes/easy-deep-learning-ch01/rgb-channels.png" alt="앵무새 사진을 R·G·B 채널로 분리하고 각 채널을 회색조로 표시한 이미지" width="400" loading="lazy" />
+  <figcaption>원본 사진과 R·G·B 채널. 출처: Ricardo Cancho Niemietz, <a href="https://commons.wikimedia.org/wiki/File:RGB_channels_separation.png">Wikimedia Commons</a> · Public domain.</figcaption>
+</figure>
 
 ### 번역
 
@@ -111,7 +119,10 @@ I am an instructor. → [I] [am] [an] [instructor] [.]
 2. 기준 패치 주변에서 같은 크기의 패치를 선택한다.
 3. 두 패치를 입력하고, 주변 패치가 기준 패치의 어느 방향에 있었는지 예측한다.
 
-메모에서 ‘파란색 패치’는 기준 영역을 표시한 것이다. 실제 입력은 그 영역에서 잘라낸 이미지다.
+<figure>
+  <img src="/images/notes/easy-deep-learning-ch01/context-prediction.jpg" alt="고양이 코의 기준 패치와 귀 패치로 상대 위치 3번을 예측하는 Context Prediction 원 저자 그림" width="1024" loading="lazy" />
+  <figcaption>파란색이 기준 패치이며, 주변 패치의 위치를 8개 방향 중에서 예측한다. 출처: Doersch · Gupta · Efros, <a href="https://graphics.cs.cmu.edu/projects/deepContext/">ICCV 2015 프로젝트 페이지</a>.</figcaption>
+</figure>
 
 패치의 위치는 추출 과정에서 알 수 있으므로 별도 레이블링 없이 여러 학습 쌍을 만들 수 있다. 이미지의 픽셀과 물체의 부분이 일정한 구조를 가진다는 점을 활용한다. [원 논문](https://arxiv.org/abs/1505.05192)
 
@@ -123,7 +134,10 @@ I am an instructor. → [I] [am] [an] [instructor] [.]
 2. 변형된 이미지를 모델에 넣어 각각 숫자 벡터로 표현한다.
 3. 같은 원본의 벡터는 가까워지고, 다른 원본의 벡터는 멀어지도록 모델을 조정한다.
 
-![같은 원본의 두 변형은 가깝게, 다른 원본의 표현은 멀어지도록 학습하는 대조학습 도식](/images/notes/easy-deep-learning-ch01/contrastive-learning.svg)
+<figure>
+  <img src="/images/notes/easy-deep-learning-ch01/simclr.png" alt="강아지와 의자 사진을 각각 두 번 변형해 같은 원본의 표현은 당기고 다른 원본은 밀어내는 SimCLR 그림" width="640" loading="lazy" />
+  <figcaption>같은 원본의 변형은 Attract, 다른 원본은 Repel로 표시되어 있다. 출처: Chen et al., <a href="https://simclr.github.io/">SimCLR 공식 프로젝트 페이지</a>.</figcaption>
+</figure>
 
 **이미지의 특징은 어떻게 배우는가?** 두 변형에 공통으로 남는 정보를 찾아야 같은 원본의 표현을 가깝게 만들 수 있다. 이 방향으로 모델을 반복해서 조정하며 특징을 학습한다. 서로 다른 원본에 같은 종류의 물체가 있을 수 있다는 점은 구분해야 한다. [SimCLR 원 논문](https://arxiv.org/abs/2002.05709)
 
@@ -162,7 +176,10 @@ I am an instructor. → [I] [am] [an] [instructor] [.]
 
 보상을 주는 것만으로 원하는 행동이 보장되지는 않는다. 행동을 시도하고 결과를 확인하는 경험이 필요하다.
 
-![행동을 선택하는 에이전트와 관측·보상을 돌려주는 환경의 상호작용](/images/notes/easy-deep-learning-ch01/reinforcement-learning.svg)
+<figure>
+  <img src="/images/notes/easy-deep-learning-ch01/rl-spinning-up.png" alt="에이전트가 행동을 보내고 환경에서 상태와 보상을 받는 강화학습 순환 그림" width="570" loading="lazy" />
+  <figcaption>출처: OpenAI, <a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html">Spinning Up</a> · <a href="/images/notes/easy-deep-learning-ch01/LICENSE-spinning-up.txt">MIT License</a>.</figcaption>
+</figure>
 
 #### 자주 나오는 용어
 

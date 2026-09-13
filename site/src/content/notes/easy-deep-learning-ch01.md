@@ -28,8 +28,8 @@ featured: false
 딥러닝(Deep Learning)은 심층 신경망(Deep Neural Network)을 사용해 데이터에서 학습하는 머신러닝 방법이다.
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-commons.svg" alt="AI 안에 머신러닝, 머신러닝 안에 딥러닝을 배치한 포함 관계 그림" width="480" loading="lazy" />
-  <figcaption>출처: Avimanyu786 · Tukijaaliwa, <a href="https://commons.wikimedia.org/wiki/File:AI-ML-DL.svg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. 원본 그대로 사용.</figcaption>
+  <img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-korean.png" alt="AI 안에 머신러닝, 머신러닝 안에 딥러닝을 배치한 포함 관계 그림" width="895" loading="lazy" />
+  <figcaption>인공지능 ⊃ 머신러닝 ⊃ 딥러닝. 출처: <a href="https://hyeonjiwon.github.io/machine%20learning/ML-1/">Hyeon’s DevLog · 머신러닝의 개요</a>.</figcaption>
 </figure>
 
 ## 2. AI가 이미지와 번역을 처리하는 방식
@@ -38,17 +38,20 @@ featured: false
 
 일반적인 8비트 RGB 이미지는 픽셀마다 빨강(R), 초록(G), 파랑(B) 값을 갖는다. 각 값은 0~255 범위이며, `(255, 255, 255)`는 흰색이다.
 
-1. 픽셀 값을 R·G·B 채널별로 모으면 행렬 세 개가 된다.
-2. 이 숫자 배열을 모델의 입력으로 사용한다.
-3. 강아지 사진은 1, 고양이 사진은 0처럼 정답 레이블을 정한다.
-4. 모델의 예측이 정답에 가까워지도록 학습한다.
-
-모델은 사진 자체를 사람처럼 보는 것이 아니라, 사진을 표현한 숫자를 계산한다.
+픽셀 값을 R·G·B 채널별로 모으면 행렬 세 개가 된다. 아래 그림은 강아지 사진을 세 채널과 숫자 행렬로 표현한 예시다.
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch01/rgb-channels.png" alt="앵무새 사진을 R·G·B 채널로 분리하고 각 채널을 회색조로 표시한 이미지" width="400" loading="lazy" />
-  <figcaption>원본 사진과 R·G·B 채널. 출처: Ricardo Cancho Niemietz, <a href="https://commons.wikimedia.org/wiki/File:RGB_channels_separation.png">Wikimedia Commons</a> · Public domain.</figcaption>
+  <img src="/images/notes/easy-deep-learning-ch01/dog-rgb-matrices.png" alt="강아지 사진을 빨강·초록·파랑 채널로 나누고 각 채널 아래에 숫자 행렬을 표시한 예시" width="1590" loading="lazy" />
+  <figcaption>행렬의 수치는 설명용 예시다. 출처: <a href="https://bruders.tistory.com/85">Bruders · 픽셀과 채널</a>, 원자료: <a href="https://www.analyticsvidhya.com/blog/2021/03/grayscale-and-rgb-format-for-storing-images/">Analytics Vidhya</a>.</figcaption>
 </figure>
+
+분류를 학습할 때는 이 숫자 배열을 입력으로 사용하고, 정답 레이블을 별도로 붙인다.
+
+- **입력:** 강아지 또는 고양이 사진의 RGB 숫자 배열
+- **정답:** 강아지는 1, 고양이는 0처럼 정한 레이블
+- **학습:** 모델의 예측이 정답에 가까워지도록 조정
+
+픽셀 값은 사진을 표현하는 숫자이고, 정답 레이블은 사진의 종류를 표시하는 숫자다.
 
 ### 번역
 

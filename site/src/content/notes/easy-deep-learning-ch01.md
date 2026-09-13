@@ -29,7 +29,7 @@ featured: false
 
 <figure>
   <img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-korean.png" alt="AI 안에 머신러닝, 머신러닝 안에 딥러닝을 배치한 포함 관계 그림" width="895" loading="lazy" />
-  <figcaption>인공지능 ⊃ 머신러닝 ⊃ 딥러닝. 출처: <a href="https://hyeonjiwon.github.io/machine%20learning/ML-1/">Hyeon’s DevLog · 머신러닝의 개요</a>.</figcaption>
+  <figcaption>출처: <a href="https://hyeonjiwon.github.io/machine%20learning/ML-1/">Hyeon’s DevLog · 머신러닝의 개요</a>.</figcaption>
 </figure>
 
 ## 2. AI가 이미지와 번역을 처리하는 방식
@@ -42,7 +42,7 @@ featured: false
 
 <figure>
   <img src="/images/notes/easy-deep-learning-ch01/dog-rgb-matrices.png" alt="강아지 사진을 빨강·초록·파랑 채널로 나누고 각 채널 아래에 숫자 행렬을 표시한 예시" width="1590" loading="lazy" />
-  <figcaption>행렬의 수치는 설명용 예시다. 출처: <a href="https://bruders.tistory.com/85">Bruders · 픽셀과 채널</a>, 원자료: <a href="https://www.analyticsvidhya.com/blog/2021/03/grayscale-and-rgb-format-for-storing-images/">Analytics Vidhya</a>.</figcaption>
+  <figcaption>출처: <a href="https://bruders.tistory.com/85">Bruders · 픽셀과 채널</a>, 원자료: <a href="https://www.analyticsvidhya.com/blog/2021/03/grayscale-and-rgb-format-for-storing-images/">Analytics Vidhya</a>.</figcaption>
 </figure>
 
 분류를 학습할 때는 이 숫자 배열을 입력으로 사용하고, 정답 레이블을 별도로 붙인다.
@@ -124,7 +124,7 @@ I am an instructor. → [I] [am] [an] [instructor] [.]
 
 <figure>
   <img src="/images/notes/easy-deep-learning-ch01/context-prediction.jpg" alt="고양이 코의 기준 패치와 귀 패치로 상대 위치 3번을 예측하는 Context Prediction 원 저자 그림" width="1024" loading="lazy" />
-  <figcaption>파란색이 기준 패치이며, 주변 패치의 위치를 8개 방향 중에서 예측한다. 출처: Doersch · Gupta · Efros, <a href="https://graphics.cs.cmu.edu/projects/deepContext/">ICCV 2015 프로젝트 페이지</a>.</figcaption>
+  <figcaption>출처: Doersch · Gupta · Efros, <a href="https://graphics.cs.cmu.edu/projects/deepContext/">ICCV 2015 프로젝트 페이지</a>.</figcaption>
 </figure>
 
 패치의 위치는 추출 과정에서 알 수 있으므로 별도 레이블링 없이 여러 학습 쌍을 만들 수 있다. 이미지의 픽셀과 물체의 부분이 일정한 구조를 가진다는 점을 활용한다. [원 논문](https://arxiv.org/abs/1505.05192)
@@ -139,7 +139,7 @@ I am an instructor. → [I] [am] [an] [instructor] [.]
 
 <figure>
   <img src="/images/notes/easy-deep-learning-ch01/simclr.png" alt="강아지와 의자 사진을 각각 두 번 변형해 같은 원본의 표현은 당기고 다른 원본은 밀어내는 SimCLR 그림" width="640" loading="lazy" />
-  <figcaption>같은 원본의 변형은 Attract, 다른 원본은 Repel로 표시되어 있다. 출처: Chen et al., <a href="https://simclr.github.io/">SimCLR 공식 프로젝트 페이지</a>.</figcaption>
+  <figcaption>출처: Chen et al., <a href="https://simclr.github.io/">SimCLR 공식 프로젝트 페이지</a>.</figcaption>
 </figure>
 
 **이미지의 특징은 어떻게 배우는가?** 두 변형에 공통으로 남는 정보를 찾아야 같은 원본의 표현을 가깝게 만들 수 있다. 이 방향으로 모델을 반복해서 조정하며 특징을 학습한다. 서로 다른 원본에 같은 종류의 물체가 있을 수 있다는 점은 구분해야 한다. [SimCLR 원 논문](https://arxiv.org/abs/2002.05709)

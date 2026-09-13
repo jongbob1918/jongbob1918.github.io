@@ -1,6 +1,6 @@
 ---
 title: "이지 딥러닝 1장: AI·ML·DL과 네 가지 학습 방식"
-description: "AI·머신러닝·딥러닝의 관계부터 이미지와 텍스트의 숫자 표현, 지도·자기지도·비지도·강화학습의 차이를 정리한다."
+description: ""
 publishedAt: 2026-09-13
 category: deep-learning
 type: concept

@@ -32,7 +32,7 @@ const searchText = `${note.data.title} ${note.data.description} ${category?.titl
       <span>{contentTypeLabels[note.data.type]}</span>
     </div>
     <h2><a href={`/notes/${note.id}/`}>{note.data.title}</a></h2>
-    <p>{note.data.description}</p>
+    {note.data.description && <p>{note.data.description}</p>}
     <div class="card-foot">
       <span>{note.data.tags.slice(0, 2).join(' · ') || category?.title}</span>
       <a href={`/notes/${note.id}/`} aria-label={`${note.data.title} 읽기`}>읽기 <span aria-hidden="true">→</span></a>

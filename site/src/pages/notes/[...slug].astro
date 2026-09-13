@@ -33,7 +33,7 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
         <a class="back-link" href={`/notes/category/${note.data.category}/`}>← {category?.title}</a>
         <p class="article-category">{category?.title} · {contentTypeLabels[note.data.type]}</p>
         <h1>{note.data.title}</h1>
-        <p class="article-lead">{note.data.description}</p>
+        {note.data.description && <p class="article-lead">{note.data.description}</p>}
         <div class="article-meta">
           <span><time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time></span>
           {note.data.updatedAt && <span>수정 {formatDate(note.data.updatedAt)}</span>}

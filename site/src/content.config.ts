@@ -13,6 +13,7 @@ const notes = defineCollection({
       'localization-slam',
       'planning-control',
       'ros2-systems',
+      'deep-learning',
       'projects'
     ]),
     type: z.enum(['overview', 'concept', 'algorithm', 'implementation', 'experiment', 'case-study']),

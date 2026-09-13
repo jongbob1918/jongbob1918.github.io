@@ -48,8 +48,20 @@ export const categories = [
     ]
   },
   {
-    id: 'projects',
+    id: 'deep-learning',
     number: '05',
+    title: '딥러닝',
+    description: '신경망의 기본 원리부터 학습 과정과 구현을 정리합니다.',
+    topics: ['신경망 기초', '손실함수·최적화', '역전파', '딥러닝 실습'],
+    children: [
+      { id: 'foundations', title: '딥러닝 기초' },
+      { id: 'training', title: '학습 원리' },
+      { id: 'practice', title: '구현·실습' }
+    ]
+  },
+  {
+    id: 'projects',
+    number: '06',
     title: '프로젝트',
     description: '로봇 소프트웨어 프로젝트의 설계, 구현, 검증 내용을 정리합니다.',
     topics: ['JAVIS', 'ROOMIE', 'FALCON'],

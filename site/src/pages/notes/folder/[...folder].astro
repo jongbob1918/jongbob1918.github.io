@@ -25,12 +25,12 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     <main class="notes-listing">
       <header class="listing-header category-listing-header">
         <div>
-          <h1>{folder.title}</h1>
+          <h1>{folder.path} <span class="listing-count">({notes.length})</span></h1>
         </div>
-        <ListingControls count={notes.length} />
+        <ListingControls />
       </header>
       {notes.length ? (
-        <div class="note-card-grid" id="notes-grid" data-view="cards">
+        <div class="note-card-grid" id="notes-grid" data-view="list">
           {notes.map(note => <NoteCard note={note} />)}
         </div>
       ) : (

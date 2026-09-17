@@ -13,10 +13,8 @@ const currentPath = decodeURIComponent(Astro.url.pathname);
 
 <details class="category-folder" open={expanded}>
   <summary>
-    <span class="folder-icon" aria-hidden="true"></span>
     <strong>{folder.title}</strong>
     <small>({folder.count})</small>
-    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
   </summary>
   <div class="category-children">
     {folder.children.map(child => <Astro.self folder={child} activeFolder={activeFolder} />)}

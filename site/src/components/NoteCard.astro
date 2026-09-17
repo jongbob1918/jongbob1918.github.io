@@ -1,42 +1,39 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import { marked } from 'marked';
 import { noteFolder, folderTitle } from '../data/folders';
 
-interface Props {
-  note: CollectionEntry<'notes'>;
-}
-
+interface Props { note: CollectionEntry<'notes'>; }
 const { note } = Astro.props;
 const folder = noteFolder(note);
 const label = folderTitle(folder);
+const body = note.body ?? '';
+const imageTag = body.match(/<img\b[^>]*\bsrc="([^"]+)"[^>]*>/i);
+const markdownImage = body.match(/!\[([^\]]*)\]\(([^\s)]+)\)/);
+const thumbnail = imageTag?.[1] ?? markdownImage?.[2];
+const plainText = (text: string) => text
+  .replace(/\$\$[\s\S]*?\$\$|\$[^$\n]+\$/g, '')
+  .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+  .replace(/<[^>]*>/g, '').replace(/[*_`]/g, '').replace(/\s+/g, ' ').trim();
+const excerpt = note.data.description || marked.lexer(body)
+  .filter(token => token.type === 'paragraph')
+  .map(token => plainText((token as { text: string }).text))
+  .filter(Boolean).slice(0, 3).join(' ').slice(0, 320);
 const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric', month: '2-digit', day: '2-digit'
 }).format(date);
 const searchText = `${note.data.title} ${note.data.description} ${folder} ${note.data.tags.join(' ')}`;
 ---
-
 <article class="note-card search-item" data-search={searchText}>
   <a class="card-cover" href={`/notes/${note.id}/`} tabindex="-1" aria-hidden="true">
-    <span class="cover-grid"></span>
-    <svg viewBox="0 0 320 170" role="presentation">
-      <path d="M28 132 88 78l48 27 70-70 85 52" />
-      <circle cx="88" cy="78" r="8" />
-      <circle cx="136" cy="105" r="8" />
-      <circle cx="206" cy="35" r="8" />
-      <path d="M50 35h74M50 49h45M236 124h45M251 109v30" />
-    </svg>
-    <span>{label}</span>
+    {thumbnail ? <img src={thumbnail} alt="" loading="lazy" /> : <span class="cover-placeholder">{label}</span>}
   </a>
   <div class="card-body">
+    <h2><a href={`/notes/${note.id}/`} title={note.data.title}>{note.data.title}</a></h2>
+    {excerpt && <p class="card-excerpt">{excerpt}</p>}
     <div class="card-meta">
       <time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time>
-    </div>
-    <h2><a href={`/notes/${note.id}/`} title={note.data.title}>{note.data.title}</a></h2>
-    {note.data.description && <p>{note.data.description}</p>}
-    <span class="list-category" title={folder || label}>{label}</span>
-    <div class="card-foot">
-      <span>{note.data.tags.slice(0, 2).join(' · ') || label}</span>
-      <a href={`/notes/${note.id}/`} aria-label={`${note.data.title} 읽기`}>읽기 <span aria-hidden="true">→</span></a>
+      <span>{label}</span>
     </div>
   </div>
 </article>

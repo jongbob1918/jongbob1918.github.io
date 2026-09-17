@@ -15,12 +15,11 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     <main class="notes-listing">
       <header class="listing-header">
         <div>
-          <p>Robotics Technical Blog</p>
-          <h1>최근 글</h1>
+          <h1>전체 글 <span class="listing-count">({notes.length})</span></h1>
         </div>
-        <ListingControls count={notes.length} />
+        <ListingControls />
       </header>
-      <div class="note-card-grid" id="notes-grid" data-view="cards">
+      <div class="note-card-grid" id="notes-grid" data-view="list">
         {notes.map(note => <NoteCard note={note} />)}
       </div>
       <p class="search-empty" hidden>검색 결과가 없습니다.</p>
@@ -52,11 +51,5 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
     });
     filterCards(initialQuery);
 
-    document.addEventListener('keydown', event => {
-      if (event.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
-        event.preventDefault();
-        inputs.find(input => input.offsetParent !== null)?.focus();
-      }
-    });
   </script>
 </BaseLayout>

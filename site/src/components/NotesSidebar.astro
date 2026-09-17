@@ -1,37 +1,18 @@
 ---
-import { folderTitle } from '../data/folders';
 import CategoryTree from './CategoryTree.astro';
-
-interface Props {
-  activeFolder?: string;
-}
-
+interface Props { activeFolder?: string; }
 const { activeFolder } = Astro.props;
-const currentLabel = activeFolder ? folderTitle(activeFolder) : '최근 글';
 ---
-
-<aside class="notes-sidebar">
-  <form class="sidebar-search" action="/notes/" method="get" role="search">
-    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
-    <label class="sr-only" for="desktop-note-search">글 검색</label>
-    <input id="desktop-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
-  </form>
-  <p class="sidebar-label">Menu</p>
+<dialog id="notes-menu" class="notes-sidebar" aria-label="블로그 메뉴">
+  <button class="menu-close icon-button" type="button" aria-label="메뉴 닫기" autofocus>
+    <svg viewBox="0 0 28 28" aria-hidden="true"><path d="m4 4 20 20M24 4 4 24" /></svg>
+  </button>
   <CategoryTree activeFolder={activeFolder} />
-</aside>
-
-<details class="mobile-notes-nav">
-  <summary>
-    <span>Menu</span>
-    <strong>{currentLabel}</strong>
-    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></svg>
-  </summary>
-  <div>
-    <form class="sidebar-search" action="/notes/" method="get" role="search">
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.15a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" /></svg>
-      <label class="sr-only" for="mobile-note-search">글 검색</label>
-      <input id="mobile-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
-    </form>
-    <CategoryTree activeFolder={activeFolder} />
-  </div>
-</details>
+  <nav class="drawer-links" aria-label="외부 링크">
+    <a href="/#key-projects">Projects</a>
+    <a href="https://github.com/jongbob1918" target="_blank" rel="noreferrer">GitHub</a>
+    <a href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer">LinkedIn</a>
+    <a href="https://www.youtube.com/channel/UCVbvniwYb2V2equijzjjt0Q" target="_blank" rel="noreferrer">YouTube</a>
+    <button class="theme-toggle" type="button" aria-label="색상 모드 전환">밝게 / 어둡게</button>
+  </nav>
+</dialog>

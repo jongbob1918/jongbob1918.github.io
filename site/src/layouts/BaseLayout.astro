@@ -14,11 +14,6 @@ interface Props {
 
 const { title, description, article } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const socialLinks = {
-  github: 'https://github.com/jongbob1918',
-  linkedin: 'https://www.linkedin.com/in/jongmyung-kim-370932341/',
-  youtube: 'https://www.youtube.com/channel/UCVbvniwYb2V2equijzjjt0Q'
-};
 const structuredData = article ? {
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
@@ -66,45 +61,79 @@ const structuredData = article ? {
   <body>
     <header class="site-header">
       <div class="header-inner">
+        <button class="menu-toggle icon-button" type="button" aria-label="메뉴 열기" aria-controls="notes-menu" aria-expanded="false">
+          <svg viewBox="0 0 28 24" aria-hidden="true"><path d="M1 5h26M1 12h26M1 19h26" /></svg>
+        </button>
         <a class="name" href="/notes/" aria-label="블로그 홈">Jongmyung Kim</a>
-        <nav class="nav" aria-label="주요 메뉴">
-          <a class="projects-link" href="/#key-projects">Projects</a>
-          <span class="header-socials" aria-label="외부 링크">
-            <a class="header-social-icon" href={socialLinks.github} target="_blank" rel="noreferrer" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z" /></svg>
-            </a>
-            <a class="header-social-icon" href={socialLinks.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="4" height="12" /><circle cx="5" cy="5" r="2" /><path d="M11 21V9h4v2c1-1.5 2.5-2.3 4.2-2 1.8.3 2.8 1.8 2.8 4.5V21h-4v-6.5c0-1.4-.5-2.5-1.8-2.5-1.5 0-2.2 1.1-2.2 3V21h-3Z" /></svg>
-            </a>
-            <a class="header-social-icon" href={socialLinks.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7.5a3 3 0 0 0-2.1-2.1C17.1 5 12 5 12 5s-5.1 0-6.9.4A3 3 0 0 0 3 7.5 31 31 0 0 0 2.6 12 31 31 0 0 0 3 16.5a3 3 0 0 0 2.1 2.1c1.8.4 6.9.4 6.9.4s5.1 0 6.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5Z" /><path class="play" d="m10 9 5 3-5 3Z" /></svg>
-            </a>
-          </span>
-          <button class="theme-toggle" type="button" aria-label="색상 모드 전환">
-            <svg class="sun-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" /></svg>
-            <svg class="moon-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z" /></svg>
-          </button>
-        </nav>
+        <button class="search-toggle icon-button" type="button" aria-label="검색 열기" aria-controls="header-search" aria-expanded="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="7" /><path d="m15 15 6 6" /></svg>
+        </button>
       </div>
+      <form id="header-search" class="sidebar-search header-search" action="/notes/" method="get" role="search" hidden>
+        <label class="sr-only" for="note-search">글 검색</label>
+        <input id="note-search" name="q" type="search" placeholder="검색어를 입력하세요" autocomplete="off" />
+        <button type="submit">검색</button>
+      </form>
     </header>
-    <main>
+    <div class="site-content">
       <slot />
-    </main>
+    </div>
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <span>© 2026 Jongmyung Kim</span>
       </div>
     </footer>
+    <script>
+      const menu = document.querySelector<HTMLDialogElement>('#notes-menu');
+      const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const closeMenu = () => menu?.close();
+      menuButton?.addEventListener('click', () => {
+        menu?.showModal();
+        menuButton.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('menu-open');
+      });
+      menu?.querySelector('.menu-close')?.addEventListener('click', closeMenu);
+      menu?.addEventListener('click', event => { if (event.target === menu && event.clientX > menu.getBoundingClientRect().right) closeMenu(); });
+      menu?.addEventListener('close', () => {
+        menuButton?.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('menu-open');
+      });
+      const searchButton = document.querySelector<HTMLButtonElement>('.search-toggle');
+      const search = document.querySelector<HTMLFormElement>('#header-search');
+      const openSearch = () => {
+        if (!search) return;
+        search.hidden = false;
+        searchButton?.setAttribute('aria-expanded', 'true');
+        search.querySelector('input')?.focus();
+      };
+      searchButton?.addEventListener('click', () => {
+        if (!search) return;
+        if (search.hidden) openSearch();
+        else { search.hidden = true; searchButton.setAttribute('aria-expanded', 'false'); }
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === '/' && !menu?.open && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName ?? '')) {
+          event.preventDefault(); openSearch();
+        }
+        if (event.key === 'Escape' && search && !search.hidden) {
+          search.hidden = true; searchButton?.setAttribute('aria-expanded', 'false'); searchButton?.focus();
+        }
+      });
+      if (new URLSearchParams(location.search).has('q')) openSearch();
+    </script>
     <script is:inline>
-      const savedTheme = localStorage.getItem('portfolio-theme') || localStorage.getItem('notes-theme');
+      let savedTheme;
+      try { savedTheme = localStorage.getItem('portfolio-theme') || localStorage.getItem('notes-theme'); } catch {}
       const preferredDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (savedTheme === 'dark' || (!savedTheme && preferredDark)) document.documentElement.dataset.theme = 'dark';
       document.querySelector('.theme-toggle')?.addEventListener('click', () => {
         const dark = document.documentElement.dataset.theme !== 'dark';
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
         const nextTheme = dark ? 'dark' : 'light';
-        localStorage.setItem('portfolio-theme', nextTheme);
-        localStorage.setItem('notes-theme', nextTheme);
+        try {
+          localStorage.setItem('portfolio-theme', nextTheme);
+          localStorage.setItem('notes-theme', nextTheme);
+        } catch {}
       });
     </script>
   </body>

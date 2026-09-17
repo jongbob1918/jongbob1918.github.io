@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import NotesSidebar from '../../../components/NotesSidebar.astro';
+import ListingControls from '../../../components/ListingControls.astro';
 import NoteCard from '../../../components/NoteCard.astro';
 import { buildFolders, flattenFolders, isInFolder } from '../../../data/folders';
 
@@ -26,10 +27,10 @@ const notes = (await getCollection('notes', ({ data }) => !data.draft))
         <div>
           <h1>{folder.title}</h1>
         </div>
-        <span>{notes.length}개의 글</span>
+        <ListingControls count={notes.length} />
       </header>
       {notes.length ? (
-        <div class="note-card-grid">
+        <div class="note-card-grid" id="notes-grid" data-view="cards">
           {notes.map(note => <NoteCard note={note} />)}
         </div>
       ) : (

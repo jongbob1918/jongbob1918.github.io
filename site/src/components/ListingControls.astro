@@ -1,0 +1,28 @@
+---
+interface Props { count: number; }
+const { count } = Astro.props;
+---
+
+<div class="listing-controls">
+  <span>{count}개의 글</span>
+  <div class="view-toggle" role="group" aria-label="글 보기 방식">
+    <button type="button" data-note-view="cards" aria-label="카드 보기" title="카드 보기" aria-pressed="true" aria-controls="notes-grid"><span aria-hidden="true">▦</span></button>
+    <button type="button" data-note-view="list" aria-label="리스트 보기" title="리스트 보기" aria-pressed="false" aria-controls="notes-grid"><span aria-hidden="true">☰</span></button>
+  </div>
+</div>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('#notes-grid');
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-note-view]')];
+  const applyView = (value: string | null) => {
+    const view = value === 'list' ? 'list' : 'cards';
+    if (grid) grid.dataset.view = view;
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.noteView === view)));
+  };
+  try { applyView(localStorage.getItem('notes-view')); } catch { applyView('cards'); }
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const view = button.dataset.noteView ?? 'cards';
+    applyView(view);
+    try { localStorage.setItem('notes-view', view); } catch { /* Viewing works without storage. */ }
+  }));
+</script>

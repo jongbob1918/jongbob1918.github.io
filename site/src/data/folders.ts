@@ -5,6 +5,7 @@ export interface NoteFolder {
   title: string;
   count: number;
   children: NoteFolder[];
+  notes: CollectionEntry<'notes'>[];
 }
 
 // Use the source directory name verbatim, independently of Astro's slugged IDs.
@@ -36,16 +37,23 @@ export function buildFolders(notes: CollectionEntry<'notes'>[]): NoteFolder[] {
       const path = parts.slice(0, index + 1).join('/');
       let folder = siblings.find(item => item.path === path);
       if (!folder) {
-        folder = { path, title, count: 0, children: [] };
+        folder = { path, title, count: 0, children: [], notes: [] };
         siblings.push(folder);
       }
       folder.count += 1;
+      if (index === parts.length - 1) folder.notes.push(note);
       siblings = folder.children;
     });
   }
   const sort = (folders: NoteFolder[]): NoteFolder[] => folders
     .sort((a, b) => a.title.localeCompare(b.title, 'ko'))
-    .map(folder => ({ ...folder, children: sort(folder.children) }));
+    .map(folder => ({
+      ...folder,
+      children: sort(folder.children),
+      notes: folder.notes.sort((a, b) =>
+        b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+        || a.data.title.localeCompare(b.data.title, 'ko', { numeric: true }))
+    }));
   return sort(roots);
 }
 

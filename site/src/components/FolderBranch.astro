@@ -7,26 +7,30 @@ interface Props {
 const { folder, activeFolder } = Astro.props;
 const active = activeFolder === folder.path;
 const expanded = active || activeFolder?.startsWith(`${folder.path}/`);
+const preview = folder.notes.slice(0, 5);
+const currentPath = decodeURIComponent(Astro.url.pathname);
 ---
 
-{folder.children.length ? (
-  <details class="category-folder" open={expanded}>
-    <summary>
-      <span class="folder-icon" aria-hidden="true"></span>
-      <strong>{folder.title}</strong>
-      <small>({folder.count})</small>
-      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
-    </summary>
-    <div class="category-children">
-      <a class:list={[{ active }]} href={folderUrl(folder.path)} aria-current={active ? 'page' : undefined}>
-        <span>{folder.title} 전체 글</span><small>({folder.count})</small>
-      </a>
-      {folder.children.map(child => <Astro.self folder={child} activeFolder={activeFolder} />)}
-    </div>
-  </details>
-) : (
-  <a class:list={['folder-link', { active }]} href={folderUrl(folder.path)} aria-current={active ? 'page' : undefined}>
+<details class="category-folder" open={expanded}>
+  <summary>
     <span class="folder-icon" aria-hidden="true"></span>
-    <span>{folder.title}</span><small>({folder.count})</small>
-  </a>
-)}
+    <strong>{folder.title}</strong>
+    <small>({folder.count})</small>
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+  </summary>
+  <div class="category-children">
+    {folder.children.map(child => <Astro.self folder={child} activeFolder={activeFolder} />)}
+    {preview.map(note => {
+      const href = `/notes/${note.id}/`;
+      const current = currentPath === decodeURIComponent(href);
+      return (
+        <a class:list={['folder-note', { active: current }]} href={href} aria-current={current ? 'page' : undefined} title={note.data.title}>
+          <span>{note.data.title}</span>
+        </a>
+      );
+    })}
+    <a class="folder-more" href={folderUrl(folder.path)} aria-current={active && currentPath === decodeURIComponent(folderUrl(folder.path)) ? 'page' : undefined}>
+      <span>더보기</span><small>전체 {folder.count}개 →</small>
+    </a>
+  </div>
+</details>

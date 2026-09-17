@@ -223,3 +223,7 @@ h1, h2, h3, p { margin-top: 0; }
 }
 
 .article .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.5em 0; }
+
+.folder-link { display: flex; align-items: center; gap: 8px; padding: 9px 8px; font-size: .75rem; }
+.folder-link small { margin-left: auto; }
+.folder-link.active { color: var(--accent); background: var(--accent-soft); }

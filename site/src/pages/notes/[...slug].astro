@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import NotesSidebar from '../../components/NotesSidebar.astro';
-import { categoryMap, contentTypeLabels } from '../../data/taxonomy';
+import { noteFolder, folderTitle, folderUrl } from '../../data/folders';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { note } = Astro.props;
 const { Content, headings } = await render(note);
-const category = categoryMap.get(note.data.category);
+const folder = noteFolder(note);
 const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
   year: 'numeric', month: 'long', day: 'numeric'
 }).format(date);
@@ -27,11 +27,10 @@ const formatDate = (date: Date) => new Intl.DateTimeFormat('ko-KR', {
   }}
 >
   <div class="notes-page-shell article-shell">
-    <NotesSidebar activeCategory={note.data.category} />
+    <NotesSidebar activeFolder={folder} />
     <main class="article-main">
       <header class="article-header">
-        <a class="back-link" href={`/notes/category/${note.data.category}/`}>← {category?.title}</a>
-        <p class="article-category">{category?.title} · {contentTypeLabels[note.data.type]}</p>
+        <a class="back-link" href={folderUrl(folder)}>← {folderTitle(folder)}</a>
         <h1>{note.data.title}</h1>
         {note.data.description && <p class="article-lead">{note.data.description}</p>}
         <div class="article-meta">

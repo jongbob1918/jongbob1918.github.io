@@ -2,9 +2,7 @@
 title: "이지 딥러닝 4장 · 이진분류와 다중분류, 손실 함수"
 description: ""
 publishedAt: 2026-09-13
-category: deep-learning
-type: concept
-tags: [딥러닝, 이지딥러닝, 분류, sigmoid, softmax, MLE]
+tags: [Deep learning]
 draft: false
 featured: false
 ---

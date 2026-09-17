@@ -1,0 +1,32 @@
+---
+import { folderUrl, type NoteFolder } from '../data/folders';
+interface Props {
+  folder: NoteFolder;
+  activeFolder?: string;
+}
+const { folder, activeFolder } = Astro.props;
+const active = activeFolder === folder.path;
+const expanded = active || activeFolder?.startsWith(`${folder.path}/`);
+---
+
+{folder.children.length ? (
+  <details class="category-folder" open={expanded}>
+    <summary>
+      <span class="folder-icon" aria-hidden="true"></span>
+      <strong>{folder.title}</strong>
+      <small>({folder.count})</small>
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+    </summary>
+    <div class="category-children">
+      <a class:list={[{ active }]} href={folderUrl(folder.path)} aria-current={active ? 'page' : undefined}>
+        <span>{folder.title} 전체 글</span><small>({folder.count})</small>
+      </a>
+      {folder.children.map(child => <Astro.self folder={child} activeFolder={activeFolder} />)}
+    </div>
+  </details>
+) : (
+  <a class:list={['folder-link', { active }]} href={folderUrl(folder.path)} aria-current={active ? 'page' : undefined}>
+    <span class="folder-icon" aria-hidden="true"></span>
+    <span>{folder.title}</span><small>({folder.count})</small>
+  </a>
+)}

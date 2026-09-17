@@ -3,26 +3,28 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import NotesSidebar from '../../../components/NotesSidebar.astro';
 import NoteCard from '../../../components/NoteCard.astro';
-import { categories, categoryMap } from '../../../data/taxonomy';
+import { buildFolders, flattenFolders, isInFolder } from '../../../data/folders';
 
-export function getStaticPaths() {
-  return categories.map(category => ({ params: { category: category.id } }));
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return flattenFolders(buildFolders(notes)).map(folder => ({
+    params: { folder: folder.path }, props: { folder }
+  }));
 }
 
-const category = categoryMap.get(Astro.params.category ?? '');
-if (!category) return Astro.redirect('/notes/');
-
-const notes = (await getCollection('notes', ({ data }) => !data.draft && data.category === category.id))
+const { folder } = Astro.props;
+const notes = (await getCollection('notes', ({ data }) => !data.draft))
+  .filter(note => isInFolder(note, folder.path))
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
 ---
 
-<BaseLayout title={`${category.title} — Robotics Notes`} description={category.description}>
+<BaseLayout title={`${folder.title} — Robotics Notes`} description={`${folder.title} 폴더의 글`}>
   <div class="notes-page-shell">
-    <NotesSidebar activeCategory={category.id} />
+    <NotesSidebar activeFolder={folder.path} />
     <main class="notes-listing">
       <header class="listing-header category-listing-header">
         <div>
-          <h1>{category.title}</h1>
+          <h1>{folder.title}</h1>
         </div>
         <span>{notes.length}개의 글</span>
       </header>

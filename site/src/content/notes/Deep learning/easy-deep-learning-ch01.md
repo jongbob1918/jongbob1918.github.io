@@ -2,9 +2,7 @@
 title: "이지 딥러닝 1장: AI·ML·DL과 네 가지 학습 방식"
 description: ""
 publishedAt: 2026-09-13
-category: deep-learning
-type: concept
-tags: [딥러닝, 이지딥러닝, 머신러닝, 자기지도학습, 강화학습]
+tags: [Deep learning]
 draft: false
 featured: false
 ---

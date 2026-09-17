@@ -1,5 +1,5 @@
 import { getCollection } from 'astro:content';
-import { categories } from '../data/taxonomy';
+import { buildFolders, flattenFolders, folderUrl } from '../data/folders';
 
 export const prerender = true;
 
@@ -15,8 +15,8 @@ export async function GET({ site }: { site: URL }) {
   const entries = [
     { path: '/', changefreq: 'monthly', priority: '1.0' },
     { path: '/notes/', changefreq: 'weekly', priority: '0.9' },
-    ...categories.map(category => ({
-      path: `/notes/category/${category.id}/`,
+    ...flattenFolders(buildFolders(notes)).map(folder => ({
+      path: folderUrl(folder.path),
       changefreq: 'weekly',
       priority: '0.7'
     })),

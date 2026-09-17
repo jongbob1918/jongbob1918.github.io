@@ -2,9 +2,7 @@
 title: "이지 딥러닝 3장 · MLP의 행렬 표현과 역전파"
 description: ""
 publishedAt: 2026-09-13
-category: deep-learning
-type: concept
-tags: [딥러닝, 이지딥러닝, MLP, 행렬, 역전파]
+tags: [Deep learning]
 draft: false
 featured: false
 ---

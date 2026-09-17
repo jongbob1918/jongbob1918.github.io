@@ -1,13 +1,13 @@
 ---
-import { categoryMap } from '../data/taxonomy';
+import { folderTitle } from '../data/folders';
 import CategoryTree from './CategoryTree.astro';
 
 interface Props {
-  activeCategory?: string;
+  activeFolder?: string;
 }
 
-const { activeCategory } = Astro.props;
-const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '최근 글';
+const { activeFolder } = Astro.props;
+const currentLabel = activeFolder ? folderTitle(activeFolder) : '최근 글';
 ---
 
 <aside class="notes-sidebar">
@@ -17,7 +17,7 @@ const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '
     <input id="desktop-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
   </form>
   <p class="sidebar-label">Menu</p>
-  <CategoryTree activeCategory={activeCategory} />
+  <CategoryTree activeFolder={activeFolder} />
 </aside>
 
 <details class="mobile-notes-nav">
@@ -32,6 +32,6 @@ const currentLabel = activeCategory ? categoryMap.get(activeCategory)?.title : '
       <label class="sr-only" for="mobile-note-search">글 검색</label>
       <input id="mobile-note-search" name="q" type="search" placeholder="글 검색" autocomplete="off" />
     </form>
-    <CategoryTree activeCategory={activeCategory} />
+    <CategoryTree activeFolder={activeFolder} />
   </div>
 </details>

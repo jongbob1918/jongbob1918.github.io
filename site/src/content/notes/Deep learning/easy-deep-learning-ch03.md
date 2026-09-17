@@ -1,6 +1,6 @@
 ---
 title: "이지 딥러닝 3장 · MLP의 행렬 표현과 역전파"
-description: ""
+description: "다층 퍼셉트론의 계산을 행렬로 표현하고, 비선형 활성화 함수가 필요한 이유를 설명합니다. 연쇄 법칙으로 역전파를 전개하고 순전파와의 관계를 정리합니다."
 publishedAt: 2026-09-13
 tags: [Deep learning]
 draft: false

@@ -1,6 +1,6 @@
 ---
 title: "이지 딥러닝 1장: AI·ML·DL과 네 가지 학습 방식"
-description: ""
+description: "인공지능, 머신러닝, 딥러닝의 관계와 지도·비지도·자기지도·강화학습의 차이를 정리합니다. 이미지와 게임 예시로 각 학습 방식의 입력과 목표를 살펴봅니다."
 publishedAt: 2026-09-13
 tags: [Deep learning]
 draft: false

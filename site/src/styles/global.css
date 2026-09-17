@@ -224,6 +224,12 @@ h1, h2, h3, p { margin-top: 0; }
 
 .article .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.5em 0; }
 
+.sidebar-nav .category-children a,
+.sidebar-nav .category-children small,
+.sidebar-nav .category-children summary strong { font-size: .5625rem; }
+.sidebar-nav .category-children a { font-weight: 400; }
+.sidebar-nav .category-children summary strong,
+.sidebar-nav .category-children a.active { font-weight: 600; }
 .category-children .folder-note span { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-height: 1.5; overflow-wrap: anywhere; }
 .category-children .folder-more { margin-top: 5px; color: var(--muted); }
 .listing-controls { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 12px; flex-shrink: 0; }
@@ -238,11 +244,16 @@ h1, h2, h3, p { margin-top: 0; }
 .note-card-grid[data-view="list"] .note-card { border: 0; border-bottom: 1px solid var(--line); }
 .note-card-grid[data-view="list"] .note-card:hover { transform: none; box-shadow: none; background: var(--soft); }
 .note-card-grid[data-view="list"] .card-cover { display: none; }
-.note-card-grid[data-view="list"] .card-body { min-height: 0; padding: 18px 12px; }
-.note-card-grid[data-view="list"] .card-body h2 { font-size: 1rem; }
-.note-card-grid[data-view="list"] .card-body > p { margin-bottom: 8px; -webkit-line-clamp: 2; }
-.note-card-grid[data-view="list"] .card-foot { border: 0; padding-top: 3px; }
+.list-category { display: none; }
+.note-card-grid[data-view="list"] .card-body { min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 7em 9em; align-items: center; column-gap: 18px; padding: 16px 12px; }
+.note-card-grid[data-view="list"] .card-body h2 { grid-column: 1; grid-row: 1; min-width: 0; margin: 0; font-size: 1rem; }
+.note-card-grid[data-view="list"] .card-body h2 a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.note-card-grid[data-view="list"] .card-meta { grid-column: 2; grid-row: 1; margin: 0; justify-content: flex-end; white-space: nowrap; }
+.note-card-grid[data-view="list"] .list-category { grid-column: 3; grid-row: 1; display: block; overflow: hidden; color: var(--muted); font-size: .59rem; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
+.note-card-grid[data-view="list"] .card-body > p,
+.note-card-grid[data-view="list"] .card-foot { display: none; }
 @media (max-width: 640px) {
   .listing-header { gap: 14px; flex-wrap: wrap; }
   .listing-controls { margin-left: auto; }
+  .note-card-grid[data-view="list"] .card-body { grid-template-columns: minmax(0, 1fr) 70px 65px; column-gap: 8px; padding: 14px 4px; }
 }

@@ -31,8 +31,9 @@ const searchText = `${note.data.title} ${note.data.description} ${folder} ${note
     <div class="card-meta">
       <time datetime={note.data.publishedAt.toISOString()}>{formatDate(note.data.publishedAt)}</time>
     </div>
-    <h2><a href={`/notes/${note.id}/`}>{note.data.title}</a></h2>
+    <h2><a href={`/notes/${note.id}/`} title={note.data.title}>{note.data.title}</a></h2>
     {note.data.description && <p>{note.data.description}</p>}
+    <span class="list-category" title={folder || label}>{label}</span>
     <div class="card-foot">
       <span>{note.data.tags.slice(0, 2).join(' · ') || label}</span>
       <a href={`/notes/${note.id}/`} aria-label={`${note.data.title} 읽기`}>읽기 <span aria-hidden="true">→</span></a>

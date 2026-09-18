@@ -90,7 +90,7 @@ h1, h2, h3, p { margin-top: 0; }
 .back-link { display: inline-block; margin-bottom: 30px; color: var(--muted); font-size: .72rem; }
 .back-link:hover { color: var(--accent); }
 .article-category { margin-bottom: 12px; color: var(--accent); font-size: .69rem; font-weight: 700; letter-spacing: .06em; }
-.article-header h1 { margin-bottom: 19px; font-size: clamp(2rem, 4.7vw, 3.4rem); line-height: 1.18; letter-spacing: -.052em; }
+.article-header h1 { margin-bottom: 19px; font-size: 32px; line-height: 1.18; letter-spacing: -.052em; }
 .article-lead { max-width: 760px; color: var(--text); font-size: .98rem; }
 .article-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 23px; color: var(--muted); font-size: .68rem; }
 .article-meta span + span::before { content: "·"; margin-right: 10px; }

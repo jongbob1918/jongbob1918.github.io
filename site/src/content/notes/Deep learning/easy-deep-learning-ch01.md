@@ -119,8 +119,14 @@ featured: false
 | ----------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ |
 | 사전학습(Pretraining) | 보조 과제인 프리텍스트 작업(Pretext Task)을 풀며 특징 학습<br>Predictor : 가짜 연습 문제(Pretext Task)를 풀기 위한 **임시 채점기**                    | 사람이 붙인 레이블이 없는 데이터 |
 | 미세조정(Fine-tuning) | 실제로 풀려는 다운스트림 작업(Downstream Task)에 맞게 모델 조정<br> Predictor : 우리가 진짜 풀고 싶은 실전 문제(Downstream Task)를 위한 **실전용 최종 출력기** | 해당 작업의 레이블이 있는 데이터 |
-#### 대표적인 사전학습 방법
-#### Context Prediction · 위치 관계 예측
+
+여기서는 책에 나온 사전학습 예시를 **자가예측**과 **대조학습**으로 묶어 살펴본다. 자가예측은 데이터의 일부나 내부 관계를 맞추는 방식이고, 대조학습은 데이터의 표현을 비교하는 방식이다. 자기지도학습에는 이 밖의 접근도 있으며, 두 방식을 결합하기도 한다.
+
+#### 자가예측 방식 (Self-Prediction)
+
+**데이터의 일부를 보고 나머지를 예측하거나, 데이터 안의 관계를 맞추는 방식**이다. Context Prediction은 이미지 조각 사이의 위치 관계를, GPT와 BERT는 문맥을 바탕으로 토큰을 예측한다.
+
+##### 비전 예시: Context Prediction · 위치 관계 예측
 
 이미지에 정답 레이블이 없어도 어디에서 잘라낸 조각인지는 알 수 있다. 이 위치 정보를 학습 목표로 사용하는 방법이 **Context Prediction**이다. 작은 이미지 영역인 패치 사이의 상대 위치를 예측한다.
 
@@ -135,9 +141,18 @@ featured: false
 
 패치의 위치는 추출 과정에서 알 수 있으므로 별도 레이블링 없이 여러 학습 쌍을 만들 수 있다. 이미지의 픽셀과 물체의 부분이 일정한 구조를 가진다는 점을 활용한다. [원 논문](https://arxiv.org/abs/1505.05192)
 
-#### Contrastive Learning · 대조학습
+##### 자연어 예시: GPT와 BERT
 
-사진을 자르거나 밝기를 바꿔도 같은 대상의 특징을 유지할 필요가 있다. **대조학습**에서는 같은 원본의 두 변형을 한 쌍으로 만들어, 공통된 특징을 학습하게 한다. 아래는 SimCLR 방식의 예다.
+- **GPT:** 앞선 토큰을 보고 다음 토큰을 예측한다(Next Token Prediction).
+- **BERT:** 문장의 일부를 가리고 해당 토큰을 예측한다(Masked Token Prediction). 원래 BERT는 두 문장 구간이 연속된 것인지 예측하는 작업(Next Sentence Prediction)도 사용했다.
+
+두 방식 모두 원문으로부터 학습 목표를 만든다. [BERT 공식 설명](https://github.com/google-research/bert#what-is-bert)
+
+#### 대조학습 방식 (Contrastive Learning)
+
+사진을 자르거나 밝기를 바꿔도 같은 대상의 특징을 유지할 필요가 있다. **대조학습**에서는 같은 원본의 두 변형을 한 쌍으로 만들어, 공통된 특징을 학습하게 한다. 같은 대상의 표현은 가깝게, 다른 대상의 표현은 멀게 만드는 SimCLR이 대표적인 예다.
+
+##### 비전 예시: SimCLR
 
 1. 하나의 이미지에 서로 다른 변형을 적용한다. 예: 일부 자르기, 밝기·색상 조절.
 2. 변형된 이미지를 모델에 넣어 각각 숫자 벡터로 표현한다.
@@ -149,13 +164,6 @@ featured: false
 </figure>
 
 두 변형의 표현이 가까워지도록 모델을 조정하면서, 변형 후에도 공통으로 남는 특징을 학습한다. [SimCLR 원 논문](https://arxiv.org/abs/2002.05709)
-
-#### 자연어 처리
-
-- **GPT:** 앞선 토큰을 보고 다음 토큰을 예측한다(Next Token Prediction).
-- **BERT:** 문장의 일부를 가리고 해당 토큰을 예측한다(Masked Token Prediction). 원래 BERT는 두 문장 구간이 연속된 것인지 예측하는 작업(Next Sentence Prediction)도 사용했다.
-
-두 방식 모두 원문으로부터 학습 목표를 만든다. [BERT 공식 설명](https://github.com/google-research/bert#what-is-bert)
 
 ### 2.3 비지도학습
 
@@ -303,6 +311,8 @@ AI는 처음부터 좋은 수를 알지 못한다. 예를 들어 모든 Q값을 
 참고: [Sutton·Barto · 강화학습 교재](https://www.incompleteideas.net/book/bookdraft2018mar21.pdf), [Gymnasium · 큐러닝 예제](https://gymnasium.farama.org/tutorials/training_agents/frozenlake_q_learning/)
 
 ## 참고 자료
+
+- [NeurIPS 2021 · Self-Supervised Learning: Self-Prediction and Contrastive Learning](https://nips.cc/media/neurips-2021/Slides/21895.pdf).
 
 - 혁펜하임, 『이지 딥러닝』, 챕터 1.
 - Doersch et al., [Context Prediction](https://arxiv.org/abs/1505.05192), 2015.

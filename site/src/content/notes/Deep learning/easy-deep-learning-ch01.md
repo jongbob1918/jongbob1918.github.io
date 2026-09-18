@@ -52,7 +52,7 @@ featured: false
 깊은 인공신경망은 매우 많은 층(최소 두개이상의 은닉층)을 가진 인공신경망이다.
 
 <img src="/images/notes/easy-deep-learning-ch01/biological-neuron.png" alt="신경세포의 구조와 신호 입력 및 출력 방향" width="388" loading="lazy" />
-![[Pasted image 20260918223246.png]]
+<img src="/images/notes/easy-deep-learning-ch01/artificial-neuron-labeled.png" alt="입력 신호가 연결을 통해 인공신경 노드로 들어가 출력되는 구조" loading="lazy" />
 
 #### 비 딥러닝 ML과 DL의 차이
 **특징 추출**은 데이터에서 판단에 필요한 정보를 뽑는 과정이다.<br>
@@ -113,7 +113,7 @@ featured: false
 
 이를 통해 적은 양의 레이블 데이터만으로도 특정 작업에 적합한 모델을 만들 수 있다.
 
-![[Pasted image 20260918223841.png|578]]
+<img src="/images/notes/easy-deep-learning-ch01/pretraining-finetuning.png" alt="프리텍스트 작업으로 사전학습한 모델을 다운스트림 작업으로 전이하고 미세조정하는 과정" width="578" loading="lazy" />
 
 | 단계                | 학습 내용                                                                                                              | 사용하는 데이터           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ |

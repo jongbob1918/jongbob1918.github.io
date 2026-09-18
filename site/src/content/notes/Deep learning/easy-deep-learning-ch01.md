@@ -14,7 +14,7 @@ featured: false
 
 인공지능은 컴퓨터가 사람처럼 인식하고 판단하도록 만드는 기술을 아우르는 넓은 개념입니다. 사람이 규칙을 직접 정하는 방식부터, 데이터를 통해 학습하는 머신러닝과 딥러닝까지 포함합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-overview.png" alt="인공지능 안에 머신러닝과 딥러닝을 배치한 포함 관계와 알고리즘 예시" width="348" loading="lazy" />
+<img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-overview.png" alt="인공지능 안에 머신러닝과 딥러닝을 배치한 포함 관계와 알고리즘 예시" width="500" loading="lazy" />
 
 ### 머신러닝(Machine Learning)
 
@@ -22,41 +22,42 @@ featured: false
 
 규칙 기반 알고리즘으로 강아지와 고양이를 구분하려면 사람이 직접 구별 규칙을 만들어야 합니다. 하지만 같은 동물도 생김새와 자세가 달라 모든 경우에 맞는 규칙을 작성하기는 어렵습니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/rule-based-classification.png" alt="강아지와 고양이 사진 옆에 사람이 작성한 구별 규칙을 나열한 예시" width="795" loading="lazy" />
+<img src="/images/notes/easy-deep-learning-ch01/rule-based-classification.png" alt="강아지와 고양이 사진 옆에 사람이 작성한 구별 규칙을 나열한 예시" width="700" loading="lazy" />
 
 머신러닝에서는 강아지와 고양이 사진을 정답과 함께 제공해, 모델이 둘을 구분하는 패턴을 학습하도록 합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/data-based-learning.png" alt="강아지와 고양이 사진을 컴퓨터에 입력하는 데이터 기반 학습 흐름" width="797" loading="lazy" />
+<img src="/images/notes/easy-deep-learning-ch01/data-based-learning.png" alt="강아지와 고양이 사진을 컴퓨터에 입력하는 데이터 기반 학습 흐름" width="700" loading="lazy" />
 
-다양한 상황의 사진을 구분하려면 학습 데이터도 그 상황을 충분히 담고 있어야 합니다. 예를 들어, 누워 있거나 뒤돌아 있는 모습, 흐릿하거나 노이즈가 있는 사진을 포함하면 다양한 입력에 대응하는 데 도움이 됩니다. 다만 데이터가 많고 다양하다는 이유만으로 높은 성능이 보장되지는 않습니다.
+다양한 상황의 사진을 구분하려면 학습 데이터도 그 상황을 충분히 담고 있어야 합니다.
+예를 들어, 누워 있거나 뒤돌아 있는 모습, 흐릿하거나 노이즈가 있는 사진을 포함하면 다양한 입력에 대응하는 데 도움이 됩니다.
+다만 데이터가 많고 다양하다는 이유만으로 높은 성능이 보장되지는 않습니다.
 
 이렇게 데이터로 모델을 조정하는 과정을 **훈련**이라고 합니다. 훈련 후에는 **학습에 사용하지 않은 사진**으로 강아지와 고양이를 얼마나 잘 구분하는지 평가합니다.
 
 ### 딥러닝(Deep Learning)
 
-**딥러닝**은 머신러닝의 한 종류입니다. 여러 층으로 이루어진 **심층 신경망(Deep Neural Network)**을 이용해 데이터에서 패턴을 학습합니다.
+**딥러닝**은 머신러닝의 한 종류입니다. **깊은 인공 신경망(Deep Neural Network)** 을 이용해 데이터에서 패턴을 학습합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/deep-neural-network.png" alt="입력층에서 여러 은닉층을 거쳐 출력층으로 연결되는 인공신경망 구조" width="516" loading="lazy" />
+<img src="/images/notes/easy-deep-learning-ch01/deep-learning-classification.png" alt="강아지와 고양이 이미지를 입력층, 은닉층, 출력층으로 처리하는 심층 신경망" loading="lazy" />
 
-사진 출처: https://velog.io/@ceunseo313/%EB%94%A5%EB%9F%AC%EB%8B%9D-%EA%B8%B0%EB%B3%B8-%EA%B0%9C%EB%85%90-1%ED%83%84
+#### 인공 신경망이란?
+위와 같은 여러층의 인공신경다발로 이루어진 수학적 모델입니다.
+인공신경은 뇌의 신경세포와 그 연결 방식에서 영감을 얻어만들었습니다.
+인공신경망은 데이터 입력을 받는 입력층, 특징을 추출하고 계산하는 은닉층, 결과를 출력하는 출력층이 있다.
+깊은 인공신경망은 매우 많은 층(최소 두개이상의 은닉층)을 가진 인공신경망이다.
 
-**인공신경망(Artificial Neural Network)**은 뇌의 신경세포와 그 연결 방식에서 영감을 얻은 계산 모델입니다.
+<img src="/images/notes/easy-deep-learning-ch01/biological-neuron.png" alt="신경세포의 구조와 신호 입력 및 출력 방향" width="388" loading="lazy" />
+<img src="/images/notes/easy-deep-learning-ch01/artificial-neuron.png" alt="연결을 통해 입력을 받아 출력하는 인공신경 노드" width="390" loading="lazy" />
+
+#### 비 딥러닝 ML과 DL의 차이
+**특징 추출**은 데이터에서 판단에 필요한 정보를 뽑는 과정입니다.
+전통적인 이미지 분류에서는 사람이 특징을 추출하는 방법을 정하고, 모델은 그 특징으로 이미지를 구분하는 방법을 학습하는 경우가 많았습니다.
+**딥러닝은 특징을 추출하는 방법부터 이미지를 구분하는 방법까지 함께 학습할 수 있습니다.**
 
 
-<img src="/images/notes/easy-deep-learning-ch01/neuron-connections.png" alt="신호를 전달하는 신경세포들의 연결과 인공신경망의 생물학적 영감" width="640" loading="lazy" />
+<img src="/images/notes/easy-deep-learning-ch01/traditional-ml-pipeline.png" alt="수작업 특징 추출 후 분류 또는 회귀 모델로 결과를 출력하는 전통 머신러닝 흐름" loading="lazy" />
 
-사진 출처: https://blog.naver.com/nlrose/223836604859
-
-**특징 추출**은 데이터에서 판단에 필요한 정보를 뽑는 과정입니다. 전통적인 이미지 분류에서는 사람이 특징을 추출하는 방법을 정하고, 모델은 그 특징으로 이미지를 구분하는 방법을 학습하는 경우가 많았습니다. **딥러닝은 특징을 추출하는 방법부터 이미지를 구분하는 방법까지 함께 학습할 수 있습니다.**
-
-예를 들어, 손글씨 숫자를 읽는 두 가지 방식을 비교해 보겠습니다. 두 방식 모두 숫자 이미지와 정답을 이용해 학습합니다.
-
-- **사람이 특징을 설계하는 방식:** 이미지를 작은 구역으로 나누고, 각 구역에 가로·세로·대각선 방향의 획이 얼마나 나타나는지 계산합니다. 모델은 이렇게 얻은 숫자들을 이용해 손글씨가 어떤 숫자인지 구분하는 방법을 학습합니다.
-- **딥러닝 방식:** 이미지의 픽셀 값을 신경망에 입력합니다. 신경망은 정답을 맞히도록 학습하면서, 구분에 유용한 패턴을 뽑는 방법과 그 패턴으로 숫자를 판단하는 방법을 함께 조정합니다.
-
-첫 방식에서는 사람이 정한 특징 추출 방법이 고정되어 있고, 두 번째 방식에서는 특징 추출 방법도 학습하면서 바뀝니다.
-
-참고: [MathWorks · Deep Learning](https://www.mathworks.com/discovery/deep-learning.html), [Deep Learning · 1장](https://www.deeplearningbook.org/contents/intro.html)
+<img src="/images/notes/easy-deep-learning-ch01/deep-learning-pipeline.png" alt="다층 신경망이 특징 추출과 분류를 함께 학습하는 딥러닝 흐름" loading="lazy" />
 
 ## 2. 머신러닝의 학습 방식
 

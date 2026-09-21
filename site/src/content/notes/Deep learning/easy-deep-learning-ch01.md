@@ -114,9 +114,10 @@ featured: false
 
  <img src="/images/notes/easy-deep-learning-ch01/pose-estimation.png" alt="신체 주요 부위의 위치를 찾는 자세 추정 예시" width="347" loading="lazy" />
 
-
 - **얼굴 랜드마크 탐지:** 눈·코·입 등 얼굴의 주요 특징점 좌표를 예측합니다.
+
 <img src="/images/notes/easy-deep-learning-ch01/face-landmarks.png" alt="얼굴 주요 특징점의 위치를 찾는 랜드마크 탐지 예시" width="200" loading="lazy" />
+
 
 
 사람이 직접 정답(레이블)을 붙이는 데에는 많은 시간과 비용이 듭니다.

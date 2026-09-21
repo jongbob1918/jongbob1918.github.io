@@ -1,5 +1,5 @@
 ---
-title: " 01. AI·ML·DL과 네 가지 학습 방식"
+title: " AI·ML·DL과 네 가지 학습 방식"
 description: 인공지능, 머신러닝, 딥러닝의 관계와 지도·비지도·자기지도·강화학습의 차이를 정리한다.
 publishedAt: 2026-09-13
 tags:
@@ -8,7 +8,7 @@ draft: false
 featured: false
 ---
 
-## 1. AI, ML, DL의 차이
+## AI, ML, DL의 차이
 
 ### 인공지능(Artificial Intelligence)
 

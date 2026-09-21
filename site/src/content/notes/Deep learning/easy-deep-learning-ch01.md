@@ -74,7 +74,7 @@ featured: false
 
 특히 **딥러닝은 여러 층을 통해 단순한 특징을 복잡한 특징으로 단계적으로 조합하고, 판단 기준까지 하나의 학습 과정에서 함께 학습합니다.**
 
-![[Pasted image 20260921230811.png]]
+<img src="/images/notes/easy-deep-learning-ch01/ml-dl-comparison.png" alt="딥러닝은 깊은 신경망에서 특징 추출과 판단 기준을 함께 학습하고, 전통적인 머신러닝은 사람이 특징을 추출한 뒤 별도의 분류 모델이 판단 기준을 학습하는 이미지 분류 과정 비교" loading="lazy" />
 
 ## 2. 머신러닝의 학습 방식
 

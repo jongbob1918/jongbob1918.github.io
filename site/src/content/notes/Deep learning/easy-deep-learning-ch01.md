@@ -108,15 +108,18 @@ featured: false
 
 구현 예시: 객체 탐지 → 각 객체 영역의 픽셀 분할
 <img src="/images/notes/easy-deep-learning-ch01/image-segmentation.png" alt="이미지의 픽셀 영역을 구분하는 분할 예시" loading="lazy" />
+
 #### 자세 추정과 얼굴 랜드마크 탐지
 
 - **자세 추정(Pose Estimation):** 어깨·팔꿈치·무릎 등 주요 신체 부위의 좌표를 예측합니다.
 
- <img src="/images/notes/easy-deep-learning-ch01/pose-estimation.png" alt="신체 주요 부위의 위치를 찾는 자세 추정 예시" width="347" loading="lazy" />
+
+  <img src="/images/notes/easy-deep-learning-ch01/pose-estimation.png" alt="신체 주요 부위의 위치를 찾는 자세 추정 예시" width="347" loading="lazy" />
+
 
 - **얼굴 랜드마크 탐지:** 눈·코·입 등 얼굴의 주요 특징점 좌표를 예측합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/face-landmarks.png" alt="얼굴 주요 특징점의 위치를 찾는 랜드마크 탐지 예시" width="200" loading="lazy" />
+  <img src="/images/notes/easy-deep-learning-ch01/face-landmarks.png" alt="얼굴 주요 특징점의 위치를 찾는 랜드마크 탐지 예시" width="200" loading="lazy" />
 
 
 

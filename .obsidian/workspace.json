@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch02.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "easy-deep-learning-ch01"
+              "title": "easy-deep-learning-ch02"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch02.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch02.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch02.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,9 +190,15 @@
   },
   "active": "55dcc9b2821462c1",
   "lastOpenFiles": [
+    "Pasted image 20260921232151.png",
+    "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
     "dist/assets/videos/roomie-ik-target-control.mp4",
     "dist/assets/videos/roomie-button-click.mp4",
     "dist/assets/videos",
+    "dist/projects.json",
+    "dist/script.js",
+    "dist/styles.css",
+    "dist/index.html",
     "dist/assets/images/tron_test.gif",
     "dist/assets/images/roomie_system_architecture.png",
     "dist/assets/images/roomie_gaussian_motion.webp",
@@ -204,13 +210,8 @@
     "dist/assets/images/roomie-button-detection-cropped.webp",
     "dist/assets/images/roomie-button-click-poster.jpg",
     "dist/assets/images",
-    "dist/_astro/NotesSidebar.Boyo3-BB.css",
-    "dist/_astro/KaTeX_Typewriter-Regular.D3Ib7_Hf.ttf",
-    "dist/_astro/KaTeX_Typewriter-Regular.CO6r4hn1.woff2",
-    "dist/_astro/KaTeX_Typewriter-Regular.C0xS9mPB.woff",
-    "dist/_astro/KaTeX_Size4-Regular.Dl5lxZxV.woff2",
-    "dist/_astro/KaTeX_Size4-Regular.DWFBv043.ttf",
-    "dist/_astro/KaTeX_Size4-Regular.BF-4gkZK.woff",
+    "dist/assets",
+    "dist/projects/roomie.html",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
@@ -234,7 +235,6 @@
     "node_modules/vite/README.md",
     "node_modules/axobject-query/README.md",
     "node_modules/vite/LICENSE.md",
-    "node_modules/micromark-core-commonmark/readme.md",
-    "node_modules/css-select/README.md"
+    "node_modules/micromark-core-commonmark/readme.md"
   ]
 }

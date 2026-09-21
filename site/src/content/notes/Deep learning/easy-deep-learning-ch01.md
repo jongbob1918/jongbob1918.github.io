@@ -46,29 +46,35 @@ featured: false
 
 ### 딥러닝(Deep Learning)
 
-**딥러닝**은 머신러닝의 한 종류입니다. **깊은 인공 신경망(Deep Neural Network)** 을 이용해 데이터에서 패턴을 학습합니다.
+**딥러닝**은 머신러닝의 한 분야입니다. **깊은 인공 신경망(Deep Neural Network)** 을 이용해 데이터의 특징과 판단 기준을 학습합니다.
 
 <img src="/images/notes/easy-deep-learning-ch01/deep-learning-classification.png" alt="강아지와 고양이 이미지를 입력층, 은닉층, 출력층으로 처리하는 심층 신경망" loading="lazy" />
 
 #### 인공 신경망이란?
-위와 같은 여러 층의 인공 신경 다발로 이루어진 수학적 모델입니다.
+여러 인공 신경을 층으로 연결한 수학적 모델입니다.
 
 인공 신경은 뇌의 신경세포와 그 연결 방식에서 영감을 얻어 만들었습니다.
 
 인공 신경망에는 데이터 입력을 받는 입력층, 특징을 추출하고 계산하는 은닉층, 결과를 출력하는 출력층이 있습니다.
-깊은 인공 신경망은 매우 많은 층(최소 두 개 이상의 은닉층)을 가진 인공 신경망입니다.
+은닉층이 하나인 모델은 얕은 신경망, 은닉층을 여러 겹 쌓은 모델은 깊은 신경망이라고 부릅니다. 얕은 신경망도 데이터에서 특징을 학습할 수 있지만, 깊은 신경망은 여러 층을 거치며 단순한 특징을 복잡한 특징으로 단계적으로 조합합니다.
 
 <img src="/images/notes/easy-deep-learning-ch01/biological-neuron.png" alt="신경세포의 구조와 신호 입력 및 출력 방향" width="388" loading="lazy" />
 <img src="/images/notes/easy-deep-learning-ch01/artificial-neuron-labeled.png" alt="입력 신호가 연결을 통해 인공신경 노드로 들어가 출력되는 구조" loading="lazy" />
 
-#### 비 딥러닝 ML과 DL의 차이
-**특징 추출**은 데이터에서 주어진 작업에 필요한 정보를 뽑아내는 과정입니다.
 
-전통적인 이미지 분류에서는 사람이 어떤 특징을 사용할지 정하고, 머신러닝 모델은 그 특징을 이용해 이미지를 분류하는 방법을 학습하는 경우가 많았습니다.
+#### 딥러닝이 기존 머신러닝과 다른 점
 
-반면 **딥러닝 기반 이미지 분류 모델은 일반적으로 데이터에서 유용한 특징을 추출하는 방법과, 그 특징을 이용해 이미지를 분류하는 방법을 함께 학습합니다.**
+딥러닝은 머신러닝과 별개의 기술이 아니라, 깊은 인공 신경망을 사용하는 머신러닝의 한 분야입니다. 
 
-<img src="/images/notes/easy-deep-learning-ch01/ml-dl-comparison.png" alt="머신러닝과 딥러닝의 특징 추출 및 분류 과정 비교" loading="lazy" />
+두 방식은 데이터에서 **특징**을 다루는 과정에서 차이가 드러납니다. 특징은 주어진 작업에 필요한 정보입니다.
+
+기존 머신러닝에서는 사람이 어떤 특징을 추출할지 설계하고, 모델은 추출된 특징을 바탕으로 판단 기준을 학습하는 경우가 많았습니다.
+
+인공 신경망은 학습 과정에서 특징을 직접 학습할 수 있습니다. 
+
+특히 **딥러닝은 여러 층을 통해 단순한 특징을 복잡한 특징으로 단계적으로 조합하고, 판단 기준까지 하나의 학습 과정에서 함께 학습합니다.**
+
+![[Pasted image 20260921230811.png]]
 
 ## 2. 머신러닝의 학습 방식
 
@@ -81,7 +87,7 @@ featured: false
 입력 데이터에 정답을 붙이는 작업을 **데이터 레이블링**(Data Labeling)이라고 합니다.
 <img src="/images/notes/easy-deep-learning-ch01/data-labeling.png" alt="지도학습을 위한 데이터 레이블링 예시" width="480" loading="lazy" />
 
-#### 지도학습의 종류
+### 지도학습의 종류
 #### 분류와 위치 추정
 사진에 무엇이 있는지만 알면 되는지, 어디에 몇 개 있는지도 알아야 하는지에 따라 작업이 달라집니다.
 
@@ -113,8 +119,8 @@ featured: false
 <img src="/images/notes/easy-deep-learning-ch01/face-landmarks.png" alt="얼굴 주요 특징점의 위치를 찾는 랜드마크 탐지 예시" width="200" loading="lazy" />
 
 
-
 사람이 직접 정답(레이블)을 붙이는 데에는 많은 시간과 비용이 듭니다.
+
 
 ### 2.2 자기지도학습(self-supervised learning)
 
@@ -123,7 +129,9 @@ featured: false
 
 넓은 의미에서는 비지도학습의 한 종류로 볼 수 있지만, 데이터로부터 입력과 정답에 해당하는 학습 신호를 만든 뒤 지도학습과 유사한 방식으로 모델을 학습한다는 특징이 있어 별도로 구분하기도 합니다.
 
+
 이때 대표적으로 사용하는 방법이 **사전학습(Pre-training)과 미세조정(Fine-tuning)​**입니다.
+
 
 먼저 레이블이 없는 대량의 데이터를 이용해 가짜 목표를 만들고 모델을 사전학습한 뒤, 실제로 하려는 작업의 레이블이 있는 소량의 데이터를 이용해 모델을 미세조정합니다.
 
@@ -137,6 +145,7 @@ featured: false
 | 미세조정(Fine-tuning) | 실제로 풀려는 다운스트림 작업(Downstream Task)에 맞게 모델 조정<br> Predictor : 우리가 진짜 풀고 싶은 실전 문제(Downstream Task)를 위한 **실전용 최종 출력기** | 해당 작업의 레이블이 있는 데이터 |
 
 사전학습 방식은 대표적으로 두 가지로 나뉩니다.
+
 #### 자가예측 방식 (Self-Prediction)
 
 하나의 data sample 내에서 한 파트를 통해서 다른 파트를 예측하는 task를 말합니다.
@@ -144,11 +153,13 @@ featured: false
 <img src="/images/notes/easy-deep-learning-ch01/self-prediction-diagram.png" alt="하나의 데이터에서 일부를 보고 나머지 부분을 예측하는 자가예측 방식" width="308" loading="lazy" />
 
 
-
 ##### 이미지에서 예시
 
 - **Context Prediction · 위치 관계 예측**
-	이미지에 정답 레이블이 없어도 어디에서 잘라낸 조각인지는 알 수 있습니다. 이 위치 정보를 학습 목표로 사용하는 방법이 **Context Prediction**입니다. 작은 이미지 영역인 패치 사이의 상대 위치를 예측합니다.
+	이미지에 정답 레이블이 없어도 어디에서 잘라낸 조각인지는 알 수 있습니다.
+	 이 위치 정보를 학습 목표로 사용하는 방법이 **Context Prediction**입니다. 
+	 작은 이미지 영역인 패치 사이의 상대 위치를 예측합니다.
+	
 	순서
 
 	1. 이미지에서 기준 패치를 무작위로 선택합니다.
@@ -169,6 +180,7 @@ featured: false
 
 두 방식 모두 원문으로부터 학습 목표를 만듭니다. [BERT 공식 설명](https://github.com/google-research/bert#what-is-bert)
 
+
 #### 대조학습 방식 (Contrastive Learning)
 
 이미지 사이의 관계를 예측하는 task를 말합니다.
@@ -188,6 +200,7 @@ featured: false
 </figure>
 
 두 변형의 표현이 가까워지도록 모델을 조정하면서, 변형 전후에도 유지되는 핵심 특징을 학습합니다. [SimCLR 원 논문](https://arxiv.org/abs/2002.05709)
+
 
 ### 2.3 비지도학습
 
@@ -224,6 +237,7 @@ featured: false
 - **SVD(Singular Value Decomposition):** 복잡한 직사각형 숫자 표(행렬)를 3개의 단순한 부품 표로 쪼개는 기술입니다. 일부 성분을 남기는 근사나 PCA 계산에 활용할 수 있습니다.
 
 [군집화·차원 축소 참고 문서](https://scikit-learn.org/stable/unsupervised_learning.html)
+
 
 ### 2.4 강화학습
 

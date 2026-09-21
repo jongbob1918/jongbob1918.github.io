@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">기존 머신러닝과 딥러닝의 학습 과정 비교</title>
+  <desc id="desc">이미지 분류를 예로 들어 기존 머신러닝은 사람이 특징 추출 방법을 설계한 뒤 판단 모델을 학습하고, 딥러닝은 깊은 신경망이 특징과 판단 기준을 함께 학습하는 과정을 비교한다.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#64748b"/>
+    </marker>
+    <style>
+      text { font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif; fill: #172033; }
+      .section { font-size: 25px; font-weight: 700; }
+      .label { font-size: 20px; font-weight: 600; }
+      .detail { font-size: 16px; fill: #526078; }
+      .arrow { fill: none; stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow); }
+      .frame { fill: #fff; stroke: #d5dbe5; stroke-width: 2; }
+      .input { fill: #f4f1ff; stroke: #8b7ce8; stroke-width: 2; }
+      .human { fill: #fff2ed; stroke: #e8795c; stroke-width: 2; }
+      .model { fill: #eff6ff; stroke: #5b8def; stroke-width: 2; }
+      .deep { fill: #eef8ef; stroke: #58a565; stroke-width: 2; }
+      .output { fill: #f5f3ff; stroke: #8b7ce8; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect class="frame" x="12" y="12" width="1176" height="242" rx="10"/>
+  <text class="section" x="40" y="52">기존 머신러닝</text>
+  <rect class="input" x="42" y="92" width="180" height="108" rx="8"/>
+  <text class="label" x="132" y="136" text-anchor="middle">입력 이미지</text>
+  <text class="detail" x="132" y="166" text-anchor="middle">예: 차량 사진</text>
+
+  <path class="arrow" d="M222 146H306"/>
+  <rect class="human" x="310" y="78" width="270" height="136" rx="8"/>
+  <text class="label" x="445" y="122" text-anchor="middle">사람이 특징 추출 설계</text>
+  <text class="detail" x="445" y="154" text-anchor="middle">윤곽선 · 모서리</text>
+  <text class="detail" x="445" y="180" text-anchor="middle">색상 분포 등</text>
+
+  <path class="arrow" d="M580 146H664"/>
+  <rect class="model" x="668" y="92" width="220" height="108" rx="8"/>
+  <text class="label" x="778" y="136" text-anchor="middle">분류 모델</text>
+  <text class="detail" x="778" y="166" text-anchor="middle">분류 기준 학습</text>
+
+  <path class="arrow" d="M888 146H972"/>
+  <rect class="output" x="976" y="92" width="174" height="108" rx="54"/>
+  <text class="label" x="1063" y="136" text-anchor="middle">최종 출력</text>
+  <text class="detail" x="1063" y="166" text-anchor="middle">차량 / 비차량</text>
+
+  <rect class="frame" x="12" y="286" width="1176" height="242" rx="10"/>
+  <text class="section" x="40" y="326">딥러닝</text>
+  <rect class="input" x="42" y="366" width="180" height="108" rx="8"/>
+  <text class="label" x="132" y="410" text-anchor="middle">입력 이미지</text>
+  <text class="detail" x="132" y="440" text-anchor="middle">예: 차량 사진</text>
+
+  <path class="arrow" d="M222 420H382"/>
+  <rect class="deep" x="386" y="350" width="502" height="140" rx="8"/>
+  <text class="label" x="637" y="398" text-anchor="middle">깊은 인공 신경망</text>
+  <text class="detail" x="637" y="432" text-anchor="middle">여러 층에서 특징을 단계적으로 학습</text>
+  <text class="detail" x="637" y="458" text-anchor="middle">특징 추출 + 분류 기준을 함께 학습</text>
+
+  <path class="arrow" d="M888 420H972"/>
+  <rect class="output" x="976" y="366" width="174" height="108" rx="54"/>
+  <text class="label" x="1063" y="410" text-anchor="middle">최종 출력</text>
+  <text class="detail" x="1063" y="440" text-anchor="middle">차량 / 비차량</text>
+</svg>

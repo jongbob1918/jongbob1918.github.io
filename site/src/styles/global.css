@@ -45,6 +45,7 @@ h1, h2, h3, p { margin-top: 0; }
 .sidebar-nav a.active { font-weight: 500; }
 .drawer-links { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 60px; color: var(--text); }
 .drawer-links a, .drawer-links button { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; padding: 7px; color: inherit; border: 0; border-radius: 50%; background: transparent; }
+.drawer-links .portfolio-link { flex-basis: auto; width: auto; padding: 0 8px; border-radius: 18px; font-size: 10px; font-weight: 600; letter-spacing: .02em; }
 .drawer-links a:hover, .drawer-links button:hover { color: var(--ink); background: var(--soft); }
 .drawer-links svg { width: 22px; height: 22px; fill: currentColor; }
 .drawer-links .play-mark { fill: var(--paper); }

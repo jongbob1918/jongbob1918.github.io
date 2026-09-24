@@ -344,7 +344,7 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
   .project-row { display: block; padding: 0 0 12px; background: transparent; }
   .project-media { min-height: 0; height: auto; aspect-ratio: 16/9; }
   .project-copy { display: block; margin: 0 10px; padding: 18px; box-shadow: 0 6px 16px rgba(0,0,0,.07); }
-  .project-section:not(.side-section) .result { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+  .project-list[data-project-group="key"] .result { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
   .project-row:hover .project-copy, .project-row:focus-within .project-copy { transform: none; }
   .side-project-list { grid-template-columns: minmax(0,360px); gap: 14px; }
   .side-project-list .project-row { display: grid; height: auto; aspect-ratio: auto; padding: 0; }

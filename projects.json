@@ -35,32 +35,10 @@
     "descriptionEn": "Built a ROS 2 library management robot that integrates autonomous navigation, manipulation, and vision AI to pick up and return books and guide visitors."
   },
   {
-    "slug": "roomie",
-    "group": "key",
-    "category": "addinedu",
-    "order": 2,
-    "detailUrl": "projects/roomie.html",
-    "image": "assets/images/elevator-alignbutton.gif",
-    "imageAlt": "엘리베이터 버튼 앞에 정렬하는 호텔 서비스 로봇 ROOMIE",
-    "imageSequence": [],
-    "titleKo": "ROOMIE — 자율주행 호텔 서비스 로봇",
-    "titleEn": "ROOMIE — Autonomous Hotel Service Robot",
-    "contextKo": "ADDINEDU 장기 교육",
-    "contextEn": "ADDINEDU Long-term Robotics Program",
-    "keywords": [
-      "ROS 2",
-      "Autonomous Navigation",
-      "Elevator Interaction",
-      "Service Robot"
-    ],
-    "descriptionKo": "2D 카메라로 엘리베이터 버튼 위치를 추정하고 4축 로봇팔을 제어했습니다. 버튼 접촉 실험 10회 중 3회에 성공했습니다.",
-    "descriptionEn": "Estimated elevator-button positions with a 2D camera and controlled a four-axis arm. The tip contacted the button in 3 of 10 trials."
-  },
-  {
     "slug": "falcon",
     "group": "key",
     "category": "addinedu",
-    "order": 3,
+    "order": 2,
     "detailUrl": "projects/falcon.html",
     "image": "assets/images/hawkeye_mainpage.gif",
     "imageAlt": "FALCON runway hazard detection interface",
@@ -77,6 +55,28 @@
     ],
     "descriptionKo": "실사·합성·Negative Sample로 학습한 6종 탐지 모델이 mAP@0.5:0.95 0.9005를 기록했습니다. ByteTrack 추적과 ArUco 좌표변환을 관제 화면까지 연동했습니다.",
     "descriptionEn": "Trained a six-class detector on real, synthetic, and negative samples, reaching 0.9005 mAP@0.5:0.95. Integrated ByteTrack and ArUco mapping with the control interface."
+  },
+  {
+    "slug": "roomie",
+    "group": "key",
+    "category": "addinedu",
+    "order": 3,
+    "detailUrl": "projects/roomie.html",
+    "image": "assets/images/elevator-alignbutton.gif",
+    "imageAlt": "엘리베이터 버튼 앞에 정렬하는 호텔 서비스 로봇 ROOMIE",
+    "imageSequence": [],
+    "titleKo": "ROOMIE — 자율주행 호텔 서비스 로봇",
+    "titleEn": "ROOMIE — Autonomous Hotel Service Robot",
+    "contextKo": "ADDINEDU 장기 교육",
+    "contextEn": "ADDINEDU Long-term Robotics Program",
+    "keywords": [
+      "ROS 2",
+      "Autonomous Navigation",
+      "Elevator Interaction",
+      "Service Robot"
+    ],
+    "descriptionKo": "2D 카메라로 엘리베이터 버튼 위치를 추정하고 4축 로봇팔을 제어했습니다. 버튼 접촉 실험 10회 중 3회에 성공했습니다.",
+    "descriptionEn": "Estimated elevator-button positions with a 2D camera and controlled a four-axis arm. The tip contacted the button in 3 of 10 trials."
   },
   {
     "slug": "physical-ai-hackathon",
@@ -112,8 +112,8 @@
     "imageSequence": [],
     "titleKo": "ELEVATOR MCU — 호출 우선순위 LED 제어기",
     "titleEn": "ELEVATOR MCU — Direction-Aware LED Controller",
-    "contextKo": "ADDINEDU 장기 교육",
-    "contextEn": "ADDINEDU Long-term Robotics Program",
+    "contextKo": "",
+    "contextEn": "",
     "keywords": [
       "Arduino",
       "C++",

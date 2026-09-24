@@ -7,7 +7,6 @@ title: ELEVATOR MCU — 호출 우선순위 LED 제어기
 description: 큐 기반 초기 설계의 한계를 방향·상태 기반 탐색으로 개선한 Arduino 원데이 프로젝트
 team: 1명
 period: 2025.07.06
-context: ADDINEDU 장기 교육
 skills:
   - Arduino · C++
   - State-based Scheduling

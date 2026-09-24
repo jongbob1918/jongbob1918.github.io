@@ -187,7 +187,7 @@ const renderProjects = () => {
       const sideClass = group === 'side' ? ' side-project' : '';
       const loading = group === 'key' && index === 0 ? 'eager' : 'lazy';
       const openLabel = activeLanguage === 'ko' ? `${projectName} 프로젝트 열기` : `Open the ${projectName} project`;
-      return `<article class="project-row${sideClass}" data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}">
+      return `<article id="project-${escapeHtml(project.slug)}" class="project-row${sideClass}" data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}">
         <a class="project-media" href="${url}" aria-label="${openLabel}">
           <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}">
           <span class="project-overlay"><span>${copy.viewProject}</span></span>

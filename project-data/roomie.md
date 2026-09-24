@@ -2,7 +2,7 @@
 slug: roomie
 shortName: ROOMIE
 group: key
-order: 2
+order: 3
 title: ROOMIE — 자율주행 호텔 서비스 로봇
 description: 자율주행, 물품 배송, 사용자 안내와 엘리베이터 연동을 통합한 ROS 2 기반 호텔 서비스 로봇
 period: 2025.07.07–08.13

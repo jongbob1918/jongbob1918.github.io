@@ -42,12 +42,13 @@ const renderLocalizedProject = (project, sharedProject, language) => {
   const teamLabel = language === 'ko' ? '팀' : 'Team';
   const periodLabel = language === 'ko' ? '기간' : 'Period';
   const roleLabel = language === 'ko' ? '담당' : 'Role';
+  const contextLabel = language === 'ko' ? '과정' : 'Program';
   const repositoryLabel = language === 'ko' ? `${sharedProject.shortName} GitHub 저장소 열기` : `Open the ${sharedProject.shortName} GitHub repository`;
   const demo = project.demo ?? sharedProject.demo;
   return `<div class="project-language" data-language-content="${language}"${language === 'en' ? ' hidden' : ''}>
     <header class="project-header">
       <h1>${escapeHtml(project.title)}</h1>
-      <div class="meta">${project.team ? `<span><strong>${teamLabel}:</strong> ${escapeHtml(project.team)}</span>` : ''}<span><strong>${periodLabel}:</strong> ${escapeHtml(project.period)}</span>${project.role ? `<span><strong>${roleLabel}:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
+      <div class="meta">${project.context ? `<span><strong>${contextLabel}:</strong> ${escapeHtml(project.context)}</span>` : ''}${project.team ? `<span><strong>${teamLabel}:</strong> ${escapeHtml(project.team)}</span>` : ''}<span><strong>${periodLabel}:</strong> ${escapeHtml(project.period)}</span>${project.role ? `<span><strong>${roleLabel}:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
       <p class="project-skills">${sharedProject.skills.map(escapeHtml).join(' · ')}</p>
       <a class="project-repository" href="${escapeHtml(sharedProject.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(repositoryLabel)}">${githubIcon}</a>
     </header>
@@ -78,7 +79,7 @@ export const renderProjectDetail = (project, translations, sourceFile = `${proje
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260924-2">
+  <link rel="stylesheet" href="../styles.css?v=20260924-3">
 </head>
 <body data-page="project-detail" data-title-ko="${escapeHtml(translations.ko.title)} — Jongmyung Kim" data-title-en="${escapeHtml(translations.en.title)} — Jongmyung Kim" data-description-ko="${escapeHtml(translations.ko.description)}" data-description-en="${escapeHtml(translations.en.description)}">
   <div class="reading-progress" aria-hidden="true"></div>
@@ -89,7 +90,7 @@ export const renderProjectDetail = (project, translations, sourceFile = `${proje
     ${renderLocalizedProject(translations.ko, project, 'ko')}
     ${renderLocalizedProject(translations.en, project, 'en')}
   </main>
-  <script src="../script.js?v=20260924-1"></script>
+  <script src="../script.js?v=20260924-3"></script>
 </body>
 </html>
 `;

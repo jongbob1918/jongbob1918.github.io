@@ -7,6 +7,7 @@ title: FALCON — 활주로 위험요소 관제
 description: CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템
 team: 4명
 period: 2025.05.26–07.03
+context: ADDINEDU 장기 교육
 skills:
   - PyTorch
   - YOLOv8

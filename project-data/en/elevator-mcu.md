@@ -4,6 +4,7 @@ title: ELEVATOR MCU — Direction-Aware LED Controller
 description: A one-day Arduino project replacing a queue-first design with direction- and state-based request scanning
 team: Solo project
 period: Jul 6, 2025
+context: ADDINEDU Long-term Robotics Program
 overview: >-
   This solo, one-day project models elevator calls, movement, and idle behavior with four buttons and fourteen LEDs. A queue-based first design became complicated when calls were added or canceled in transit. I replaced call order with per-floor request state and recompute the next target on every loop according to the last travel direction. The project validates scheduling logic in Arduino and Tinkercad rather than controlling a physical elevator motor.
 demo:

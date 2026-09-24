@@ -7,6 +7,7 @@ title: JAVIS — 도서관 관리 로봇
 description: 자율주행, 로봇팔과 비전 AI를 통합한 ROS 2 기반 도서관 관리 로봇
 team: 9명
 period: 2025.09–10
+context: ADDINEDU 심화 부트캠프
 role: 자율주행 안정화 · 로봇 상태 및 임무 제어
 skills:
   - ROS 2

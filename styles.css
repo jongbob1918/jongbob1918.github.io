@@ -92,6 +92,7 @@ h3 { font-size: 1rem; }
 .project-row:hover .project-copy, .project-row:focus-within .project-copy { box-shadow: 0 12px 28px rgba(0,0,0,.14); transform: translateX(-3px); }
 .project-title { display: inline-flex; align-items: baseline; margin-bottom: 7px; font-size: clamp(1.15rem, 2vw, 1.38rem); font-weight: 750; letter-spacing: -.03em; }
 .project-title:hover, .project-row:focus-within .project-title { color: var(--accent); }
+.project-context { display: block; margin-bottom: 5px; color: var(--muted); font-size: .7rem; font-weight: 650; line-height: 1.5; }
 .keywords { margin-bottom: 10px; color: var(--accent); font-size: .76rem; font-weight: 600; line-height: 1.6; letter-spacing: -.01em; }
 .result { max-width: 650px; margin-bottom: 18px; color: var(--text); font-size: .94rem; }
 .side-project-list { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px; }
@@ -128,11 +129,15 @@ html[data-theme="dark"] .social-icon[aria-label="GitHub"] { color: #f2f4f7; }
 .org-entry { display: flex; align-items: flex-start; gap: 14px; }
 .org-entry img { width: 44px; height: 50px; flex: 0 0 44px; object-fit: contain; }
 .org-entry .addinedu-logo { width: 50px; height: 50px; flex-basis: 50px; }
+.org-letter { width: 44px; height: 44px; flex: 0 0 44px; display: grid; place-items: center; border-radius: 10px; color: var(--paper); background: var(--ink); font-size: 1.15rem; font-weight: 800; line-height: 1; }
 .org-icon { width: 44px; height: 50px; flex: 0 0 44px; display: grid; place-items: center; }
 .org-entry .rokaf-logo { width: 44px; height: 50px; max-width: none; flex: none; object-fit: contain; }
 .org-entry > span { display: grid; gap: 2px; min-width: 0; }
 .org-entry strong { color: var(--ink); font-size: .9rem; }
 .org-entry small { color: var(--muted); font-size: .76rem; font-weight: 400; line-height: 1.6; }
+.entry-project-links { display: grid; gap: 3px; margin-top: 5px; }
+.entry-project-links a { width: fit-content; color: var(--accent); font-size: .75rem; font-weight: 600; line-height: 1.6; }
+.entry-project-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .site-footer { padding: 28px 0; border-top: 0; color: var(--muted); background: var(--soft); font-size: .78rem; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .social-links { display: flex; gap: 8px; }

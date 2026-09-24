@@ -3,6 +3,9 @@ slug: roomie
 title: ROOMIE — Autonomous Hotel Service Robot
 description: A ROS 2 hotel service robot integrating navigation, delivery, guidance, and elevator interaction
 period: Jul 7–Aug 13, 2025
+context: ADDINEDU Long-term Robotics Program
+team: 4 members
+role: Arm control for elevator-button interaction
 overview: >-
   Hotels have repetitive cross-floor work such as room-service delivery and guest guidance. ROOMIE connects autonomous navigation, delivery, guidance, and staff monitoring through ROS 2. At an elevator, it recognizes buttons and door state, operates the call and destination buttons with a four-axis arm, and continues its mission on another floor without human assistance.
 demo:

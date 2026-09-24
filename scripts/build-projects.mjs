@@ -89,6 +89,8 @@ for (const file of files) {
     imageSequence: project.card.sequence ?? [],
     titleKo: project.title,
     titleEn: project.card.titleEn,
+    contextKo: project.context ?? '',
+    contextEn: englishProject.context ?? '',
     keywords: project.card.keywords,
     descriptionKo: project.card.descriptionKo,
     descriptionEn: project.card.descriptionEn

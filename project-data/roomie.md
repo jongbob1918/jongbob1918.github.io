@@ -6,6 +6,9 @@ order: 2
 title: ROOMIE — 자율주행 호텔 서비스 로봇
 description: 자율주행, 물품 배송, 사용자 안내와 엘리베이터 연동을 통합한 ROS 2 기반 호텔 서비스 로봇
 period: 2025.07.07–08.13
+context: ADDINEDU 장기 교육
+team: 4명
+role: 엘리베이터 버튼 조작용 로봇팔 제어
 skills:
   - ROS 2
   - Python · OpenCV
@@ -22,8 +25,8 @@ card:
     - Autonomous Navigation
     - Elevator Interaction
     - Service Robot
-  descriptionKo: 자율주행, 물품 배송, 사용자 안내와 엘리베이터 이용을 하나의 서비스 흐름으로 구현했습니다.
-  descriptionEn: Integrated autonomous navigation, delivery, user guidance, and elevator interaction into a hotel service robot.
+  descriptionKo: 2D 카메라로 엘리베이터 버튼 위치를 추정하고 4축 로봇팔을 제어했습니다. 버튼 접촉 실험 10회 중 3회에 성공했습니다.
+  descriptionEn: Estimated elevator-button positions with a 2D camera and controlled a four-axis arm. The tip contacted the button in 3 of 10 trials.
 overview: >-
   호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생합니다. ROOMIE는 자율주행, 물품 배송, 사용자 안내와 관리자 모니터링을 ROS 2로 연결한 호텔 서비스 로봇입니다. 엘리베이터 앞까지 이동한 뒤 버튼과 문 상태를 인식하고, 4축 로봇팔로 호출·목적층 버튼을 조작해 사람의 도움 없이 층간 임무를 이어갑니다.
 demo:

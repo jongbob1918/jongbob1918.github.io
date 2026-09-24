@@ -158,14 +158,10 @@ const copyByLanguage = {
   en: {
     keyProjects: 'Key Projects', sideProjects: 'Side Projects', blog: 'Blog', about: 'About',
     education: 'Education', career: 'Career', viewProject: 'View Project ↗', loadError: 'Project data could not be loaded.',
-    educationDetails: ['Department of Aeronautical & Mechanical Engineering', 'AI Robotics Bootcamp · 2025.02–2025.08', 'ROS 2 · Navigation · SLAM · Deep Learning'],
-    careerDetails: ['Robotics Software Engineer', '2025.10–Present · Autonomous Navigation', 'Avionics Maintenance Non-Commissioned Officer', '2020.03–2025.03 · KF-16 Radar & Avionics Maintenance']
   },
   ko: {
     keyProjects: '주요 프로젝트', sideProjects: '사이드 프로젝트', blog: '블로그', about: '소개',
     education: '학력', career: '경력', viewProject: '프로젝트 보기 ↗', loadError: '프로젝트 정보를 불러오지 못했습니다.',
-    educationDetails: ['항공기계공학과', 'AI 로보틱스 부트캠프 · 2025.02–2025.08', 'ROS 2 · Navigation · SLAM · Deep Learning'],
-    careerDetails: ['로보틱스 소프트웨어 엔지니어', '2025.10–현재 · 자율주행', '항공전자제어 정비 부사관', '2020.03–2025.03 · KF-16 레이더·항공전자 계통 정비']
   }
 };
 
@@ -195,6 +191,7 @@ const renderProjects = () => {
           <span class="project-overlay"><span>${copy.viewProject}</span></span>
         </a>
         <div class="project-copy">
+          ${project.contextKo ? `<span class="project-context">${escapeHtml(activeLanguage === 'ko' ? project.contextKo : project.contextEn)}</span>` : ''}
           <a class="project-title" href="${url}">${title}</a>
           <p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>
           <p class="result">${description}</p>
@@ -216,12 +213,8 @@ const applyLanguage = () => {
   setAllText('#key-projects-title', copy.keyProjects);
   setAllText('#side-projects-title', copy.sideProjects);
   setAllText('#about-title', copy.about);
-  const factLabels = document.querySelectorAll('.about-facts dt');
-  if (factLabels[0]) factLabels[0].textContent = copy.education;
-  if (factLabels[1]) factLabels[1].textContent = copy.career;
-  const detailLines = document.querySelectorAll('.about-facts small');
-  [...copy.educationDetails, ...copy.careerDetails].forEach((text, index) => {
-    if (detailLines[index]) detailLines[index].textContent = text;
+  document.querySelectorAll('[data-copy-ko][data-copy-en]').forEach(element => {
+    element.textContent = element.dataset[activeLanguage === 'ko' ? 'copyKo' : 'copyEn'];
   });
   document.querySelectorAll('.language-toggle [data-language]').forEach(option => {
     option.classList.toggle('active', option.dataset.language === activeLanguage);

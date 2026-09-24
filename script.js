@@ -16,6 +16,36 @@ if (profilePhoto && !document.querySelector('.profile-social')) profilePhoto.ins
 
 const isHomePage = Boolean(document.querySelector('[data-project-group]'));
 const isProjectDetail = document.body.dataset.page === 'project-detail';
+if (isProjectDetail) {
+  const header = document.querySelector('.site-header');
+  if (header) {
+    let lastY = window.scrollY;
+    let movement = 0;
+    const showHeader = () => {
+      header.classList.remove('is-hidden');
+      document.body.classList.remove('header-hidden');
+    };
+    const hideHeader = () => {
+      header.classList.add('is-hidden');
+      document.body.classList.add('header-hidden');
+    };
+    window.addEventListener('scroll', () => {
+      const y = Math.max(0, window.scrollY);
+      const delta = y - lastY;
+      lastY = y;
+      if (y <= header.offsetHeight || document.body.classList.contains('menu-open') || header.querySelector(':focus-visible')) {
+        movement = 0;
+        showHeader();
+        return;
+      }
+      if (Math.sign(delta) !== Math.sign(movement)) movement = 0;
+      movement += delta;
+      if (movement > 6) { hideHeader(); movement = 0; }
+      if (movement < -6) { showHeader(); movement = 0; }
+    }, { passive: true });
+    header.addEventListener('focusin', showHeader);
+  }
+}
 const urlParameters = new URLSearchParams(window.location.search);
 const utilityControls = `
   <span class="nav-utilities" aria-label="Display settings">

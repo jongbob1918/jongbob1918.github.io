@@ -85,10 +85,32 @@ const structuredData = article ? {
       </div>
     </footer>
     <script>
+      const header = document.querySelector<HTMLElement>('.site-header');
+      let lastY = window.scrollY;
+      let movement = 0;
+      const showHeader = () => header?.classList.remove('is-hidden');
+      header?.addEventListener('focusin', showHeader);
+      window.addEventListener('scroll', () => {
+        if (!header) return;
+        const y = Math.max(0, window.scrollY);
+        const delta = y - lastY;
+        lastY = y;
+        const searchOpen = !document.querySelector<HTMLFormElement>('#header-search')?.hidden;
+        if (y <= header.offsetHeight || document.querySelector<HTMLDialogElement>('#notes-menu')?.open || searchOpen || header.querySelector(':focus-visible')) {
+          movement = 0;
+          showHeader();
+          return;
+        }
+        if (Math.sign(delta) !== Math.sign(movement)) movement = 0;
+        movement += delta;
+        if (movement > 6) { header.classList.add('is-hidden'); movement = 0; }
+        if (movement < -6) { showHeader(); movement = 0; }
+      }, { passive: true });
       const menu = document.querySelector<HTMLDialogElement>('#notes-menu');
       const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const closeMenu = () => menu?.close();
       menuButton?.addEventListener('click', () => {
+        showHeader();
         menu?.showModal();
         menuButton.setAttribute('aria-expanded', 'true');
         document.body.classList.add('menu-open');
@@ -103,6 +125,7 @@ const structuredData = article ? {
       const search = document.querySelector<HTMLFormElement>('#header-search');
       const openSearch = () => {
         if (!search) return;
+        showHeader();
         search.hidden = false;
         searchButton?.setAttribute('aria-expanded', 'true');
         search.querySelector('input')?.focus();

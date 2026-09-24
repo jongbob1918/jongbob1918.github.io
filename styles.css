@@ -38,7 +38,8 @@ button { font: inherit; }
 a:focus-visible, button:focus-visible, [role="link"]:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
 
-.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-bg); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); }
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-bg); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); transition: transform .22s ease; }
+.site-header.is-hidden { transform: translateY(-100%); }
 .header-inner { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .name { white-space: nowrap; font-size: .875rem; font-weight: 750; letter-spacing: .015em; }
 .nav { display: flex; align-items: center; gap: 20px; font-size: .875rem; color: var(--muted); }
@@ -144,7 +145,8 @@ html[data-theme="dark"] .social-icon[aria-label="GitHub"] { color: #f2f4f7; }
 .social-links .play { fill: white; }
 
 /* Case study */
-.reading-progress { position: fixed; top: 61px; left: 0; z-index: 21; width: 0; height: 3px; background: #175cd3; }
+.reading-progress { position: fixed; top: 61px; left: 0; z-index: 21; width: 0; height: 3px; background: #175cd3; transition: top .22s ease; }
+.header-hidden .reading-progress { top: 0; }
 html[data-theme="dark"] .reading-progress { background: #8ab4f8; }
 .case-page { --case-content-width: 900px; --project-accent-on-light: #175cd3; --project-accent-on-dark: #8ab4f8; --project-skills-color: #aecbfa; --accent: var(--project-accent-on-light); --accent-soft: #eff8ff; padding: 38px 0 84px; }
 html[data-theme="dark"] .case-page { --accent: var(--project-accent-on-dark); --accent-soft: #102a56; }

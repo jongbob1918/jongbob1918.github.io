@@ -38,7 +38,7 @@ const parseSections = markdown => {
     while (usedIds.has(id)) id = `${baseId}-${suffix++}`;
     usedIds.add(id);
 
-    return { id, title, body: marked.parse(source, { gfm: true }) };
+    return { id, title, body: marked.parse(source, { gfm: true, breaks: true }) };
   });
 };
 

@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
+import remarkBreaks from 'remark-breaks';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
@@ -15,7 +16,7 @@ export default defineConfig({
     }))
   },
   markdown: {
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkMath, remarkBreaks],
     rehypePlugins: [[rehypeKatex, { strict: 'error', throwOnError: true }]]
   }
 });

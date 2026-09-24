@@ -393,14 +393,14 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
 .header-social .social-icon { width: 32px; height: 32px; padding: 0; }
 .header-inner > .nav-utilities { flex-shrink: 0; gap: 6px; margin: 0; padding-left: 18px; }
 #key-projects { background: var(--paper); }
-#key-projects > .project-subgroup { width: 94%; margin-inline: auto; padding: 32px 0; border-radius: var(--radius-large); background: var(--soft); }
+#key-projects > .project-subgroup { width: 100%; margin-inline: 0; padding: 24px 0; border-radius: 0; background: var(--soft); }
 #key-projects > .project-subgroup + .project-subgroup { margin-top: 26px; }
 .organization-title { margin: 0 0 20px; color: var(--text); font-size: .9rem; letter-spacing: .04em; }
 .addinedu-title { color: #174b88; }
 html[data-theme="dark"] .addinedu-title { color: #8cc8ff; }
 #lk-projects .work-project-list { margin-top: 0; }
 #lk-projects .work-project { border-radius: var(--radius-small); background: var(--paper); }
-#side-projects { width: 94%; margin-inline: auto; border-radius: var(--radius-large); }
+#side-projects { width: 100%; margin-inline: 0; border-radius: 0; }
 .about-name { width: 100%; }
 .profile-intro { width: 100%; max-width: 350px; margin-top: 26px; padding: 22px; border-radius: var(--radius-small); color: var(--text); background: var(--soft); font-size: .88rem; line-height: 1.85; text-align: left; }
 .profile-intro p { margin-bottom: 12px; }
@@ -416,7 +416,7 @@ html[data-theme="dark"] .addinedu-title { color: #8cc8ff; }
 }
 
 /* Shared main-card geometry: round only the outside of the joined card. */
-.project-list[data-project-group="key"] .project-row { height: 300px; padding: 0; overflow: hidden; background: var(--paper); box-shadow: 0 6px 16px rgba(0,0,0,.06); }
+.project-list[data-project-group="key"] .project-row { height: 220px; padding: 0; overflow: hidden; background: var(--paper); box-shadow: 0 6px 16px rgba(0,0,0,.06); }
 .project-list[data-project-group="key"] .project-media { min-height: 0; height: 100%; border-radius: 0; }
 .project-list[data-project-group="key"] .project-copy { min-height: 0; margin: 0; border-radius: 0; box-shadow: none; padding: 22px 26px; }
 .project-list[data-project-group="key"] .project-row:hover .project-copy,
@@ -433,6 +433,6 @@ html[data-theme="dark"] .addinedu-title { color: #8cc8ff; }
 @media (max-width: 760px) {
   .project-list[data-project-group="key"] .project-row { height: auto; }
   .project-list[data-project-group="key"] .project-media { height: auto; aspect-ratio: 16/9; }
-  .project-list[data-project-group="key"] .project-copy { min-height: 230px; padding: 20px; }
+  .project-list[data-project-group="key"] .project-copy { min-height: 150px; padding: 18px; }
   .project-summary .project-media img { padding: 45px; }
 }

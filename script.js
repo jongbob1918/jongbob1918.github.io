@@ -172,13 +172,15 @@ const setAllText = (selector, text) => document.querySelectorAll(selector).forEa
 
 // Company summaries use the same card renderer as documented projects.
 const companyProjects = [
-  ['lk-patrol', '서오릉 순찰 로봇', 'Seooreung patrol robot'],
-  ['lk-ros', '로봇 시스템 ROS 1 → ROS 2 전환', 'Robot system migration from ROS 1 to ROS 2'],
-  ['lk-biped', 'Biped 로봇 내비게이션', 'Biped robot navigation'],
-].map(([slug, titleKo, titleEn]) => ({
-  slug, titleKo, titleEn, group: 'key', category: 'lk',
+  { slug: 'lk-patrol', titleKo: '서오릉 순찰 로봇', titleEn: 'Seooreung patrol robot' },
+  { slug: 'lk-ros', titleKo: '로봇 시스템 ROS 1 → ROS 2 전환', titleEn: 'Robot system migration from ROS 1 to ROS 2' },
+  { slug: 'lk-biped', titleKo: 'Biped 로봇 내비게이션', titleEn: 'Biped robot navigation' },
+].map(project => ({
+  group: 'key', category: 'lk',
   image: 'assets/images/lk-robotics-emblem.svg', imageAlt: 'LK ROBOTICS logo',
-  descriptionKo: '', descriptionEn: '', keywords: [],
+  keywords: [],
+  // Optional periodKo/En, teamKo/En and contributionKo/En appear only when supplied.
+  ...project,
 }));
 
 const renderProjects = () => {
@@ -192,7 +194,11 @@ const renderProjects = () => {
     container.innerHTML = groupProjects.map((project, index) => {
       const url = project.detailUrl ? escapeHtml(project.detailUrl) : null;
       const title = escapeHtml(activeLanguage === 'ko' ? project.titleKo : project.titleEn);
-      const description = escapeHtml(activeLanguage === 'ko' ? project.descriptionKo : project.descriptionEn);
+      const korean = activeLanguage === 'ko';
+      const period = korean ? project.periodKo : project.periodEn;
+      const team = korean ? project.teamKo : project.teamEn;
+      const contribution = korean ? project.contributionKo : project.contributionEn;
+      const meta = [period ? `${korean ? '기간' : 'Period'}: ${escapeHtml(period)}` : '', team ? `${korean ? '인원' : 'Team'}: ${escapeHtml(team)}` : ''].filter(Boolean).join(' · ');
       const projectName = escapeHtml(project.slug.toUpperCase());
       const sideClass = group === 'side' ? ' side-project' : '';
       const loading = group === 'key' && index === 0 ? 'eager' : 'lazy';
@@ -204,8 +210,9 @@ const renderProjects = () => {
         </${url ? 'a' : 'div'}>
         <div class="project-copy">
           <${url ? 'a' : 'h3'} class="project-title" ${url ? `href="${url}"` : ''}>${title}</${url ? 'a' : 'h3'}>
+          ${meta ? `<p class="card-meta">${meta}</p>` : ''}
+          ${contribution ? `<p class="card-contribution"><span>${korean ? '담당' : 'Contribution'}:</span> ${escapeHtml(contribution)}</p>` : ''}
           ${project.keywords.length ? `<p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>` : ''}
-          ${group === 'side' && description ? `<p class="result">${description}</p>` : ''}
         </div>
       </article>`;
     }).join('');

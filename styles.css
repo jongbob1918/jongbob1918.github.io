@@ -436,3 +436,16 @@ html[data-theme="dark"] .addinedu-title { color: #8cc8ff; }
   .project-list[data-project-group="key"] .project-copy { min-height: 150px; padding: 18px; }
   .project-summary .project-media img { padding: 45px; }
 }
+
+.card-meta { margin: 0 0 8px; color: var(--muted); font-size: .7rem; line-height: 1.6; }
+.card-contribution { margin: 0 0 10px; color: var(--text); font-size: .8rem; line-height: 1.6; }
+.card-contribution > span { font-weight: 700; }
+.project-list[data-project-group="key"] .project-copy { padding: 16px 22px; }
+.project-list[data-project-group="key"] .project-title { font-size: 1.08rem; line-height: 1.4; }
+.project-copy .keywords { margin-bottom: 0; }
+.side-project-list .card-meta { font-size: .65rem; }
+.side-project-list .card-contribution { font-size: .74rem; }
+
+@media (min-width: 761px) and (max-width: 1000px) {
+  .project-list[data-project-group="key"] .project-row { height: 260px; }
+}

@@ -17,6 +17,8 @@ skills:
   - TCP
 repository: https://github.com/jongbob1918/FALCON
 card:
+  contributionKo: 지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증
+  contributionEn: Detector training, tracking pipeline integration, and coordinate mapping validation
   image: assets/images/hawkeye_mainpage.gif
   imageAlt: FALCON runway hazard detection interface
   titleEn: FALCON — Runway Safety Monitoring System

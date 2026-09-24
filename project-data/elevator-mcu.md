@@ -15,6 +15,8 @@ skills:
   - Tinkercad
 repository: https://github.com/jongbob1918/elevator-mcu
 card:
+  contributionKo: 방향·상태 기반 호출 스케줄링과 LED 이동 제어 구현
+  contributionEn: Direction-based call scheduling and LED movement control
   image: assets/images/elevator-mcu-demo.gif
   imageAlt: Tinkercad에서 실행한 4층 LED 엘리베이터 호출·이동 시뮬레이션
   titleEn: ELEVATOR MCU — Direction-Aware LED Controller

@@ -273,7 +273,7 @@ Policy : 상태에 따른 행동을 선택하는 전략
 
 <img src="/images/notes/easy-deep-learning-ch01/restaurant-rl-01-random-exploration.png" alt="에이전트가 출발점에서 무작위로 이동하다 공사 구간에 들어가 벌점 20을 받고 해당 행동의 점수를 낮추는 첫 번째 학습 단계" loading="lazy" />
 
-공사 구간으로 이동한 행동의 점수는 낮추고, 맛집에 도착하는 데 도움이 된 행동의 점수는 높입니다. 이 과정을 반복하면 에이전트는 각 위치에서 보상이 큰 행동을 선택하게 됩니다.
+공사 구간으로 이동한 행동의 점수는 낮추고, 맛집에 도착하는 데 도움이 된 행동의 점수는 높입니다. 이 과정을 반복하면 에이전트는 각 위치에서 맛집까지 가는 데 유리한 방향을 선택하게 됩니다.
 
 <img src="/images/notes/easy-deep-learning-ch01/restaurant-rl-02-reward-update.png" alt="에이전트가 벌점 경로는 피하고 보상 40을 주는 맛집 A로 향하는 행동의 점수를 높이는 두 번째 학습 단계" loading="lazy" />
 

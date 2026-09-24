@@ -308,6 +308,6 @@ if (progress) {
 if (!document.querySelector('.site-footer')) {
   document.body.insertAdjacentHTML('beforeend', `
     <footer class="site-footer">
-      <div class="wrap footer-inner"><span>© 2026 Jongmyung Kim</span></div>
+      <div class="wrap footer-inner"><span data-copy-ko="© 2026 김종명" data-copy-en="© 2026 Jongmyung Kim">© 2026 Jongmyung Kim</span></div>
     </footer>`);
 }

@@ -1,7 +1,7 @@
 ---
 slug: elevator-mcu
 shortName: ELEVATOR MCU
-group: side
+category: side
 order: 5
 title: ELEVATOR MCU — 호출 우선순위 LED 제어기
 description: 큐 기반 초기 설계의 한계를 방향·상태 기반 탐색으로 개선한 Arduino 원데이 프로젝트
@@ -14,19 +14,15 @@ skills:
   - Cooperative Timing
   - Tinkercad
 repository: https://github.com/jongbob1918/elevator-mcu
+role: 방향·상태 기반 호출 스케줄링과 LED 이동 제어 구현
 card:
-  contributionKo: 방향·상태 기반 호출 스케줄링과 LED 이동 제어 구현
-  contributionEn: Direction-based call scheduling and LED movement control
   image: assets/images/elevator-mcu-demo.gif
   imageAlt: Tinkercad에서 실행한 4층 LED 엘리베이터 호출·이동 시뮬레이션
-  titleEn: ELEVATOR MCU — Direction-Aware LED Controller
-  keywords:
+  skills:
     - Arduino
     - C++
     - Scheduling
     - Embedded Systems
-  descriptionKo: 큐 기반 호출 처리의 취소·중간 삽입 문제를 발견하고, 현재 진행 방향에 따라 목적층을 다시 탐색하는 구조로 개선했습니다.
-  descriptionEn: Replaced a queue-first design with direction-aware request scanning to handle cancellation and mid-route calls.
 overview: >-
   4개 버튼과 14개 LED로 엘리베이터의 호출·이동·대기 규칙을 재현한 1인 원데이 프로젝트입니다. 처음에는 호출 순서를 큐에 저장하려 했지만, 이동 중 호출과 취소가 들어오면 중간 삽입과 우선순위 변경이 복잡해졌습니다. 호출 순서를 저장하는 대신 각 층의 호출 상태를 유지하고, 마지막 진행 방향에 따라 목적층을 매 루프 다시 탐색하는 구조로 변경했습니다. 실제 모터 제어가 아니라 Arduino와 Tinkercad에서 스케줄링 로직을 검증한 프로젝트입니다.
 demo:

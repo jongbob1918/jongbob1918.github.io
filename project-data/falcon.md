@@ -1,7 +1,7 @@
 ---
 slug: falcon
 shortName: FALCON
-group: key
+category: addinedu
 order: 2
 title: FALCON — 활주로 위험요소 관제
 description: CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템
@@ -16,19 +16,15 @@ skills:
   - Homography
   - TCP
 repository: https://github.com/jongbob1918/FALCON
+role: 지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증
 card:
-  contributionKo: 지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증
-  contributionEn: Detector training, tracking pipeline integration, and coordinate mapping validation
   image: assets/images/hawkeye_mainpage.gif
   imageAlt: FALCON runway hazard detection interface
-  titleEn: FALCON — Runway Safety Monitoring System
-  keywords:
+  skills:
     - YOLOv8
     - ByteTrack
     - Homography
     - OpenCV
-  descriptionKo: 실사·합성·Negative Sample로 학습한 6종 탐지 모델이 mAP@0.5:0.95 0.9005를 기록했습니다. ByteTrack 추적과 ArUco 좌표변환을 관제 화면까지 연동했습니다.
-  descriptionEn: Trained a six-class detector on real, synthetic, and negative samples, reaching 0.9005 mAP@0.5:0.95. Integrated ByteTrack and ArUco mapping with the control interface.
 overview: >-
   활주로의 조류, FOD, 사람과 차량은 작은 객체라도 항공기 운항에 직접적인 위험이 되지만 여러 CCTV를 관제사가 지속적으로 감시하는 데에는 한계가 있습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 픽셀 위치를 실제 활주로 좌표와 구역 정보로 변환해 관제 화면에 전달하는 AI 안전 관제 시스템입니다. 위험요소가 감지되면 객체 ID·클래스·좌표·신뢰도를 서버로 전송하고, 관제 GUI가 지도 마커와 팝업 경보를 갱신합니다.
 demo:

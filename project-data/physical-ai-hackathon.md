@@ -1,12 +1,12 @@
 ---
 slug: physical-ai-hackathon
 shortName: PHYSICAL AI
-group: side
+category: side
 order: 4
 title: 한성대×로보시지 제1회 Physical AI 해커톤
 description: ACT 모방학습으로 SO-101 양팔의 공 전달·색상 분류 미션에 도전한 해커톤 참가 기록
 team: 4명
-period: 2026.02
+period: "2026.02"
 skills:
   - LeRobot
   - ACT
@@ -17,15 +17,12 @@ repository: https://github.com/TheMomentLab/physical_ai_hackathon
 card:
   image: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
   imageAlt: 제1회 Physical AI 해커톤에서 두 대의 SO-101 로봇팔이 색상 공을 전달하고 분류하는 모습
-  titleEn: PHYSICAL AI HACKATHON — Bimanual Imitation Learning
-  keywords:
+  skills:
     - LeRobot
     - ACT
     - Imitation Learning
     - Bimanual Manipulation
     - SO-101
-  descriptionKo: 5개 연속 동작을 색상별 단일 태스크로 재구성하고 복구 시연을 더해, 심사에서 5개 공 중 3개 분류에 성공했습니다.
-  descriptionEn: Reframed one five-ball sequence as per-color tasks, added recovery demonstrations, and sorted three of five balls during judging.
 overview: >-
   한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가했습니다.
   120만 원대 SO-101 로봇팔 두 대와 2D 카메라를 사용해 색상 공을 집어 수납함에 분류하는 미션에 도전했습니다.

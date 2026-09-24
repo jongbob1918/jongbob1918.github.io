@@ -5,7 +5,7 @@ description: An AI monitoring system that detects and tracks runway hazards and 
 team: 4 members
 period: May 26–Jul 3, 2025
 context: ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9
-role: Team lead · Ground hazard detection integration and validation
+role: Detector training, tracking pipeline integration, and coordinate mapping validation
 overview: >-
   Birds, foreign object debris, people, and vehicles can threaten aircraft operations even when they appear as small objects, while continuously watching multiple CCTV feeds is difficult for an operator. FALCON detects and tracks ground hazards in fixed-camera footage, converts pixel positions into runway coordinates and zones, and sends object ID, class, location, and confidence events to a control interface.
 demo:

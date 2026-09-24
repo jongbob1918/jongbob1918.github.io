@@ -1,7 +1,7 @@
 ---
 slug: javis
 shortName: JAVIS
-group: key
+category: addinedu
 order: 1
 title: JAVIS — 도서관 관리 로봇
 description: 자율주행, 로봇팔과 비전 AI를 통합한 ROS 2 기반 도서관 관리 로봇
@@ -27,16 +27,13 @@ card:
     - src: assets/images/javis_nav_rviz.gif
       alt: RViz에서 협소한 서가 사이를 주행하는 JAVIS
       duration: 7510
-  titleEn: JAVIS — Library Management Robot
-  keywords:
+  skills:
     - ROS 2
     - Python
     - Nav2
     - 2D LiDAR SLAM
     - Path Planning
     - State Machine
-  descriptionKo: 자율주행, 로봇팔과 비전 AI를 ROS 2로 통합해 도서 픽업·반납과 사용자 안내를 수행하는 도서관 관리 로봇을 개발했습니다.
-  descriptionEn: Built a ROS 2 library management robot that integrates autonomous navigation, manipulation, and vision AI to pick up and return books and guide visitors.
 overview: >-
   도서관에서는 도서 픽업·반납과 길 안내 같은 반복 업무에 지속적인 인력이 필요합니다.
   이를 자동화하기 위해 VIC-PINKY 모바일 로봇과 myCobot 매니퓰레이터, 비전 AI를 ROS 2로 연결한 도서관 관리 로봇 JAVIS를 개발했습니다.

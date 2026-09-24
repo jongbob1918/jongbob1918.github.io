@@ -1,7 +1,7 @@
 ---
 slug: project-slug
 title: PROJECT — Descriptive English project title
-description: One-sentence description for search results and metadata
+description: Short project description shown on the homepage card and in search results
 team: Solo project
 period: Jan–Mar 2026
 role: Primary responsibility

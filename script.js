@@ -11,7 +11,6 @@ const socialLinks = `
   </span>`;
 
 
-const isHomePage = Boolean(document.querySelector('[data-project-group]'));
 const isProjectDetail = document.body.dataset.page === 'project-detail';
 if (isProjectDetail) {
   const header = document.querySelector('.site-header');
@@ -151,7 +150,8 @@ const bindMediaSequences = (root = document) => {
   });
 };
 
-const projectContainers = [...document.querySelectorAll('[data-project-group]')];
+const categoryRoot = document.querySelector('#project-categories');
+let loadedCategories = [];
 
 const copyByLanguage = {
   en: {
@@ -170,27 +170,22 @@ let loadedProjects = [];
 
 const setAllText = (selector, text) => document.querySelectorAll(selector).forEach(element => { element.textContent = text; });
 
-// Company summaries use the same card renderer as documented projects.
-const companyProjects = [
-  { slug: 'lk-patrol', titleKo: '서오릉 순찰 로봇', titleEn: 'Seooreung patrol robot' },
-  { slug: 'lk-ros', titleKo: '로봇 시스템 ROS 1 → ROS 2 전환', titleEn: 'Robot system migration from ROS 1 to ROS 2' },
-  { slug: 'lk-biped', titleKo: 'Biped 로봇 내비게이션', titleEn: 'Biped robot navigation' },
-].map(project => ({
-  group: 'key', category: 'lk',
-  image: 'assets/images/lk-robotics-emblem.svg', imageAlt: 'LK ROBOTICS logo',
-  keywords: [],
-  // Optional periodKo/En, teamKo/En and contributionKo/En appear only when supplied.
-  ...project,
-}));
-
 const renderProjects = () => {
-  if (!loadedProjects.length) return;
+  if (!categoryRoot) return;
   const copy = copyByLanguage[activeLanguage];
+  categoryRoot.innerHTML = loadedCategories.filter(category => loadedProjects.some(project => project.category === category.id)).map(category => {
+    const title = activeLanguage === 'ko' ? category.titleKo : category.titleEn;
+    const colorStyle = category.color ? `--category-color:${category.color};` : '';
+    const darkStyle = category.darkColor ? `--category-dark-color:${category.darkColor};` : '';
+    return `<section class="project-subgroup" id="${escapeHtml(category.id)}-projects" aria-labelledby="category-${escapeHtml(category.id)}-title" style="${escapeHtml(colorStyle + darkStyle)}">
+      <div class="wrap"><h3 class="organization-title" id="category-${escapeHtml(category.id)}-title">${escapeHtml(title)}</h3>
+      <div class="project-list${category.layout === 'compact' ? ' side-project-list' : ''}" data-project-layout="${escapeHtml(category.layout)}" data-project-category="${escapeHtml(category.id)}"></div></div>
+    </section>`;
+  }).join('');
+  const projectContainers = [...categoryRoot.querySelectorAll('[data-project-category]')];
   projectContainers.forEach(container => {
-    const group = container.dataset.projectGroup;
-    const category = container.dataset.projectCategory;
-    const groupProjects = [...companyProjects, ...loadedProjects].filter(project => project.group === group && (!category || project.category === category));
-    if (category === 'personal') container.closest('.project-subgroup').hidden = groupProjects.length === 0;
+    const compact = container.dataset.projectLayout === 'compact';
+    const groupProjects = loadedProjects.filter(project => project.category === container.dataset.projectCategory);
     container.innerHTML = groupProjects.map((project, index) => {
       const url = project.detailUrl ? escapeHtml(project.detailUrl) : null;
       const title = escapeHtml(activeLanguage === 'ko' ? project.titleKo : project.titleEn);
@@ -201,14 +196,14 @@ const renderProjects = () => {
       const contribution = korean ? project.contributionKo : project.contributionEn;
       const meta = [period ? `${korean ? '기간' : 'Period'}: ${escapeHtml(period)}` : '', team ? `${korean ? '인원' : 'Team'}: ${escapeHtml(team)}` : ''].filter(Boolean).join(' · ');
       const projectName = escapeHtml(project.slug.toUpperCase());
-      const sideClass = group === 'side' ? ' side-project' : '';
-      const loading = group === 'key' && index === 0 ? 'eager' : 'lazy';
+      const sideClass = compact ? ' side-project' : '';
+      const loading = !compact && index === 0 ? 'eager' : 'lazy';
       const openLabel = activeLanguage === 'ko' ? `${projectName} 프로젝트 열기` : `Open the ${projectName} project`;
-      return `<article id="project-${escapeHtml(project.slug)}" class="project-row${sideClass}${url ? '' : ' project-summary'}" ${url ? `data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}"` : ''}>
-        <${url ? 'a' : 'div'} class="project-media" ${url ? `href="${url}" aria-label="${openLabel}"` : ''}>
-          <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}">
+      return `<article id="project-${escapeHtml(project.slug)}" class="project-row${sideClass}${url ? '' : ' project-summary'}${project.image ? '' : ' project-text-only'}" ${url ? `data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}"` : ''}>
+        ${project.image ? `<${url ? 'a' : 'div'} class="project-media" data-image-fit="${escapeHtml(project.imageFit)}" ${url ? `href="${url}" aria-label="${openLabel}"` : ''}>
+          <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}"${project.imageSequence?.length > 1 ? ` data-media-sequence="${escapeHtml(JSON.stringify(project.imageSequence))}"` : ''}>
           ${url ? `<span class="project-overlay"><span>${copy.viewProject}</span></span>` : ''}
-        </${url ? 'a' : 'div'}>
+        </${url ? 'a' : 'div'}>` : ''}
         <div class="project-copy">
           <${url ? 'a' : 'h3'} class="project-title" ${url ? `href="${url}"` : ''}>${title}</${url ? 'a' : 'h3'}>
           ${meta ? `<p class="card-meta">${meta}</p>` : ''}
@@ -227,11 +222,9 @@ const applyLanguage = () => {
   const copy = copyByLanguage[activeLanguage];
   document.documentElement.lang = activeLanguage;
   setAllText('.nav a[href$="#key-projects"]', copy.keyProjects);
-  setAllText('.nav a[href$="#side-projects"]', copy.sideProjects);
   setAllText('.nav a[href$="notes/"]', copy.blog);
   setAllText('.nav a[href$="#about"]', copy.about);
   setAllText('#key-projects-title', copy.keyProjects);
-  setAllText('#side-projects-title', copy.sideProjects);
   setAllText('#about-title', copy.about);
   document.querySelectorAll('[data-copy-ko][data-copy-en]').forEach(element => {
     element.textContent = element.dataset[activeLanguage === 'ko' ? 'copyKo' : 'copyEn'];
@@ -268,20 +261,25 @@ document.querySelector('.language-toggle')?.addEventListener('click', () => {
 
 applyLanguage();
 
-if (projectContainers.length) {
+if (categoryRoot) {
   fetch('projects.json', { cache: 'no-store' })
     .then(response => {
       if (!response.ok) throw new Error(`Project data request failed: ${response.status}`);
       return response.json();
     })
-    .then(projects => {
-      loadedProjects = projects;
+    .then(catalog => {
+      loadedCategories = catalog.categories;
+      loadedProjects = catalog.projects;
       renderProjects();
+      // Category anchors are created after the catalog arrives.
+      if (window.location.hash) {
+        let targetId;
+        try { targetId = decodeURIComponent(window.location.hash.slice(1)); } catch { targetId = ''; }
+        requestAnimationFrame(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'instant' }));
+      }
     })
     .catch(error => {
-      projectContainers.forEach(container => {
-        container.innerHTML = `<p class="project-data-error">${copyByLanguage[activeLanguage].loadError}</p>`;
-      });
+      categoryRoot.innerHTML = `<p class="project-data-error">${copyByLanguage[activeLanguage].loadError}</p>`;
       console.error(error);
     });
 } else {

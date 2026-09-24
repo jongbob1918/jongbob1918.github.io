@@ -1,0 +1,5 @@
+[
+  { "id": "lk", "titleKo": "LK ROBOTICS", "titleEn": "LK ROBOTICS", "priority": 1, "layout": "main" },
+  { "id": "addinedu", "titleKo": "ADDINEDU", "titleEn": "ADDINEDU", "priority": 2, "layout": "main", "color": "#174b88", "darkColor": "#8cc8ff" },
+  { "id": "side", "titleKo": "Side", "titleEn": "Side", "priority": 3, "layout": "compact" }
+]

@@ -1,5 +1,6 @@
 ---
 title: 이진분류와 다중분류, 손실 함수
+slug: deep-learning/easy-deep-learning-ch04
 description: 이진분류와 다중분류의 출력 및 손실 함수를 정리합니다. sigmoid, softmax와 교차 엔트로피를 살펴보고 최대우도추정으로 손실 함수의 의미를 설명합니다.
 publishedAt: 2026-09-13
 tags:

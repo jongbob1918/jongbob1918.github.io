@@ -1,5 +1,6 @@
 ---
 title: 손실 함수에서 Adam까지
+slug: deep-learning/easy-deep-learning-ch02
 description: 인공 신경망의 가중치와 바이어스, 선형 회귀와 경사하강법을 정리합니다. 미니배치 학습, 모멘텀, RMSprop, Adam과 검증 데이터의 역할을 살펴봅니다.
 publishedAt: 2026-09-13
 tags:

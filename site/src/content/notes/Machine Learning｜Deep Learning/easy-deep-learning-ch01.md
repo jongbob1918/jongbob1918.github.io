@@ -1,5 +1,6 @@
 ---
 title: " AI·ML·DL과 네 가지 학습 방식"
+slug: deep-learning/easy-deep-learning-ch01
 description: 인공지능, 머신러닝, 딥러닝의 관계와 지도·비지도·자기지도·강화학습의 차이를 정리합니다.
 publishedAt: 2026-09-13
 tags:

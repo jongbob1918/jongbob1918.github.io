@@ -214,7 +214,7 @@ const renderProjects = () => {
           ${meta ? `<p class="card-meta">${meta}</p>` : ''}
           ${contribution ? `<p class="card-contribution"><span>${korean ? '담당' : 'Contribution'}:</span> ${escapeHtml(contribution)}</p>` : ''}
           ${project.keywords.length ? `<p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>` : ''}
-          ${overview ? `<p class="card-overview" title="${escapeHtml(overview)}"><span>Overview:</span> ${escapeHtml(overview)}</p>` : ''}
+          ${overview ? `<p class="card-overview">${escapeHtml(overview)}</p>` : ''}
         </div>
       </article>`;
     }).join('');

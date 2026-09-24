@@ -450,6 +450,14 @@ html[data-theme="dark"] .addinedu-title { color: #8cc8ff; }
   .project-list[data-project-group="key"] .project-row { height: 260px; }
 }
 
-.card-overview { margin: 8px 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: .73rem; line-height: 1.5; }
-.card-overview > span { font-weight: 650; }
+.card-overview { margin: 8px 0 0; white-space: normal; overflow-wrap: anywhere; color: var(--muted); font-size: .73rem; line-height: 1.5; }
 .side-project-list .card-overview { font-size: .68rem; }
+
+/* Let the longest card determine a common height without clipping its text. */
+.project-list[data-project-group="key"] { grid-auto-rows: 1fr; }
+.project-list[data-project-group="key"] .project-row { height: auto; min-height: 220px; }
+.project-list[data-project-group="key"] .project-media img { position: absolute; inset: 0; }
+@media (max-width: 760px) {
+  .project-list[data-project-group="key"] { grid-auto-rows: auto; }
+  .project-list[data-project-group="key"] .project-row { min-height: 0; }
+}

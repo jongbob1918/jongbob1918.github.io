@@ -1,27 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" aria-labelledby="title desc">
   <title id="title">조회수와 실제 수익으로 구성한 학습 데이터</title>
-  <desc id="desc">가로축은 조회수, 세로축은 실제 수익이다. 영상 A는 1만 회와 2만 원, B는 2만 회와 4만 원, C는 3만 회와 5만 원, D는 4만 회와 7만 원인 점으로 표시한다.</desc>
+  <desc id="desc">가로축은 조회수(만 회), 세로축은 실제 수익(만 원)이다. A(1, 2), B(2, 4), C(3, 5), D(4, 7) 네 점과 최소제곱으로 구한 연한 빨간 직선 y=1.6x+0.5를 표시한다.</desc>
   <defs>
     <style>
-      text { font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif; fill: #253047; }
-      .axis { stroke: #4b5568; stroke-width: 2; }
-      .grid { stroke: #dfe4ec; stroke-width: 1; stroke-dasharray: 5 6; }
-      .guide { stroke: #8ca4cc; stroke-width: 1.5; stroke-dasharray: 4 5; }
-      .tick { font-size: 16px; fill: #697386; }
+      text { font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif; fill: #242424; }
+      .axis { stroke: #242424; stroke-width: 2; }
+      .grid { stroke: #dedede; stroke-width: 1; }
+      .guide { stroke: #9c9c9c; stroke-width: 1; stroke-dasharray: 4 5; }
+      .regression-line { stroke: #e6a0a0; stroke-width: 6; fill: none; }
+      .tick { font-size: 16px; fill: #444444; }
       .axis-label { font-size: 19px; font-weight: 600; }
-      .point-label { font-size: 18px; font-weight: 700; fill: #285ea8; }
-      .note { font-size: 16px; fill: #526078; }
+      .point-label { font-size: 18px; font-weight: 700; fill: #2b4e6c; }
     </style>
     <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-      <path d="M0 0 9 4.5 0 9Z" fill="#4b5568"/>
+      <path d="M0 0 9 4.5 0 9Z" fill="#242424"/>
     </marker>
   </defs>
 
-  <rect x="1" y="1" width="718" height="428" rx="10" fill="#fff" stroke="#dfe4ec" stroke-width="2"/>
-  <text class="note" x="360" y="35" text-anchor="middle">점 하나가 기존 영상 하나의 학습 데이터입니다</text>
+  <rect x="0" y="0" width="720" height="430" fill="#fff"/>
 
   <path class="grid" d="M120 330H620M120 290H620M120 250H620M120 210H620M120 170H620M120 130H620M120 90H620M120 50H620"/>
   <path class="grid" d="M240 50V370M360 50V370M480 50V370M600 50V370"/>
+  <path class="regression-line" d="M120 350L600 94"/>
   <path class="axis" d="M120 370H640" marker-end="url(#arrow)"/>
   <path class="axis" d="M120 370V50" marker-end="url(#arrow)"/>
 
@@ -43,18 +43,18 @@
   <text class="axis-label" x="27" y="205" text-anchor="middle" transform="rotate(-90 27 205)">실제 수익 y (만 원)</text>
 
   <path class="guide" d="M240 370V290M120 290H240"/>
-  <circle cx="240" cy="290" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
-  <text class="point-label" x="254" y="280">A (1, 2)</text>
+  <circle cx="240" cy="290" r="9" fill="#315a7a" stroke="#fff" stroke-width="2"/>
+  <text class="point-label" x="150" y="270">A (1, 2)</text>
 
   <path class="guide" d="M360 370V210M120 210H360"/>
-  <circle cx="360" cy="210" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
-  <text class="point-label" x="374" y="200">B (2, 4)</text>
+  <circle cx="360" cy="210" r="9" fill="#315a7a" stroke="#fff" stroke-width="2"/>
+  <text class="point-label" x="275" y="194">B (2, 4)</text>
 
   <path class="guide" d="M480 370V170M120 170H480"/>
-  <circle cx="480" cy="170" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
-  <text class="point-label" x="494" y="160">C (3, 5)</text>
+  <circle cx="480" cy="170" r="9" fill="#315a7a" stroke="#fff" stroke-width="2"/>
+  <text class="point-label" x="390" y="140">C (3, 5)</text>
 
   <path class="guide" d="M600 370V90M120 90H600"/>
-  <circle cx="600" cy="90" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
+  <circle cx="600" cy="90" r="9" fill="#315a7a" stroke="#fff" stroke-width="2"/>
   <text class="point-label" x="614" y="80">D (4, 7)</text>
 </svg>

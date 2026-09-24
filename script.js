@@ -5,14 +5,11 @@ const rokafLogo = document.querySelector('.rokaf-logo');
 if (rokafLogo) rokafLogo.src = 'assets/images/rokaf-emblem.png';
 
 const socialLinks = `
-  <span class="profile-social" aria-label="Social links">
+  <span class="header-social" aria-label="Social links">
     <a class="social-icon" href="https://github.com/jongbob1918" target="_blank" rel="noreferrer" aria-label="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
     <a class="social-icon" href="https://www.linkedin.com/in/jongmyung-kim-370932341/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="5" r="2"/><path d="M11 21V9h4v2c1-1.5 2.5-2.3 4.2-2 1.8.3 2.8 1.8 2.8 4.5V21h-4v-6.5c0-1.4-.5-2.5-1.8-2.5-1.5 0-2.2 1.1-2.2 3V21h-3Z"/></svg></a>
-    <a class="social-icon" href="https://www.youtube.com/channel/UCVbvniwYb2V2equijzjjt0Q" target="_blank" rel="noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 7.5a3 3 0 0 0-2.1-2.1C17.1 5 12 5 12 5s-5.1 0-6.9.4A3 3 0 0 0 3 7.5 31 31 0 0 0 2.6 12 31 31 0 0 0 3 16.5a3 3 0 0 0 2.1 2.1c1.8.4 6.9.4 6.9.4s5.1 0 6.9-.4a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .4-4.5 31 31 0 0 0-.4-4.5Z"/><path class="play" d="m10 9 5 3-5 3Z"/></svg></a>
   </span>`;
 
-const profilePhoto = document.querySelector('.profile-photo');
-if (profilePhoto && !document.querySelector('.profile-social')) profilePhoto.insertAdjacentHTML('afterend', socialLinks);
 
 const isHomePage = Boolean(document.querySelector('[data-project-group]'));
 const isProjectDetail = document.body.dataset.page === 'project-detail';
@@ -54,10 +51,12 @@ const utilityControls = `
       <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
       <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg>
     </button>
-    <a class="blog-link" href="${isProjectDetail ? '../notes/' : 'notes/'}">Blog</a>
   </span>`;
 
-if (nav && !nav.querySelector('.nav-utilities')) nav.insertAdjacentHTML('beforeend', utilityControls);
+if (nav) {
+  nav.insertAdjacentHTML('beforeend', `<span class="nav-links"><a class="blog-link" href="${isProjectDetail ? '../notes/' : 'notes/'}">Blog</a>${socialLinks}</span>`);
+  document.querySelector('.header-inner')?.insertAdjacentHTML('beforeend', utilityControls);
+}
 
 const savedTheme = localStorage.getItem('portfolio-theme') || localStorage.getItem('notes-theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;

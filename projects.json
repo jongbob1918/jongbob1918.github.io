@@ -224,8 +224,8 @@
       "periodEn": "Jul 6, 2025",
       "teamKo": "1명",
       "teamEn": "Solo project",
-      "contributionKo": "방향·상태 기반 호출 스케줄링과 LED 이동 제어 구현",
-      "contributionEn": "Direction-based call scheduling and LED movement control",
+      "contributionKo": "",
+      "contributionEn": "",
       "keywords": [
         "Arduino",
         "C++",

@@ -246,9 +246,9 @@ featured: false
 
 ### 2.4 강화학습
 
-**강화학습(Reinforcement Learning)** 은 원하는 행동에 대해서 보상과 벌을 설계하여 그 환경 안에서 시행착오를 하며 상을 받고 벌을 피하는 방식으로 최적의 행동을 스스로 학습하는 방식입니다.
+**강화학습(Reinforcement Learning)** 은 에이전트가 환경에서 행동을 시도하고 보상을 받으며, 앞으로 더 큰 보상을 얻는 선택을 배우는 방식입니다.
 
-기존의 신경망들이 라벨(정답)이 있는 데이터를 통해서 가중치와 편향을 학습하는 것과 비슷하게 보상(Reward)이라는 개념을 사용하여 가중치와 편향을 학습합니다. 목적은 최적의 행동 양식 또는 정책을 학습하는 것입니다.
+**딥 강화학습(Deep Reinforcement Learning)** 은 이 과정에 깊은 신경망을 사용하는 방식입니다. 예를 들어 Q-learning은 위치와 행동의 예상 보상인 Q값을 배우고, **심층 Q 신경망(Deep Q-Network, DQN)** 은 신경망으로 그 Q값을 예측합니다.
 
 출처: [https://davinci-ai.tistory.com/31](https://davinci-ai.tistory.com/31) [DAVINCI - AI:티스토리]
 

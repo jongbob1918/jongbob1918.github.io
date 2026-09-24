@@ -65,7 +65,10 @@
             <mxPoint x="590" y="438" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-exploration-13" style="endArrow=block;endFill=1;html=1;strokeColor=#d77b22;strokeWidth=5;rounded=1;dashed=1;dashPattern=7 5;" edge="1" parent="1">
+        <mxCell id="rl-exploration-13" value="이동 1칸당&#10;−1점" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#fff8e9;strokeColor=#d69b27;strokeWidth=2;fontSize=18;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="615" y="268" width="174" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="rl-exploration-14" style="endArrow=block;endFill=1;html=1;strokeColor=#d77b22;strokeWidth=5;rounded=1;dashed=1;dashPattern=7 5;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="266" y="474" as="sourcePoint" />
             <Array as="points">
@@ -75,16 +78,16 @@
             <mxPoint x="365" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-exploration-14" value="출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-exploration-15" value="에이전트&#10;출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="230" y="438" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-exploration-15" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-exploration-16" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="374" y="294" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-exploration-16" value="한 번의 이동&#10;→ 한 칸" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontColor=#d77b22;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="rl-exploration-17" value="점선: 탐색한&#10;이동 경로" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=18;fontColor=#d77b22;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="40" y="220" width="175" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="rl-exploration-17" value="공사 칸 진입 시 −20 · 이동할 때마다 −1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#fff2ed;strokeColor=#ca5555;strokeWidth=1;fontSize=15;fontColor=#ca5555;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-exploration-18" value="공사 칸 진입 시 −20 · 이동할 때마다 −1" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#fff2ed;strokeColor=#ca5555;strokeWidth=1;fontSize=15;fontColor=#ca5555;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="145" y="533" width="530" height="37" as="geometry" />
         </mxCell>
       </root>
@@ -155,25 +158,28 @@
             <mxPoint x="590" y="438" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-q-update-13" style="endArrow=block;endFill=1;html=1;strokeColor=#4678c8;strokeWidth=5;rounded=1;" edge="1" parent="1">
+        <mxCell id="rl-q-update-13" value="이동 1칸당&#10;−1점" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#fff8e9;strokeColor=#d69b27;strokeWidth=2;fontSize=18;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="615" y="268" width="174" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="rl-q-update-14" style="endArrow=block;endFill=1;html=1;strokeColor=#4678c8;strokeWidth=5;rounded=1;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="266" y="474" as="sourcePoint" />
             <mxPoint x="507" y="474" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-q-update-14" value="출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-q-update-15" value="에이전트&#10;출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="230" y="438" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-q-update-15" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-q-update-16" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="374" y="294" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-q-update-16" value="맛집 A&#10;+40" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f1ff;strokeColor=#4678c8;strokeWidth=2;fontSize=15;fontColor=#244e8a;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-q-update-17" value="맛집 A&#10;+40" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f1ff;strokeColor=#4678c8;strokeWidth=2;fontSize=15;fontColor=#244e8a;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="518" y="438" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-q-update-17" value="출발 칸의&#10;오른쪽 Q값 ↑" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#eef4ff;strokeColor=#4678c8;strokeWidth=2;fontSize=17;fontColor=#244e8a;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-q-update-18" value="출발 칸의&#10;오른쪽 Q값 ↑" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#eef4ff;strokeColor=#4678c8;strokeWidth=2;fontSize=17;fontColor=#244e8a;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="30" y="265" width="185" height="91" as="geometry" />
         </mxCell>
-        <mxCell id="rl-q-update-18" value="보상 + 다음 칸의 예상 점수로 Q값을 갱신" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#eef4ff;strokeColor=#4678c8;strokeWidth=1;fontSize=15;fontColor=#4678c8;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-q-update-19" value="보상 + 다음 칸의 예상 점수로 Q값을 갱신" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#eef4ff;strokeColor=#4678c8;strokeWidth=1;fontSize=15;fontColor=#4678c8;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="145" y="533" width="530" height="37" as="geometry" />
         </mxCell>
       </root>
@@ -244,13 +250,16 @@
             <mxPoint x="590" y="438" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-explore-exploit-13" style="endArrow=block;endFill=1;html=1;strokeColor=#4678c8;strokeWidth=5;rounded=1;" edge="1" parent="1">
+        <mxCell id="rl-explore-exploit-13" value="이동 1칸당&#10;−1점" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#fff8e9;strokeColor=#d69b27;strokeWidth=2;fontSize=18;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="615" y="268" width="174" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="rl-explore-exploit-14" style="endArrow=block;endFill=1;html=1;strokeColor=#4678c8;strokeWidth=5;rounded=1;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="266" y="474" as="sourcePoint" />
             <mxPoint x="507" y="474" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-explore-exploit-14" style="endArrow=block;endFill=1;html=1;strokeColor=#d77b22;strokeWidth=5;rounded=1;dashed=1;dashPattern=7 5;" edge="1" parent="1">
+        <mxCell id="rl-explore-exploit-15" style="endArrow=block;endFill=1;html=1;strokeColor=#d77b22;strokeWidth=5;rounded=1;dashed=1;dashPattern=7 5;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="266" y="474" as="sourcePoint" />
             <Array as="points">
@@ -261,22 +270,22 @@
             <mxPoint x="554" y="232" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-explore-exploit-15" value="출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-explore-exploit-16" value="에이전트&#10;출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="230" y="438" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-explore-exploit-16" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-explore-exploit-17" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="374" y="294" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-explore-exploit-17" value="맛집 A&#10;+40" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f1ff;strokeColor=#4678c8;strokeWidth=2;fontSize=15;fontColor=#244e8a;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-explore-exploit-18" value="맛집 A&#10;+40" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f1ff;strokeColor=#4678c8;strokeWidth=2;fontSize=15;fontColor=#244e8a;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="518" y="438" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-explore-exploit-18" value="맛집 B&#10;+100" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fff4d8;strokeColor=#d69b27;strokeWidth=2;fontSize=15;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-explore-exploit-19" value="맛집 B&#10;+100" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fff4d8;strokeColor=#d69b27;strokeWidth=2;fontSize=15;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="518" y="150" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-explore-exploit-19" value="파랑: 활용&#10;주황: 탐색" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=16;fontColor=#526078;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="rl-explore-exploit-20" value="파랑: 활용&#10;주황: 탐색" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=16;fontColor=#526078;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="26" y="390" width="188" height="56" as="geometry" />
         </mxCell>
-        <mxCell id="rl-explore-exploit-20" value="ε 확률로 새 길 탐색 · 1−ε 확률로 아는 길 활용" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#f4f1ff;strokeColor=#7564c9;strokeWidth=1;fontSize=15;fontColor=#7564c9;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-explore-exploit-21" value="ε 확률로 새 길 탐색 · 1−ε 확률로 아는 길 활용" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#f4f1ff;strokeColor=#7564c9;strokeWidth=1;fontSize=15;fontColor=#7564c9;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="145" y="533" width="530" height="37" as="geometry" />
         </mxCell>
       </root>
@@ -347,7 +356,10 @@
             <mxPoint x="590" y="438" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-shorter-route-13" style="endArrow=block;endFill=1;html=1;strokeColor=#929cab;strokeWidth=4;rounded=1;dashed=1;dashPattern=7 5;" edge="1" parent="1">
+        <mxCell id="rl-shorter-route-13" value="이동 1칸당&#10;−1점" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#fff8e9;strokeColor=#d69b27;strokeWidth=2;fontSize=18;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="615" y="268" width="174" height="88" as="geometry" />
+        </mxCell>
+        <mxCell id="rl-shorter-route-14" style="endArrow=block;endFill=1;html=1;strokeColor=#929cab;strokeWidth=4;rounded=1;dashed=1;dashPattern=7 5;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="266" y="474" as="sourcePoint" />
             <Array as="points">
@@ -360,7 +372,7 @@
             <mxPoint x="509" y="186" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-shorter-route-14" style="endArrow=block;endFill=1;html=1;strokeColor=#3c9460;strokeWidth=6;rounded=1;" edge="1" parent="1">
+        <mxCell id="rl-shorter-route-15" style="endArrow=block;endFill=1;html=1;strokeColor=#3c9460;strokeWidth=6;rounded=1;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="266" y="474" as="sourcePoint" />
             <Array as="points">
@@ -369,19 +381,19 @@
             <mxPoint x="554" y="232" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="rl-shorter-route-15" value="출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-shorter-route-16" value="에이전트&#10;출발" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#3c9460;strokeWidth=2;fontSize=15;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="230" y="438" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-shorter-route-16" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-shorter-route-17" value="공사 구간&#10;−20" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fdeaea;strokeColor=#ca5555;strokeWidth=2;fontSize=15;fontColor=#8b2f2f;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="374" y="294" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-shorter-route-17" value="맛집 B&#10;+100" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fff4d8;strokeColor=#d69b27;strokeWidth=2;fontSize=15;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-shorter-route-18" value="맛집 B&#10;+100" style="rounded=0;arcSize=0;whiteSpace=wrap;html=1;fillColor=#fff4d8;strokeColor=#d69b27;strokeWidth=2;fontSize=15;fontColor=#77500c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="518" y="150" width="72" height="72" as="geometry" />
         </mxCell>
-        <mxCell id="rl-shorter-route-18" value="초록 8칸: +92&#10;회색 10칸: +90" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#eef8ef;strokeColor=#3c9460;strokeWidth=2;fontSize=16;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-shorter-route-19" value="초록 8칸: +92&#10;회색 10칸: +90" style="rounded=1;arcSize=9;whiteSpace=wrap;html=1;fillColor=#eef8ef;strokeColor=#3c9460;strokeWidth=2;fontSize=16;fontColor=#245b2c;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="32" y="340" width="183" height="93" as="geometry" />
         </mxCell>
-        <mxCell id="rl-shorter-route-19" value="같은 보상이라면 이동 벌점이 적은 8칸 경로가 유리" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#eef8ef;strokeColor=#3c9460;strokeWidth=1;fontSize=15;fontColor=#3c9460;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="rl-shorter-route-20" value="같은 보상이라면 이동 벌점이 적은 8칸 경로가 유리" style="rounded=1;arcSize=8;whiteSpace=wrap;html=1;fillColor=#eef8ef;strokeColor=#3c9460;strokeWidth=1;fontSize=15;fontColor=#3c9460;fontStyle=0;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="145" y="533" width="530" height="37" as="geometry" />
         </mxCell>
       </root>

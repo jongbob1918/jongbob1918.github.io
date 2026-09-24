@@ -11,9 +11,9 @@ featured: false
 ## 1. 인공 신경
 
 인공 신경망은 생물학적 신경 구조에서 영감을 받은 모델이다.
-<img src="/images/notes/easy-deep-learning-ch02/biological-neuron-signals.png" alt="수상돌기로 신호를 받고 축삭을 통해 신호를 출력하는 신경세포" width="466" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/biological-neuron-signals.png" alt="수상돌기로 신호를 받고 축삭을 통해 신호를 출력하는 신경세포" width="466" loading="lazy" />
 
-<img src="/images/notes/easy-deep-learning-ch02/artificial-neuron-signals.png" alt="두 입력 신호를 받아 활성화 함수를 거쳐 출력을 전달하는 인공 신경" width="424" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/artificial-neuron-signals.png" alt="두 입력 신호를 받아 활성화 함수를 거쳐 출력을 전달하는 인공 신경" width="424" loading="lazy" />
 
 | 생물학적 구조 | 역할             | 인공 신경                    |
 | ------- | -------------- | ------------------------ |
@@ -25,7 +25,7 @@ featured: false
 우리 뇌의 뉴런도 자극이 일정 기준(역치)을 넘어야만 다음 뉴런으로 신호를 쏘듯이 인공신경망에서도 노드에 들어온 입력값에 더하고 활성화 함수에 통과시켜 다음 층으로 보냅니다.
 
 여러활성화 함수중에 기본적인 unit step function은 총합이 0보다 작거나 같으면 0을, 0보다 크면 1을 출력합니다. 계단모양을 띄어 unit step function이라고 불린다.
-![[Pasted image 20260921232151.png|458]]
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/unit-step-neuron.png" alt="두 입력을 받아 유닛 스텝 함수로 0 또는 1을 출력하는 인공 신경 구조" width="458" loading="lazy" />
 
 
 ### Weight와 Bias란?
@@ -38,7 +38,7 @@ featured: false
 
 1. 온도계가 99도이면서 연기가 안나는 상황
 
-<img src="/images/notes/easy-deep-learning-ch02/alarm-neuron-inputs.png" alt="온도 99와 연기 0을 입력받아 계단 함수로 경보 출력을 결정하는 인공 신경" width="456" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/alarm-neuron-inputs.png" alt="온도 99와 연기 0을 입력받아 계단 함수로 경보 출력을 결정하는 인공 신경" width="456" loading="lazy" />
 
 온도 99 + 연기 0 = 99이므로 연기가 없는데 경보가 울린다. 인공신경이 필요이상으로 민감함으로 이 문제를 해결하기 위해 합 **바이어스(Bias)** 를 도입한다. 
 
@@ -65,7 +65,7 @@ featured: false
 (99, 1) = 99 * 1 + 1 * 100 - 99 = 1, 경보울림
 (0, 1) = 0 * 1 + 1 *  100 - 99 = 1, 경보울림
 
-<img src="/images/notes/easy-deep-learning-ch02/alarm-neuron-weights-bias.png" alt="온도 가중치 1, 연기 가중치 99, 바이어스 −99가 표시된 경보 뉴런" width="473" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/alarm-neuron-weights-bias.png" alt="온도 가중치 1, 연기 가중치 99, 바이어스 −99가 표시된 경보 뉴런" width="473" loading="lazy" />
 
 
 가중치와 바이어스를 사람이 하나씩 조정하기에는 파라미터가 너무 많다. 데이터에 맞는 값을 자동으로 찾아가는 과정이 **학습**이다.
@@ -79,7 +79,7 @@ featured: false
 | 은닉층(Hidden Layer) | 입력을 조합하고 변환         |
 | 출력층(Output Layer) | 예측 수익 같은 최종 결과를 출력  |
 
-<img src="/images/notes/easy-deep-learning-ch02/network-layer-diagram.png" alt="입력층, 은닉층, 출력층의 노드가 연결된 인공 신경망" width="556" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/network-layer-diagram.png" alt="입력층, 은닉층, 출력층의 노드가 연결된 인공 신경망" width="556" loading="lazy" />
 
 - **완전연결층**(Fully Connected Layer, FC): 이전 층의 모든 노드와 연결된 층.
 - **다층 퍼셉트론**(Multi-Layer Perceptron, MLP): 하나 이상의 은닉층을 가지며, 완전연결층과 비선형 활성화 함수로 구성한 신경망.
@@ -103,7 +103,7 @@ featured: false
 
 표의 한 행이 하나의 학습 데이터다. 영상 A는 조회수 1만 회와 실제 수익 2만 원을 한 쌍으로 묶은 데이터이고, 영상 B는 조회수 2만 회와 실제 수익 4만 원을 묶은 데이터다. 이를 그래프에 표시하면 영상 하나가 점 하나가 된다.
 
-<img src="/images/notes/easy-deep-learning-ch02/linear-regression-data.svg" alt="가로축은 조회수, 세로축은 실제 수익이며 영상 A는 1만 회와 2만 원, 영상 B는 2만 회와 4만 원인 두 학습 데이터를 점으로 표시한 그래프" width="640" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch02/linear-regression-data.svg" alt="가로축은 조회수, 세로축은 실제 수익이며 영상 A는 1만 회와 2만 원, 영상 B는 2만 회와 4만 원인 두 학습 데이터를 점으로 표시한 그래프" width="640" loading="lazy" />
 
 선형 회귀는 이 점들의 관계를 직선으로 표현한다.
 
@@ -327,7 +327,7 @@ $$
 그래디언트가 계속 큰 축은 분모가 커져 이동 폭이 줄어든다. 상대적으로 작은 축은 덜 줄어든다. [RMSprop 강의 자료](https://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch02/optimization.gif" alt="같은 손실 표면에서 SGD, 모멘텀, RMSprop 등 최적화 방법이 이동하는 경로 비교" loading="lazy" width="620" height="480" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch02/optimization.gif" alt="같은 손실 표면에서 SGD, 모멘텀, RMSprop 등 최적화 방법이 이동하는 경로 비교" loading="lazy" width="620" height="480" />
   <figcaption>출처: <a href="https://cs231n.github.io/neural-networks-3/">Stanford CS231n · Alec Radford</a>.</figcaption>
 </figure>
 

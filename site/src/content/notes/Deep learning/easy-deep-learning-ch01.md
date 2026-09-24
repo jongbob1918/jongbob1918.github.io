@@ -16,7 +16,7 @@ featured: false
 
 사람이 규칙을 직접 정하는 방식부터, 데이터를 통해 학습하는 머신러닝과 딥러닝까지 포함합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/ai-ml-dl-overview.png" alt="인공지능 안에 머신러닝과 딥러닝을 배치한 포함 관계와 알고리즘 예시" width="500" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/ai-ml-dl-overview.png" alt="인공지능 안에 머신러닝과 딥러닝을 배치한 포함 관계와 알고리즘 예시" width="500" loading="lazy" />
 
 ### 머신러닝(Machine Learning)
 
@@ -26,12 +26,12 @@ featured: false
 하지만 같은 동물도 생김새와 자세가 달라 모든 경우에 맞는 규칙을 작성하기는 어렵습니다.
 
 
-<img src="/images/notes/easy-deep-learning-ch01/rule-based-classification.png" alt="강아지와 고양이 사진 옆에 사람이 작성한 구별 규칙을 나열한 예시" width="700" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/rule-based-classification.png" alt="강아지와 고양이 사진 옆에 사람이 작성한 구별 규칙을 나열한 예시" width="700" loading="lazy" />
 
 
 머신러닝에서는 데이터를 이용해 모델이 패턴을 학습하도록 합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/data-based-learning.png" alt="강아지와 고양이 사진을 컴퓨터에 입력하는 데이터 기반 학습 흐름" width="700" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/data-based-learning.png" alt="강아지와 고양이 사진을 컴퓨터에 입력하는 데이터 기반 학습 흐름" width="700" loading="lazy" />
 
 
 다양한 상황의 사진을 구분하려면 학습 데이터도 그 상황을 충분히 담고 있어야 합니다.
@@ -48,7 +48,7 @@ featured: false
 
 **딥러닝**은 머신러닝의 한 분야입니다. **깊은 인공 신경망(Deep Neural Network)** 을 이용해 데이터의 특징과 판단 기준을 학습합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/deep-learning-classification.png" alt="강아지와 고양이 이미지를 입력층, 은닉층, 출력층으로 처리하는 심층 신경망" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/deep-learning-classification.png" alt="강아지와 고양이 이미지를 입력층, 은닉층, 출력층으로 처리하는 심층 신경망" loading="lazy" />
 
 #### 인공 신경망이란?
 여러 인공 신경을 층으로 연결한 수학적 모델입니다.
@@ -58,8 +58,8 @@ featured: false
 인공 신경망에는 데이터 입력을 받는 입력층, 특징을 추출하고 계산하는 은닉층, 결과를 출력하는 출력층이 있습니다.
 은닉층이 하나인 모델은 얕은 신경망, 은닉층을 여러 겹 쌓은 모델은 깊은 신경망이라고 부릅니다. 얕은 신경망도 데이터에서 특징을 학습할 수 있지만, 깊은 신경망은 여러 층을 거치며 단순한 특징을 복잡한 특징으로 단계적으로 조합합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/biological-neuron.png" alt="신경세포의 구조와 신호 입력 및 출력 방향" width="388" loading="lazy" />
-<img src="/images/notes/easy-deep-learning-ch01/artificial-neuron-labeled.png" alt="입력 신호가 연결을 통해 인공신경 노드로 들어가 출력되는 구조" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/biological-neuron.png" alt="신경세포의 구조와 신호 입력 및 출력 방향" width="388" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/artificial-neuron-labeled.png" alt="입력 신호가 연결을 통해 인공신경 노드로 들어가 출력되는 구조" loading="lazy" />
 
 
 #### 딥러닝이 기존 머신러닝과 다른 점
@@ -74,7 +74,7 @@ featured: false
 
 특히 **딥러닝은 여러 층을 통해 단순한 특징을 복잡한 특징으로 단계적으로 조합하고, 판단 기준까지 하나의 학습 과정에서 함께 학습합니다.**
 
-<img src="/images/notes/easy-deep-learning-ch01/ml-dl-comparison.png" alt="딥러닝은 깊은 신경망에서 특징 추출과 판단 기준을 함께 학습하고, 전통적인 머신러닝은 사람이 특징을 추출한 뒤 별도의 분류 모델이 판단 기준을 학습하는 이미지 분류 과정 비교" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/ml-dl-comparison.png" alt="딥러닝은 깊은 신경망에서 특징 추출과 판단 기준을 함께 학습하고, 전통적인 머신러닝은 사람이 특징을 추출한 뒤 별도의 분류 모델이 판단 기준을 학습하는 이미지 분류 과정 비교" loading="lazy" />
 
 ## 2. 머신러닝의 학습 방식
 
@@ -85,7 +85,7 @@ featured: false
 **지도학습**은 입력 데이터에 정답을 붙이고, 예측과 정답의 차이를 줄이도록 학습하는 방식입니다.
 
 입력 데이터에 정답을 붙이는 작업을 **데이터 레이블링**(Data Labeling)이라고 합니다.
-<img src="/images/notes/easy-deep-learning-ch01/data-labeling.png" alt="지도학습을 위한 데이터 레이블링 예시" width="480" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/data-labeling.png" alt="지도학습을 위한 데이터 레이블링 예시" width="480" loading="lazy" />
 
 ### 지도학습의 종류
 #### 분류와 위치 추정
@@ -96,7 +96,7 @@ featured: false
 - **객체 위치 추정(localization):** 대상 객체의 위치를 예측합니다. 보통 경계 상자로 표시합니다.
 
 - **객체 탐지(object detection):** 한 이미지에 있는 여러 객체의 종류와 위치를 함께 예측합니다.
-<img src="/images/notes/easy-deep-learning-ch01/classification-localization-detection.png" alt="이미지 분류와 객체 위치 추정 및 탐지 비교" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/classification-localization-detection.png" alt="이미지 분류와 객체 위치 추정 및 탐지 비교" loading="lazy" />
 
 #### 분할
 
@@ -107,19 +107,19 @@ featured: false
 - **인스턴스 분할(instance segmentation):** 같은 클래스라도 개별 객체를 구분합니다. 사람 두 명이 있으면 각각 다른 영역으로 표시합니다.
 
 구현 예시: 객체 탐지 → 각 객체 영역의 픽셀 분할
-<img src="/images/notes/easy-deep-learning-ch01/image-segmentation.png" alt="이미지의 픽셀 영역을 구분하는 분할 예시" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/image-segmentation.png" alt="이미지의 픽셀 영역을 구분하는 분할 예시" loading="lazy" />
 
 #### 자세 추정과 얼굴 랜드마크 탐지
 
 - **자세 추정(Pose Estimation):** 어깨·팔꿈치·무릎 등 주요 신체 부위의 좌표를 예측합니다.
 
 
-  <img src="/images/notes/easy-deep-learning-ch01/pose-estimation.png" alt="신체 주요 부위의 위치를 찾는 자세 추정 예시" width="347" loading="lazy" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch01/pose-estimation.png" alt="신체 주요 부위의 위치를 찾는 자세 추정 예시" width="347" loading="lazy" />
 
 
 - **얼굴 랜드마크 탐지:** 눈·코·입 등 얼굴의 주요 특징점 좌표를 예측합니다.
 
-  <img src="/images/notes/easy-deep-learning-ch01/face-landmarks.png" alt="얼굴 주요 특징점의 위치를 찾는 랜드마크 탐지 예시" width="200" loading="lazy" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch01/face-landmarks.png" alt="얼굴 주요 특징점의 위치를 찾는 랜드마크 탐지 예시" width="200" loading="lazy" />
 
 
 
@@ -141,7 +141,7 @@ featured: false
 
 이를 통해 적은 양의 레이블 데이터만으로도 특정 작업에 적합한 모델을 만들 수 있습니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/pretraining-finetuning.png" alt="프리텍스트 작업으로 사전학습한 모델을 다운스트림 작업으로 전이하고 미세조정하는 과정" width="578" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/pretraining-finetuning.png" alt="프리텍스트 작업으로 사전학습한 모델을 다운스트림 작업으로 전이하고 미세조정하는 과정" width="578" loading="lazy" />
 
 | 단계                | 학습 내용                                                                                                              | 사용하는 데이터           |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ |
@@ -154,7 +154,7 @@ featured: false
 
 하나의 data sample 내에서 한 파트를 통해서 다른 파트를 예측하는 task를 말합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/self-prediction-diagram.png" alt="하나의 데이터에서 일부를 보고 나머지 부분을 예측하는 자가예측 방식" width="308" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/self-prediction-diagram.png" alt="하나의 데이터에서 일부를 보고 나머지 부분을 예측하는 자가예측 방식" width="308" loading="lazy" />
 
 
 ##### 이미지에서 예시
@@ -171,7 +171,7 @@ featured: false
 	3. 두 패치를 입력하고, 주변 패치가 기준 패치의 어느 방향에 있었는지 예측합니다.
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch01/context-prediction.jpg" alt="고양이 코의 기준 패치와 귀 패치로 상대 위치 3번을 예측하는 Context Prediction 원 저자 그림" width="1024" loading="lazy" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch01/context-prediction.jpg" alt="고양이 코의 기준 패치와 귀 패치로 상대 위치 3번을 예측하는 Context Prediction 원 저자 그림" width="1024" loading="lazy" />
   <figcaption>출처: Doersch · Gupta · Efros, <a href="https://graphics.cs.cmu.edu/projects/deepContext/">ICCV 2015 프로젝트 페이지</a>.</figcaption>
 </figure>
 
@@ -190,7 +190,7 @@ featured: false
 
 이미지 사이의 관계를 예측하는 task를 말합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/contrastive-learning-diagram.png" alt="서로 다른 두 데이터 사이의 관계를 비교하는 대조학습 개념도" width="385" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/contrastive-learning-diagram.png" alt="서로 다른 두 데이터 사이의 관계를 비교하는 대조학습 개념도" width="385" loading="lazy" />
 
 ##### 이미지에서 예시: SimCLR
 
@@ -200,7 +200,7 @@ featured: false
 
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch01/simclr.png" alt="강아지와 의자 사진을 각각 두 번 변형해 같은 원본의 표현은 당기고 다른 원본은 밀어내는 SimCLR 그림" width="640" loading="lazy" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch01/simclr.png" alt="강아지와 의자 사진을 각각 두 번 변형해 같은 원본의 표현은 당기고 다른 원본은 밀어내는 SimCLR 그림" width="640" loading="lazy" />
   <figcaption>출처: Chen et al., <a href="https://simclr.github.io/">SimCLR 공식 프로젝트 페이지</a>.</figcaption>
 </figure>
 
@@ -226,13 +226,13 @@ featured: false
 - **K-means:** 군집 수 K를 정하고, 가까운 중심에 데이터를 배정한 뒤 중심을 갱신하는 과정을 반복합니다.
 - **DBSCAN:** 데이터가 밀집한 영역을 그룹으로 묶는 밀도 기반 방법입니다. k means와 달리 비정형 군집모양도 가능합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/clustering-groups.png" alt="흩어진 데이터를 유사성에 따라 보라색, 초록색, 노란색의 세 그룹으로 묶는 군집화 예시" width="507" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/clustering-groups.png" alt="흩어진 데이터를 유사성에 따라 보라색, 초록색, 노란색의 세 그룹으로 묶는 군집화 예시" width="507" loading="lazy" />
 
 #### 차원 축소
 
 데이터의 특징이 많으면 계산량이 늘고, 분포를 눈으로 확인하기도 어렵습니다. **차원 축소**는 중요한 특징을 가능한 한 유지하면서 특징 수를 줄이는 방법입니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/pca-dimensionality-reduction.png" alt="3차원 데이터를 PCA로 두 주성분 PC1과 PC2의 2차원 공간에 나타낸 차원 축소 예시" width="573" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/pca-dimensionality-reduction.png" alt="3차원 데이터를 PCA로 두 주성분 PC1과 PC2의 2차원 공간에 나타낸 차원 축소 예시" width="573" loading="lazy" />
 
 활용 예시: 고차원 데이터 시각화, 계산량 감소
 
@@ -253,7 +253,7 @@ featured: false
 출처: [https://davinci-ai.tistory.com/31](https://davinci-ai.tistory.com/31) [DAVINCI - AI:티스토리]
 
 
-<img src="/images/notes/easy-deep-learning-ch01/reinforcement-learning-grid-feedback.png" alt="첫 번째 시도에서 로봇이 −10점 칸으로 이동하고, 두 번째 시도에서는 그 방향을 피하는 격자 예시. 오른쪽 위에는 +100점 칸이 있다." width="624" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/reinforcement-learning-grid-feedback.png" alt="첫 번째 시도에서 로봇이 −10점 칸으로 이동하고, 두 번째 시도에서는 그 방향을 피하는 격자 예시. 오른쪽 위에는 +100점 칸이 있다." width="624" loading="lazy" />
 
 #### 강화학습에 나오는 용어 정리
 
@@ -263,8 +263,7 @@ featured: false
 - **환경(Environment):** 에이전트가 행동하고 그 결과와 보상을 받는 공간
 - **상태(State):** 에이전트가 행동을 선택할 때 참고하는 현재 상황. 예: 현재 위치
 - **정책(Policy):** 상태에 따라 어떤 행동을 할지 정하는 전략
-- **상태 가치 함수(State-Value Function, V):** 현재 위치에서 앞으로 받을 보상의 기댓값
-- **행동 가치 함수(Action-Value Function, Q):** 현재 위치에서 특정 행동을 했을 때 앞으로 받을 보상의 기댓값
+- **가치 함수(Value Function):** 현재 상태나 행동에서 앞으로 받을 보상의 기댓값
 
 #### 맛집을 찾으며 배우는 에이전트
 
@@ -272,11 +271,11 @@ featured: false
 
 학습 초반에는 어느 길이 좋은지 모르기 때문에 여러 방향으로 움직이며 시행착오를 겪습니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/restaurant-rl-01-random-exploration.png" alt="에이전트가 출발점에서 무작위로 이동하다 공사 구간에 들어가 벌점 20을 받고 해당 행동의 점수를 낮추는 첫 번째 학습 단계" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/restaurant-rl-01-random-exploration.png" alt="에이전트가 출발점에서 무작위로 이동하다 공사 구간에 들어가 벌점 20을 받고 해당 행동의 점수를 낮추는 첫 번째 학습 단계" loading="lazy" />
 
 공사 구간으로 이동한 행동의 점수는 낮추고, 맛집에 도착하는 데 도움이 된 행동의 점수는 높입니다. 이 과정을 반복하면 에이전트는 각 위치에서 맛집까지 가는 데 유리한 방향을 선택하게 됩니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/restaurant-rl-02-reward-update.png" alt="에이전트가 벌점 경로는 피하고 보상 40을 주는 맛집 A로 향하는 행동의 점수를 높이는 두 번째 학습 단계" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/restaurant-rl-02-reward-update.png" alt="에이전트가 벌점 경로는 피하고 보상 40을 주는 맛집 A로 향하는 행동의 점수를 높이는 두 번째 학습 단계" loading="lazy" />
 
 하지만 지금까지 가장 높은 보상을 준 길만 계속 선택하면, 다른 위치에 있는 더 좋은 맛집을 발견하지 못할 수 있습니다.
 
@@ -284,7 +283,7 @@ featured: false
 
 대표적인 방법인 **엡실론 그리디(ε-greedy)** 는 `ε`의 확률로 무작위 행동을 선택하고, `1−ε`의 확률로 현재 점수가 가장 높은 행동을 선택합니다. `ε`는 사람이 정하는 하이퍼파라미터이며, 학습 초반에는 크게 두고 학습이 진행될수록 줄이기도 합니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/restaurant-rl-03-exploration-exploitation.png" alt="에이전트가 보상 40의 맛집 A 경로를 활용하면서 엡실론 확률의 무작위 탐색으로 보상 100의 맛집 B를 발견하는 세 번째 학습 단계" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/restaurant-rl-03-exploration-exploitation.png" alt="에이전트가 보상 40의 맛집 A 경로를 활용하면서 엡실론 확률의 무작위 탐색으로 보상 100의 맛집 B를 발견하는 세 번째 학습 단계" loading="lazy" />
 
 맛집을 발견한 다음에는 더 짧은 경로도 학습해야 합니다. 한 칸 이동할 때마다 작은 벌점 `−1`을 주면 이동 횟수가 많은 경로의 누적 보상이 작아집니다. 여기에 **할인율(Discount Factor)** `γ`를 적용하면 나중에 받을 보상일수록 현재 선택에 더 작게 반영됩니다.
 
@@ -294,7 +293,7 @@ $$
 
 맛집의 보상은 이전 위치의 행동으로 거슬러 올라가며 전달됩니다. 같은 `+100`을 받더라도 적은 단계로 도착한 경로는 이동 벌점과 할인 효과를 덜 받기 때문에 누적 보상이 더 큽니다. 에이전트는 이 누적 보상을 비교하며 더 짧은 경로를 선택하게 됩니다.
 
-<img src="/images/notes/easy-deep-learning-ch01/restaurant-rl-04-shortest-path.png" alt="이동할 때마다 벌점 1을 받고 미래 보상을 할인율 감마로 이전 선택에 전달하여 긴 경로보다 누적 보상이 큰 짧은 경로를 선택하는 네 번째 학습 단계" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch01/restaurant-rl-04-shortest-path.png" alt="이동할 때마다 벌점 1을 받고 미래 보상을 할인율 감마로 이전 선택에 전달하여 긴 경로보다 누적 보상이 큰 짧은 경로를 선택하는 네 번째 학습 단계" loading="lazy" />
 
 | 하이퍼파라미터 | 역할 |
 | --- | --- |

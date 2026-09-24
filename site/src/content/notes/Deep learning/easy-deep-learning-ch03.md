@@ -126,7 +126,7 @@ $$
 $$
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch03/relu.jpeg" alt="입력이 음수일 때 출력이 0이고, 양수일 때 출력이 입력과 같은 ReLU 그래프" loading="lazy" width="311" height="210" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch03/relu.jpeg" alt="입력이 음수일 때 출력이 0이고, 양수일 때 출력이 입력과 같은 ReLU 그래프" loading="lazy" width="311" height="210" />
   <figcaption>출처: <a href="https://cs231n.github.io/neural-networks-1/">Stanford CS231n</a>.</figcaption>
 </figure>
 
@@ -141,7 +141,7 @@ $$
 특징을 적은 수의 채널로 압축한 상태에서 음수 성분까지 없애면 필요한 정보가 사라질 수 있다. **MobileNetV2**는 이를 줄이기 위해 좁은 병목층의 출력에 비선형 활성화 함수를 붙이지 않는 **선형 병목**(Linear Bottleneck)을 사용한다.
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch03/linear-bottleneck.png" alt="좁은 입력을 넓은 중간 표현으로 확장해 처리하고 다시 좁은 출력으로 압축하는 MobileNetV2 블록" loading="lazy" width="1027" height="445" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch03/linear-bottleneck.png" alt="좁은 입력을 넓은 중간 표현으로 확장해 처리하고 다시 좁은 출력으로 압축하는 MobileNetV2 블록" loading="lazy" width="1027" height="445" />
   <figcaption>출처: <a href="https://arxiv.org/html/1801.04381v4">Sandler et al., MobileNetV2, 2018</a>.</figcaption>
 </figure>
 

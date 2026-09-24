@@ -6,7 +6,7 @@
     "dev": "astro dev --root site",
     "deploy": "bash scripts/deploy.sh",
     "build:projects": "node scripts/build-projects.mjs",
-    "build:notes": "astro build --root site",
+    "build:notes": "node scripts/check-note-images.mjs && astro build --root site",
     "build": "npm run build:projects && npm run build:notes && mkdir -p dist/projects dist/assets && cp index.html styles.css script.js projects.json dist/ && cp -R projects/. dist/projects/ && cp -R assets/. dist/assets/",
     "preview": "astro preview --root site"
   },

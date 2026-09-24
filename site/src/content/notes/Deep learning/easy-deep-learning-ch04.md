@@ -39,7 +39,7 @@ $$
 이처럼 가중합에 계단 함수를 적용해 이진 출력을 만드는 단일 인공 신경을 **퍼셉트론**이라고 한다.
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch04/unit-step.svg" alt="입력이 0보다 작으면 0, 0 이상이면 1을 출력하는 계단 함수" loading="lazy" width="600" height="400" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch04/unit-step.svg" alt="입력이 0보다 작으면 0, 0 이상이면 1을 출력하는 계단 함수" loading="lazy" width="600" height="400" />
   <figcaption>출처: <a href="https://commons.wikimedia.org/wiki/File:Mplwp_heaviside_theta.svg">Geek3 · Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. 원본 그대로 사용.</figcaption>
 </figure>
 
@@ -85,7 +85,7 @@ $$
 $p$를 강아지일 확률의 예측값으로 두면, 고양이일 확률은 $1-p$다.
 
 <figure>
-  <img src="/images/notes/easy-deep-learning-ch04/sigmoid.jpeg" alt="입력이 커질수록 출력이 0에서 1로 부드럽게 증가하고, 입력 0에서 출력 0.5를 지나는 sigmoid 곡선" loading="lazy" width="320" height="204" />
+  <img src="../../../../public/images/notes/easy-deep-learning-ch04/sigmoid.jpeg" alt="입력이 커질수록 출력이 0에서 1로 부드럽게 증가하고, 입력 0에서 출력 0.5를 지나는 sigmoid 곡선" loading="lazy" width="320" height="204" />
   <figcaption>출처: <a href="https://cs231n.github.io/neural-networks-1/">Stanford CS231n</a>.</figcaption>
 </figure>
 

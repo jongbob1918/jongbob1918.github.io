@@ -203,7 +203,6 @@ const renderProjects = () => {
           ${url ? `<span class="project-overlay"><span>${copy.viewProject}</span></span>` : ''}
         </${url ? 'a' : 'div'}>
         <div class="project-copy">
-          ${project.contextKo ? `<span class="project-context">${escapeHtml(activeLanguage === 'ko' ? project.contextKo : project.contextEn)}</span>` : ''}
           <${url ? 'a' : 'h3'} class="project-title" ${url ? `href="${url}"` : ''}>${title}</${url ? 'a' : 'h3'}>
           ${project.keywords.length ? `<p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>` : ''}
           ${group === 'side' && description ? `<p class="result">${description}</p>` : ''}

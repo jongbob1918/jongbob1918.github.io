@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <mxfile host="app.diagrams.net" agent="Codex" version="24.7.17" compressed="false">
   <diagram id="rl-first-try" name="1 처음 시도">
-    <mxGraphModel dx="640" dy="420" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="640" pageHeight="420" math="0" shadow="0">
+    <mxGraphModel dx="640" dy="400" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="640" pageHeight="400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -123,14 +123,11 @@
         <mxCell id="rl-first-try-27" value="맛집 도착   +100" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;fontColor=#253247;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry x="424" y="193" width="170" height="25" as="geometry" />
         </mxCell>
-        <mxCell id="rl-first-try-28" value="점선은 벌점을 받은 시도입니다." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#526078;fontStyle=0;" vertex="1" parent="1">
-          <mxGeometry x="70" y="391" width="390" height="21" as="geometry" />
-        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
   <diagram id="rl-learned-choice" name="2 반복 뒤 선택">
-    <mxGraphModel dx="640" dy="420" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="640" pageHeight="420" math="0" shadow="0">
+    <mxGraphModel dx="640" dy="400" grid="1" gridSize="10" page="1" pageScale="1" pageWidth="640" pageHeight="400" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -250,9 +247,6 @@
         </mxCell>
         <mxCell id="rl-learned-choice-27" value="맛집 도착   +100" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=14;fontColor=#253247;fontStyle=0;" vertex="1" parent="1">
           <mxGeometry x="424" y="193" width="170" height="25" as="geometry" />
-        </mxCell>
-        <mxCell id="rl-learned-choice-28" value="이동 벌점을 고려해 맛집으로 갑니다." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontColor=#526078;fontStyle=0;" vertex="1" parent="1">
-          <mxGeometry x="70" y="391" width="390" height="21" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

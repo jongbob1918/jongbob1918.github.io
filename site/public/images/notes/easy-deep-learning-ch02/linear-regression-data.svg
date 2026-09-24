@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" aria-labelledby="title desc">
   <title id="title">조회수와 실제 수익으로 구성한 학습 데이터</title>
-  <desc id="desc">가로축은 조회수, 세로축은 실제 수익이다. 영상 A는 1만 회와 2만 원, 영상 B는 2만 회와 4만 원인 점으로 표시한다.</desc>
+  <desc id="desc">가로축은 조회수, 세로축은 실제 수익이다. 영상 A는 1만 회와 2만 원, B는 2만 회와 4만 원, C는 3만 회와 5만 원, D는 4만 회와 7만 원인 점으로 표시한다.</desc>
   <defs>
     <style>
       text { font-family: "Noto Sans CJK KR", "Noto Sans KR", sans-serif; fill: #253047; }
@@ -20,29 +20,41 @@
   <rect x="1" y="1" width="718" height="428" rx="10" fill="#fff" stroke="#dfe4ec" stroke-width="2"/>
   <text class="note" x="360" y="35" text-anchor="middle">점 하나가 기존 영상 하나의 학습 데이터입니다</text>
 
-  <path class="grid" d="M120 310H620M120 250H620M120 190H620M120 130H620M120 70H620"/>
-  <path class="grid" d="M280 70V370M440 70V370M600 70V370"/>
+  <path class="grid" d="M120 330H620M120 290H620M120 250H620M120 210H620M120 170H620M120 130H620M120 90H620M120 50H620"/>
+  <path class="grid" d="M240 50V370M360 50V370M480 50V370M600 50V370"/>
   <path class="axis" d="M120 370H640" marker-end="url(#arrow)"/>
   <path class="axis" d="M120 370V50" marker-end="url(#arrow)"/>
 
   <text class="tick" x="120" y="397" text-anchor="middle">0</text>
-  <text class="tick" x="280" y="397" text-anchor="middle">1</text>
-  <text class="tick" x="440" y="397" text-anchor="middle">2</text>
-  <text class="tick" x="600" y="397" text-anchor="middle">3</text>
-  <text class="tick" x="98" y="315" text-anchor="end">1</text>
-  <text class="tick" x="98" y="255" text-anchor="end">2</text>
-  <text class="tick" x="98" y="195" text-anchor="end">3</text>
-  <text class="tick" x="98" y="135" text-anchor="end">4</text>
-  <text class="tick" x="98" y="75" text-anchor="end">5</text>
+  <text class="tick" x="240" y="397" text-anchor="middle">1</text>
+  <text class="tick" x="360" y="397" text-anchor="middle">2</text>
+  <text class="tick" x="480" y="397" text-anchor="middle">3</text>
+  <text class="tick" x="600" y="397" text-anchor="middle">4</text>
+  <text class="tick" x="98" y="335" text-anchor="end">1</text>
+  <text class="tick" x="98" y="295" text-anchor="end">2</text>
+  <text class="tick" x="98" y="255" text-anchor="end">3</text>
+  <text class="tick" x="98" y="215" text-anchor="end">4</text>
+  <text class="tick" x="98" y="175" text-anchor="end">5</text>
+  <text class="tick" x="98" y="135" text-anchor="end">6</text>
+  <text class="tick" x="98" y="95" text-anchor="end">7</text>
+  <text class="tick" x="98" y="55" text-anchor="end">8</text>
 
   <text class="axis-label" x="626" y="421" text-anchor="end">조회수 x (만 회)</text>
   <text class="axis-label" x="27" y="205" text-anchor="middle" transform="rotate(-90 27 205)">실제 수익 y (만 원)</text>
 
-  <path class="guide" d="M280 370V250M120 250H280"/>
-  <circle cx="280" cy="250" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
-  <text class="point-label" x="298" y="236">A (1, 2)</text>
+  <path class="guide" d="M240 370V290M120 290H240"/>
+  <circle cx="240" cy="290" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
+  <text class="point-label" x="254" y="280">A (1, 2)</text>
 
-  <path class="guide" d="M440 370V130M120 130H440"/>
-  <circle cx="440" cy="130" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
-  <text class="point-label" x="458" y="116">B (2, 4)</text>
+  <path class="guide" d="M360 370V210M120 210H360"/>
+  <circle cx="360" cy="210" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
+  <text class="point-label" x="374" y="200">B (2, 4)</text>
+
+  <path class="guide" d="M480 370V170M120 170H480"/>
+  <circle cx="480" cy="170" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
+  <text class="point-label" x="494" y="160">C (3, 5)</text>
+
+  <path class="guide" d="M600 370V90M120 90H600"/>
+  <circle cx="600" cy="90" r="9" fill="#3978cf" stroke="#fff" stroke-width="3"/>
+  <text class="point-label" x="614" y="80">D (4, 7)</text>
 </svg>

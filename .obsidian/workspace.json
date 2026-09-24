@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "8148653c4a686d58",
+        "id": "050dfba839648caa",
         "type": "tabs",
         "children": [
           {
-            "id": "55dcc9b2821462c1",
+            "id": "4ef708ae061714b6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "easy-deep-learning-ch01"
+              "title": "easy-deep-learning-ch02"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -188,35 +188,45 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "55dcc9b2821462c1",
+  "active": "4ef708ae061714b6",
   "lastOpenFiles": [
-    "site/src/content/notes/Deep learning/easy-deep-learning-ch02.md",
+    "dist/projects.json",
+    "dist/script.js",
+    "dist/styles.css",
     "dist/index.html",
-    "dist/assets/videos/roomie-ik-target-control.mp4",
-    "dist/assets/videos/roomie-button-click.mp4",
     "dist/assets/images/tron_test.gif",
     "dist/assets/images/roomie_system_architecture.png",
     "dist/assets/images/roomie_gaussian_motion.webp",
-    "dist/assets/images/roomie_arm_principle.png",
     "dist/assets/images/roomie_elevator_flow.png",
+    "dist/assets/images/roomie_arm_principle.png",
     "dist/assets/images/roomie_arm_hardware.webp",
     "dist/assets/images/roomie-ik-target-control-poster.jpg",
     "dist/assets/images/roomie-button-detection.webp",
     "dist/assets/images/roomie-button-detection-cropped.webp",
     "dist/assets/images/roomie-button-click-poster.jpg",
+    "dist/assets/videos/roomie-ik-target-control.mp4",
+    "dist/assets/videos/roomie-button-click.mp4",
     "dist/assets/videos",
     "dist/assets/images",
     "dist/assets",
-    "dist/_astro/KaTeX_Typewriter-Regular.D3Ib7_Hf.ttf",
-    "dist/_astro/NotesSidebar.Boyo3-BB.css",
-    "dist/_astro/KaTeX_Typewriter-Regular.CO6r4hn1.woff2",
-    "dist/_astro/KaTeX_Typewriter-Regular.C0xS9mPB.woff",
-    "site/src/content/notes/Deep learning/easy-deep-learning-ch03.md",
-    "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+    "dist/projects/roomie.html",
+    "dist/projects/physical-ai-hackathon.html",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch04.md",
+    "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
+    "site/README.md",
+    "site/src/content/notes/Deep learning/image-path-check.md",
+    "site/src/content/Untitled.md",
+    "site/src/content/notes/Deep learning/easy-deep-learning-ch02.md",
+    "node_modules/mdast-util-newline-to-break/readme.md",
+    "node_modules/remark-breaks/readme.md",
+    "site/src/content/notes/Deep learning/easy-deep-learning-ch03.md",
     "node_modules/astro/README.md",
     "node_modules/@img/sharp-libvips-linuxmusl-x64/README.md",
     "node_modules/@img/sharp-libvips-linux-x64/README.md",
@@ -225,15 +235,6 @@
     "node_modules/@esbuild/linux-x64/README.md",
     "node_modules/zod/README.md",
     "node_modules/css-tree/README.md",
-    "node_modules/csso/node_modules/css-tree/README.md",
-    "node_modules/lru-cache/README.md",
-    "node_modules/lru-cache/LICENSE.md",
-    "node_modules/katex/README.md",
-    "node_modules/diff/release-notes.md",
-    "node_modules/aria-query/README.md",
-    "node_modules/csso/README.md",
-    "node_modules/oniguruma-parser/README.md",
-    "node_modules/vite/README.md",
-    "node_modules/axobject-query/README.md"
+    "node_modules/csso/node_modules/css-tree/README.md"
   ]
 }

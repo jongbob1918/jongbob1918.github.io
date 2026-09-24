@@ -38,8 +38,9 @@ button { font: inherit; }
 a:focus-visible, button:focus-visible, [role="link"]:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 .wrap { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
 
-.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-bg); border-bottom: 1px solid var(--line); backdrop-filter: blur(14px); transition: transform .22s ease; }
-.site-header.is-hidden { transform: translateY(-100%); }
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-bg); border-bottom: 1px solid var(--line); box-shadow: 0 4px 14px rgba(16,24,40,.09); backdrop-filter: blur(14px); transition: transform .22s ease; }
+html[data-theme="dark"] .site-header { box-shadow: 0 4px 14px rgba(0,0,0,.24); }
+.site-header.is-hidden { transform: translateY(calc(-100% - 16px)); }
 .header-inner { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .name { white-space: nowrap; font-size: .875rem; font-weight: 750; letter-spacing: .015em; }
 .nav { display: flex; align-items: center; gap: 20px; font-size: .875rem; color: var(--muted); }

@@ -11,8 +11,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 [hidden] { display: none !important; }
 h1, h2, h3, p { margin-top: 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-.site-header { position: sticky; top: 0; z-index: 30; background: var(--paper); transition: transform .22s ease; }
-.site-header.is-hidden { transform: translateY(-100%); }
+.site-header { position: sticky; top: 0; z-index: 30; background: var(--paper); border-bottom: 1px solid var(--line); box-shadow: 0 4px 14px rgba(0,0,0,.09); transition: transform .22s ease; }
+:root[data-theme="dark"] .site-header { box-shadow: 0 4px 14px rgba(0,0,0,.26); }
+.site-header.is-hidden { transform: translateY(calc(-100% - 16px)); }
 .header-inner { height: 80px; display: grid; grid-template-columns: 40px minmax(0,1fr) 40px; align-items: center; padding: 0 32px; }
 .name { justify-self: center; font-size: 24px; line-height: 1; font-weight: 700; }
 .icon-button { display: grid; place-items: center; width: 40px; height: 40px; padding: 7px; color: var(--ink); border: 0; background: transparent; }

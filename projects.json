@@ -129,35 +129,9 @@
       ]
     },
     {
-      "slug": "falcon",
-      "category": "addinedu",
-      "order": 2,
-      "detailUrl": "projects/falcon.html",
-      "image": "assets/images/hawkeye_mainpage.gif",
-      "imageAlt": "FALCON runway hazard detection interface",
-      "imageFit": "cover",
-      "imageSequence": [],
-      "titleKo": "FALCON — 활주로 위험요소 관제",
-      "titleEn": "FALCON — Runway Safety Monitoring System",
-      "overviewKo": "CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템",
-      "overviewEn": "An AI monitoring system that detects and tracks runway hazards and maps them to real-world coordinates",
-      "periodKo": "2025.05.26–07.03",
-      "periodEn": "May 26–Jul 3, 2025",
-      "teamKo": "4명",
-      "teamEn": "4 members",
-      "contributionKo": "지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증",
-      "contributionEn": "Detector training, tracking pipeline integration, and coordinate mapping validation",
-      "keywords": [
-        "YOLOv8",
-        "ByteTrack",
-        "Homography",
-        "OpenCV"
-      ]
-    },
-    {
       "slug": "roomie",
       "category": "addinedu",
-      "order": 3,
+      "order": 2,
       "detailUrl": "projects/roomie.html",
       "image": "assets/images/elevator-alignbutton.gif",
       "imageAlt": "엘리베이터 버튼 앞에 정렬하는 호텔 서비스 로봇 ROOMIE",
@@ -178,6 +152,32 @@
         "Autonomous Navigation",
         "Elevator Interaction",
         "Service Robot"
+      ]
+    },
+    {
+      "slug": "falcon",
+      "category": "addinedu",
+      "order": 3,
+      "detailUrl": "projects/falcon.html",
+      "image": "assets/images/hawkeye_mainpage.gif",
+      "imageAlt": "FALCON runway hazard detection interface",
+      "imageFit": "cover",
+      "imageSequence": [],
+      "titleKo": "FALCON — 활주로 위험요소 관제",
+      "titleEn": "FALCON — Runway Safety Monitoring System",
+      "overviewKo": "CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템",
+      "overviewEn": "An AI monitoring system that detects and tracks runway hazards and maps them to real-world coordinates",
+      "periodKo": "2025.05.26–07.03",
+      "periodEn": "May 26–Jul 3, 2025",
+      "teamKo": "4명",
+      "teamEn": "4 members",
+      "contributionKo": "지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증",
+      "contributionEn": "Detector training, tracking pipeline integration, and coordinate mapping validation",
+      "keywords": [
+        "YOLOv8",
+        "ByteTrack",
+        "Homography",
+        "OpenCV"
       ]
     },
     {

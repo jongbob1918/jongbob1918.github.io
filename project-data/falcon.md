@@ -1,7 +1,7 @@
 ---
 slug: falcon
 shortName: FALCON
-group: side
+group: key
 order: 3
 title: FALCON — 활주로 위험요소 관제
 description: CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템

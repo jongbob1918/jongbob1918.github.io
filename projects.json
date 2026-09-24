@@ -2,6 +2,7 @@
   {
     "slug": "javis",
     "group": "key",
+    "category": "addinedu",
     "order": 1,
     "detailUrl": "projects/javis.html",
     "image": "assets/images/javis_robot_drive.gif",
@@ -36,6 +37,7 @@
   {
     "slug": "roomie",
     "group": "key",
+    "category": "addinedu",
     "order": 2,
     "detailUrl": "projects/roomie.html",
     "image": "assets/images/elevator-alignbutton.gif",
@@ -56,7 +58,8 @@
   },
   {
     "slug": "falcon",
-    "group": "side",
+    "group": "key",
+    "category": "addinedu",
     "order": 3,
     "detailUrl": "projects/falcon.html",
     "image": "assets/images/hawkeye_mainpage.gif",
@@ -78,6 +81,7 @@
   {
     "slug": "physical-ai-hackathon",
     "group": "side",
+    "category": "side",
     "order": 4,
     "detailUrl": "projects/physical-ai-hackathon.html",
     "image": "https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif",
@@ -100,6 +104,7 @@
   {
     "slug": "elevator-mcu",
     "group": "side",
+    "category": "side",
     "order": 5,
     "detailUrl": "projects/elevator-mcu.html",
     "image": "assets/images/elevator-mcu-demo.gif",

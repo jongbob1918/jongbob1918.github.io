@@ -157,11 +157,11 @@ const projectContainers = [...document.querySelectorAll('[data-project-group]')]
 const copyByLanguage = {
   en: {
     keyProjects: 'Key Projects', sideProjects: 'Side Projects', blog: 'Blog', about: 'About',
-    education: 'Education', career: 'Career', viewProject: 'View Project ↗', loadError: 'Project data could not be loaded.',
+    education: 'Education', career: 'Career', viewProject: 'View Project', loadError: 'Project data could not be loaded.',
   },
   ko: {
     keyProjects: '주요 프로젝트', sideProjects: '사이드 프로젝트', blog: '블로그', about: '소개',
-    education: '학력', career: '경력', viewProject: '프로젝트 보기 ↗', loadError: '프로젝트 정보를 불러오지 못했습니다.',
+    education: '학력', career: '경력', viewProject: '프로젝트 보기', loadError: '프로젝트 정보를 불러오지 못했습니다.',
   }
 };
 
@@ -176,7 +176,9 @@ const renderProjects = () => {
   const copy = copyByLanguage[activeLanguage];
   projectContainers.forEach(container => {
     const group = container.dataset.projectGroup;
-    const groupProjects = loadedProjects.filter(project => project.group === group);
+    const category = container.dataset.projectCategory;
+    const groupProjects = loadedProjects.filter(project => project.group === group && (!category || project.category === category));
+    if (category === 'personal') container.closest('.project-subgroup').hidden = groupProjects.length === 0;
     container.innerHTML = groupProjects.map((project, index) => {
       const url = escapeHtml(project.detailUrl);
       const title = escapeHtml(activeLanguage === 'ko' ? project.titleKo : project.titleEn);

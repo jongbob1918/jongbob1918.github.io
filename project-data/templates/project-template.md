@@ -48,4 +48,4 @@ demo:
 
 ## 관련 코드
 
-[GitHub에서 코드 보기 ↗](https://github.com/USER/REPOSITORY)
+[GitHub에서 코드 보기](https://github.com/USER/REPOSITORY)

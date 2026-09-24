@@ -77,6 +77,12 @@ h3 { font-size: 1rem; }
 .project-section.side-section { margin-top: 0; background: var(--soft); }
 .project-group-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; padding: 0; border: 0; }
 .project-group-head h2, .section-head h2 { margin: 0; font-size: clamp(1.25rem, 2.5vw, 1.55rem); font-weight: 700; text-transform: none; letter-spacing: -.025em; }
+.project-subgroup + .project-subgroup { margin-top: 52px; }
+.project-subgroup > h3 { margin: 0 0 14px; color: var(--muted); font-size: .88rem; font-weight: 700; letter-spacing: .02em; }
+.career-project-preview { padding: 24px 28px; border-left: 3px solid var(--accent); background: var(--soft); }
+.career-project-preview strong { display: block; margin-bottom: 6px; font-size: 1.04rem; }
+.career-project-preview p { max-width: 760px; margin: 0; color: var(--text); font-size: .9rem; }
+.career-project-preview + .project-list:not(:empty) { margin-top: 18px; }
 
 .project-list { display: grid; gap: 52px; }
 .project-row { position: relative; display: grid; grid-template-columns: minmax(0,1.08fr) minmax(280px,.92fr); gap: 0; padding: 30px 30px 30px 0; overflow: visible; border: 0; border-radius: 0; background: transparent; box-shadow: none; cursor: pointer; }
@@ -95,7 +101,7 @@ h3 { font-size: 1rem; }
 .project-context { display: block; margin-bottom: 5px; color: var(--muted); font-size: .7rem; font-weight: 650; line-height: 1.5; }
 .keywords { margin-bottom: 10px; color: var(--accent); font-size: .76rem; font-weight: 600; line-height: 1.6; letter-spacing: -.01em; }
 .result { max-width: 650px; margin-bottom: 18px; color: var(--text); font-size: .94rem; }
-.side-project-list { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 18px; }
+.side-project-list { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
 .side-project-list .project-row { display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: auto 1fr; gap: 0; height: 100%; aspect-ratio: auto; padding: 0; overflow: hidden; background: var(--paper); box-shadow: 0 8px 22px rgba(16,24,40,.07); transition: box-shadow .24s ease, transform .24s ease; }
 .side-project-list .project-row:hover, .side-project-list .project-row:focus-within { box-shadow: var(--shadow); transform: translateY(-2px); }
 .side-project-list .project-copy { width: 100%; height: 100%; min-height: 0; display: block; margin: 0; padding: 16px 16px 18px; box-shadow: none; transform: none; }
@@ -129,7 +135,7 @@ html[data-theme="dark"] .social-icon[aria-label="GitHub"] { color: #f2f4f7; }
 .org-entry { display: flex; align-items: flex-start; gap: 14px; }
 .org-entry img { width: 44px; height: 50px; flex: 0 0 44px; object-fit: contain; }
 .org-entry .addinedu-logo { width: 50px; height: 50px; flex-basis: 50px; }
-.org-entry .maxerve-logo { width: 88px; height: 50px; flex: 0 0 88px; padding: 5px; border-radius: 6px; background: #fff; object-fit: contain; }
+.org-entry .maxerve-icon { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 10px; object-fit: contain; }
 .org-icon { width: 44px; height: 50px; flex: 0 0 44px; display: grid; place-items: center; }
 .org-entry .rokaf-logo { width: 44px; height: 50px; max-width: none; flex: none; object-fit: contain; }
 .org-entry > span { display: grid; gap: 2px; min-width: 0; }

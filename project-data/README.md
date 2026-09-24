@@ -15,7 +15,7 @@
 
 `Technical Details`, `System`, `Hardware`, `Troubleshooting` 같은 고정 섹션 이름은 없습니다. `##` 제목을 추가·삭제하거나 순서를 바꾸면 생성된 상세페이지에도 그대로 반영됩니다.
 
-빌드할 때 각 Markdown의 `card` 정보를 모아 `projects.json`도 자동 생성합니다. 따라서 새 프로젝트를 추가할 때 `script.js`나 `projects.json`을 직접 수정하지 않습니다. `group`은 `key` 또는 `side`, `order`는 홈페이지에서 표시할 순서입니다.
+빌드할 때 각 Markdown의 `card` 정보를 모아 `projects.json`도 자동 생성합니다. 따라서 새 프로젝트를 추가할 때 `script.js`나 `projects.json`을 직접 수정하지 않습니다. `group`은 `key` 또는 `side`, `order`는 홈페이지에서 표시할 순서입니다. 주요 프로젝트의 `category`는 `addinedu`, `lk`, `personal` 중 하나를 사용하며, 생략하면 `addinedu`로 표시합니다. 회사 업무 소개는 현재 홈페이지의 LK ROBOTICS 항목에서 관리합니다.
 
 수정 후 아래 명령으로 `projects/*.html`을 다시 생성합니다.
 

@@ -82,6 +82,7 @@ for (const file of files) {
   catalog.push({
     slug: project.slug,
     group: project.group,
+    category: project.category ?? (project.group === 'key' ? 'addinedu' : 'side'),
     order: project.order ?? 999,
     detailUrl: `projects/${project.slug}.html`,
     image: project.card.image,

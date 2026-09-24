@@ -33,4 +33,4 @@ Section names, count, and order can be changed for each project.
 
 ## Related code
 
-[View source on GitHub ↗](https://github.com/USER/REPOSITORY)
+[View source on GitHub](https://github.com/USER/REPOSITORY)

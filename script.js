@@ -195,6 +195,7 @@ const renderProjects = () => {
       const url = project.detailUrl ? escapeHtml(project.detailUrl) : null;
       const title = escapeHtml(activeLanguage === 'ko' ? project.titleKo : project.titleEn);
       const korean = activeLanguage === 'ko';
+      const overview = korean ? project.overviewKo : project.overviewEn;
       const period = korean ? project.periodKo : project.periodEn;
       const team = korean ? project.teamKo : project.teamEn;
       const contribution = korean ? project.contributionKo : project.contributionEn;
@@ -213,6 +214,7 @@ const renderProjects = () => {
           ${meta ? `<p class="card-meta">${meta}</p>` : ''}
           ${contribution ? `<p class="card-contribution"><span>${korean ? '담당' : 'Contribution'}:</span> ${escapeHtml(contribution)}</p>` : ''}
           ${project.keywords.length ? `<p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>` : ''}
+          ${overview ? `<p class="card-overview" title="${escapeHtml(overview)}"><span>Overview:</span> ${escapeHtml(overview)}</p>` : ''}
         </div>
       </article>`;
     }).join('');

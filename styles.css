@@ -449,3 +449,7 @@ html[data-theme="dark"] .addinedu-title { color: #8cc8ff; }
 @media (min-width: 761px) and (max-width: 1000px) {
   .project-list[data-project-group="key"] .project-row { height: 260px; }
 }
+
+.card-overview { margin: 8px 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted); font-size: .73rem; line-height: 1.5; }
+.card-overview > span { font-weight: 650; }
+.side-project-list .card-overview { font-size: .68rem; }

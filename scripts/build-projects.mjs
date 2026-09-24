@@ -92,6 +92,8 @@ for (const file of files) {
     titleEn: project.card.titleEn,
     contextKo: project.context ?? '',
     contextEn: englishProject.context ?? '',
+    overviewKo: project.description,
+    overviewEn: englishProject.description,
     periodKo: project.period,
     periodEn: englishProject.period,
     teamKo: project.team ?? '',

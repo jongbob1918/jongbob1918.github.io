@@ -4,7 +4,7 @@ title: JAVIS — Library Management Robot
 description: A ROS 2 library robot integrating autonomous navigation, manipulation, and vision AI
 team: 9 members
 period: Sep–Oct 2025
-context: ADDINEDU Advanced Bootcamp
+context: ADDINEDU · Advanced Autonomous Robot Developer Bootcamp with AI, Cohort 7
 role: Navigation stabilization · Robot state and mission control
 overview: >-
   Libraries require continuous staff time for repetitive work such as book pickup, returns, and visitor guidance. JAVIS connects a VIC-PINKY mobile base, a myCobot manipulator, and vision AI through ROS 2 to automate these tasks. The mobile base navigates to the target shelf, and the manipulator identifies, picks up, and returns books with its camera.

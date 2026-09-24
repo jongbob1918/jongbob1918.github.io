@@ -6,7 +6,7 @@ order: 3
 title: ROOMIE — 자율주행 호텔 서비스 로봇
 description: 자율주행, 물품 배송, 사용자 안내와 엘리베이터 연동을 통합한 ROS 2 기반 호텔 서비스 로봇
 period: 2025.07.07–08.13
-context: ADDINEDU 장기 교육
+context: ADDINEDU · ROS2와 인공지능을 활용한 자율주행 로봇 개발자 양성과정 9기
 team: 4명
 role: 엘리베이터 버튼 조작용 로봇팔 제어
 skills:

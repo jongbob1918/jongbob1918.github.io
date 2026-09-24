@@ -21,8 +21,8 @@
     ],
     "titleKo": "JAVIS — 도서관 관리 로봇",
     "titleEn": "JAVIS — Library Management Robot",
-    "contextKo": "ADDINEDU 심화 부트캠프",
-    "contextEn": "ADDINEDU Advanced Bootcamp",
+    "contextKo": "ADDINEDU · AI를 활용한 자율주행 로봇개발자 부트캠프 심화과정 7기",
+    "contextEn": "ADDINEDU · Advanced Autonomous Robot Developer Bootcamp with AI, Cohort 7",
     "keywords": [
       "ROS 2",
       "Python",
@@ -45,8 +45,8 @@
     "imageSequence": [],
     "titleKo": "FALCON — 활주로 위험요소 관제",
     "titleEn": "FALCON — Runway Safety Monitoring System",
-    "contextKo": "ADDINEDU 장기 교육",
-    "contextEn": "ADDINEDU Long-term Robotics Program",
+    "contextKo": "ADDINEDU · ROS2와 인공지능을 활용한 자율주행 로봇 개발자 양성과정 9기",
+    "contextEn": "ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9",
     "keywords": [
       "YOLOv8",
       "ByteTrack",
@@ -67,8 +67,8 @@
     "imageSequence": [],
     "titleKo": "ROOMIE — 자율주행 호텔 서비스 로봇",
     "titleEn": "ROOMIE — Autonomous Hotel Service Robot",
-    "contextKo": "ADDINEDU 장기 교육",
-    "contextEn": "ADDINEDU Long-term Robotics Program",
+    "contextKo": "ADDINEDU · ROS2와 인공지능을 활용한 자율주행 로봇 개발자 양성과정 9기",
+    "contextEn": "ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9",
     "keywords": [
       "ROS 2",
       "Autonomous Navigation",

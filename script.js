@@ -170,32 +170,43 @@ let loadedProjects = [];
 
 const setAllText = (selector, text) => document.querySelectorAll(selector).forEach(element => { element.textContent = text; });
 
+// Company summaries use the same card renderer as documented projects.
+const companyProjects = [
+  ['lk-patrol', '서오릉 순찰 로봇', 'Seooreung patrol robot'],
+  ['lk-ros', '로봇 시스템 ROS 1 → ROS 2 전환', 'Robot system migration from ROS 1 to ROS 2'],
+  ['lk-biped', 'Biped 로봇 내비게이션', 'Biped robot navigation'],
+].map(([slug, titleKo, titleEn]) => ({
+  slug, titleKo, titleEn, group: 'key', category: 'lk',
+  image: 'assets/images/lk-robotics-emblem.svg', imageAlt: 'LK ROBOTICS logo',
+  descriptionKo: '', descriptionEn: '', keywords: [],
+}));
+
 const renderProjects = () => {
   if (!loadedProjects.length) return;
   const copy = copyByLanguage[activeLanguage];
   projectContainers.forEach(container => {
     const group = container.dataset.projectGroup;
     const category = container.dataset.projectCategory;
-    const groupProjects = loadedProjects.filter(project => project.group === group && (!category || project.category === category));
+    const groupProjects = [...companyProjects, ...loadedProjects].filter(project => project.group === group && (!category || project.category === category));
     if (category === 'personal') container.closest('.project-subgroup').hidden = groupProjects.length === 0;
     container.innerHTML = groupProjects.map((project, index) => {
-      const url = escapeHtml(project.detailUrl);
+      const url = project.detailUrl ? escapeHtml(project.detailUrl) : null;
       const title = escapeHtml(activeLanguage === 'ko' ? project.titleKo : project.titleEn);
       const description = escapeHtml(activeLanguage === 'ko' ? project.descriptionKo : project.descriptionEn);
       const projectName = escapeHtml(project.slug.toUpperCase());
       const sideClass = group === 'side' ? ' side-project' : '';
       const loading = group === 'key' && index === 0 ? 'eager' : 'lazy';
       const openLabel = activeLanguage === 'ko' ? `${projectName} 프로젝트 열기` : `Open the ${projectName} project`;
-      return `<article id="project-${escapeHtml(project.slug)}" class="project-row${sideClass}" data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}">
-        <a class="project-media" href="${url}" aria-label="${openLabel}">
+      return `<article id="project-${escapeHtml(project.slug)}" class="project-row${sideClass}${url ? '' : ' project-summary'}" ${url ? `data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}"` : ''}>
+        <${url ? 'a' : 'div'} class="project-media" ${url ? `href="${url}" aria-label="${openLabel}"` : ''}>
           <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}">
-          <span class="project-overlay"><span>${copy.viewProject}</span></span>
-        </a>
+          ${url ? `<span class="project-overlay"><span>${copy.viewProject}</span></span>` : ''}
+        </${url ? 'a' : 'div'}>
         <div class="project-copy">
           ${project.contextKo ? `<span class="project-context">${escapeHtml(activeLanguage === 'ko' ? project.contextKo : project.contextEn)}</span>` : ''}
-          <a class="project-title" href="${url}">${title}</a>
-          <p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>
-          <p class="result">${description}</p>
+          <${url ? 'a' : 'h3'} class="project-title" ${url ? `href="${url}"` : ''}>${title}</${url ? 'a' : 'h3'}>
+          ${project.keywords.length ? `<p class="keywords">${project.keywords.map(escapeHtml).join(' · ')}</p>` : ''}
+          ${description ? `<p class="result">${description}</p>` : ''}
         </div>
       </article>`;
     }).join('');

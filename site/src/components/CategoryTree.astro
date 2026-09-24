@@ -12,7 +12,7 @@ const folders = buildFolders(notes);
 
 <nav class="sidebar-nav" aria-label="글 폴더">
   <a class:list={['all-notes-link', { active: !activeFolder }]} href="/notes/">
-    <span>분류 전체보기</span><small>({notes.length})</small>
+    <span>홈</span>
   </a>
   <div class="category-tree">
     {folders.map(folder => <FolderBranch folder={folder} activeFolder={activeFolder} />)}

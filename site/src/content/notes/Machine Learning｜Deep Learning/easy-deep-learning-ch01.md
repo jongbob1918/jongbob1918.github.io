@@ -249,12 +249,11 @@ featured: false
 
 **강화학습(Reinforcement Learning)** 은 에이전트가 환경에서 행동을 시도하고 보상을 받으며, 앞으로 더 큰 보상을 얻는 선택을 배우는 방식입니다.
 
-**딥 강화학습(Deep Reinforcement Learning)** 은 이 과정에 깊은 신경망을 사용하는 방식입니다. 예를 들어 Q-learning은 위치와 행동별 예상 누적 보상인 Q값을 배우고, **심층 Q 신경망(Deep Q-Network, DQN)** 은 신경망으로 그 Q값을 예측합니다.
+**심층 강화학습(Deep Reinforcement Learning)** 은 강화학습에 깊은 신경망을 결합한 방식입니다. 예를 들어 **심층 Q 신경망(Deep Q-Network, DQN)** 은 Q값을 표에 저장하는 대신 신경망으로 예측합니다.
 
 출처: [https://davinci-ai.tistory.com/31](https://davinci-ai.tistory.com/31) [DAVINCI - AI:티스토리]
 
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch01/reinforcement-learning-grid-feedback.png" alt="첫 번째 시도에서 로봇이 −10점 칸으로 이동하고, 두 번째 시도에서는 그 방향을 피하는 격자 예시. 오른쪽 위에는 +100점 칸이 있다." width="624" loading="lazy" />
 
 #### 강화학습에 나오는 용어 정리
 

@@ -5,7 +5,7 @@ description: A ROS 2 library robot integrating autonomous navigation, manipulati
 team: 9 members
 period: Sep–Oct 2025
 context: ADDINEDU · Advanced Autonomous Robot Developer Bootcamp with AI, Cohort 7
-role: Navigation stabilization · Robot state and mission control
+role: Navigation stabilization · Robot task control
 overview: >-
   Libraries require continuous staff time for repetitive work such as book pickup, returns, and visitor guidance. JAVIS connects a VIC-PINKY mobile base, a myCobot manipulator, and vision AI through ROS 2 to automate these tasks. The mobile base navigates to the target shelf, and the manipulator identifies, picks up, and returns books with its camera.
 demo:
@@ -43,7 +43,7 @@ I replaced the global planner with Smac Planner Hybrid, which accounts for the r
 
 Tests in the real library confirmed that JAVIS could pass narrow shelves and low-clearance turning areas to reach its pickup and return positions.
 
-## Robot state and mission control
+## Robot task control
 
 I divided the top-level behavior into initialization, charging, idle, task execution, and return-to-charger states. Each mission step checks completion, failure, and cancellation responses from lower-level modules. Battery conditions or an emergency-stop request move the system from the active mission into a recovery or safe state.
 

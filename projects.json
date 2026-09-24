@@ -27,8 +27,8 @@
     "periodEn": "Sep–Oct 2025",
     "teamKo": "9명",
     "teamEn": "9 members",
-    "contributionKo": "자율주행 안정화 · 로봇 상태 및 임무 제어",
-    "contributionEn": "Navigation stabilization · Robot state and mission control",
+    "contributionKo": "자율주행 안정화 · 로봇 작업 제어",
+    "contributionEn": "Navigation stabilization · Robot task control",
     "keywords": [
       "ROS 2",
       "Python",

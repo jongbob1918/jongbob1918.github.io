@@ -155,11 +155,11 @@ let loadedCategories = [];
 
 const copyByLanguage = {
   en: {
-    keyProjects: 'Projects', sideProjects: 'Side', blog: 'Blog', about: 'About',
+    keyProjects: 'Projects', sideProjects: 'Side', blog: 'Blog', about: 'Background',
     education: 'Education', career: 'Career', viewProject: 'View Project', loadError: 'Project data could not be loaded.',
   },
   ko: {
-    keyProjects: '프로젝트', sideProjects: 'Side', blog: '블로그', about: '소개',
+    keyProjects: '프로젝트', sideProjects: 'Side', blog: '블로그', about: '경력·교육',
     education: '학력', career: '경력', viewProject: '프로젝트 보기', loadError: '프로젝트 정보를 불러오지 못했습니다.',
   }
 };

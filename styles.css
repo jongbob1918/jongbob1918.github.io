@@ -447,3 +447,21 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
 
 .project-list .project-text-only { grid-template-columns: minmax(0, 1fr); }
 .side-project-list .project-text-only .project-copy { margin-top: 0; padding-top: 18px; }
+
+.profile-overview { padding: 52px 0 24px; }
+.profile-overview-grid { display: grid; grid-template-columns: 150px minmax(240px, .9fr) minmax(0, 1.2fr); gap: 30px; align-items: center; }
+.profile-overview .profile-photo { width: 150px; margin: 0; }
+.profile-identity h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.04em; }
+.profile-identity .profile-role { text-align: left; }
+.profile-overview .profile-intro { max-width: none; margin: 0; padding: 22px 24px; }
+.background-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+.background-facts > div { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+@media (max-width: 900px) {
+  .profile-overview-grid { grid-template-columns: 110px minmax(0, 1fr); gap: 20px; }
+  .profile-overview .profile-photo { width: 110px; }
+  .profile-overview .profile-intro { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .profile-overview { padding: 30px 0 10px; }
+  .background-facts { grid-template-columns: 1fr; }
+}

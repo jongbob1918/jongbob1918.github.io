@@ -5,7 +5,6 @@ description: Developed autonomous navigation software for a robot that patrols S
 role: Autonomous navigation software development for the patrol robot
 overview: >-
   I contributed autonomous navigation software to the development of a royal heritage patrol robot in collaboration with the Korea Heritage Service. Built on a wheeled biped platform, the robot detects fires and fallen people at Seooreung in Goyang.
-  The lead image is from Channel A News coverage at Seooreung on September 4, 2026; select it to open the original video.
 demo:
   type: image
   src: ../assets/images/lk-patrol-seooreung-channela.jpg

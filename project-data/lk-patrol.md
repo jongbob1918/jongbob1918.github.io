@@ -17,7 +17,6 @@ card:
   imageFit: cover
 overview: >-
   국가유산청과 협업하여 고양 서오릉에서 화재와 쓰러진 사람을 탐지하는 바퀴형 이족 로봇(Wheeled Biped) 플랫폼 기반 궁능순찰로봇 개발에 자율주행 소프트웨어 개발로 참여했습니다.
-  대표 사진은 채널A 뉴스의 2026년 9월 4일 서오릉 현장 보도 화면이며, 사진을 누르면 원본 영상으로 이동합니다.
 demo:
   type: image
   src: ../assets/images/lk-patrol-seooreung-channela.jpg

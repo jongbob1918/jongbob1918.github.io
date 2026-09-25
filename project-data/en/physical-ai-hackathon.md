@@ -5,7 +5,7 @@ description: A hackathon project using ACT imitation learning for bimanual ball 
 team: 4 members
 period: Feb 8–9, 2026
 overview: >-
-  I joined a four-person team at the first Physical AI Hackathon hosted by Hansung University and ROBOSIZE. Using two SO-101 arms, each costing roughly KRW 1.2 million, and 2D cameras, we trained the robots to pick up colored balls, transfer them between grippers, and sort them into bins.
+  I joined a four-person team at the first Physical AI Hackathon hosted by Hansung University and ROBOSIZE. Using two SO-101 arms and 2D cameras, we trained the robots to pick up colored balls, transfer them between grippers, and sort them into bins.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif

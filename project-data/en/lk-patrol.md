@@ -99,7 +99,7 @@ Excessive MPPI velocity commands remained when obstacle costs left little traver
 
 ### Solution
 
-After analyzing the Humble implementation, I ported the Kilted MPPI controller. Its acceleration constraints can be found in the [official source code](https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html).
+I analyzed the Humble MPPI implementation and confirmed the issue causing excessive velocity commands in narrow spaces. I then analyzed and ported the Kilted MPPI controller to constrain acceleration and improve excessive velocity output in narrow spaces.
 
 ### Result
 

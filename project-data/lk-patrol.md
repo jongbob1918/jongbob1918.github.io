@@ -111,7 +111,7 @@ demo:
 
 ### Solution
 
-Humble의 MPPI 구현을 분석한 뒤 Kilted 버전의 MPPI를 포팅했습니다. Kilted 구현의 가속 제약은 [공식 소스 코드](https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html)에서 확인할 수 있습니다.
+Humble 버전의 MPPI 구현을 분석해 좁은 구간에서 과도한 속도 명령이 출력되는 문제를 확인했습니다. 이후 Kilted 버전의 MPPI를 분석·포팅해 가속도를 제한하고, 좁은 구간의 과도한 속도 출력을 개선했습니다.
 
 ### Result
 

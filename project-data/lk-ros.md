@@ -8,8 +8,8 @@ description: 지도 생성·위치추정·주행 기능의 ROS 2 전환을 담�
 role: 로봇 소프트웨어 이식 및 실행 구조 점검
 skills:
   - ROS 2
-  - Nav2
-  - FAST-LIO
+  - SLAM
+  - Navigation
   - C++
 card:
   image: assets/images/lk-robotics-emblem.svg

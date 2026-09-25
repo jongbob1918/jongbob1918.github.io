@@ -8,7 +8,7 @@ description: 평지 주행과 계단 이동을 연계하는 경로 계획·제�
 role: 경로 계획·계단 제어·층간 지도 전환 연동
 skills:
   - ROS 2
-  - Nav2
+  - Navigation
   - Path Planning
   - Robot Control
 card:

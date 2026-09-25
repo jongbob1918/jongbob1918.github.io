@@ -47,7 +47,8 @@
       "contributionEn": "Outdoor mapping, localization diagnosis and stabilization",
       "keywords": [
         "ROS 2",
-        "FAST-LIO",
+        "3D LiDAR",
+        "SLAM",
         "Localization",
         "C++"
       ]
@@ -73,8 +74,8 @@
       "contributionEn": "Robot software migration and runtime diagnosis",
       "keywords": [
         "ROS 2",
-        "Nav2",
-        "FAST-LIO",
+        "SLAM",
+        "Navigation",
         "C++"
       ]
     },
@@ -99,7 +100,7 @@
       "contributionEn": "Path planning, stair control and floor-map transition integration",
       "keywords": [
         "ROS 2",
-        "Nav2",
+        "Navigation",
         "Path Planning",
         "Robot Control"
       ]

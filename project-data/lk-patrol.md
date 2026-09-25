@@ -8,7 +8,8 @@ description: 실주행 기록으로 위치추정과 장시간 실행 중 발생�
 role: 야외 지도 생성·위치추정 분석 및 안정화
 skills:
   - ROS 2
-  - FAST-LIO
+  - 3D LiDAR
+  - SLAM
   - Localization
   - C++
 card:

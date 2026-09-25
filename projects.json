@@ -137,9 +137,11 @@
       "contributionEn": "Arm control for elevator-button interaction",
       "keywords": [
         "ROS 2",
-        "Autonomous Navigation",
-        "Elevator Interaction",
-        "Service Robot"
+        "Python",
+        "OpenCV",
+        "4-DOF IK",
+        "ESP32",
+        "Visual Servoing"
       ]
     },
     {

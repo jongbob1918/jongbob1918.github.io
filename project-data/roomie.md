@@ -11,19 +11,15 @@ team: 4명
 role: 엘리베이터 버튼 조작용 로봇팔 제어
 skills:
   - ROS 2
-  - Python · OpenCV
-  - 4-DOF Inverse Kinematics
-  - Vision-Guided Control
-  - ESP32 · FreeRTOS
+  - Python
+  - OpenCV
+  - 4-DOF IK
+  - ESP32
+  - Visual Servoing
 repository: https://github.com/jongbob1918/ROOMIE
 card:
   image: assets/images/elevator-alignbutton.gif
   imageAlt: 엘리베이터 버튼 앞에 정렬하는 호텔 서비스 로봇 ROOMIE
-  skills:
-    - ROS 2
-    - Autonomous Navigation
-    - Elevator Interaction
-    - Service Robot
 overview: >-
   호텔에서는 룸서비스 배송과 길 안내처럼 층간 이동이 필요한 반복 업무가 발생합니다. ROOMIE는 자율주행, 물품 배송, 사용자 안내와 관리자 모니터링을 ROS 2로 연결한 호텔 서비스 로봇입니다. 엘리베이터 앞까지 이동한 뒤 버튼과 문 상태를 인식하고, 4축 로봇팔로 호출·목적층 버튼을 조작해 사람의 도움 없이 층간 임무를 이어갑니다.
 demo:

@@ -52,35 +52,9 @@
       ]
     },
     {
-      "slug": "lk-ros",
-      "category": "lk",
-      "order": 2,
-      "detailUrl": "projects/lk-ros.html",
-      "image": "assets/images/ros1-noetic-to-ros2-humble.png",
-      "imageAlt": "왼쪽 ROS 1 Noetic에서 오른쪽 ROS 2 Humble로 전환하는 방향을 나타낸 그림",
-      "imageFit": "cover",
-      "imageSequence": [],
-      "titleKo": "로봇 소프트웨어 ROS 2 전환",
-      "titleEn": "Robot software migration to ROS 2",
-      "overviewKo": "ROS 1 Noetic 시스템을 ROS 2 Humble로 전환했습니다. 필요한 알고리즘을 포팅하고 행동 트리 기반 의사결정과 기능별 모듈화를 도입해 여러 로봇에서 재사용할 수 있도록 설계했습니다.",
-      "overviewEn": "Migrated a ROS 1 Noetic system to ROS 2 Humble, ported selected algorithms, and introduced behavior-tree decision-making and functional modules designed for reuse across robots.",
-      "periodKo": "",
-      "periodEn": "",
-      "teamKo": "",
-      "teamEn": "",
-      "contributionKo": "",
-      "contributionEn": "",
-      "keywords": [
-        "ROS 2",
-        "Nav2",
-        "Behavior Tree",
-        "System Redesign"
-      ]
-    },
-    {
       "slug": "lk-biped",
       "category": "lk",
-      "order": 3,
+      "order": 2,
       "detailUrl": "projects/lk-biped.html",
       "image": "assets/images/lk-robotics-emblem.svg",
       "imageAlt": "LK ROBOTICS 로고",
@@ -101,6 +75,32 @@
         "Elevation Mapping",
         "Multi-floor Navigation",
         "Gimbal Scan System"
+      ]
+    },
+    {
+      "slug": "lk-ros",
+      "category": "lk",
+      "order": 3,
+      "detailUrl": "projects/lk-ros.html",
+      "image": "assets/images/ros1-noetic-to-ros2-humble.png",
+      "imageAlt": "왼쪽 ROS 1 Noetic에서 오른쪽 ROS 2 Humble로 전환하는 방향을 나타낸 그림",
+      "imageFit": "cover",
+      "imageSequence": [],
+      "titleKo": "로봇 소프트웨어 ROS 2 전환",
+      "titleEn": "Robot software migration to ROS 2",
+      "overviewKo": "ROS 1 Noetic 시스템을 ROS 2 Humble로 전환했습니다. 필요한 알고리즘을 포팅하고 행동 트리 기반 의사결정과 기능별 모듈화를 도입해 여러 로봇에서 재사용할 수 있도록 설계했습니다.",
+      "overviewEn": "Migrated a ROS 1 Noetic system to ROS 2 Humble, ported selected algorithms, and introduced behavior-tree decision-making and functional modules designed for reuse across robots.",
+      "periodKo": "",
+      "periodEn": "",
+      "teamKo": "",
+      "teamEn": "",
+      "contributionKo": "",
+      "contributionEn": "",
+      "keywords": [
+        "ROS 2",
+        "Nav2",
+        "Behavior Tree",
+        "System Redesign"
       ]
     },
     {

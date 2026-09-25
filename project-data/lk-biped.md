@@ -1,7 +1,7 @@
 ---
 slug: lk-biped
 category: lk
-order: 3
+order: 2
 detail: true
 collapsibleSections: true
 title: 실내 다층 건물 자율주행 시스템 설계

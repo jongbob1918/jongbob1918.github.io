@@ -9,15 +9,37 @@ overview: >-
   I adapted localization and motion control to the site for repeated runs along a 2 km route with dirt paths and slopes.
 ---
 
-## Dirt paths and slopes at Seooreung
+## Localization errors in woodland and grass-covered areas
 
-Most of the patrol route consists of dirt paths with slopes and uneven ground. Rain can wash away soil and change the path surface and height differences. The existing fixed-height obstacle detection struggled to distinguish sloping ground from actual obstacles.
+Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Parts of the patrol area lacked distinctive features for localization. Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail to find a match.
 
-## Separating ground from obstacles
+The existing system responded to local matching failures by searching the entire map through global localization. On a large prebuilt map, identifying the correct candidate position was difficult and computational load increased.
 
-I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. I replaced the existing 2D obstacle handling with terrain-aware processing, using the distinction between sloping ground, steps, and obstacles for navigation.
+### Splitting maps and linking transition points
 
-I also added exception handling and tuned simultaneous localization and mapping (SLAM) and map-based localization for the site.
+I divided the patrol area and mapped each section separately. I connected the maps with waypoints and loaded the relevant map when the robot reached a transition point. This reduced the map area processed at once and resource usage.
+
+### Building a replay-based experiment workflow
+
+Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. There was no existing workflow for recording, replaying, and comparing sensor data. I collected field data over a week using rosbag, a ROS message recording tool, and used it for repeatable experiments.
+
+I defined acceptance criteria, candidate algorithms, and parameter combinations, then used agents to run replay experiments in parallel. I identified settings that avoided localization jumps across multiple recordings and restricted acceptance of local matching results to a configured tolerance.
+
+I also visualized and compared intervals where incorrect matching candidates were selected. This let me check mismatches the agents could miss and refine the algorithms and parameters.
+
+## Incorrect initial poses after map transitions
+
+I implemented navigation so that a goal in another map led the robot through the required transition waypoints, switched maps, and continued to the goal. However, localization could shift if the initial pose in the new map was not specified accurately.
+
+I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud registration algorithm, and stored the resulting inter-map coordinate transforms in a shared interface. I linked transition waypoints to the same physical location in both maps and used this correspondence to set the initial pose after switching. This reduced inconsistencies caused by specifying transition positions separately in each map.
+
+## Obstacle perception on slopes and uneven ground
+
+Most of the patrol route consists of dirt paths. Even apparently flat sections differ in elevation, and rain can wash away soil and change the surface and height differences.
+
+The existing indoor navigation system detected obstacles using z-axis height in the robot’s reference frame. Outdoors, elevation changes on slopes and uneven sections caused traversable ground to be classified as obstacles.
+
+I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. Navigation used the distinction between ground and obstacles rather than a fixed height threshold, allowing obstacle avoidance to account for changes in terrain height.
 
 ## Improving startup acceleration and velocity commands in narrow spaces
 
@@ -37,6 +59,6 @@ I developed docking to enter the docking position and undocking to leave it.
 
 ## Repeated runs along a 2 km route
 
-I carried out multiple runs along the 2 km patrol route at Seooreung and adjusted the algorithms to the site.
+After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.
 
 <figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="Patrol robot driving along a dirt path at Seooreung — watch on Channel A YouTube" loading="lazy"></a><figcaption>Robot navigating at Seooreung · Channel A News · September 4, 2026</figcaption></figure>

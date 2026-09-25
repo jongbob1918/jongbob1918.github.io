@@ -35,16 +35,31 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-서오릉의-흙길과-경사로">
-          <div class="case-heading"><h2>서오릉의 흙길과 경사로</h2></div>
-          <p>서오릉 순찰 경로는 대부분 흙길이며, 경사와 요철이 많습니다. 비가 오면 흙이 유실돼 길의 형태와 단차도 달라집니다. 고정된 높이를 기준으로 장애물을 판별하는 기존 방식으로는 경사진 지면과 실제 장애물을 구분하기 어려웠습니다.</p>
+        <section class="case-section" id="ko-수림과-잔디-구간에서의-위치-추정-오류">
+          <div class="case-heading"><h2>수림과 잔디 구간에서의 위치 추정 오류</h2></div>
+          <p>고양 서오릉은 <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">전체 면적이 약 187만 m²인 유적지</a>로, 수림과 수풀·잔디가 넓게 분포합니다. 순찰 구역에는 위치를 구분할 만한 특징이 부족한 구간이 있어, 센서 데이터를 사전 지도와 맞추는 로컬 정합(Local Matching)이 수 m 앞의 위치에 잘못 맞거나 실패하는 경우가 있었습니다.</p>
+<p>기존 시스템은 로컬 정합에 실패하면 지도 전체에서 위치를 다시 찾는 전역 위치 추정(Global Localization)을 수행했습니다. 하지만 수만 평 규모의 사전 지도에서는 올바른 후보 위치를 찾기 어려웠고, 계산 부하도 커졌습니다.</p>
+<h3>지도를 나누고 전환 지점으로 연결</h3>
+<p>순찰 구역을 나눠 각각 지도를 작성하고, 지도 사이를 연결하는 경유점인 웨이포인트(Waypoint)를 지정했습니다. 로봇이 전환 지점에 도착하면 해당 구역의 지도를 불러오도록 해 한 번에 처리하는 지도 범위와 리소스 사용량을 줄였습니다.</p>
+<h3>현장 데이터를 재생하는 실험 환경 구축</h3>
+<p>알고리즘이나 파라미터를 바꿀 때마다 현장을 방문하기에는 날씨와 배터리 제약이 컸습니다. 기존에는 센서 데이터를 저장하고 재생하며 비교하는 실험 환경이 없어, 일주일 동안 현장 센서 데이터를 ROS 메시지 기록 도구인 rosbag으로 수집하고 반복 실험에 활용했습니다.</p>
+<p>통과 기준과 알고리즘 후보·파라미터 조합을 정하고, 에이전트를 활용해 데이터 재생 실험을 병렬로 실행했습니다. 여러 기록 데이터에서 위치 추정이 틀어지지 않는 설정을 확인하고, 설정한 허용 범위 안의 로컬 정합 결과만 받아들이도록 제한했습니다.</p>
+<p>자동 실험 결과만으로 판단하지 않고, 정합 후보가 잘못 선택되는 구간을 직접 시각화해 비교했습니다. 에이전트가 놓칠 수 있는 오정합을 확인하며 알고리즘과 파라미터를 조정했습니다.</p>
 
         </section>
 
-        <section class="case-section" id="ko-지면과-장애물을-구분하는-주행">
-          <div class="case-heading"><h2>지면과 장애물을 구분하는 주행</h2></div>
-          <p>레이저로 주변의 3차원 형상을 측정하는 센서(3D LiDAR, Light Detection and Ranging)의 데이터를 이용해 지면을 분리하는 Ground Segmentation 알고리즘을 적용했습니다. 기존 2D 장애물 처리에서 지형을 고려하는 방식으로 바꾸고, 경사로의 지면과 단차·장애물을 구분한 결과를 내비게이션에 반영했습니다.</p>
-<p>지도 작성과 동시에 위치를 추정하는 SLAM(Simultaneous Localization and Mapping), 지도에서 현재 위치를 찾는 Localization 기능에도 예외 처리를 추가하고 현장에 맞게 설정을 조정했습니다.</p>
+        <section class="case-section" id="ko-맵-전환-후-초기-위치가-어긋나는-문제">
+          <div class="case-heading"><h2>맵 전환 후 초기 위치가 어긋나는 문제</h2></div>
+          <p>분할된 지도에서 목표를 지정하면, 로봇이 필요한 맵 전환 웨이포인트를 거쳐 지도를 바꾸고 목표까지 이동하도록 구현했습니다. 하지만 전환한 지도에서 초기 위치를 정확히 지정하지 않으면 위치 추정이 어긋나는 문제가 발생했습니다.</p>
+<p>이를 해결하기 위해 분할된 사전 지도들을 점군 정합 알고리즘인 ICP(Iterative Closest Point)로 맞추고, 지도 사이의 좌표 변환을 구해 공통 인터페이스에 저장했습니다. 맵 전환 웨이포인트가 두 지도에서 같은 실제 위치를 가리키도록 연결하고, 전환 후 초기 위치를 지정하는 데 활용했습니다. 이 방식으로 맵마다 따로 지정하던 전환 위치의 불일치를 줄였습니다.</p>
+
+        </section>
+
+        <section class="case-section" id="ko-경사와-단차를-고려한-장애물-인지">
+          <div class="case-heading"><h2>경사와 단차를 고려한 장애물 인지</h2></div>
+          <p>순찰 경로는 대부분 흙길이며, 평탄해 보이는 구간도 위치에 따라 고도가 다릅니다. 비가 오면 흙이 유실돼 길의 형태와 단차도 달라집니다.</p>
+<p>기존 실내 주행용 장애물 인식은 로봇 기준 좌표계의 z축 높이를 기준으로 했습니다. 이 방식을 야외에 적용하자 지면의 고도가 달라지는 경사로나 단차 구간에서 주행 가능한 지면까지 장애물로 인식하는 문제가 있었습니다.</p>
+<p>레이저로 주변의 3차원 형상을 측정하는 센서(3D LiDAR, Light Detection and Ranging)의 데이터에 지면 분리 알고리즘(Ground Segmentation)을 적용했습니다. 고정된 높이 기준 대신 지면과 장애물을 구분한 결과를 내비게이션에 반영해, 지형의 높이 변화를 고려하며 장애물을 회피하도록 수정했습니다.</p>
 
         </section>
 
@@ -70,7 +85,7 @@
 
         <section class="case-section" id="ko-2-km-경로에서-반복-주행">
           <div class="case-heading"><h2>2 km 경로에서 반복 주행</h2></div>
-          <p>서오릉의 2 km 순찰 경로에서 수차례 주행하며 현장에 맞게 알고리즘을 조정했습니다.</p>
+          <p>기록 데이터로 위치 추정 설정과 정합 결과를 확인한 뒤, 서오릉의 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다. 데이터 재생 실험과 현장 주행을 함께 활용해 위치 추정을 안정화했습니다.</p>
 <figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="서오릉 흙길에서 궁능순찰로봇이 주행하는 현장 모습 — 채널A 유튜브 영상 보기" loading="lazy"></a><figcaption>서오릉 현장의 로봇 주행 모습 · 채널A 뉴스 · 2026.09.04</figcaption></figure>
         </section>
       </article>
@@ -93,16 +108,31 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-dirt-paths-and-slopes-at-seooreung">
-          <div class="case-heading"><h2>Dirt paths and slopes at Seooreung</h2></div>
-          <p>Most of the patrol route consists of dirt paths with slopes and uneven ground. Rain can wash away soil and change the path surface and height differences. The existing fixed-height obstacle detection struggled to distinguish sloping ground from actual obstacles.</p>
+        <section class="case-section" id="en-localization-errors-in-woodland-and-grass-covered-areas">
+          <div class="case-heading"><h2>Localization errors in woodland and grass-covered areas</h2></div>
+          <p>Seooreung in Goyang is a <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">heritage site covering approximately 1.87 million m²</a>, with extensive woodland, undergrowth, and lawns. Parts of the patrol area lacked distinctive features for localization. Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail to find a match.</p>
+<p>The existing system responded to local matching failures by searching the entire map through global localization. On a large prebuilt map, identifying the correct candidate position was difficult and computational load increased.</p>
+<h3>Splitting maps and linking transition points</h3>
+<p>I divided the patrol area and mapped each section separately. I connected the maps with waypoints and loaded the relevant map when the robot reached a transition point. This reduced the map area processed at once and resource usage.</p>
+<h3>Building a replay-based experiment workflow</h3>
+<p>Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. There was no existing workflow for recording, replaying, and comparing sensor data. I collected field data over a week using rosbag, a ROS message recording tool, and used it for repeatable experiments.</p>
+<p>I defined acceptance criteria, candidate algorithms, and parameter combinations, then used agents to run replay experiments in parallel. I identified settings that avoided localization jumps across multiple recordings and restricted acceptance of local matching results to a configured tolerance.</p>
+<p>I also visualized and compared intervals where incorrect matching candidates were selected. This let me check mismatches the agents could miss and refine the algorithms and parameters.</p>
 
         </section>
 
-        <section class="case-section" id="en-separating-ground-from-obstacles">
-          <div class="case-heading"><h2>Separating ground from obstacles</h2></div>
-          <p>I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. I replaced the existing 2D obstacle handling with terrain-aware processing, using the distinction between sloping ground, steps, and obstacles for navigation.</p>
-<p>I also added exception handling and tuned simultaneous localization and mapping (SLAM) and map-based localization for the site.</p>
+        <section class="case-section" id="en-incorrect-initial-poses-after-map-transitions">
+          <div class="case-heading"><h2>Incorrect initial poses after map transitions</h2></div>
+          <p>I implemented navigation so that a goal in another map led the robot through the required transition waypoints, switched maps, and continued to the goal. However, localization could shift if the initial pose in the new map was not specified accurately.</p>
+<p>I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud registration algorithm, and stored the resulting inter-map coordinate transforms in a shared interface. I linked transition waypoints to the same physical location in both maps and used this correspondence to set the initial pose after switching. This reduced inconsistencies caused by specifying transition positions separately in each map.</p>
+
+        </section>
+
+        <section class="case-section" id="en-obstacle-perception-on-slopes-and-uneven-ground">
+          <div class="case-heading"><h2>Obstacle perception on slopes and uneven ground</h2></div>
+          <p>Most of the patrol route consists of dirt paths. Even apparently flat sections differ in elevation, and rain can wash away soil and change the surface and height differences.</p>
+<p>The existing indoor navigation system detected obstacles using z-axis height in the robot’s reference frame. Outdoors, elevation changes on slopes and uneven sections caused traversable ground to be classified as obstacles.</p>
+<p>I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. Navigation used the distinction between ground and obstacles rather than a fixed height threshold, allowing obstacle avoidance to account for changes in terrain height.</p>
 
         </section>
 
@@ -128,7 +158,7 @@
 
         <section class="case-section" id="en-repeated-runs-along-a-2-km-route">
           <div class="case-heading"><h2>Repeated runs along a 2 km route</h2></div>
-          <p>I carried out multiple runs along the 2 km patrol route at Seooreung and adjusted the algorithms to the site.</p>
+          <p>After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.</p>
 <figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="Patrol robot driving along a dirt path at Seooreung — watch on Channel A YouTube" loading="lazy"></a><figcaption>Robot navigating at Seooreung · Channel A News · September 4, 2026</figcaption></figure>
         </section>
       </article>

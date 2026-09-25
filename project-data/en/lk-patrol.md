@@ -4,9 +4,7 @@ title: Royal heritage patrol robot
 description: Developed autonomous navigation software for a robot that patrols Seooreung in Goyang to detect fires and fallen people. Improved obstacle perception and motion control for repeated runs along a 2 km patrol route.
 role: Autonomous navigation software development for the patrol robot
 overview: >-
-  This project is a patrol robot that detects fires and fallen people at Seooreung in Goyang.
-  I developed autonomous navigation, mission execution, and docking functions.
-  I adapted localization and motion control to the site for repeated runs along a 2 km route with dirt paths and slopes.
+  I contributed autonomous navigation software to the development of a royal heritage patrol robot in collaboration with the Korea Heritage Service. Built on a wheeled biped platform, the robot detects fires and fallen people at Seooreung in Goyang.
 ---
 
 ## Localization errors in woodland and grass-covered areas

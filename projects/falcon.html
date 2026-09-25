@@ -49,14 +49,15 @@
 
         <section class="case-section" id="ko-초기-위험요소-객체탐지-모델-학습">
           <div class="case-heading"><h2>초기 위험요소 객체탐지 모델 학습</h2></div>
-          <p>지상 탐지 대상은 조류, 이물질, 야생동물, 사람, 차량, 항공기 6종으로 정했습니다. 처음에는 공개 이미지 약 15,000장으로 모델을 학습했지만, 공항 모형을 촬영한 영상에서는 작은 객체를 잘 찾지 못했습니다.</p>
-<p>실제 공항 사진과 모형의 크기·형태·배경 차이를 줄이기 위해 학습 데이터를 다시 구성했습니다.</p>
+          <p>지상 탐지 대상은 조류, 이물질, 야생동물, 사람, 차량, 항공기 6종으로 정했습니다. 실제 공항 사진 중심의 공개 이미지 약 15,000장으로 첫 모델을 학습했지만, 공항 모형 영상에서는 탐지 정확도가 떨어졌습니다. 동물을 사람으로 잘못 분류하는 사례도 있었습니다.</p>
+<p>실제 공항 사진과 모형 영상은 객체가 보이는 크기와 배경이 달랐습니다. 이를 성능 저하의 원인 중 하나로 보고, 모형과 비슷한 장면을 학습에 추가하기 위해 합성 데이터를 만들었습니다.</p>
 
         </section>
 
         <section class="case-section" id="ko-합성-실제-데이터를-결합한-모델-개선">
           <div class="case-heading"><h2>합성·실제 데이터를 결합한 모델 개선</h2></div>
-          <p>팀에서 Polycam과 Blender로 모형을 가상 환경에 재현했습니다. 합성 데이터 담당 팀원은 Unity로 촬영 각도·조명을 바꾸며 이미지와 객체 위치 라벨을 자동 생성했습니다.</p>
+          <p>팀에서 Polycam과 Blender로 모형을 가상 환경에 재현했습니다.</p>
+<figure class="feature-media"><img src="../assets/images/falcon_simulated_airport_scene.png" alt="Polycam으로 스캔한 차량·조류·동물·이물질 모형과 Blender에 재현한 공항 모형 환경" loading="lazy"></figure><p>합성 데이터 담당 팀원은 Unity로 촬영 각도·조명을 바꾸며 이미지와 객체 위치 라벨을 자동 생성했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/falcon_synthetic_pipeline.webp" alt="발표자료 60쪽: Unity에서 촬영 각도와 조명을 바꾸고 객체 위치 라벨을 자동 생성하는 과정" loading="lazy"></figure><p>합성 이미지 3,000장과 실제 촬영 이미지 1,000장을 섞어 경량 객체 탐지 모델 YOLOv8n을 학습했습니다.</p>
 
         </section>
@@ -122,14 +123,15 @@
 
         <section class="case-section" id="en-training-the-initial-hazard-detection-model">
           <div class="case-heading"><h2>Training the initial hazard detection model</h2></div>
-          <p>We defined six ground-object classes: birds, debris, wild animals, people, vehicles, and aircraft. The initial model was trained on roughly 15,000 public images but struggled to detect small objects in footage of the airport model.</p>
-<p>We rebuilt the training data to reduce differences in object size, shape, and background between airport photographs and our model environment.</p>
+          <p>We defined six ground-object classes: birds, debris, wild animals, people, vehicles, and aircraft. We trained the first model on roughly 15,000 public images, mostly photographs of real airports, but its detection accuracy dropped in footage of the airport model. In some cases, it classified model animals as people.</p>
+<p>Objects differed in apparent size and background between the airport photographs and the model footage. We treated this gap as one likely cause of the weaker detections and created synthetic data to add scenes resembling the model to the training set.</p>
 
         </section>
 
         <section class="case-section" id="en-improving-the-model-with-mixed-training-data">
           <div class="case-heading"><h2>Improving the model with mixed training data</h2></div>
-          <p>The team recreated the physical models in a virtual environment using Polycam and Blender. The teammate responsible for synthetic data used Unity to vary camera angles and lighting and automatically generate images and object-location labels.</p>
+          <p>The team recreated the physical models in a virtual environment using Polycam and Blender.</p>
+<figure class="feature-media"><img src="../assets/images/falcon_simulated_airport_scene.png" alt="Vehicle, bird, animal, and debris models scanned with Polycam beside the airport-model environment recreated in Blender" loading="lazy"></figure><p>The teammate responsible for synthetic data used Unity to vary camera angles and lighting and automatically generate images and object-location labels.</p>
 <figure class="feature-media"><img src="../assets/images/falcon_synthetic_pipeline.webp" alt="Presentation slide 60: Unity pipeline varying camera angles and lighting while automatically generating object labels" loading="lazy"></figure><p>We trained the lightweight object detection model YOLOv8n on 3,000 synthetic images and 1,000 photographs.</p>
 
         </section>

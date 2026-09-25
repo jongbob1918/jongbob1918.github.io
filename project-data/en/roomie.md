@@ -78,10 +78,6 @@ To reduce end-effector jitter from constant-speed motion, I applied a Gaussian p
 
 <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="Full ROOMIE demonstration" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
 
-## Result
-
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">10</span><span class="metric-label">Button-approach trials</span></div><div class="metric-card"><span class="metric-value">3</span><span class="metric-label">Successful contacts</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">Contact success rate</span></div></div>
-
 ## Limitations
 
 The end effector contacted the button accurately in three of ten trials. The remaining seven missed the target.

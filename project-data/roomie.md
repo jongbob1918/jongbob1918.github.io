@@ -96,10 +96,6 @@ Vision Service가 검출한 버튼의 중심 픽셀 `(u, v)`와 Bounding Box 너
 
 <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/qIbQOql0ST0" title="ROOMIE 전체 시연 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
 
-## 최종 결과
-
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">10회</span><span class="metric-label">버튼 접근 시도</span></div><div class="metric-card"><span class="metric-value">3회</span><span class="metric-label">버튼 접촉 성공</span></div><div class="metric-card"><span class="metric-value">30%</span><span class="metric-label">접촉 성공률</span></div></div>
-
 ## 한계
 
 10회 중 로봇팔 끝단이 버튼에 정확히 닿은 경우는 3회였습니다. 나머지 7회는 목표 위치를 벗어나 버튼에 접촉하지 못했습니다.

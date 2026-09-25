@@ -1,0 +1,4 @@
+Source: https://github.com/ros-navigation/docs.nav2.org/blob/588d37415e87eb083500d6c79aaed92ee1285f52/docs/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/assets/navigation_subtree_bare.png
+Documentation: https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/
+License: Apache-2.0 (see nav2-navigation-behavior-tree.LICENSE.txt)
+Image used without modification. This is an upstream example, not the project implementation.

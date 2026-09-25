@@ -24,7 +24,11 @@ Path planning and motion control were organized around Navigation2 (Nav2).
 
 ## Behavior trees and functional modules
 
-I replaced the state-machine-based decision structure with a behavior tree, which organizes condition checks and action execution into a tree. I separated decision-making from individual functions and organized the system into four modules.
+I replaced the state-machine-based decision structure with a behavior tree, which organizes condition checks and action execution into a tree.
+
+<figure class="feature-media"><a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/nav2-navigation-behavior-tree.png" alt="Official Nav2 behavior tree example connecting ComputePathToPose and FollowPath under NavigateWithReplanning" loading="lazy"></a><figcaption>Official Nav2 example linking path planning and path following; a conceptual reference diagram. <a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer">Nav2 Docs</a> · Apache-2.0</figcaption></figure>
+
+I separated decision-making from individual functions and organized the system into four modules.
 
 | Module | Responsibility |
 | --- | --- |

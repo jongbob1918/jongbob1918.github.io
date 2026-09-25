@@ -46,15 +46,27 @@ We trained the lightweight object detection model YOLOv8n on 3,000 synthetic ima
 
 We selected the model trained on mixed synthetic and photographed images, which performed best in testing, for ground detection.
 
-## Placing detected objects on the map
+## Hazard alerts based on zone access levels
 
-We used square reference markers (ArUco) to map image positions to map coordinates. I researched and tested the mapping; the backend teammate designed the transformation logic.
+Treating every detected person or vehicle as a hazard would trigger alerts for normal work and reduce trust in the service. People and vehicles must stay clear of a runway before takeoff, while maintenance areas need to admit workers and service vehicles.
 
-Measured marker positions and their image coordinates define a planar transformation matrix, or homography. We used it to map object locations and classify them as runway, taxiway, or grass areas.
+We divided the airport into eight zones and let administrators set an access level for each. The system compares the detected object type with the zone's access level and alerts on access violations.
+
+<figure class="feature-media"><img src="../assets/images/falcon_zone_access_settings.webp" alt="Presentation slide 39: eight airport zones with three access levels allowing everyone, only workers and service vehicles, or no people or vehicles" loading="lazy"></figure>
+
+The example below shows a vehicle access alert after Taxiway A is set to prohibit entry.
+
+<figure class="feature-media"><img src="../assets/images/falcon_zone_access_alert.webp" alt="Presentation slide 40: Taxiway A set to access level 3, with ordinary and service vehicles marked and an access-violation alert displayed" loading="lazy"></figure>
+
+## Identifying an object's zone from camera footage
+
+Applying access rules requires knowing which zone contains each detected object. We used square reference markers (ArUco) to identify reference points in the image and connect camera coordinates to map coordinates.
+
+We measured marker-center positions on the physical model and found the same points in the camera image. These pairs define a planar transformation matrix, or homography, that maps object centers to the map and identifies runway, taxiway, or grass zones. I researched and tested the mapping; the backend teammate designed the transformation logic.
 
 <figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="Measured ArUco marker locations on the airport model paired with their pixel positions in camera footage" loading="lazy"></figure>
 
-ByteTrack associates the same object across frames as it moves. We also analyzed fluorescent vest and vehicle colors to distinguish workers and service vehicles. Sending object identifiers, classes, and positions to the server updates map markers and popup alerts on the controller interface.
+ByteTrack follows moving objects across frames, while fluorescent vest and vehicle colors distinguish workers and service vehicles. Object types and locations are checked against access levels to update the controller map and alerts.
 
 ## Demonstrating the integrated system
 

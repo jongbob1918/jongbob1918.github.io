@@ -23,6 +23,8 @@ The task was to maintain localization and repeatedly navigate a 2 km patrol rout
 
 The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. I used 3D Light Detection and Ranging (LiDAR) and camera data for simultaneous localization and mapping (SLAM) and autonomous navigation.
 
+The upper-level navigation module sends velocity commands to a reinforcement-learning-based low-level controller that controls the wheeled biped robot’s locomotion. The upper-level module uses a Model Predictive Path Integral (MPPI) controller to evaluate candidate trajectories and generate velocity commands.
+
 I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.
 
 ## Challenge 1: Localization in woodland and grass-covered areas
@@ -85,7 +87,7 @@ I applied ground segmentation to 3D LiDAR data. Navigation used the distinction 
 
 ### Problem
 
-The reinforcement-learning-based motion control could accelerate sharply at startup even with the same velocity command. I investigated acceleration handling in the Humble version of the Model Predictive Path Integral (MPPI) controller, which evaluates candidate trajectories to produce velocity commands.
+The reinforcement-learning-based low-level controller responds to the robot’s past and current states, so its actual velocity differed from the command sent by the upper-level navigation module. In particular, the robot would tilt and accelerate abruptly at startup.
 
 ### First Approach
 

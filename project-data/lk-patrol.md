@@ -35,6 +35,8 @@ demo:
 
 바퀴형 이족 로봇에 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 2와 자율주행 소프트웨어 Nav2(Navigation2)를 사용했습니다. 3D LiDAR(Light Detection and Ranging)와 카메라를 활용해 지도 작성·동시 위치 추정(SLAM, Simultaneous Localization and Mapping)과 자율주행을 수행했습니다.
 
+상위 주행 모듈이 속도 명령을 전달하면 강화학습 기반 하위 제어기가 바퀴형 이족 로봇의 이동을 제어하는 구조입니다. 상위 모듈에서는 여러 후보 주행 궤적을 평가해 속도 명령을 만드는 MPPI(Model Predictive Path Integral) 제어기를 사용했습니다.
+
 로봇이 대기 장소에 안전하게 진입해 대기할 수 있도록 정밀 정렬 알고리즘을 적용했습니다.
 
 ## Challenge 1: 수림과 잔디 구간의 위치 추정
@@ -97,7 +99,7 @@ demo:
 
 ### Problem
 
-강화학습 기반 주행 제어에서는 같은 속도 명령을 주어도 출발 시 급격한 가속이 나타났습니다. 당시 사용한 Humble 버전의 MPPI(Model Predictive Path Integral) 제어기에서 가속을 제한하는 방식을 검토했습니다. MPPI는 여러 후보 주행 궤적을 평가해 속도 명령을 만드는 제어기입니다.
+강화학습 기반 하위 제어기는 로봇의 과거·현재 상태에 따라 반응하므로, 실제 속도가 상위 주행 모듈의 속도 명령과 다르게 나타났습니다. 특히 출발 시 로봇이 기울어지면서 급격하게 가속하는 현상이 있었습니다.
 
 ### First Approach
 

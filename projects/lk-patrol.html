@@ -45,6 +45,7 @@
         <details class="case-section case-disclosure" id="ko-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><p>바퀴형 이족 로봇에 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 2와 자율주행 소프트웨어 Nav2(Navigation2)를 사용했습니다. 3D LiDAR(Light Detection and Ranging)와 카메라를 활용해 지도 작성·동시 위치 추정(SLAM, Simultaneous Localization and Mapping)과 자율주행을 수행했습니다.</p>
+<p>상위 주행 모듈이 속도 명령을 전달하면 강화학습 기반 하위 제어기가 바퀴형 이족 로봇의 이동을 제어하는 구조입니다. 상위 모듈에서는 여러 후보 주행 궤적을 평가해 속도 명령을 만드는 MPPI(Model Predictive Path Integral) 제어기를 사용했습니다.</p>
 <p>로봇이 대기 장소에 안전하게 진입해 대기할 수 있도록 정밀 정렬 알고리즘을 적용했습니다.</p>
 </div>
         </details>
@@ -92,7 +93,7 @@
         <details class="case-section case-disclosure" id="ko-challenge-4-출발-가속과-좁은-구간의-속도-출력">
           <summary class="case-heading"><h2>Challenge 4: 출발 가속과 좁은 구간의 속도 출력</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
-<p>강화학습 기반 주행 제어에서는 같은 속도 명령을 주어도 출발 시 급격한 가속이 나타났습니다. 당시 사용한 Humble 버전의 MPPI(Model Predictive Path Integral) 제어기에서 가속을 제한하는 방식을 검토했습니다. MPPI는 여러 후보 주행 궤적을 평가해 속도 명령을 만드는 제어기입니다.</p>
+<p>강화학습 기반 하위 제어기는 로봇의 과거·현재 상태에 따라 반응하므로, 실제 속도가 상위 주행 모듈의 속도 명령과 다르게 나타났습니다. 특히 출발 시 로봇이 기울어지면서 급격하게 가속하는 현상이 있었습니다.</p>
 <h3>First Approach</h3>
 <p>지수 이동 평균 필터(EMA, Exponential Moving Average)를 적용해 속도 명령의 급격한 변화를 완화했습니다.</p>
 <h3>Remaining Problem</h3>
@@ -148,6 +149,7 @@
         <details class="case-section case-disclosure" id="en-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><p>The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. I used 3D Light Detection and Ranging (LiDAR) and camera data for simultaneous localization and mapping (SLAM) and autonomous navigation.</p>
+<p>The upper-level navigation module sends velocity commands to a reinforcement-learning-based low-level controller that controls the wheeled biped robot’s locomotion. The upper-level module uses a Model Predictive Path Integral (MPPI) controller to evaluate candidate trajectories and generate velocity commands.</p>
 <p>I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.</p>
 </div>
         </details>
@@ -195,7 +197,7 @@
         <details class="case-section case-disclosure" id="en-challenge-4-startup-acceleration-and-velocity-output-in-narrow-spaces">
           <summary class="case-heading"><h2>Challenge 4: Startup acceleration and velocity output in narrow spaces</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
-<p>The reinforcement-learning-based motion control could accelerate sharply at startup even with the same velocity command. I investigated acceleration handling in the Humble version of the Model Predictive Path Integral (MPPI) controller, which evaluates candidate trajectories to produce velocity commands.</p>
+<p>The reinforcement-learning-based low-level controller responds to the robot’s past and current states, so its actual velocity differed from the command sent by the upper-level navigation module. In particular, the robot would tilt and accelerate abruptly at startup.</p>
 <h3>First Approach</h3>
 <p>I applied an exponential moving average (EMA) filter to smooth abrupt changes in velocity commands.</p>
 <h3>Remaining Problem</h3>

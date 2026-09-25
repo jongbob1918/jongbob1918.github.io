@@ -162,10 +162,11 @@
       "contributionKo": "프로젝트 총괄·지상 객체 탐지 시스템 구축·카메라 영상과 실제 구역 위치 정합",
       "contributionEn": "Project leadership · Ground-object detection system development · Camera-to-ground zone mapping",
       "keywords": [
-        "YOLOv8",
-        "ByteTrack",
+        "Object Detection",
+        "Object Tracking",
+        "OpenCV",
         "Homography",
-        "OpenCV"
+        "Python"
       ]
     },
     {

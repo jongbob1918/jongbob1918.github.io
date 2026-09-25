@@ -9,22 +9,16 @@ team: 4명
 period: 2025.05.26–07.03
 context: ADDINEDU · ROS2와 인공지능을 활용한 자율주행 로봇 개발자 양성과정 9기
 skills:
-  - PyTorch
-  - YOLOv8
-  - ByteTrack
+  - Object Detection
+  - Object Tracking
   - OpenCV
   - Homography
-  - TCP
+  - Python
 repository: https://github.com/jongbob1918/FALCON
 role: 프로젝트 총괄·지상 객체 탐지 시스템 구축·카메라 영상과 실제 구역 위치 정합
 card:
   image: assets/images/hawkeye_mainpage.gif
   imageAlt: FALCON runway hazard detection interface
-  skills:
-    - YOLOv8
-    - ByteTrack
-    - Homography
-    - OpenCV
 overview: >-
   공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 인력 중심의 활주로 안전관리에서 발생하는 인력 부족과 비용 부담을 줄이고자 AI로 위험요소 감시를 자동화하는 프로젝트를 시작했습니다. FALCON은 지상 위험요소 탐지와 조류 충돌 위험 분석, 음성 안내로 관제사와 조종사의 안전한 항공기 운항을 지원하는 AI 서비스입니다. CCTV에서 감지한 위험정보를 관제 화면과 조종사 음성 경보로 전달합니다.
 demo:

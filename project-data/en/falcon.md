@@ -26,8 +26,6 @@ The ground- and bird-detection servers, controller PC, and pilot PC connect thro
 
 <figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Detection servers connected through the main server to the controller interface and pilot service" loading="lazy"></figure>
 
-As the lead of a four-person team, I managed schedules and documentation and handled the ground-object detection server, model research, and training. Synthetic-data generation and model development were shared work. Other team members implemented the main server, controller interface, and pilot service.
-
 ## Object detection model troubleshooting
 
 We defined six ground-object classes: birds, debris, wild animals, people, vehicles, and aircraft. The initial model was trained on roughly 15,000 public images but struggled to detect small objects in footage of the airport model.

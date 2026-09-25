@@ -62,8 +62,8 @@
       "imageSequence": [],
       "titleKo": "실내 다층 건물 자율주행 시스템 설계",
       "titleEn": "Indoor multi-floor navigation system design",
-      "overviewKo": "바퀴형 이족 로봇의 실내 다층 자율주행 시스템을 설계했습니다. 짐벌 스캔 시스템과 고도 지도, 층간 내비게이션을 중심으로 구성했습니다.",
-      "overviewEn": "Designed an indoor multi-floor navigation system for a wheeled biped robot, centered on gimbal scanning, elevation mapping, and navigation between floors.",
+      "overviewKo": "바퀴형 이족 로봇의 실내 다층 자율주행 시스템을 설계했습니다. 고도 지도와 층간 내비게이션을 중심으로 구성했습니다.",
+      "overviewEn": "Designed an indoor multi-floor navigation system for a wheeled biped robot, centered on elevation mapping and navigation between floors.",
       "periodKo": "",
       "periodEn": "",
       "teamKo": "",
@@ -73,8 +73,7 @@
       "keywords": [
         "ROS 2",
         "Elevation Mapping",
-        "Multi-floor Navigation",
-        "Gimbal Scan System"
+        "Multi-floor Navigation"
       ]
     },
     {

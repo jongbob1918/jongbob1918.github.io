@@ -1,16 +1,16 @@
 ---
 slug: lk-biped
 title: Indoor multi-floor navigation system design
-description: Designed an indoor multi-floor navigation system for a wheeled biped robot, centered on gimbal scanning, elevation mapping, and navigation between floors.
+description: Designed an indoor multi-floor navigation system for a wheeled biped robot, centered on elevation mapping and navigation between floors.
 overview: >-
-  I designed an indoor multi-floor navigation system and developed gimbal scanning for a wheeled biped robot.
+  I designed an indoor multi-floor navigation system for a wheeled biped robot.
 ---
 
 ## Problem Statement
 
-Patrolling multiple indoor floors required connecting flat-ground navigation, stair entry and traversal, map switching, and navigation on the destination floor. Stair traversal also needed to account for terrain height and robot posture, while observation tasks required operating a gimbal after reaching a destination.
+Patrolling multiple indoor floors required connecting flat-ground navigation, stair entry and traversal, map switching, and navigation on the destination floor. Stair traversal also needed to account for terrain height and robot posture.
 
-The engineering tasks were to coordinate floor transitions, incorporate terrain height into stair navigation, and connect navigation with observation tasks.
+The engineering tasks were to coordinate floor transitions and incorporate terrain height into stair navigation.
 
 ## System Setup
 
@@ -21,8 +21,7 @@ The TRON1 wheeled biped robot used the Robot Operating System (ROS) 2 Humble fra
 | 3D Light Detection and Ranging (LiDAR) sensor | Prior mapping and localization |
 | Color and depth (RGB-D) camera | Near-field geometry and depth observation |
 | Elevation map | Grid representation of ground height for stair navigation |
-| Behavior tree | Execution flow for navigation, map switching, and observation |
-| Gremsy VIO gimbal camera | Camera orientation and visible-light/thermal observation |
+| Behavior tree | Execution flow for navigation and map switching |
 
 ## Challenge 1: Connecting floor transitions and map switching
 
@@ -60,24 +59,8 @@ Missing depth data could distort stair geometry in the elevation map and mark tr
 
 Beyond controller implementation, real-stair validation remained for coordinate alignment, obstacle stop/resume behavior, and repeated runs.
 
-## Challenge 3: Gimbal scanning and task interruption after navigation
-
-### Problem
-
-Scanning at a destination still needed to respond to cancellation, emergency stops, and new tasks. An independent scan could continue after the parent task ended, so task state and gimbal motion needed coordinated handling.
-
-### Solution
-
-I connected navigation followed by gimbal scanning in a behavior tree. Cancellation, emergency stops, and preemption by a new task stop the scan and trigger a return motion.
-
-I implemented sector, bowtie, and look-around patterns with configurable scan limits. Mounted-hardware trials exposed vibration and speed issues, leading to stepwise yaw/pitch motion and adjustments to movement and pause durations.
-
-### Result
-
-The gimbal scanning feature underwent build checks and automated tests. I also tested patterns on the mounted hardware and adjusted the motion.
-
 ## Validation & Next Steps
 
-Field checks covered localization on flat ground, stairs, and floor-transition segments, as well as gimbal communication and camera control. Inspection start, save, and stop operations were also checked on the robot.
+Field checks covered localization on flat ground, stairs, and floor-transition segments.
 
 Repeated end-to-end multi-floor runs and hardware validation of the elevation-based stair controller remained follow-up work. Test cases were organized around stair ascent/descent, static obstacles, and people crossing the route.

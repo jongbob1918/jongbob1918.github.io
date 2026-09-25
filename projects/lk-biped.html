@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="바퀴형 이족 로봇의 실내 다층 자율주행 시스템을 설계했습니다. 짐벌 스캔 시스템과 고도 지도, 층간 내비게이션을 중심으로 구성했습니다.">
+  <meta name="description" content="바퀴형 이족 로봇의 실내 다층 자율주행 시스템을 설계했습니다. 고도 지도와 층간 내비게이션을 중심으로 구성했습니다.">
   <title>실내 다층 건물 자율주행 시스템 설계 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-17">
 </head>
-<body data-page="project-detail" data-title-ko="실내 다층 건물 자율주행 시스템 설계 — Jongmyung Kim" data-title-en="Indoor multi-floor navigation system design — Jongmyung Kim" data-description-ko="바퀴형 이족 로봇의 실내 다층 자율주행 시스템을 설계했습니다. 짐벌 스캔 시스템과 고도 지도, 층간 내비게이션을 중심으로 구성했습니다." data-description-en="Designed an indoor multi-floor navigation system for a wheeled biped robot, centered on gimbal scanning, elevation mapping, and navigation between floors.">
+<body data-page="project-detail" data-title-ko="실내 다층 건물 자율주행 시스템 설계 — Jongmyung Kim" data-title-en="Indoor multi-floor navigation system design — Jongmyung Kim" data-description-ko="바퀴형 이족 로봇의 실내 다층 자율주행 시스템을 설계했습니다. 고도 지도와 층간 내비게이션을 중심으로 구성했습니다." data-description-en="Designed an indoor multi-floor navigation system for a wheeled biped robot, centered on elevation mapping and navigation between floors.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -22,13 +22,13 @@
     <header class="project-header">
       <h1>실내 다층 건물 자율주행 시스템 설계</h1>
       <div class="meta"></div>
-      <p class="project-skills">ROS 2 · Elevation Mapping · Multi-floor Navigation · Gimbal Scan System</p>
+      <p class="project-skills">ROS 2 · Elevation Mapping · Multi-floor Navigation</p>
       
     </header>
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">바퀴형 이족 로봇의 실내 다층 이동을 위한 자율주행 시스템 설계와 짐벌 스캔 기능 개발을 담당했습니다.</p>
+      <p class="lead">바퀴형 이족 로봇의 실내 다층 이동을 위한 자율주행 시스템 설계를 담당했습니다.</p>
     </section>
 
     
@@ -37,8 +37,8 @@
       <article class="case-study">
         <details class="case-section case-disclosure" id="ko-problem-statement">
           <summary class="case-heading"><h2>Problem Statement</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>실내 여러 층을 순찰하려면 평지 주행뿐 아니라 계단 진입·통과, 지도 전환, 다음 층에서의 주행을 연결해야 했습니다. 계단에서는 지면의 높이와 로봇의 자세가 달라지고, 목적지에서는 이동을 마친 뒤 짐벌을 움직여 주변을 관측해야 했습니다.</p>
-<p>개발 과제는 층간 이동의 실행 순서를 관리하고, 계단의 높이 정보를 주행에 반영하며, 이동과 관측 작업을 연결하는 것이었습니다.</p>
+          <div class="case-disclosure-body"><p>실내 여러 층을 순찰하려면 평지 주행뿐 아니라 계단 진입·통과, 지도 전환, 다음 층에서의 주행을 연결해야 했습니다. 계단에서는 지면의 높이와 로봇의 자세 변화도 고려해야 했습니다.</p>
+<p>개발 과제는 층간 이동의 실행 순서를 관리하고, 계단의 높이 정보를 주행에 반영하는 것이었습니다.</p>
 </div>
         </details>
 
@@ -66,11 +66,7 @@
 </tr>
 <tr>
 <td>행동 트리(Behavior Tree)</td>
-<td>이동·지도 전환·관측 작업의 실행 순서 관리</td>
-</tr>
-<tr>
-<td>짐벌 카메라 Gremsy VIO</td>
-<td>카메라 방향 조절과 가시광·열화상 관측</td>
+<td>이동·지도 전환의 실행 순서 관리</td>
 </tr>
 </tbody></table>
 </div>
@@ -102,21 +98,9 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-3-이동-후-짐벌-스캔과-작업-중단-처리">
-          <summary class="case-heading"><h2>Challenge 3: 이동 후 짐벌 스캔과 작업 중단 처리</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><h3>Problem</h3>
-<p>목적지 도착 후 주변을 스캔하는 동안에도 작업 취소, 긴급 정지, 새 작업 요청을 처리해야 했습니다. 짐벌 스캔이 독립적으로 계속 실행되면 상위 작업이 끝나도 카메라가 움직일 수 있어, 작업 상태와 짐벌 동작을 함께 관리해야 했습니다.</p>
-<h3>Solution</h3>
-<p>목적지 이동 후 짐벌 스캔을 실행하는 작업을 행동 트리에 연결했습니다. 취소·긴급 정지·새 작업 선점 시에는 스캔을 중단하고 복귀하도록 구현했습니다.</p>
-<p>부채꼴, 나비 모양, 주변 둘러보기 패턴을 구성하고 스캔 범위를 설정 파일에서 조절하도록 했습니다. 장착 상태의 시험에서 진동과 속도 문제를 확인한 뒤, 좌우·상하 각도를 단계적으로 바꾸는 방식으로 수정하고 이동·정지 시간을 조정했습니다.</p>
-<h3>Result</h3>
-<p>짐벌 스캔 기능의 빌드와 자동시험을 수행하고, 실제 장착 상태에서 패턴을 시험하며 동작을 조정했습니다.</p>
-</div>
-        </details>
-
         <details class="case-section case-disclosure" id="ko-validation-next-steps">
           <summary class="case-heading"><h2>Validation &amp; Next Steps</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>평지·계단·층 전환 구간의 위치 추정과 짐벌 통신·카메라 제어를 실환경에서 확인했습니다. 짐벌은 검사 시작·저장·종료 동작도 검증했습니다.</p>
+          <div class="case-disclosure-body"><p>평지·계단·층 전환 구간의 위치 추정을 실환경에서 확인했습니다.</p>
 <p>다층 이동 전체 시나리오의 반복 완주와 고도 지도 기반 계단 제어기의 실차 검증은 후속 과제로 남아 있습니다. 계단 상·하행, 정적 장애물, 사람이 경로를 가로지르는 상황을 나눠 시험 항목을 정리했습니다.</p>
 </div>
         </details>
@@ -127,13 +111,13 @@
     <header class="project-header">
       <h1>Indoor multi-floor navigation system design</h1>
       <div class="meta"></div>
-      <p class="project-skills">ROS 2 · Elevation Mapping · Multi-floor Navigation · Gimbal Scan System</p>
+      <p class="project-skills">ROS 2 · Elevation Mapping · Multi-floor Navigation</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I designed an indoor multi-floor navigation system and developed gimbal scanning for a wheeled biped robot.</p>
+      <p class="lead">I designed an indoor multi-floor navigation system for a wheeled biped robot.</p>
     </section>
 
     
@@ -142,8 +126,8 @@
       <article class="case-study">
         <details class="case-section case-disclosure" id="en-problem-statement">
           <summary class="case-heading"><h2>Problem Statement</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>Patrolling multiple indoor floors required connecting flat-ground navigation, stair entry and traversal, map switching, and navigation on the destination floor. Stair traversal also needed to account for terrain height and robot posture, while observation tasks required operating a gimbal after reaching a destination.</p>
-<p>The engineering tasks were to coordinate floor transitions, incorporate terrain height into stair navigation, and connect navigation with observation tasks.</p>
+          <div class="case-disclosure-body"><p>Patrolling multiple indoor floors required connecting flat-ground navigation, stair entry and traversal, map switching, and navigation on the destination floor. Stair traversal also needed to account for terrain height and robot posture.</p>
+<p>The engineering tasks were to coordinate floor transitions and incorporate terrain height into stair navigation.</p>
 </div>
         </details>
 
@@ -171,11 +155,7 @@
 </tr>
 <tr>
 <td>Behavior tree</td>
-<td>Execution flow for navigation, map switching, and observation</td>
-</tr>
-<tr>
-<td>Gremsy VIO gimbal camera</td>
-<td>Camera orientation and visible-light/thermal observation</td>
+<td>Execution flow for navigation and map switching</td>
 </tr>
 </tbody></table>
 </div>
@@ -207,21 +187,9 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-3-gimbal-scanning-and-task-interruption-after-navigation">
-          <summary class="case-heading"><h2>Challenge 3: Gimbal scanning and task interruption after navigation</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><h3>Problem</h3>
-<p>Scanning at a destination still needed to respond to cancellation, emergency stops, and new tasks. An independent scan could continue after the parent task ended, so task state and gimbal motion needed coordinated handling.</p>
-<h3>Solution</h3>
-<p>I connected navigation followed by gimbal scanning in a behavior tree. Cancellation, emergency stops, and preemption by a new task stop the scan and trigger a return motion.</p>
-<p>I implemented sector, bowtie, and look-around patterns with configurable scan limits. Mounted-hardware trials exposed vibration and speed issues, leading to stepwise yaw/pitch motion and adjustments to movement and pause durations.</p>
-<h3>Result</h3>
-<p>The gimbal scanning feature underwent build checks and automated tests. I also tested patterns on the mounted hardware and adjusted the motion.</p>
-</div>
-        </details>
-
         <details class="case-section case-disclosure" id="en-validation-next-steps">
           <summary class="case-heading"><h2>Validation &amp; Next Steps</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>Field checks covered localization on flat ground, stairs, and floor-transition segments, as well as gimbal communication and camera control. Inspection start, save, and stop operations were also checked on the robot.</p>
+          <div class="case-disclosure-body"><p>Field checks covered localization on flat ground, stairs, and floor-transition segments.</p>
 <p>Repeated end-to-end multi-floor runs and hardware validation of the elevation-based stair controller remained follow-up work. Test cases were organized around stair ascent/descent, static obstacles, and people crossing the route.</p>
 </div>
         </details>

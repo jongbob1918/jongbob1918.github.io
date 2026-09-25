@@ -108,11 +108,11 @@ I improved startup acceleration handling and excessive velocity output in narrow
 
 ### Problem
 
-While operating with the existing controller during busy visiting hours at Seooreung, I observed visitors approaching closely or surrounding the robot out of curiosity. These situations required additional handling to maintain a safe distance from nearby people.
+With the existing controller, navigation kept driving by planning a path around obstacles, even when many were present. During busy visiting hours at Seooreung, some visitors approached the robot or surrounded it out of curiosity. Because people move unpredictably, I judged that the robot could still collide with someone while driving around them.
 
 ### Solution
 
-I added a safety function that detects people approaching within a configured safety zone and stops the robot.
+I set a safety zone around the robot so that it stops when a person enters the zone and resumes driving when the zone is clear.
 
 ## Field Validation
 

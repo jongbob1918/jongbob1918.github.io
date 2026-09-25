@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="회사 로봇의 기존 ROS 1 Noetic 소프트웨어를 ROS 2 Humble로 포팅하고, ROS 2와 Nav2 기반으로 시스템을 재설계했습니다.">
+  <meta name="description" content="ROS 1 Noetic 시스템을 ROS 2 Humble로 전환했습니다. 필요한 알고리즘을 포팅하고 행동 트리 기반 의사결정과 기능별 모듈화를 도입해 여러 로봇에서 재사용할 수 있도록 설계했습니다.">
   <title>로봇 소프트웨어 ROS 2 전환 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-16">
 </head>
-<body data-page="project-detail" data-title-ko="로봇 소프트웨어 ROS 2 전환 — Jongmyung Kim" data-title-en="Robot software migration to ROS 2 — Jongmyung Kim" data-description-ko="회사 로봇의 기존 ROS 1 Noetic 소프트웨어를 ROS 2 Humble로 포팅하고, ROS 2와 Nav2 기반으로 시스템을 재설계했습니다." data-description-en="Ported the company’s robot software from ROS 1 Noetic to ROS 2 Humble and redesigned the system around ROS 2 and Nav2.">
+<body data-page="project-detail" data-title-ko="로봇 소프트웨어 ROS 2 전환 — Jongmyung Kim" data-title-en="Robot software migration to ROS 2 — Jongmyung Kim" data-description-ko="ROS 1 Noetic 시스템을 ROS 2 Humble로 전환했습니다. 필요한 알고리즘을 포팅하고 행동 트리 기반 의사결정과 기능별 모듈화를 도입해 여러 로봇에서 재사용할 수 있도록 설계했습니다." data-description-en="Migrated a ROS 1 Noetic system to ROS 2 Humble, ported selected algorithms, and introduced behavior-tree decision-making and functional modules designed for reuse across robots.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -22,28 +22,61 @@
     <header class="project-header">
       <h1>로봇 소프트웨어 ROS 2 전환</h1>
       <div class="meta"></div>
-      <p class="project-skills">ROS 2 · Nav2 · System Redesign</p>
+      <p class="project-skills">ROS 2 · Nav2 · Behavior Tree · System Redesign</p>
       
     </header>
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">회사 로봇에서 사용하던 ROS 1 Noetic 기반 소프트웨어를 ROS 2 Humble로 전환했습니다. 기존 코드를 포팅하고 자율주행 시스템을 ROS 2와 Nav2 기반으로 재설계했습니다. 새 환경에서 제공하는 기능을 활용할 수 있도록 로봇 소프트웨어의 기반을 변경했습니다.</p>
+      <p class="lead">회사 로봇의 ROS 1 Noetic 기반 소프트웨어를 ROS 2 Humble로 전환했습니다. 기존 지도 작성·위치 추정 알고리즘 등 필요한 부분을 포팅하고, 행동 트리 기반 의사결정 구조를 도입했습니다. 위치 추정·주행·관제 통신·의사결정을 각각 모듈화해 여러 로봇에서 재사용할 수 있도록 설계했습니다.</p>
     </section>
 
     <section class="demo-section" id="demo-ko"><figure class="feature-media"><img src="../assets/images/ros1-noetic-to-ros2-humble.png" alt="ROS 1 Noetic에서 ROS 2 Humble로의 소프트웨어 전환 방향"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-ros-1-noetic에서-ros-2-humble로">
-          <div class="case-heading"><h2>ROS 1 Noetic에서 ROS 2 Humble로</h2></div>
-          <p>센서 처리와 로봇 제어 프로그램을 연결하는 소프트웨어 프레임워크인 ROS(Robot Operating System)를 전환했습니다. 기존 ROS 1 Noetic 기반 코드를 ROS 2 Humble 환경으로 포팅했습니다.</p>
+        <section class="case-section" id="ko-problem-statement">
+          <div class="case-heading"><h2>Problem Statement</h2></div>
+          <p>기존 시스템은 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 1 Noetic과 자율주행 패키지 move_base를 사용했습니다. 로봇의 동작은 현재 상태와 전환 조건에 따라 다음 행동을 정하는 상태 머신(State Machine)으로 관리했습니다.</p>
+<p><a href="https://www.ros.org/blog/noetic-eol/">ROS 1 Noetic의 공식 지원은 2025년 5월 31일 종료되었습니다</a>. 기존 move_base 기반 구성에서 사용할 수 있는 알고리즘과 시스템 구조에도 서비스 확장을 위한 한계가 있어, ROS 2 Humble로 전환하고 자율주행과 의사결정 구조를 재설계했습니다.</p>
 
         </section>
 
-        <section class="case-section" id="ko-자율주행-시스템-재설계">
-          <div class="case-heading"><h2>자율주행 시스템 재설계</h2></div>
-          <p>경로 계획과 주행 제어를 제공하는 Nav2(Navigation2)를 중심으로 자율주행 시스템을 재설계했습니다. 기존 코드를 옮기는 작업과 함께, ROS 2와 Nav2의 기능을 활용할 수 있도록 시스템 구성을 변경했습니다.</p>
+        <section class="case-section" id="ko-필요한-알고리즘의-ros-2-포팅">
+          <div class="case-heading"><h2>필요한 알고리즘의 ROS 2 포팅</h2></div>
+          <p>기존 코드 전체를 옮기기보다 새 시스템에 필요한 부분을 선별했습니다. 3차원 레이저 센서인 3D LiDAR(Light Detection and Ranging)를 이용한 지도 작성·동시 위치 추정 알고리즘(SLAM, Simultaneous Localization and Mapping)과 사전 지도 기반 위치 추정(Localization) 등을 ROS 2 Humble로 포팅했습니다.</p>
+<p>경로 계획과 주행 제어는 Nav2(Navigation2)를 중심으로 구성했습니다.</p>
+
+        </section>
+
+        <section class="case-section" id="ko-행동-트리-도입과-기능별-모듈화">
+          <div class="case-heading"><h2>행동 트리 도입과 기능별 모듈화</h2></div>
+          <p>상태 머신 기반 의사결정 구조를 변경해, 조건 확인과 행동 실행을 트리로 구성하는 행동 트리(Behavior Tree)를 도입했습니다. 의사결정과 개별 기능을 분리하고, 시스템을 다음 네 모듈로 나눴습니다.</p>
+<table>
+<thead>
+<tr>
+<th>모듈</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>지도 작성·위치 추정</td>
+<td>3D LiDAR 기반 SLAM과 사전 지도에서의 현재 위치 추정</td>
+</tr>
+<tr>
+<td>주행</td>
+<td>Nav2 기반 경로 계획과 주행 제어</td>
+</tr>
+<tr>
+<td>관제 통신</td>
+<td>관제 시스템과 로봇 사이의 통신</td>
+</tr>
+<tr>
+<td>의사결정</td>
+<td>행동 트리 기반 조건 판단과 행동 실행 흐름 관리</td>
+</tr>
+</tbody></table>
+<p>이 구조를 바탕으로 여러 로봇에서 각 모듈을 재사용할 수 있도록 설계했습니다.</p>
 
         </section>
       </article>
@@ -53,28 +86,61 @@
     <header class="project-header">
       <h1>Robot software migration to ROS 2</h1>
       <div class="meta"></div>
-      <p class="project-skills">ROS 2 · Nav2 · System Redesign</p>
+      <p class="project-skills">ROS 2 · Nav2 · Behavior Tree · System Redesign</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I migrated the company’s robot software from ROS 1 Noetic to ROS 2 Humble. I ported the existing code and redesigned the autonomous navigation system around ROS 2 and Nav2. This changed the software foundation so the robot could use features available in the new environment.</p>
+      <p class="lead">I migrated the company’s robot software from ROS 1 Noetic to ROS 2 Humble. I ported the mapping and localization algorithms needed by the new system and introduced behavior-tree-based decision-making. I separated localization, navigation, control-center communication, and decision-making into modules designed for reuse across multiple robots.</p>
     </section>
 
     <section class="demo-section" id="demo-en"><figure class="feature-media"><img src="../assets/images/ros1-noetic-to-ros2-humble.png" alt="Software migration from ROS 1 Noetic on the left to ROS 2 Humble on the right"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-from-ros-1-noetic-to-ros-2-humble">
-          <div class="case-heading"><h2>From ROS 1 Noetic to ROS 2 Humble</h2></div>
-          <p>I migrated the Robot Operating System (ROS), the software framework that connects sensor-processing and robot-control programs. I ported the existing ROS 1 Noetic code to the ROS 2 Humble environment.</p>
+        <section class="case-section" id="en-problem-statement">
+          <div class="case-heading"><h2>Problem Statement</h2></div>
+          <p>The existing system used the Robot Operating System (ROS) 1 Noetic framework and the move_base navigation package. A state machine managed robot behavior by selecting the next action based on the current state and transition conditions.</p>
+<p><a href="https://www.ros.org/blog/noetic-eol/">Official support for ROS 1 Noetic ended on May 31, 2025</a>. The algorithms available in the existing move_base configuration and its system structure also limited further service development. I migrated the system to ROS 2 Humble and redesigned navigation and decision-making.</p>
 
         </section>
 
-        <section class="case-section" id="en-redesigning-the-navigation-system">
-          <div class="case-heading"><h2>Redesigning the navigation system</h2></div>
-          <p>I redesigned autonomous navigation around Navigation2 (Nav2), which provides path planning and motion control. Alongside porting the existing code, I changed the system structure to use ROS 2 and Nav2 features.</p>
+        <section class="case-section" id="en-porting-selected-algorithms-to-ros-2">
+          <div class="case-heading"><h2>Porting selected algorithms to ROS 2</h2></div>
+          <p>I selected the components needed by the new system rather than porting the entire codebase. These included simultaneous localization and mapping (SLAM) using a 3D Light Detection and Ranging (LiDAR) sensor, and localization against prebuilt maps. I ported these components to ROS 2 Humble.</p>
+<p>Path planning and motion control were organized around Navigation2 (Nav2).</p>
+
+        </section>
+
+        <section class="case-section" id="en-behavior-trees-and-functional-modules">
+          <div class="case-heading"><h2>Behavior trees and functional modules</h2></div>
+          <p>I replaced the state-machine-based decision structure with a behavior tree, which organizes condition checks and action execution into a tree. I separated decision-making from individual functions and organized the system into four modules.</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Mapping and localization</td>
+<td>3D LiDAR SLAM and localization against prebuilt maps</td>
+</tr>
+<tr>
+<td>Navigation</td>
+<td>Nav2-based path planning and motion control</td>
+</tr>
+<tr>
+<td>Control-center communication</td>
+<td>Communication between the robot and the control-center system</td>
+</tr>
+<tr>
+<td>Decision-making</td>
+<td>Behavior-tree condition checks and action execution flow</td>
+</tr>
+</tbody></table>
+<p>The modular structure was designed to support reuse across multiple robots.</p>
 
         </section>
       </article>

@@ -1,21 +1,38 @@
 ---
 slug: lk-ros
 title: Robot software migration to ROS 2
-description: Ported the company’s robot software from ROS 1 Noetic to ROS 2 Humble and redesigned the system around ROS 2 and Nav2.
+description: Migrated a ROS 1 Noetic system to ROS 2 Humble, ported selected algorithms, and introduced behavior-tree decision-making and functional modules designed for reuse across robots.
 overview: >-
   I migrated the company’s robot software from ROS 1 Noetic to ROS 2 Humble.
-  I ported the existing code and redesigned the autonomous navigation system around ROS 2 and Nav2.
-  This changed the software foundation so the robot could use features available in the new environment.
+  I ported the mapping and localization algorithms needed by the new system and introduced behavior-tree-based decision-making.
+  I separated localization, navigation, control-center communication, and decision-making into modules designed for reuse across multiple robots.
 demo:
   type: image
   src: ../assets/images/ros1-noetic-to-ros2-humble.png
   alt: Software migration from ROS 1 Noetic on the left to ROS 2 Humble on the right
 ---
 
-## From ROS 1 Noetic to ROS 2 Humble
+## Problem Statement
 
-I migrated the Robot Operating System (ROS), the software framework that connects sensor-processing and robot-control programs. I ported the existing ROS 1 Noetic code to the ROS 2 Humble environment.
+The existing system used the Robot Operating System (ROS) 1 Noetic framework and the move_base navigation package. A state machine managed robot behavior by selecting the next action based on the current state and transition conditions.
 
-## Redesigning the navigation system
+[Official support for ROS 1 Noetic ended on May 31, 2025](https://www.ros.org/blog/noetic-eol/). The algorithms available in the existing move_base configuration and its system structure also limited further service development. I migrated the system to ROS 2 Humble and redesigned navigation and decision-making.
 
-I redesigned autonomous navigation around Navigation2 (Nav2), which provides path planning and motion control. Alongside porting the existing code, I changed the system structure to use ROS 2 and Nav2 features.
+## Porting selected algorithms to ROS 2
+
+I selected the components needed by the new system rather than porting the entire codebase. These included simultaneous localization and mapping (SLAM) using a 3D Light Detection and Ranging (LiDAR) sensor, and localization against prebuilt maps. I ported these components to ROS 2 Humble.
+
+Path planning and motion control were organized around Navigation2 (Nav2).
+
+## Behavior trees and functional modules
+
+I replaced the state-machine-based decision structure with a behavior tree, which organizes condition checks and action execution into a tree. I separated decision-making from individual functions and organized the system into four modules.
+
+| Module | Responsibility |
+| --- | --- |
+| Mapping and localization | 3D LiDAR SLAM and localization against prebuilt maps |
+| Navigation | Nav2-based path planning and motion control |
+| Control-center communication | Communication between the robot and the control-center system |
+| Decision-making | Behavior-tree condition checks and action execution flow |
+
+The modular structure was designed to support reuse across multiple robots.

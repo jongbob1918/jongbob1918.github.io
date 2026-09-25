@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="야외 지도를 작성하고 위치 추정 오류를 디버깅했습니다. 주행 중 수집한 센서 데이터를 재생해 수정 결과를 확인했습니다.">
-  <title>야외 순찰 로봇 — Jongmyung Kim</title>
+  <title>궁능순찰로봇 서오릉 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="야외 순찰 로봇 — Jongmyung Kim" data-title-en="Outdoor patrol robot — Jongmyung Kim" data-description-ko="야외 지도를 작성하고 위치 추정 오류를 디버깅했습니다. 주행 중 수집한 센서 데이터를 재생해 수정 결과를 확인했습니다." data-description-en="Built outdoor maps and debugged localization issues. Replayed sensor data from field tests to check the fixes.">
+<body data-page="project-detail" data-title-ko="궁능순찰로봇 서오릉 — Jongmyung Kim" data-title-en="Royal heritage patrol robot at Seooreung — Jongmyung Kim" data-description-ko="야외 지도를 작성하고 위치 추정 오류를 디버깅했습니다. 주행 중 수집한 센서 데이터를 재생해 수정 결과를 확인했습니다." data-description-en="Built outdoor maps and debugged localization issues. Replayed sensor data from field tests to check the fixes.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -20,7 +20,7 @@
     <a class="back" href="../index.html#lk-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
-      <h1>야외 순찰 로봇</h1>
+      <h1>궁능순찰로봇 서오릉</h1>
       <div class="meta"><span><strong>담당:</strong> 지도 작성, 위치 추정 디버깅</span></div>
       <p class="project-skills">ROS 2 · 3D LiDAR · SLAM · Localization · C++</p>
       
@@ -28,7 +28,7 @@
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">야외 순찰 로봇이 주행할 때 사용하는 지도를 작성했습니다. 센서 데이터와 로그를 분석해 위치 추정 오류와 장시간 실행 시 발생하는 문제를 디버깅했습니다. 코드 수정 후에는 같은 데이터를 재생해 문제가 다시 발생하는지 확인했습니다.</p>
+      <p class="lead">서오릉 궁능순찰로봇이 주행할 때 사용하는 지도를 작성했습니다. 센서 데이터와 로그를 분석해 위치 추정 오류와 장시간 실행 시 발생하는 문제를 디버깅했습니다. 코드 수정 후에는 같은 데이터를 재생해 문제가 다시 발생하는지 확인했습니다.</p>
     </section>
 
     
@@ -41,12 +41,19 @@
 <p>현장에서 수집한 데이터를 재생해 같은 조건으로 테스트했습니다. 코드 수정 전후의 로그를 비교하고, 기존 문제가 다시 발생하는지 확인했습니다.</p>
 
         </section>
+
+        <section class="case-section" id="ko-관련-보도">
+          <div class="case-heading"><h2>관련 보도</h2></div>
+          <p><a href="https://ichannela.com/news/detail/000000548784.do">채널A 뉴스 · “사람이 쓰러졌습니다”…왕릉 순찰 로봇 ‘순라봇’</a> — 2026.09.04</p>
+<p>서오릉에 시범 도입된 순찰 로봇의 주행과 쓰러진 관람객 감지 시연을 소개한 보도입니다.</p>
+
+        </section>
       </article>
     </div>
   </div>
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
-      <h1>Outdoor patrol robot</h1>
+      <h1>Royal heritage patrol robot at Seooreung</h1>
       <div class="meta"><span><strong>Role:</strong> Mapping and localization debugging</span></div>
       <p class="project-skills">ROS 2 · 3D LiDAR · SLAM · Localization · C++</p>
       
@@ -54,7 +61,7 @@
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I built maps used by an outdoor patrol robot. I analyzed sensor data and logs to debug localization errors and problems during long runs. After changing the code, I replayed the same data to check whether the problems recurred.</p>
+      <p class="lead">I built maps used by the royal heritage patrol robot at Seooreung. I analyzed sensor data and logs to debug localization errors and problems during long runs. After changing the code, I replayed the same data to check whether the problems recurred.</p>
     </section>
 
     
@@ -65,6 +72,13 @@
           <div class="case-heading"><h2>Log analysis and reproduction tests</h2></div>
           <p>I compared sensor-input and position-output timestamps to identify when errors occurred. I investigated incorrect position estimates separately from problems with program execution.</p>
 <p>I replayed field data to test under the same input conditions. I compared logs before and after code changes and checked whether the original problems recurred.</p>
+
+        </section>
+
+        <section class="case-section" id="en-news-coverage">
+          <div class="case-heading"><h2>News coverage</h2></div>
+          <p><a href="https://ichannela.com/news/detail/000000548784.do">Channel A News · Sunrabot patrol robot at the royal tombs (Korean)</a> — September 4, 2026</p>
+<p>The report shows the robot on patrol during its trial deployment at Seooreung, including a demonstration of detecting a fallen visitor.</p>
 
         </section>
       </article>

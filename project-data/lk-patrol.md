@@ -17,6 +17,12 @@ card:
   imageFit: cover
 overview: >-
   국가유산청과 협업하여 고양 서오릉에서 화재와 쓰러진 사람을 탐지하는 바퀴형 이족 로봇(Wheeled Biped) 플랫폼 기반 궁능순찰로봇 개발에 자율주행 소프트웨어 개발로 참여했습니다.
+demo:
+  type: image
+  src: ../assets/images/lk-patrol-seooreung-channela.jpg
+  alt: 서오릉 흙길에서 궁능순찰로봇이 주행하는 현장 모습 — 채널A 유튜브 영상 보기
+  href: https://www.youtube.com/watch?v=kHgA8jEmoCw&t=22s
+  caption: 서오릉 현장의 로봇 주행 모습 · 채널A 뉴스 · 2026.09.04
 ---
 
 ## Problem Statement
@@ -112,5 +118,3 @@ Humble의 MPPI 구현을 분석한 뒤 Kilted 버전의 MPPI를 포팅했습니�
 ## Field Validation
 
 기록 데이터로 위치 추정 설정과 정합 결과를 확인한 뒤, 서오릉의 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다. 데이터 재생 실험과 현장 주행을 함께 활용해 위치 추정을 안정화했습니다.
-
-<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="서오릉 흙길에서 궁능순찰로봇이 주행하는 현장 모습 — 채널A 유튜브 영상 보기" loading="lazy"></a><figcaption>서오릉 현장의 로봇 주행 모습 · 채널A 뉴스 · 2026.09.04</figcaption></figure>

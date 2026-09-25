@@ -32,9 +32,10 @@ const renderDemo = (demo, language) => {
     media = `<div class="video-embed"><iframe src="${escapeHtml(demo.src)}" title="${escapeHtml(demo.title || demo.alt || (language === 'ko' ? '프로젝트 시연 영상' : 'Project demonstration video'))}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
   } else {
     media = `<img src="${escapeHtml(demo.src)}" alt="${escapeHtml(demo.alt || '')}"${sequenceAttribute}>`;
+    if (demo.href) media = `<a href="${escapeHtml(demo.href)}" target="_blank" rel="noopener noreferrer">${media}</a>`;
   }
 
-  return `<section class="demo-section" id="demo-${language}"><figure class="feature-media">${media}</figure></section>`;
+  return `<section class="demo-section" id="demo-${language}"><figure class="feature-media">${media}${demo.caption ? `<figcaption>${escapeHtml(demo.caption)}</figcaption>` : ''}</figure></section>`;
 };
 
 const renderOverviewNote = note => {

@@ -5,6 +5,12 @@ description: Developed autonomous navigation software for a robot that patrols S
 role: Autonomous navigation software development for the patrol robot
 overview: >-
   I contributed autonomous navigation software to the development of a royal heritage patrol robot in collaboration with the Korea Heritage Service. Built on a wheeled biped platform, the robot detects fires and fallen people at Seooreung in Goyang.
+demo:
+  type: image
+  src: ../assets/images/lk-patrol-seooreung-channela.jpg
+  alt: Patrol robot driving along a dirt path at Seooreung — watch on Channel A YouTube
+  href: https://www.youtube.com/watch?v=kHgA8jEmoCw&t=22s
+  caption: Robot navigating at Seooreung · Channel A News · September 4, 2026
 ---
 
 ## Problem Statement
@@ -100,5 +106,3 @@ I improved startup acceleration handling and excessive velocity output in narrow
 ## Field Validation
 
 After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.
-
-<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="Patrol robot driving along a dirt path at Seooreung — watch on Channel A YouTube" loading="lazy"></a><figcaption>Robot navigating at Seooreung · Channel A News · September 4, 2026</figcaption></figure>

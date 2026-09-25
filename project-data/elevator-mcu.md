@@ -19,6 +19,11 @@ card:
     - Arduino
     - State Machine
     - C++
+links:
+  - label: 시뮬레이션
+    href: https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled
+  - label: 코드
+    href: https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino
 overview: >-
   Arduino와 버튼·LED로 4층 엘리베이터의 호출, 이동, 대기 동작을 구현한 1인 원데이 프로젝트입니다. 이동 중 호출을 추가하거나 취소할 수 있으며, 진행 방향에서 가까운 층부터 처리합니다.
 demo:
@@ -62,5 +67,3 @@ demo:
 단일 호출, 이동 중 추가 호출, 호출 취소, 대기 상태 등을 8개 테스트 케이스로 정리했습니다. 아래 표는 각 입력에 대한 기대 동작입니다.
 
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="호출 순서와 취소 여부에 따른 기대 동작을 정리한 8개 테스트 케이스 표" loading="lazy"></figure></div>
-
-페이지 상단 데모에는 간단한 조작을 담았습니다. 다른 호출 순서는 [Tinkercad 시뮬레이션](https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled)에서 직접 실행할 수 있습니다.

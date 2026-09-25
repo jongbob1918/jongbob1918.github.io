@@ -55,7 +55,8 @@ const renderLocalizedProject = (project, sharedProject, language) => {
       <h1>${escapeHtml(project.title)}</h1>
       <div class="meta">${project.context ? `<span><strong>${contextLabel}:</strong> ${escapeHtml(project.context)}</span>` : ''}${project.team ? `<span><strong>${teamLabel}:</strong> ${escapeHtml(project.team)}</span>` : ''}${project.period ? `<span><strong>${periodLabel}:</strong> ${escapeHtml(project.period)}</span>` : ''}${project.role ? `<span><strong>${roleLabel}:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
       ${sharedProject.skills.length ? `<p class="project-skills">${sharedProject.skills.map(escapeHtml).join(' · ')}</p>` : ''}
-      ${sharedProject.repository ? `<a class="project-repository" href="${escapeHtml(sharedProject.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(repositoryLabel)}">${githubIcon}</a>` : ''}
+      ${sharedProject.repository ? `<a class="project-repository" href="${escapeHtml(sharedProject.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(repositoryLabel)}">${githubIcon}</a>` : ''}${project.links?.length ? `
+      <p class="project-links">${project.links.map(link => `<a href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join(' · ')}</p>` : ''}
     </header>
 
     ${project.overview ? `<section class="project-overview" id="overview-${language}">

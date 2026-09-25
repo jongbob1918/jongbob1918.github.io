@@ -91,6 +91,14 @@ for (const file of files) {
   if (englishData.slug !== data.slug) throw new Error(`${englishFile}: slug must match ${data.slug}`);
   for (const [localized, name] of [[data, file], [englishData, englishFile]]) {
     requireText(localized.title, 'title', name);
+    if (localized.links !== undefined) {
+      if (!Array.isArray(localized.links)) throw new Error(`${name}: links must be a list`);
+      for (const link of localized.links) {
+        requireText(link?.label, 'links.label', name);
+        requireText(link?.href, 'links.href', name);
+        if (!/^https?:\/\//i.test(link.href)) throw new Error(`${name}: links.href must use HTTP or HTTPS`);
+      }
+    }
     for (const field of ['description', 'period', 'team', 'role', 'context', 'overview', 'shortName', 'repository']) optionalText(localized[field], field, name);
   }
   validateSkills(data.skills, 'skills', file);

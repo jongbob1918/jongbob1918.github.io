@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "notes/Deep learning/easy-deep-learning-ch02.md",
+                "file": "notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "easy-deep-learning-ch02"
+              "title": "easy-deep-learning-ch01"
             }
           }
         ]
@@ -190,6 +190,8 @@
   },
   "active": "cc066c7bd74ebd4b",
   "lastOpenFiles": [
+    "notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+    "notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
     "Pasted image 20260919170844.png",
     "Pasted image 20260919170129.png",
     "Pasted image 20260919164059.png",
@@ -203,7 +205,6 @@
     "Pasted image 20260919140545.png",
     "Pasted image 20260919140515.png",
     "Pasted image 20260919140458.png",
-    "Pasted image 20260919140308.png",
     "notes/Deep learning/reinforcement-learning.md",
     "notes/Deep learning/unsupervised-learning.md",
     "notes/Deep learning/self-supervised-learning.md",

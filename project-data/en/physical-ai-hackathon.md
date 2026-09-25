@@ -42,19 +42,19 @@ We recorded diagonal as well as frontal approaches to cover changes in ball posi
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="Three changes to training demonstrations: record one ball at a time, approach from varied angles, and include a missed grasp followed by another attempt" loading="lazy"></figure>
 
-## Judging result: three of five balls
+## Judging result
 
 We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging.
 
-The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence.
+The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence. Unfortunately, we did not win an award.
 
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"></figure>
 
-## Reflection: the system needed decisions beyond imitation
+## Reflection
 
-ACT learned precise bimanual motion quickly, but the mission exposed limits of imitation learning alone. The policy generated actions from camera images and joint state, but did not explicitly represent which ball was current, which color should come next, or whether a bin had fallen. It imitated the sequence embedded in the data and was weak at deterministic replanning when conditions changed.
+ACT learned the two-arm motions, but the system struggled to continue when conditions changed, such as a bin falling over. It needed a separate mechanism to track progress and choose the next action.
 
-In a redesign, I would use ACT as the low-level manipulation policy and add a high-level state machine for color recognition, ball count, and task progress. Conditions for a fallen bin or failed grasp could select the required single-task policy or trigger recovery. The project showed that task decomposition and failure-state demonstrations matter as much as model choice for real-robot robustness.
+In a redesign, ACT would control arm motion while a high-level state machine managed ball color, the number processed, and failures. The experience showed the importance of splitting tasks into short actions and including recovery demonstrations in the training data.
 
 ## Team
 

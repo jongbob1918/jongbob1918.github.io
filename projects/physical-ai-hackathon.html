@@ -60,17 +60,17 @@
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="공 하나의 집기·전달·분류를 따로 기록하고, 여러 각도로 접근하며, 놓친 공을 다시 집는 복구 동작까지 시연에 포함한 2차 학습 방법" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="ko-심사-결과-5개-중-3개-성공">
-          <div class="case-heading"><h2>심사 결과: 5개 중 3개 성공</h2></div>
+        <section class="case-section" id="ko-심사-결과">
+          <div class="case-heading"><h2>심사 결과</h2></div>
           <p>공 5개를 각각 200회씩 시연해 약 1,000개의 학습 데이터를 수집했습니다. 오전 9시 마감에 맞춰 15,000 step까지 학습한 모델로 심사를 진행했습니다.</p>
-<p>공 3개는 집기·전달·색상별 분류까지 연속으로 성공했습니다. 네 번째 공을 처리하던 중 오른팔이 수납함을 넘어뜨려 시연을 중단했고, 아쉽게 완주하지 못했습니다.</p>
+<p>공 3개는 집기·전달·색상별 분류까지 연속으로 성공했습니다. 네 번째 공을 처리하던 중 오른팔이 수납함을 넘어뜨려 시연을 중단해 완주하지 못했고, 아쉽게 수상하지는 못했습니다.</p>
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="ko-회고-모방을-넘어-판단할-수-있는-구조가-필요했다">
-          <div class="case-heading"><h2>회고: 모방을 넘어 판단할 수 있는 구조가 필요했다</h2></div>
-          <p>ACT는 짧은 시간 안에 정밀한 양팔 동작을 학습시키는 데 효과적이었지만, 이번 미션에서는 모방학습만으로 해결하기 어려운 한계도 확인했습니다. 정책은 카메라 영상과 현재 관절 상태로 다음 행동을 생성하지만, “현재 몇 번째 공인지”, “어느 색을 다음에 처리해야 하는지”, “수납함이 넘어졌는지”와 같은 명시적인 작업 상태나 목표를 스스로 결정하는 구조는 아니었습니다. 따라서 정해진 순서를 데이터에서 암묵적으로 모방할 뿐, 상황에 따라 다음 행동을 결정론적으로 선택하거나 작업 계획을 다시 세우는 데는 취약했습니다.</p>
-<p>다시 설계한다면 ACT를 저수준 양팔 조작 정책으로 사용하되, 색상 인식과 공 개수·작업 진행 상태를 관리하는 상위 상태 머신을 분리하겠습니다. 여기에 수납함 전도나 집기 실패를 감지하는 조건을 추가해, 필요한 단일 태스크 정책을 선택하고 실패 시 복구 동작으로 전환하도록 구성할 수 있습니다. 이번 경험을 통해 모델 선택만큼이나 <strong>태스크를 어떻게 나누고, 실패 상태까지 어떤 데이터로 보여주는가</strong>가 실제 로봇의 강건성을 좌우한다는 점을 배웠습니다.</p>
+        <section class="case-section" id="ko-회고">
+          <div class="case-heading"><h2>회고</h2></div>
+          <p>ACT로 양팔 동작을 학습했지만, 수납함이 넘어지는 등 상황이 달라졌을 때 작업을 이어가는 데 한계가 있었습니다. 동작 학습과 별개로 작업 진행 상태를 확인하고 다음 행동을 정하는 구조가 필요했습니다.</p>
+<p>다시 설계한다면 ACT는 팔 동작을 맡고, 상위 상태 머신은 공의 색상·처리 개수·실패 여부를 관리하도록 나누겠습니다. 이번 경험을 통해 작업을 짧게 나누고 실패 후 복구 동작까지 데이터에 담는 것이 중요하다는 점을 배웠습니다.</p>
 
         </section>
 
@@ -123,17 +123,17 @@
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="Three changes to training demonstrations: record one ball at a time, approach from varied angles, and include a missed grasp followed by another attempt" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="en-judging-result-three-of-five-balls">
-          <div class="case-heading"><h2>Judging result: three of five balls</h2></div>
+        <section class="case-section" id="en-judging-result">
+          <div class="case-heading"><h2>Judging result</h2></div>
           <p>We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging.</p>
-<p>The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence.</p>
+<p>The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence. Unfortunately, we did not win an award.</p>
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="en-reflection-the-system-needed-decisions-beyond-imitation">
-          <div class="case-heading"><h2>Reflection: the system needed decisions beyond imitation</h2></div>
-          <p>ACT learned precise bimanual motion quickly, but the mission exposed limits of imitation learning alone. The policy generated actions from camera images and joint state, but did not explicitly represent which ball was current, which color should come next, or whether a bin had fallen. It imitated the sequence embedded in the data and was weak at deterministic replanning when conditions changed.</p>
-<p>In a redesign, I would use ACT as the low-level manipulation policy and add a high-level state machine for color recognition, ball count, and task progress. Conditions for a fallen bin or failed grasp could select the required single-task policy or trigger recovery. The project showed that task decomposition and failure-state demonstrations matter as much as model choice for real-robot robustness.</p>
+        <section class="case-section" id="en-reflection">
+          <div class="case-heading"><h2>Reflection</h2></div>
+          <p>ACT learned the two-arm motions, but the system struggled to continue when conditions changed, such as a bin falling over. It needed a separate mechanism to track progress and choose the next action.</p>
+<p>In a redesign, ACT would control arm motion while a high-level state machine managed ball color, the number processed, and failures. The experience showed the importance of splitting tasks into short actions and including recovery demonstrations in the training data.</p>
 
         </section>
 

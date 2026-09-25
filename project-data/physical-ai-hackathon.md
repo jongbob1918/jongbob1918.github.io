@@ -53,15 +53,13 @@ demo:
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="파랑·파랑·빨강·빨강·노랑 순서의 전체 동작을 약 200회 학습한 뒤, 위치 변화로 집기에 실패하거나 중간에 멈추는 양팔 로봇의 1차 시도를 설명한 그림" loading="lazy"></figure>
 
-## 2차 시도: 태스크를 나누고 실패까지 데이터로 만들기
+## 2차 시도: 공 하나씩 학습하고 실패 복구도 기록하기
 
-추가 기술 조사를 거쳐 다섯 공을 한 번에 학습시키는 대신, **공 하나를 집어 색상에 맞는 수납함에 넣는 태스크**로 시연을 나눴습니다. 색상별 단일 태스크를 반복하면 모델이 한 번의 성공 동작을 더 조밀하게 관찰할 수 있고, 긴 시퀀스에서 발생하던 오차 누적도 줄일 수 있다고 판단했습니다.
+시연을 **공 하나를 집어 전달하고, 같은 색 수납함에 넣는 동작**으로 나눴습니다. 긴 순서를 한꺼번에 익히기보다 짧은 동작을 반복해서 학습하도록 바꿨습니다.
 
-또한 사용한 카메라는 2D 영상만 제공하므로, 화면 속 위치가 같아 보여도 실제 깊이와 크기 차이로 스케일 왜곡이 생길 수밖에 없었습니다. 정면으로만 접근하는 동일한 궤적 대신 그리퍼가 공을 **대각선 방향으로 진입하도록** 시연 각도를 다양화해 위치 오차에 대한 대응 범위를 넓혔습니다.
+공 위치가 달라져도 대응할 수 있도록 정면뿐 아니라 대각선으로 접근하는 시연도 기록했습니다. 일부러 공을 놓친 뒤 다시 집는 동작을 넣어, **실패한 상태에서 작업을 이어가는 과정**도 학습 데이터에 포함했습니다.
 
-성공 궤적만 기록하지도 않았습니다. 텔레오퍼레이션 중 일부러 공을 놓친 뒤 다시 접근해 집는 복구 동작을 추가했습니다. 실제 추론에서 공이 미끄러지거나 예상 위치를 벗어나더라도 다음 행동으로 이어갈 수 있도록 실패 이후의 상태와 복구 과정을 데이터에 포함했습니다.
-
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">공 하나·색상별 수납함 단위로 분리</span></div><div class="metric-card"><span class="metric-value">≈ 1,000</span><span class="metric-label">공 5개 × 각 200회 시연</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">심사 시점 Training Steps</span></div></div>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="공 하나의 집기·전달·분류를 따로 기록하고, 여러 각도로 접근하며, 놓친 공을 다시 집는 복구 동작까지 시연에 포함한 2차 학습 방법" loading="lazy"></figure>
 
 ## 심사 결과: 5개 중 3개 성공
 

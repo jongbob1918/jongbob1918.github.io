@@ -34,15 +34,13 @@ We recorded about 200 episodes, each covering the full sequence of picking, tran
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Illustration of the first attempt: about 200 demonstrations of blue, blue, red, red, and yellow balls in one sequence, followed by missed grasps and mid-sequence stops when positions change" loading="lazy"></figure>
 
-## Second attempt: split tasks and include recovery data
+## Second attempt: learn one ball at a time and record recovery
 
-After additional research, we replaced the five-ball sequence with a single-ball task: pick one ball and place it in the matching bin. Repeating each color-specific task gave the model denser examples of a successful action and reduced error accumulation.
+We split demonstrations into **picking up one ball, passing it between arms, and placing it in the matching bin**. This let the model learn repeated short actions instead of one long sequence.
 
-Because the cameras only provided 2D images, similar image positions could still represent different depths and scales. We varied the demonstrations so the gripper approached diagonally instead of always following one frontal trajectory.
+We recorded diagonal as well as frontal approaches to cover changes in ball position. We also deliberately missed a ball and picked it up again, adding **how to continue after a failed grasp** to the training data.
 
-We also recorded recovery rather than only successful trajectories. During teleoperation, we intentionally missed a ball and then approached it again, adding the states and actions needed to continue after slippage or a displaced target.
-
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">1 task</span><span class="metric-label">One ball and one color-matched bin</span></div><div class="metric-card"><span class="metric-value">≈ 1,000</span><span class="metric-label">5 balls × 200 demonstrations</span></div><div class="metric-card"><span class="metric-value">15K</span><span class="metric-label">Training steps at judging</span></div></div>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="Three changes to training demonstrations: record one ball at a time, approach from varied angles, and include a missed grasp followed by another attempt" loading="lazy"></figure>
 
 ## Judging result: three of five balls
 

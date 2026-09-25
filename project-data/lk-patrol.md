@@ -10,7 +10,6 @@ skills:
   - ROS 2
   - 3D LiDAR SLAM / Localization
   - Navigation
-  - Docking
 card:
   image: assets/images/lk-patrol-seooreung-channela.jpg
   imageAlt: 고양 서오릉 숲길을 순찰하는 궁능순찰로봇의 현장 모습 — 채널A 뉴스 화면

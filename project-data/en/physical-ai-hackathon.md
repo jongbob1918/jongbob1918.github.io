@@ -5,7 +5,7 @@ description: A hackathon project using ACT imitation learning for bimanual ball 
 team: 4 members
 period: Feb 8–9, 2026
 overview: >-
-  I joined a four-person team at the first Physical AI Hackathon hosted by Hansung University and ROBOSIZE. Using two SO-101 arms, each costing roughly KRW 1.2 million, and 2D cameras, we trained the robots to pick up colored balls, transfer them between grippers, and sort them into bins. The LeRobot-based system successfully sorted three of five balls during judging.
+  I joined a four-person team at the first Physical AI Hackathon hosted by Hansung University and ROBOSIZE. Using two SO-101 arms, each costing roughly KRW 1.2 million, and 2D cameras, we trained the robots to pick up colored balls, transfer them between grippers, and sort them into bins.
 demo:
   type: image
   src: https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif
@@ -44,9 +44,9 @@ We recorded diagonal as well as frontal approaches to cover changes in ball posi
 
 ## Judging result: three of five balls
 
-We ultimately recorded about 1,000 single-task demonstrations, 200 for each of five balls. The 9 a.m. deadline prevented further training, so judging used the checkpoint at 15,000 steps.
+We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging.
 
-The robots successfully picked, transferred, and sorted three balls. While processing the fourth, the right arm knocked over a bin and disrupted the environment, ending the run. Although the full sequence was not completed, the revised data strategy produced three consecutive successes in the judging setup.
+The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence.
 
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"></figure>
 

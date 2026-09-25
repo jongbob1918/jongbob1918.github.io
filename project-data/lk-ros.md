@@ -39,7 +39,7 @@ overview: >-
 
 상태 머신 기반 의사결정 구조를 변경해, 조건 확인과 행동 실행을 트리로 구성하는 행동 트리(Behavior Tree)를 도입했습니다.
 
-<figure class="feature-media"><a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/nav2-navigation-behavior-tree.png" alt="Nav2 공식 행동 트리 예시: NavigateWithReplanning 아래에 경로 계획 ComputePathToPose와 경로 추종 FollowPath가 연결된 구조" loading="lazy"></a><figcaption>Nav2 공식 예시 · 경로 계획과 경로 추종을 연결한 행동 트리. 개념 설명용 참고 이미지입니다. <a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer">Nav2 Docs</a> · Apache-2.0</figcaption></figure>
+<figure class="feature-media"><a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/nav2-navigation-behavior-tree.png" alt="Nav2 공식 행동 트리 예시: NavigateWithReplanning 아래에 경로 계획 ComputePathToPose와 경로 추종 FollowPath가 연결된 구조" loading="lazy"></a></figure>
 
 의사결정과 개별 기능을 분리하고, 시스템을 다음 네 모듈로 나눴습니다.
 

@@ -30,7 +30,7 @@ The ground- and bird-detection servers, controller PC, and pilot PC connect thro
 
 We defined six ground-object classes: birds, debris, wild animals, people, vehicles, and aircraft. We trained the first model on roughly 15,000 public images, mostly photographs of real airports, but its detection accuracy dropped in footage of the airport model. In some cases, it classified model animals as people.
 
-Objects differed in apparent size and background between the airport photographs and the model footage. We treated this gap as one likely cause of the weaker detections and created synthetic data to add scenes resembling the model to the training set.
+We photographed the airport model and labeled object locations to add training images closer to the footage. Limited project time and personnel made it difficult to collect enough labeled images by hand. We therefore built a simulation pipeline to generate images and labels in larger numbers.
 
 ## Improving the model with mixed training data
 
@@ -42,7 +42,7 @@ The teammate responsible for synthetic data used Unity to vary camera angles and
 
 <figure class="feature-media"><img src="../assets/images/falcon_synthetic_pipeline.webp" alt="Presentation slide 60: Unity pipeline varying camera angles and lighting while automatically generating object labels" loading="lazy"></figure>
 
-We trained the lightweight object detection model YOLOv8n on 3,000 synthetic images and 1,000 photographs.
+We trained the lightweight object detection model YOLOv8n on 3,000 synthetic images and 1,000 photographs of the model that we had labeled by hand.
 
 ## Detection performance by training data
 

@@ -1,16 +1,21 @@
 ---
 slug: lk-ros
-title: Robot system migration from ROS 1 to ROS 2
-description: Ported mapping, localization, and navigation code to ROS 2 and fixed delayed position output during long runs.
-role: ROS 2 porting, functional testing and latency analysis
+title: Robot software migration to ROS 2
+description: Ported the company’s robot software from ROS 1 Noetic to ROS 2 Humble and redesigned the system around ROS 2 and Nav2.
 overview: >-
-  I ported existing ROS 1 robot software to ROS 2.
-  The Robot Operating System (ROS) is a software framework used to develop sensor-processing and robot-control programs.
-  I tested mapping, localization, and navigation after the migration.
+  I migrated the company’s robot software from ROS 1 Noetic to ROS 2 Humble.
+  I ported the existing code and redesigned the autonomous navigation system around ROS 2 and Nav2.
+  This changed the software foundation so the robot could use features available in the new environment.
+demo:
+  type: image
+  src: ../assets/images/ros1-noetic-to-ros2-humble.png
+  alt: Software migration from ROS 1 Noetic on the left to ROS 2 Humble on the right
 ---
 
-## Testing after the port
+## From ROS 1 Noetic to ROS 2 Humble
 
-I compared the original and ported code to check data delivery and processing. After the build passed, I connected sensors and tested each function.
+I migrated the Robot Operating System (ROS), the software framework that connects sensor-processing and robot-control programs. I ported the existing ROS 1 Noetic code to the ROS 2 Humble environment.
 
-Long-running tests revealed delayed position output. I measured the delay between sensor input and position output to investigate the cause, then changed the code and repeated the test under the same conditions.
+## Redesigning the navigation system
+
+I redesigned autonomous navigation around Navigation2 (Nav2), which provides path planning and motion control. Alongside porting the existing code, I changed the system structure to use ROS 2 and Nav2 features.

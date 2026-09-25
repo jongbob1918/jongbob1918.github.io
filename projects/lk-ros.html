@@ -4,15 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="지도 작성·위치 추정·주행 코드를 ROS 2로 포팅하고, 장시간 실행 시 위치 정보가 늦게 출력되는 문제를 수정했습니다.">
-  <title>로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim</title>
+  <meta name="description" content="회사 로봇의 기존 ROS 1 Noetic 소프트웨어를 ROS 2 Humble로 포팅하고, ROS 2와 Nav2 기반으로 시스템을 재설계했습니다.">
+  <title>로봇 소프트웨어 ROS 2 전환 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim" data-title-en="Robot system migration from ROS 1 to ROS 2 — Jongmyung Kim" data-description-ko="지도 작성·위치 추정·주행 코드를 ROS 2로 포팅하고, 장시간 실행 시 위치 정보가 늦게 출력되는 문제를 수정했습니다." data-description-en="Ported mapping, localization, and navigation code to ROS 2 and fixed delayed position output during long runs.">
+<body data-page="project-detail" data-title-ko="로봇 소프트웨어 ROS 2 전환 — Jongmyung Kim" data-title-en="Robot software migration to ROS 2 — Jongmyung Kim" data-description-ko="회사 로봇의 기존 ROS 1 Noetic 소프트웨어를 ROS 2 Humble로 포팅하고, ROS 2와 Nav2 기반으로 시스템을 재설계했습니다." data-description-en="Ported the company’s robot software from ROS 1 Noetic to ROS 2 Humble and redesigned the system around ROS 2 and Nav2.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -20,25 +20,30 @@
     <a class="back" href="../index.html#lk-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
-      <h1>로봇 시스템 ROS 1 → ROS 2 전환</h1>
-      <div class="meta"><span><strong>담당:</strong> ROS 2 포팅, 기능 테스트, 지연 원인 분석</span></div>
-      <p class="project-skills">ROS 2 · SLAM · Navigation · C++</p>
+      <h1>로봇 소프트웨어 ROS 2 전환</h1>
+      <div class="meta"></div>
+      <p class="project-skills">ROS 2 · Nav2 · System Redesign</p>
       
     </header>
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">기존 ROS 1 기반 로봇 소프트웨어를 ROS 2로 포팅했습니다. ROS(Robot Operating System)는 센서 처리와 로봇 제어 프로그램을 개발할 때 사용하는 소프트웨어 프레임워크입니다. 지도 작성, 위치 추정, 주행 기능이 전환 후에도 동작하는지 테스트했습니다.</p>
+      <p class="lead">회사 로봇에서 사용하던 ROS 1 Noetic 기반 소프트웨어를 ROS 2 Humble로 전환했습니다. 기존 코드를 포팅하고 자율주행 시스템을 ROS 2와 Nav2 기반으로 재설계했습니다. 새 환경에서 제공하는 기능을 활용할 수 있도록 로봇 소프트웨어의 기반을 변경했습니다.</p>
     </section>
 
-    
+    <section class="demo-section" id="demo-ko"><figure class="feature-media"><img src="../assets/images/ros1-noetic-to-ros2-humble.png" alt="ROS 1 Noetic에서 ROS 2 Humble로의 소프트웨어 전환 방향"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-포팅-후-기능-테스트">
-          <div class="case-heading"><h2>포팅 후 기능 테스트</h2></div>
-          <p>기존 코드와 포팅한 코드를 비교하며 데이터가 정상적으로 전달되고 처리되는지 확인했습니다. 빌드가 완료된 뒤에는 센서를 연결해 각 기능의 동작을 테스트했습니다.</p>
-<p>장시간 실행 테스트에서는 위치 정보가 늦게 출력되는 문제가 있었습니다. 센서 입력과 위치 정보 출력 사이의 지연 시간을 확인해 원인을 분석하고, 코드를 수정한 뒤 같은 조건으로 다시 테스트했습니다.</p>
+        <section class="case-section" id="ko-ros-1-noetic에서-ros-2-humble로">
+          <div class="case-heading"><h2>ROS 1 Noetic에서 ROS 2 Humble로</h2></div>
+          <p>센서 처리와 로봇 제어 프로그램을 연결하는 소프트웨어 프레임워크인 ROS(Robot Operating System)를 전환했습니다. 기존 ROS 1 Noetic 기반 코드를 ROS 2 Humble 환경으로 포팅했습니다.</p>
+
+        </section>
+
+        <section class="case-section" id="ko-자율주행-시스템-재설계">
+          <div class="case-heading"><h2>자율주행 시스템 재설계</h2></div>
+          <p>경로 계획과 주행 제어를 제공하는 Nav2(Navigation2)를 중심으로 자율주행 시스템을 재설계했습니다. 기존 코드를 옮기는 작업과 함께, ROS 2와 Nav2의 기능을 활용할 수 있도록 시스템 구성을 변경했습니다.</p>
 
         </section>
       </article>
@@ -46,25 +51,30 @@
   </div>
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
-      <h1>Robot system migration from ROS 1 to ROS 2</h1>
-      <div class="meta"><span><strong>Role:</strong> ROS 2 porting, functional testing and latency analysis</span></div>
-      <p class="project-skills">ROS 2 · SLAM · Navigation · C++</p>
+      <h1>Robot software migration to ROS 2</h1>
+      <div class="meta"></div>
+      <p class="project-skills">ROS 2 · Nav2 · System Redesign</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I ported existing ROS 1 robot software to ROS 2. The Robot Operating System (ROS) is a software framework used to develop sensor-processing and robot-control programs. I tested mapping, localization, and navigation after the migration.</p>
+      <p class="lead">I migrated the company’s robot software from ROS 1 Noetic to ROS 2 Humble. I ported the existing code and redesigned the autonomous navigation system around ROS 2 and Nav2. This changed the software foundation so the robot could use features available in the new environment.</p>
     </section>
 
-    
+    <section class="demo-section" id="demo-en"><figure class="feature-media"><img src="../assets/images/ros1-noetic-to-ros2-humble.png" alt="Software migration from ROS 1 Noetic on the left to ROS 2 Humble on the right"></figure></section>
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-testing-after-the-port">
-          <div class="case-heading"><h2>Testing after the port</h2></div>
-          <p>I compared the original and ported code to check data delivery and processing. After the build passed, I connected sensors and tested each function.</p>
-<p>Long-running tests revealed delayed position output. I measured the delay between sensor input and position output to investigate the cause, then changed the code and repeated the test under the same conditions.</p>
+        <section class="case-section" id="en-from-ros-1-noetic-to-ros-2-humble">
+          <div class="case-heading"><h2>From ROS 1 Noetic to ROS 2 Humble</h2></div>
+          <p>I migrated the Robot Operating System (ROS), the software framework that connects sensor-processing and robot-control programs. I ported the existing ROS 1 Noetic code to the ROS 2 Humble environment.</p>
+
+        </section>
+
+        <section class="case-section" id="en-redesigning-the-navigation-system">
+          <div class="case-heading"><h2>Redesigning the navigation system</h2></div>
+          <p>I redesigned autonomous navigation around Navigation2 (Nav2), which provides path planning and motion control. Alongside porting the existing code, I changed the system structure to use ROS 2 and Nav2 features.</p>
 
         </section>
       </article>

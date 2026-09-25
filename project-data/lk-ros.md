@@ -3,26 +3,31 @@ slug: lk-ros
 category: lk
 order: 2
 detail: true
-title: 로봇 시스템 ROS 1 → ROS 2 전환
-description: 지도 작성·위치 추정·주행 코드를 ROS 2로 포팅하고, 장시간 실행 시 위치 정보가 늦게 출력되는 문제를 수정했습니다.
-role: ROS 2 포팅, 기능 테스트, 지연 원인 분석
+title: 로봇 소프트웨어 ROS 2 전환
+description: 회사 로봇의 기존 ROS 1 Noetic 소프트웨어를 ROS 2 Humble로 포팅하고, ROS 2와 Nav2 기반으로 시스템을 재설계했습니다.
 skills:
   - ROS 2
-  - SLAM
-  - Navigation
-  - C++
+  - Nav2
+  - System Redesign
 card:
-  image: assets/images/lk-robotics-emblem.svg
-  imageAlt: LK ROBOTICS 로고
-  imageFit: contain
+  image: assets/images/ros1-noetic-to-ros2-humble.png
+  imageAlt: 왼쪽 ROS 1 Noetic에서 오른쪽 ROS 2 Humble로 전환하는 방향을 나타낸 그림
+  imageFit: cover
+demo:
+  type: image
+  src: ../assets/images/ros1-noetic-to-ros2-humble.png
+  alt: ROS 1 Noetic에서 ROS 2 Humble로의 소프트웨어 전환 방향
+
 overview: >-
-  기존 ROS 1 기반 로봇 소프트웨어를 ROS 2로 포팅했습니다.
-  ROS(Robot Operating System)는 센서 처리와 로봇 제어 프로그램을 개발할 때 사용하는 소프트웨어 프레임워크입니다.
-  지도 작성, 위치 추정, 주행 기능이 전환 후에도 동작하는지 테스트했습니다.
+  회사 로봇에서 사용하던 ROS 1 Noetic 기반 소프트웨어를 ROS 2 Humble로 전환했습니다.
+  기존 코드를 포팅하고 자율주행 시스템을 ROS 2와 Nav2 기반으로 재설계했습니다.
+  새 환경에서 제공하는 기능을 활용할 수 있도록 로봇 소프트웨어의 기반을 변경했습니다.
 ---
 
-## 포팅 후 기능 테스트
+## ROS 1 Noetic에서 ROS 2 Humble로
 
-기존 코드와 포팅한 코드를 비교하며 데이터가 정상적으로 전달되고 처리되는지 확인했습니다. 빌드가 완료된 뒤에는 센서를 연결해 각 기능의 동작을 테스트했습니다.
+센서 처리와 로봇 제어 프로그램을 연결하는 소프트웨어 프레임워크인 ROS(Robot Operating System)를 전환했습니다. 기존 ROS 1 Noetic 기반 코드를 ROS 2 Humble 환경으로 포팅했습니다.
 
-장시간 실행 테스트에서는 위치 정보가 늦게 출력되는 문제가 있었습니다. 센서 입력과 위치 정보 출력 사이의 지연 시간을 확인해 원인을 분석하고, 코드를 수정한 뒤 같은 조건으로 다시 테스트했습니다.
+## 자율주행 시스템 재설계
+
+경로 계획과 주행 제어를 제공하는 Nav2(Navigation2)를 중심으로 자율주행 시스템을 재설계했습니다. 기존 코드를 옮기는 작업과 함께, ROS 2와 Nav2의 기능을 활용할 수 있도록 시스템 구성을 변경했습니다.

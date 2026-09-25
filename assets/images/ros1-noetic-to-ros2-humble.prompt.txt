@@ -1,0 +1,4 @@
+Tool: built-in image_gen
+Asset: ros1-noetic-to-ros2-humble.png
+
+Use case: infographic-diagram. Asset type: robotics portfolio project thumbnail, landscape 16:9. Create a crisp minimal migration illustration on a clean off-white background. Left: a blue outlined rounded panel with nine small blue ROS dots above large exact text "ROS 1", and exact text "Noetic" directly below. Center: one clear right-pointing blue arrow. Right: matching blue outlined rounded panel with nine small blue ROS dots above large exact text "ROS 2", and exact text "Humble" directly below. Symmetrical horizontal composition, generous outer margins, all lettering highly readable at thumbnail size. Flat professional technical graphic, no extra labels, no watermark, no decorative scene.

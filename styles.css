@@ -70,6 +70,7 @@ html[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
 .menu-toggle span, .menu-toggle::before, .menu-toggle::after { content: ""; display: block; width: 17px; height: 1.5px; margin: 4px auto; background: var(--ink); transition: transform .2s, opacity .2s; }
 
 main { padding: 0; }
+.portfolio-main { --max: var(--project-max); }
 .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 30px; padding: 0; border: 0; }
 h1, h2, h3, p, figure { margin-top: 0; }
 h1 { margin-bottom: 0; font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.15; letter-spacing: -.05em; }
@@ -450,7 +451,6 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
 .side-project-list .project-text-only .project-copy { margin-top: 0; padding-top: 18px; }
 
 .profile-overview { padding: 52px 0 24px; }
-.profile-overview > .wrap { width: min(calc(100% - 40px), var(--project-max)); }
 .profile-overview-grid { display: grid; grid-template-columns: 200px minmax(240px, .9fr) minmax(0, 1.2fr); gap: 30px; align-items: center; }
 .profile-overview .profile-photo { width: 200px; margin: 0; }
 .profile-identity h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.04em; }
@@ -466,7 +466,6 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
 }
 @media (max-width: 760px) {
   .profile-overview { padding: 30px 0 10px; }
-  .profile-overview > .wrap { width: min(calc(100% - 28px), var(--project-max)); }
   .background-facts { grid-template-columns: 1fr; }
 }
 

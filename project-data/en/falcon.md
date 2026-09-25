@@ -66,7 +66,7 @@ The example below shows a vehicle access alert after Taxiway A is set to prohibi
 
 Applying access rules requires knowing which zone contains each detected object. We used square reference markers (ArUco) to identify reference points in the image and connect camera coordinates to map coordinates.
 
-We measured marker-center positions on the physical model and found the same points in the camera image. These pairs define a planar transformation matrix, or homography, that maps object centers to the map and identifies runway, taxiway, or grass zones. I researched and tested the mapping; the backend teammate designed the transformation logic.
+We measured marker-center positions on the physical model and found the same points in the camera image. These pairs define a planar transformation matrix, or homography, that maps object centers to the map and identifies runway, taxiway, or grass zones.
 
 <figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="Measured ArUco marker locations on the airport model paired with their pixel positions in camera footage" loading="lazy"></figure>
 

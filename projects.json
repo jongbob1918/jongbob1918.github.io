@@ -204,10 +204,10 @@
       "imageAlt": "Tinkercad에서 실행한 4층 LED 엘리베이터 호출·이동 시뮬레이션",
       "imageFit": "cover",
       "imageSequence": [],
-      "titleKo": "ELEVATOR MCU — 호출 우선순위 LED 제어기",
-      "titleEn": "ELEVATOR MCU — Direction-Aware LED Controller",
-      "overviewKo": "큐 기반 초기 설계의 한계를 방향·상태 기반 탐색으로 개선한 Arduino 원데이 프로젝트",
-      "overviewEn": "A one-day Arduino project replacing a queue-first design with direction- and state-based request scanning",
+      "titleKo": "ELEVATOR MCU — Arduino LED 엘리베이터",
+      "titleEn": "ELEVATOR MCU — Arduino LED Elevator",
+      "overviewKo": "버튼과 LED로 호출·이동·대기를 구현한 Arduino 원데이 프로젝트",
+      "overviewEn": "A one-day Arduino project simulating elevator calls, movement, and idle behavior with buttons and LEDs",
       "periodKo": "2025.07.06",
       "periodEn": "Jul 6, 2025",
       "teamKo": "1명",
@@ -217,8 +217,7 @@
       "keywords": [
         "Arduino",
         "C++",
-        "Scheduling",
-        "Embedded Systems"
+        "Tinkercad"
       ]
     }
   ]

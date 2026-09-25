@@ -53,7 +53,7 @@ const renderLocalizedProject = (project, sharedProject, language) => {
       ${sharedProject.repository ? `<a class="project-repository" href="${escapeHtml(sharedProject.repository)}" target="_blank" rel="noreferrer" aria-label="${escapeHtml(repositoryLabel)}">${githubIcon}</a>` : ''}
     </header>
 
-    ${project.introduction ? `<div class="project-overview"><p class="lead">${escapeHtml(project.introduction)}</p></div>` : ''}${project.overview ? `<section class="project-overview" id="overview-${language}">
+    ${project.overview ? `<section class="project-overview" id="overview-${language}">
       <h2>Overview</h2>
       <p class="lead">${escapeHtml(project.overview)}</p>${renderOverviewNote(project.overviewNote)}
     </section>` : ''}

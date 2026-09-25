@@ -90,7 +90,7 @@ for (const file of files) {
   if (englishData.slug !== data.slug) throw new Error(`${englishFile}: slug must match ${data.slug}`);
   for (const [localized, name] of [[data, file], [englishData, englishFile]]) {
     requireText(localized.title, 'title', name);
-    for (const field of ['description', 'period', 'team', 'role', 'context', 'introduction', 'overview', 'shortName', 'repository']) optionalText(localized[field], field, name);
+    for (const field of ['description', 'period', 'team', 'role', 'context', 'overview', 'shortName', 'repository']) optionalText(localized[field], field, name);
   }
   validateSkills(data.skills, 'skills', file);
   const card = data.card ?? {};

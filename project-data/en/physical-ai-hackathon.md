@@ -38,9 +38,9 @@ We recorded about 200 episodes, each covering the full sequence of picking, tran
 
 We split demonstrations into **picking up one ball, passing it between arms, and placing it in the matching bin**. This let the model learn repeated short actions instead of one long sequence.
 
-We recorded diagonal as well as frontal approaches to cover changes in ball position. We also deliberately missed a ball and picked it up again, adding **how to continue after a failed grasp** to the training data.
+We recorded the gripper approaching the ball diagonally rather than descending vertically. We also deliberately missed a ball and picked it up again, adding **how to continue after a failed grasp** to the training data.
 
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="Three changes to training demonstrations: record one ball at a time, approach from varied angles, and include a missed grasp followed by another attempt" loading="lazy"></figure>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="Three changes to training demonstrations: record one ball at a time, approach diagonally, and include a missed grasp followed by another attempt" loading="lazy"></figure>
 
 ## Judging result
 

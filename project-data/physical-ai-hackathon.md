@@ -56,9 +56,9 @@ demo:
 
 시연을 **공 하나를 집어 전달하고, 같은 색 수납함에 넣는 동작**으로 나눴습니다. 긴 순서를 한꺼번에 익히기보다 짧은 동작을 반복해서 학습하도록 바꿨습니다.
 
-공 위치가 달라져도 대응할 수 있도록 정면뿐 아니라 대각선으로 접근하는 시연도 기록했습니다. 일부러 공을 놓친 뒤 다시 집는 동작을 넣어, **실패한 상태에서 작업을 이어가는 과정**도 학습 데이터에 포함했습니다.
+공에 수직으로 내려가는 대신 대각선으로 접근해 집는 동작을 기록했습니다. 일부러 공을 놓친 뒤 다시 집는 동작을 넣어, **실패한 상태에서 작업을 이어가는 과정**도 학습 데이터에 포함했습니다.
 
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="공 하나의 집기·전달·분류를 따로 기록하고, 여러 각도로 접근하며, 놓친 공을 다시 집는 복구 동작까지 시연에 포함한 2차 학습 방법" loading="lazy"></figure>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-second-attempt.png" alt="공 하나의 집기·전달·분류를 따로 기록하고, 대각선으로 접근하며, 놓친 공을 다시 집는 복구 동작까지 시연에 포함한 2차 학습 방법" loading="lazy"></figure>
 
 ## 심사 결과
 

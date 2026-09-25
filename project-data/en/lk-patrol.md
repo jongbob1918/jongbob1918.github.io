@@ -26,7 +26,7 @@ The upper-level navigation module sends velocity commands to a reinforcement-lea
 
 I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.
 
-## Challenge 1: Localization errors in woodland and grass-covered areas
+## Challenge 1: Localization errors in outdoor environments
 
 ### Problem
 

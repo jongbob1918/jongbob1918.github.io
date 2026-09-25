@@ -30,7 +30,9 @@ A human moved the leader arms while camera images, joint states, and actions wer
 
 ## First attempt: learn all five balls in one sequence
 
-We recorded about 200 episodes, each covering the full sequence of picking, transferring, and sorting all five balls. During testing, small changes in ball or gripper position caused missed grasps or mid-sequence stops. We attributed this to too few demonstrations of each stage within the long sequence and errors carrying over into later actions.
+We chose fixed positions for the balls and recorded the full sequence of picking, transferring, and sorting them in the order **blue → blue → red → red → yellow** as a single episode. We repeated this process about 200 times to collect training data.
+
+During testing, the robot stopped after dropping a ball instead of picking it up again, and struggled to grasp balls placed outside the fixed training positions. During vertical approaches, the gripper also closed before reaching the ball.
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Illustration of the first attempt: about 200 demonstrations of blue, blue, red, red, and yellow balls in one sequence, followed by missed grasps and mid-sequence stops when positions change" loading="lazy"></figure>
 

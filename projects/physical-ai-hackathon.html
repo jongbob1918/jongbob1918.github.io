@@ -49,7 +49,8 @@
 
         <section class="case-section" id="ko-1차-시도-다섯-개의-공을-한-번에-학습시키기">
           <div class="case-heading"><h2>1차 시도: 다섯 개의 공을 한 번에 학습시키기</h2></div>
-          <p>다섯 공을 순서대로 집어 전달하고 분류하는 전체 동작을 하나의 에피소드로 묶어 약 200회 기록했습니다. 테스트에서는 공이나 그리퍼 위치가 조금만 달라져도 집기에 실패하거나 중간에 멈췄습니다. 긴 동작을 한꺼번에 학습하면서 단계별 시연이 부족하고, 앞 단계의 오차가 뒤로 이어진 것으로 판단했습니다.</p>
+          <p>공의 위치를 임의로 정해 고정한 뒤, <strong>파랑 → 파랑 → 빨강 → 빨강 → 노랑</strong> 순서로 다섯 공을 집어 전달하고 분류하는 전체 시퀀스를 한 번에 기록했습니다. 이 과정을 약 200회 반복해 학습 데이터를 수집했습니다.</p>
+<p>테스트에서는 공을 떨어뜨리면 다시 집지 못하고 멈췄고, 공이 학습 때 고정한 위치에서 벗어나면 제대로 집지 못했습니다. 수직으로 접근하는 과정에서는 공에 닿기 전에 집게를 먼저 닫는 현상도 발생했습니다.</p>
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="파랑·파랑·빨강·빨강·노랑 순서의 전체 동작을 약 200회 학습한 뒤, 위치 변화로 집기에 실패하거나 중간에 멈추는 양팔 로봇의 1차 시도를 설명한 그림" loading="lazy"></figure>
         </section>
 
@@ -112,7 +113,8 @@
 
         <section class="case-section" id="en-first-attempt-learn-all-five-balls-in-one-sequence">
           <div class="case-heading"><h2>First attempt: learn all five balls in one sequence</h2></div>
-          <p>We recorded about 200 episodes, each covering the full sequence of picking, transferring, and sorting all five balls. During testing, small changes in ball or gripper position caused missed grasps or mid-sequence stops. We attributed this to too few demonstrations of each stage within the long sequence and errors carrying over into later actions.</p>
+          <p>We chose fixed positions for the balls and recorded the full sequence of picking, transferring, and sorting them in the order <strong>blue → blue → red → red → yellow</strong> as a single episode. We repeated this process about 200 times to collect training data.</p>
+<p>During testing, the robot stopped after dropping a ball instead of picking it up again, and struggled to grasp balls placed outside the fixed training positions. During vertical approaches, the gripper also closed before reaching the ball.</p>
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Illustration of the first attempt: about 200 demonstrations of blue, blue, red, red, and yellow balls in one sequence, followed by missed grasps and mid-sequence stops when positions change" loading="lazy"></figure>
         </section>
 

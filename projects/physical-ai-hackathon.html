@@ -49,9 +49,10 @@
 
         <section class="case-section" id="ko-1차-시도-다섯-개의-공을-한-번에-학습시키기">
           <div class="case-heading"><h2>1차 시도: 다섯 개의 공을 한 번에 학습시키기</h2></div>
-          <p>공의 위치를 임의로 정해 고정한 뒤, <strong>파랑 → 파랑 → 빨강 → 빨강 → 노랑</strong> 순서로 다섯 공을 집어 전달하고 분류하는 전체 시퀀스를 한 번에 기록했습니다. 이 과정을 약 200회 반복해 학습 데이터를 수집했습니다.</p>
+          <p>수납함 오른쪽에 별 모양의 꼭짓점을 따라 공을 놓을 지점을 정하고, 이 고정 지점들을 번갈아 사용했습니다. <strong>파랑 → 파랑 → 빨강 → 빨강 → 노랑</strong> 순서로 다섯 공을 집어 전달하고 분류하는 전체 시퀀스를 한 번에 기록해, 약 200개의 시연 데이터를 수집했습니다.</p>
+<h3>1차 테스트</h3>
 <p>테스트에서는 공을 떨어뜨리면 다시 집지 못하고 멈췄고, 공이 학습 때 고정한 위치에서 벗어나면 제대로 집지 못했습니다. 수직으로 접근하는 과정에서는 공에 닿기 전에 집게를 먼저 닫는 현상도 발생했습니다.</p>
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="파랑·파랑·빨강·빨강·노랑 순서의 전체 동작을 약 200회 학습한 뒤, 위치 변화로 집기에 실패하거나 중간에 멈추는 양팔 로봇의 1차 시도를 설명한 그림" loading="lazy"></figure>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="수납함 오른쪽의 별 모양 고정 지점을 번갈아 사용한 시연 수집과, 위치 이탈 시 집기 실패·공 낙하 후 정지·수직 접근 중 집게 조기 닫힘을 설명한 그림" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="ko-2차-시도-공-하나씩-학습하고-실패-복구도-기록하기">
@@ -63,7 +64,7 @@
 
         <section class="case-section" id="ko-심사-결과">
           <div class="case-heading"><h2>심사 결과</h2></div>
-          <p>공 5개를 각각 200회씩 시연해 약 1,000개의 학습 데이터를 수집했습니다. 오전 9시 마감에 맞춰 15,000 step까지 학습한 모델로 심사를 진행했습니다.</p>
+          <p>공 5개를 각각 200회씩 시연해 약 1,000개의 학습 데이터를 수집했습니다. 오전 9시 마감에 맞춰 15,000 step까지 학습한 모델로 심사를 진행했습니다. <a href="https://huggingface.co/Moment-Lab/act_hackathon_roboseasy_final/blob/main/train_config.json">공개 최종 모델의 학습 설정</a>은 50,000 step으로, 심사에 사용한 모델과 구분됩니다.</p>
 <p>공 3개는 집기·전달·색상별 분류까지 연속으로 성공했습니다. 네 번째 공을 처리하던 중 오른팔이 수납함을 넘어뜨려 시연을 중단해 완주하지 못했고, 아쉽게 수상하지는 못했습니다.</p>
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"></figure>
         </section>
@@ -113,9 +114,10 @@
 
         <section class="case-section" id="en-first-attempt-learn-all-five-balls-in-one-sequence">
           <div class="case-heading"><h2>First attempt: learn all five balls in one sequence</h2></div>
-          <p>We chose fixed positions for the balls and recorded the full sequence of picking, transferring, and sorting them in the order <strong>blue → blue → red → red → yellow</strong> as a single episode. We repeated this process about 200 times to collect training data.</p>
+          <p>We defined fixed pickup positions at the tips of a star-shaped layout to the right of the basket and alternated between these positions. We recorded about 200 demonstrations, each covering the full sequence of picking, transferring, and sorting five balls in the order <strong>blue → blue → red → red → yellow</strong>.</p>
+<h3>First test</h3>
 <p>During testing, the robot stopped after dropping a ball instead of picking it up again, and struggled to grasp balls placed outside the fixed training positions. During vertical approaches, the gripper also closed before reaching the ball.</p>
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Illustration of the first attempt: about 200 demonstrations of blue, blue, red, red, and yellow balls in one sequence, followed by missed grasps and mid-sequence stops when positions change" loading="lazy"></figure>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Alternating fixed pickup points in a star-shaped layout beside the basket, followed by failed grasps outside those points, stopping after a dropped ball, and premature gripper closure during vertical approach" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="en-second-attempt-learn-one-ball-at-a-time-and-record-recovery">
@@ -127,7 +129,7 @@
 
         <section class="case-section" id="en-judging-result">
           <div class="case-heading"><h2>Judging result</h2></div>
-          <p>We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging.</p>
+          <p>We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging. The <a href="https://huggingface.co/Moment-Lab/act_hackathon_roboseasy_final/blob/main/train_config.json">published final model configuration</a> specifies 50,000 steps, distinct from the model used for judging.</p>
 <p>The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence. Unfortunately, we did not win an award.</p>
 <figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"></figure>
         </section>

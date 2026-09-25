@@ -42,32 +42,23 @@
 
         </section>
 
-        <section class="case-section" id="ko-호출-순서를-큐에-넣으려-했지만">
-          <div class="case-heading"><h2>호출 순서를 큐에 넣으려 했지만</h2></div>
-          <p>처음에는 버튼을 누른 순서대로 층 번호를 큐에 저장하려 했습니다. 그런데 1층에서 4층으로 가는 중에 2층 호출이 들어오면, 나중에 누른 2층을 먼저 들러야 했습니다. 호출 취소까지 처리하려니 큐 중간에 값을 넣거나 지우는 일이 많아졌습니다.</p>
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="호출된 층을 순서대로 큐에 저장하는 초기 설계" loading="lazy"><figcaption>처음 구상한 호출 큐</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="이동 중 호출 추가와 취소로 큐 순서를 수정해야 하는 상황" loading="lazy"><figcaption>호출이 바뀔 때 큐를 수정해야 하는 문제</figcaption></figure></div><p>그래서 <code>floorList[4]</code>에는 각 층의 호출 여부만 저장하고, 현재 위치와 진행 방향을 기준으로 목적층을 매번 다시 찾도록 바꿨습니다. 호출을 추가하거나 취소할 때는 해당 층의 값만 바꾸면 됩니다.</p>
-
+        <section class="case-section" id="ko-초기-설계-방법론">
+          <div class="case-heading"><h2>초기 설계 방법론</h2></div>
+          <p>처음에는 먼저 들어온 호출부터 처리하는 큐 방식으로 설계했습니다. 하지만 1층에서 4층으로 이동하다가 2층을 지나기 전에 2층 호출이 들어오면, 나중에 들어온 호출을 먼저 처리해야 했습니다. 이동 중 호출 추가와 취소를 반영하려면 큐 중간에 층 번호를 넣거나 지우고, 처리 순서도 다시 정해야 했습니다.</p>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="호출된 층을 순서대로 큐에 저장하는 초기 설계" loading="lazy"><figcaption>처음 구상한 호출 큐</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="이동 중 호출 추가와 취소로 큐 순서를 수정해야 하는 상황" loading="lazy"><figcaption>호출이 바뀔 때 큐를 수정해야 하는 문제</figcaption></figure></div>
         </section>
 
-        <section class="case-section" id="ko-진행-방향의-가까운-층부터-처리">
-          <div class="case-heading"><h2>진행 방향의 가까운 층부터 처리</h2></div>
-          <p>올라가는 중에는 위쪽의 가까운 호출부터 찾고, 위에 호출이 없으면 아래쪽을 찾습니다. 내려가는 중에는 반대로 처리합니다. 호출이 모두 사라지면 가장 가까운 층으로 이동해 대기합니다.</p>
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="상승 중일 때와 하강 중일 때 호출 처리 순서가 달라지는 예시" loading="lazy"><figcaption>같은 호출이 남아 있어도 진행 방향에 따라 처리 순서가 달라집니다.</figcaption></figure></div><p><code>scanTop()</code>과 <code>scanBottom()</code>이 위·아래의 호출을 찾고, <code>getWantFloor()</code>가 마지막 이동 방향인 <code>upMode</code>에 따라 탐색 순서를 정합니다. 현재 위치는 <code>nowFloor</code>, 목적 위치는 <code>wantFloor</code>에 저장했습니다. 두 값은 층 번호가 아니라 층 사이 LED까지 포함한 0~9의 위치입니다.</p>
-
+        <section class="case-section" id="ko-개선-방법론">
+          <div class="case-heading"><h2>개선 방법론</h2></div>
+          <p>각 층에 호출이 있는지를 따로 기록하고, 현재 위치와 이동 방향에 따라 다음 목적층을 정하도록 바꿨습니다. 예를 들어 2층과 4층이 호출된 상태에서 2층 호출을 취소하면, 4층 호출만 남습니다. 호출 순서를 따로 수정할 필요 없이 남은 호출 중에서 목적층을 다시 선택합니다.</p>
+<p>올라가는 중에는 위쪽의 가까운 호출부터 찾고, 위에 호출이 없으면 아래쪽을 찾습니다. 내려가는 중에는 반대로 처리합니다. 호출이 모두 사라지면 가장 가까운 층으로 이동해 대기합니다.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="상승 중일 때와 하강 중일 때 호출 처리 순서가 달라지는 예시" loading="lazy"><figcaption>같은 호출이 남아 있어도 진행 방향에 따라 처리 순서가 달라집니다.</figcaption></figure></div>
         </section>
 
         <section class="case-section" id="ko-버튼-입력과-이동-처리">
           <div class="case-heading"><h2>버튼 입력과 이동 처리</h2></div>
-          <p>버튼을 누르고 있는 동안 호출이 반복해서 등록·취소되지 않도록, 이전 입력과 현재 입력을 비교했습니다. <code>LOW → HIGH</code>로 바뀐 순간에만 호출 상태와 초록 LED를 함께 바꿉니다.</p>
-<pre><code class="language-cpp">int current = digitalRead(buttons[button]);
-
-if (prevButtons[button] == LOW &amp;&amp; current == HIGH) {
-    floorSensing(button);
-}
-
-prevButtons[button] = current;
-</code></pre>
-<p>메인 루프에서는 버튼 확인과 목적층 탐색을 반복합니다. 이동은 <code>millis()</code>로 시간을 확인해 500 ms가 지났을 때만 <code>moveElevator()</code>를 호출합니다. 이동을 기다리는 동안에도 새 호출과 취소를 반영할 수 있습니다. 루프 마지막에는 <code>delay(10)</code>을 두었습니다.</p>
+          <p>버튼을 계속 누르고 있어도 호출 상태가 한 번만 바뀌도록, 누르지 않은 상태에서 누른 상태로 바뀌는 순간을 감지했습니다. 같은 버튼을 다시 누르면 호출이 취소되고 초록 LED가 꺼집니다.</p>
+<p>버튼 확인과 목적층 선택은 반복해서 수행하고, 이동은 경과 시간을 확인해 0.5초마다 LED를 한 칸씩 옮기도록 했습니다. 다음 이동 시점까지 기다리는 동안에도 버튼을 확인하므로 새 호출과 취소를 반영할 수 있습니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="버튼 확인과 목적층 탐색을 반복하고 500 ms 간격으로 이동하는 메인 루프 순서도" loading="lazy"><figcaption>입력과 목적층은 매 루프 확인하고, 이동은 시간 간격에 맞춰 실행합니다.</figcaption></figure></div>
         </section>
 
@@ -75,13 +66,6 @@ prevButtons[button] = current;
           <div class="case-heading"><h2>테스트</h2></div>
           <p>단일 호출, 이동 중 추가 호출, 호출 취소, 대기 상태 등을 8개 테스트 케이스로 정리했습니다. 아래 표는 각 입력에 대한 기대 동작입니다.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="호출 순서와 취소 여부에 따른 기대 동작을 정리한 8개 테스트 케이스 표" loading="lazy"><figcaption>테스트 입력 순서와 예상 결과</figcaption></figure></div><p>페이지 상단 데모에는 간단한 조작을 담았습니다. 다른 호출 순서는 <a href="https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled">Tinkercad 시뮬레이션</a>에서 직접 실행할 수 있습니다.</p>
-
-        </section>
-
-        <section class="case-section" id="ko-남은-부분">
-          <div class="case-heading"><h2>남은 부분</h2></div>
-          <p>LED로 호출과 이동 규칙을 확인하는 데까지 구현했습니다. 실제 모터 제어는 포함하지 않았습니다. 또한 버튼 접점이 튀면서 한 번의 입력이 여러 번 감지되는 현상을 걸러내는 처리가 없어, 실제 버튼으로 제작한다면 이 부분을 보완해야 합니다.</p>
-<p><a href="https://docs.google.com/presentation/d/1m6TEW22ZXlsffNen36meO2qcAVfPnEL0svScLSEzju0/edit?usp=sharing">발표 슬라이드 보기</a> · <a href="https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino">전체 코드</a></p>
 
         </section>
       </article>
@@ -111,32 +95,23 @@ prevButtons[button] = current;
 
         </section>
 
-        <section class="case-section" id="en-why-i-moved-away-from-a-queue">
-          <div class="case-heading"><h2>Why I moved away from a queue</h2></div>
-          <p>My first idea was to queue floor numbers in the order the buttons were pressed. But if a call for floor 2 arrived while traveling from floor 1 to floor 4, floor 2 should be served first. Supporting this and cancellations meant inserting and removing entries in the middle of the queue.</p>
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="Initial design storing called floors in a queue" loading="lazy"><figcaption>The initial call queue</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="New calls and cancellations requiring changes to the queue during movement" loading="lazy"><figcaption>Changes needed when calls are added or canceled</figcaption></figure></div><p>I changed <code>floorList[4]</code> to store only whether each floor has an active call. The target is recalculated from the current position and direction on each loop. Adding or canceling a call only changes that floor&#39;s value.</p>
-
+        <section class="case-section" id="en-initial-design-approach">
+          <div class="case-heading"><h2>Initial design approach</h2></div>
+          <p>The initial design used a queue to serve calls in the order they arrived. But if a call for floor 2 arrived before the elevator passed it on the way from floor 1 to floor 4, that later call should be served first. Handling new calls and cancellations during movement meant inserting or removing floor numbers and adjusting the queue order.</p>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="Initial design storing called floors in a queue" loading="lazy"><figcaption>The initial call queue</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="New calls and cancellations requiring changes to the queue during movement" loading="lazy"><figcaption>Changes needed when calls are added or canceled</figcaption></figure></div>
         </section>
 
-        <section class="case-section" id="en-serving-nearby-floors-in-the-travel-direction">
-          <div class="case-heading"><h2>Serving nearby floors in the travel direction</h2></div>
-          <p>While moving up, the elevator looks for the nearest call above it, then searches below if none remain above. While moving down, it searches in the reverse order. With no calls left, it moves to the nearest floor and waits.</p>
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="Examples showing different call orders during upward and downward travel" loading="lazy"><figcaption>The same active calls are served in a different order depending on direction.</figcaption></figure></div><p><code>scanTop()</code> and <code>scanBottom()</code> find calls above and below. <code>getWantFloor()</code> chooses their search order using <code>upMode</code>, which stores the last travel direction. <code>nowFloor</code> and <code>wantFloor</code> hold the current and target positions. These are LED positions from 0 to 9, including the spaces between floors.</p>
-
+        <section class="case-section" id="en-improved-design-approach">
+          <div class="case-heading"><h2>Improved design approach</h2></div>
+          <p>I recorded whether each floor had an active call and selected the next target using the current position and travel direction. For example, canceling floor 2 when floors 2 and 4 are requested leaves only the call for floor 4. The next target is selected from the remaining calls without editing a stored call order.</p>
+<p>While moving up, the elevator looks for the nearest call above it, then searches below if none remain above. While moving down, it searches in the reverse order. With no calls left, it moves to the nearest floor and waits.</p>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="Examples showing different call orders during upward and downward travel" loading="lazy"><figcaption>The same active calls are served in a different order depending on direction.</figcaption></figure></div>
         </section>
 
         <section class="case-section" id="en-button-input-and-movement">
           <div class="case-heading"><h2>Button input and movement</h2></div>
-          <p>I compare the previous and current button readings so holding a button does not repeatedly register and cancel its call. The call state and green LED change only when the input switches from <code>LOW</code> to <code>HIGH</code>.</p>
-<pre><code class="language-cpp">int current = digitalRead(buttons[button]);
-
-if (prevButtons[button] == LOW &amp;&amp; current == HIGH) {
-    floorSensing(button);
-}
-
-prevButtons[button] = current;
-</code></pre>
-<p>The main loop checks buttons and recalculates the target. It uses <code>millis()</code> to call <code>moveElevator()</code> only after 500 ms have elapsed, allowing new calls and cancellations between movement steps. Each loop ends with <code>delay(10)</code>.</p>
+          <p>To change the call state only once when a button is held down, I detect the transition from released to pressed. Pressing the same button again cancels the call and turns off its green LED.</p>
+<p>The program repeatedly checks buttons and selects the target, while elapsed time determines when to advance one LED every 0.5 seconds. Button checks continue between movement steps, allowing new calls and cancellations to be handled.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="Main loop checking buttons and the target repeatedly while moving at 500 ms intervals" loading="lazy"><figcaption>Input and target checks run each loop; movement runs at timed intervals.</figcaption></figure></div>
         </section>
 
@@ -144,13 +119,6 @@ prevButtons[button] = current;
           <div class="case-heading"><h2>Tests</h2></div>
           <p>I defined eight test cases covering single calls, new calls during movement, cancellations, and idle behavior. The table lists the expected behavior for each input sequence.</p>
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="Eight test cases listing expected behavior for call sequences and cancellations" loading="lazy"><figcaption>Test inputs and expected results</figcaption></figure></div><p>The demo at the top shows a short interaction. Other call sequences can be tried in the <a href="https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled">Tinkercad simulation</a>.</p>
-
-        </section>
-
-        <section class="case-section" id="en-remaining-work">
-          <div class="case-heading"><h2>Remaining work</h2></div>
-          <p>The implementation covers call and movement rules using LEDs. Motor control is outside its scope. It also lacks filtering for mechanical button bounce, which can register a single press multiple times. This would need attention before building it with physical buttons.</p>
-<p><a href="https://docs.google.com/presentation/d/1m6TEW22ZXlsffNen36meO2qcAVfPnEL0svScLSEzju0/edit?usp=sharing">View presentation</a> · <a href="https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino">Full source</a></p>
 
         </section>
       </article>

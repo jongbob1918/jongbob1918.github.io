@@ -20,37 +20,25 @@ Four red LEDs mark the floors, and six yellow LEDs show movement between them. E
 
 The elevator starts at floor 1. Pressing a button registers a call; pressing it again cancels it. The position advances one LED every 0.5 seconds, and the call LED turns off when the elevator reaches that floor.
 
-## Why I moved away from a queue
+## Initial design approach
 
-My first idea was to queue floor numbers in the order the buttons were pressed. But if a call for floor 2 arrived while traveling from floor 1 to floor 4, floor 2 should be served first. Supporting this and cancellations meant inserting and removing entries in the middle of the queue.
+The initial design used a queue to serve calls in the order they arrived. But if a call for floor 2 arrived before the elevator passed it on the way from floor 1 to floor 4, that later call should be served first. Handling new calls and cancellations during movement meant inserting or removing floor numbers and adjusting the queue order.
 
 <div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="Initial design storing called floors in a queue" loading="lazy"><figcaption>The initial call queue</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="New calls and cancellations requiring changes to the queue during movement" loading="lazy"><figcaption>Changes needed when calls are added or canceled</figcaption></figure></div>
 
-I changed `floorList[4]` to store only whether each floor has an active call. The target is recalculated from the current position and direction on each loop. Adding or canceling a call only changes that floor's value.
+## Improved design approach
 
-## Serving nearby floors in the travel direction
+I recorded whether each floor had an active call and selected the next target using the current position and travel direction. For example, canceling floor 2 when floors 2 and 4 are requested leaves only the call for floor 4. The next target is selected from the remaining calls without editing a stored call order.
 
 While moving up, the elevator looks for the nearest call above it, then searches below if none remain above. While moving down, it searches in the reverse order. With no calls left, it moves to the nearest floor and waits.
 
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="Examples showing different call orders during upward and downward travel" loading="lazy"><figcaption>The same active calls are served in a different order depending on direction.</figcaption></figure></div>
 
-`scanTop()` and `scanBottom()` find calls above and below. `getWantFloor()` chooses their search order using `upMode`, which stores the last travel direction. `nowFloor` and `wantFloor` hold the current and target positions. These are LED positions from 0 to 9, including the spaces between floors.
-
 ## Button input and movement
 
-I compare the previous and current button readings so holding a button does not repeatedly register and cancel its call. The call state and green LED change only when the input switches from `LOW` to `HIGH`.
+To change the call state only once when a button is held down, I detect the transition from released to pressed. Pressing the same button again cancels the call and turns off its green LED.
 
-```cpp
-int current = digitalRead(buttons[button]);
-
-if (prevButtons[button] == LOW && current == HIGH) {
-    floorSensing(button);
-}
-
-prevButtons[button] = current;
-```
-
-The main loop checks buttons and recalculates the target. It uses `millis()` to call `moveElevator()` only after 500 ms have elapsed, allowing new calls and cancellations between movement steps. Each loop ends with `delay(10)`.
+The program repeatedly checks buttons and selects the target, while elapsed time determines when to advance one LED every 0.5 seconds. Button checks continue between movement steps, allowing new calls and cancellations to be handled.
 
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="Main loop checking buttons and the target repeatedly while moving at 500 ms intervals" loading="lazy"><figcaption>Input and target checks run each loop; movement runs at timed intervals.</figcaption></figure></div>
 
@@ -61,9 +49,3 @@ I defined eight test cases covering single calls, new calls during movement, can
 <div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="Eight test cases listing expected behavior for call sequences and cancellations" loading="lazy"><figcaption>Test inputs and expected results</figcaption></figure></div>
 
 The demo at the top shows a short interaction. Other call sequences can be tried in the [Tinkercad simulation](https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled).
-
-## Remaining work
-
-The implementation covers call and movement rules using LEDs. Motor control is outside its scope. It also lacks filtering for mechanical button bounce, which can register a single press multiple times. This would need attention before building it with physical buttons.
-
-[View presentation](https://docs.google.com/presentation/d/1m6TEW22ZXlsffNen36meO2qcAVfPnEL0svScLSEzju0/edit?usp=sharing) · [Full source](https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino)

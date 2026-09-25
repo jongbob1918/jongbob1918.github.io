@@ -78,5 +78,3 @@ demo:
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/falcon_ground_detection.webp" alt="공항 모형의 조류·이물질·사람·동물·항공기·차량을 탐지한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_worker_classification.gif" alt="형광 조끼 색상을 분석해 작업자를 구분하는 시연" loading="lazy"></figure></div>
 
 <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/-si0u8I1h2A" title="FALCON 위험정보를 조종사 음성 경보로 전달하는 통합 시연" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
-
-이번 구현에서는 모형 환경에 맞춘 데이터가 탐지 성능에 큰 영향을 준다는 점을 확인했습니다. 다른 환경에서는 탐지 성능이 떨어졌고, 작업자 구분도 조끼 색상에 의존했습니다. 후속 개선 과제로 촬영 환경과 탐지 대상의 다양화, 색상 외 특징을 이용한 인원 구분을 정리했습니다.

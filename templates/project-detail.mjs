@@ -5,7 +5,11 @@ const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 })[character]);
 
-const renderSections = (sections, language) => sections.map(section => `
+const renderSections = (sections, language, collapsible = false) => sections.map(section => collapsible ? `
+        <details class="case-section case-disclosure" id="${escapeHtml(`${language}-${section.id}`)}">
+          <summary class="case-heading"><h2>${escapeHtml(section.title)}</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">${language === 'ko' ? '상세 펼치기' : 'Show details'}</span><span class="when-open">${language === 'ko' ? '접기' : 'Hide details'}</span></span></summary>
+          <div class="case-disclosure-body">${section.body}</div>
+        </details>` : `
         <section class="case-section" id="${escapeHtml(`${language}-${section.id}`)}">
           <div class="case-heading"><h2>${escapeHtml(section.title)}</h2></div>
           ${section.body}
@@ -61,7 +65,7 @@ const renderLocalizedProject = (project, sharedProject, language) => {
     ${renderDemo(demo, language)}
 
     <div class="case-layout">
-      <article class="case-study">${renderSections(project.sections, language)}
+      <article class="case-study">${renderSections(project.sections, language, sharedProject.collapsibleSections)}
       </article>
     </div>
   </div>`;
@@ -79,7 +83,7 @@ export const renderProjectDetail = (project, translations, sourceFile = `${proje
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260925-13">
+  <link rel="stylesheet" href="../styles.css?v=20260925-16">
 </head>
 <body data-page="project-detail" data-title-ko="${escapeHtml(translations.ko.title)} — Jongmyung Kim" data-title-en="${escapeHtml(translations.en.title)} — Jongmyung Kim" data-description-ko="${escapeHtml(translations.ko.description)}" data-description-en="${escapeHtml(translations.en.description)}">
   <div class="reading-progress" aria-hidden="true"></div>

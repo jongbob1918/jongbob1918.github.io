@@ -245,6 +245,19 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .case-section video { display: block; width: 100%; margin: 22px 0; background: #0b1220; }
 .case-section pre { max-width: 100%; overflow-x: auto; }
 .case-section a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.case-section.case-disclosure { padding: 0; margin-bottom: 0; border-bottom: 1px solid var(--line); }
+.case-disclosure > summary { align-items: center; justify-content: space-between; gap: 16px; margin: 0; padding: 22px 0; cursor: pointer; list-style: none; }
+.case-disclosure > summary::-webkit-details-marker { display: none; }
+.case-disclosure > summary h2 { min-width: 0; font-size: clamp(1.05rem, 2.5vw, 1.3rem); }
+.case-disclosure > summary:hover h2 { color: var(--accent); }
+.case-disclosure > summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.case-disclosure-action { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; color: var(--muted); font-size: .72rem; }
+.case-disclosure-action::after { content: '+'; font-size: 1.2rem; }
+.case-disclosure[open] > summary .case-disclosure-action::after { content: '−'; }
+.case-disclosure:not([open]) > summary .when-open, .case-disclosure[open] > summary .when-closed { display: none; }
+.case-disclosure-body { padding-bottom: 26px; }
+.case-disclosure-body > :first-child { margin-top: 0; }
+.case-disclosure-body > :last-child { margin-bottom: 0; }
 .role-grid, .metric-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
 .info-card { padding: 17px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); }
 .info-card strong { display: block; margin-bottom: 4px; font-size: .9rem; }

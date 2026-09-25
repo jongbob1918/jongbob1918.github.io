@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260925-13">
+  <link rel="stylesheet" href="../styles.css?v=20260925-16">
 </head>
 <body data-page="project-detail" data-title-ko="궁능순찰로봇 — Jongmyung Kim" data-title-en="Royal heritage patrol robot — Jongmyung Kim" data-description-ko="고양 서오릉에서 화재와 쓰러진 사람을 탐지하는 순찰로봇의 자율주행 소프트웨어를 개발했습니다. 2 km 순찰 경로를 반복 주행할 수 있도록 장애물 인지와 주행 제어를 개선했습니다." data-description-en="Developed autonomous navigation software for a robot that patrols Seooreung in Goyang to detect fires and fallen people. Improved obstacle perception and motion control for repeated runs along a 2 km patrol route.">
   <div class="reading-progress" aria-hidden="true"></div>
@@ -35,59 +35,61 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-수림과-잔디-구간에서의-위치-추정-오류">
-          <div class="case-heading"><h2>수림과 잔디 구간에서의 위치 추정 오류</h2></div>
-          <p>고양 서오릉은 <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">전체 면적이 약 187만 m²인 유적지</a>로, 수림과 수풀·잔디가 넓게 분포합니다. 순찰 구역에는 위치를 구분할 만한 특징이 부족한 구간이 있어, 센서 데이터를 사전 지도와 맞추는 로컬 정합(Local Matching)이 수 m 앞의 위치에 잘못 맞거나 실패하는 경우가 있었습니다.</p>
+        <details class="case-section case-disclosure" id="ko-수림과-잔디-구간에서의-위치-추정-오류">
+          <summary class="case-heading"><h2>수림과 잔디 구간에서의 위치 추정 오류</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>문제</strong> — 고양 서오릉은 <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">전체 면적이 약 187만 m²인 유적지</a>로, 수림과 수풀·잔디가 넓게 분포합니다. 순찰 구역에는 위치를 구분할 만한 특징이 부족한 구간이 있어, 센서 데이터를 사전 지도와 맞추는 로컬 정합(Local Matching)이 수 m 앞의 위치에 잘못 맞거나 실패하는 경우가 있었습니다.</p>
 <p>기존 시스템은 로컬 정합에 실패하면 지도 전체에서 위치를 다시 찾는 전역 위치 추정(Global Localization)을 수행했습니다. 하지만 수만 평 규모의 사전 지도에서는 올바른 후보 위치를 찾기 어려웠고, 계산 부하도 커졌습니다.</p>
 <h3>지도를 나누고 전환 지점으로 연결</h3>
-<p>순찰 구역을 나눠 각각 지도를 작성하고, 지도 사이를 연결하는 경유점인 웨이포인트(Waypoint)를 지정했습니다. 로봇이 전환 지점에 도착하면 해당 구역의 지도를 불러오도록 해 한 번에 처리하는 지도 범위와 리소스 사용량을 줄였습니다.</p>
+<p><strong>해결</strong> — 순찰 구역을 나눠 각각 지도를 작성하고, 지도 사이를 연결하는 경유점인 웨이포인트(Waypoint)를 지정했습니다. 로봇이 전환 지점에 도착하면 해당 구역의 지도를 불러오도록 해 한 번에 처리하는 지도 범위와 리소스 사용량을 줄였습니다.</p>
 <h3>현장 데이터를 재생하는 실험 환경 구축</h3>
-<p>알고리즘이나 파라미터를 바꿀 때마다 현장을 방문하기에는 날씨와 배터리 제약이 컸습니다. 기존에는 센서 데이터를 저장하고 재생하며 비교하는 실험 환경이 없어, 일주일 동안 현장 센서 데이터를 ROS 메시지 기록 도구인 rosbag으로 수집하고 반복 실험에 활용했습니다.</p>
+<p><strong>실험 제약과 대응</strong> — 알고리즘이나 파라미터를 바꿀 때마다 현장을 방문하기에는 날씨와 배터리 제약이 컸습니다. 기존에는 센서 데이터를 저장하고 재생하며 비교하는 실험 환경이 없어, 일주일 동안 현장 센서 데이터를 ROS 메시지 기록 도구인 rosbag으로 수집하고 반복 실험에 활용했습니다.</p>
 <p>통과 기준과 알고리즘 후보·파라미터 조합을 정하고, 에이전트를 활용해 데이터 재생 실험을 병렬로 실행했습니다. 여러 기록 데이터에서 위치 추정이 틀어지지 않는 설정을 확인하고, 설정한 허용 범위 안의 로컬 정합 결과만 받아들이도록 제한했습니다.</p>
-<p>자동 실험 결과만으로 판단하지 않고, 정합 후보가 잘못 선택되는 구간을 직접 시각화해 비교했습니다. 에이전트가 놓칠 수 있는 오정합을 확인하며 알고리즘과 파라미터를 조정했습니다.</p>
+<p><strong>검증</strong> — 자동 실험 결과만으로 판단하지 않고, 정합 후보가 잘못 선택되는 구간을 직접 시각화해 비교했습니다. 에이전트가 놓칠 수 있는 오정합을 확인하며 알고리즘과 파라미터를 조정했습니다.</p>
+</div>
+        </details>
 
-        </section>
+        <details class="case-section case-disclosure" id="ko-맵-전환-후-초기-위치가-어긋나는-문제">
+          <summary class="case-heading"><h2>맵 전환 후 초기 위치가 어긋나는 문제</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>문제</strong> — 분할된 지도에서 목표를 지정하면, 로봇이 필요한 맵 전환 웨이포인트를 거쳐 지도를 바꾸고 목표까지 이동하도록 구현했습니다. 하지만 전환한 지도에서 초기 위치를 정확히 지정하지 않으면 위치 추정이 어긋나는 문제가 발생했습니다.</p>
+<p><strong>해결</strong> — 이를 해결하기 위해 분할된 사전 지도들을 점군 정합 알고리즘인 ICP(Iterative Closest Point)로 맞추고, 지도 사이의 좌표 변환을 구해 공통 인터페이스에 저장했습니다. 맵 전환 웨이포인트가 두 지도에서 같은 실제 위치를 가리키도록 연결하고, 전환 후 초기 위치를 지정하는 데 활용했습니다. 이 방식으로 맵마다 따로 지정하던 전환 위치의 불일치를 줄였습니다.</p>
+</div>
+        </details>
 
-        <section class="case-section" id="ko-맵-전환-후-초기-위치가-어긋나는-문제">
-          <div class="case-heading"><h2>맵 전환 후 초기 위치가 어긋나는 문제</h2></div>
-          <p>분할된 지도에서 목표를 지정하면, 로봇이 필요한 맵 전환 웨이포인트를 거쳐 지도를 바꾸고 목표까지 이동하도록 구현했습니다. 하지만 전환한 지도에서 초기 위치를 정확히 지정하지 않으면 위치 추정이 어긋나는 문제가 발생했습니다.</p>
-<p>이를 해결하기 위해 분할된 사전 지도들을 점군 정합 알고리즘인 ICP(Iterative Closest Point)로 맞추고, 지도 사이의 좌표 변환을 구해 공통 인터페이스에 저장했습니다. 맵 전환 웨이포인트가 두 지도에서 같은 실제 위치를 가리키도록 연결하고, 전환 후 초기 위치를 지정하는 데 활용했습니다. 이 방식으로 맵마다 따로 지정하던 전환 위치의 불일치를 줄였습니다.</p>
+        <details class="case-section case-disclosure" id="ko-경사와-단차를-고려한-장애물-인지">
+          <summary class="case-heading"><h2>경사와 단차를 고려한 장애물 인지</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>환경</strong> — 순찰 경로는 대부분 흙길이며, 평탄해 보이는 구간도 위치에 따라 고도가 다릅니다. 비가 오면 흙이 유실돼 길의 형태와 단차도 달라집니다.</p>
+<p><strong>문제</strong> — 기존 실내 주행용 장애물 인식은 로봇 기준 좌표계의 z축 높이를 기준으로 했습니다. 이 방식을 야외에 적용하자 지면의 고도가 달라지는 경사로나 단차 구간에서 주행 가능한 지면까지 장애물로 인식하는 문제가 있었습니다.</p>
+<p><strong>해결</strong> — 레이저로 주변의 3차원 형상을 측정하는 센서(3D LiDAR, Light Detection and Ranging)의 데이터에 지면 분리 알고리즘(Ground Segmentation)을 적용했습니다. 고정된 높이 기준 대신 지면과 장애물을 구분한 결과를 내비게이션에 반영해, 지형의 높이 변화를 고려하며 장애물을 회피하도록 수정했습니다.</p>
+</div>
+        </details>
 
-        </section>
+        <details class="case-section case-disclosure" id="ko-출발-가속과-좁은-구간의-속도-명령-개선">
+          <summary class="case-heading"><h2>출발 가속과 좁은 구간의 속도 명령 개선</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>문제</strong> — 바퀴형 이족 로봇의 강화학습 기반 주행 제어에서는 같은 속도 명령을 주어도 출발 시 급격한 가속이 나타났습니다. 당시 사용한 자율주행 소프트웨어 Nav2(Navigation2)의 Humble 버전 MPPI(Model Predictive Path Integral) 제어기에서 가속을 제한하는 방식을 검토했습니다. MPPI는 여러 후보 주행 궤적을 평가해 속도 명령을 만드는 제어기입니다.</p>
+<p><strong>1차 개선</strong> — 먼저 지수 이동 평균 필터(EMA, Exponential Moving Average)를 적용해 속도 명령의 급격한 변화를 완화했습니다.</p>
+<p><strong>남은 문제</strong> — 하지만 장애물 비용이 반영된 지도에서 통과 공간이 좁아지는 조건에서는 MPPI가 과도한 속도 명령을 출력하는 문제가 남았습니다.</p>
+<p><strong>추가 개선</strong> — Humble의 MPPI 구현을 분석한 뒤 Kilted 버전의 MPPI를 포팅해 가속과 좁은 구간의 과도한 속도 출력을 개선했습니다. Kilted 구현의 가속 제약은 <a href="https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html">공식 소스 코드</a>에서 확인할 수 있습니다.</p>
+</div>
+        </details>
 
-        <section class="case-section" id="ko-경사와-단차를-고려한-장애물-인지">
-          <div class="case-heading"><h2>경사와 단차를 고려한 장애물 인지</h2></div>
-          <p>순찰 경로는 대부분 흙길이며, 평탄해 보이는 구간도 위치에 따라 고도가 다릅니다. 비가 오면 흙이 유실돼 길의 형태와 단차도 달라집니다.</p>
-<p>기존 실내 주행용 장애물 인식은 로봇 기준 좌표계의 z축 높이를 기준으로 했습니다. 이 방식을 야외에 적용하자 지면의 고도가 달라지는 경사로나 단차 구간에서 주행 가능한 지면까지 장애물로 인식하는 문제가 있었습니다.</p>
-<p>레이저로 주변의 3차원 형상을 측정하는 센서(3D LiDAR, Light Detection and Ranging)의 데이터에 지면 분리 알고리즘(Ground Segmentation)을 적용했습니다. 고정된 높이 기준 대신 지면과 장애물을 구분한 결과를 내비게이션에 반영해, 지형의 높이 변화를 고려하며 장애물을 회피하도록 수정했습니다.</p>
+        <details class="case-section case-disclosure" id="ko-사람-접근-시-정지와-안내-방송">
+          <summary class="case-heading"><h2>사람 접근 시 정지와 안내 방송</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>기존 동작</strong> — 사람이 접근하면 회피 동작을 빈번하게 수행했습니다.</p>
+<p><strong>변경</strong> — 설정한 안전 범위 안에 사람이 감지되면 정지하고 안내 방송을 하는 방식으로 변경했습니다. 사람이 함께 이용하는 순찰 공간에 맞춰 임무 수행 중의 예외 처리를 추가했습니다.</p>
+</div>
+        </details>
 
-        </section>
+        <details class="case-section case-disclosure" id="ko-도킹과-언도킹">
+          <summary class="case-heading"><h2>도킹과 언도킹</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>순찰로봇이 도킹 위치에 진입하는 도킹 기능과, 도킹 위치에서 이탈하는 언도킹 기능을 개발했습니다.</p>
+</div>
+        </details>
 
-        <section class="case-section" id="ko-출발-가속과-좁은-구간의-속도-명령-개선">
-          <div class="case-heading"><h2>출발 가속과 좁은 구간의 속도 명령 개선</h2></div>
-          <p>바퀴형 이족 로봇의 강화학습 기반 주행 제어에서는 같은 속도 명령을 주어도 출발 시 급격한 가속이 나타났습니다. 당시 사용한 자율주행 소프트웨어 Nav2(Navigation2)의 Humble 버전 MPPI(Model Predictive Path Integral) 제어기에서 가속을 제한하는 방식을 검토했습니다. MPPI는 여러 후보 주행 궤적을 평가해 속도 명령을 만드는 제어기입니다.</p>
-<p>먼저 지수 이동 평균 필터(EMA, Exponential Moving Average)를 적용해 속도 명령의 급격한 변화를 완화했습니다. 하지만 장애물 비용이 반영된 지도에서 통과 공간이 좁아지는 조건에서는 MPPI가 과도한 속도 명령을 출력하는 문제가 남았습니다.</p>
-<p>Humble의 MPPI 구현을 분석한 뒤 Kilted 버전의 MPPI를 포팅해 가속과 좁은 구간의 과도한 속도 출력을 개선했습니다. Kilted 구현의 가속 제약은 <a href="https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html">공식 소스 코드</a>에서 확인할 수 있습니다.</p>
-
-        </section>
-
-        <section class="case-section" id="ko-사람-접근-시-정지와-안내-방송">
-          <div class="case-heading"><h2>사람 접근 시 정지와 안내 방송</h2></div>
-          <p>사람이 접근하면 회피 동작을 빈번하게 수행하던 방식에서, 설정한 안전 범위 안에 사람이 감지되면 정지하고 안내 방송을 하는 방식으로 변경했습니다. 사람이 함께 이용하는 순찰 공간에 맞춰 임무 수행 중의 예외 처리를 추가했습니다.</p>
-
-        </section>
-
-        <section class="case-section" id="ko-도킹과-언도킹">
-          <div class="case-heading"><h2>도킹과 언도킹</h2></div>
-          <p>순찰로봇이 도킹 위치에 진입하는 도킹 기능과, 도킹 위치에서 이탈하는 언도킹 기능을 개발했습니다.</p>
-
-        </section>
-
-        <section class="case-section" id="ko-2-km-경로에서-반복-주행">
-          <div class="case-heading"><h2>2 km 경로에서 반복 주행</h2></div>
-          <p>기록 데이터로 위치 추정 설정과 정합 결과를 확인한 뒤, 서오릉의 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다. 데이터 재생 실험과 현장 주행을 함께 활용해 위치 추정을 안정화했습니다.</p>
-<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="서오릉 흙길에서 궁능순찰로봇이 주행하는 현장 모습 — 채널A 유튜브 영상 보기" loading="lazy"></a><figcaption>서오릉 현장의 로봇 주행 모습 · 채널A 뉴스 · 2026.09.04</figcaption></figure>
-        </section>
+        <details class="case-section case-disclosure" id="ko-2-km-경로에서-반복-주행">
+          <summary class="case-heading"><h2>2 km 경로에서 반복 주행</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>기록 데이터로 위치 추정 설정과 정합 결과를 확인한 뒤, 서오릉의 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다. 데이터 재생 실험과 현장 주행을 함께 활용해 위치 추정을 안정화했습니다.</p>
+<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="서오릉 흙길에서 궁능순찰로봇이 주행하는 현장 모습 — 채널A 유튜브 영상 보기" loading="lazy"></a><figcaption>서오릉 현장의 로봇 주행 모습 · 채널A 뉴스 · 2026.09.04</figcaption></figure></div>
+        </details>
       </article>
     </div>
   </div>
@@ -108,59 +110,61 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-localization-errors-in-woodland-and-grass-covered-areas">
-          <div class="case-heading"><h2>Localization errors in woodland and grass-covered areas</h2></div>
-          <p>Seooreung in Goyang is a <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">heritage site covering approximately 1.87 million m²</a>, with extensive woodland, undergrowth, and lawns. Parts of the patrol area lacked distinctive features for localization. Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail to find a match.</p>
+        <details class="case-section case-disclosure" id="en-localization-errors-in-woodland-and-grass-covered-areas">
+          <summary class="case-heading"><h2>Localization errors in woodland and grass-covered areas</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>Problem</strong> — Seooreung in Goyang is a <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">heritage site covering approximately 1.87 million m²</a>, with extensive woodland, undergrowth, and lawns. Parts of the patrol area lacked distinctive features for localization. Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail to find a match.</p>
 <p>The existing system responded to local matching failures by searching the entire map through global localization. On a large prebuilt map, identifying the correct candidate position was difficult and computational load increased.</p>
 <h3>Splitting maps and linking transition points</h3>
-<p>I divided the patrol area and mapped each section separately. I connected the maps with waypoints and loaded the relevant map when the robot reached a transition point. This reduced the map area processed at once and resource usage.</p>
+<p><strong>Solution</strong> — I divided the patrol area and mapped each section separately. I connected the maps with waypoints and loaded the relevant map when the robot reached a transition point. This reduced the map area processed at once and resource usage.</p>
 <h3>Building a replay-based experiment workflow</h3>
-<p>Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. There was no existing workflow for recording, replaying, and comparing sensor data. I collected field data over a week using rosbag, a ROS message recording tool, and used it for repeatable experiments.</p>
+<p><strong>Testing constraints and approach</strong> — Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. There was no existing workflow for recording, replaying, and comparing sensor data. I collected field data over a week using rosbag, a ROS message recording tool, and used it for repeatable experiments.</p>
 <p>I defined acceptance criteria, candidate algorithms, and parameter combinations, then used agents to run replay experiments in parallel. I identified settings that avoided localization jumps across multiple recordings and restricted acceptance of local matching results to a configured tolerance.</p>
-<p>I also visualized and compared intervals where incorrect matching candidates were selected. This let me check mismatches the agents could miss and refine the algorithms and parameters.</p>
+<p><strong>Validation</strong> — I also visualized and compared intervals where incorrect matching candidates were selected. This let me check mismatches the agents could miss and refine the algorithms and parameters.</p>
+</div>
+        </details>
 
-        </section>
+        <details class="case-section case-disclosure" id="en-incorrect-initial-poses-after-map-transitions">
+          <summary class="case-heading"><h2>Incorrect initial poses after map transitions</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>Problem</strong> — I implemented navigation so that a goal in another map led the robot through the required transition waypoints, switched maps, and continued to the goal. However, localization could shift if the initial pose in the new map was not specified accurately.</p>
+<p><strong>Solution</strong> — I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud registration algorithm, and stored the resulting inter-map coordinate transforms in a shared interface. I linked transition waypoints to the same physical location in both maps and used this correspondence to set the initial pose after switching. This reduced inconsistencies caused by specifying transition positions separately in each map.</p>
+</div>
+        </details>
 
-        <section class="case-section" id="en-incorrect-initial-poses-after-map-transitions">
-          <div class="case-heading"><h2>Incorrect initial poses after map transitions</h2></div>
-          <p>I implemented navigation so that a goal in another map led the robot through the required transition waypoints, switched maps, and continued to the goal. However, localization could shift if the initial pose in the new map was not specified accurately.</p>
-<p>I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud registration algorithm, and stored the resulting inter-map coordinate transforms in a shared interface. I linked transition waypoints to the same physical location in both maps and used this correspondence to set the initial pose after switching. This reduced inconsistencies caused by specifying transition positions separately in each map.</p>
+        <details class="case-section case-disclosure" id="en-obstacle-perception-on-slopes-and-uneven-ground">
+          <summary class="case-heading"><h2>Obstacle perception on slopes and uneven ground</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>Environment</strong> — Most of the patrol route consists of dirt paths. Even apparently flat sections differ in elevation, and rain can wash away soil and change the surface and height differences.</p>
+<p><strong>Problem</strong> — The existing indoor navigation system detected obstacles using z-axis height in the robot’s reference frame. Outdoors, elevation changes on slopes and uneven sections caused traversable ground to be classified as obstacles.</p>
+<p><strong>Solution</strong> — I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. Navigation used the distinction between ground and obstacles rather than a fixed height threshold, allowing obstacle avoidance to account for changes in terrain height.</p>
+</div>
+        </details>
 
-        </section>
+        <details class="case-section case-disclosure" id="en-improving-startup-acceleration-and-velocity-commands-in-narrow-spaces">
+          <summary class="case-heading"><h2>Improving startup acceleration and velocity commands in narrow spaces</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>Problem</strong> — The wheeled biped robot’s reinforcement-learning-based motion control could accelerate sharply at startup even with the same velocity command. I investigated acceleration handling in the Humble version of the Model Predictive Path Integral (MPPI) controller used in the Navigation2 (Nav2) navigation stack. MPPI evaluates candidate trajectories to produce velocity commands.</p>
+<p><strong>First improvement</strong> — I first applied an exponential moving average (EMA) filter to smooth abrupt changes in the velocity commands.</p>
+<p><strong>Remaining problem</strong> — However, excessive MPPI velocity commands remained under conditions where obstacle costs left little traversable space in the map.</p>
+<p><strong>Further improvement</strong> — After analyzing the Humble implementation, I ported the Kilted MPPI controller to improve acceleration handling and excessive velocity output in narrow spaces. Its acceleration constraints can be found in the <a href="https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html">official Kilted source code</a>.</p>
+</div>
+        </details>
 
-        <section class="case-section" id="en-obstacle-perception-on-slopes-and-uneven-ground">
-          <div class="case-heading"><h2>Obstacle perception on slopes and uneven ground</h2></div>
-          <p>Most of the patrol route consists of dirt paths. Even apparently flat sections differ in elevation, and rain can wash away soil and change the surface and height differences.</p>
-<p>The existing indoor navigation system detected obstacles using z-axis height in the robot’s reference frame. Outdoors, elevation changes on slopes and uneven sections caused traversable ground to be classified as obstacles.</p>
-<p>I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. Navigation used the distinction between ground and obstacles rather than a fixed height threshold, allowing obstacle avoidance to account for changes in terrain height.</p>
+        <details class="case-section case-disclosure" id="en-stopping-and-announcing-when-people-approach">
+          <summary class="case-heading"><h2>Stopping and announcing when people approach</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p><strong>Previous behavior</strong> — The robot made frequent avoidance maneuvers when people approached.</p>
+<p><strong>Change</strong> — I changed it to stop and play an announcement when a person was detected within the configured safety zone. This added mission exception handling for a patrol route shared with visitors.</p>
+</div>
+        </details>
 
-        </section>
+        <details class="case-section case-disclosure" id="en-docking-and-undocking">
+          <summary class="case-heading"><h2>Docking and undocking</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>I developed docking to enter the docking position and undocking to leave it.</p>
+</div>
+        </details>
 
-        <section class="case-section" id="en-improving-startup-acceleration-and-velocity-commands-in-narrow-spaces">
-          <div class="case-heading"><h2>Improving startup acceleration and velocity commands in narrow spaces</h2></div>
-          <p>The wheeled biped robot’s reinforcement-learning-based motion control could accelerate sharply at startup even with the same velocity command. I investigated acceleration handling in the Humble version of the Model Predictive Path Integral (MPPI) controller used in the Navigation2 (Nav2) navigation stack. MPPI evaluates candidate trajectories to produce velocity commands.</p>
-<p>I first applied an exponential moving average (EMA) filter to smooth abrupt changes in the velocity commands. However, excessive MPPI velocity commands remained under conditions where obstacle costs left little traversable space in the map.</p>
-<p>After analyzing the Humble implementation, I ported the Kilted MPPI controller to improve acceleration handling and excessive velocity output in narrow spaces. Its acceleration constraints can be found in the <a href="https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html">official Kilted source code</a>.</p>
-
-        </section>
-
-        <section class="case-section" id="en-stopping-and-announcing-when-people-approach">
-          <div class="case-heading"><h2>Stopping and announcing when people approach</h2></div>
-          <p>I changed the behavior from frequent avoidance maneuvers when people approached to stopping and playing an announcement when a person was detected within the configured safety zone. This added mission exception handling for a patrol route shared with visitors.</p>
-
-        </section>
-
-        <section class="case-section" id="en-docking-and-undocking">
-          <div class="case-heading"><h2>Docking and undocking</h2></div>
-          <p>I developed docking to enter the docking position and undocking to leave it.</p>
-
-        </section>
-
-        <section class="case-section" id="en-repeated-runs-along-a-2-km-route">
-          <div class="case-heading"><h2>Repeated runs along a 2 km route</h2></div>
-          <p>After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.</p>
-<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="Patrol robot driving along a dirt path at Seooreung — watch on Channel A YouTube" loading="lazy"></a><figcaption>Robot navigating at Seooreung · Channel A News · September 4, 2026</figcaption></figure>
-        </section>
+        <details class="case-section case-disclosure" id="en-repeated-runs-along-a-2-km-route">
+          <summary class="case-heading"><h2>Repeated runs along a 2 km route</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.</p>
+<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="Patrol robot driving along a dirt path at Seooreung — watch on Channel A YouTube" loading="lazy"></a><figcaption>Robot navigating at Seooreung · Channel A News · September 4, 2026</figcaption></figure></div>
+        </details>
       </article>
     </div>
   </div>

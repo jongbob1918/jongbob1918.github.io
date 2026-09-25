@@ -26,26 +26,24 @@ card:
     - Homography
     - OpenCV
 overview: >-
-  공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 인력 중심의 활주로 안전관리에서 발생하는 인력 부족과 비용 부담을 줄이고자 AI로 위험요소 감시를 자동화하는 프로젝트를 시작했습니다. FALCON은 지상 위험요소 탐지와 조류 충돌 위험 분석, 음성 안내로 관제사와 조종사의 안전한 항공기 운항을 지원하는 AI 서비스입니다. CCTV에서 감지한 위험정보를 관제 화면과 조종사 음성 경보로 전달합니다. 저는 프로젝트 총괄과 지상 객체 탐지 시스템 구축, 카메라 영상과 실제 구역 위치 정합을 담당했습니다.
+  공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 인력 중심의 활주로 안전관리에서 발생하는 인력 부족과 비용 부담을 줄이고자 AI로 위험요소 감시를 자동화하는 프로젝트를 시작했습니다. FALCON은 지상 위험요소 탐지와 조류 충돌 위험 분석, 음성 안내로 관제사와 조종사의 안전한 항공기 운항을 지원하는 AI 서비스입니다. CCTV에서 감지한 위험정보를 관제 화면과 조종사 음성 경보로 전달합니다.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU
   title: FALCON 지상 위험요소 관제 데모
 ---
 
-## 위험 감지부터 관제·조종사 안내까지
+## 소프트웨어 구성
 
-관제사 서비스(Hawkeye)는 지상 위험요소의 위치와 경보를 화면에 표시합니다. 조종사 서비스(RedWing)는 운항 위험을 음성으로 알리고, 위험도 질의에 대한 응답과 지상 유도사의 수신호 안내를 제공합니다. 지상 탐지와 조류 충돌 위험 분석 결과는 서버를 거쳐 각 서비스로 전달됩니다.
+지상·조류 탐지 서버와 관제 PC, 조종사 PC를 메인 서버로 연결했습니다. 메인 서버는 탐지 결과와 위험정보를 관리하고, 관제 화면(Hawkeye)과 조종사 서비스(RedWing)에 전달합니다.
 
-<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="CCTV 탐지 서버, FALCON Main Server, 관제 GUI와 조종사 시스템을 연결한 전체 소프트웨어 구조" loading="lazy"></figure>
-
-이 중 제가 맡은 지상 탐지 시스템은 위험요소의 위치를 관제 지도에 표시해, 관제사가 어느 구역에서 위험이 발생했는지 확인하도록 합니다.
-
-<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="CCTV 영상 수신부터 위험요소 탐지, 구역 판단과 관제 GUI 지도 표시까지 이어지는 FALCON 흐름" loading="lazy"></figure>
+<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="CCTV 탐지 서버, FALCON Main Server, 관제 GUI와 조종사 시스템을 연결한 전체 소프트웨어 구조" loading="lazy"><figcaption>탐지 서버, 메인 서버·데이터베이스, 관제 PC와 조종사 PC의 연결 구조</figcaption></figure>
 
 ## 지상 위험요소 탐지 시스템 구축
 
 4명으로 구성된 팀의 팀장으로 일정과 문서를 관리하고, 지상 객체 탐지 시스템 구축과 모델 기술조사·학습을 담당했습니다. 합성 데이터 생성과 지상 탐지 모델 제작은 팀원과 협업했습니다.
+
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="CCTV 영상 수신부터 위험요소 탐지, 구역 판단과 관제 GUI 지도 표시까지 이어지는 FALCON 흐름" loading="lazy"><figcaption>CCTV 영상에서 위험요소를 탐지하고 구역 상태를 판단해 관제 화면의 상태·팝업·지도에 반영하는 흐름</figcaption></figure>
 
 공개 데이터로 학습한 초기 모델은 공항 모형 영상에서 작은 객체를 놓치거나 배경의 ArUco 마커를 위험요소로 오인했습니다. 고정 카메라의 시점과 모형 배경에 맞는 학습 데이터가 필요했습니다.
 

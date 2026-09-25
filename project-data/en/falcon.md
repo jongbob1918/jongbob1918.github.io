@@ -7,26 +7,24 @@ period: May 26–Jul 3, 2025
 context: ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9
 role: Project leadership · Ground-object detection system development · Camera-to-ground zone mapping
 overview: >-
-  While serving as a noncommissioned officer in the Republic of Korea Air Force, I experienced how birds, animals, and debris such as screws and litter on runways can pose a critical risk to aircraft operations. I started this project to automate hazard monitoring with AI and help reduce the staffing shortages and costs associated with manual runway safety management. FALCON supports controllers and pilots in safe aircraft operations through ground-hazard detection, bird-strike risk analysis, and voice guidance. It delivers hazard information detected in CCTV footage through the control interface and voice alerts for pilots. I led the project and was responsible for developing the ground-object detection system and mapping camera-image positions to physical zones.
+  While serving as a noncommissioned officer in the Republic of Korea Air Force, I experienced how birds, animals, and debris such as screws and litter on runways can pose a critical risk to aircraft operations. I started this project to automate hazard monitoring with AI and help reduce the staffing shortages and costs associated with manual runway safety management. FALCON supports controllers and pilots in safe aircraft operations through ground-hazard detection, bird-strike risk analysis, and voice guidance. It delivers hazard information detected in CCTV footage through the control interface and voice alerts for pilots.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU
   title: FALCON ground-hazard monitoring demonstration
 ---
 
-## From hazard detection to controller and pilot guidance
+## Software architecture
 
-Hawkeye displays ground-hazard locations and alerts for controllers. RedWing provides pilots with voice warnings, answers to risk queries, and guidance based on ground marshals’ hand signals. Ground detections and bird-strike risk estimates reach these services through the server.
+The ground- and bird-detection servers, controller PC, and pilot PC connect through the main server. The main server manages detections and risk information and delivers them to the controller interface (Hawkeye) and pilot service (RedWing).
 
-<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Software architecture connecting CCTV detection, the FALCON main server, monitoring GUI, and pilot system" loading="lazy"></figure>
-
-My ground-detection work places hazard locations on the monitoring map so controllers can identify the affected zone.
-
-<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"></figure>
+<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Software architecture connecting CCTV detection, the FALCON main server, monitoring GUI, and pilot system" loading="lazy"><figcaption>Connections between detection servers, the main server and database, the controller PC, and the pilot PC</figcaption></figure>
 
 ## Building the ground-hazard detection system
 
 As the lead of a four-person team, I managed schedules and documentation and was responsible for the ground-object detection system, model research, and training. Synthetic-data generation and ground-detection model development were collaborative work.
+
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"><figcaption>CCTV input, hazard detection, and zone-state assessment leading to status updates, popup alerts, and map display</figcaption></figure>
 
 The initial model trained on public data missed small objects in airport-model footage and sometimes mistook ArUco markers for hazards. Training data needed to reflect the fixed camera view and model background.
 

@@ -14,62 +14,58 @@ demo:
   title: FALCON ground-hazard monitoring demonstration
 ---
 
-## From CCTV footage to an operator alert
+## From hazard detection to controller and pilot guidance
 
-Each camera frame passes through `detection → tracking → coordinate mapping → zone classification → operator display`. The pipeline turns bounding boxes into events that tell an operator where a hazard is and whether the same object is still moving.
-
-<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"></figure>
-
-## Ground-hazard detection and coordinate validation
-
-As the lead of a four-person team, I managed schedules and documentation and integrated the Ground IDS pipeline that turns birds, FOD, people, and vehicles into control-room information. My work covered model research, training and validation on real and synthetic data, the YOLOv8–ByteTrack pipeline, and ArUco-based coordinate-mapping tests. I collaborated with Jinhyeok Jang on synthetic data, Hyojin Park on server and mapping logic, and Jiyeon Kim on the monitoring GUI.
-
-## Why we combined synthetic, real, and negative samples
-
-The initial public-data model missed small objects in the fixed view of our airport model and sometimes classified background ArUco markers as hazards. The training data differed too much from the target camera angle, lighting, and background.
-
-We combined Unity and Blender synthetic images with photos of the physical airport model and object-free negative samples. YOLOv8n-box was retrained for six classes—birds, FOD, people, animals, aircraft, and vehicles—using 960×960 inputs for 150 epochs.
-
-<dl class="flow"><dt>Problem</dt><dd>The public-data model did not generalize to small objects and the background of the fixed CCTV view.</dd><dt>Data</dt><dd>We combined Unity and Blender images, real model-airport footage, and object-free negative samples.</dd><dt>Training</dt><dd>YOLOv8n-box was retrained for six classes at 960×960 for 150 epochs.</dd><dt>Validation</dt><dd>We checked both metrics on a held-out set and multi-object detections in real airport-model footage.</dd></dl>
-
-<figure class="feature-media"><img src="../assets/images/falcon_synthetic_dataset.gif" alt="Building FALCON ground-hazard training data with Blender and airport-model footage" loading="lazy"></figure>
-
-## Model validation with metrics and real footage
-
-We compared the class-wise precision–recall curves of the original public-data segmentation model and the hybrid detection model. Precision in the baseline dropped quickly as recall increased, while the hybrid model stayed closer to the upper-right region for all six classes.
-
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="Class-wise precision–recall curves of the baseline FALCON segmentation model" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Class-wise precision–recall curves of the FALCON hybrid detection model" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
-
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
-
-Ground Model v0.3 achieved these values and detected multiple classes in real airport-model footage. Because the repository does not preserve whether the baseline metrics used the identical evaluation split, I do not claim a numerical improvement percentage; the PR-curve shapes are used only as comparative evidence.
-
-## Six-class detection and object tracking
-
-YOLOv8 inference feeds ByteTrack with persistence enabled so the same object retains its track ID across frames. Post-processing then derives states needed by the monitoring system.
-
-<dl class="flow"><dt>Tracking</dt><dd>ByteTrack IDs become FALCON object IDs, preserving a hazard's motion across frames.</dd><dt>Worker status</dt><dd>The fluorescent-pixel ratio in the upper 60% of a person's bounding box separates workers in safety vests from other people.</dd><dt>Service vehicle</dt><dd>Yellow and black pixel ratios distinguish service vehicles from ordinary vehicles.</dd><dt>Fall event</dt><dd>A person's bounding-box aspect ratio and its duration create a separate rescue-stage event.</dd></dl>
-
-<div class="media-grid"><figure class="feature-media"><img src="../assets/images/falcon_ground_detection.webp" alt="FALCON detecting six ground-hazard classes on the airport model" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_worker_classification.gif" alt="FALCON post-processing that distinguishes fluorescent-vest workers" loading="lazy"></figure></div>
-
-## Mapping pixels to physical coordinates with ArUco markers
-
-A bounding box only identifies a location in the image. To place it on the runway map, the system finds the centers of ArUco markers 0–3 and pairs them with four measured reference points to calculate a homography.
-
-<div class="formula-block">λ [x<sub>map</sub>, y<sub>map</sub>, 1]ᵀ = H [u<sub>pixel</sub>, v<sub>pixel</sub>, 1]ᵀ</div>
-
-<figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="Correspondence between measured runway-model coordinates and ArUco pixel coordinates" loading="lazy"></figure>
-
-The center of each detection is converted into millimeter map coordinates with `perspectiveTransform`. Calibration is generated only when all four reference markers are visible, and the mapped position is compared with runway, taxiway, and grass boundaries to assign a zone.
-
-## Sending detection events to the monitoring server
-
-The detector separates a calibration Map Mode from an Object Mode for hazard detection. Object ID, class, coordinate, and confidence values become JSON events sent to the main server through a TCP queue; server commands can switch between the two modes.
-
-If the connection drops, a communication thread retries every five seconds. Newlines delimit messages so multiple JSON commands received together can be reconstructed in order. This keeps network latency out of the vision loop and lets the GUI update detections, map markers, and alert history.
+Hawkeye displays ground-hazard locations and alerts for controllers. RedWing provides pilots with voice warnings, answers to risk queries, and guidance based on ground marshals’ hand signals. Ground detections and bird-strike risk estimates reach these services through the server.
 
 <figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Software architecture connecting CCTV detection, the FALCON main server, monitoring GUI, and pilot system" loading="lazy"></figure>
 
-## Ground-hazard detection demonstration
+My ground-detection work places hazard locations on the monitoring map so controllers can identify the affected zone.
+
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"></figure>
+
+## Building the ground-hazard detection system
+
+As the lead of a four-person team, I managed schedules and documentation and was responsible for the ground-object detection system, model research, and training. Synthetic-data generation and ground-detection model development were collaborative work.
+
+The initial model trained on public data missed small objects in airport-model footage and sometimes mistook ArUco markers for hazards. Training data needed to reflect the fixed camera view and model background.
+
+We combined synthetic images produced by the team in Unity and Blender with photographs of the airport model and background images without target objects (negative samples). YOLOv8n-box was retrained with 960×960 inputs for 150 epochs and a batch size of 8 to detect six classes: birds, debris, people, animals, aircraft, and vehicles.
+
+<figure class="feature-media"><img src="../assets/images/falcon_synthetic_dataset.gif" alt="Building FALCON ground-hazard training data with Blender and airport-model footage" loading="lazy"></figure>
+
+## Tracking objects and locating them in physical zones
+
+Detection results feed ByteTrack to follow the same object across frames. Post-processing uses safety-vest and vehicle colors to distinguish workers from other people and service vehicles from ordinary vehicles.
+
+To place detections on the monitoring map, image pixels must be matched to physical zone coordinates. I researched and tested ArUco-based coordinate mapping; the backend team member designed the transformation logic.
+
+Image coordinates and measured positions of four reference markers define a planar transformation matrix (homography). OpenCV’s `perspectiveTransform` maps detection-box centers to model-map coordinates, which are then checked against runway, taxiway, and grass zones.
+
+<figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="Correspondence between measured runway-model coordinates and ArUco pixel coordinates" loading="lazy"></figure>
+
+Object identifiers, classes, coordinates, and confidence scores are sent to the monitoring server. The server and monitoring interface were implemented by their respective team members and use these results to update map markers and popup alerts.
+
+## Model evaluation and airport-model demonstrations
+
+These Ground Model v0.3 results are recorded in the project README. The dataset combines synthetic images and photographs of the airport model, with approximately 69.4% allocated to training, 20.9% to validation, and 9.8% to testing. The README does not specify whether the metrics below come from the validation or test split.
+
+<div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
+
+The precision–recall curves below show the initial model trained on public data and the model retrained on mixed data. Matching evaluation conditions have not been established, so these curves are not used to calculate a percentage improvement.
+
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="Class-wise precision–recall curves of the baseline FALCON segmentation model" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Class-wise precision–recall curves of the FALCON hybrid detection model" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
+
+Airport-model footage demonstrated detection of multiple object classes and identification of workers by safety-vest color. The following video shows ground-hazard detection in operation.
+
+<div class="media-grid"><figure class="feature-media"><img src="../assets/images/falcon_ground_detection.webp" alt="FALCON detecting six ground-hazard classes on the airport model" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_worker_classification.gif" alt="FALCON post-processing that distinguishes fluorescent-vest workers" loading="lazy"></figure></div>
 
 <figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/-si0u8I1h2A?list=PLCGG9KRfKwMmQqXvp43pChNMyyLSyjHp9&amp;index=4" title="FALCON ground-hazard detection demonstration" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure>
+
+## Limitations and next steps
+
+**From a model to an airport:** The results presented here come from synthetic data and airport-model footage. Deployment at an actual airport requires further evaluation across camera distances, lighting, and weather conditions.
+
+**Coordinate-mapping validation:** My work included mapping research and tests, but this page does not present measured position errors or their test conditions. Further validation should compare mapped positions with known reference locations and measure errors and zone-classification accuracy near boundaries.
+
+**Operational evaluation:** Detection metrics alone do not establish the impact on monitoring work. Next steps include measuring the delay from video input to displayed alerts, false-alarm frequency, and missed hazards.

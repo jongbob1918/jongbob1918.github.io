@@ -6,7 +6,7 @@ order: 4
 title: 한성대×로보시지 제1회 Physical AI 해커톤
 description: ACT 모방학습으로 SO-101 양팔의 공 전달·색상 분류 미션에 도전한 해커톤 참가 기록
 team: 4명
-period: "2026.02"
+period: "2026.02.08~02.09"
 skills:
   - LeRobot
   - ACT

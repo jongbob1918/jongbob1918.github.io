@@ -25,17 +25,15 @@ overview: >-
 
 ## Problem Statement
 
-기존 시스템은 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 1 Noetic과 자율주행 패키지 move_base를 사용했습니다. 로봇의 동작은 현재 상태와 전환 조건에 따라 다음 행동을 정하는 상태 머신(State Machine)으로 관리했습니다.
+기존 시스템은 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 1 Noetic과 자율주행 패키지 move_base를 사용했습니다. 로봇의 동작은 상태 머신(State Machine)으로 관리했습니다.
 
-[ROS 1 Noetic의 공식 지원은 2025년 5월 31일 종료되었습니다](https://www.ros.org/blog/noetic-eol/). 기존 move_base 기반 구성에서 사용할 수 있는 알고리즘과 시스템 구조에도 서비스 확장을 위한 한계가 있어, ROS 2 Humble로 전환하고 자율주행과 의사결정 구조를 재설계했습니다.
+기존 ROS 1의 유지보수 지원이 종료되고, move_base 기반 구성에서 사용할 수 있는 알고리즘과 시스템 구조에도 서비스 확장의 한계가 있었습니다. 이에 ROS 2 Humble로 전환하고 자율주행과 의사결정 구조를 재설계했습니다.
 
-## 필요한 알고리즘의 ROS 2 포팅
+## ROS 2 포팅
 
 기존 코드 전체를 옮기기보다 새 시스템에 필요한 부분을 선별했습니다. 3차원 레이저 센서인 3D LiDAR(Light Detection and Ranging)를 이용한 지도 작성·동시 위치 추정 알고리즘(SLAM, Simultaneous Localization and Mapping)과 사전 지도 기반 위치 추정(Localization) 등을 ROS 2 Humble로 포팅했습니다.
 
 경로 계획과 주행 제어는 Nav2(Navigation2)를 중심으로 구성했습니다.
-
-## 행동 트리 도입과 기능별 모듈화
 
 상태 머신 기반 의사결정 구조를 변경해, 조건 확인과 행동 실행을 트리로 구성하는 행동 트리(Behavior Tree)를 도입했습니다.
 

@@ -108,7 +108,7 @@
         <details class="case-section case-disclosure" id="ko-challenge-5-방문객을-고려한-안전-규칙">
           <summary class="case-heading"><h2>Challenge 5: 방문객을 고려한 안전 규칙</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
-<p>기존 컨트롤러로 주행할 때, 내비게이션은 장애물이 많아도 회피 경로를 만들어 주행을 이어갔습니다. 서오릉에 방문객이 많은 시간대에는 로봇에 관심을 보이며 가까이 다가오거나 둘러싸는 사람들이 있었습니다. 사람의 움직임은 예측하기 어려워, 회피 주행을 하더라도 충돌할 수 있다고 판단했습니다.</p>
+<p>기존 내비게이션 로직은 장애물이 많아도 회피 경로를 만들어 주행을 이어갔습니다. 서오릉에 방문객이 많은 시간대에는 로봇에 관심을 보이며 가까이 다가오거나 둘러싸는 사람들이 있었습니다. 사람의 움직임은 예측하기 어려워, 회피 주행을 하더라도 충돌할 수 있다고 판단했습니다.</p>
 <h3>Solution</h3>
 <p>로봇 주변에 안전 범위를 설정해 사람이 들어오면 정지하고, 범위 안에 사람이 없어지면 주행을 재개하도록 했습니다.</p>
 </div>
@@ -212,7 +212,7 @@
         <details class="case-section case-disclosure" id="en-challenge-5-safety-rules-for-visitors">
           <summary class="case-heading"><h2>Challenge 5: Safety rules for visitors</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
-<p>With the existing controller, navigation kept driving by planning a path around obstacles, even when many were present. During busy visiting hours at Seooreung, some visitors approached the robot or surrounded it out of curiosity. Because people move unpredictably, I judged that the robot could still collide with someone while driving around them.</p>
+<p>The existing navigation logic kept driving by planning a path around obstacles, even when many were present. During busy visiting hours at Seooreung, some visitors approached the robot or surrounded it out of curiosity. Because people move unpredictably, I judged that the robot could still collide with someone while driving around them.</p>
 <h3>Solution</h3>
 <p>I set a safety zone around the robot so that it stops when a person enters the zone and resumes driving when the zone is clear.</p>
 </div>

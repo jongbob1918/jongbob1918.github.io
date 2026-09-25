@@ -108,7 +108,7 @@ I improved startup acceleration handling and excessive velocity output in narrow
 
 ### Problem
 
-With the existing controller, navigation kept driving by planning a path around obstacles, even when many were present. During busy visiting hours at Seooreung, some visitors approached the robot or surrounded it out of curiosity. Because people move unpredictably, I judged that the robot could still collide with someone while driving around them.
+The existing navigation logic kept driving by planning a path around obstacles, even when many were present. During busy visiting hours at Seooreung, some visitors approached the robot or surrounded it out of curiosity. Because people move unpredictably, I judged that the robot could still collide with someone while driving around them.
 
 ### Solution
 

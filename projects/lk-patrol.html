@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="실주행 기록으로 위치추정과 장시간 실행 중 발생한 문제를 분석·수정하고, 기록 데이터 재생으로 수정 사항을 검증했습니다.">
+  <meta name="description" content="야외 지도를 작성하고 위치 추정 오류를 디버깅했습니다. 주행 중 수집한 센서 데이터를 재생해 수정 결과를 확인했습니다.">
   <title>야외 순찰 로봇 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="야외 순찰 로봇 — Jongmyung Kim" data-title-en="Outdoor patrol robot — Jongmyung Kim" data-description-ko="실주행 기록으로 위치추정과 장시간 실행 중 발생한 문제를 분석·수정하고, 기록 데이터 재생으로 수정 사항을 검증했습니다." data-description-en="Analyzed and addressed localization and extended-runtime issues using field recordings, then replayed the data to verify the changes.">
+<body data-page="project-detail" data-title-ko="야외 순찰 로봇 — Jongmyung Kim" data-title-en="Outdoor patrol robot — Jongmyung Kim" data-description-ko="야외 지도를 작성하고 위치 추정 오류를 디버깅했습니다. 주행 중 수집한 센서 데이터를 재생해 수정 결과를 확인했습니다." data-description-en="Built outdoor maps and debugged localization issues. Replayed sensor data from field tests to check the fixes.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -21,24 +21,24 @@
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>야외 순찰 로봇</h1>
-      <div class="meta"><span><strong>담당:</strong> 야외 지도 생성·위치추정 분석 및 안정화</span></div>
+      <div class="meta"><span><strong>담당:</strong> 지도 작성, 위치 추정 디버깅</span></div>
       <p class="project-skills">ROS 2 · 3D LiDAR · SLAM · Localization · C++</p>
       
     </header>
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">야외 순찰 로봇의 지도 생성과 위치추정 분석을 담당했습니다. 실주행 기록을 바탕으로 위치추정과 장시간 실행 중 발생한 문제를 분석하고 수정했습니다. 수정 전후에 같은 기록 데이터를 재생해 문제의 재발 여부를 확인했습니다.</p>
+      <p class="lead">야외 순찰 로봇이 주행할 때 사용하는 지도를 작성했습니다. 센서 데이터와 로그를 분석해 위치 추정 오류와 장시간 실행 시 발생하는 문제를 디버깅했습니다. 코드 수정 후에는 같은 데이터를 재생해 문제가 다시 발생하는지 확인했습니다.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-실주행-기록으로-문제-원인-좁히기">
-          <div class="case-heading"><h2>실주행 기록으로 문제 원인 좁히기</h2></div>
-          <p>엘케이로보틱스에서 야외 지도 생성과 위치추정 분석·안정화를 담당했습니다. 센서 입력과 위치추정 결과를 시간 순서대로 비교해 문제가 발생한 단계를 좁혔습니다.</p>
-<p>증상이 비슷해도 원인이 다를 수 있어, 위치추정 품질과 프로그램 실행 안정성을 나누어 점검했습니다. 수정 후에는 같은 기록 데이터를 재생해 변경 전후를 비교하고 재발 여부를 확인했습니다.</p>
+        <section class="case-section" id="ko-로그-분석과-재현-테스트">
+          <div class="case-heading"><h2>로그 분석과 재현 테스트</h2></div>
+          <p>센서 데이터의 수신 시각과 위치 계산 결과의 출력 시각을 비교해 오류가 발생한 시점을 찾았습니다. 위치 계산이 잘못되는 문제와 프로그램 실행 중 발생하는 문제를 구분해 원인을 분석했습니다.</p>
+<p>현장에서 수집한 데이터를 재생해 같은 조건으로 테스트했습니다. 코드 수정 전후의 로그를 비교하고, 기존 문제가 다시 발생하는지 확인했습니다.</p>
 
         </section>
       </article>
@@ -47,24 +47,24 @@
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
       <h1>Outdoor patrol robot</h1>
-      <div class="meta"><span><strong>Role:</strong> Outdoor mapping, localization diagnosis and stabilization</span></div>
+      <div class="meta"><span><strong>Role:</strong> Mapping and localization debugging</span></div>
       <p class="project-skills">ROS 2 · 3D LiDAR · SLAM · Localization · C++</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I worked on mapping and localization diagnosis for an outdoor patrol robot. I used field recordings to investigate and address localization and extended-runtime issues. Replaying the same data before and after changes allowed me to check whether the issues recurred.</p>
+      <p class="lead">I built maps used by an outdoor patrol robot. I analyzed sensor data and logs to debug localization errors and problems during long runs. After changing the code, I replayed the same data to check whether the problems recurred.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-narrowing-down-causes-with-field-recordings">
-          <div class="case-heading"><h2>Narrowing down causes with field recordings</h2></div>
-          <p>At LK Robotics, I worked on outdoor mapping, localization diagnosis, and stabilization. I compared sensor input and position estimates over time to identify the stage where a problem began.</p>
-<p>Since similar symptoms can have different causes, I examined localization quality and program stability separately. After making changes, I replayed the same data to compare behavior and check for recurrence.</p>
+        <section class="case-section" id="en-log-analysis-and-reproduction-tests">
+          <div class="case-heading"><h2>Log analysis and reproduction tests</h2></div>
+          <p>I compared sensor-input and position-output timestamps to identify when errors occurred. I investigated incorrect position estimates separately from problems with program execution.</p>
+<p>I replayed field data to test under the same input conditions. I compared logs before and after code changes and checked whether the original problems recurred.</p>
 
         </section>
       </article>

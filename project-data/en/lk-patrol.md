@@ -1,16 +1,16 @@
 ---
 slug: lk-patrol
 title: Outdoor patrol robot
-description: Analyzed and addressed localization and extended-runtime issues using field recordings, then replayed the data to verify the changes.
-role: Outdoor mapping, localization diagnosis and stabilization
+description: Built outdoor maps and debugged localization issues. Replayed sensor data from field tests to check the fixes.
+role: Mapping and localization debugging
 overview: >-
-  I worked on mapping and localization diagnosis for an outdoor patrol robot.
-  I used field recordings to investigate and address localization and extended-runtime issues.
-  Replaying the same data before and after changes allowed me to check whether the issues recurred.
+  I built maps used by an outdoor patrol robot.
+  I analyzed sensor data and logs to debug localization errors and problems during long runs.
+  After changing the code, I replayed the same data to check whether the problems recurred.
 ---
 
-## Narrowing down causes with field recordings
+## Log analysis and reproduction tests
 
-At LK Robotics, I worked on outdoor mapping, localization diagnosis, and stabilization. I compared sensor input and position estimates over time to identify the stage where a problem began.
+I compared sensor-input and position-output timestamps to identify when errors occurred. I investigated incorrect position estimates separately from problems with program execution.
 
-Since similar symptoms can have different causes, I examined localization quality and program stability separately. After making changes, I replayed the same data to compare behavior and check for recurrence.
+I replayed field data to test under the same input conditions. I compared logs before and after code changes and checked whether the original problems recurred.

@@ -1,16 +1,16 @@
 ---
 slug: lk-biped
 title: Biped navigation on flat ground and stairs
-description: Implemented path planning and control connecting flat-ground travel with stairs, and checked entry conditions and control transitions on the physical robot.
-role: Path planning, stair control and floor-map transition integration
+description: Developed path planning and motion control for flat ground and stairs, then tested stair entry and driving-mode changes on the robot.
+role: Path planning, stair control and floor-map switching
 overview: >-
-  I developed navigation connecting flat-ground travel and stair traversal for a biped robot.
-  My work covered path planning, stair control, and floor-map transition integration.
-  Physical robot trials checked stair-entry conditions and behavior at transitions between driving modes.
+  I developed autonomous navigation for a biped robot moving on flat ground and stairs.
+  I worked on the software that generates paths and velocity commands.
+  I implemented stair control and floor-map switching and tested them on the robot.
 ---
 
-## Connecting and testing movement segments
+## Stair navigation tests
 
-At LK Robotics, I implemented path planning and control linking flat-ground travel with stairs. My contribution was the navigation layer above the robot's balance and locomotion control.
+I varied the stair-entry angle and checked the robot’s motion. I also tested driving-mode changes as the robot approached stairs from flat ground.
 
-Physical trials examined stair entry, traversal, and driving-mode transitions separately. I analyzed recordings from problematic segments and organized follow-up checks by test condition.
+When a problem occurred, I analyzed the navigation logs to determine whether it happened during the approach or on the stairs. I recorded the test conditions and results and listed the remaining checks.

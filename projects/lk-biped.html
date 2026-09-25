@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="평지 주행과 계단 이동을 연계하는 경로 계획·제어 로직을 구현하고, 실기 시험으로 진입 조건과 제어 전환 동작을 확인했습니다.">
+  <meta name="description" content="평지와 계단을 이동하는 로봇의 경로 계획과 주행 제어를 개발하고, 실제 로봇으로 계단 진입과 주행 모드 전환을 테스트했습니다.">
   <title>이족 로봇의 평지·계단 내비게이션 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="이족 로봇의 평지·계단 내비게이션 — Jongmyung Kim" data-title-en="Biped navigation on flat ground and stairs — Jongmyung Kim" data-description-ko="평지 주행과 계단 이동을 연계하는 경로 계획·제어 로직을 구현하고, 실기 시험으로 진입 조건과 제어 전환 동작을 확인했습니다." data-description-en="Implemented path planning and control connecting flat-ground travel with stairs, and checked entry conditions and control transitions on the physical robot.">
+<body data-page="project-detail" data-title-ko="이족 로봇의 평지·계단 내비게이션 — Jongmyung Kim" data-title-en="Biped navigation on flat ground and stairs — Jongmyung Kim" data-description-ko="평지와 계단을 이동하는 로봇의 경로 계획과 주행 제어를 개발하고, 실제 로봇으로 계단 진입과 주행 모드 전환을 테스트했습니다." data-description-en="Developed path planning and motion control for flat ground and stairs, then tested stair entry and driving-mode changes on the robot.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -21,24 +21,24 @@
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>이족 로봇의 평지·계단 내비게이션</h1>
-      <div class="meta"><span><strong>담당:</strong> 경로 계획·계단 제어·층간 지도 전환 연동</span></div>
+      <div class="meta"><span><strong>담당:</strong> 경로 계획, 계단 주행 제어, 층별 지도 전환</span></div>
       <p class="project-skills">ROS 2 · Navigation · Path Planning · Robot Control</p>
       
     </header>
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">이족 로봇의 평지 주행과 계단 이동을 연결하는 내비게이션을 개발했습니다. 경로 계획과 계단 제어, 층간 지도 전환 연동을 담당했습니다. 실제 로봇 시험으로 계단 진입 조건과 주행 방식이 바뀌는 구간의 동작을 확인했습니다.</p>
+      <p class="lead">평지와 계단을 이동하는 이족 로봇의 자율주행 기능을 개발했습니다. 로봇이 따라갈 경로와 속도 명령을 만드는 소프트웨어를 담당했습니다. 계단 주행 제어와 층별 지도 전환을 구현하고 실제 로봇에서 테스트했습니다.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-이동-구간별-동작을-연결하고-시험하기">
-          <div class="case-heading"><h2>이동 구간별 동작을 연결하고 시험하기</h2></div>
-          <p>엘케이로보틱스에서 평지와 계단을 연계하는 경로 계획·제어 로직을 구현했습니다. 로봇의 균형·보행 제어와 구분되는 상위 내비게이션을 담당했습니다.</p>
-<p>실기 시험에서는 계단 진입, 계단 이동, 주행 방식 전환을 나누어 확인했습니다. 문제가 나타난 구간의 기록을 분석하고, 시험 조건을 구분해 후속 검증 항목을 정리했습니다.</p>
+        <section class="case-section" id="ko-계단-주행-테스트">
+          <div class="case-heading"><h2>계단 주행 테스트</h2></div>
+          <p>계단 진입 각도를 바꿔가며 로봇의 움직임을 확인했습니다. 평지에서 계단으로 진입할 때 주행 모드가 전환되는지도 테스트했습니다.</p>
+<p>문제가 발생하면 주행 로그를 분석해 계단에 접근하는 과정과 계단을 오르내리는 과정 중 어디에서 발생했는지 확인했습니다. 테스트 조건과 결과를 기록하고 추가로 확인할 항목을 정리했습니다.</p>
 
         </section>
       </article>
@@ -47,24 +47,24 @@
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
       <h1>Biped navigation on flat ground and stairs</h1>
-      <div class="meta"><span><strong>Role:</strong> Path planning, stair control and floor-map transition integration</span></div>
+      <div class="meta"><span><strong>Role:</strong> Path planning, stair control and floor-map switching</span></div>
       <p class="project-skills">ROS 2 · Navigation · Path Planning · Robot Control</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I developed navigation connecting flat-ground travel and stair traversal for a biped robot. My work covered path planning, stair control, and floor-map transition integration. Physical robot trials checked stair-entry conditions and behavior at transitions between driving modes.</p>
+      <p class="lead">I developed autonomous navigation for a biped robot moving on flat ground and stairs. I worked on the software that generates paths and velocity commands. I implemented stair control and floor-map switching and tested them on the robot.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-connecting-and-testing-movement-segments">
-          <div class="case-heading"><h2>Connecting and testing movement segments</h2></div>
-          <p>At LK Robotics, I implemented path planning and control linking flat-ground travel with stairs. My contribution was the navigation layer above the robot&#39;s balance and locomotion control.</p>
-<p>Physical trials examined stair entry, traversal, and driving-mode transitions separately. I analyzed recordings from problematic segments and organized follow-up checks by test condition.</p>
+        <section class="case-section" id="en-stair-navigation-tests">
+          <div class="case-heading"><h2>Stair navigation tests</h2></div>
+          <p>I varied the stair-entry angle and checked the robot’s motion. I also tested driving-mode changes as the robot approached stairs from flat ground.</p>
+<p>When a problem occurred, I analyzed the navigation logs to determine whether it happened during the approach or on the stairs. I recorded the test conditions and results and listed the remaining checks.</p>
 
         </section>
       </article>

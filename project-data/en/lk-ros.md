@@ -1,16 +1,16 @@
 ---
 slug: lk-ros
 title: Robot system migration from ROS 1 to ROS 2
-description: Migrated mapping, localization, and navigation to ROS 2, and investigated and reduced position-output delays during extended operation.
-role: Robot software migration and runtime diagnosis
+description: Ported mapping, localization, and navigation code to ROS 2 and fixed delayed position output during long runs.
+role: ROS 2 porting, functional testing and latency analysis
 overview: >-
-  I worked on migrating robot software between versions of the Robot Operating System (ROS).
-  I moved mapping, localization, and navigation functions to ROS 2 and checked their connections.
-  Extended-runtime tests revealed position-output delays that I investigated and addressed.
+  I ported existing ROS 1 robot software to ROS 2.
+  The Robot Operating System (ROS) is a software framework used to develop sensor-processing and robot-control programs.
+  I tested mapping, localization, and navigation after the migration.
 ---
 
-## Comparing behavior before and after migration
+## Testing after the port
 
-At LK Robotics, I worked on software migration and runtime checks. I compared data delivery and execution conditions to preserve existing functionality in the new environment.
+I compared the original and ported code to check data delivery and processing. After the build passed, I connected sensors and tested each function.
 
-After checking builds and connections, I examined whether processing delays accumulated during extended operation. Comparing sensor-input and output timestamps helped narrow down the cause, followed by comparison tests before and after the changes.
+Long-running tests revealed delayed position output. I measured the delay between sensor input and position output to investigate the cause, then changed the code and repeated the test under the same conditions.

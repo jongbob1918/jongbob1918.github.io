@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="지도 생성·위치추정·주행 기능의 ROS 2 전환을 담당하고, 장시간 실행 중 발생하는 위치 정보 지연 문제를 분석·개선했습니다.">
+  <meta name="description" content="지도 작성·위치 추정·주행 코드를 ROS 2로 포팅하고, 장시간 실행 시 위치 정보가 늦게 출력되는 문제를 수정했습니다.">
   <title>로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim" data-title-en="Robot system migration from ROS 1 to ROS 2 — Jongmyung Kim" data-description-ko="지도 생성·위치추정·주행 기능의 ROS 2 전환을 담당하고, 장시간 실행 중 발생하는 위치 정보 지연 문제를 분석·개선했습니다." data-description-en="Migrated mapping, localization, and navigation to ROS 2, and investigated and reduced position-output delays during extended operation.">
+<body data-page="project-detail" data-title-ko="로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim" data-title-en="Robot system migration from ROS 1 to ROS 2 — Jongmyung Kim" data-description-ko="지도 작성·위치 추정·주행 코드를 ROS 2로 포팅하고, 장시간 실행 시 위치 정보가 늦게 출력되는 문제를 수정했습니다." data-description-en="Ported mapping, localization, and navigation code to ROS 2 and fixed delayed position output during long runs.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -21,24 +21,24 @@
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
       <h1>로봇 시스템 ROS 1 → ROS 2 전환</h1>
-      <div class="meta"><span><strong>담당:</strong> 로봇 소프트웨어 이식 및 실행 구조 점검</span></div>
+      <div class="meta"><span><strong>담당:</strong> ROS 2 포팅, 기능 테스트, 지연 원인 분석</span></div>
       <p class="project-skills">ROS 2 · SLAM · Navigation · C++</p>
       
     </header>
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">로봇 소프트웨어 프레임워크 ROS(Robot Operating System)의 버전 전환을 담당했습니다. 지도 생성·위치추정·주행 기능을 ROS 2 환경으로 옮기고 기능 간 연결을 점검했습니다. 장시간 실행 시험에서 발견한 위치 정보 지연을 분석하고 개선했습니다.</p>
+      <p class="lead">기존 ROS 1 기반 로봇 소프트웨어를 ROS 2로 포팅했습니다. ROS(Robot Operating System)는 센서 처리와 로봇 제어 프로그램을 개발할 때 사용하는 소프트웨어 프레임워크입니다. 지도 작성, 위치 추정, 주행 기능이 전환 후에도 동작하는지 테스트했습니다.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-전환-전후의-실행-동작-비교">
-          <div class="case-heading"><h2>전환 전후의 실행 동작 비교</h2></div>
-          <p>엘케이로보틱스에서 로봇 소프트웨어 이식과 실행 구조 점검을 담당했습니다. 기존 기능이 새 환경에서도 이어지도록 데이터 전달과 실행 조건을 비교했습니다.</p>
-<p>빌드와 연결 확인 이후에는 장시간 실행 중 처리 지연이 누적되는지 점검했습니다. 센서 입력과 처리 결과의 시간 차이를 분석해 지연 원인을 좁히고, 수정 전후를 비교 시험했습니다.</p>
+        <section class="case-section" id="ko-포팅-후-기능-테스트">
+          <div class="case-heading"><h2>포팅 후 기능 테스트</h2></div>
+          <p>기존 코드와 포팅한 코드를 비교하며 데이터가 정상적으로 전달되고 처리되는지 확인했습니다. 빌드가 완료된 뒤에는 센서를 연결해 각 기능의 동작을 테스트했습니다.</p>
+<p>장시간 실행 테스트에서는 위치 정보가 늦게 출력되는 문제가 있었습니다. 센서 입력과 위치 정보 출력 사이의 지연 시간을 확인해 원인을 분석하고, 코드를 수정한 뒤 같은 조건으로 다시 테스트했습니다.</p>
 
         </section>
       </article>
@@ -47,24 +47,24 @@
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
       <h1>Robot system migration from ROS 1 to ROS 2</h1>
-      <div class="meta"><span><strong>Role:</strong> Robot software migration and runtime diagnosis</span></div>
+      <div class="meta"><span><strong>Role:</strong> ROS 2 porting, functional testing and latency analysis</span></div>
       <p class="project-skills">ROS 2 · SLAM · Navigation · C++</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">I worked on migrating robot software between versions of the Robot Operating System (ROS). I moved mapping, localization, and navigation functions to ROS 2 and checked their connections. Extended-runtime tests revealed position-output delays that I investigated and addressed.</p>
+      <p class="lead">I ported existing ROS 1 robot software to ROS 2. The Robot Operating System (ROS) is a software framework used to develop sensor-processing and robot-control programs. I tested mapping, localization, and navigation after the migration.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-comparing-behavior-before-and-after-migration">
-          <div class="case-heading"><h2>Comparing behavior before and after migration</h2></div>
-          <p>At LK Robotics, I worked on software migration and runtime checks. I compared data delivery and execution conditions to preserve existing functionality in the new environment.</p>
-<p>After checking builds and connections, I examined whether processing delays accumulated during extended operation. Comparing sensor-input and output timestamps helped narrow down the cause, followed by comparison tests before and after the changes.</p>
+        <section class="case-section" id="en-testing-after-the-port">
+          <div class="case-heading"><h2>Testing after the port</h2></div>
+          <p>I compared the original and ported code to check data delivery and processing. After the build passed, I connected sensors and tested each function.</p>
+<p>Long-running tests revealed delayed position output. I measured the delay between sensor input and position output to investigate the cause, then changed the code and repeated the test under the same conditions.</p>
 
         </section>
       </article>

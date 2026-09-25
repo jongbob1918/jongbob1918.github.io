@@ -54,7 +54,7 @@ ROOMIE는 엘리베이터 앞까지 자율주행한 뒤 외부 호출 버튼을 
 
 Vision Service가 검출한 버튼의 중심 픽셀 `(u, v)`와 Bounding Box 너비 `Wpx`를 입력으로 사용했습니다. 버튼의 실제 지름은 `D = 35 mm`로 설정하고, 카메라 내부 파라미터 `(fx, fy, cx, cy)`를 이용해 카메라에서 버튼까지의 거리와 방향을 계산했습니다.
 
-<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="2D 카메라 영상에서 검출한 엘리베이터 버튼과 Bounding Box" loading="lazy"><figcaption>버튼 중심과 Bounding Box 크기를 위치 추정 입력으로 사용</figcaption></figure>
+<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="2D 카메라 영상에서 검출한 엘리베이터 버튼과 Bounding Box" loading="lazy"></figure>
 
 <div class="formula-block">Z ≈ f<sub>x</sub>D / W<sub>px</sub> &nbsp;·&nbsp; X = (u-c<sub>x</sub>)Z/f<sub>x</sub> &nbsp;·&nbsp; Y = (v-c<sub>y</sub>)Z/f<sub>y</sub></div>
 
@@ -64,13 +64,15 @@ Vision Service가 검출한 버튼의 중심 픽셀 `(u, v)`와 Bounding Box 너
 
 현재 관절각 `q`의 Forward Kinematics로 `Tbase←tool`을 계산하고, Hand–Eye Calibration으로 구한 고정 변환 `Ttool←camera`를 적용했습니다. 그 결과 카메라 기준 버튼 위치를 로봇 베이스 기준 목표 `p_base`로 변환해 4축 역기구학의 입력으로 사용했습니다.
 
-<figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 좌표를 로봇 베이스 기준 목표와 관절 제어로 연결하는 원리" loading="lazy"><figcaption>버튼의 영상 좌표를 카메라·Tool·Base 좌표계를 거쳐 로봇팔의 목표로 변환하는 구조</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="카메라 영상의 버튼 좌표를 로봇 베이스 기준 목표와 관절 제어로 연결하는 원리" loading="lazy"></figure>
 
 ## 4축 IK 목표 검증
 
 변환된 목표 위치는 `ikpy` 기반 4관절 역기구학으로 계산했습니다. 현재 관절각을 초기값으로 사용하고, 계산 결과를 Forward Kinematics로 다시 검산해 수치 잔차가 1 mm를 넘거나 관절 제한을 벗어나면 이동을 실패 처리했습니다.
 
-<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video><figcaption>IK 목표 제어 실험. 실제 로봇팔의 이동과 RViz 관절 모델을 함께 확인했습니다.</figcaption></figure>
+목표 제어 실험에서는 실제 로봇팔의 이동과 RViz 관절 모델을 함께 확인했습니다.
+
+<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video></figure>
 
 여기서 1 mm는 IK 수치해의 허용 잔차이며 실제 로봇팔 끝단의 절대 정확도를 의미하지는 않습니다.
 
@@ -82,7 +84,9 @@ Vision Service가 검출한 버튼의 중심 픽셀 `(u, v)`와 Bounding Box 너
 
 <div class="diagram" role="img" aria-label="ROOMIE 본체 접근부터 버튼 클릭까지의 순서"><div class="diagram-node">본체 정밀 접근</div><div class="diagram-arrow">→</div><div class="diagram-node owner">OBSERVE_POSE</div><div class="diagram-arrow">→</div><div class="diagram-node owner">버튼 위치 계산</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Standby<br>80 mm</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Press<br>100 mm</div><div class="diagram-arrow">→</div><div class="diagram-node">Retreat</div></div>
 
-<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video><figcaption>개발 환경에서 관측 자세와 버튼 접근 동작을 확인한 실험</figcaption></figure>
+개발 환경에서 관측 자세와 버튼 접근 동작을 확인했습니다.
+
+<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">브라우저가 MP4 영상을 지원하지 않습니다.</video></figure>
 
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE가 엘리베이터 버튼 가까이 정밀하게 접근하는 과정" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE 로봇팔이 엘리베이터 외부 호출 버튼을 누르는 과정" loading="lazy"></figure></div>
 

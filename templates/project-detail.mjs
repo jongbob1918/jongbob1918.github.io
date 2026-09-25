@@ -35,7 +35,7 @@ const renderDemo = (demo, language) => {
     if (demo.href) media = `<a href="${escapeHtml(demo.href)}" target="_blank" rel="noopener noreferrer">${media}</a>`;
   }
 
-  return `<section class="demo-section" id="demo-${language}"><figure class="feature-media">${media}${demo.caption ? `<figcaption>${escapeHtml(demo.caption)}</figcaption>` : ''}</figure></section>`;
+  return `<section class="demo-section" id="demo-${language}"><figure class="feature-media">${media}</figure></section>`;
 };
 
 const renderOverviewNote = note => {

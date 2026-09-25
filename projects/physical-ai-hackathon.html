@@ -43,7 +43,8 @@
         <section class="case-section" id="ko-모델-선택">
           <div class="case-heading"><h2>모델 선택</h2></div>
           <p>제한된 시간 안에 구현과 테스트를 마치기 위해 LeRobot에서 지원하는 ACT를 사용했습니다. ACT는 카메라 영상과 관절 상태를 바탕으로 여러 동작을 한 번에 예측해 집기·전달·분류 같은 연속 동작을 제어합니다.</p>
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure><figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="리더 로봇팔을 조작해 두 대의 SO-101 팔의 시연 데이터를 기록하는 텔레오퍼레이션 모습" loading="lazy"><figcaption>텔레오퍼레이션 · 사람이 리더 팔을 움직이며 카메라 영상, 관절 상태와 행동을 에피소드로 기록</figcaption></figure>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="학습 단계의 CVAE 스타일 변수 인코더와 다중 카메라·관절 상태에서 행동 시퀀스를 출력하는 ACT Transformer 구조" loading="lazy"></figure><p>사람이 리더 로봇팔을 움직이며 카메라 영상, 관절 상태와 동작을 에피소드로 기록했습니다.</p>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="리더 로봇팔을 조작해 두 대의 SO-101 팔의 시연 데이터를 기록하는 텔레오퍼레이션 모습" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="ko-1차-시도-다섯-개의-공을-한-번에-학습시키기">
@@ -65,7 +66,7 @@
           <div class="case-heading"><h2>심사 결과: 5개 중 3개 성공</h2></div>
           <p>최종적으로 공 5개를 각각 200회씩 기록해 약 1,000개의 단일 태스크 시연 데이터를 확보했습니다. 마감이 오전 9시였기 때문에 학습을 더 이어가지 못하고, 당시 15,000 step까지 학습된 체크포인트로 심사를 진행했습니다.</p>
 <p>로봇은 다섯 개의 공 가운데 세 개를 집어 전달하고 색상별 수납함에 넣는 데 성공했습니다. 네 번째 공을 처리하는 과정에서 오른팔이 수납함을 넘어뜨렸고, 환경이 흐트러져 남은 시연은 더 이상 진행할 수 없었습니다. 완주에는 실패했지만, 데이터 전략을 바꾼 뒤 실제 심사 환경에서 세 번의 연속 성공을 확인했습니다.</p>
-<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"><figcaption>실제 양팔 조작 · 공 집기, 그리퍼 간 전달, 색상별 수납함 분류</figcaption></figure>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="두 SO-101 로봇팔이 공을 집어 서로 전달하고 색상별 수납함에 넣는 실제 시연" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="ko-회고-모방을-넘어-판단할-수-있는-구조가-필요했다">
@@ -107,7 +108,8 @@
         <section class="case-section" id="en-model-selection">
           <div class="case-heading"><h2>Model selection</h2></div>
           <p>We chose ACT, supported by LeRobot, to finish implementation and testing within the limited event time. ACT predicts a chunk of actions from camera images and joint states, enabling continuous pick, transfer, and sorting motion.</p>
-<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="ACT Transformer with a CVAE-style latent encoder and action-sequence output from cameras and joint state" loading="lazy"></figure><figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="Teleoperation setup recording demonstrations for two SO-101 arms" loading="lazy"><figcaption>Teleoperation · A human moves the leader arms while camera images, joint states, and actions are recorded as episodes</figcaption></figure>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="ACT Transformer with a CVAE-style latent encoder and action-sequence output from cameras and joint state" loading="lazy"></figure><p>A human moved the leader arms while camera images, joint states, and actions were recorded as episodes.</p>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="Teleoperation setup recording demonstrations for two SO-101 arms" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="en-first-attempt-learn-all-five-balls-in-one-sequence">
@@ -129,7 +131,7 @@
           <div class="case-heading"><h2>Judging result: three of five balls</h2></div>
           <p>We ultimately recorded about 1,000 single-task demonstrations, 200 for each of five balls. The 9 a.m. deadline prevented further training, so judging used the checkpoint at 15,000 steps.</p>
 <p>The robots successfully picked, transferred, and sorted three balls. While processing the fourth, the right arm knocked over a bin and disrupted the environment, ending the run. Although the full sequence was not completed, the revised data strategy produced three consecutive successes in the judging setup.</p>
-<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"><figcaption>Physical bimanual manipulation · grasp, gripper-to-gripper transfer, and color sorting</figcaption></figure>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="en-reflection-the-system-needed-decisions-beyond-imitation">

@@ -24,7 +24,9 @@ We chose ACT, supported by LeRobot, to finish implementation and testing within 
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/act_architecture.png" alt="ACT Transformer with a CVAE-style latent encoder and action-sequence output from cameras and joint state" loading="lazy"></figure>
 
-<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="Teleoperation setup recording demonstrations for two SO-101 arms" loading="lazy"><figcaption>Teleoperation · A human moves the leader arms while camera images, joint states, and actions are recorded as episodes</figcaption></figure>
+A human moved the leader arms while camera images, joint states, and actions were recorded as episodes.
+
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/teleop.jpg" alt="Teleoperation setup recording demonstrations for two SO-101 arms" loading="lazy"></figure>
 
 ## First attempt: learn all five balls in one sequence
 
@@ -50,7 +52,7 @@ We ultimately recorded about 1,000 single-task demonstrations, 200 for each of f
 
 The robots successfully picked, transferred, and sorted three balls. While processing the fourth, the right arm knocked over a bin and disrupted the environment, ending the run. Although the full sequence was not completed, the revised data strategy produced three consecutive successes in the judging setup.
 
-<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"><figcaption>Physical bimanual manipulation · grasp, gripper-to-gripper transfer, and color sorting</figcaption></figure>
+<figure class="feature-media hackathon-wide-media"><img src="https://raw.githubusercontent.com/TheMomentLab/physical_ai_hackathon/main/assets/demo.gif" alt="Two SO-101 arms picking, transferring, and sorting balls into color-coded bins" loading="lazy"></figure>
 
 ## Reflection: the system needed decisions beyond imitation
 

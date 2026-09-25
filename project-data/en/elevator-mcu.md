@@ -16,7 +16,7 @@ demo:
 
 Four red LEDs mark the floors, and six yellow LEDs show movement between them. Each floor has a button and a green LED to indicate an active call.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-hardware.webp" alt="Arduino circuit with four red floor LEDs, six yellow movement LEDs, and a button and green call LED for each floor" loading="lazy"><figcaption>Four floors with two yellow LEDs between each pair of red LEDs</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-hardware.webp" alt="Arduino circuit with four red floor LEDs, six yellow movement LEDs, and a button and green call LED for each floor" loading="lazy"></figure></div>
 
 The elevator starts at floor 1. Pressing a button registers a call; pressing it again cancels it. The position advances one LED every 0.5 seconds, and the call LED turns off when the elevator reaches that floor.
 
@@ -24,7 +24,7 @@ The elevator starts at floor 1. Pressing a button registers a call; pressing it 
 
 The initial design used a queue to serve calls in the order they arrived. But if a call for floor 2 arrived before the elevator passed it on the way from floor 1 to floor 4, that later call should be served first. Handling new calls and cancellations during movement meant inserting or removing floor numbers and adjusting the queue order.
 
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="Initial design storing called floors in a queue" loading="lazy"><figcaption>The initial call queue</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="New calls and cancellations requiring changes to the queue during movement" loading="lazy"><figcaption>Changes needed when calls are added or canceled</figcaption></figure></div>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="Initial design storing called floors in a queue" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="New calls and cancellations requiring changes to the queue during movement" loading="lazy"></figure></div>
 
 ## Improved design approach
 
@@ -32,7 +32,7 @@ I recorded whether each floor had an active call and selected the next target us
 
 While moving up, the elevator looks for the nearest call above it, then searches below if none remain above. While moving down, it searches in the reverse order. With no calls left, it moves to the nearest floor and waits.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="Examples showing different call orders during upward and downward travel" loading="lazy"><figcaption>The same active calls are served in a different order depending on direction.</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="Examples showing different call orders during upward and downward travel" loading="lazy"></figure></div>
 
 ## Button input and movement
 
@@ -40,12 +40,12 @@ To change the call state only once when a button is held down, I detect the tran
 
 The program repeatedly checks buttons and selects the target, while elapsed time determines when to advance one LED every 0.5 seconds. Button checks continue between movement steps, allowing new calls and cancellations to be handled.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="Main loop checking buttons and the target repeatedly while moving at 500 ms intervals" loading="lazy"><figcaption>Input and target checks run each loop; movement runs at timed intervals.</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="Main loop checking buttons and the target repeatedly while moving at 500 ms intervals" loading="lazy"></figure></div>
 
 ## Tests
 
 I defined eight test cases covering single calls, new calls during movement, cancellations, and idle behavior. The table lists the expected behavior for each input sequence.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="Eight test cases listing expected behavior for call sequences and cancellations" loading="lazy"><figcaption>Test inputs and expected results</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="Eight test cases listing expected behavior for call sequences and cancellations" loading="lazy"></figure></div>
 
 The demo at the top shows a short interaction. Other call sequences can be tried in the [Tinkercad simulation](https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled).

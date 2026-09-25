@@ -18,13 +18,13 @@ demo:
 
 The ground- and bird-detection servers, controller PC, and pilot PC connect through the main server. The main server manages detections and risk information and delivers them to the controller interface (Hawkeye) and pilot service (RedWing).
 
-<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Software architecture connecting CCTV detection, the FALCON main server, monitoring GUI, and pilot system" loading="lazy"><figcaption>Connections between detection servers, the main server and database, the controller PC, and the pilot PC</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Software architecture connecting CCTV detection, the FALCON main server, monitoring GUI, and pilot system" loading="lazy"></figure>
 
 ## Building the ground-hazard detection system
 
 As the lead of a four-person team, I managed schedules and documentation and was responsible for the ground-object detection system, model research, and training. Synthetic-data generation and ground-detection model development were collaborative work.
 
-<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"><figcaption>CCTV input, hazard detection, and zone-state assessment leading to status updates, popup alerts, and map display</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"></figure>
 
 ### Training and evaluating the model for the airport model
 
@@ -38,9 +38,9 @@ The retrained ground-object detection model (v0.3) achieved the following metric
 
 <div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
 
-The precision–recall curves below show the initial and retrained models.
+The precision–recall curves show the initial model trained on public data on the left and the model retrained on mixed data on the right.
 
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="Class-wise precision–recall curves of the baseline FALCON segmentation model" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Class-wise precision–recall curves of the FALCON hybrid detection model" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="Class-wise precision–recall curves of the baseline FALCON segmentation model" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Class-wise precision–recall curves of the FALCON hybrid detection model" loading="lazy"></figure></div>
 
 Whether these metrics were measured on validation or test data still needs to be confirmed. Matching evaluation conditions for the two models have also not been established, so the curves alone cannot quantify the improvement.
 

@@ -31,13 +31,13 @@ demo:
 
 지상·조류 탐지 서버와 관제 PC, 조종사 PC를 메인 서버로 연결했습니다. 메인 서버는 탐지 결과와 위험정보를 관리하고, 관제 화면(Hawkeye)과 조종사 서비스(RedWing)에 전달합니다.
 
-<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="CCTV 탐지 서버, FALCON Main Server, 관제 GUI와 조종사 시스템을 연결한 전체 소프트웨어 구조" loading="lazy"><figcaption>탐지 서버, 메인 서버·데이터베이스, 관제 PC와 조종사 PC의 연결 구조</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="CCTV 탐지 서버, FALCON Main Server, 관제 GUI와 조종사 시스템을 연결한 전체 소프트웨어 구조" loading="lazy"></figure>
 
 ## 지상 위험요소 탐지 시스템 구축
 
 4명으로 구성된 팀의 팀장으로 일정과 문서를 관리하고, 지상 객체 탐지 시스템 구축과 모델 기술조사·학습을 담당했습니다. 합성 데이터 생성과 지상 탐지 모델 제작은 팀원과 협업했습니다.
 
-<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="CCTV 영상 수신부터 위험요소 탐지, 구역 판단과 관제 GUI 지도 표시까지 이어지는 FALCON 흐름" loading="lazy"><figcaption>CCTV 영상에서 위험요소를 탐지하고 구역 상태를 판단해 관제 화면의 상태·팝업·지도에 반영하는 흐름</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="CCTV 영상 수신부터 위험요소 탐지, 구역 판단과 관제 GUI 지도 표시까지 이어지는 FALCON 흐름" loading="lazy"></figure>
 
 ### 모형 환경에 맞춘 모델 학습과 평가
 
@@ -51,9 +51,9 @@ demo:
 
 <div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
 
-초기 모델과 재학습 모델의 정밀도·재현율 곡선(PR Curve)을 함께 제시했습니다.
+왼쪽은 공개 데이터로 학습한 초기 모델, 오른쪽은 혼합 데이터로 재학습한 모델의 정밀도·재현율 곡선(PR Curve)입니다.
 
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="공개 데이터로 학습한 기존 FALCON Segmentation 모델의 클래스별 PR Curve" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="실사와 합성 데이터를 결합한 FALCON Hybrid Detection 모델의 클래스별 PR Curve" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="공개 데이터로 학습한 기존 FALCON Segmentation 모델의 클래스별 PR Curve" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="실사와 합성 데이터를 결합한 FALCON Hybrid Detection 모델의 클래스별 PR Curve" loading="lazy"></figure></div>
 
 위 수치가 검증용·테스트용 데이터 중 어느 쪽의 결과인지는 확인이 필요합니다. 두 모델의 평가 조건도 동일한지 확인되지 않아, 곡선만으로 성능 개선 폭을 단정하기는 어렵습니다.
 

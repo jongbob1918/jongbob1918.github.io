@@ -31,15 +31,15 @@ When a user requests a book, the central system checks the robot's status and ba
 
 JAVIS must pass through narrow aisles and stop at a designated shelf to pick up or return a book. We created an occupancy-grid map with Cartographer and a 2D LiDAR, then removed unnecessary regions and corrected shelf boundaries with a map editor.
 
-<figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="Library occupancy map showing shelves, aisles, waypoints, and the robot position" loading="lazy"><figcaption>2D library occupancy map generated with Cartographer</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="Library occupancy map showing shelves, aisles, waypoints, and the robot position" loading="lazy"></figure>
 
 The first configuration used Nav2's DWB Controller. It worked in open areas, but repeatedly stopped when it could not find a feasible turning trajectory in narrow or blocked spaces. Increasing costmap inflation made aisles appear impassable, while reducing it brought the robot too close to shelves.
 
-<figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="Early DWB navigation test in which JAVIS cannot turn in a narrow space" loading="lazy"><figcaption>Early DWB test failing to turn in a narrow aisle</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="Early DWB navigation test in which JAVIS cannot turn in a narrow space" loading="lazy"></figure>
 
 I replaced the global planner with Smac Planner Hybrid, which accounts for the rectangular footprint, turning radius, and reverse paths. I tuned the LiDAR filters and inflation values to the physical robot and applied the MPPI Controller to evaluate multiple candidate trajectories.
 
-<figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="JAVIS following a narrow-aisle route with Smac Planner Hybrid and MPPI in RViz" loading="lazy"><figcaption>Navigating a narrow aisle after applying Smac Planner Hybrid and MPPI</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/javis_nav_rviz.gif" alt="JAVIS following a narrow-aisle route with Smac Planner Hybrid and MPPI in RViz" loading="lazy"></figure>
 
 Tests in the real library confirmed that JAVIS could pass narrow shelves and low-clearance turning areas to reach its pickup and return positions.
 

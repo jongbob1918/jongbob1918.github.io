@@ -36,7 +36,7 @@ We used an educational four-axis arm costing roughly KRW 50,000 for the bare mec
 
 The input consists of the detected button center `(u, v)` and bounding-box width `Wpx`. With the physical button diameter set to `D = 35 mm`, the camera intrinsics `(fx, fy, cx, cy)` estimate its distance and direction.
 
-<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="Elevator button and bounding box detected in the 2D camera image" loading="lazy"><figcaption>The button center and bounding-box size are used for position estimation</figcaption></figure>
+<figure class="feature-media portrait-evidence"><img src="../assets/images/roomie-button-detection-cropped.webp" alt="Elevator button and bounding box detected in the 2D camera image" loading="lazy"></figure>
 
 <div class="formula-block">Z ≈ f<sub>x</sub>D / W<sub>px</sub> &nbsp;·&nbsp; X = (u-c<sub>x</sub>)Z/f<sub>x</sub> &nbsp;·&nbsp; Y = (v-c<sub>y</sub>)Z/f<sub>y</sub></div>
 
@@ -46,13 +46,15 @@ The pinhole model approximates depth `Z` from the ratio between the physical dia
 
 Forward kinematics at joint state `q` provides `Tbase←tool`, and hand–eye calibration provides the fixed `Ttool←camera`. Their composition converts the camera-frame button location into the base-frame target `p_base` used by the four-axis inverse kinematics solver.
 
-<figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="Transformation from an image-space button coordinate through camera, tool, and base frames to arm control" loading="lazy"><figcaption>Converting image coordinates into a base-frame target for the manipulator</figcaption></figure>
+<figure class="feature-media"><img src="../assets/images/roomie_arm_principle.png" alt="Transformation from an image-space button coordinate through camera, tool, and base frames to arm control" loading="lazy"></figure>
 
 ## Validating four-axis IK targets
 
 The target position is solved with `ikpy` for four joints. The current joint angles initialize the solver, and forward kinematics checks the result. A numerical residual above 1 mm or a joint-limit violation marks the motion as failed.
 
-<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">Your browser does not support MP4 video.</video><figcaption>IK target-control test comparing physical arm motion with the RViz joint model</figcaption></figure>
+The target-control test compared physical arm motion with the RViz joint model.
+
+<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-ik-target-control-poster.jpg"><source src="../assets/videos/roomie-ik-target-control.mp4" type="video/mp4">Your browser does not support MP4 video.</video></figure>
 
 The 1 mm value is the numerical IK tolerance, not the absolute end-effector accuracy of the physical arm.
 
@@ -64,7 +66,9 @@ The arm's total link length is about 33.5 cm, which limits its independent works
 
 <div class="diagram" role="img" aria-label="Sequence from ROOMIE base approach to button press"><div class="diagram-node">Precise base approach</div><div class="diagram-arrow">→</div><div class="diagram-node owner">OBSERVE_POSE</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Estimate button</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Standby<br>80 mm</div><div class="diagram-arrow">→</div><div class="diagram-node owner">Press<br>100 mm</div><div class="diagram-arrow">→</div><div class="diagram-node">Retreat</div></div>
 
-<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">Your browser does not support MP4 video.</video><figcaption>Development test of the observation pose and button approach</figcaption></figure>
+The observation pose and button approach were tested in the development environment.
+
+<figure class="feature-media evidence-video"><video controls playsinline preload="metadata" poster="../assets/images/roomie-button-click-poster.jpg"><source src="../assets/videos/roomie-button-click.mp4" type="video/mp4">Your browser does not support MP4 video.</video></figure>
 
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/elevator-alignbutton.gif" alt="ROOMIE approaching and aligning near an elevator button" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-pushouterbutton2.gif" alt="ROOMIE arm pressing an external elevator call button" loading="lazy"></figure></div>
 

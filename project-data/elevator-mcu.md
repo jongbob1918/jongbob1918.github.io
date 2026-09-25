@@ -31,7 +31,7 @@ demo:
 
 빨간 LED 4개는 각 층의 위치, 노란 LED 6개는 층 사이의 이동을 나타냅니다. 층마다 버튼과 초록 LED를 하나씩 두어 호출 여부를 표시했습니다.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-hardware.webp" alt="Arduino에 층 표시용 빨간 LED 4개, 이동 표시용 노란 LED 6개, 호출용 버튼과 초록 LED를 연결한 회로" loading="lazy"><figcaption>빨간 LED 사이에 노란 LED를 두 개씩 배치한 4층 회로</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-hardware.webp" alt="Arduino에 층 표시용 빨간 LED 4개, 이동 표시용 노란 LED 6개, 호출용 버튼과 초록 LED를 연결한 회로" loading="lazy"></figure></div>
 
 시작하면 1층에서 대기합니다. 버튼을 한 번 누르면 해당 층이 호출되고, 다시 누르면 취소됩니다. 이동할 때는 0.5초 간격으로 LED를 한 칸씩 옮기며, 도착한 층의 호출 LED는 꺼집니다.
 
@@ -39,7 +39,7 @@ demo:
 
 처음에는 먼저 들어온 호출부터 처리하는 큐 방식으로 설계했습니다. 하지만 1층에서 4층으로 이동하다가 2층을 지나기 전에 2층 호출이 들어오면, 나중에 들어온 호출을 먼저 처리해야 했습니다. 이동 중 호출 추가와 취소를 반영하려면 큐 중간에 층 번호를 넣거나 지우고, 처리 순서도 다시 정해야 했습니다.
 
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="호출된 층을 순서대로 큐에 저장하는 초기 설계" loading="lazy"><figcaption>처음 구상한 호출 큐</figcaption></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="이동 중 호출 추가와 취소로 큐 순서를 수정해야 하는 상황" loading="lazy"><figcaption>호출이 바뀔 때 큐를 수정해야 하는 문제</figcaption></figure></div>
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-design.webp" alt="호출된 층을 순서대로 큐에 저장하는 초기 설계" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/elevator-mcu-queue-problem.webp" alt="이동 중 호출 추가와 취소로 큐 순서를 수정해야 하는 상황" loading="lazy"></figure></div>
 
 ## 개선 방법론
 
@@ -47,7 +47,7 @@ demo:
 
 올라가는 중에는 위쪽의 가까운 호출부터 찾고, 위에 호출이 없으면 아래쪽을 찾습니다. 내려가는 중에는 반대로 처리합니다. 호출이 모두 사라지면 가장 가까운 층으로 이동해 대기합니다.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="상승 중일 때와 하강 중일 때 호출 처리 순서가 달라지는 예시" loading="lazy"><figcaption>같은 호출이 남아 있어도 진행 방향에 따라 처리 순서가 달라집니다.</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-direction-example.webp" alt="상승 중일 때와 하강 중일 때 호출 처리 순서가 달라지는 예시" loading="lazy"></figure></div>
 
 ## 버튼 입력과 이동 처리
 
@@ -55,12 +55,12 @@ demo:
 
 버튼 확인과 목적층 선택은 반복해서 수행하고, 이동은 경과 시간을 확인해 0.5초마다 LED를 한 칸씩 옮기도록 했습니다. 다음 이동 시점까지 기다리는 동안에도 버튼을 확인하므로 새 호출과 취소를 반영할 수 있습니다.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="버튼 확인과 목적층 탐색을 반복하고 500 ms 간격으로 이동하는 메인 루프 순서도" loading="lazy"><figcaption>입력과 목적층은 매 루프 확인하고, 이동은 시간 간격에 맞춰 실행합니다.</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-loop-flow.webp" alt="버튼 확인과 목적층 탐색을 반복하고 500 ms 간격으로 이동하는 메인 루프 순서도" loading="lazy"></figure></div>
 
 ## 테스트
 
 단일 호출, 이동 중 추가 호출, 호출 취소, 대기 상태 등을 8개 테스트 케이스로 정리했습니다. 아래 표는 각 입력에 대한 기대 동작입니다.
 
-<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="호출 순서와 취소 여부에 따른 기대 동작을 정리한 8개 테스트 케이스 표" loading="lazy"><figcaption>테스트 입력 순서와 예상 결과</figcaption></figure></div>
+<div class="media-stack"><figure class="feature-media"><img src="../assets/images/elevator-mcu-test-cases.webp" alt="호출 순서와 취소 여부에 따른 기대 동작을 정리한 8개 테스트 케이스 표" loading="lazy"></figure></div>
 
 페이지 상단 데모에는 간단한 조작을 담았습니다. 다른 호출 순서는 [Tinkercad 시뮬레이션](https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled)에서 직접 실행할 수 있습니다.

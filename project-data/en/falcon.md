@@ -26,35 +26,31 @@ The ground- and bird-detection servers, controller PC, and pilot PC connect thro
 
 <figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Detection servers connected through the main server to the controller interface and pilot service" loading="lazy"></figure>
 
-## Object detection model troubleshooting
+## Training the initial hazard detection model
 
 We defined six ground-object classes: birds, debris, wild animals, people, vehicles, and aircraft. The initial model was trained on roughly 15,000 public images but struggled to detect small objects in footage of the airport model.
 
-Real airport photographs differed from our test setup in object size, shape, and background. We built training data that reflected the model environment to reduce this gap.
+We rebuilt the training data to reduce differences in object size, shape, and background between airport photographs and our model environment.
 
 ## Improving the model with mixed training data
 
-The team scanned physical models in 3D and used Polycam and Blender to build a virtual airport environment. A teammate implemented the Unity environment and automatic labeling pipeline, varying camera angles and lighting while generating images and object-location labels together.
+The team recreated the physical models in a virtual environment using Polycam and Blender. The teammate responsible for synthetic data used Unity to vary camera angles and lighting and automatically generate images and object-location labels.
 
 <figure class="feature-media"><img src="../assets/images/falcon_synthetic_pipeline.webp" alt="Presentation slide 60: Unity pipeline varying camera angles and lighting while automatically generating object labels" loading="lazy"></figure>
 
-We combined 3,000 synthetic images with 1,000 photographs. We trained YOLOv8n, a lightweight model that locates and classifies objects, for 100 passes through the training data.
+We trained the lightweight object detection model YOLOv8n on 3,000 synthetic images and 1,000 photographs.
 
-## Comparing detections on test data
-
-We evaluated models trained on public, synthetic, photographed, and mixed images using test images of the airport model and objects. The public-image model was trained for 150 epochs; the other models were trained for 100. The model trained on mixed synthetic and photographed images performed best in this comparison.
-
-The precision–recall curves below show the relationship between how many detections are correct and how many target objects are found. The mixed-data model maintained high values for both across all six classes.
+## Detection performance by training data
 
 <figure class="feature-media"><img src="../assets/images/falcon_dataset_evaluation.webp" alt="Presentation slide 62: class-wise precision–recall curves on test data for the four training-data configurations" loading="lazy"></figure>
 
-The mixed-data model achieved a mean average precision (mAP) of **0.930** at a 50% overlap threshold between predicted and reference boxes, and **0.7207** averaged across thresholds from 50% to 95%. We selected this model for ground-object detection.
+We selected the model trained on mixed synthetic and photographed images, which performed best in testing, for ground detection.
 
 ## Placing detected objects on the map
 
-To display objects on the controller map, we needed to convert image pixels into coordinates on the airport model. I researched and tested coordinate mapping with square reference markers (ArUco); the backend teammate designed the transformation logic.
+We used square reference markers (ArUco) to map image positions to map coordinates. I researched and tested the mapping; the backend teammate designed the transformation logic.
 
-We measured marker-center locations on the model and found the corresponding pixel positions in camera images. These pairs define a planar transformation matrix, or homography, that maps the center of each detected object onto the map. The mapped position determines whether the object is on a runway, taxiway, or grass area.
+Measured marker positions and their image coordinates define a planar transformation matrix, or homography. We used it to map object locations and classify them as runway, taxiway, or grass areas.
 
 <figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="Measured ArUco marker locations on the airport model paired with their pixel positions in camera footage" loading="lazy"></figure>
 

@@ -4,7 +4,7 @@ shortName: FALCON
 category: addinedu
 order: 3
 title: FALCON — 활주로 운항안전서비스
-description: CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템
+description: 지상 위험요소 탐지와 조류 충돌 위험 분석, 음성 안내로 관제사와 조종사를 지원하는 AI 운항안전서비스
 team: 4명
 period: 2025.05.26–07.03
 context: ADDINEDU · ROS2와 인공지능을 활용한 자율주행 로봇 개발자 양성과정 9기
@@ -16,7 +16,7 @@ skills:
   - Homography
   - TCP
 repository: https://github.com/jongbob1918/FALCON
-role: 지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증
+role: 프로젝트 총괄·지상 객체 탐지 시스템 구축·카메라 영상과 실제 구역 위치 정합
 card:
   image: assets/images/hawkeye_mainpage.gif
   imageAlt: FALCON runway hazard detection interface
@@ -26,7 +26,7 @@ card:
     - Homography
     - OpenCV
 overview: >-
-  공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 매년 인력을 투입해 위험을 예방하고 활주로를 관리하지만, 인력 부족과 비용 부담이 있습니다. 이러한 문제를 줄이고자 AI로 활주로 위험요소 감시와 안전관리를 자동화하는 프로젝트를 시작했습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 위험요소가 감지되면 관제에 전달하는 AI 안전 관제 시스템입니다.
+  공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 인력 중심의 활주로 안전관리에서 발생하는 인력 부족과 비용 부담을 줄이고자 AI로 위험요소 감시를 자동화하는 프로젝트를 시작했습니다. FALCON은 지상 위험요소 탐지와 조류 충돌 위험 분석, 음성 안내로 관제사와 조종사의 안전한 항공기 운항을 지원하는 AI 서비스입니다. CCTV에서 감지한 위험정보를 관제 화면과 조종사 음성 경보로 전달합니다. 저는 프로젝트 총괄과 지상 객체 탐지 시스템 구축, 카메라 영상과 실제 구역 위치 정합을 담당했습니다.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU

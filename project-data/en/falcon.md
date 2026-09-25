@@ -1,13 +1,13 @@
 ---
 slug: falcon
 title: FALCON — Runway Operational Safety Service
-description: An AI monitoring system that detects and tracks runway hazards and maps them to real-world coordinates
+description: An AI operational safety service supporting controllers and pilots through ground-hazard detection, bird-strike risk analysis, and voice guidance
 team: 4 members
 period: May 26–Jul 3, 2025
 context: ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9
-role: Detector training, tracking pipeline integration, and coordinate mapping validation
+role: Project leadership · Ground-object detection system development · Camera-to-ground zone mapping
 overview: >-
-  While serving as a noncommissioned officer in the Republic of Korea Air Force, I experienced how birds, animals, and debris such as screws and litter on runways can pose a critical risk to aircraft operations. Personnel are assigned each year to prevent hazards and maintain runway safety, but staffing shortages and costs remain a burden. I started this project to help address these problems by using AI to automate runway hazard monitoring and safety management. FALCON is an AI safety monitoring system that detects and tracks ground hazards in fixed CCTV footage and reports them to operators when detected.
+  While serving as a noncommissioned officer in the Republic of Korea Air Force, I experienced how birds, animals, and debris such as screws and litter on runways can pose a critical risk to aircraft operations. I started this project to automate hazard monitoring with AI and help reduce the staffing shortages and costs associated with manual runway safety management. FALCON supports controllers and pilots in safe aircraft operations through ground-hazard detection, bird-strike risk analysis, and voice guidance. It delivers hazard information detected in CCTV footage through the control interface and voice alerts for pilots. I led the project and was responsible for developing the ground-object detection system and mapping camera-image positions to physical zones.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU

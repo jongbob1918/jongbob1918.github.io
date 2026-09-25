@@ -50,8 +50,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-1-수림과-잔디-구간의-위치-추정">
-          <summary class="case-heading"><h2>Challenge 1: 수림과 잔디 구간의 위치 추정</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+        <details class="case-section case-disclosure" id="ko-challenge-1-수림과-잔디-구간의-위치-추정-틀어짐">
+          <summary class="case-heading"><h2>Challenge 1: 수림과 잔디 구간의 위치 추정 틀어짐</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>센서 데이터를 사전 지도와 맞추는 로컬 정합(Local Matching)이 수 m 앞의 위치에 잘못 맞거나 실패하는 경우가 있었습니다. 실패 후 지도 전체에서 위치를 다시 찾는 전역 위치 추정(Global Localization)도 올바른 후보를 찾기 어려웠고, 계산 부하가 커졌습니다.</p>
 <h3>Root Cause</h3>
@@ -66,8 +66,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-2-맵-전환-후-초기-위치-오류">
-          <summary class="case-heading"><h2>Challenge 2: 맵 전환 후 초기 위치 오류</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+        <details class="case-section case-disclosure" id="ko-challenge-2-맵-전환-후-초기-위치-틀어짐">
+          <summary class="case-heading"><h2>Challenge 2: 맵 전환 후 초기 위치 틀어짐</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>지도를 분할한 뒤, 맵 전환 후 초기 위치를 정확히 지정하지 않으면 위치 추정이 어긋나는 문제가 발생했습니다.</p>
 <h3>Root Cause</h3>
@@ -79,8 +79,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-3-경사와-단차-구간의-장애물-인지">
-          <summary class="case-heading"><h2>Challenge 3: 경사와 단차 구간의 장애물 인지</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+        <details class="case-section case-disclosure" id="ko-challenge-3-경사-단차-구간의-장애물-인지-한계">
+          <summary class="case-heading"><h2>Challenge 3: 경사·단차 구간의 장애물 인지 한계</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>경사로나 단차 구간에서 주행 가능한 지면까지 장애물로 인식하는 문제가 있었습니다.</p>
 <h3>Root Cause</h3>
@@ -90,8 +90,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-4-출발-가속과-좁은-구간의-속도-출력">
-          <summary class="case-heading"><h2>Challenge 4: 출발 가속과 좁은 구간의 속도 출력</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+        <details class="case-section case-disclosure" id="ko-challenge-4-네비게이션-가감속-불안정">
+          <summary class="case-heading"><h2>Challenge 4: 네비게이션 가감속 불안정</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>강화학습 기반 하위 제어기는 로봇의 과거·현재 상태에 따라 반응하므로, 실제 속도가 상위 주행 모듈의 속도 명령과 다르게 나타났습니다. 특히 출발 시 로봇이 기울어지면서 급격하게 가속하는 현상이 있었습니다.</p>
 <h3>First Approach</h3>
@@ -105,8 +105,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-5-방문객-접근-시-안전-정지">
-          <summary class="case-heading"><h2>Challenge 5: 방문객 접근 시 안전 정지</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+        <details class="case-section case-disclosure" id="ko-challenge-5-방문객을-고려한-안전-규칙">
+          <summary class="case-heading"><h2>Challenge 5: 방문객을 고려한 안전 규칙</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>기존 컨트롤러로 주행할 때, 서오릉에 방문객이 많은 시간대에는 로봇에 관심을 보이며 가까이 다가오거나 둘러싸는 사람들이 있었습니다. 이 상황에서는 주변 사람과의 안전거리를 확보하기 위한 별도 처리가 필요했습니다.</p>
 <h3>Solution</h3>
@@ -154,8 +154,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-1-localization-in-woodland-and-grass-covered-areas">
-          <summary class="case-heading"><h2>Challenge 1: Localization in woodland and grass-covered areas</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+        <details class="case-section case-disclosure" id="en-challenge-1-localization-errors-in-woodland-and-grass-covered-areas">
+          <summary class="case-heading"><h2>Challenge 1: Localization errors in woodland and grass-covered areas</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail entirely. The fallback global localization searched the entire map, but struggled to find the correct candidate and increased computational load.</p>
 <h3>Root Cause</h3>
@@ -170,8 +170,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-2-initial-pose-errors-after-map-transitions">
-          <summary class="case-heading"><h2>Challenge 2: Initial-pose errors after map transitions</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+        <details class="case-section case-disclosure" id="en-challenge-2-initial-pose-misalignment-after-map-transitions">
+          <summary class="case-heading"><h2>Challenge 2: Initial-pose misalignment after map transitions</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>After splitting the maps, localization could shift if the initial pose was not specified accurately when switching maps.</p>
 <h3>Root Cause</h3>
@@ -183,8 +183,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-3-obstacle-perception-on-slopes-and-uneven-ground">
-          <summary class="case-heading"><h2>Challenge 3: Obstacle perception on slopes and uneven ground</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+        <details class="case-section case-disclosure" id="en-challenge-3-limits-of-obstacle-perception-on-slopes-and-height-discontinuities">
+          <summary class="case-heading"><h2>Challenge 3: Limits of obstacle perception on slopes and height discontinuities</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>Traversable ground was classified as an obstacle on slopes and uneven sections.</p>
 <h3>Root Cause</h3>
@@ -194,8 +194,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-4-startup-acceleration-and-velocity-output-in-narrow-spaces">
-          <summary class="case-heading"><h2>Challenge 4: Startup acceleration and velocity output in narrow spaces</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+        <details class="case-section case-disclosure" id="en-challenge-4-unstable-acceleration-and-deceleration-during-navigation">
+          <summary class="case-heading"><h2>Challenge 4: Unstable acceleration and deceleration during navigation</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>The reinforcement-learning-based low-level controller responds to the robot’s past and current states, so its actual velocity differed from the command sent by the upper-level navigation module. In particular, the robot would tilt and accelerate abruptly at startup.</p>
 <h3>First Approach</h3>
@@ -209,8 +209,8 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-5-safe-stopping-when-visitors-approach">
-          <summary class="case-heading"><h2>Challenge 5: Safe stopping when visitors approach</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+        <details class="case-section case-disclosure" id="en-challenge-5-safety-rules-for-visitors">
+          <summary class="case-heading"><h2>Challenge 5: Safety rules for visitors</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
 <p>While operating with the existing controller during busy visiting hours at Seooreung, I observed visitors approaching closely or surrounding the robot out of curiosity. These situations required additional handling to maintain a safe distance from nearby people.</p>
 <h3>Solution</h3>

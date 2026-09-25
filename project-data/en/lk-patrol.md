@@ -27,7 +27,7 @@ The upper-level navigation module sends velocity commands to a reinforcement-lea
 
 I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.
 
-## Challenge 1: Localization in woodland and grass-covered areas
+## Challenge 1: Localization errors in woodland and grass-covered areas
 
 ### Problem
 
@@ -51,7 +51,7 @@ I defined acceptance criteria, candidate algorithms, and parameter combinations,
 
 Map splitting reduced the processing area and resource usage. I identified settings that avoided localization jumps across multiple recordings and applied them to field navigation.
 
-## Challenge 2: Initial-pose errors after map transitions
+## Challenge 2: Initial-pose misalignment after map transitions
 
 ### Problem
 
@@ -69,7 +69,7 @@ I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud r
 
 This reduced inconsistencies between independently specified transition positions. Initial poses were set using the coordinate relationship between the maps.
 
-## Challenge 3: Obstacle perception on slopes and uneven ground
+## Challenge 3: Limits of obstacle perception on slopes and height discontinuities
 
 ### Problem
 
@@ -83,7 +83,7 @@ The existing indoor navigation system detected obstacles using z-axis height in 
 
 I applied ground segmentation to 3D LiDAR data. Navigation used the distinction between ground and obstacles so that obstacle avoidance accounted for changes in terrain height.
 
-## Challenge 4: Startup acceleration and velocity output in narrow spaces
+## Challenge 4: Unstable acceleration and deceleration during navigation
 
 ### Problem
 
@@ -105,7 +105,7 @@ I analyzed the Humble MPPI implementation and confirmed the issue causing excess
 
 I improved startup acceleration handling and excessive velocity output in narrow spaces.
 
-## Challenge 5: Safe stopping when visitors approach
+## Challenge 5: Safety rules for visitors
 
 ### Problem
 

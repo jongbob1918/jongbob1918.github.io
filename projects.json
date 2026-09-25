@@ -43,8 +43,8 @@
       "periodEn": "",
       "teamKo": "",
       "teamEn": "",
-      "contributionKo": "자율주행 기능 개발, 로봇 임무 수행 기능 개발, 도킹 기능 개발",
-      "contributionEn": "Autonomous navigation, mission execution, and docking development",
+      "contributionKo": "순찰로봇 자율주행 소프트웨어 개발",
+      "contributionEn": "Autonomous navigation software development for the patrol robot",
       "keywords": [
         "ROS 2",
         "3D LiDAR SLAM / Localization",

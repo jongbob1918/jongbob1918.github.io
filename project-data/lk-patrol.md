@@ -5,7 +5,7 @@ order: 1
 detail: true
 title: 궁능순찰로봇
 description: 고양 서오릉에서 화재와 쓰러진 사람을 탐지하는 순찰로봇의 자율주행 소프트웨어를 개발했습니다. 2 km 순찰 경로를 반복 주행할 수 있도록 장애물 인지와 주행 제어를 개선했습니다.
-role: 자율주행 기능 개발, 로봇 임무 수행 기능 개발, 도킹 기능 개발
+role: 순찰로봇 자율주행 소프트웨어 개발
 skills:
   - ROS 2
   - 3D LiDAR SLAM / Localization

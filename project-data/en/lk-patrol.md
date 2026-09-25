@@ -2,7 +2,7 @@
 slug: lk-patrol
 title: Royal heritage patrol robot
 description: Developed autonomous navigation software for a robot that patrols Seooreung in Goyang to detect fires and fallen people. Improved obstacle perception and motion control for repeated runs along a 2 km patrol route.
-role: Autonomous navigation, mission execution, and docking development
+role: Autonomous navigation software development for the patrol robot
 overview: >-
   This project is a patrol robot that detects fires and fallen people at Seooreung in Goyang.
   I developed autonomous navigation, mission execution, and docking functions.

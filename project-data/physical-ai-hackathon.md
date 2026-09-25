@@ -11,7 +11,6 @@ skills:
   - LeRobot
   - ACT
   - Imitation Learning
-  - Bimanual Manipulation
   - SO-101
 repository: https://github.com/TheMomentLab/physical_ai_hackathon
 card:
@@ -21,7 +20,6 @@ card:
     - LeRobot
     - ACT
     - Imitation Learning
-    - Bimanual Manipulation
     - SO-101
 overview: >-
   한성대학교와 로보시지가 주최한 제1회 Physical AI 해커톤에 4인 팀으로 참가했습니다.

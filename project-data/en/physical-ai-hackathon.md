@@ -34,7 +34,7 @@ We defined fixed pickup positions at the tips of a star-shaped layout to the rig
 
 ### First test
 
-During testing, the robot stopped after dropping a ball instead of picking it up again, and struggled to grasp balls placed outside the fixed training positions. During vertical approaches, the gripper also closed before reaching the ball.
+We tested the model after 20,000 training steps. The robot stopped after dropping a ball instead of picking it up again, and struggled to grasp balls placed outside the fixed training positions. During vertical approaches, the gripper also closed before reaching the ball.
 
 <figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Alternating fixed pickup points in a star-shaped layout beside the basket, followed by failed grasps outside those points, stopping after a dropped ball, and premature gripper closure during vertical approach" loading="lazy"></figure>
 
@@ -48,7 +48,7 @@ We recorded the gripper approaching the ball diagonally rather than descending v
 
 ## Judging result
 
-We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging. The [published final model configuration](https://huggingface.co/Moment-Lab/act_hackathon_roboseasy_final/blob/main/train_config.json) specifies 50,000 steps, distinct from the model used for judging.
+We collected about 1,000 training demonstrations, 200 for each of five balls. To meet the 9 a.m. deadline, we used the model trained to 15,000 steps for judging.
 
 The robots picked, transferred, and sorted three balls consecutively. While handling the fourth, the right arm knocked over a bin, ending the demonstration before we could complete the full sequence. Unfortunately, we did not win an award.
 

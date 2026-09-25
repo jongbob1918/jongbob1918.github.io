@@ -7,59 +7,97 @@ overview: >-
   I contributed autonomous navigation software to the development of a royal heritage patrol robot in collaboration with the Korea Heritage Service. Built on a wheeled biped platform, the robot detects fires and fallen people at Seooreung in Goyang.
 ---
 
-## Localization errors in woodland and grass-covered areas
+## Problem Statement
 
-**Problem** — Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Parts of the patrol area lacked distinctive features for localization. Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail to find a match.
+Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Most of the patrol route consists of dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.
 
-The existing system responded to local matching failures by searching the entire map through global localization. On a large prebuilt map, identifying the correct candidate position was difficult and computational load increased.
+The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment. The main issues were incorrect localization matches, initial-pose errors after map transitions, ground misclassified as obstacles, and abrupt acceleration or excessive velocity commands.
 
-### Splitting maps and linking transition points
+## System Setup
 
-**Solution** — I divided the patrol area and mapped each section separately. I connected the maps with waypoints and loaded the relevant map when the robot reached a transition point. This reduced the map area processed at once and resource usage.
+The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. Data from a 3D Light Detection and Ranging (LiDAR) sensor supported localization against prebuilt maps and ground–obstacle separation.
 
-### Building a replay-based experiment workflow
+I divided the patrol area into maps connected by waypoints. Given a goal, the robot travels through the required transition points, switches maps, and continues to the destination.
 
-**Testing constraints and approach** — Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. There was no existing workflow for recording, replaying, and comparing sensor data. I collected field data over a week using rosbag, a ROS message recording tool, and used it for repeatable experiments.
+I also developed mission execution, docking, and undocking. When people approached, I replaced frequent avoidance maneuvers with stopping and playing an announcement when a person was detected within the configured safety zone.
 
-I defined acceptance criteria, candidate algorithms, and parameter combinations, then used agents to run replay experiments in parallel. I identified settings that avoided localization jumps across multiple recordings and restricted acceptance of local matching results to a configured tolerance.
+## Challenge 1: Localization in woodland and grass-covered areas
 
-**Validation** — I also visualized and compared intervals where incorrect matching candidates were selected. This let me check mismatches the agents could miss and refine the algorithms and parameters.
+### Problem
 
-## Incorrect initial poses after map transitions
+Local matching, which aligns sensor data with a prebuilt map, could incorrectly place the robot several meters ahead or fail entirely. The fallback global localization searched the entire map, but struggled to find the correct candidate and increased computational load.
 
-**Problem** — I implemented navigation so that a goal in another map led the robot through the required transition waypoints, switched maps, and continued to the goal. However, localization could shift if the initial pose in the new map was not specified accurately.
+### Root Cause
 
-**Solution** — I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud registration algorithm, and stored the resulting inter-map coordinate transforms in a shared interface. I linked transition waypoints to the same physical location in both maps and used this correspondence to set the initial pose after switching. This reduced inconsistencies caused by specifying transition positions separately in each map.
+Some woodland and grass-covered sections lacked distinctive features for localization. Searching a large prebuilt map made candidate positions difficult to distinguish and increased the area to process.
 
-## Obstacle perception on slopes and uneven ground
+### Solution
 
-**Environment** — Most of the patrol route consists of dirt paths. Even apparently flat sections differ in elevation, and rain can wash away soil and change the surface and height differences.
+I mapped each section separately and loaded the relevant map at transition waypoints. I reduced the map area processed at once and restricted acceptance of local matching results to a configured tolerance.
 
-**Problem** — The existing indoor navigation system detected obstacles using z-axis height in the robot’s reference frame. Outdoors, elevation changes on slopes and uneven sections caused traversable ground to be classified as obstacles.
+Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. I collected field sensor data over a week using rosbag, a ROS message recording tool, and built a workflow for replaying and comparing data.
 
-**Solution** — I applied ground segmentation to data from a 3D Light Detection and Ranging (LiDAR) sensor, which measures the shape of the surroundings. Navigation used the distinction between ground and obstacles rather than a fixed height threshold, allowing obstacle avoidance to account for changes in terrain height.
+I defined acceptance criteria, candidate algorithms, and parameter combinations, then used agents to run replay experiments in parallel. I visualized and compared intervals with incorrect matching candidates to check mismatches the automated experiments could miss.
 
-## Improving startup acceleration and velocity commands in narrow spaces
+### Result
 
-**Problem** — The wheeled biped robot’s reinforcement-learning-based motion control could accelerate sharply at startup even with the same velocity command. I investigated acceleration handling in the Humble version of the Model Predictive Path Integral (MPPI) controller used in the Navigation2 (Nav2) navigation stack. MPPI evaluates candidate trajectories to produce velocity commands.
+Map splitting reduced the processing area and resource usage. I identified settings that avoided localization jumps across multiple recordings and applied them to field navigation.
 
-**First improvement** — I first applied an exponential moving average (EMA) filter to smooth abrupt changes in the velocity commands.
+## Challenge 2: Initial-pose errors after map transitions
 
-**Remaining problem** — However, excessive MPPI velocity commands remained under conditions where obstacle costs left little traversable space in the map.
+### Problem
 
-**Further improvement** — After analyzing the Humble implementation, I ported the Kilted MPPI controller to improve acceleration handling and excessive velocity output in narrow spaces. Its acceleration constraints can be found in the [official Kilted source code](https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html).
+After splitting the maps, localization could shift if the initial pose was not specified accurately when switching maps.
 
-## Stopping and announcing when people approach
+### Root Cause
 
-**Previous behavior** — The robot made frequent avoidance maneuvers when people approached.
+Transition positions specified separately in each map were not aligned to the same physical location. The initial pose needed to be set in the new map’s coordinate frame.
 
-**Change** — I changed it to stop and play an announcement when a person was detected within the configured safety zone. This added mission exception handling for a patrol route shared with visitors.
+### Solution
 
-## Docking and undocking
+I aligned the prebuilt maps using Iterative Closest Point (ICP), a point-cloud registration algorithm, and stored the resulting inter-map coordinate transforms in a shared interface. I linked transition waypoints to the same physical location in both maps and used this correspondence to set the initial pose after switching.
 
-I developed docking to enter the docking position and undocking to leave it.
+### Result
 
-## Repeated runs along a 2 km route
+This reduced inconsistencies between independently specified transition positions. Initial poses were set using the coordinate relationship between the maps.
+
+## Challenge 3: Obstacle perception on slopes and uneven ground
+
+### Problem
+
+Traversable ground was classified as an obstacle on slopes and uneven sections.
+
+### Root Cause
+
+The existing indoor navigation system detected obstacles using z-axis height in the robot’s reference frame. At Seooreung, even apparently flat sections differ in elevation, and rain changes the surface. A fixed height threshold could not reliably distinguish ground from obstacles.
+
+### Solution
+
+I applied ground segmentation to 3D LiDAR data. Navigation used the distinction between ground and obstacles so that obstacle avoidance accounted for changes in terrain height.
+
+## Challenge 4: Startup acceleration and velocity output in narrow spaces
+
+### Problem
+
+The reinforcement-learning-based motion control could accelerate sharply at startup even with the same velocity command. I investigated acceleration handling in the Humble version of the Model Predictive Path Integral (MPPI) controller, which evaluates candidate trajectories to produce velocity commands.
+
+### First Approach
+
+I applied an exponential moving average (EMA) filter to smooth abrupt changes in velocity commands.
+
+### Remaining Problem
+
+Excessive MPPI velocity commands remained when obstacle costs left little traversable space in the map. Filtering the output alone was insufficient, so I investigated the controller implementation.
+
+### Solution
+
+After analyzing the Humble implementation, I ported the Kilted MPPI controller. Its acceleration constraints can be found in the [official source code](https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html).
+
+### Result
+
+I improved startup acceleration handling and excessive velocity output in narrow spaces.
+
+## Field Validation
 
 After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.
 

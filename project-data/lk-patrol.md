@@ -27,9 +27,9 @@ demo:
 
 ## Problem Statement
 
-고양 서오릉은 [전체 면적이 약 187만 m²인 유적지](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0)로, 수림과 수풀·잔디가 넓게 분포합니다. 순찰 경로는 대부분 흙길이며 경사와 요철이 많고, 비가 오면 흙이 유실돼 지형도 달라집니다.
+고양 서오릉은 [전체 면적이 약 187만 m²인 유적지](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0)로, 수림과 수풀·잔디가 넓게 분포되어 있고, 산책로는 대부분 흙길이며 경사와 요철이 많고, 비가 오면 흙이 유실돼 지형도 달라집니다.
 
-개발 과제는 이 환경에서 위치 추정을 유지하며 2 km 순찰 경로를 반복 주행하도록 만드는 것이었습니다. 주요 문제는 위치 오정합, 맵 전환 후 초기 위치 오류, 경사진 지면의 장애물 오인식, 급격한 가속과 과도한 속도 출력, 방문객 접근 시의 안전 확보였습니다.
+개발 과제는 이 환경에서 위치 추정을 유지하며 2 km 순찰 경로를 반복 주행하도록 만드는 것이었습니다.
 
 ## System Setup
 

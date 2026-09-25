@@ -15,9 +15,9 @@ demo:
 
 ## Problem Statement
 
-Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Most of the patrol route consists of dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.
+Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Most walking trails are dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.
 
-The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment. The main issues were incorrect localization matches, initial-pose errors after map transitions, ground misclassified as obstacles, abrupt acceleration or excessive velocity commands, and safe handling of approaching visitors.
+The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment.
 
 ## System Setup
 

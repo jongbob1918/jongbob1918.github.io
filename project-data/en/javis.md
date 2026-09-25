@@ -27,7 +27,7 @@ When a user requests a book, the central system checks the robot's status and ba
 
 <figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="Service flow from book selection and authentication to JAVIS pickup and delivery" loading="lazy"></figure>
 
-## Autonomous navigation for pickup and return
+## Autonomous navigation in narrow spaces resembling a library
 
 JAVIS must pass through narrow aisles and stop at a designated shelf to pick up or return a book. We created an occupancy-grid map with Cartographer and a 2D LiDAR, then removed unnecessary regions and corrected shelf boundaries with a map editor.
 

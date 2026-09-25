@@ -41,8 +41,8 @@
 <figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="도서 선택부터 인증, JAVIS 작업과 도서 수령까지의 서비스 흐름" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="ko-픽업-반납-자율주행">
-          <div class="case-heading"><h2>픽업·반납 자율주행</h2></div>
+        <section class="case-section" id="ko-도서관과-유사한-좁은-공간에서-자율주행">
+          <div class="case-heading"><h2>도서관과 유사한 좁은 공간에서 자율주행</h2></div>
           <p>JAVIS가 도서를 픽업하고 반납하려면 폭이 좁은 서가 사이를 지나 지정된 책장 앞까지 이동해야 했습니다. Cartographer와 2D LiDAR로 도서관의 점유격자 지도를 생성한 뒤, 편집 도구로 불필요한 영역과 벽면을 정리했습니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="서가 벽면과 통로, 지정 위치와 로봇 위치가 표시된 도서관 점유격자 지도" loading="lazy"><figcaption>Cartographer로 생성한 도서관의 2D 점유격자 지도</figcaption></figure><p>초기에는 Nav2의 DWB Controller로 경로를 추종했습니다. 넓은 구간에서는 이동할 수 있었지만, 좁은 복도와 전방이 막힌 구간에서는 회전 궤적을 찾지 못하고 정지하는 문제가 반복됐습니다. Costmap의 Inflation 영역을 넓히면 서가 사이를 통과할 수 없는 공간으로 판단했고, 반대로 좁히면 로봇이 벽에 지나치게 가까워졌습니다.</p>
 <figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="DWB Controller를 적용한 JAVIS가 좁은 공간에서 회전 경로를 찾지 못하는 초기 주행" loading="lazy"><figcaption>DWB 적용 후 좁은 구간에서 회전에 실패한 초기 주행</figcaption></figure><p>이 문제를 해결하기 위해 로봇의 직사각형 형상과 회전 반경, 후진 경로를 고려하는 Smac Planner Hybrid로 전역 경로 계획기를 변경했습니다. LiDAR 필터와 Inflation 값을 실제 로봇 크기에 맞게 조정하고, 여러 후보 궤적을 비교해 움직임을 선택하는 MPPI Controller를 적용했습니다.</p>
@@ -94,8 +94,8 @@
 <figure class="feature-media"><img src="../assets/images/javis_book_pickup_pipeline.png" alt="Service flow from book selection and authentication to JAVIS pickup and delivery" loading="lazy"></figure>
         </section>
 
-        <section class="case-section" id="en-autonomous-navigation-for-pickup-and-return">
-          <div class="case-heading"><h2>Autonomous navigation for pickup and return</h2></div>
+        <section class="case-section" id="en-autonomous-navigation-in-narrow-spaces-resembling-a-library">
+          <div class="case-heading"><h2>Autonomous navigation in narrow spaces resembling a library</h2></div>
           <p>JAVIS must pass through narrow aisles and stop at a designated shelf to pick up or return a book. We created an occupancy-grid map with Cartographer and a 2D LiDAR, then removed unnecessary regions and corrected shelf boundaries with a map editor.</p>
 <figure class="feature-media"><img src="../assets/images/javis_library_map.webp" alt="Library occupancy map showing shelves, aisles, waypoints, and the robot position" loading="lazy"><figcaption>2D library occupancy map generated with Cartographer</figcaption></figure><p>The first configuration used Nav2&#39;s DWB Controller. It worked in open areas, but repeatedly stopped when it could not find a feasible turning trajectory in narrow or blocked spaces. Increasing costmap inflation made aisles appear impassable, while reducing it brought the robot too close to shelves.</p>
 <figure class="feature-media"><img src="../assets/images/javis_navigation_failure.gif" alt="Early DWB navigation test in which JAVIS cannot turn in a narrow space" loading="lazy"><figcaption>Early DWB test failing to turn in a narrow aisle</figcaption></figure><p>I replaced the global planner with Smac Planner Hybrid, which accounts for the rectangular footprint, turning radius, and reverse paths. I tuned the LiDAR filters and inflation values to the physical robot and applied the MPPI Controller to evaluate multiple candidate trajectories.</p>

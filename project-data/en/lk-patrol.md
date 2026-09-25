@@ -17,6 +17,4 @@ I replayed field data to test under the same input conditions. I compared logs b
 
 ## News coverage
 
-[Channel A News · Sunrabot patrol robot at the royal tombs (Korean)](https://ichannela.com/news/detail/000000548784.do) — September 4, 2026
-
-The report shows the robot on patrol during its trial deployment at Seooreung, including a demonstration of detecting a fallen visitor.
+<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="Patrol robot on a forest path at Seooreung — watch on Channel A YouTube" loading="lazy"></a><figcaption>Channel A News · Seooreung patrol robot · YouTube · 2026.09.04</figcaption></figure>

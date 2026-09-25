@@ -13,9 +13,9 @@ skills:
   - Localization
   - C++
 card:
-  image: assets/images/lk-robotics-emblem.svg
-  imageAlt: LK ROBOTICS 로고
-  imageFit: contain
+  image: assets/images/lk-patrol-seooreung-channela.jpg
+  imageAlt: 서오릉 숲길을 순찰하는 궁능순찰로봇 — 채널A 뉴스 화면
+  imageFit: cover
 overview: >-
   서오릉 궁능순찰로봇이 주행할 때 사용하는 지도를 작성했습니다.
   센서 데이터와 로그를 분석해 위치 추정 오류와 장시간 실행 시 발생하는 문제를 디버깅했습니다.
@@ -30,6 +30,4 @@ overview: >-
 
 ## 관련 보도
 
-[채널A 뉴스 · “사람이 쓰러졌습니다”…왕릉 순찰 로봇 ‘순라봇’](https://ichannela.com/news/detail/000000548784.do) — 2026.09.04
-
-서오릉에 시범 도입된 순찰 로봇의 주행과 쓰러진 관람객 감지 시연을 소개한 보도입니다.
+<figure class="feature-media"><a href="https://www.youtube.com/watch?v=kHgA8jEmoCw&amp;t=22s" target="_blank" rel="noopener noreferrer"><img src="../assets/images/lk-patrol-seooreung-channela.jpg" alt="서오릉 숲길을 주행하는 궁능순찰로봇 — 채널A 유튜브 영상 보기" loading="lazy"></a><figcaption>채널A 뉴스 · 서오릉 순라봇 · YouTube · 2026.09.04</figcaption></figure>

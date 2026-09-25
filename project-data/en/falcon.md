@@ -26,11 +26,23 @@ As the lead of a four-person team, I managed schedules and documentation and was
 
 <figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="FALCON flow from CCTV input through hazard detection and zone classification to map display" loading="lazy"><figcaption>CCTV input, hazard detection, and zone-state assessment leading to status updates, popup alerts, and map display</figcaption></figure>
 
+### Training and evaluating the model for the airport model
+
 The initial model trained on public data missed small objects in airport-model footage and sometimes mistook ArUco markers for hazards. Training data needed to reflect the fixed camera view and model background.
 
-We combined synthetic images produced by the team in Unity and Blender with photographs of the airport model and background images without target objects (negative samples). YOLOv8n-box was retrained with 960×960 inputs for 150 epochs and a batch size of 8 to detect six classes: birds, debris, people, animals, aircraft, and vehicles.
+We combined synthetic images produced by the team in Unity and Blender with photographs of the airport model and background images without target objects (negative samples). The data was split into approximately 69.4% training, 20.9% validation, and 9.8% testing. YOLOv8n-box was trained with 960×960 inputs for 150 epochs and a batch size of 8 to detect six classes: birds, debris, people, animals, aircraft, and vehicles.
 
 <figure class="feature-media"><img src="../assets/images/falcon_synthetic_dataset.gif" alt="Building FALCON ground-hazard training data with Blender and airport-model footage" loading="lazy"></figure>
+
+The retrained ground-object detection model (v0.3) achieved the following metrics.
+
+<div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
+
+The precision–recall curves below show the initial and retrained models.
+
+<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="Class-wise precision–recall curves of the baseline FALCON segmentation model" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Class-wise precision–recall curves of the FALCON hybrid detection model" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
+
+Whether these metrics were measured on validation or test data still needs to be confirmed. Matching evaluation conditions for the two models have also not been established, so the curves alone cannot quantify the improvement.
 
 ## Tracking objects and locating them in physical zones
 
@@ -44,17 +56,9 @@ Image coordinates and measured positions of four reference markers define a plan
 
 Object identifiers, classes, coordinates, and confidence scores are sent to the monitoring server. The server and monitoring interface were implemented by their respective team members and use these results to update map markers and popup alerts.
 
-## Model evaluation and airport-model demonstrations
+## Ground-hazard detection in the airport model
 
-These Ground Model v0.3 results are recorded in the project README. The dataset combines synthetic images and photographs of the airport model, with approximately 69.4% allocated to training, 20.9% to validation, and 9.8% to testing. The README does not specify whether the metrics below come from the validation or test split.
-
-<div class="metric-grid"><div class="metric-card"><span class="metric-value">0.9902</span><span class="metric-label">mAP@0.5</span></div><div class="metric-card"><span class="metric-value">0.9005</span><span class="metric-label">mAP@0.5:0.95</span></div><div class="metric-card"><span class="metric-value">0.9928 / 0.9672</span><span class="metric-label">Precision / Recall</span></div></div>
-
-The precision–recall curves below show the initial model trained on public data and the model retrained on mixed data. Matching evaluation conditions have not been established, so these curves are not used to calculate a percentage improvement.
-
-<div class="media-grid pr-comparison"><figure class="feature-media"><img src="../assets/images/falcon_baseline_pr_curve.png" alt="Class-wise precision–recall curves of the baseline FALCON segmentation model" loading="lazy"><figcaption>Before · Public Dataset Segmentation Model</figcaption></figure><figure class="feature-media"><img src="../assets/images/falcon_hybrid_pr_curve.png" alt="Class-wise precision–recall curves of the FALCON hybrid detection model" loading="lazy"><figcaption>After · Hybrid Dataset YOLOv8n-box</figcaption></figure></div>
-
-Airport-model footage demonstrated detection of multiple object classes and identification of workers by safety-vest color. The following video shows ground-hazard detection in operation.
+In airport-model footage, we checked detection of multiple object classes and identification of workers wearing safety vests.
 
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/falcon_ground_detection.webp" alt="FALCON detecting six ground-hazard classes on the airport model" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/falcon_worker_classification.gif" alt="FALCON post-processing that distinguishes fluorescent-vest workers" loading="lazy"></figure></div>
 

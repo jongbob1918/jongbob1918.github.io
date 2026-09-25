@@ -38,14 +38,14 @@
         <details class="case-section case-disclosure" id="ko-problem-statement">
           <summary class="case-heading"><h2>Problem Statement</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><p>고양 서오릉은 <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">전체 면적이 약 187만 m²인 유적지</a>로, 수림과 수풀·잔디가 넓게 분포합니다. 순찰 경로는 대부분 흙길이며 경사와 요철이 많고, 비가 오면 흙이 유실돼 지형도 달라집니다.</p>
-<p>개발 과제는 이 환경에서 위치 추정을 유지하며 2 km 순찰 경로를 반복 주행하도록 만드는 것이었습니다. 주요 문제는 위치 오정합, 맵 전환 후 초기 위치 오류, 경사진 지면의 장애물 오인식, 급격한 가속과 과도한 속도 출력이었습니다.</p>
+<p>개발 과제는 이 환경에서 위치 추정을 유지하며 2 km 순찰 경로를 반복 주행하도록 만드는 것이었습니다. 주요 문제는 위치 오정합, 맵 전환 후 초기 위치 오류, 경사진 지면의 장애물 오인식, 급격한 가속과 과도한 속도 출력, 방문객 접근 시의 안전 확보였습니다.</p>
 </div>
         </details>
 
         <details class="case-section case-disclosure" id="ko-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>바퀴형 이족 로봇에 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 2와 자율주행 소프트웨어 Nav2(Navigation2)를 사용했습니다. 주변의 3차원 형상을 측정하는 센서인 3D LiDAR(Light Detection and Ranging)의 데이터로 사전 지도에서 위치를 추정하고, 지면과 장애물을 구분했습니다.</p>
-<p>주행과 함께 임무 수행, 도킹·언도킹 기능을 개발했습니다. 사람 접근 시에는 빈번하게 회피하던 동작을 바꿔, 설정한 안전 범위 안에 사람이 감지되면 정지하고 안내 방송을 하도록 했습니다.</p>
+          <div class="case-disclosure-body"><p>바퀴형 이족 로봇에 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 2와 자율주행 소프트웨어 Nav2(Navigation2)를 사용했습니다. 3D LiDAR(Light Detection and Ranging)와 카메라를 활용해 지도 작성·동시 위치 추정(SLAM, Simultaneous Localization and Mapping)과 자율주행을 수행했습니다.</p>
+<p>로봇이 대기 장소에 안전하게 진입해 대기할 수 있도록 정밀 정렬 알고리즘을 적용했습니다.</p>
 </div>
         </details>
 
@@ -104,6 +104,15 @@
 </div>
         </details>
 
+        <details class="case-section case-disclosure" id="ko-challenge-5-방문객-접근-시-안전-정지">
+          <summary class="case-heading"><h2>Challenge 5: 방문객 접근 시 안전 정지</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><h3>Problem</h3>
+<p>기존 컨트롤러로 주행할 때, 서오릉에 방문객이 많은 시간대에는 로봇에 관심을 보이며 가까이 다가오거나 둘러싸는 사람들이 있었습니다. 이 상황에서는 주변 사람과의 안전거리를 확보하기 위한 별도 처리가 필요했습니다.</p>
+<h3>Solution</h3>
+<p>설정한 안전 범위 안에 사람이 접근하면 감지하고 정지하도록 안전 처리 기능을 추가했습니다.</p>
+</div>
+        </details>
+
         <details class="case-section case-disclosure" id="ko-field-validation">
           <summary class="case-heading"><h2>Field Validation</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><p>기록 데이터로 위치 추정 설정과 정합 결과를 확인한 뒤, 서오릉의 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다. 데이터 재생 실험과 현장 주행을 함께 활용해 위치 추정을 안정화했습니다.</p>
@@ -132,14 +141,14 @@
         <details class="case-section case-disclosure" id="en-problem-statement">
           <summary class="case-heading"><h2>Problem Statement</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><p>Seooreung in Goyang is a <a href="https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0">heritage site covering approximately 1.87 million m²</a>, with extensive woodland, undergrowth, and lawns. Most of the patrol route consists of dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.</p>
-<p>The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment. The main issues were incorrect localization matches, initial-pose errors after map transitions, ground misclassified as obstacles, and abrupt acceleration or excessive velocity commands.</p>
+<p>The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment. The main issues were incorrect localization matches, initial-pose errors after map transitions, ground misclassified as obstacles, abrupt acceleration or excessive velocity commands, and safe handling of approaching visitors.</p>
 </div>
         </details>
 
         <details class="case-section case-disclosure" id="en-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. Data from a 3D Light Detection and Ranging (LiDAR) sensor supported localization against prebuilt maps and ground–obstacle separation.</p>
-<p>I also developed mission execution, docking, and undocking. When people approached, I replaced frequent avoidance maneuvers with stopping and playing an announcement when a person was detected within the configured safety zone.</p>
+          <div class="case-disclosure-body"><p>The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. I used 3D Light Detection and Ranging (LiDAR) and camera data for simultaneous localization and mapping (SLAM) and autonomous navigation.</p>
+<p>I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.</p>
 </div>
         </details>
 
@@ -195,6 +204,15 @@
 <p>After analyzing the Humble implementation, I ported the Kilted MPPI controller. Its acceleration constraints can be found in the <a href="https://api.nav2.org/nav2-kilted/html/motion__models_8hpp_source.html">official source code</a>.</p>
 <h3>Result</h3>
 <p>I improved startup acceleration handling and excessive velocity output in narrow spaces.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="en-challenge-5-safe-stopping-when-visitors-approach">
+          <summary class="case-heading"><h2>Challenge 5: Safe stopping when visitors approach</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><h3>Problem</h3>
+<p>While operating with the existing controller during busy visiting hours at Seooreung, I observed visitors approaching closely or surrounding the robot out of curiosity. These situations required additional handling to maintain a safe distance from nearby people.</p>
+<h3>Solution</h3>
+<p>I added a safety function that detects people approaching within a configured safety zone and stops the robot.</p>
 </div>
         </details>
 

@@ -17,13 +17,13 @@ demo:
 
 Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Most of the patrol route consists of dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.
 
-The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment. The main issues were incorrect localization matches, initial-pose errors after map transitions, ground misclassified as obstacles, and abrupt acceleration or excessive velocity commands.
+The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment. The main issues were incorrect localization matches, initial-pose errors after map transitions, ground misclassified as obstacles, abrupt acceleration or excessive velocity commands, and safe handling of approaching visitors.
 
 ## System Setup
 
-The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. Data from a 3D Light Detection and Ranging (LiDAR) sensor supported localization against prebuilt maps and ground–obstacle separation.
+The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. I used 3D Light Detection and Ranging (LiDAR) and camera data for simultaneous localization and mapping (SLAM) and autonomous navigation.
 
-I also developed mission execution, docking, and undocking. When people approached, I replaced frequent avoidance maneuvers with stopping and playing an announcement when a person was detected within the configured safety zone.
+I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.
 
 ## Challenge 1: Localization in woodland and grass-covered areas
 
@@ -102,6 +102,16 @@ After analyzing the Humble implementation, I ported the Kilted MPPI controller. 
 ### Result
 
 I improved startup acceleration handling and excessive velocity output in narrow spaces.
+
+## Challenge 5: Safe stopping when visitors approach
+
+### Problem
+
+While operating with the existing controller during busy visiting hours at Seooreung, I observed visitors approaching closely or surrounding the robot out of curiosity. These situations required additional handling to maintain a safe distance from nearby people.
+
+### Solution
+
+I added a safety function that detects people approaching within a configured safety zone and stops the robot.
 
 ## Field Validation
 

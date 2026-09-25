@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="계단 구역의 중심 경로와 전용 제어기를 연결하고, 실기 진입각 시험으로 정렬 조건과 한계를 확인했습니다.">
+  <meta name="description" content="평지 주행과 계단 이동을 연계하는 경로 계획·제어 로직을 구현하고, 실기 시험으로 진입 조건과 제어 전환 동작을 확인했습니다.">
   <title>이족 로봇의 평지·계단 내비게이션 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="이족 로봇의 평지·계단 내비게이션 — Jongmyung Kim" data-title-en="Biped navigation on flat ground and stairs — Jongmyung Kim" data-description-ko="계단 구역의 중심 경로와 전용 제어기를 연결하고, 실기 진입각 시험으로 정렬 조건과 한계를 확인했습니다." data-description-en="Connected stair center paths to a dedicated controller and used physical entry-angle trials to examine alignment conditions and limits.">
+<body data-page="project-detail" data-title-ko="이족 로봇의 평지·계단 내비게이션 — Jongmyung Kim" data-title-en="Biped navigation on flat ground and stairs — Jongmyung Kim" data-description-ko="평지 주행과 계단 이동을 연계하는 경로 계획·제어 로직을 구현하고, 실기 시험으로 진입 조건과 제어 전환 동작을 확인했습니다." data-description-en="Implemented path planning and control connecting flat-ground travel with stairs, and checked entry conditions and control transitions on the physical robot.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -28,77 +28,17 @@
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">바퀴가 달린 이족 로봇 TRON1이 건물 안에서 이동하려면 평지와 계단에 맞춰 주행 방식을 바꿔야 합니다. 지도에 계단 구역과 진입·이탈 지점을 지정하고, 구간별 경로와 제어기를 연결했습니다. 로봇은 계단 입구에 접근해 방향을 맞춘 뒤 중심 경로를 따라 이동하며, 실기 시험으로 진입 조건과 남은 한계를 확인했습니다.</p>
+      <p class="lead">이족 로봇의 평지 주행과 계단 이동을 연결하는 내비게이션을 개발했습니다. 경로 계획과 계단 제어, 층간 지도 전환 연동을 담당했습니다. 실제 로봇 시험으로 계단 진입 조건과 주행 방식이 바뀌는 구간의 동작을 확인했습니다.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-평지-경로를-계단-주행으로-연결">
-          <div class="case-heading"><h2>평지 경로를 계단 주행으로 연결</h2></div>
-          <p>엘케이로보틱스에서 TRON1의 경로 계획과 계단 제어, 층간 지도 전환 연동을 담당했습니다. 제조사의 균형·보행 제어 위에 목표 경로와 속도 명령을 생성하는 상위 내비게이션을 구성했습니다.</p>
-<p>로봇 소프트웨어 프레임워크 ROS(Robot Operating System) 2의 자율주행 스택 Nav2를 사용했습니다. 전체 경로가 지도에 표시한 계단 구역을 통과하면 일반 구간과 계단 구간으로 나누고, 계단의 위·아래 기준점으로 중심 경로를 생성합니다. 구간을 실행할 때 해당 경로와 전용 제어기를 선택합니다.</p>
-<blockquote>
-<p>이미지 필요: 실제 TRON1 계단 주행 사진과 지도 위 일반 경로·계단 구역·진입점·이탈점을 표시한 그림.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-진입-방향을-맞춘-뒤-중심선을-추종">
-          <div class="case-heading"><h2>진입 방향을 맞춘 뒤 중심선을 추종</h2></div>
-          <p>계단에서는 진입 방향과 측면 여유가 중요해 정렬, 통과, 도착 단계를 나눴습니다. 전용 제어기는 중심선에서 벗어난 거리와 방향 오차를 이용해 각속도를 보정하고, 상승·하강에 서로 다른 속도 설정을 적용합니다. 측면 이탈, 목표 초과, 시간 초과도 검사합니다.</p>
-<p>2026년 7월 16일에는 단높이 180 mm, 단너비 300 mm의 4단 계단에서 수동 진입각 시험을 진행했습니다.</p>
-<table>
-<thead>
-<tr>
-<th>진입각</th>
-<th>성공 / 시도</th>
-<th>관찰</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0°</td>
-<td>3 / 3</td>
-<td>정면 진입에서 세 차례 성공</td>
-</tr>
-<tr>
-<td>10°</td>
-<td>1 / 2</td>
-<td>같은 각도에서도 실패 발생</td>
-</tr>
-<tr>
-<td>20°</td>
-<td>1 / 1</td>
-<td>반복 시험 부족</td>
-</tr>
-<tr>
-<td>30°</td>
-<td>0 / 1</td>
-<td>좌우 밀림 발생</td>
-</tr>
-</tbody></table>
-<p>30° 시험은 다른 속도 명령을 사용했으므로 각도만의 영향으로 비교할 수 없습니다. 20°도 한 번의 성공이어서 허용 한계로 확정하지 않았습니다. 이 결과를 바탕으로 계단 진입 전 정렬을 유지하고, 허용각과 속도는 반복 시험으로 정해야 합니다.</p>
-<blockquote>
-<p>이미지 필요: 계단 치수와 진입각을 표시한 평면도, 정면 진입과 30° 진입 시 측면 밀림을 비교한 연속 사진.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-층이-바뀌면-경로-기준도-함께-변경">
-          <div class="case-heading"><h2>층이 바뀌면 경로 기준도 함께 변경</h2></div>
-          <p>층간 이동에서는 도착 층의 지도뿐 아니라 계단 구역과 기준점 정보도 바꿔야 합니다. 새 지도 경로에 이전 층의 구역 정보가 남으면 계단 진입 방향을 잘못 판단할 수 있습니다.</p>
-<p>이동 실행은 목표 층 정보 준비, 지도 전환 요청, 현재 층 상태 갱신, 위치추정 준비 대기 순서로 연결했습니다. 전환 문제를 분석할 때는 경로 분석기가 읽는 지도 정보와 계단 제어기에 전달되는 상승·하강 방향을 함께 확인했습니다. 지도 전환 응답 이후의 정보 갱신까지 점검해야 하는 구조입니다.</p>
-<blockquote>
-<p>이미지 필요: 3층에서 4층으로 이동할 때 지도·계단 기준점·현재 층 상태가 바뀌는 순서도.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-실기-시험에서-확인한-한계">
-          <div class="case-heading"><h2>실기 시험에서 확인한 한계</h2></div>
-          <p>고정된 계단 환경에서 1차 주행과 사람 감지 정지를 시험했습니다. 다만 움직이는 사람에 대한 감속 시험에서는 효과가 충분하지 않았고, 비 온 뒤나 빛이 반사되는 계단에서는 깊이 측정의 오차와 유실이 남았습니다. 사람 감지 정지 시험만으로 동적 장애물 회피가 검증됐다고 볼 수는 없습니다.</p>
-<p>8월에는 계단 제어기로 전환하기 전, 일반 주행 제어기가 입구의 위치와 방향을 동시에 맞추다 정체되는 구간도 확인했습니다. 진입 정렬과 계단 통과를 각각 시험하고, 변경된 계단 형상과 장애물 조건에서 반복 검증하는 것이 다음 과제입니다.</p>
+        <section class="case-section" id="ko-이동-구간별-동작을-연결하고-시험하기">
+          <div class="case-heading"><h2>이동 구간별 동작을 연결하고 시험하기</h2></div>
+          <p>엘케이로보틱스에서 평지와 계단을 연계하는 경로 계획·제어 로직을 구현했습니다. 로봇의 균형·보행 제어와 구분되는 상위 내비게이션을 담당했습니다.</p>
+<p>실기 시험에서는 계단 진입, 계단 이동, 주행 방식 전환을 나누어 확인했습니다. 문제가 나타난 구간의 기록을 분석하고, 시험 조건을 구분해 후속 검증 항목을 정리했습니다.</p>
 
         </section>
       </article>
@@ -114,77 +54,17 @@
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">The wheeled biped TRON1 needs different driving behavior on flat ground and stairs to move through a building. I connected segment-specific paths and controllers using stair regions and entry and exit points marked on the map. The robot approaches the stair entrance, aligns, and follows a center path; physical trials examined entry conditions and remaining limits.</p>
+      <p class="lead">I developed navigation connecting flat-ground travel and stair traversal for a biped robot. My work covered path planning, stair control, and floor-map transition integration. Physical robot trials checked stair-entry conditions and behavior at transitions between driving modes.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-connecting-flat-ground-routes-to-stair-traversal">
-          <div class="case-heading"><h2>Connecting flat-ground routes to stair traversal</h2></div>
-          <p>At LK Robotics, I worked on TRON1 path planning, stair control, and floor-map transition integration. The navigation layer generated target paths and velocity commands above the manufacturer&#39;s balance and locomotion controller.</p>
-<p>I used Nav2, the navigation stack for Robot Operating System (ROS) 2. When a route intersects a mapped stair region, it is divided into normal and stair segments. Lower and upper anchor points define a stair center path, and the path and dedicated controller are selected when that segment executes.</p>
-<blockquote>
-<p>Image needed: A physical TRON1 stair trial beside a map showing the normal route, stair region, entry point, and exit point.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-aligning-before-following-the-center-path">
-          <div class="case-heading"><h2>Aligning before following the center path</h2></div>
-          <p>Entry direction and lateral clearance matter on stairs, so I separated alignment, traversal, and arrival. The dedicated controller adjusts angular velocity using heading and cross-track errors, with separate speed settings for ascent and descent. It also checks lateral departure, overshoot, and timeout.</p>
-<p>On July 16, 2026, I conducted manual entry-angle trials on four steps with a 180 mm rise and 300 mm tread depth.</p>
-<table>
-<thead>
-<tr>
-<th>Entry angle</th>
-<th>Successes / attempts</th>
-<th>Observation</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0°</td>
-<td>3 / 3</td>
-<td>Three successful straight entries</td>
-</tr>
-<tr>
-<td>10°</td>
-<td>1 / 2</td>
-<td>A failure at the same angle</td>
-</tr>
-<tr>
-<td>20°</td>
-<td>1 / 1</td>
-<td>Insufficient repeated trials</td>
-</tr>
-<tr>
-<td>30°</td>
-<td>0 / 1</td>
-<td>Lateral slipping</td>
-</tr>
-</tbody></table>
-<p>The 30° trial used a different speed command, so the result cannot isolate the effect of entry angle. One success at 20° also does not establish an allowable limit. Entry alignment remains necessary, and angle and speed limits require repeated trials.</p>
-<blockquote>
-<p>Image needed: A plan view with stair dimensions and entry angles, plus image sequences comparing straight entry with lateral slipping at 30°.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-updating-route-references-when-changing-floors">
-          <div class="case-heading"><h2>Updating route references when changing floors</h2></div>
-          <p>Changing floors requires updating stair regions and anchor data along with the destination map. If a new-floor path is evaluated against the previous floor&#39;s regions, the system can select the wrong stair entry direction.</p>
-<p>Execution connects destination-floor preparation, the map-switch request, current-floor state updates, and a wait for localization readiness. During transition diagnosis, I checked both the map data read by route analysis and the ascent or descent direction passed to the stair controller. Data updates after the map-switch response must also be verified.</p>
-<blockquote>
-<p>Image needed: A sequence diagram showing map, stair-anchor, and current-floor state changes during a third-to-fourth-floor transition.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-limits-observed-in-physical-trials">
-          <div class="case-heading"><h2>Limits observed in physical trials</h2></div>
-          <p>Initial navigation and stopping on person detection were tested on a fixed stair setup. Deceleration around moving people was insufficient in a separate trial, and wet or reflective stairs still caused depth errors and missing measurements. The person-detection stop test does not establish dynamic obstacle-avoidance performance.</p>
-<p>An August trial also revealed a stall before switching to the stair controller: the normal navigation controller struggled to satisfy entrance position and heading together. Follow-up work is to test entry alignment and stair traversal separately, then repeat validation with different stair geometry and obstacle conditions.</p>
+        <section class="case-section" id="en-connecting-and-testing-movement-segments">
+          <div class="case-heading"><h2>Connecting and testing movement segments</h2></div>
+          <p>At LK Robotics, I implemented path planning and control linking flat-ground travel with stairs. My contribution was the navigation layer above the robot&#39;s balance and locomotion control.</p>
+<p>Physical trials examined stair entry, traversal, and driving-mode transitions separately. I analyzed recordings from problematic segments and organized follow-up checks by test condition.</p>
 
         </section>
       </article>

@@ -4,15 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="숲길 주행 로그로 위치추정 장애를 분리하고, 메모리 손상 수정 후 55분 기록 재생으로 크래시 재발 여부를 확인했습니다.">
-  <title>서오릉 순찰 로봇 — Jongmyung Kim</title>
+  <meta name="description" content="실주행 기록으로 위치추정과 장시간 실행 중 발생한 문제를 분석·수정하고, 기록 데이터 재생으로 수정 사항을 검증했습니다.">
+  <title>야외 순찰 로봇 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="서오릉 순찰 로봇 — Jongmyung Kim" data-title-en="Seooreung patrol robot — Jongmyung Kim" data-description-ko="숲길 주행 로그로 위치추정 장애를 분리하고, 메모리 손상 수정 후 55분 기록 재생으로 크래시 재발 여부를 확인했습니다." data-description-en="Separated localization failures in forest-route logs and checked a memory-corruption fix by replaying a 55-minute recording.">
+<body data-page="project-detail" data-title-ko="야외 순찰 로봇 — Jongmyung Kim" data-title-en="Outdoor patrol robot — Jongmyung Kim" data-description-ko="실주행 기록으로 위치추정과 장시간 실행 중 발생한 문제를 분석·수정하고, 기록 데이터 재생으로 수정 사항을 검증했습니다." data-description-en="Analyzed and addressed localization and extended-runtime issues using field recordings, then replayed the data to verify the changes.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -20,7 +20,7 @@
     <a class="back" href="../index.html#lk-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
-      <h1>서오릉 순찰 로봇</h1>
+      <h1>야외 순찰 로봇</h1>
       <div class="meta"><span><strong>담당:</strong> 야외 지도 생성·위치추정 분석 및 안정화</span></div>
       <p class="project-skills">ROS 2 · FAST-LIO · Localization · C++</p>
       
@@ -28,48 +28,17 @@
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">서오릉 숲길을 순찰하려면 비슷한 나무와 갈림길 사이에서도 로봇이 자신의 위치를 유지해야 합니다. TRON2에 거리 센서와 카메라를 연결하고, 현장 지도를 생성해 위치추정과 주행을 시험했습니다. 시험 중 발생한 프로세스 종료와 위치추정 상실을 분리해 분석하고, 크래시 수정과 재생 검증을 진행했습니다.</p>
+      <p class="lead">야외 순찰 로봇의 지도 생성과 위치추정 분석을 담당했습니다. 실주행 기록을 바탕으로 위치추정과 장시간 실행 중 발생한 문제를 분석하고 수정했습니다. 수정 전후에 같은 기록 데이터를 재생해 문제의 재발 여부를 확인했습니다.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-숲길에서-위치를-유지하기">
-          <div class="case-heading"><h2>숲길에서 위치를 유지하기</h2></div>
-          <p>엘케이로보틱스에서 야외 지도 생성과 위치추정 분석을 담당했습니다. 대빈묘와 관리소를 잇는 약 2.88 km 왕복 경로가 목표였으며, 지도 생성과 구간 시험부터 진행했습니다.</p>
-<p>TRON2에는 주변의 3차원 형상을 측정하는 라이다(LiDAR, Light Detection and Ranging)와 깊이 카메라를 탑재했습니다. 라이다와 관성 측정 장치(IMU, Inertial Measurement Unit)로 이동량을 추정하고, 현재 스캔을 저장 지도에 맞춰 위치를 보정하는 구성입니다.</p>
-<blockquote>
-<p>이미지 필요: 서오릉 시험 로봇의 센서 배치와 지도 위 시험 경로. 목표 왕복 경로와 실제 시험 구간을 구분한 그림.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-위치-오차와-프로세스-종료를-분리">
-          <div class="case-heading"><h2>위치 오차와 프로세스 종료를 분리</h2></div>
-          <p>숲길에서는 지도 위 로봇 표시가 멈추거나 위치가 크게 바뀌었고, 위치추정 프로세스가 종료되기도 했습니다. 센서 입력, FAST-LIO의 이동량 추정, 지도 정합 후 위치를 같은 시간축으로 비교해 어느 단계부터 이상이 생겼는지 좁혔습니다.</p>
-<p>종료 당시 호출 기록에서는 점군 객체를 해제하는 과정에서 메모리 손상이 감지됐습니다. 공유 점군과 보정 상태의 동시 접근을 막고, 실행 스레드와 점군 정합 스레드를 각각 2개와 4개로 제한했습니다.</p>
-<p>메모리 오류 검사 도구인 AddressSanitizer를 켜고 같은 센서 기록 약 55분을 끝까지 재생했습니다. 기존 크래시 시점을 지나 정상 종료할 때까지 메모리 오류와 프로세스 비정상 종료가 재발하지 않았습니다.</p>
-<blockquote>
-<p>이미지 필요: 수정 전 메모리 손상 호출 기록과 수정 후 55분 재생·정상 종료 결과를 비교한 화면.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-정합-점수가-좋아도-위치는-틀릴-수-있다">
-          <div class="case-heading"><h2>정합 점수가 좋아도 위치는 틀릴 수 있다</h2></div>
-          <p>크래시를 수정한 뒤에도 지도와 현재 스캔을 맞추는 과정에서 큰 위치 보정이 반복됐습니다. 점군 정합 알고리즘인 Nano-GICP가 수렴했다고 판정한 결과에도 수 m 이상의 보정이 포함됐습니다.</p>
-<p>8월 14일 현장 기록 두 개에서 큰 보정으로 거부된 결과에 정합 점수 기준 0.25를 적용해 보니, 각각 27건 중 24건과 103건 중 89건이 통과했습니다. 점수만으로는 큰 보정을 가려낼 수 없어, 보정 거리와 연속 결과의 일관성을 함께 확인해야 한다고 판단했습니다.</p>
-<blockquote>
-<p>이미지 필요: 동일 시각의 저장 지도와 현재 스캔을 겹친 화면. 정합 점수, 보정 거리, 실제 구조물의 어긋남을 함께 표시한 비교 그림.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-확인한-결과와-남은-과제">
-          <div class="case-heading"><h2>확인한 결과와 남은 과제</h2></div>
-          <p>크래시는 같은 입력을 재생해 재발하지 않음을 확인했지만, 숲길에서 위치를 잃은 뒤 자동으로 복구하는 문제는 남았습니다. 위치를 다시 찾는 중에도 주행 가능한 상태가 유지되는 경우가 있어, 위치 신뢰도와 주행 허용 조건을 연결하는 수정이 필요합니다.</p>
-<p>복귀 구간에서는 지도 정합과 별개로 FAST-LIO 출력이 멈춘 뒤 추정 위치가 크게 뛰는 현상도 확인했습니다. 처리 정지를 감시하고 추정 상태를 초기화하는 절차가 후속 과제입니다. 왕복 무인 순찰, 도랑 회피, 화재·쓰러진 사람 감지는 아직 검증 결과에 포함하지 않았습니다.</p>
+        <section class="case-section" id="ko-실주행-기록으로-문제-원인-좁히기">
+          <div class="case-heading"><h2>실주행 기록으로 문제 원인 좁히기</h2></div>
+          <p>엘케이로보틱스에서 야외 지도 생성과 위치추정 분석·안정화를 담당했습니다. 센서 입력과 위치추정 결과를 시간 순서대로 비교해 문제가 발생한 단계를 좁혔습니다.</p>
+<p>증상이 비슷해도 원인이 다를 수 있어, 위치추정 품질과 프로그램 실행 안정성을 나누어 점검했습니다. 수정 후에는 같은 기록 데이터를 재생해 변경 전후를 비교하고 재발 여부를 확인했습니다.</p>
 
         </section>
       </article>
@@ -77,7 +46,7 @@
   </div>
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
-      <h1>Seooreung patrol robot</h1>
+      <h1>Outdoor patrol robot</h1>
       <div class="meta"><span><strong>Role:</strong> Outdoor mapping, localization diagnosis and stabilization</span></div>
       <p class="project-skills">ROS 2 · FAST-LIO · Localization · C++</p>
       
@@ -85,48 +54,17 @@
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">Patrolling Seooreung requires the robot to maintain its position among similar trees and junctions. I integrated range sensors and cameras on TRON2, built a site map, and tested localization and navigation. I separated process crashes from tracking loss, then patched and replay-tested the crash issue.</p>
+      <p class="lead">I worked on mapping and localization diagnosis for an outdoor patrol robot. I used field recordings to investigate and address localization and extended-runtime issues. Replaying the same data before and after changes allowed me to check whether the issues recurred.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-maintaining-position-on-a-forest-route">
-          <div class="case-heading"><h2>Maintaining position on a forest route</h2></div>
-          <p>At LK Robotics, I worked on outdoor mapping and localization diagnosis. The target mission was a roughly 2.88 km round trip between Daebinmyo and the management office; work began with mapping and segment trials.</p>
-<p>TRON2 carried a depth camera and a LiDAR (Light Detection and Ranging) sensor for measuring surrounding geometry. LiDAR and an Inertial Measurement Unit (IMU) estimated motion, while matching current scans to the stored map corrected the robot&#39;s position.</p>
-<blockquote>
-<p>Image needed: Sensor layout on the field-test robot and a map distinguishing the target round-trip route from the segments actually tested.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-separating-position-errors-from-process-crashes">
-          <div class="case-heading"><h2>Separating position errors from process crashes</h2></div>
-          <p>During forest trials, the robot marker on the map froze or jumped, and the localization process sometimes terminated. I compared sensor input, FAST-LIO motion estimates, and map-corrected positions on a common timeline to locate the first failing stage.</p>
-<p>The crash backtrace showed memory corruption detected while releasing a point-cloud object. I protected shared point clouds and correction state against concurrent access, and limited executor and registration threads to two and four respectively.</p>
-<p>I replayed approximately 55 minutes of the same sensor recording with AddressSanitizer enabled. The process passed the previous crash point and shut down normally without another reported memory error or abnormal termination.</p>
-<blockquote>
-<p>Image needed: The original memory-corruption backtrace beside the patched run&#39;s 55-minute replay and clean shutdown results.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-a-good-matching-score-can-still-give-a-wrong-position">
-          <div class="case-heading"><h2>A good matching score can still give a wrong position</h2></div>
-          <p>Large position corrections continued after the crash fix. Results reported as converged by the Nano-GICP point-cloud registration algorithm could still include corrections of several meters or more.</p>
-<p>In two field recordings from August 14, a fitness threshold of 0.25 would have accepted 24 of 27 and 89 of 103 results previously rejected for large corrections. The score alone could not distinguish those corrections, so correction distance and consistency across successive results also needed inspection.</p>
-<blockquote>
-<p>Image needed: Stored-map and current-scan overlays from the same timestamp, showing the fitness score, correction distance, and misaligned physical structures.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-results-and-remaining-work">
-          <div class="case-heading"><h2>Results and remaining work</h2></div>
-          <p>The crash did not recur in the replay, but automatic recovery after losing position in the forest remained unresolved. Navigation could remain enabled while localization was searching for a position, requiring changes that connect localization confidence to permission to move.</p>
-<p>A separate return-route failure involved FAST-LIO output stopping and then resuming with a large position jump. Monitoring processing stalls and resetting estimator state remain follow-up work. An unattended round trip, ditch avoidance, and fire or fallen-person detection have not been validated.</p>
+        <section class="case-section" id="en-narrowing-down-causes-with-field-recordings">
+          <div class="case-heading"><h2>Narrowing down causes with field recordings</h2></div>
+          <p>At LK Robotics, I worked on outdoor mapping, localization diagnosis, and stabilization. I compared sensor input and position estimates over time to identify the stage where a problem began.</p>
+<p>Since similar symptoms can have different causes, I examined localization quality and program stability separately. After making changes, I replayed the same data to compare behavior and check for recurrence.</p>
 
         </section>
       </article>

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="지도 생성·위치추정·주행을 ROS 2로 옮기고, 장시간 실행 시 위치 출력이 늦어지는 누적 지도 발행 문제를 수정했습니다.">
+  <meta name="description" content="지도 생성·위치추정·주행 기능의 ROS 2 전환을 담당하고, 장시간 실행 중 발생하는 위치 정보 지연 문제를 분석·개선했습니다.">
   <title>로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-13">
 </head>
-<body data-page="project-detail" data-title-ko="로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim" data-title-en="Robot system migration from ROS 1 to ROS 2 — Jongmyung Kim" data-description-ko="지도 생성·위치추정·주행을 ROS 2로 옮기고, 장시간 실행 시 위치 출력이 늦어지는 누적 지도 발행 문제를 수정했습니다." data-description-en="Migrated mapping, localization and navigation to ROS 2, then removed an accumulating map-publication path that delayed position output during extended operation.">
+<body data-page="project-detail" data-title-ko="로봇 시스템 ROS 1 → ROS 2 전환 — Jongmyung Kim" data-title-en="Robot system migration from ROS 1 to ROS 2 — Jongmyung Kim" data-description-ko="지도 생성·위치추정·주행 기능의 ROS 2 전환을 담당하고, 장시간 실행 중 발생하는 위치 정보 지연 문제를 분석·개선했습니다." data-description-en="Migrated mapping, localization, and navigation to ROS 2, and investigated and reduced position-output delays during extended operation.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -28,47 +28,17 @@
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">기존 로봇의 지도 생성과 위치추정을 유지하면서 ROS 2 기반 주행 기능을 연결하는 작업입니다. 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System)의 버전 전환에 맞춰 하드웨어 통신, 지도 관리, 주행 실행 구조를 정리했습니다. 전환 후에는 실제 센서 입력과 장시간 실행 결과를 비교하며 위치 출력 지연을 수정했습니다.</p>
+      <p class="lead">로봇 소프트웨어 프레임워크 ROS(Robot Operating System)의 버전 전환을 담당했습니다. 지도 생성·위치추정·주행 기능을 ROS 2 환경으로 옮기고 기능 간 연결을 점검했습니다. 장시간 실행 시험에서 발견한 위치 정보 지연을 분석하고 개선했습니다.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-센서-입력부터-주행-명령까지-연결">
-          <div class="case-heading"><h2>센서 입력부터 주행 명령까지 연결</h2></div>
-          <p>엘케이로보틱스에서 지도 생성·위치추정과 하드웨어 통신의 ROS 2 전환을 담당했습니다. 센서 데이터를 처리하는 부분, 지도를 관리하는 부분, 주행 명령을 실행하는 부분을 나누고 ROS 2 자율주행 스택인 Nav2에 연결했습니다.</p>
-<p>지도 저장·불러오기·삭제·목록 조회·전환 기능을 서비스로 구성했습니다. 계단 구간은 지도에 지정한 영역을 바탕으로 경로를 만들고 전용 제어기를 선택하도록 연결했습니다. 계단 주행 방식은 <a href="lk-biped.html">이족 로봇 내비게이션</a>에서 설명합니다.</p>
-<blockquote>
-<p>이미지 필요: 센서 입력, 지도 생성·위치추정, 지도 관리, Nav2, 로봇 통신의 연결도. ROS 1에서 ROS 2로 옮긴 범위를 표시한 그림.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-30분-뒤부터-위치-출력이-늦어지는-문제">
-          <div class="case-heading"><h2>30분 뒤부터 위치 출력이 늦어지는 문제</h2></div>
-          <p>전환 후 처음에는 동작했지만, 장시간 실행하면 위치 출력이 늦어지고 추정 위치가 튀었습니다. 라이다 입력은 10 Hz, 관성 센서 입력은 200 Hz를 유지한 반면, FAST-LIO 위치 출력의 지연은 약 0.14초에서 0.68초로 증가했습니다.</p>
-<p>입력 주기와 출력 지연을 비교한 뒤 기존 운영 코드와 전환 코드를 대조했습니다. ROS 1에서는 사용하지 않던 지도 발행 경로가 ROS 2에서 활성화돼 있었습니다. 스캔을 계속 누적하고 1초마다 전체 점군을 메시지로 변환해 보내면서 처리 부담이 커지는 구조였습니다.</p>
-<blockquote>
-<p>이미지 필요: 같은 시간축에 라이다·관성 센서 수신 주기와 FAST-LIO 출력 지연을 표시한 그래프.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-누적-지도-발행을-실행-경로에서-제거">
-          <div class="case-heading"><h2>누적 지도 발행을 실행 경로에서 제거</h2></div>
-          <p>누적 지도 발행을 끈 비교 시험에서는 1시간 동안 위치 발산이 관찰되지 않았습니다. 이를 바탕으로 1초 주기의 누적 점군 발행 경로를 제거하고, 원시 점군 저장은 디버깅 용도로 분리했습니다.</p>
-<p>이 결과는 해당 시험에서 발산이 재발하지 않았다는 의미입니다. 실제 위치 오차를 기준 장비로 측정한 정확도 결과는 아니며, 센서 처리와 발행에 걸리는 시간의 세부 비중은 추가 계측이 필요합니다.</p>
-<blockquote>
-<p>이미지 필요: 누적 지도 발행을 켠 시험과 끈 시험의 실행 시간별 출력 지연·추정 위치 비교.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="ko-전환-후-확인한-범위">
-          <div class="case-heading"><h2>전환 후 확인한 범위</h2></div>
-          <p>7월 개발 기록에서 ROS 2 지도 생성의 실환경 검증과 평지·계단·층 전환 구간의 위치추정 점검을 확인했습니다. 다층 전체 임무와 여러 환경에서의 반복 성공률은 별도 검증이 남아 있습니다.</p>
-<p>이번 전환에서는 빌드와 토픽 연결 이후에도 기존 운영 코드의 실행 조건을 비교해야 했습니다. 후속 검증은 장시간 실행, 카메라 동시 사용, 지도 전환처럼 처리 부하와 상태가 바뀌는 조건을 중심으로 진행해야 합니다.</p>
+        <section class="case-section" id="ko-전환-전후의-실행-동작-비교">
+          <div class="case-heading"><h2>전환 전후의 실행 동작 비교</h2></div>
+          <p>엘케이로보틱스에서 로봇 소프트웨어 이식과 실행 구조 점검을 담당했습니다. 기존 기능이 새 환경에서도 이어지도록 데이터 전달과 실행 조건을 비교했습니다.</p>
+<p>빌드와 연결 확인 이후에는 장시간 실행 중 처리 지연이 누적되는지 점검했습니다. 센서 입력과 처리 결과의 시간 차이를 분석해 지연 원인을 좁히고, 수정 전후를 비교 시험했습니다.</p>
 
         </section>
       </article>
@@ -84,47 +54,17 @@
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">This project connected ROS 2 navigation while retaining the robot&#39;s mapping and localization capabilities. I reorganized hardware communication, map management, and navigation execution for the new version of the Robot Operating System (ROS). After migration, I compared live sensor input and extended runtime behavior to fix delayed position output.</p>
+      <p class="lead">I worked on migrating robot software between versions of the Robot Operating System (ROS). I moved mapping, localization, and navigation functions to ROS 2 and checked their connections. Extended-runtime tests revealed position-output delays that I investigated and addressed.</p>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-connecting-sensor-input-to-motion-commands">
-          <div class="case-heading"><h2>Connecting sensor input to motion commands</h2></div>
-          <p>At LK Robotics, I worked on migrating mapping, localization, and hardware communication to ROS 2. I separated sensor processing, map management, and motion execution, then connected them to Nav2, the ROS 2 navigation stack.</p>
-<p>Map saving, loading, deletion, listing, and switching were exposed as services. Designated stair regions supplied paths and selected a dedicated controller. The stair behavior is described in <a href="lk-biped.html">biped robot navigation</a>.</p>
-<blockquote>
-<p>Image needed: A diagram connecting sensors, mapping and localization, map management, Nav2, and robot communication, highlighting the migrated components.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-position-output-fell-behind-after-extended-operation">
-          <div class="case-heading"><h2>Position output fell behind after extended operation</h2></div>
-          <p>The system worked initially, but position output became delayed and estimates jumped during longer runs. LiDAR and inertial sensor input remained at 10 Hz and 200 Hz, while FAST-LIO output delay grew from approximately 0.14 to 0.68 seconds.</p>
-<p>After comparing input rates and output delay, I checked the migrated code against the ROS 1 production version. A map-publication path unused in ROS 1 was active in ROS 2. It continuously accumulated scans and converted the entire point cloud into a message every second, creating a growing processing load.</p>
-<blockquote>
-<p>Image needed: A common timeline showing LiDAR and inertial sensor input rates alongside FAST-LIO output delay.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-removing-accumulated-map-publication">
-          <div class="case-heading"><h2>Removing accumulated map publication</h2></div>
-          <p>In a comparison run with accumulated map publication disabled, no position divergence was observed over one hour. I then removed the one-second publication path and separated raw point-cloud saving as a debugging function.</p>
-<p>This establishes that divergence did not recur in that trial. It is not a position-accuracy measurement against an external reference. The detailed share of time spent processing sensors and publishing data still requires instrumentation.</p>
-<blockquote>
-<p>Image needed: Runtime plots comparing output delay and estimated position with accumulated map publication enabled and disabled.</p>
-</blockquote>
-
-        </section>
-
-        <section class="case-section" id="en-what-was-checked-after-migration">
-          <div class="case-heading"><h2>What was checked after migration</h2></div>
-          <p>July development records document real-environment ROS 2 mapping validation and localization checks on flat ground, stairs, and floor transitions. Complete multi-floor missions and repeated success rates across different environments still require separate validation.</p>
-<p>The migration required comparing runtime behavior with the production version after the build and topic connections worked. Follow-up checks should cover changing load and state, including extended operation, simultaneous camera use, and map switching.</p>
+        <section class="case-section" id="en-comparing-behavior-before-and-after-migration">
+          <div class="case-heading"><h2>Comparing behavior before and after migration</h2></div>
+          <p>At LK Robotics, I worked on software migration and runtime checks. I compared data delivery and execution conditions to preserve existing functionality in the new environment.</p>
+<p>After checking builds and connections, I examined whether processing delays accumulated during extended operation. Comparing sensor-input and output timestamps helped narrow down the cause, followed by comparison tests before and after the changes.</p>
 
         </section>
       </article>

@@ -37,7 +37,7 @@ card:
 overview: >-
   도서관에서는 도서 픽업·반납과 길 안내 같은 반복 업무에 지속적인 인력이 필요합니다.
   이를 자동화하기 위해 VIC-PINKY 모바일 로봇과 myCobot 매니퓰레이터, 비전 AI를 ROS 2로 연결한 도서관 관리 로봇 JAVIS를 개발했습니다.
-  VIC-PINKY는 목표 책장까지 자율주행하고, myCobot은 카메라로 인식한 도서를 픽업·반납합니다.
+  모바일로봇은 목표 책장까지 자율주행하고, 매니퓰레이터는 카메라로 인식한 도서를 픽업·반납합니다.
 demo:
   type: image
   src: ../assets/images/javis_robot_drive.gif

@@ -4,11 +4,6 @@ title: Arduino Project - LED Elevator
 description: A one-day Arduino project simulating elevator calls, movement, and idle behavior with buttons and LEDs
 team: Solo project
 period: Jul 6, 2025
-links:
-  - label: Simulation
-    href: https://www.tinkercad.com/things/1Y2Mx1cmY9a-elevatorled
-  - label: Code
-    href: https://github.com/jongbob1918/elevator-mcu/blob/main/src/elevator.ino
 overview: >-
   A solo, one-day project simulating calls, movement, and idle behavior for a four-floor elevator with an Arduino, buttons, and LEDs. Calls can be added or canceled during movement, and the nearest requested floor in the travel direction is served first.
 demo:

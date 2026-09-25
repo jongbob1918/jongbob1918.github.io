@@ -1,6 +1,6 @@
 ---
 slug: elevator-mcu
-title: ELEVATOR MCU — Arduino LED Elevator
+title: aduino project - LED elevator
 description: A one-day Arduino project simulating elevator calls, movement, and idle behavior with buttons and LEDs
 team: Solo project
 period: Jul 6, 2025

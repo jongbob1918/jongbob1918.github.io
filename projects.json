@@ -204,8 +204,8 @@
       "imageAlt": "Tinkercad에서 실행한 4층 LED 엘리베이터 호출·이동 시뮬레이션",
       "imageFit": "cover",
       "imageSequence": [],
-      "titleKo": "ELEVATOR MCU — Arduino LED 엘리베이터",
-      "titleEn": "ELEVATOR MCU — Arduino LED Elevator",
+      "titleKo": "aduino project - LED elevator",
+      "titleEn": "aduino project - LED elevator",
       "overviewKo": "버튼과 LED로 호출·이동·대기를 구현한 Arduino 원데이 프로젝트",
       "overviewEn": "A one-day Arduino project simulating elevator calls, movement, and idle behavior with buttons and LEDs",
       "periodKo": "2025.07.06",
@@ -215,9 +215,9 @@
       "contributionKo": "",
       "contributionEn": "",
       "keywords": [
-        "Arduino",
-        "C++",
-        "Tinkercad"
+        "arduino",
+        "state machine",
+        "c++"
       ]
     }
   ]

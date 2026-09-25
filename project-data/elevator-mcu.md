@@ -1,23 +1,24 @@
 ---
 slug: elevator-mcu
-shortName: ELEVATOR MCU
+shortName: aduino project - LED elevator
 category: side
 order: 5
-title: ELEVATOR MCU — Arduino LED 엘리베이터
+title: aduino project - LED elevator
 description: 버튼과 LED로 호출·이동·대기를 구현한 Arduino 원데이 프로젝트
 team: 1명
 period: 2025.07.06
 skills:
-  - Arduino · C++
-  - Tinkercad
+  - arduino
+  - state machine
+  - c++
 repository: https://github.com/jongbob1918/elevator-mcu
 card:
   image: assets/images/elevator-mcu-demo.gif
   imageAlt: Tinkercad에서 실행한 4층 LED 엘리베이터 호출·이동 시뮬레이션
   skills:
-    - Arduino
-    - C++
-    - Tinkercad
+    - arduino
+    - state machine
+    - c++
 overview: >-
   Arduino와 버튼 4개, LED 14개로 4층 엘리베이터의 호출·이동·대기 동작을 구현했습니다. 하루 동안 혼자 진행한 프로젝트로, Tinkercad에서 회로를 구성하고 동작을 확인했습니다. 이동 중 들어오는 호출과 취소를 처리하면서 호출 우선순위를 정하는 방법을 고민했습니다.
 demo:

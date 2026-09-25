@@ -1,11 +1,11 @@
 ---
 slug: elevator-mcu
-title: aduino project - LED elevator
+title: Arduino Project - LED Elevator
 description: A one-day Arduino project simulating elevator calls, movement, and idle behavior with buttons and LEDs
 team: Solo project
 period: Jul 6, 2025
 overview: >-
-  I built a four-floor elevator simulation with an Arduino, four buttons, and fourteen LEDs in a solo, one-day project. I assembled and checked the circuit in Tinkercad. Handling new calls and cancellations during movement led me to rethink how to choose the next floor.
+  A solo, one-day project simulating calls, movement, and idle behavior for a four-floor elevator with an Arduino, buttons, and LEDs. Calls can be added or canceled during movement, and the nearest requested floor in the travel direction is served first.
 demo:
   type: image
   src: ../assets/images/elevator-mcu-demo.gif

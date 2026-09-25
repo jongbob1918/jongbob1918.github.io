@@ -7,7 +7,7 @@ period: May 26–Jul 3, 2025
 context: ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9
 role: Project leadership · Ground-object detection system development · Camera-to-ground zone mapping
 overview: >-
-  While serving as a noncommissioned officer in the Republic of Korea Air Force, I encountered runway hazards such as birds, animals, and loose debris. We developed FALCON to support manual monitoring by combining ground-hazard detection, bird-strike risk analysis, and voice guidance. When a camera detects a hazard, the system displays its location and type on the controller interface and delivers a voice alert to the pilot.
+  While serving as a noncommissioned officer in the Republic of Korea Air Force, I encountered situations where birds, animals, and loose debris threatened aircraft operations. I wanted to reduce the burden of manual monitoring and help people detect and communicate hazards in time. FALCON is an operational safety service project that brings together ground-hazard detection, bird-strike risk analysis, and voice guidance to address this problem.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU

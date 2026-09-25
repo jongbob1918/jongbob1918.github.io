@@ -20,7 +20,7 @@ card:
   image: assets/images/hawkeye_mainpage.gif
   imageAlt: FALCON runway hazard detection interface
 overview: >-
-  공군 부사관으로 근무하며 활주로의 새와 동물, 나사 같은 이물질이 항공기 운항에 위험이 되는 상황을 경험했습니다. 인력 중심의 감시를 보조하기 위해 지상 위험요소 탐지, 조류 충돌 위험 분석, 음성 안내를 통합한 운항안전서비스 FALCON을 개발했습니다. 카메라에서 위험요소를 감지하면 위치와 종류를 관제 화면에 표시하고 조종사에게 음성 경보로 전달합니다.
+  공군 부사관으로 근무하며 활주로의 새와 동물, 나사 같은 이물질이 항공기 운항을 위협하는 상황을 경험했습니다. 이러한 위험요소를 사람이 직접 감시해야 하는 부담을 줄이고, 위험을 제때 발견해 전달하는 문제를 해결하고 싶었습니다. FALCON은 이를 위해 지상 위험요소 탐지, 조류 충돌 위험 분석, 음성 안내를 통합한 운항안전서비스 프로젝트입니다.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU

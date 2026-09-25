@@ -55,6 +55,7 @@ title: 로봇 프로젝트
 | 기간 / 인원 | 각 언어 MD의 `period` / `team` |
 | 담당한 일 | 각 언어 MD의 `role` |
 | 카드 아래 설명 | 각 언어 MD의 `description` |
+| 제목 없는 짧은 상세 소개 | 각 언어 MD의 `introduction` (별도 Overview가 필요 없을 때 사용) |
 | 상세 Overview | 각 언어 MD의 `overview` |
 | 공통 스킬 | 한국어 MD의 `skills` |
 | 카드에 별도 표시할 스킬 | 선택 항목 `card.skills`; 없으면 `skills` 사용 |

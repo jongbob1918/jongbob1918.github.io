@@ -3,9 +3,7 @@ slug: lk-ros
 title: Robot software migration to ROS 2
 description: Migrated a ROS 1 Noetic system to ROS 2 Humble, ported selected algorithms, and introduced behavior-tree decision-making and functional modules designed for reuse across robots.
 overview: >-
-  I migrated the company’s robot software from ROS 1 Noetic to ROS 2 Humble.
-  I ported the mapping and localization algorithms needed by the new system and introduced behavior-tree-based decision-making.
-  I separated localization, navigation, control-center communication, and decision-making into modules designed for reuse across multiple robots.
+  I was responsible for migrating the company’s robot software to ROS 2 Humble.
 demo:
   type: image
   src: ../assets/images/ros1-noetic-to-ros2-humble.png

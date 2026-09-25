@@ -3,7 +3,7 @@ slug: falcon
 shortName: FALCON
 category: addinedu
 order: 3
-title: FALCON — 활주로 위험요소 관제
+title: FALCON — 활주로 운항안전서비스
 description: CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템
 team: 4명
 period: 2025.05.26–07.03
@@ -26,7 +26,7 @@ card:
     - Homography
     - OpenCV
 overview: >-
-  활주로의 조류, FOD, 사람과 차량은 작은 객체라도 항공기 운항에 직접적인 위험이 되지만 여러 CCTV를 관제사가 지속적으로 감시하는 데에는 한계가 있습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 픽셀 위치를 실제 활주로 좌표와 구역 정보로 변환해 관제 화면에 전달하는 AI 안전 관제 시스템입니다. 위험요소가 감지되면 객체 ID·클래스·좌표·신뢰도를 서버로 전송하고, 관제 GUI가 지도 마커와 팝업 경보를 갱신합니다.
+  공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 매년 인력을 투입해 위험을 예방하고 활주로를 관리하지만, 인력 부족과 비용 부담이 있습니다. 이러한 문제를 줄이고자 AI로 활주로 위험요소 감시와 안전관리를 자동화하는 프로젝트를 시작했습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 위험요소가 감지되면 관제에 전달하는 AI 안전 관제 시스템입니다.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU

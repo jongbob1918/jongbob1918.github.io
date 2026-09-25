@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-17">
 </head>
-<body data-page="project-detail" data-title-ko="FALCON — 활주로 위험요소 관제 — Jongmyung Kim" data-title-en="FALCON — Runway Safety Monitoring System — Jongmyung Kim" data-description-ko="CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템" data-description-en="An AI monitoring system that detects and tracks runway hazards and maps them to real-world coordinates">
+<body data-page="project-detail" data-title-ko="FALCON — 활주로 운항안전서비스 — Jongmyung Kim" data-title-en="FALCON — Runway Operational Safety Service — Jongmyung Kim" data-description-ko="CCTV 영상의 지상 위험요소를 탐지·추적하고 실제 활주로 좌표로 변환하는 AI 관제 시스템" data-description-en="An AI monitoring system that detects and tracks runway hazards and maps them to real-world coordinates">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -20,7 +20,7 @@
     <a class="back" href="../index.html#addinedu-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
-      <h1>FALCON — 활주로 위험요소 관제</h1>
+      <h1>FALCON — 활주로 운항안전서비스</h1>
       <div class="meta"><span><strong>과정:</strong> ADDINEDU · ROS2와 인공지능을 활용한 자율주행 로봇 개발자 양성과정 9기</span><span><strong>팀:</strong> 4명</span><span><strong>기간:</strong> 2025.05.26–07.03</span><span><strong>담당:</strong> 지상 위험요소 탐지 모델 학습·추적 파이프라인 통합·좌표변환 검증</span></div>
       <p class="project-skills">PyTorch · YOLOv8 · ByteTrack · OpenCV · Homography · TCP</p>
       <a class="project-repository" href="https://github.com/jongbob1918/FALCON" target="_blank" rel="noreferrer" aria-label="FALCON GitHub 저장소 열기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
@@ -28,7 +28,7 @@
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">활주로의 조류, FOD, 사람과 차량은 작은 객체라도 항공기 운항에 직접적인 위험이 되지만 여러 CCTV를 관제사가 지속적으로 감시하는 데에는 한계가 있습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 픽셀 위치를 실제 활주로 좌표와 구역 정보로 변환해 관제 화면에 전달하는 AI 안전 관제 시스템입니다. 위험요소가 감지되면 객체 ID·클래스·좌표·신뢰도를 서버로 전송하고, 관제 GUI가 지도 마커와 팝업 경보를 갱신합니다.</p>
+      <p class="lead">공군 부사관으로 근무하며 활주로의 새와 동물, 나사와 쓰레기 같은 이물질이 항공기 운항에 치명적인 위험이 될 수 있음을 경험했습니다. 매년 인력을 투입해 위험을 예방하고 활주로를 관리하지만, 인력 부족과 비용 부담이 있습니다. 이러한 문제를 줄이고자 AI로 활주로 위험요소 감시와 안전관리를 자동화하는 프로젝트를 시작했습니다. FALCON은 고정 CCTV 영상에서 지상 위험요소를 탐지·추적하고, 위험요소가 감지되면 관제에 전달하는 AI 안전 관제 시스템입니다.</p>
     </section>
 
     <section class="demo-section" id="demo-ko"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/lctXpBYrVsU" title="FALCON 지상 위험요소 관제 데모" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>
@@ -90,7 +90,7 @@
   </div>
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
-      <h1>FALCON — Runway Safety Monitoring System</h1>
+      <h1>FALCON — Runway Operational Safety Service</h1>
       <div class="meta"><span><strong>Program:</strong> ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9</span><span><strong>Team:</strong> 4 members</span><span><strong>Period:</strong> May 26–Jul 3, 2025</span><span><strong>Role:</strong> Detector training, tracking pipeline integration, and coordinate mapping validation</span></div>
       <p class="project-skills">PyTorch · YOLOv8 · ByteTrack · OpenCV · Homography · TCP</p>
       <a class="project-repository" href="https://github.com/jongbob1918/FALCON" target="_blank" rel="noreferrer" aria-label="Open the FALCON GitHub repository"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.9-1.29 2.74-1.02 2.74-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></a>
@@ -98,7 +98,7 @@
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">Birds, foreign object debris, people, and vehicles can threaten aircraft operations even when they appear as small objects, while continuously watching multiple CCTV feeds is difficult for an operator. FALCON detects and tracks ground hazards in fixed-camera footage, converts pixel positions into runway coordinates and zones, and sends object ID, class, location, and confidence events to a control interface.</p>
+      <p class="lead">While serving as a noncommissioned officer in the Republic of Korea Air Force, I experienced how birds, animals, and debris such as screws and litter on runways can pose a critical risk to aircraft operations. Personnel are assigned each year to prevent hazards and maintain runway safety, but staffing shortages and costs remain a burden. I started this project to help address these problems by using AI to automate runway hazard monitoring and safety management. FALCON is an AI safety monitoring system that detects and tracks ground hazards in fixed CCTV footage and reports them to operators when detected.</p>
     </section>
 
     <section class="demo-section" id="demo-en"><figure class="feature-media"><div class="video-embed"><iframe src="https://www.youtube.com/embed/lctXpBYrVsU" title="FALCON ground-hazard monitoring demonstration" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></figure></section>

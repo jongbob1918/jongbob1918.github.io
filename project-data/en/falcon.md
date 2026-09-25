@@ -1,13 +1,13 @@
 ---
 slug: falcon
-title: FALCON — Runway Safety Monitoring System
+title: FALCON — Runway Operational Safety Service
 description: An AI monitoring system that detects and tracks runway hazards and maps them to real-world coordinates
 team: 4 members
 period: May 26–Jul 3, 2025
 context: ADDINEDU · Autonomous Robot Developer Training with ROS 2 and AI, Cohort 9
 role: Detector training, tracking pipeline integration, and coordinate mapping validation
 overview: >-
-  Birds, foreign object debris, people, and vehicles can threaten aircraft operations even when they appear as small objects, while continuously watching multiple CCTV feeds is difficult for an operator. FALCON detects and tracks ground hazards in fixed-camera footage, converts pixel positions into runway coordinates and zones, and sends object ID, class, location, and confidence events to a control interface.
+  While serving as a noncommissioned officer in the Republic of Korea Air Force, I experienced how birds, animals, and debris such as screws and litter on runways can pose a critical risk to aircraft operations. Personnel are assigned each year to prevent hazards and maintain runway safety, but staffing shortages and costs remain a burden. I started this project to help address these problems by using AI to automate runway hazard monitoring and safety management. FALCON is an AI safety monitoring system that detects and tracks ground hazards in fixed CCTV footage and reports them to operators when detected.
 demo:
   type: youtube
   src: https://www.youtube.com/embed/lctXpBYrVsU

@@ -30,11 +30,9 @@ A human moved the leader arms while camera images, joint states, and actions wer
 
 ## First attempt: learn all five balls in one sequence
 
-Our first dataset copied the judging order: two blue balls, two red balls, and one yellow ball were picked, transferred, and sorted in a single episode. We recorded about 200 demonstrations and trained the first policy.
+We recorded about 200 episodes, each covering the full sequence of picking, transferring, and sorting all five balls. During testing, small changes in ball or gripper position caused missed grasps or mid-sequence stops. We attributed this to too few demonstrations of each stage within the long sequence and errors carrying over into later actions.
 
-In initial tests, the robot sometimes stopped mid-motion, and small changes in ball or gripper position sharply reduced grasp accuracy. Position, color, ordering, and the bimanual handoff were mixed into one long episode, leaving too few examples for each stage and allowing early errors to accumulate.
-
-<dl class="flow"><dt>Data</dt><dd>About 200 episodes covering blue → blue → red → red → yellow</dd><dt>Training unit</dt><dd>Imitate grasping, transfer, and color sorting as one long action sequence</dd><dt>Observation</dt><dd>Mid-sequence stops, unstable grasps, and weak tolerance to ball-position changes</dd></dl>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Illustration of the first attempt: about 200 demonstrations of blue, blue, red, red, and yellow balls in one sequence, followed by missed grasps and mid-sequence stops when positions change" loading="lazy"></figure>
 
 ## Second attempt: split tasks and include recovery data
 

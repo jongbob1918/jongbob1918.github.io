@@ -49,9 +49,8 @@
 
         <section class="case-section" id="ko-1차-시도-다섯-개의-공을-한-번에-학습시키기">
           <div class="case-heading"><h2>1차 시도: 다섯 개의 공을 한 번에 학습시키기</h2></div>
-          <p>처음에는 실제 심사 순서와 동일하게 파란 공 2개, 빨간 공 2개, 노란 공 1개를 연속으로 집어 전달하고 분류하는 전체 과정을 하나의 에피소드로 기록했습니다. 이 방식으로 약 200개의 시연 데이터를 수집해 첫 학습을 진행했습니다.</p>
-<p>그러나 1차 테스트에서는 로봇이 동작 중 갑자기 멈추거나, 공과 그리퍼의 위치가 조금만 달라져도 집기 정확도가 크게 떨어졌습니다. 하나의 긴 에피소드 안에 공의 위치, 색상, 순서와 양팔 전달 단계가 모두 섞이면서 각 단계에 필요한 시연 밀도가 부족했고, 앞 단계의 작은 오차가 뒤 동작까지 누적됐습니다.</p>
-<dl class="flow"><dt>데이터</dt><dd>파랑 → 파랑 → 빨강 → 빨강 → 노랑의 다섯 공 전체 과정을 약 200개 에피소드로 기록</dd><dt>학습 단위</dt><dd>집기·전달·색상 분류를 하나의 긴 행동 시퀀스로 모방</dd><dt>관찰 결과</dt><dd>중간 정지와 불안정한 집기가 발생하고, 공 위치 변화에 대한 정확도가 기대에 미치지 못함</dd></dl>
+          <p>다섯 공을 순서대로 집어 전달하고 분류하는 전체 동작을 하나의 에피소드로 묶어 약 200회 기록했습니다. 테스트에서는 공이나 그리퍼 위치가 조금만 달라져도 집기에 실패하거나 중간에 멈췄습니다. 긴 동작을 한꺼번에 학습하면서 단계별 시연이 부족하고, 앞 단계의 오차가 뒤로 이어진 것으로 판단했습니다.</p>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="파랑·파랑·빨강·빨강·노랑 순서의 전체 동작을 약 200회 학습한 뒤, 위치 변화로 집기에 실패하거나 중간에 멈추는 양팔 로봇의 1차 시도를 설명한 그림" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="ko-2차-시도-태스크를-나누고-실패까지-데이터로-만들기">
@@ -114,9 +113,8 @@
 
         <section class="case-section" id="en-first-attempt-learn-all-five-balls-in-one-sequence">
           <div class="case-heading"><h2>First attempt: learn all five balls in one sequence</h2></div>
-          <p>Our first dataset copied the judging order: two blue balls, two red balls, and one yellow ball were picked, transferred, and sorted in a single episode. We recorded about 200 demonstrations and trained the first policy.</p>
-<p>In initial tests, the robot sometimes stopped mid-motion, and small changes in ball or gripper position sharply reduced grasp accuracy. Position, color, ordering, and the bimanual handoff were mixed into one long episode, leaving too few examples for each stage and allowing early errors to accumulate.</p>
-<dl class="flow"><dt>Data</dt><dd>About 200 episodes covering blue → blue → red → red → yellow</dd><dt>Training unit</dt><dd>Imitate grasping, transfer, and color sorting as one long action sequence</dd><dt>Observation</dt><dd>Mid-sequence stops, unstable grasps, and weak tolerance to ball-position changes</dd></dl>
+          <p>We recorded about 200 episodes, each covering the full sequence of picking, transferring, and sorting all five balls. During testing, small changes in ball or gripper position caused missed grasps or mid-sequence stops. We attributed this to too few demonstrations of each stage within the long sequence and errors carrying over into later actions.</p>
+<figure class="feature-media hackathon-act-media"><img src="../assets/images/physical-ai-first-attempt.png" alt="Illustration of the first attempt: about 200 demonstrations of blue, blue, red, red, and yellow balls in one sequence, followed by missed grasps and mid-sequence stops when positions change" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="en-second-attempt-split-tasks-and-include-recovery-data">

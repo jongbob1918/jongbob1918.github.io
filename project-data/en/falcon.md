@@ -14,21 +14,27 @@ demo:
   title: FALCON ground-hazard monitoring demonstration
 ---
 
-## From camera footage to operational alerts
+## Service flow from hazard detection to alerts
 
-We installed cameras around an airport model and connected the detected hazards to controller and pilot services. Ground- and bird-detection servers send their results to the main server. The controller interface (Hawkeye) displays locations and alerts, while the pilot service (RedWing) delivers voice guidance.
+When a camera detects a hazard, the system identifies its type and location and places it on the controller map. Controllers see map markers and popup alerts, while pilots receive the hazard information through voice alerts.
+
+<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="Processing sequence from camera input through detection, tracking, and coordinate mapping to map and alert updates" loading="lazy"></figure>
+
+## System design
+
+The ground- and bird-detection servers, controller PC, and pilot PC connect through the main server. Each detection server analyzes camera footage. The main server manages detections and risk information and forwards them to the controller interface (Hawkeye) and pilot service (RedWing).
 
 <figure class="feature-media"><img src="../assets/images/falcon_software_architecture.png" alt="Detection servers connected through the main server to the controller interface and pilot service" loading="lazy"></figure>
 
 As the lead of a four-person team, I managed schedules and documentation and handled the ground-object detection server, model research, and training. Synthetic-data generation and model development were shared work. Other team members implemented the main server, controller interface, and pilot service.
 
-## Why the initial model missed objects
+## Object detection model troubleshooting
 
 We defined six ground-object classes: birds, debris, wild animals, people, vehicles, and aircraft. The initial model was trained on roughly 15,000 public images but struggled to detect small objects in footage of the airport model.
 
 Real airport photographs differed from our test setup in object size, shape, and background. We built training data that reflected the model environment to reduce this gap.
 
-## Combining synthetic and photographed images
+## Improving the model with mixed training data
 
 The team scanned physical models in 3D and used Polycam and Blender to build a virtual airport environment. A teammate implemented the Unity environment and automatic labeling pipeline, varying camera angles and lighting while generating images and object-location labels together.
 
@@ -55,8 +61,6 @@ We measured marker-center locations on the model and found the corresponding pix
 <figure class="feature-media"><img src="../assets/images/falcon_aruco_mapping.png" alt="Measured ArUco marker locations on the airport model paired with their pixel positions in camera footage" loading="lazy"></figure>
 
 ByteTrack associates the same object across frames as it moves. We also analyzed fluorescent vest and vehicle colors to distinguish workers and service vehicles. Sending object identifiers, classes, and positions to the server updates map markers and popup alerts on the controller interface.
-
-<figure class="feature-media"><img src="../assets/images/falcon_detection_sequence.png" alt="Processing sequence from camera input through detection, tracking, and coordinate mapping to map and alert updates" loading="lazy"></figure>
 
 ## Demonstrating the integrated system
 

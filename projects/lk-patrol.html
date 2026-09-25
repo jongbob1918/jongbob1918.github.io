@@ -45,7 +45,6 @@
         <details class="case-section case-disclosure" id="ko-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><p>바퀴형 이족 로봇에 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 2와 자율주행 소프트웨어 Nav2(Navigation2)를 사용했습니다. 주변의 3차원 형상을 측정하는 센서인 3D LiDAR(Light Detection and Ranging)의 데이터로 사전 지도에서 위치를 추정하고, 지면과 장애물을 구분했습니다.</p>
-<p>순찰 구역은 여러 지도로 나누고 경유점인 웨이포인트(Waypoint)로 연결했습니다. 목표를 지정하면 로봇은 필요한 맵 전환 지점을 거쳐 지도를 바꾸고 목표까지 이동합니다.</p>
 <p>주행과 함께 임무 수행, 도킹·언도킹 기능을 개발했습니다. 사람 접근 시에는 빈번하게 회피하던 동작을 바꿔, 설정한 안전 범위 안에 사람이 감지되면 정지하고 안내 방송을 하도록 했습니다.</p>
 </div>
         </details>
@@ -57,7 +56,8 @@
 <h3>Root Cause</h3>
 <p>순찰 구역에는 위치를 구분할 만한 특징이 부족한 수림·잔디 구간이 있었습니다. 여기에 수만 평 규모의 사전 지도 전체를 탐색하면서 후보 위치를 구분하기 어려워지고 처리 범위도 커졌습니다.</p>
 <h3>Solution</h3>
-<p>순찰 구역을 나눠 각각 지도를 작성하고, 전환 웨이포인트에 도착하면 해당 구역의 지도를 불러오도록 했습니다. 한 번에 처리하는 지도 범위를 줄이고, 설정한 허용 범위 안의 로컬 정합 결과만 받아들이도록 제한했습니다.</p>
+<p>순찰 구역을 나눠 각각 지도를 작성하고, 경유점인 웨이포인트(Waypoint)로 연결했습니다. 목표를 지정하면 로봇이 필요한 맵 전환 지점을 거쳐 해당 구역의 지도를 불러오고 목표까지 이동하도록 했습니다.</p>
+<p>이렇게 한 번에 처리하는 지도 범위를 줄이고, 설정한 허용 범위 안의 로컬 정합 결과만 받아들이도록 제한했습니다.</p>
 <p>알고리즘과 파라미터를 바꿀 때마다 현장을 방문하기에는 날씨와 배터리 제약이 컸습니다. 일주일 동안 현장 센서 데이터를 ROS 메시지 기록 도구인 rosbag으로 수집하고, 데이터를 재생하며 비교하는 실험 환경을 구축했습니다.</p>
 <p>통과 기준과 알고리즘 후보·파라미터 조합을 정한 뒤 에이전트를 활용해 재생 실험을 병렬로 실행했습니다. 정합 후보가 잘못 선택되는 구간은 직접 시각화해 비교하며, 자동 실험에서 놓칠 수 있는 오정합을 확인했습니다.</p>
 <h3>Result</h3>
@@ -139,7 +139,6 @@
         <details class="case-section case-disclosure" id="en-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><p>The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. Data from a 3D Light Detection and Ranging (LiDAR) sensor supported localization against prebuilt maps and ground–obstacle separation.</p>
-<p>I divided the patrol area into maps connected by waypoints. Given a goal, the robot travels through the required transition points, switches maps, and continues to the destination.</p>
 <p>I also developed mission execution, docking, and undocking. When people approached, I replaced frequent avoidance maneuvers with stopping and playing an announcement when a person was detected within the configured safety zone.</p>
 </div>
         </details>
@@ -151,7 +150,8 @@
 <h3>Root Cause</h3>
 <p>Some woodland and grass-covered sections lacked distinctive features for localization. Searching a large prebuilt map made candidate positions difficult to distinguish and increased the area to process.</p>
 <h3>Solution</h3>
-<p>I mapped each section separately and loaded the relevant map at transition waypoints. I reduced the map area processed at once and restricted acceptance of local matching results to a configured tolerance.</p>
+<p>I mapped each section separately and connected the maps with waypoints. Given a goal, the robot travels through the required transition points, loads the relevant map, and continues to the destination.</p>
+<p>This reduced the map area processed at once. I also restricted acceptance of local matching results to a configured tolerance.</p>
 <p>Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. I collected field sensor data over a week using rosbag, a ROS message recording tool, and built a workflow for replaying and comparing data.</p>
 <p>I defined acceptance criteria, candidate algorithms, and parameter combinations, then used agents to run replay experiments in parallel. I visualized and compared intervals with incorrect matching candidates to check mismatches the automated experiments could miss.</p>
 <h3>Result</h3>

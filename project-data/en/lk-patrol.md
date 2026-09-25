@@ -17,8 +17,6 @@ The task was to maintain localization and repeatedly navigate a 2 km patrol rout
 
 The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. Data from a 3D Light Detection and Ranging (LiDAR) sensor supported localization against prebuilt maps and ground–obstacle separation.
 
-I divided the patrol area into maps connected by waypoints. Given a goal, the robot travels through the required transition points, switches maps, and continues to the destination.
-
 I also developed mission execution, docking, and undocking. When people approached, I replaced frequent avoidance maneuvers with stopping and playing an announcement when a person was detected within the configured safety zone.
 
 ## Challenge 1: Localization in woodland and grass-covered areas
@@ -33,7 +31,9 @@ Some woodland and grass-covered sections lacked distinctive features for localiz
 
 ### Solution
 
-I mapped each section separately and loaded the relevant map at transition waypoints. I reduced the map area processed at once and restricted acceptance of local matching results to a configured tolerance.
+I mapped each section separately and connected the maps with waypoints. Given a goal, the robot travels through the required transition points, loads the relevant map, and continues to the destination.
+
+This reduced the map area processed at once. I also restricted acceptance of local matching results to a configured tolerance.
 
 Weather and battery constraints made it difficult to revisit the site for every algorithm or parameter change. I collected field sensor data over a week using rosbag, a ROS message recording tool, and built a workflow for replaying and comparing data.
 

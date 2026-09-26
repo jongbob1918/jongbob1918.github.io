@@ -1,13 +1,15 @@
 ---
-title: " AI·ML·DL과 네 가지 학습 방식"
+title: "머신러닝은 어떤 정답으로 배울까"
 slug: deep-learning/easy-deep-learning-ch01
-description: 인공지능, 머신러닝, 딥러닝의 관계와 지도·비지도·자기지도·강화학습의 차이를 정리합니다.
+description: 모델이 정답을 어디서 얻는지를 기준으로 지도·자기지도·비지도·강화학습의 차이를 이해합니다.
 publishedAt: 2026-09-13
 tags:
   - Deeplearning
 draft: false
 featured: false
 ---
+
+머신러닝의 학습 방식을 외우다 보면 자기지도학습과 비지도학습의 경계에서 막히기 쉽다. 이 글에서는 **학습에 필요한 정답이 어디서 오는가**를 기준으로 네 방식을 구분한다. 먼저 인공지능·머신러닝·딥러닝의 범위를 짚고, 같은 데이터라도 어떤 학습 신호를 만드느냐에 따라 방식이 어떻게 달라지는지 따라간다.
 
 ## AI, ML, DL의 차이
 
@@ -71,11 +73,11 @@ featured: false
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/ml-dl-comparison.png" alt="딥러닝은 깊은 신경망에서 특징 추출과 판단 기준을 함께 학습하고, 전통적인 머신러닝은 사람이 특징을 추출한 뒤 별도의 분류 모델이 판단 기준을 학습하는 이미지 분류 과정 비교" loading="lazy" />
 
-## 2. 머신러닝의 학습 방식
+## 정답은 어디서 오는가
 
 학습 방식에는 크게 네 가지로 지도학습, 비지도학습, 자기지도학습, 강화학습이 있습니다.
 
-### 2.1 지도학습(supervised learning)
+### 사람이 정답을 붙이는 지도학습
 
 **지도학습**은 입력 데이터에 정답을 붙이고, 예측과 정답의 차이를 줄이도록 학습하는 방식입니다.
 
@@ -123,7 +125,7 @@ featured: false
 사람이 직접 정답(레이블)을 붙이는 데에는 많은 시간과 비용이 듭니다.
 
 
-### 2.2 자기지도학습(self-supervised learning)
+### 데이터에서 정답을 만드는 자기지도학습
 
 지도학습의 한계를 개선하기 위해 나온 학습 방식입니다.
 별도로 사람이 만든 레이블 없이, 데이터 자체에서 학습에 필요한 정답이나 목표를 자동으로 만들어 학습하는 방식입니다.
@@ -204,7 +206,7 @@ featured: false
 두 변형의 표현이 가까워지도록 모델을 조정하면서, 변형 전후에도 유지되는 핵심 특징을 학습합니다. [SimCLR 원 논문](https://arxiv.org/abs/2002.05709)
 
 
-### 2.3 비지도학습
+### 정답 없이 구조를 찾는 비지도학습
 
 
 **레이블이 없는 데이터에서 패턴이나 구조를 찾는 방식입니다.**
@@ -242,7 +244,7 @@ featured: false
 [군집화·차원 축소 참고 문서](https://scikit-learn.org/stable/unsupervised_learning.html)
 
 
-### 2.4 강화학습
+### 행동의 결과로 배우는 강화학습
 
 **강화학습(Reinforcement Learning)** 은 행동을 시도하고, 그 결과로 받은 보상을 바탕으로 다음 선택을 바꾸는 학습 방식입니다.
 
@@ -267,7 +269,7 @@ featured: false
 
 - [NeurIPS 2021 · Self-Supervised Learning: Self-Prediction and Contrastive Learning](https://nips.cc/media/neurips-2021/Slides/21895.pdf).
 
-- 혁펜하임, 『이지 딥러닝』, 챕터 1.
+- 혁펜하임, 『이지 딥러닝』. 인공지능과 학습 방식의 전체 범위를 이해하는 데 참고했다.
 - Doersch et al., [Context Prediction](https://arxiv.org/abs/1505.05192), 2015.
 - Chen et al., [SimCLR](https://arxiv.org/abs/2002.05709), 2020.
 - [BERT 공식 설명](https://github.com/google-research/bert#what-is-bert).

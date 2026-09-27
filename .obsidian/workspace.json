@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "050dfba839648caa",
+        "id": "4bc8239c8abcca29",
         "type": "tabs",
         "children": [
           {
-            "id": "4ef708ae061714b6",
+            "id": "70b4aacaa0bf3dd1",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "easy-deep-learning-ch02"
+              "title": "easy-deep-learning-ch01"
             }
           }
         ]
@@ -188,29 +188,37 @@
       "bases:Create new base": false
     }
   },
-  "active": "4ef708ae061714b6",
+  "active": "70b4aacaa0bf3dd1",
   "lastOpenFiles": [
-    "dist/assets/images/tron_test.gif",
-    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
-    "dist/assets/images/ros1-noetic-to-ros2-humble.png",
-    "dist/assets/images/roomie_system_architecture.png",
-    "dist/assets/images/roomie_gaussian_motion.webp",
-    "dist/assets/images/roomie_elevator_flow.png",
-    "dist/assets/images/roomie_arm_principle.png",
-    "dist/assets/images/roomie_arm_hardware.webp",
-    "dist/assets/images/roomie-ik-target-control-poster.jpg",
-    "dist/assets/images/roomie-button-detection.webp",
+    "dist/assets/images/falcon_ground_detection.webp",
     "dist/assets/images/roomie-button-detection-cropped.webp",
-    "dist/assets/images/roomie-button-click-poster.jpg",
+    "dist/assets/images/javis_book_pickup_pipeline.png",
     "dist/assets/images/nav2-navigation-behavior-tree.source.txt",
+    "dist/assets/images/project_falcon.png",
+    "dist/assets/images/project_roomie.png",
+    "dist/assets/images/javis_interface_mock_architecture.png",
+    "dist/assets/images/javis_robot_drive.gif",
+    "dist/assets/images/physical-ai-second-attempt.png",
+    "dist/assets/images/physical-ai-first-attempt.png",
+    "dist/assets/images/roomie-ik-target-control-poster.jpg",
+    "dist/assets/images/lk-robotics-emblem.svg",
     "dist/assets/images/nav2-navigation-behavior-tree.LICENSE.txt",
     "dist/assets/videos/roomie-ik-target-control.mp4",
     "dist/assets/videos/roomie-button-click.mp4",
     "dist/assets/videos",
+    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
     "dist/assets/images",
     "dist/assets",
-    "dist/_astro/NotesSidebar.C5PiSdxL.css",
-    "dist/_astro/KaTeX_Typewriter-Regular.D3Ib7_Hf.ttf",
+    "dist/projects/roomie.html",
+    "dist/projects/physical-ai-hackathon.html",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch04.md",
+    "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
     "project-data/archive/en/lk-biped.md",
     "project-data/archive/lk-biped.md",
     "project-data/en/lk-biped.md",
@@ -219,14 +227,6 @@
     "project-data/lk-ros.md",
     "project-data/en/lk-patrol.md",
     "project-data/lk-patrol.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
-    "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch03.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch04.md",
     "site/src/content/notes/Deep learning/easy-deep-learning-ch01.md",
     "site/README.md",
     "site/src/content/notes/Deep learning/image-path-check.md",

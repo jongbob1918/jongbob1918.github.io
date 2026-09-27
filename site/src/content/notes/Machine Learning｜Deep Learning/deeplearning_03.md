@@ -1,131 +1,91 @@
 ---
-title: "역전파: 손실에서 가중치까지"
-slug: deep-learning/easy-deep-learning-ch03
-description: 예측값에서 손실까지 이어지는 계산 경로를 거슬러 올라가며 가중치의 미분을 구하고, 그 값으로 가중치를 갱신합니다.
-publishedAt: 2026-09-13
-updatedAt: 2026-09-27
+title: 3. 활성화 함수
+slug: deep-learning/linear-nonlinear-activations
+description: 비선형 활성화 함수가 필요한 이유와 선형 출력을 쓰는 경우를 살펴보고, ReLU의 정보 손실을 MobileNetV2 사례에 연결합니다.
+publishedAt: 2026-09-27
 tags:
   - Deep learning
 draft: false
 featured: false
 ---
 
-2장에 이어 조회수 $x_1$과 영상 길이 $x_2$로 수익을 예측한다고 해 보겠습니다. 구조는 **입력 노드 2개 → 은닉층 1개(노드 3개) → 출력 노드 1개**입니다. 두 입력은 은닉 노드 $h_1,h_2,h_3$ 각각에 연결되고, 이 세 노드는 모두 출력 $\hat y$에 연결됩니다.
 
-은닉층에는 ReLU를 쓰고, 출력층은 값을 그대로 내보냅니다. 은닉 노드 $j$에서는 다음 순서로 계산합니다.
 
-$$
-z_j=x_1w_{1j}+x_2w_{2j}+b_j,\qquad h_j=\operatorname{ReLU}(z_j)
-$$
+## 1. 비선형 활성화 함수가 필요한 이유
 
-$w_{ij}$는 입력 $i$에서 은닉 노드 $j$로 이어지는 가중치이고, $b_j$는 그 노드의 바이어스입니다. ReLU는 음수를 0으로, 양수를 그대로 내보냅니다. 세 노드의 출력을 합쳐 예측값을 구합니다.
+![[Pasted image 20260927161552.png|515]]
 
-$$
-\hat y=h_1v_1+h_2v_2+h_3v_3+b_{\mathrm{out}}
-$$
+### 선형 계산만 반복하면
 
-$v_j$는 은닉 노드 $j$에서 출력으로 이어지는 가중치입니다. 입력에서 예측값까지 계산하는 과정을 **순전파**(Forward Propagation)라고 합니다. 이때 구한 $z_j$, $h_j$, $\hat y$는 역전파에서도 사용합니다.
+x입력층에서 나온 값들이 만약 선형 활성화함수 f1를 통과한다면 값들은 선형성이 유지됩니다.
 
-## 1. 손실의 미분을 거꾸로 계산하기
+층을 깊게 쌓으면 더 복잡한 관계를 표현할 수 있을까요? 
 
-예측이 실제 수익과 다르면 각 가중치를 어느 방향으로 바꿔야 할까요? 이번에는 손실을 제곱 오차의 절반으로 둡니다. $1/2$은 미분할 때 나오는 2를 없애기 위한 값입니다.
+활성화 함수를 입력을 그대로 내보내는 항등 함수 $f(x)=x$로 둘 경우:
 
-$$
-L=\frac12(\hat y-y)^2
-$$
+$$\begin{aligned} \hat{y} &= w_2(w_1x + b_1) + b_2 \\ &= \underbrace{(w_2 w_1)}_{W'}x + \underbrace{(w_2 b_1 + b_2)}_{B'} \\ &= W'x + B' \end{aligned}$$
 
-**역전파**(Backpropagation)는 출력 쪽에서 입력 쪽으로 계산을 거슬러 올라가며 손실의 편미분을 구합니다. 첫 번째 가중치 $w_{11}$이 손실에 영향을 주는 경로는 다음과 같습니다.
+- **결과:** 100개 층을 쌓아도 단 1개 층($W'x + B'$)과 수학적으로 완전히 같습니다.
+    
+- **해결책:** 층 사이에 **비선형 활성화 함수**를 넣어야 연산이 하나로 합쳐지지 않고 복잡한 고차원 패턴을 표현할 수 있습니다.
+    
 
-$$
-w_{11}\;\longrightarrow\;z_1\;\longrightarrow\;h_1
-\;\longrightarrow\;\hat y\;\longrightarrow\;L
-$$
+##### 선형 활성화 함수는 언제 쓸까?
 
-각 단계의 변화율을 곱하는 **연쇄 법칙**(Chain Rule)을 적용합니다.
+은닉층은 비선형 함수를 쓰는 것이 기본이지만, 특수한 목적으로 선형 출력을 유지하는 영역이 있습니다.
 
-$$
-\frac{\partial L}{\partial w_{11}}
-=\frac{\partial L}{\partial\hat y}
-\frac{\partial\hat y}{\partial h_1}
-\frac{\partial h_1}{\partial z_1}
-\frac{\partial z_1}{\partial w_{11}}
-$$
+| **사용 위치**  | **사용 목적**                            | **실제 사례**                                    |
+| ---------- | ------------------------------------ | -------------------------------------------- |
+| **출력층**    | 출력 범위를 제한(0~1 등)하지 않고 임의의 실수를 그대로 예측 | **회귀(Regression)** 모델 (예: 주가·매출 예측)          |
+| **은닉층 일부** | 비선형 변환으로 인한 과도한 정보 파괴 방지             | **MobileNetV2**의 선형 병목(Linear Bottleneck) 구간 |
 
-| 단계 | 변화율 |
-| --- | --- |
-| 예측 → 손실 | $\partial L/\partial\hat y=\hat y-y$ |
-| 은닉 출력 → 예측 | $\partial\hat y/\partial h_1=v_1$ |
-| 가중합 → 은닉 출력 | $\partial h_1/\partial z_1=\operatorname{ReLU}'(z_1)$ |
-| 가중치 → 가중합 | $\partial z_1/\partial w_{11}=x_1$ |
+## 2. ReLU(Rectified Linear Unit)
 
-따라서 첫 번째 가중치의 미분은 다음과 같습니다.
+널리 쓰이는 비선형 활성화 함수입니다. 양수입력이 들어오면 그대로 출력하고 음수입력이 들어오면 0으로 출력합니다. 
 
-$$
-\frac{\partial L}{\partial w_{11}}
-=(\hat y-y)v_1\operatorname{ReLU}'(z_1)x_1
-$$
+<img src="../../../../public/images/notes/easy-deep-learning-ch03/relu.jpeg" alt="음수 입력에서 0, 양수 입력에서 입력값을 그대로 출력하는 ReLU 그래프" loading="lazy" width="311" height="210" />
 
-ReLU의 기울기는 입력이 양수이면 1, 음수이면 0입니다. 0에서는 미분이 정의되지 않으며, 구현에서는 보통 0으로 처리합니다.
 
-### 뒤에서 구한 미분값 재사용하기
 
-은닉 노드 $j$까지 전달된 미분값을 $\delta_j$로 묶습니다.
+ReLU는 연산이 빠르고 기울기 소실(Vanishing Gradient)을 줄여주지만, 정보 손실이 발생합니다.
+은닉층이 층이 적을경우 기울기 소실이 일어나지만 층이 많을경우 기울기 손실을 줄여줍니다.
+이런 현상은 음수를 0으로 만들어버려 죽은뉴런 문제를 만들기 때문이다.
 
-$$
-\delta_j=\frac{\partial L}{\partial z_j}
-=(\hat y-y)v_j\operatorname{ReLU}'(z_j)
-$$
+## 3. RELU의 대안책
+###  Leaky ReLU
 
-같은 은닉 노드로 들어오는 가중치와 바이어스는 이 값을 함께 사용합니다.
+![[Pasted image 20260927171402.png]]
 
-$$
-\frac{\partial L}{\partial w_{ij}}=x_i\delta_j,\qquad
-\frac{\partial L}{\partial b_j}=\delta_j
-$$
+음수영역에서 기울기가 0이 아닌 0.01로 설정한 비선형 함수입니다.
 
-출력층의 미분에는 순전파에서 구한 $h_j$가 쓰입니다.
+GAN(Generative Adversarial Network)과 경량 CNN에서 많이 사용합니다.
 
-$$
-\frac{\partial L}{\partial v_j}=h_j(\hat y-y),\qquad
-\frac{\partial L}{\partial b_{\mathrm{out}}}=\hat y-y
-$$
+지수 함수($e^x$)나 시그모이드처럼 복잡한 초월함수 연산이 전혀 없어, NPU/엣지 디바이스나 실시간 처리가 중요한 **경량 모델**에서 압도적인 속도를 냅니다.
 
-역전파는 이처럼 뒤에서 계산한 미분값을 앞에서도 재사용합니다. 그래서 먼저 순전파로 $z_j$, $h_j$, $\hat y$를 구해야 합니다. 학습은 **순전파 → 손실 계산 → 역전파 → 파라미터 갱신** 순서로 진행됩니다.
 
-## 2. 숫자로 한 번 따라가기
+### Swish / SiLU (Sigmoid Linear Unit)
+![[Pasted image 20260927171844.png|397]]
+구글이 탐색 알고리즘으로 찾아낸 함수로 입력값 $x$에 시그모이드 함수 $\sigma(\beta x)$를 곱한 형태입니다
 
-입력은 단위를 조정한 설명용 값이며, 실제 영상 데이터는 아닙니다. $x_1=1$, $x_2=2$, 정답 $y=4$라고 하겠습니다. 처음 가중치와 바이어스는 다음과 같습니다.
+$x \cdot \sigma(\beta x)$
+- **$x$**: 들어오는 원래 신호(입력값)
+- **$\sigma(\cdot)$ (시그모이드)**: 어떤 값이든 0과 1 사이의 값으로 압축하는 함수 (0% ~ 100%)
+- **$\beta$ (베타)**: 곡선의 가파른 정도를 조절하는 상수 (보통 기본값으로 1을 사용하며, $\beta=1$일 때를 **SiLU**라고 부름)
 
-| 은닉 노드 $j$ | $w_{1j}$ | $w_{2j}$ | $b_j$ | $v_j$ |
-| --- | ---: | ---: | ---: | ---: |
-| 1 | 1 | 0 | 0 | 1 |
-| 2 | 0 | 1 | 0 | 1 |
-| 3 | −1 | 0 | 0 | 1 |
+Efficient Net이나, Mamba에 활용되어 Relu보다 좋은 성능을 보인다고 나옴
+### GELU (Gaussian Error Linear Unit)
+<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu.svg" alt="GELU 함수 그래프. 음수 입력에서 0 아래로 조금 내려갔다가 원점을 지나 양수 입력에서 거의 직선으로 증가한다" loading="lazy" width="800" height="500" />
 
-출력 바이어스 $b_{\mathrm{out}}$은 0입니다. 순전파에서 $z_1=1$, $z_2=2$, $z_3=-1$이므로 $h_1=1$, $h_2=2$, $h_3=0$입니다. 예측은 $\hat y=3$, 손실은 $L=\frac12(3-4)^2=0.5$입니다.
+$$GELU(x) = x \cdot \Phi(x)$$
+- **$x$**: 원래 들어온 입력값
+- **$\Phi(x)$**: 표준정규분포($\mathcal{N}(0, 1)$)의 **누적분포함수(CDF)**
+#### 의미: "확률적으로 살려두기"
+정규분포 확률 $\Phi(x)$는 항상 0과 1 사이의 값(확률)을 가집니다.
 
-예측과 정답의 차이는 $\hat y-y=-1$입니다. 세 은닉 노드의 ReLU 기울기는 차례로 $1,1,0$이므로 $\delta_1=-1$, $\delta_2=-1$, $\delta_3=0$입니다.
+- **$x$가 큰 양수일 때 (예: $x = +3$):** $\Phi(3) \approx 0.999$이므로, $x$를 거의 100% 그대로 통과시킵니다.
+- **$x$가 큰 음수일 때 (예: $x = -3$):** $\Phi(-3) \approx 0.001$이므로, 출력이 거의 0에 수렴합니다.
+    
+- **$x = 0$ 근처일 때:** $\Phi(0) = 0.5$이므로, 절반($0.5x = 0$)만 통과시키며 부드러운 곡선을 만듭니다.
 
-| 파라미터 | 노드 1 | 노드 2 | 노드 3 |
-| --- | ---: | ---: | ---: |
-| $\partial L/\partial w_{1j}$ | −1 | −1 | 0 |
-| $\partial L/\partial w_{2j}$ | −2 | −2 | 0 |
-| $\partial L/\partial b_j$ | −1 | −1 | 0 |
-| $\partial L/\partial v_j$ | −1 | −2 | 0 |
+LLM / Transformer / Vision Transformer에서 많이 사용합니다.
 
-출력 바이어스의 미분은 $\partial L/\partial b_{\mathrm{out}}=-1$입니다. 세 번째 은닉 노드는 이번 입력에서 ReLU의 음수 구간에 있으므로, 그 노드를 지나는 미분값은 모두 0입니다.
-
-학습률 $\eta=0.01$로 모든 파라미터를 동시에 갱신합니다. 예를 들어 $w_{11}$은 $1-0.01(-1)=1.01$이 됩니다. 갱신한 값으로 다시 순전파하면 $h_1=1.06$, $h_2=2.06$, $h_3=0$이고, 출력층 가중치는 각각 $1.01$, $1.02$, $1$입니다. 출력 바이어스는 $0.01$이 됩니다.
-
-$$
-\hat y=1.06(1.01)+2.06(1.02)+0.01=3.1818
-$$
-
-손실은 약 $0.3347$로 줄었습니다. 한 번의 계산에서 미분값을 구하고 그 방향으로 갱신하자 예측이 정답 4에 가까워졌습니다.
-
-행렬을 사용해 노드별 계산을 묶는 방법은 [MLP를 행렬로 표현하기](/notes/deep-learning/mlp-matrix-representation/)에서, 활성화 함수가 필요한 이유는 [선형·비선형 활성화 함수와 ReLU](/notes/deep-learning/linear-nonlinear-activations/)에서 다룹니다.
-
-## 참고 자료
-
-- 혁펜하임, 『이지 딥러닝』, 챕터 3.
-- [Stanford CS231n · 연쇄 법칙과 역전파](https://cs231n.github.io/optimization-2/).

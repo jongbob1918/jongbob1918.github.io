@@ -1,6 +1,6 @@
 # 노트 이미지 경로
 
-블로그 노트에서 쓰는 이미지는 `site/public/images/notes/<글 slug>/`에 저장한다. 예를 들어 `easy-deep-learning-ch01.md`의 이미지는 `site/public/images/notes/easy-deep-learning-ch01/`에 둔다. 파일명은 내용을 알 수 있는 영문 소문자와 하이픈으로 짓는다.
+블로그 노트에서 쓰는 이미지는 `site/public/images/notes/<글 slug>/`에 저장한다. 예를 들어 `deeplearning_01.md`의 이미지는 `site/public/images/notes/easy-deep-learning-ch01/`에 둔다. 파일명은 내용을 알 수 있는 영문 소문자와 하이픈으로 짓는다.
 
 옵시디언과 블로그에서 같은 파일을 볼 수 있도록 노트에는 파일 기준 상대경로를 쓴다. `site/src/content/notes/Machine Learning｜Deep Learning/`에 있는 글의 예시는 다음과 같다.
 

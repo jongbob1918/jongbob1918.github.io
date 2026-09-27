@@ -402,7 +402,7 @@ $$
     - 10% 줄이면? $\rightarrow$ 고작 **0.1점** 깎임.
     - 0점에 가려면 **세월아 네월아** 기어가야 함.학습이 정체**되는 딜레마가 생깁니다.
 
-![[shared_learning_rate.gif]]
+![같은 학습률을 적용했을 때 기울기가 큰 방향과 작은 방향에서 이동 폭이 달라지는 모습](../../../../public/images/notes/easy-deep-learning-ch02/shared-learning-rate.gif)
 
 이를 해결하기 위해 등장한 방식이 RMSprop(Root Mean Square Propagation)입니다.
 

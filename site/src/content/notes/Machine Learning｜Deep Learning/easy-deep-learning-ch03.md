@@ -1,179 +1,47 @@
 ---
-title: "MLP의 행렬 표현과 역전파"
+title: "순전파와 역전파"
 slug: deep-learning/easy-deep-learning-ch03
-description: 다층 퍼셉트론의 계산을 행렬로 표현하고, 비선형 활성화 함수가 필요한 이유를 설명합니다. 연쇄 법칙으로 역전파를 전개하고 순전파와의 관계를 정리합니다.
+description: 순전파로 구한 중간값을 연쇄 법칙에 넣어 손실의 미분을 계산하고, 그 값을 재사용해 가중치를 갱신합니다.
 publishedAt: 2026-09-13
+updatedAt: 2026-09-27
 tags:
   - Deep learning
 draft: false
 featured: false
 ---
 
-## 1. MLP를 행렬로 표현하기
+## 1. 순전파로 무엇을 계산할까
 
-### 노드마다 계산하면 식이 길어집니다
-
-2장에 이어 조회수와 영상 길이로 수익을 예측한다고 해 보겠습니다. 이번에는 다음 구조의 **다층 퍼셉트론**(Multi-Layer Perceptron, MLP)을 사용합니다.
-
-| 층 | 노드 수 | 값 |
-| --- | --- | --- |
-| 입력층 | 2개 | 조회수 $x_1$, 영상 길이 $x_2$ |
-| 은닉층 | 3개 | 변환한 특징 $h_1,h_2,h_3$ |
-| 출력층 | 1개 | 예측 수익 $\hat y$ |
-
-은닉층의 활성화 함수를 $f_1$이라고 하면, 세 노드의 출력은 다음과 같습니다.
+2장에 이어 조회수 $x_1$과 영상 길이 $x_2$로 수익을 예측한다고 해 보겠습니다. 은닉 노드 세 개에는 ReLU를 쓰고, 출력층은 값을 그대로 내보냅니다. 은닉 노드 $j$에서는 다음 순서로 계산합니다.
 
 $$
-\begin{aligned}
-h_1&=f_1(x_1w_{11}+x_2w_{21}+b_1)\\
-h_2&=f_1(x_1w_{12}+x_2w_{22}+b_2)\\
-h_3&=f_1(x_1w_{13}+x_2w_{23}+b_3)
-\end{aligned}
+z_j=x_1w_{1j}+x_2w_{2j}+b_j,\qquad h_j=\operatorname{ReLU}(z_j)
 $$
 
-$w_{ij}$는 입력 $i$에서 은닉 노드 $j$로 이어지는 가중치입니다. 노드 수가 늘어나면 같은 형태의 식을 계속 적어야 합니다.
-
-### 입력을 벡터로 묶기
-
-입력 두 개를 **행벡터** $\mathbf{x}=[x_1\;x_2]$로 묶습니다. 첫 번째 은닉 노드의 가중합은 행벡터와 열벡터의 곱, 즉 내적으로 쓸 수 있습니다.
+$w_{ij}$는 입력 $i$에서 은닉 노드 $j$로 이어지는 가중치이고, $b_j$는 그 노드의 바이어스입니다. ReLU는 음수를 0으로, 양수를 그대로 내보냅니다. 세 노드의 출력을 합쳐 예측값을 구합니다.
 
 $$
-z_1=
-\begin{bmatrix}x_1&x_2\end{bmatrix}
-\begin{bmatrix}w_{11}\\w_{21}\end{bmatrix}+b_1
+\hat y=h_1v_1+h_2v_2+h_3v_3+b_{\mathrm{out}}
 $$
 
-$$
-h_1=f_1(z_1)
-$$
+$v_j$는 은닉 노드 $j$에서 출력으로 이어지는 가중치입니다. 입력에서 예측값까지 계산하는 과정을 **순전파**(Forward Propagation)라고 합니다. 이때 구한 $z_j$, $h_j$, $\hat y$는 역전파에서도 사용합니다.
 
-세 노드의 가중치를 열마다 모으면 **가중치 행렬**이 됩니다.
+## 2. 손실에서 가중치까지 거슬러 올라가기
 
-$$
-\mathbf{W}^{(1)}=
-\begin{bmatrix}
-w_{11}&w_{12}&w_{13}\\
-w_{21}&w_{22}&w_{23}
-\end{bmatrix},\qquad
-\mathbf{b}^{(1)}=\begin{bmatrix}b_1&b_2&b_3\end{bmatrix}
-$$
-
-이제 은닉층 전체를 한 번에 계산할 수 있습니다.
-
-$$
-\mathbf{z}=\mathbf{x}\mathbf{W}^{(1)}+\mathbf{b}^{(1)},\qquad
-\mathbf{h}=f_1(\mathbf{z})
-$$
-
-$f_1$은 벡터의 각 원소에 따로 적용합니다. 위첨자 $(1)$은 첫 번째 가중치 층을 뜻합니다.
-
-### 출력층까지 한 식으로
-
-출력층의 가중치를 $\mathbf{W}^{(2)}=[v_1\;v_2\;v_3]^\mathsf{T}$, 바이어스를 $b^{(2)}$라고 하겠습니다. 출력층 활성화 함수 $f_2$까지 적용하면 다음과 같습니다.
-
-$$
-\hat y=f_2\left(\mathbf{h}\mathbf{W}^{(2)}+b^{(2)}\right)
-$$
-
-$$
-\hat y=f_2\left(f_1\left(\mathbf{x}\mathbf{W}^{(1)}+\mathbf{b}^{(1)}\right)\mathbf{W}^{(2)}+b^{(2)}\right)
-$$
-
-| 계산 | 크기 변화 |
-| --- | --- |
-| 입력 × 은닉층 가중치 | $(1\times2)(2\times3)=1\times3$ |
-| 은닉층 바이어스 더하기 | $1\times3$ 유지 |
-| 활성화 함수 적용 | $1\times3$ 유지 |
-| 은닉층 출력 × 출력층 가중치 | $(1\times3)(3\times1)=1\times1$ |
-
-MLP는 **행렬 곱 → 바이어스 덧셈 → 활성화 함수**를 반복하는 함수로 정리됩니다.
-
-## 2. 비선형 활성화 함수가 필요한 이유
-
-### 선형 계산만 반복하면
-
-층을 깊게 쌓으면 더 복잡한 관계를 표현할 수 있을까요? 활성화 함수가 모두 입력을 그대로 내보내는 $f(z)=z$라면, 두 층의 계산은 다음처럼 합쳐집니다.
-
-$$
-\begin{aligned}
-\hat y
-&=(\mathbf{x}\mathbf{W}^{(1)}+\mathbf{b}^{(1)})\mathbf{W}^{(2)}+b^{(2)}\\
-&=\mathbf{x}(\mathbf{W}^{(1)}\mathbf{W}^{(2)})
- +\mathbf{b}^{(1)}\mathbf{W}^{(2)}+b^{(2)}\\
-&=\mathbf{x}\mathbf{W}_{\mathrm{eff}}+b_{\mathrm{eff}}
-\end{aligned}
-$$
-
-여러 가중치 행렬은 하나의 행렬로, 바이어스도 하나로 묶입니다. 아무리 층을 늘려도 **완전연결층 하나로 표현할 수 있는 형태**가 됩니다. 바이어스를 포함한 이런 변환은 엄밀히는 아핀 변환입니다.
-
-비선형 활성화 함수를 사이에 넣으면 이처럼 하나로 합칠 수 없게 됩니다. 조회수나 영상 길이에 따라 수익의 증가 양상이 달라지는 관계도 표현할 수 있습니다.
-
-### 선형 활성화 함수를 쓰는 곳
-
-은닉층에서는 비선형 관계를 만들고, 출력층에서는 예측할 값에 맞춰 활성화 함수를 선택합니다.
-
-대표 예시: **연속적인 수치를 예측하는 회귀의 출력층**. $f_2(z)=z$를 쓰면 출력값이 0~1 같은 특정 구간에 묶이지 않습니다. 이번 수익 예측 예제도 이 방식을 사용합니다.
-
-모델 중간에서도 선형 출력을 활용합니다. 뒤에서 살펴볼 MobileNetV2의 좁은 병목층이 그 예입니다.
-
-## 3. ReLU와 정보 손실
-
-### 음수는 0, 양수는 그대로
-
-**ReLU**(Rectified Linear Unit)는 음수 입력을 0으로 만들고 양수 입력은 그대로 출력합니다.
-
-$$
-\operatorname{ReLU}(z)=\max(0,z)
-$$
-
-<figure>
-  <img src="../../../../public/images/notes/easy-deep-learning-ch03/relu.jpeg" alt="입력이 음수일 때 출력이 0이고, 양수일 때 출력이 입력과 같은 ReLU 그래프" loading="lazy" width="311" height="210" />
-  <figcaption>출처: <a href="https://cs231n.github.io/neural-networks-1/">Stanford CS231n</a>.</figcaption>
-</figure>
-
-| 입력 | −3 | −1 | 0 | 2 |
-| --- | --- | --- | --- | --- |
-| ReLU 출력 | 0 | 0 | 0 | 2 |
-
-−3과 −1은 다른 값이지만 출력은 모두 0입니다. 이 출력만 보고 원래 음수 값을 구분할 수는 없습니다.
-
-### 좁은 층에서 정보를 남기는 방법
-
-특징을 적은 수의 채널로 압축한 상태에서 음수 성분까지 없애면 필요한 정보가 사라질 수 있습니다. **MobileNetV2**는 이를 줄이기 위해 좁은 병목층의 출력에 비선형 활성화 함수를 붙이지 않는 **선형 병목**(Linear Bottleneck)을 사용합니다.
-
-<figure>
-  <img src="../../../../public/images/notes/easy-deep-learning-ch03/linear-bottleneck.png" alt="좁은 입력을 넓은 중간 표현으로 확장해 처리하고 다시 좁은 출력으로 압축하는 MobileNetV2 블록" loading="lazy" width="1027" height="445" />
-  <figcaption>출처: <a href="https://arxiv.org/html/1801.04381v4">Sandler et al., MobileNetV2, 2018</a>.</figcaption>
-</figure>
-
-그림의 흐름은 **좁은 입력 → 넓은 중간 표현 → 좁은 출력**입니다. 넓은 내부에서는 ReLU6를 쓰고, 마지막 압축 결과는 선형으로 내보냅니다. ReLU6는 ReLU의 양수 출력을 6에서 한 번 더 제한한 함수입니다.
-
-이것은 MobileNetV2의 병목 구조에 맞춘 설계입니다. 층의 노드 수가 줄어든다는 이유만으로 항상 활성화 함수를 제거하는 것은 아닙니다. [MobileNetV2 논문](https://arxiv.org/abs/1801.04381)
-
-## 4. 역전파
-
-### 어떤 가중치를 얼마나 바꿔야 할까
-
-예측 수익이 실제 수익보다 작게 나왔다고 해 보겠습니다. 출력층뿐 아니라 은닉층의 가중치도 예측에 영향을 줍니다. 각 파라미터를 조금 바꿀 때 손실이 얼마나 변하는지 알아야 갱신 방향을 정할 수 있습니다.
-
-**역전파**(Backpropagation)는 출력 쪽에서 입력 쪽으로 계산을 거슬러 올라가며, 손실의 편미분을 구하는 알고리즘입니다.
-
-이번 예제에서는 은닉층에 ReLU, 출력층에 선형 활성화 함수를 씁니다. 한 영상의 손실은 미분을 간단히 하려고 제곱 오차에 $1/2$을 곱합니다.
+예측이 실제 수익과 다르면 각 가중치를 어느 방향으로 바꿔야 할까요? 이번에는 손실을 제곱 오차의 절반으로 둡니다. $1/2$은 미분할 때 나오는 2를 없애기 위한 값입니다.
 
 $$
 L=\frac12(\hat y-y)^2
 $$
 
-### 연결된 계산은 연쇄 법칙으로 미분합니다
-
-첫 번째 가중치 $w_{11}$이 손실에 영향을 주는 경로를 따라가면 다음과 같습니다.
+**역전파**(Backpropagation)는 출력 쪽에서 입력 쪽으로 계산을 거슬러 올라가며 손실의 편미분을 구합니다. 첫 번째 가중치 $w_{11}$이 손실에 영향을 주는 경로는 다음과 같습니다.
 
 $$
 w_{11}\;\longrightarrow\;z_1\;\longrightarrow\;h_1
 \;\longrightarrow\;\hat y\;\longrightarrow\;L
 $$
 
-$w_{11}$이 바뀌면 가중합 $z_1$, 은닉 출력 $h_1$, 예측 $\hat y$가 차례로 바뀝니다. 각 단계의 변화율을 곱하는 것이 **연쇄 법칙**(Chain Rule)입니다.
+각 단계의 변화율을 곱하는 **연쇄 법칙**(Chain Rule)을 적용합니다.
 
 $$
 \frac{\partial L}{\partial w_{11}}
@@ -187,155 +55,77 @@ $$
 | --- | --- |
 | 예측 → 손실 | $\partial L/\partial\hat y=\hat y-y$ |
 | 은닉 출력 → 예측 | $\partial\hat y/\partial h_1=v_1$ |
-| 가중합 → 은닉 출력 | $\partial h_1/\partial z_1=f_1'(z_1)$ |
+| 가중합 → 은닉 출력 | $\partial h_1/\partial z_1=\operatorname{ReLU}'(z_1)$ |
 | 가중치 → 가중합 | $\partial z_1/\partial w_{11}=x_1$ |
 
-따라서 네 값을 곱하면 됩니다.
+따라서 첫 번째 가중치의 미분은 다음과 같습니다.
 
 $$
 \frac{\partial L}{\partial w_{11}}
-=(\hat y-y)v_1f_1'(z_1)x_1
+=(\hat y-y)v_1\operatorname{ReLU}'(z_1)x_1
 $$
 
-### 뒤에서 구한 값을 앞에서도 재사용하기
+ReLU의 기울기는 입력이 양수이면 1, 음수이면 0입니다. 0에서는 미분이 정의되지 않으며, 구현에서는 보통 0으로 처리합니다.
 
-은닉 노드 $j$까지 전달된 미분값을 $\delta_j$로 묶어 보겠습니다.
+### 뒤에서 구한 미분값 재사용하기
+
+은닉 노드 $j$까지 전달된 미분값을 $\delta_j$로 묶습니다.
 
 $$
 \delta_j=\frac{\partial L}{\partial z_j}
-=(\hat y-y)v_jf_1'(z_j)
+=(\hat y-y)v_j\operatorname{ReLU}'(z_j)
 $$
 
-이 값만 구하면 해당 노드로 들어오는 가중치와 바이어스의 미분을 바로 계산할 수 있습니다.
+같은 은닉 노드로 들어오는 가중치와 바이어스는 이 값을 함께 사용합니다.
 
 $$
 \frac{\partial L}{\partial w_{ij}}=x_i\delta_j,\qquad
 \frac{\partial L}{\partial b_j}=\delta_j
 $$
 
-출력층의 미분은 다음과 같습니다.
+출력층의 미분에는 순전파에서 구한 $h_j$가 쓰입니다.
 
 $$
 \frac{\partial L}{\partial v_j}=h_j(\hat y-y),\qquad
-\frac{\partial L}{\partial b^{(2)}}=\hat y-y
+\frac{\partial L}{\partial b_{\mathrm{out}}}=\hat y-y
 $$
 
-역전파는 이렇게 **뒤에서 계산한 미분값을 재사용**합니다. 여러 경로가 한 값으로 모이면 각 경로에서 전달된 미분값을 더합니다. [역전파 참고](https://cs231n.github.io/optimization-2/)
+역전파는 이처럼 뒤에서 계산한 미분값을 앞에서도 재사용합니다. 그래서 먼저 순전파로 $z_j$, $h_j$, $\hat y$를 구해야 합니다. 학습은 **순전파 → 손실 계산 → 역전파 → 파라미터 갱신** 순서로 진행됩니다.
 
-### 행렬로 묶은 역전파
+## 3. 숫자로 한 번 따라가기
 
-앞에서 행벡터로 표현했으므로 미분도 같은 크기로 묶을 수 있습니다. $\delta^{(2)}=\hat y-y$라고 두면 다음과 같습니다.
+입력은 단위를 조정한 설명용 값이며, 실제 영상 데이터는 아닙니다. $x_1=1$, $x_2=2$, 정답 $y=4$라고 하겠습니다. 처음 가중치와 바이어스는 다음과 같습니다.
 
-$$
-\boldsymbol{\delta}^{(1)}
-=\left(\delta^{(2)}(\mathbf{W}^{(2)})^\mathsf{T}\right)
-\odot f_1'(\mathbf{z})
-$$
+| 은닉 노드 $j$ | $w_{1j}$ | $w_{2j}$ | $b_j$ | $v_j$ |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 1 | 0 | 0 | 1 |
+| 2 | 0 | 1 | 0 | 1 |
+| 3 | −1 | 0 | 0 | 1 |
 
-$$
-\frac{\partial L}{\partial\mathbf{W}^{(1)}}
-=\mathbf{x}^\mathsf{T}\boldsymbol{\delta}^{(1)},\qquad
-\frac{\partial L}{\partial\mathbf{b}^{(1)}}
-=\boldsymbol{\delta}^{(1)}
-$$
+출력 바이어스 $b_{\mathrm{out}}$은 0입니다. 순전파에서 $z_1=1$, $z_2=2$, $z_3=-1$이므로 $h_1=1$, $h_2=2$, $h_3=0$입니다. 예측은 $\hat y=3$, 손실은 $L=\frac12(3-4)^2=0.5$입니다.
 
-$$
-\frac{\partial L}{\partial\mathbf{W}^{(2)}}
-=\mathbf{h}^\mathsf{T}\delta^{(2)},\qquad
-\frac{\partial L}{\partial b^{(2)}}=\delta^{(2)}
-$$
+예측과 정답의 차이는 $\hat y-y=-1$입니다. 세 은닉 노드의 ReLU 기울기는 차례로 $1,1,0$이므로 $\delta_1=-1$, $\delta_2=-1$, $\delta_3=0$입니다.
 
-$\odot$는 같은 위치의 원소끼리 곱한다는 뜻입니다. 첫 가중치의 미분 행렬은 $2\times3$, 출력층 가중치의 미분은 $3\times1$로 원래 파라미터와 크기가 같습니다.
+| 파라미터 | 노드 1 | 노드 2 | 노드 3 |
+| --- | ---: | ---: | ---: |
+| $\partial L/\partial w_{1j}$ | −1 | −1 | 0 |
+| $\partial L/\partial w_{2j}$ | −2 | −2 | 0 |
+| $\partial L/\partial b_j$ | −1 | −1 | 0 |
+| $\partial L/\partial v_j$ | −1 | −2 | 0 |
 
-역전파로 미분값을 구한 다음, 2장에서 배운 GD나 Adam 같은 최적화 방법으로 파라미터를 갱신합니다.
+출력 바이어스의 미분은 $\partial L/\partial b_{\mathrm{out}}=-1$입니다. 세 번째 은닉 노드는 이번 입력에서 ReLU의 음수 구간에 있으므로, 그 노드를 지나는 미분값은 모두 0입니다.
 
-## 5. 학습할 때 순전파가 필요한 이유
-
-미분식에는 $\hat y-y$, $h_j$, $f_1'(z_j)$가 들어갑니다. 이 값들은 현재 입력과 파라미터로 직접 계산해야 알 수 있습니다.
-
-입력부터 출력까지 계산하는 **순전파**(Forward Propagation)는 예측값뿐 아니라 역전파에 필요한 중간값도 구합니다.
-
-| 순전파에서 구하는 값   | 역전파에서 사용하는 곳          |
-| ------------- | --------------------- |
-| 예측 $\hat y$   | 정답과의 차이 $\hat y-y$ 계산 |
-| 은닉 출력 $h_j$   | 출력층 가중치 $v_j$의 미분     |
-| 활성화 전 값 $z_j$ | ReLU의 미분값 결정          |
-
-ReLU는 입력이 양수인 구간에서 기울기가 1, 음수인 구간에서 0입니다. 그래서 **이번 입력에서 어떤 노드가 양수였는지** 알아야 역전파를 진행할 수 있습니다. 0에서는 미분이 정의되지 않으며, 구현에서는 보통 0으로 처리합니다.
-
-학습 흐름: **순전파 → 손실 계산 → 역전파 → 파라미터 갱신**. 갱신 후에는 바뀐 파라미터로 다시 순전파합니다.
-
-## 예제로 확인해 보기
-
-앞에서 사용한 입력 2개·은닉 노드 3개·출력 1개 구조에 숫자를 넣어 보겠습니다. 입력은 단위를 조정한 설명용 값이며, 실제 영상 데이터는 아닙니다.
+학습률 $\eta=0.01$로 모든 파라미터를 동시에 갱신합니다. 예를 들어 $w_{11}$은 $1-0.01(-1)=1.01$이 됩니다. 갱신한 값으로 다시 순전파하면 $h_1=1.06$, $h_2=2.06$, $h_3=0$이고, 출력층 가중치는 각각 $1.01$, $1.02$, $1$입니다. 출력 바이어스는 $0.01$이 됩니다.
 
 $$
-\mathbf{x}=\begin{bmatrix}1&2\end{bmatrix},\qquad y=4
+\hat y=1.06(1.01)+2.06(1.02)+0.01=3.1818
 $$
 
-$$
-\mathbf{W}^{(1)}=
-\begin{bmatrix}1&0&-1\\0&1&0\end{bmatrix},\qquad
-\mathbf{b}^{(1)}=\begin{bmatrix}0&0&0\end{bmatrix}
-$$
+손실은 약 $0.3347$로 줄었습니다. 한 번의 계산에서 미분값을 구하고 그 방향으로 갱신하자 예측이 정답 4에 가까워졌습니다.
 
-$$
-\mathbf{W}^{(2)}=\begin{bmatrix}1\\1\\1\end{bmatrix},\qquad b^{(2)}=0
-$$
-
-### 순전파로 예측과 손실 계산
-
-| 단계 | 결과 |
-| --- | --- |
-| 은닉층 가중합 | $\mathbf{z}=[1\;2\;{-1}]$ |
-| ReLU 적용 | $\mathbf{h}=[1\;2\;0]$ |
-| 예측 수익 | $\hat y=1+2+0=3$ |
-| 손실 | $L=\frac12(3-4)^2=0.5$ |
-
-### 역전파로 미분값 계산
-
-예측과 정답의 차이는 $3-4=-1$입니다. 은닉층의 ReLU 기울기는 $[1\;1\;0]$이므로 다음과 같이 전달됩니다.
-
-$$
-\boldsymbol{\delta}^{(1)}=\begin{bmatrix}-1&-1&0\end{bmatrix}
-$$
-
-$$
-\frac{\partial L}{\partial\mathbf{W}^{(1)}}
-=\begin{bmatrix}1\\2\end{bmatrix}
-\begin{bmatrix}-1&-1&0\end{bmatrix}
-=\begin{bmatrix}-1&-1&0\\-2&-2&0\end{bmatrix}
-$$
-
-$$
-\frac{\partial L}{\partial\mathbf{b}^{(1)}}=\begin{bmatrix}-1&-1&0\end{bmatrix}
-$$
-
-$$
-\frac{\partial L}{\partial\mathbf{W}^{(2)}}=\begin{bmatrix}-1\\-2\\0\end{bmatrix},\qquad
-\frac{\partial L}{\partial b^{(2)}}=-1
-$$
-
-세 번째 은닉 노드는 이번 입력에서 ReLU의 음수 구간에 있었습니다. 이 경로로 전달되는 미분값은 0입니다.
-
-### 파라미터를 갱신한 뒤 다시 예측
-
-학습률 $\eta=0.01$로 위 파라미터들을 한꺼번에 갱신합니다.
-
-$$
-\theta_{\mathrm{new}}=\theta-0.01\frac{\partial L}{\partial\theta}
-$$
-
-| 항목 | 갱신 전 | 갱신 후 |
-| --- | --- | --- |
-| 예측 수익 | 3 | 3.1818 |
-| 손실 | 0.5 | 약 0.3347 |
-
-순전파에서 구한 값으로 미분을 계산하고, 그 미분으로 갱신한 결과 예측이 정답 4에 가까워졌습니다.
+행렬을 사용해 노드별 계산을 묶는 방법은 [MLP를 행렬로 표현하기](/notes/deep-learning/mlp-matrix-representation/)에서, 활성화 함수가 필요한 이유는 [선형·비선형 활성화 함수와 ReLU](/notes/deep-learning/linear-nonlinear-activations/)에서 다룹니다.
 
 ## 참고 자료
 
 - 혁펜하임, 『이지 딥러닝』, 챕터 3.
-- [Stanford CS231n · 신경망과 활성화 함수](https://cs231n.github.io/neural-networks-1/).
 - [Stanford CS231n · 연쇄 법칙과 역전파](https://cs231n.github.io/optimization-2/).
-- [Sandler et al., MobileNetV2: Inverted Residuals and Linear Bottlenecks, 2018](https://arxiv.org/abs/1801.04381).

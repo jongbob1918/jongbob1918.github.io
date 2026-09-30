@@ -15,8 +15,12 @@ function filesIn(directory) {
   });
 }
 
-for (const note of filesIn(notesDirectory).filter(path => path.endsWith('.md'))) {
+for (const note of filesIn(notesDirectory).filter(path => /\.mdx?$/.test(path))) {
   const source = readFileSync(note, 'utf8');
+  for (const match of source.matchAll(/!\[\[[^\]]+\]\]/g)) {
+    const location = `${relative(root, note)}:${source.slice(0, match.index).split('\n').length}`;
+    errors.push(`${location}: replace Obsidian embeds with a file-relative Markdown image or img tag: ${match[0]}`);
+  }
   const references = [
     ...source.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)["'][^>]*>/gi),
     ...source.matchAll(/!\[[^\]]*\]\(([^\s)]+)(?:\s+[^)]*)?\)/g)

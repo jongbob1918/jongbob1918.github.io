@@ -4,7 +4,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import NotesSidebar from '../../../components/NotesSidebar.astro';
 import ListingControls from '../../../components/ListingControls.astro';
 import NoteCard from '../../../components/NoteCard.astro';
-import { buildFolders, flattenFolders, isInFolder } from '../../../data/folders';
+import { buildFolders, compareNotes, flattenFolders, isInFolder } from '../../../data/folders';
 
 export async function getStaticPaths() {
   const notes = await getCollection('notes', ({ data }) => !data.draft);
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { folder } = Astro.props;
 const notes = (await getCollection('notes', ({ data }) => !data.draft))
   .filter(note => isInFolder(note, folder.path))
-  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+  .sort(compareNotes);
 ---
 
 <BaseLayout title={`${folder.title} — Robotics Notes`} description={`${folder.title} 폴더의 글`}>

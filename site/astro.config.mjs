@@ -10,8 +10,8 @@ export default defineConfig({
   outDir: '../dist',
   trailingSlash: 'always',
   redirects: {
-    '/notes/category/deep-learning/': '/notes/folder/Machine%20Learning%EF%BD%9CDeep%20Learning/',
-    '/notes/folder/Deep%20learning/': '/notes/folder/Machine%20Learning%EF%BD%9CDeep%20Learning/',
+    '/notes/category/deep-learning/': '/notes/folder/Machine Learning｜Deep Learning/',
+    '/notes/folder/Deep%20learning/': '/notes/folder/Machine Learning｜Deep Learning/',
     ...Object.fromEntries([1, 2, 3, 4].map(chapter => {
       const slug = `easy-deep-learning-ch0${chapter}`;
       return [`/notes/${slug}/`, `/notes/deep-learning/${slug}/`];

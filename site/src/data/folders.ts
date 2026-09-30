@@ -28,6 +28,12 @@ export function isInFolder(note: CollectionEntry<'notes'>, path: string): boolea
   return folder === path || folder.startsWith(`${path}/`);
 }
 
+// Natural title order keeps numbered lessons in reading order (2 before 10).
+export function compareNotes(a: CollectionEntry<'notes'>, b: CollectionEntry<'notes'>): number {
+  return a.data.title.localeCompare(b.data.title, 'ko', { numeric: true })
+    || a.id.localeCompare(b.id, 'ko', { numeric: true });
+}
+
 export function buildFolders(notes: CollectionEntry<'notes'>[]): NoteFolder[] {
   const roots: NoteFolder[] = [];
   for (const note of notes) {
@@ -50,9 +56,7 @@ export function buildFolders(notes: CollectionEntry<'notes'>[]): NoteFolder[] {
     .map(folder => ({
       ...folder,
       children: sort(folder.children),
-      notes: folder.notes.sort((a, b) =>
-        b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
-        || a.data.title.localeCompare(b.data.title, 'ko', { numeric: true }))
+      notes: folder.notes.sort(compareNotes)
     }));
   return sort(roots);
 }

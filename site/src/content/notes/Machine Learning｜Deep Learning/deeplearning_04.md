@@ -23,9 +23,11 @@ featured: false
 
 ## 예측값과 손실 계산하기
 
-아래 신경망에서 입력 $x_1$, $x_2$로 예측값 $\hat y$를 계산해 보겠습니다.
+아래 그림은 입력 두 개, 은닉 노드 세 개, 출력 두 개로 구성한 신경망입니다. $z_j$와 $s_k$는 각 노드의 가중합, $h_j$와 $\hat y_k$는 출력값입니다. 가중치의 첫 첨자는 출발 노드, 둘째 첨자는 도착 노드를 뜻합니다.
 
-<img src="../../../../public/images/notes/backpropagation/example-network.png" alt="입력 x1, x2가 가중치 w11~w23의 선으로 은닉 노드 h1~h3에 연결되고, 은닉 노드가 가중치 v1~v3의 선으로 예측 y-hat에 연결되는 예시 신경망" width="640" loading="lazy" />
+이후 계산은 출력 하나만 둔 경우로 단순화해 $v_{j1}$을 $v_j$, $c_1$을 $b_{\mathrm{out}}$, $\hat y_1$을 $\hat y$로 씁니다.
+
+<img src="../../../../public/images/notes/backpropagation/example-network.png" alt="입력 x1·x2, 은닉 노드 세 개와 출력 노드 두 개를 연결한 신경망. 각 연결의 가중치 wij·vjk, 편향 bj·ck, 은닉층 가중합 zj와 출력 hj, 출력층 가중합 sk와 예측값 y-hat-k를 표시한다." width="960" loading="lazy" />
 
 은닉 노드는 입력을 가중치로 합한 $z_j$에 ReLU를 씌워 $h_j$를 냅니다. 출력 노드는 $h_j$를 다시 가중치로 합해 $\hat y$를 냅니다.
 

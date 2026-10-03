@@ -78,7 +78,7 @@ $$GELU(x) = x \cdot \Phi(x)$$
 
 위 곡선에서 $x=1$까지 색칠한 면적이 $\Phi(1)$입니다. 아래는 이 누적확률을 입력값에 따라 그린 그래프입니다.
 
-<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-normal-cdf.png" alt="표준정규분포에서 x=1 왼쪽 면적을 색칠한 확률밀도 곡선과 누적확률 Φ(1)=0.841을 표시한 CDF 곡선" width="100%" loading="lazy" />
+<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-normal-cdf.png" alt="표준정규분포에서 x=1 왼쪽 면적을 색칠한 확률밀도 곡선과 누적확률 Φ(1)=0.841을 표시한 CDF 곡선" width="60%" loading="lazy" />
 
 #### 입력 크기에 따라 부드럽게 조절하기
 누적확률 $\Phi(x)$는 유한한 입력에서 0과 1 사이의 값을 가집니다. GELU는 이 값을 입력에 곱하며, 무작위로 출력을 선택하는 함수는 아닙니다.
@@ -87,17 +87,17 @@ $$GELU(x) = x \cdot \Phi(x)$$
 
 점선은 입력을 그대로 출력하는 $y=x$입니다.
 
-<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-positive.png" alt="양수 구간을 강조한 GELU 곡선과 y=x 점선이 x=3에서 거의 겹치는 그래프" width="100%" loading="lazy" />
+<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-positive.png" alt="양수 구간을 강조한 GELU 곡선과 y=x 점선이 x=3에서 거의 겹치는 그래프" width="60%" loading="lazy" />
 
 - **$x$가 큰 음수일 때 (예: $x = -3$):** $\Phi(-3) \approx 0.001$이므로, 출력이 거의 0에 수렴합니다.
 
-<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-negative.png" alt="음수 구간을 확대한 GELU 곡선에서 x=-3의 출력이 약 -0.004로 0에 가까운 그래프" width="100%" loading="lazy" />
+<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-negative.png" alt="음수 구간을 확대한 GELU 곡선에서 x=-3의 출력이 약 -0.004로 0에 가까운 그래프" width="60%" loading="lazy" />
 
 - **$x = 0$ 근처일 때:** $\Phi(x)$가 약 0.5이므로 출력은 약 $0.5x$입니다. $x=0$에서는 출력도 0입니다.
 
 점선은 $y=0.5x$입니다.
 
-<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-near-zero.png" alt="원점 근처를 확대한 GELU 곡선과 y=0.5x 점선이 원점에서 같은 기울기로 만나는 그래프" width="100%" loading="lazy" />
+<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-near-zero.png" alt="원점 근처를 확대한 GELU 곡선과 y=0.5x 점선이 원점에서 같은 기울기로 만나는 그래프" width="60%" loading="lazy" />
 
 BERT나 Vision Transformer 같은 Transformer 모델에 사용합니다. [GELU 원 논문](https://arxiv.org/abs/1606.08415)
 

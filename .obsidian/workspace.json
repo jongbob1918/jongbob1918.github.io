@@ -1,24 +1,24 @@
 {
   "main": {
-    "id": "e2732b002318ba2e",
+    "id": "d828fb5fd5f77d15",
     "type": "split",
     "children": [
       {
-        "id": "4bc8239c8abcca29",
+        "id": "3452b8af1b9867b4",
         "type": "tabs",
         "children": [
           {
-            "id": "70b4aacaa0bf3dd1",
+            "id": "e1b4b6ca01dc900e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_05"
+              "title": "deeplearning_04"
             }
           }
         ]
@@ -27,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "6239f57bc006a44b",
+    "id": "762ce4a1c64a99e1",
     "type": "split",
     "children": [
       {
-        "id": "510324bf8d86f7d4",
+        "id": "338b8e0e30defa71",
         "type": "tabs",
         "children": [
           {
-            "id": "879fa2bc955fd3cb",
+            "id": "8554e261f9c9631d",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -46,11 +46,11 @@
                 "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "파일 탐색기"
             }
           },
           {
-            "id": "d0fac9e7caceb763",
+            "id": "ca773477b5ec83e0",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -67,7 +67,7 @@
             }
           },
           {
-            "id": "864fcce1a9b40c9f",
+            "id": "d68dddf5448cb1fb",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -86,20 +86,20 @@
     "width": 300
   },
   "right": {
-    "id": "1fe5a8df5c4401b3",
+    "id": "a310235573f8c6e0",
     "type": "split",
     "children": [
       {
-        "id": "4bfa79e16d26a55a",
+        "id": "75be5143a6983816",
         "type": "tabs",
         "children": [
           {
-            "id": "106bb92b85dd1204",
+            "id": "c0f2850009381691",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -113,12 +113,12 @@
             }
           },
           {
-            "id": "c2b294df48191e02",
+            "id": "2d9211e39b8b55ae",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -127,7 +127,7 @@
             }
           },
           {
-            "id": "388f98afac63b1ab",
+            "id": "049c498e1f99e258",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -142,7 +142,7 @@
             }
           },
           {
-            "id": "bf81681876f3314a",
+            "id": "db6817a89f875da8",
             "type": "leaf",
             "state": {
               "type": "all-properties",
@@ -156,12 +156,12 @@
             }
           },
           {
-            "id": "2b79b76c37f035ff",
+            "id": "0cfbd7b7ffea4ce2",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -179,62 +179,45 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
     }
   },
-  "active": "70b4aacaa0bf3dd1",
+  "active": "e1b4b6ca01dc900e",
   "lastOpenFiles": [
-    "dist/assets/videos/roomie-ik-target-control.mp4",
-    "dist/assets/videos/roomie-button-click.mp4",
-    "dist/assets/videos",
-    "dist/assets/images/physical-ai-second-attempt.png",
-    "dist/assets/images/falcon_zone_access_alert.webp",
-    "dist/assets/images/falcon_zone_access_settings.webp",
-    "dist/assets/images/physical-ai-first-attempt.png",
-    "dist/assets/images/falcon_simulated_airport_scene.png",
-    "dist/assets/images/falcon_dataset_evaluation.webp",
-    "dist/assets/images/nav2-navigation-behavior-tree.source.txt",
-    "dist/assets/images/nav2-navigation-behavior-tree.LICENSE.txt",
-    "dist/assets/images/nav2-navigation-behavior-tree.png",
-    "dist/assets/images/falcon_synthetic_pipeline.webp",
-    "dist/assets/images/tron_test.gif",
-    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
-    "dist/assets/images/ros1-noetic-to-ros2-humble.png",
-    "dist/assets/images",
-    "dist/projects/roomie.html",
-    "dist/projects/physical-ai-hackathon.html",
-    "dist/projects/javis.html",
-    "dist/projects/falcon.html",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch05.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch03.md",
-    "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
+    "site/public/images/notes/easy-deep-learning-ch02/nin-nout-diagram.png",
+    "scripts/figures/ch02_nin_nout.py",
+    "dist/sitemap.xml",
+    "dist/rss.xml",
+    "dist/robots.txt",
+    "dist/notes/folder/Machine Learning｜Deep Learning/index.html",
+    "dist/notes/folder/Deep%20learning/index.html",
+    "dist/notes/deep-learning/linear-nonlinear-activations/index.html",
+    "dist/notes/deep-learning/easy-deep-learning-ch04/index.html",
+    "dist/notes/deep-learning/easy-deep-learning-ch05/index.html",
+    "dist/notes/deep-learning/easy-deep-learning-ch03/index.html",
+    "dist/_astro/stochastic-gradient-descent.EnIgUvvy_10VOx0.webp",
+    "dist/_astro/shared-learning-rate.CmB1pD1A_Z1k7AR4.webp",
+    "dist/_astro/sgd-vs-gd.B7ef6mW0_PTdPT.webp",
+    "dist/_astro/momentum-minibatch-3d.BfU2Hxnx_EOXr0.webp",
+    "dist/_astro/mae-vs-mse.DmauRpD2_2fATVW.webp",
+    "dist/_astro/loss-landscapes.CKZXxUYR_Z19wFtx.webp",
+    "dist/_astro/learning-rate-too-small.CQGscni2_Zk1S6A.webp",
+    "dist/_astro/learning-rate-too-large.DIQqJYTF_199Ww6.webp",
+    "dist/images/notes/linear-nonlinear-activations/unit-step-function.png",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch02.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/easy-deep-learning-ch01.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/mlp-matrix-representation.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/Untitled.md",
-    "project-data/archive/en/lk-biped.md",
-    "project-data/archive/lk-biped.md",
-    "project-data/en/lk-biped.md",
-    "project-data/lk-biped.md",
-    "project-data/en/lk-ros.md",
-    "project-data/lk-ros.md",
-    "project-data/en/lk-patrol.md",
-    "project-data/lk-patrol.md"
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md"
   ]
 }

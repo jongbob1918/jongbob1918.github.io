@@ -10,7 +10,7 @@ const label = folderTitle(folder);
 const body = note.body ?? '';
 const imageTag = body.match(/<img\b[^>]*\bsrc="([^"]+)"[^>]*>/i);
 const markdownImage = body.match(/!\[([^\]]*)\]\(([^\s)]+)\)/);
-const thumbnailPath = imageTag?.[1] ?? markdownImage?.[2];
+const thumbnailPath = note.data.thumbnail ?? imageTag?.[1] ?? markdownImage?.[2];
 const thumbnail = thumbnailPath?.replace(/(?:\.\.\/)+public\/images\/notes\//g, '/images/notes/');
 const plainText = (text: string) => text
   .replace(/\$\$[\s\S]*?\$\$|\$[^$\n]+\$/g, '')

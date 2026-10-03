@@ -69,6 +69,8 @@ $$f(z) = \begin{cases} 1 & (z > 0) \\ 0 & (z \le 0) \end{cases}$$
 
 계단 함수는 직선이 아닌 비선형 함수가 맞습니다. 하지만 다층 신경망에서는 쓸 수 없습니다. 2장에서 배운 **경사하강법과 연쇄 법칙(미분)** 때문입니다.
 
+2장 설명: [경사하강법](/notes/deep-learning/easy-deep-learning-ch02/#3-경사하강법gradient-descent) · [기울기 구하기와 연쇄 법칙](/notes/deep-learning/easy-deep-learning-ch02/#기울기그래디언트-구하기와-연쇄-법칙)
+
 - **$z = 0$ 지점 (직각 절벽):**
 
     <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-discontinuity.png" alt="z=0에서 값이 0에서 1로 수직으로 뛰는 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="461" loading="lazy" />

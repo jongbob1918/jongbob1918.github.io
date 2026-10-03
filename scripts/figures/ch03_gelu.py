@@ -41,7 +41,7 @@ def save(fig, name):
 def cumulative_probability():
     x = np.linspace(-4, 4, 1601)
     density = np.exp(-x**2 / 2) / sqrt(2 * np.pi)
-    fig, axes = plt.subplots(1, 2, figsize=(9, 3.8))
+    fig, axes = plt.subplots(2, 1, figsize=(6.4, 7.6))
     left, right = axes
     left.plot(x, density, color=BLUE, lw=2.5)
     left.fill_between(x, density, where=x <= 1, color=BLUE, alpha=0.25)

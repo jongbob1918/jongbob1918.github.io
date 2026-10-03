@@ -27,7 +27,7 @@ featured: false
 
 이후 계산은 출력 하나만 둔 경우로 단순화해 $v_{j1}$을 $v_j$, $c_1$을 $b_{\mathrm{out}}$, $\hat y_1$을 $\hat y$로 씁니다.
 
-<img src="../../../../public/images/notes/backpropagation/example-network.png" alt="입력 x1·x2, 은닉 노드 세 개와 출력 노드 두 개를 연결한 신경망. 각 연결의 가중치 wij·vjk, 편향 bj·ck, 은닉층 가중합 zj와 출력 hj, 출력층 가중합 sk와 예측값 y-hat-k를 표시한다." width="960" loading="lazy" />
+<img src="../../../../public/images/notes/backpropagation/example-network.png" alt="입력 x1·x2, 은닉 노드 세 개와 출력 노드 두 개를 연결한 신경망. 첫 은닉 노드의 입력 가중치 w11·w21, 편향 b1, 가중합 z1과 출력 h1, 두 출력으로 이어지는 가중치 v11·v12와 출력층 편향 c1·c2, 가중합 s1·s2와 예측값을 표시한다. 나머지 은닉 노드와 연결선의 라벨은 생략한다." width="960" loading="lazy" />
 
 은닉 노드는 입력을 가중치로 합한 $z_j$에 ReLU를 씌워 $h_j$를 냅니다. 출력 노드는 $h_j$를 다시 가중치로 합해 $\hat y$를 냅니다.
 

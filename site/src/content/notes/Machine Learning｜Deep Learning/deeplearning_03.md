@@ -11,6 +11,8 @@ featured: false
 
 ## 1. 비선형 활성화 함수가 필요한 이유
 
+[2장](/notes/deep-learning/easy-deep-learning-ch02/)에서 우리는 두 가지 핵심 모델을 살펴봤습니다.
+
 <img src="../../../../public/images/notes/linear-nonlinear-activations/network-activations.png" alt="입력 두 개, 은닉 노드 세 개, 출력 두 개를 연결하고 각 층의 활성화 함수를 표시한 신경망" width="515" loading="lazy" />
 
 ### 선형 계산만 반복하면

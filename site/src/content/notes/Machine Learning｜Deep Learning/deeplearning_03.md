@@ -76,9 +76,9 @@ $$GELU(x) = x \cdot \Phi(x)$$
 - **$x$**: 원래 들어온 입력값
 - **$\Phi(x)$**: 평균이 0이고 표준편차가 1인 표준정규분포($\mathcal{N}(0, 1)$)에서, 왼쪽 끝부터 $x$까지 쌓인 확률입니다(누적분포함수, CDF). 즉 값이 $x$ 이하일 확률이며, 그래프에서는 곡선 아래의 면적입니다. 확률 $\Phi(x)$는 0과 1 사이의 값을 가집니다.
 
-위 곡선에서 $x=1$까지 색칠한 면적이 $\Phi(1)$입니다. 아래는 이 누적확률을 입력값에 따라 그린 그래프입니다.
+아래 종 모양 곡선은 표준정규분포의 확률밀도입니다. 왼쪽 끝부터 $x=1$까지 색칠한 면적이 $\Phi(1)\approx0.841$, 즉 약 84.1%입니다.
 
-<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-normal-cdf.png" alt="표준정규분포에서 x=1 왼쪽 면적을 색칠한 확률밀도 곡선과 누적확률 Φ(1)=0.841을 표시한 CDF 곡선" width="60%" loading="lazy" />
+<img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-normal-cdf.png" alt="표준정규분포의 종 모양 확률밀도 곡선에서 x=1 이하의 면적을 파란색으로 색칠해 누적확률 약 84.1%를 보여주는 그래프" width="60%" loading="lazy" />
 
 #### 입력 크기에 따라 부드럽게 조절하기
 누적확률 $\Phi(x)$는 유한한 입력에서 0과 1 사이의 값을 가집니다. GELU는 이 값을 입력에 곱하며, 무작위로 출력을 선택하는 함수는 아닙니다.

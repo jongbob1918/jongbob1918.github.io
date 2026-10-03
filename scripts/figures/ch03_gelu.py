@@ -41,21 +41,12 @@ def save(fig, name):
 def cumulative_probability():
     x = np.linspace(-4, 4, 1601)
     density = np.exp(-x**2 / 2) / sqrt(2 * np.pi)
-    fig, axes = plt.subplots(2, 1, figsize=(6.4, 7.6))
-    left, right = axes
-    left.plot(x, density, color=BLUE, lw=2.5)
-    left.fill_between(x, density, where=x <= 1, color=BLUE, alpha=0.25)
-    left.vlines(1, 0, np.exp(-0.5) / sqrt(2 * np.pi), color=ORANGE, lw=2)
-    left.set(xlim=(-4, 4), ylim=(0, 0.44), xticks=[-3, -1, 0, 1, 3])
-    style(left, r"$\varphi(x)$")
-    right.plot(x, cdf(x), color=BLUE, lw=2.5)
-    probability = cdf([1])[0]
-    right.vlines(1, 0, probability, color=ORANGE, ls="--", lw=1.5)
-    right.hlines(probability, -4, 1, color=ORANGE, ls="--", lw=1.5)
-    right.scatter([1], [probability], color=ORANGE, s=45, zorder=4)
-    right.set(xlim=(-4, 4), ylim=(0, 1.04), xticks=[-3, -1, 0, 1, 3], yticks=[0, 0.5, probability, 1])
-    right.set_yticklabels(["0", "0.5", "0.841", "1"])
-    style(right, r"$\Phi(x)$")
+    fig, ax = plt.subplots(figsize=(6.4, 3.8))
+    ax.plot(x, density, color=BLUE, lw=2.5)
+    ax.fill_between(x, density, where=x <= 1, color=BLUE, alpha=0.25)
+    ax.vlines(1, 0, np.exp(-0.5) / sqrt(2 * np.pi), color=ORANGE, lw=2)
+    ax.set(xlim=(-4, 4), ylim=(0, 0.44), xticks=[-3, -1, 0, 1, 3])
+    style(ax, r"$\varphi(x)$")
     save(fig, "gelu-normal-cdf.png")
 
 

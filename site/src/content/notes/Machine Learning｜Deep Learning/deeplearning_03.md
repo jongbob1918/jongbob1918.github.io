@@ -49,6 +49,7 @@ thumbnail: /images/notes/easy-deep-learning-ch03/relu.jpeg
 $$h = f_1(w_1x + b_1),\qquad y = f_2(w_2h + b_2)$$
 
 선형 활성화 함수는 $f(z)=z$이므로 $f_1$, $f_2$가 사라집니다.
+- 왜 $f(z)=z$ 일까요? 선형활성화 함수는 입력을 그대로 출력하기 때문입니다.
 
 $$y = w_2(w_1x + b_1) + b_2$$
 

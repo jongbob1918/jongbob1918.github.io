@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_04"
+              "title": "deeplearning_05"
             }
           }
         ]
@@ -46,7 +46,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
-              "title": "파일 탐색기"
+              "title": "Files"
             }
           },
           {
@@ -179,49 +179,50 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:빠른 전환기 열기": false,
-      "graph:그래프 뷰 열기": false,
-      "canvas:새 캔버스 만들기": false,
-      "daily-notes:오늘의 일일 노트 열기": false,
-      "templates:템플릿 삽입": false,
-      "command-palette:명령어 팔레트 열기": false,
-      "bases:새 베이스 생성하기": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
     }
   },
   "active": "e1b4b6ca01dc900e",
   "lastOpenFiles": [
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md.tmp.115897.48c80c7878e8",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md.tmp.115897.c5dac0f258fd",
-    "site/public/images/notes/linear-nonlinear-activations/linear-network-path.png",
-    "scripts/figures/ch03_linear_network.py",
-    "site/public/images/notes/linear-nonlinear-activations/linear-two-nodes.png",
-    "scripts/figures/ch03_linear_two_nodes.py",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md.tmp.98541.7d517a600649",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md.tmp.98541.70ffbd095065",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md.tmp.98541.e21c57a500ea",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md.tmp.98541.a549468a0bea",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md.tmp.98541.6434fa54d135",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md.tmp.98541.8bb7c33cf236",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
-    "site/public/images/notes/backpropagation/shared-delta.png",
-    "site/public/images/notes/backpropagation/path-w11.png",
-    "site/public/images/notes/backpropagation/example-network.png",
-    "notes/deep-learning/easy-deep-learning-ch02 2.md",
-    "dist/assets/images/ros1-noetic-to-ros2-humble.png",
+    "dist/assets/videos/roomie-ik-target-control.mp4",
+    "dist/assets/videos/roomie-button-click.mp4",
+    "dist/assets/videos",
+    "dist/assets/images/physical-ai-second-attempt.png",
+    "dist/assets/images/falcon_zone_access_alert.webp",
+    "dist/assets/images/falcon_zone_access_settings.webp",
+    "dist/assets/images/physical-ai-first-attempt.png",
+    "dist/assets/images/falcon_simulated_airport_scene.png",
+    "dist/assets/images/falcon_dataset_evaluation.webp",
+    "dist/assets/images/nav2-navigation-behavior-tree.source.txt",
+    "dist/assets/images/nav2-navigation-behavior-tree.LICENSE.txt",
+    "dist/assets/images/nav2-navigation-behavior-tree.png",
+    "dist/assets/images/falcon_synthetic_pipeline.webp",
     "dist/assets/images/roomie_system_architecture.png",
     "dist/assets/images/roomie_gaussian_motion.webp",
-    "dist/assets/images/roomie_elevator_flow.png",
-    "dist/assets/images/roomie_arm_principle.png",
-    "notes/deep-learning/easy-deep-learning-ch02 1.md",
-    "notes/deep-learning/easy-deep-learning-ch02.md",
+    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
+    "dist/assets/images",
+    "dist/projects/roomie.html",
+    "dist/projects/physical-ai-hackathon.html",
+    "dist/projects/javis.html",
+    "dist/projects/falcon.html",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
-    "dist/images/notes/easy-deep-learning-ch01/SOURCES.md"
+    "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
+    "notes/deep-learning/easy-deep-learning-ch02 2.md",
+    "notes/deep-learning/easy-deep-learning-ch02 1.md",
+    "notes/deep-learning/easy-deep-learning-ch02.md"
   ]
 }

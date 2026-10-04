@@ -11,137 +11,171 @@ featured: false
 ---
 ## 역전파 알고리즘
 
-**역전파**(Backpropagation)는 손실에 대한 모든 가중치의 기울기를 구하는 알고리즘입니다.
+딥러닝 학습은 결국 **"오차를 줄이도록 모든 가중치를 알맞게 조절하는 일"** 입니다.
 
-경사하강법([2장](/notes/deep-learning/easy-deep-learning-ch02/))으로 가중치를 갱신하려면 매번 이 기울기를 구해야 합니다.
+이를 위해 각 가중치가 오차에 얼마나 영향을 미쳤는지(그래디언트)를 효율적으로 구해내는 핵심 알고리즘이 바로 **역전파(Backpropagation)** 입니다.
 
-출력층 가중치는 예측값을 직접 바꾸므로 기울기를 바로 구할 수 있습니다.
-은닉층 가중치는 은닉 노드 → 예측값 → 손실 순서로 영향을 주므로, 거쳐 가는 단계마다 미분해야 합니다.
+마지막 출력층은 정답과 비교해 얼마나 틀렸는지 바로 알 수 있습니다.
 
-역전파의 핵심은 [연쇄 법칙](/notes/deep-learning/easy-deep-learning-ch02/)과 계산 결과의 재사용입니다.
-손실 쪽부터 미분을 거꾸로 곱해 올라가면서, 뒤에서 먼저 구한 미분과 순전파에서 구한 값을 다시 씁니다.
+하지만 중간에 낀 **은닉층은 정답 라벨이 없습니다.** 개별 은닉 노드가 몇을 내뱉어야 정답인지 중간 기준이 없는데, 최종 오차의 책임을 어떻게 물을 수 있을까요?
 
-## 예측값과 손실 계산하기
+해답은 단순합니다. **"도미노를 거꾸로 짚어가는 것"** 입니다.
 
-아래  신경망을 통해 계산 과정을 보여드리겠습니다.
+은닉 노드가 변하면 $\to$ 출력이 변하고 $\to$ 결국 최종 오차가 변합니다.
 
-<img src="../../../../public/images/notes/backpropagation/example-network.png" alt="입력 두 개, 은닉 노드 세 개와 출력 노드 두 개를 연결한 신경망. 첫 은닉 노드와 두 출력의 경로에만 가중치 w, 편향 b, 활성화 전 값 z와 출력값 a를 표시하고, 윗첨자로 층 번호를 구분한다." width="960" loading="lazy" />
+역전파는 이 인과관계를 미분의 **연쇄 법칙(Chain Rule)** 으로 엮어, 오차가 발생한 맨 뒤(손실)에서부터 거꾸로 계산해 각 가중치의 기여도를 찾아냅니다.
+
+특히 뒤쪽에서 구해둔 계산 결과를 앞쪽 노드들이 **함께 나눠 쓰기 때문에**, 수천만 개의 가중치도 중복 없이 빠르게 계산할 수 있습니다.
+
+아래 단순한 신경망을 통해 이 계산이 어떻게 흘러가는지 직접 눈으로 따라가 보겠습니다.
+
+<img src="../../../../public/images/notes/backpropagation/example-network.png" alt="입력 두 개, ReLU 은닉 노드 세 개, 선형 출력 노드 두 개를 연결한 신경망. 은닉층 가중치와 활성화 값은 초록색, 출력층 가중치와 예측값은 파란색으로 구분합니다." width="1143" loading="lazy" />
+
 가중치 : $w$
 편향 :  $b$
-노드 입력값 : $z$
-노드 출력값 : $a$
-윗첨자는 층 번호
-아랫첨자는 노드 번호
+활성화 노드 입력값 : $z$
+활성화 노드 출력값 : $a$
 
-**첫 은닉 노드에 들어가는 값.** 입력값에 각각 가중치를 곱해 더하고, 편향을 더합니다.
 
-$$
-z^1_1=x_1w^1_1+x_2w^1_2+b^1_1
-$$
+이 신경망의 계산 흐름은 다음과 같습니다. 분량상 각 층의 첫 번째 노드를 중심으로 설명합니다.
+<img src="../../../../public/images/notes/backpropagation/path-w11.png" alt="첫 입력에서 초록색 은닉층 가중치, ReLU, 파란색 출력층 가중치와 선형 출력을 거쳐 첫 예측값으로 이어지는 경로를 주황색으로 강조한 신경망" width="1143" loading="lazy" />
 
-**첫 은닉 노드에서 나오는 값.** $z^1_1$에 ReLU를 적용합니다. 나머지 은닉 노드도 같은 순서로 계산합니다.
+1. 입력층: 입력 <span style="color: #000000">x₁</span>에 가중치 <span style="color: #238443">w₁</span>을 곱하고, 다른 입력의 가중합과 편향 <span style="color: #238443">b₁</span>을 더합니다.
+2. 은닉층: 선형 변환 결과 <span style="color: #238443">z₁</span>에 ReLU를 적용하여 <span style="color: #238443">a₁</span>을 얻습니다.
+3. 출력층: <span style="color: #238443">a₁</span>에 출력층 가중치 <span style="color: #2563EB">w₁</span>을 곱하고, 다른 은닉 노드의 가중합과 편향 <span style="color: #2563EB">b₁</span>을 더합니다. 선형 활성화함수는 계산한 값을 그대로 예측값 <span style="color: #2563EB">ŷ₁</span>로 내보냅니다.
+4. 이과정을 순전파라고 합니다.
 
-$$
-a^1_1=\operatorname{ReLU}(z^1_1)
-$$
+여기서 각 가중치들 w1, w1들의 loss에 얼마나 기여를 했는지 파악하는겁니다.
+연쇄법칙을 이용해 편미분을 계산합니다.
 
-**첫 출력 노드에 들어가는 값.** 은닉 노드 세 개의 출력에 각각 가중치를 곱해 더하고, 출력층 편향을 더합니다.
+손실함수는 MSE ( $L=\frac12(\textcolor{#2563EB}{\hat y_1}-y_1)^2$ ) 를 사용합니다.
 
-$$
-z^2_1=a^1_1w^2_1+a^1_2w^2_3+a^1_3w^2_5+b^2_1
-$$
+설명을 단순하게 하려고 손실은 첫 번째 출력 $\textcolor{#2563EB}{\hat y_1}$만 사용합니다. 출력이 여러 개면 각 출력을 거치는 경로의 미분을 모두 더합니다.
 
-**첫 출력 노드에서 나오는 값.** 그림의 출력층은 들어온 값을 그대로 내보냅니다. 이 값이 예측값입니다.
+### 출력층 가중치의 미분
+
+$\textcolor{#2563EB}{w_1}$의 기울기를 먼저 계산합니다. 연쇄 법칙으로 두 개의 미분으로 나눕니다.
 
 $$
-a^2_1=z^2_1,\qquad \hat y_1=a^2_1
+\frac{\partial L}{\partial \textcolor{#2563EB}{w_1}}
+= \underbrace{\frac{\partial L}{\partial \textcolor{#2563EB}{\hat y_1}}}_{(1)}
+\cdot \underbrace{\frac{\partial \textcolor{#2563EB}{\hat y_1}}{\partial \textcolor{#2563EB}{w_1}}}_{(2)}
 $$
 
-두 번째 출력도 같은 방식으로 계산하되, 가중치는 $w^2_2$, $w^2_4$, $w^2_6$, 편향은 $b^2_2$를 씁니다.
+#### (1) 손실을 예측값으로 미분
 
-이렇게 입력에서 출력 쪽으로 차례로 계산하는 과정을 **순전파**(Forward Propagation)라고 합니다.
-
-이후 미분과 숫자 예제는 출력 하나만 둔 경우로 단순화해 첫 출력 $\hat y_1$을 따라갑니다.
-
-마지막으로 예측 $\hat y_1$과 정답 $y$를 비교해 손실을 구합니다. 손실은 MSE를 쓰고, 데이터가 하나라 평균은 생략합니다. $1/2$은 미분할 때 나오는 2를 없애 줍니다.
+지수 2가 앞으로 내려와 $\frac12$과 상쇄됩니다.
 
 $$
-L=\frac12(\hat y_1-y)^2
+L=\frac12(\textcolor{#2563EB}{\hat y_1}-y_1)^2
+\quad\Rightarrow\quad
+\frac{\partial L}{\partial \textcolor{#2563EB}{\hat y_1}} = \textcolor{#2563EB}{\hat y_1} - y_1
 $$
 
-## 손실에서 거꾸로 미분하기
+#### (2) 예측값을 가중치로 미분
 
-출력 하나로 단순화한 그림에서 $w^1_1$이 영향을 주는 길만 강조했습니다. $w^1_1\to z^1_1\to a^1_1\to\hat y_1$로 이어지고, $\hat y_1$에서 손실 $L$이 계산됩니다.
-
-<img src="../../../../public/images/notes/backpropagation/path-w11.png" alt="출력 하나를 둔 신경망에서 1층 가중치 w1, 활성화 전 값 z와 출력 a, 2층 가중치 w1을 거쳐 예측값으로 이어지는 경로를 주황색으로 강조한 그림" width="640" loading="lazy" />
-
-연쇄 법칙에 따라 이 경로의 구간마다 변화율을 곱합니다. 인수는 손실 쪽 구간부터 차례로 $\hat y_1\to L$, $a^1_1\to\hat y_1$, $z^1_1\to a^1_1$, $w^1_1\to z^1_1$의 변화율입니다.
+$\textcolor{#2563EB}{w_1}$에 곱해진 $\textcolor{#238443}{a_1}$만 남고, 나머지 항은 $\textcolor{#2563EB}{w_1}$과 무관한 상수라서 0이 됩니다.
 
 $$
-\frac{\partial L}{\partial w^1_1}
-=\underbrace{\frac{\partial L}{\partial\hat y_1}}_{\hat y_1-y}
-\underbrace{\frac{\partial\hat y_1}{\partial a^1_1}}_{w^2_1}
-\underbrace{\frac{\partial a^1_1}{\partial z^1_1}}_{\operatorname{ReLU}'(z^1_1)}
-\underbrace{\frac{\partial z^1_1}{\partial w^1_1}}_{x_1}
+\textcolor{#2563EB}{\hat y_1} = \textcolor{#2563EB}{w_1}\textcolor{#238443}{a_1} + (\text{다른 은닉 노드 항}) + \textcolor{#2563EB}{b_1}
+\quad\Rightarrow\quad
+\frac{\partial \textcolor{#2563EB}{\hat y_1}}{\partial \textcolor{#2563EB}{w_1}} = \textcolor{#238443}{a_1}
 $$
 
-ReLU의 기울기는 입력이 양수이면 1, 음수이면 0입니다. 0에서는 정의되지 않아 구현에서는 보통 0으로 처리합니다.
-
-### 뒤에서 구한 값 재사용하기
-
-$w^1_2$의 경로도 $w^1_1$과 같은 길 $z^1_1\to a^1_1\to\hat y_1\to L$을 지납니다. 처음 세 인수 $(\hat y_1-y)\,w^2_1\operatorname{ReLU}'(z^1_1)$이 같으므로, $z^1_1$에서의 미분 $\delta_1$ 하나로 묶어 두고 $a^1_1$을 계산하는 두 입력선이 함께 씁니다.
-
-<img src="../../../../public/images/notes/backpropagation/shared-delta.png" alt="첫 은닉 노드로 들어오는 1층 가중치 w1과 w2를 주황색으로 강조하고 활성화 전 값 z에 대한 미분 델타1을 표시한 그림" width="640" loading="lazy" />
+#### (3) 결과
 
 $$
-\delta_1=\frac{\partial L}{\partial z^1_1}=(\hat y_1-y)\,w^2_1\operatorname{ReLU}'(z^1_1),\qquad
-\frac{\partial L}{\partial w^1_1}=x_1\delta_1,\quad
-\frac{\partial L}{\partial w^1_2}=x_2\delta_1,\quad
-\frac{\partial L}{\partial b^1_1}=\delta_1
+\frac{\partial L}{\partial \textcolor{#2563EB}{w_1}}
+= \underbrace{(\textcolor{#2563EB}{\hat y_1} - y_1)}_{(1)}
+\, \underbrace{\textcolor{#238443}{a_1}}_{(2)}
 $$
 
-모든 은닉 노드 $j$에 같은 식이 적용됩니다.
+### 은닉층 가중치의 미분
+
+$\textcolor{#238443}{w_1}$은 출력층을 지나 손실에 영향을 주므로, 연쇄 법칙으로 네 개의 미분으로 나눕니다.
 
 $$
-\delta_j=(\hat y_1-y)\,w^2_{2j-1}\operatorname{ReLU}'(z^1_j),\qquad
-\frac{\partial L}{\partial w^1_{2j-2+i}}=x_i\delta_j
+\frac{\partial L}{\partial \textcolor{#238443}{w_1}}
+= \underbrace{\frac{\partial L}{\partial \textcolor{#2563EB}{\hat y_1}}}_{(1)}
+\cdot \underbrace{\frac{\partial \textcolor{#2563EB}{\hat y_1}}{\partial \textcolor{#238443}{a_1}}}_{(2)}
+\cdot \underbrace{\frac{\partial \textcolor{#238443}{a_1}}{\partial \textcolor{#238443}{z_1}}}_{(3)}
+\cdot \underbrace{\frac{\partial \textcolor{#238443}{z_1}}{\partial \textcolor{#238443}{w_1}}}_{(4)}
 $$
 
-출력층 가중치는 손실과 바로 이어져 더 짧습니다. $\partial L/\partial w^2_{2j-1}=a^1_j(\hat y_1-y)$, $\partial L/\partial b^2_1=\hat y_1-y$입니다.
+#### (1) 손실을 예측값으로 미분
 
-이 식들에 들어가는 $\hat y_1$, $z^1_j$, $a^1_j$는 순전파에서 이미 구한 값이라 다시 계산하지 않고 그대로 씁니다.
+출력층에서 구한 값과 같습니다: $\textcolor{#2563EB}{\hat y_1} - y_1$
 
-그래서 학습은 **순전파 → 손실 계산 → 역전파 → 파라미터 갱신** 순서로 진행됩니다.
+#### (2) 예측값을 은닉 노드 출력으로 미분
 
-## 숫자로 한 번 따라가기
-
-$x_1=1$, $x_2=2$, 정답 $y=4$로 두겠습니다(설명용 값입니다). 처음 값은 다음과 같고, $b^1_j$와 $b^2_1$은 0입니다.
-
-| 은닉 노드 $j$ | $w^1_{2j-1}$ | $w^1_{2j}$ | $w^2_{2j-1}$ |
-| --- | ---: | ---: | ---: |
-| 1 | 1 | 0 | 1 |
-| 2 | 0 | 1 | 1 |
-| 3 | −1 | 0 | 1 |
-
-**순전파.** $z^1=(1,\,2,\,-1)$이므로 $a^1=(1,\,2,\,0)$, 예측은 $\hat y_1=3$, 손실은 $L=\frac12(3-4)^2=0.5$입니다.
-
-**역전파.** $\hat y_1-y=-1$이고 ReLU 기울기는 $(1,\,1,\,0)$이므로 $\delta=(-1,\,-1,\,0)$입니다. 노드 3은 ReLU의 음수 구간이라 이 노드를 지나는 미분은 모두 0입니다.
-
-| 파라미터 | 노드 1 | 노드 2 | 노드 3 |
-| --- | ---: | ---: | ---: |
-| $\partial L/\partial w^1_{2j-1}=x_1\delta_j$ | −1 | −1 | 0 |
-| $\partial L/\partial w^1_{2j}=x_2\delta_j$ | −2 | −2 | 0 |
-| $\partial L/\partial w^2_{2j-1}=a^1_j(\hat y_1-y)$ | −1 | −2 | 0 |
-
-$\partial L/\partial b^1_j$는 $\delta_j$와 같고, $\partial L/\partial b^2_1=-1$입니다.
-
-**갱신.** 학습률 $\eta=0.01$로 모든 파라미터를 $\text{값}-\eta\times\text{미분}$으로 바꿉니다. 예를 들어 $w^1_1$은 $1-0.01(-1)=1.01$입니다. 갱신한 값으로 다시 순전파하면 $a^1=(1.06,\,2.06,\,0)$이고, $(w^2_1,\,w^2_3,\,w^2_5)=(1.01,\,1.02,\,1)$, $b^2_1=0.01$이므로
+같은 출력 노드 식을 이번에는 $\textcolor{#238443}{a_1}$로 미분합니다. $\textcolor{#238443}{a_1}$에 곱해진 $\textcolor{#2563EB}{w_1}$만 남습니다.
 
 $$
-\hat y_1=1.06(1.01)+2.06(1.02)+0.01=3.1818
+\textcolor{#2563EB}{\hat y_1} = \textcolor{#2563EB}{w_1}\textcolor{#238443}{a_1} + (\text{다른 은닉 노드 항}) + \textcolor{#2563EB}{b_1}
+\quad\Rightarrow\quad
+\frac{\partial \textcolor{#2563EB}{\hat y_1}}{\partial \textcolor{#238443}{a_1}} = \textcolor{#2563EB}{w_1}
 $$
 
-손실은 0.5에서 약 0.3347로 줄었습니다.
+#### (3) ReLU 미분
+
+$\textcolor{#238443}{z_1}>0$이면 $\textcolor{#238443}{a_1}=\textcolor{#238443}{z_1}$라서 기울기가 1이고, 아니면 $\textcolor{#238443}{a_1}=0$으로 고정이라 기울기가 0입니다. $\textcolor{#238443}{z_1}=0$에서는 미분이 정의되지 않아 보통 0으로 둡니다.
+
+$$
+\textcolor{#238443}{a_1} = \max(0, \textcolor{#238443}{z_1})
+\quad\Rightarrow\quad
+\frac{\partial \textcolor{#238443}{a_1}}{\partial \textcolor{#238443}{z_1}} = \operatorname{ReLU}'(\textcolor{#238443}{z_1}) =
+\begin{cases}
+1 & (\textcolor{#238443}{z_1} > 0) \\
+0 & (\textcolor{#238443}{z_1} \le 0)
+\end{cases}
+$$
+
+#### (4) 은닉 노드 입력을 가중치로 미분
+
+$\textcolor{#238443}{w_1}$에 곱해진 $x_1$만 남습니다.
+
+$$
+\textcolor{#238443}{z_1} = \textcolor{#238443}{w_1}x_1 + \textcolor{#238443}{w_2}x_2 + \textcolor{#238443}{b_1}
+\quad\Rightarrow\quad
+\frac{\partial \textcolor{#238443}{z_1}}{\partial \textcolor{#238443}{w_1}} = x_1
+$$
+
+#### (5) 결과
+
+$$
+\frac{\partial L}{\partial \textcolor{#238443}{w_1}}
+= \underbrace{(\textcolor{#2563EB}{\hat y_1} - y_1)}_{(1)}
+\, \underbrace{\textcolor{#2563EB}{w_1}}_{(2)}
+\, \underbrace{\operatorname{ReLU}'(\textcolor{#238443}{z_1})}_{(3)}
+\, \underbrace{x_1}_{(4)}
+$$
+
+### 계산한 값 재사용하기
+
+<img src="../../../../public/images/notes/backpropagation/shared-delta.png" alt="같은 신경망에서 출력층과 은닉층 가중치의 미분을 비교합니다. 두 식에 공통으로 들어가는 손실의 예측값 미분을 빨간 상자로 묶고, 출력층에서 구한 예측 오차를 은닉층 미분에 재사용하는 흐름을 화살표로 연결합니다." width="1400" loading="lazy" />
+
+초록색 $\textcolor{#238443}{w_1}$의 미분식을 다시 보면, 파란색 $\textcolor{#2563EB}{w_1}$을 미분할 때 구한 $\textcolor{#2563EB}{\hat y_1}-y_1$이 그대로 들어 있습니다.
+
+$$
+\frac{\partial L}{\partial \textcolor{#238443}{w_1}}
+=
+\underbrace{(\textcolor{#2563EB}{\hat y_1}-y_1)}_{\text{출력층에서 이미 구한 값}}
+\textcolor{#2563EB}{w_1}
+\operatorname{ReLU}'(\textcolor{#238443}{z_1})x_1
+$$
+
+따라서 손실함수부터 다시 미분할 필요 없이, 파란색 w1 계산시 저장한 $\textcolor{#2563EB}{\hat y_1}-y_1$에 나머지 미분값을 곱하면 됩니다.
+역전파는 이처럼 뒤쪽 층에서 구한 미분값을 앞쪽 층으로 넘기고, 각 층에서는 그 층의 미분만 곱해 계산을 이어갑니다.
+층이 더 많아도 같은 과정이 입력층 방향으로 반복됩니다.
+
+미분식에 들어가는 값 중 일부는 순전파에서 이미 계산했습니다.
+
+
+- $\textcolor{#2563EB}{\hat y_1}$: 순전파의 최종 출력입니다.
+- $\textcolor{#238443}{a_1}$: 파란색 $\textcolor{#2563EB}{w_1}$의 기울기 $(\textcolor{#2563EB}{\hat y_1}-y_1)\textcolor{#238443}{a_1}$에 곱해지는 값으로, 순전파에서 구한 은닉 노드의 출력입니다.
+- $\operatorname{ReLU}'(\textcolor{#238443}{z_1})$: 순전파에서 구한 $\textcolor{#238443}{z_1}$의 부호로 정해집니다.
+
+그래서 순전파를 할 때 $\textcolor{#238443}{z_1}$, $\textcolor{#238443}{a_1}$, $\textcolor{#2563EB}{\hat y_1}$을 저장해 두고, 역전파에서는 꺼내 쓰기만 합니다.
 
 ## 참고 자료
 

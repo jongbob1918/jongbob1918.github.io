@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mxfile host="app.diagrams.net" version="24.7.17" type="device">
+  <diagram id="bernoulli-distribution" name="베르누이 분포">
+    <mxGraphModel dx="720" dy="440" grid="1" gridSize="10" guides="1" tooltips="1" connect="0" arrows="1" fold="1" page="1" pageScale="1" pageWidth="720" pageHeight="440" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="c2" value="" style="rounded=0;html=1;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="1.0" y="1.0" width="718.0" height="438.0" as="geometry"/></mxCell>
+        <mxCell id="c3" value="" style="strokeColor=#dedede;strokeWidth=1;rounded=0;endArrow=none;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="370.0" as="sourcePoint"/><mxPoint x="640.0" y="370.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c4" value="0" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="48.0" y="356.0" width="50.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c5" value="" style="strokeColor=#dedede;strokeWidth=1;rounded=0;endArrow=none;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="310.0" as="sourcePoint"/><mxPoint x="640.0" y="310.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c6" value="0.2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="48.0" y="296.0" width="50.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c7" value="" style="strokeColor=#dedede;strokeWidth=1;rounded=0;endArrow=none;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="250.0" as="sourcePoint"/><mxPoint x="640.0" y="250.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c8" value="0.4" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="48.0" y="236.0" width="50.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c9" value="" style="strokeColor=#dedede;strokeWidth=1;rounded=0;endArrow=none;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="190.0" as="sourcePoint"/><mxPoint x="640.0" y="190.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c10" value="0.6" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="48.0" y="176.0" width="50.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c11" value="" style="strokeColor=#dedede;strokeWidth=1;rounded=0;endArrow=none;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="130.0" as="sourcePoint"/><mxPoint x="640.0" y="130.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c12" value="0.8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="48.0" y="116.0" width="50.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c13" value="" style="strokeColor=#dedede;strokeWidth=1;rounded=0;endArrow=none;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="70.0" as="sourcePoint"/><mxPoint x="640.0" y="70.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c14" value="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="48.0" y="56.0" width="50.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c15" value="" style="rounded=0;html=1;fillColor=#e07b39;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="210.0" y="310.0" width="120.0" height="60.0" as="geometry"/></mxCell>
+        <mxCell id="c16" value="P(y = 0) = 1 − p = 0.2" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#5a463b;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="160.0" y="276.0" width="220.0" height="30.0" as="geometry"/></mxCell>
+        <mxCell id="c17" value="y = 0 (불합격)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="180.0" y="376.0" width="180.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c18" value="" style="rounded=0;html=1;fillColor=#315a7a;strokeColor=none;" vertex="1" parent="1"><mxGeometry x="420.0" y="130.0" width="120.0" height="240.0" as="geometry"/></mxCell>
+        <mxCell id="c19" value="P(y = 1) = p = 0.8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#5a463b;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="370.0" y="96.0" width="220.0" height="30.0" as="geometry"/></mxCell>
+        <mxCell id="c20" value="y = 1 (합격)" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=0;" vertex="1" parent="1"><mxGeometry x="390.0" y="376.0" width="180.0" height="28.0" as="geometry"/></mxCell>
+        <mxCell id="c21" value="" style="strokeColor=#242424;strokeWidth=2;rounded=0;endArrow=classic;endFill=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="370.0" as="sourcePoint"/><mxPoint x="670.0" y="370.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c22" value="" style="strokeColor=#242424;strokeWidth=2;rounded=0;endArrow=classic;endFill=1;" edge="1" parent="1"><mxGeometry relative="1" as="geometry"><mxPoint x="110.0" y="370.0" as="sourcePoint"/><mxPoint x="110.0" y="55.0" as="targetPoint"/></mxGeometry></mxCell>
+        <mxCell id="c23" value="정답 y" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;fontSize=19;fontColor=#242424;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="370.0" y="404.0" width="300.0" height="30.0" as="geometry"/></mxCell>
+        <mxCell id="c24" value="확률" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=19;fontColor=#242424;fontStyle=1;rotation=-90;" vertex="1" parent="1"><mxGeometry x="-38.0" y="205.0" width="180.0" height="30.0" as="geometry"/></mxCell>
+        <mxCell id="c25" value="예: 합격 확률 p = 0.8" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=16;fontColor=#444444;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="112.0" y="14.0" width="400.0" height="30.0" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

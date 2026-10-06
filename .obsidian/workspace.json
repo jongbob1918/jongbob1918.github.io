@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_05"
+              "title": "deeplearning_06"
             }
           }
         ]
@@ -46,7 +46,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
-              "title": "파일 탐색기"
+              "title": "Files"
             }
           },
           {
@@ -179,47 +179,46 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:빠른 전환기 열기": false,
-      "graph:그래프 뷰 열기": false,
-      "canvas:새 캔버스 만들기": false,
-      "daily-notes:오늘의 일일 노트 열기": false,
-      "templates:템플릿 삽입": false,
-      "command-palette:명령어 팔레트 열기": false,
-      "bases:새 베이스 생성하기": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
     }
   },
   "active": "e1b4b6ca01dc900e",
   "lastOpenFiles": [
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
+    "site/public/images/notes/easy-deep-learning-ch04/sigmoid-flat-regions.png",
+    "scripts/figures/ch05_sigmoid_flat_regions.py",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "site/src/assets/diagrams/archive/easy-deep-learning-ch04/sigmoid-gradient.png",
+    "site/src/assets/diagrams/archive/easy-deep-learning-ch04/unit-step.svg",
+    "site/src/assets/diagrams/archive/easy-deep-learning-ch04/perceptron-nonconvergence.gif",
+    "site/src/assets/diagrams/archive/easy-deep-learning-ch04",
+    "site/src/assets/diagrams/archive",
+    "site/public/images/notes/easy-deep-learning-ch04/perceptron-unit-step.png",
+    "site/public/images/notes/easy-deep-learning-ch04/coin-likelihood.png",
+    "scripts/figures/ch05_coin_likelihood.py",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
+    "scripts/figures/ch05_linear_models.py",
+    "site/public/images/notes/easy-deep-learning-ch04/unit-step-sigmoid-boundary.png",
+    "scripts/figures/__pycache__/ch04_classification_drawio.cpython-312.pyc",
+    "scripts/figures/__pycache__",
+    "scripts/figures/ch05_linear_classification.py",
+    "Pasted image 20261006215924.png",
     "dist/_astro/momentum-minibatch-3d.BfU2Hxnx_EOXr0.webp",
     "dist/_astro/sgd-vs-gd.B7ef6mW0_PTdPT.webp",
-    "dist/_astro/shared-learning-rate.CmB1pD1A_Z1k7AR4.webp",
-    "dist/_astro/stochastic-gradient-descent.EnIgUvvy_10VOx0.webp",
-    "dist/_astro/learning-rate-too-small.CQGscni2_Zk1S6A.webp",
-    "dist/_astro/loss-landscapes.CKZXxUYR_Z19wFtx.webp",
-    "dist/_astro/learning-rate-too-large.DIQqJYTF_199Ww6.webp",
-    "dist/_astro/mae-vs-mse.DmauRpD2_2fATVW.webp",
     "dist/sitemap.xml",
     "dist/rss.xml",
-    "dist/robots.txt",
-    "dist/notes/deep-learning/linear-nonlinear-activations/index.html",
-    "dist/notes/deep-learning/easy-deep-learning-ch05/index.html",
-    "dist/notes/deep-learning/easy-deep-learning-ch04/index.html",
-    "dist/notes/deep-learning/easy-deep-learning-ch03/index.html",
-    "dist/notes/deep-learning/easy-deep-learning-ch02/index.html",
-    "dist/notes/deep-learning/easy-deep-learning-ch01/index.html",
-    "dist/notes/deep-learning/linear-nonlinear-activations",
-    "dist/_astro/stochastic-gradient-descent.EnIgUvvy.png",
-    "dist/_astro/shared-learning-rate.CmB1pD1A.gif",
-    "dist/_astro/momentum-minibatch-3d.BfU2Hxnx.gif",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
     "notes/deep-learning/easy-deep-learning-ch02 2.md",
     "notes/deep-learning/easy-deep-learning-ch02 1.md",

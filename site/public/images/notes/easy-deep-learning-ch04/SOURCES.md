@@ -2,6 +2,8 @@
 
 Downloaded 2026-09-13. Images used without modification.
 
+The earlier unit-step.svg is archived in site/src/assets/diagrams/archive/easy-deep-learning-ch04/. The current perceptron-unit-step.png is the author's supplied diagram.
+
 | File | Original asset | Attribution / terms |
 | --- | --- | --- |
 | unit-step.svg | https://upload.wikimedia.org/wikipedia/commons/8/81/Mplwp_heaviside_theta.svg | Geek3, https://commons.wikimedia.org/wiki/File:Mplwp_heaviside_theta.svg — CC BY 3.0, https://creativecommons.org/licenses/by/3.0/ |

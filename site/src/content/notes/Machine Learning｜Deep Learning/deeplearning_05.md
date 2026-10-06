@@ -126,12 +126,12 @@ $$
 
 $$
 \frac{\partial L}{\partial z}
-=\frac{\partial L}{\partial p}\frac{\partial p}{\partial z}
+=\frac{\partial L}{\partial p}\underbrace{\frac{\partial p}{\partial z}}_{\text{시그모이드 미분}}
 $$
 
 $$
 \frac{\partial L}{\partial z}
-=2(p-y)\,p(1-p)
+=2(p-y)\,\underbrace{p(1-p)}_{\text{시그모이드 미분}}
 $$
 
 합격생인데 $p=0.01$로 크게 틀렸다면 $p(1-p)\approx0.0099$라서 미분값이 약 $-0.02$에 그칩니다. **크게 틀렸는데 고칠 신호는 작은** 상황입니다. 

@@ -150,8 +150,8 @@ def frange(a, b, n):
 
 
 # 합격: (공부 시간, 출석률 %) / 불합격. 경계 출석률 = 100 - 10 × 공부 시간 으로 완벽히 갈린다.
-PASS = [(3.5, 85), (4.5, 75), (5, 65), (6, 60), (6.5, 85), (7, 50), (7.5, 40), (8, 70), (9, 60), (9.2, 30)]
-FAIL = [(1, 40), (1, 80), (1.5, 65), (2, 30), (2.5, 55), (3, 20), (4, 35), (5, 30), (6, 20), (7, 10)]
+PASS = [(3, 75), (3, 90), (7, 35), (7, 50)]
+FAIL = [(3, 65), (3, 50), (7, 25), (7, 10)]
 assert all(a > 100 - 10 * h for h, a in PASS) and all(a < 100 - 10 * h for h, a in FAIL)
 
 
@@ -159,21 +159,16 @@ def perceptron(boundary):
     name = "perceptron-boundary" if boundary else "perceptron-data"
     d = Diagram(name, "학습이 끝난 분류 경계" if boundary else "공부 시간과 출석률 데이터")
     p = Plot(d, (0, 10), (0, 100))
-    if boundary:
-        d.polygon(p.x0, p.y0, p.w, p.h, "[[0,0],[1,0],[1,1]]", PASS_FILL)
-        d.polygon(p.x0, p.y0, p.w, p.h, "[[0,0],[0,1],[1,1]]", FAIL_FILL)
     p.grid(range(0, 11, 2), range(0, 101, 20), lambda t: str(t), lambda t: str(t))
     if boundary:
-        d.line([(p.px(0), p.py(100)), (p.px(10), p.py(0))], RED, 4)
+        d.line([(p.px(0), p.py(100)), (p.px(10), p.py(0))], "#8b5bb5", 4)
     for h, a in FAIL:
         d.diamond(p.px(h), p.py(a), ORANGE)
     for h, a in PASS:
         d.dot(p.px(h), p.py(a), BLUE)
     p.axes("공부 시간 x<sub>1</sub> (시간)", "출석률 x<sub>2</sub> (%)")
-    items = [("dot", BLUE, "합격 (y = 1)", 110), ("diamond", ORANGE, "불합격 (y = 0)", 120)]
     if boundary:
-        items.append(("line", RED, "분류 경계 w<sub>1</sub>x<sub>1</sub> + w<sub>2</sub>x<sub>2</sub> + b = 0", 330))
-    d.legend(items, 112, 14)
+        d.legend([("line", "#8b5bb5", "유닛 스텝", 110)], 112, 14)
     d.save()
 
 

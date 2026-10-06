@@ -2,11 +2,12 @@
 
 실행: python3 scripts/figures/ch05_linear_classification.py
 동일한 점수 z = x1 + x2 / 10 - 10에서 unit step의 기준은 z=0,
-sigmoid의 기준은 p=0.5이다. 두 경계는 같은 직선이다.
+비교 그림은 sigmoid 임계값을 p=0.8로 높여 경계가 이동하는 예시다.
 출력: perceptron-data.png, perceptron-boundary.png,
       unit-step-sigmoid-boundary.png (easy-deep-learning-ch04 폴더)
 """
 from pathlib import Path
+import math
 
 import matplotlib
 
@@ -55,9 +56,10 @@ def draw_data(ax):
     ax.tick_params(colors="#444444", labelsize=12)
 
 
-def draw_boundary(ax, color):
+def draw_boundary(ax, color, score_threshold=0):
     x = np.linspace(0, 10, 101)
-    ax.plot(x, 100 - 10 * x, color=color, linewidth=2.8, zorder=2)
+    ax.plot(x, 100 - 10 * x + 10 * score_threshold,
+            color=color, linewidth=2.8, zorder=2)
 
 
 def save_single(name, boundary=False):
@@ -74,15 +76,17 @@ def save_single(name, boundary=False):
 
 
 def save_comparison():
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4.8), dpi=200)
-    fig.subplots_adjust(left=0.08, right=0.98, bottom=0.18, top=0.83, wspace=0.28)
-    for ax, color in zip(axes, (STEP_COLOR, SIGMOID_COLOR)):
-        draw_data(ax)
-        draw_boundary(ax, color)
+    fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
+    fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.84)
+    draw_data(ax)
+    draw_boundary(ax, STEP_COLOR)
+    probability_threshold = 0.8
+    score_threshold = math.log(probability_threshold / (1 - probability_threshold))
+    draw_boundary(ax, SIGMOID_COLOR, score_threshold)
     fig.legend([Line2D([0], [0], color=color, linewidth=2.8)
                 for color in (STEP_COLOR, SIGMOID_COLOR)],
                ["유닛 스텝", "시그모이드"], ncol=2, loc="upper center",
-               frameon=False, bbox_to_anchor=(0.53, 0.99))
+               frameon=False, bbox_to_anchor=(0.55, 0.99))
     fig.savefig(OUT / "unit-step-sigmoid-boundary.png", facecolor="white")
     plt.close(fig)
 

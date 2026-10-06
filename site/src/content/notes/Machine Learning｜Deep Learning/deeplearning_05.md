@@ -125,15 +125,15 @@ $$
 점$L$을 $z$에 대해 미분하려면 연쇄법칙을 사용합니다.
 
 $$
-\underbrace{\frac{\partial L}{\partial z}}_{\substack{\text{구하려는 미분}\\z\text{에 대한 }L\text{의 미분}}}
-=\underbrace{\frac{\partial L}{\partial p}}_{\substack{\text{손실 함수 미분}\\p\text{에 대한 }L\text{의 미분}}}\,
-\underbrace{\frac{\partial p}{\partial z}}_{\substack{\text{시그모이드 미분}\\z\text{에 대한 }p\text{의 미분}}}
+\underbrace{\frac{\partial L}{\partial z}}_{\text{구하려는 미분}}
+=\underbrace{\frac{\partial L}{\partial p}}_{\text{손실 함수 미분}}\,
+\underbrace{\frac{\partial p}{\partial z}}_{\text{시그모이드 미분}}
 $$
 
 $$
-\underbrace{\frac{\partial L}{\partial z}}_{\substack{\text{구하려는 미분}\\z\text{에 대한 }L\text{의 미분}}}
-=\underbrace{2(p-y)}_{\substack{\text{손실 함수 미분}\\p\text{에 대한 }L\text{의 미분}}}\,
-\underbrace{p(1-p)}_{\substack{\text{시그모이드 미분}\\z\text{에 대한 }p\text{의 미분}}}
+\underbrace{\frac{\partial L}{\partial z}}_{\text{구하려는 미분}}
+=\underbrace{2(p-y)}_{\text{손실 함수 미분}}\,
+\underbrace{p(1-p)}_{\text{시그모이드 미분}}
 $$
 
 합격생인데 $p=0.01$로 크게 틀렸다면 $p(1-p)\approx0.0099$라서 미분값이 약 $-0.02$에 그칩니다. **크게 틀렸는데 고칠 신호는 작은** 상황입니다. 

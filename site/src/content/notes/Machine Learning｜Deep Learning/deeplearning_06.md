@@ -53,7 +53,7 @@ $$\mathbf{z} = [z_{\text{dog}}, z_{\text{cat}}, z_{\text{rabbit}}]$$
 
  Softmax는 여러개의 실수값을 받아 각 출력의 값이 양수이면서 그 합이 1인되도록 변환해주는 함수입니다.
  
-![[Pasted image 20261005103623.png|432]]
+<img src="../../../../public/images/notes/easy-deep-learning-ch05/softmax-input-output.png" alt="세 로짓 z1, z2, z3를 softmax 함수에 입력해 세 출력 y1, y2, y3로 변환하는 구조" width="432" loading="lazy" />
 
 
 $y_1 = \frac{e^z_1}{ e^z_1 + e^z_2 + e^z_3 }$ 

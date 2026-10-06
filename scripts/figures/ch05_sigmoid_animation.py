@@ -1,7 +1,9 @@
-"""시그모이드에서 입력 z가 커질 때 분모와 출력이 변하는 GIF를 만든다.
+"""시그모이드에서 입력 z에 따라 분모와 출력이 변하는 GIF를 만든다.
 
 실행: python3 scripts/figures/ch05_sigmoid_animation.py
-출력: site/public/images/notes/easy-deep-learning-ch04/sigmoid-input.gif
+출력:
+  site/public/images/notes/easy-deep-learning-ch04/sigmoid-input.gif
+  site/public/images/notes/easy-deep-learning-ch04/sigmoid-input-decrease.gif
 """
 from pathlib import Path
 
@@ -14,9 +16,9 @@ from matplotlib import font_manager
 from matplotlib.animation import FuncAnimation, PillowWriter
 
 
-OUT = (
+OUT_DIR = (
     Path(__file__).resolve().parents[2]
-    / "site/public/images/notes/easy-deep-learning-ch04/sigmoid-input.gif"
+    / "site/public/images/notes/easy-deep-learning-ch04"
 )
 BLUE = "#315f7d"
 ORANGE = "#e6772e"
@@ -42,10 +44,7 @@ def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
 
-def main():
-    set_korean_font()
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-
+def render(output_path, end):
     fig = plt.figure(figsize=(7, 5), dpi=100, facecolor="white")
     grid = fig.add_gridspec(2, 1, height_ratios=(3.3, 1.2), hspace=0.06)
     ax = fig.add_subplot(grid[0])
@@ -77,7 +76,7 @@ def main():
         0.5, 0.26, "", ha="center", va="center", fontsize=17, color=DARK
     )
 
-    moving = np.linspace(0, 5, 61)
+    moving = np.linspace(0, end, 61)
     frames = np.concatenate((np.repeat(moving[0], 8), moving, np.repeat(moving[-1], 16)))
 
     def update(z):
@@ -86,7 +85,7 @@ def main():
         exponent = 0.0 if abs(z) < 0.05 else -z
         shown_z = 0.0 if abs(z) < 0.05 else z
 
-        trail_z = np.linspace(0, z, max(2, int(z * 30) + 2))
+        trail_z = np.linspace(0, z, max(2, int(abs(z) * 30) + 2))
         trail.set_data(trail_z, sigmoid(trail_z))
         point.set_data([z], [output])
         vertical.set_data([z, z], [0, output])
@@ -109,8 +108,15 @@ def main():
         blit=True,
     )
     fig.subplots_adjust(left=0.12, right=0.97, top=0.97, bottom=0.05)
-    animation.save(OUT, writer=PillowWriter(fps=15), dpi=100)
+    animation.save(output_path, writer=PillowWriter(fps=15), dpi=100)
     plt.close(fig)
+
+
+def main():
+    set_korean_font()
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    render(OUT_DIR / "sigmoid-input.gif", 5)
+    render(OUT_DIR / "sigmoid-input-decrease.gif", -5)
 
 
 if __name__ == "__main__":

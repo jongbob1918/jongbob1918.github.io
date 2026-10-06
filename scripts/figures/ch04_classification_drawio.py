@@ -16,6 +16,7 @@ PNG 위치: site/public/images/notes/easy-deep-learning-ch04/
 import math
 from pathlib import Path
 from xml.sax.saxutils import quoteattr
+from ch05_linear_models import PASS, FAIL, STEP_WEIGHTS, boundary_segment
 
 OUT = Path(__file__).resolve().parents[2] / "site/src/assets/diagrams"
 
@@ -149,19 +150,14 @@ def frange(a, b, n):
     return [a + (b - a) * i / (n - 1) for i in range(n)]
 
 
-# 합격: (공부 시간, 출석률 %) / 불합격. 경계 출석률 = 100 - 10 × 공부 시간 으로 완벽히 갈린다.
-PASS = [(4.2, 65), (6.4, 76), (8.6, 42)]
-FAIL = [(5.8, 35), (3.6, 24), (1.4, 58)]
-assert all(a > 100 - 10 * h for h, a in PASS) and all(a < 100 - 10 * h for h, a in FAIL)
-
-
 def perceptron(boundary):
     name = "perceptron-boundary" if boundary else "perceptron-data"
     d = Diagram(name, "학습이 끝난 분류 경계" if boundary else "공부 시간과 출석률 데이터")
     p = Plot(d, (0, 10), (0, 100))
     p.grid(range(0, 11, 2), range(0, 101, 20), lambda t: str(t), lambda t: str(t))
     if boundary:
-        d.line([(p.px(0), p.py(100)), (p.px(10), p.py(0))], "#8b5bb5", 4)
+        points = [(p.px(h), p.py(a)) for h, a in boundary_segment(STEP_WEIGHTS)]
+        d.line(points, "#8b5bb5", 4)
     for h, a in FAIL:
         d.diamond(p.px(h), p.py(a), ORANGE)
     for h, a in PASS:

@@ -1,13 +1,12 @@
 """학생 6명의 데이터와 유닛 스텝·시그모이드 분류 경계를 그린다.
 
 실행: python3 scripts/figures/ch05_linear_classification.py
-동일한 점수 z = x1 + x2 / 10 - 10에서 unit step의 기준은 z=0,
-비교 그림은 sigmoid 임계값을 p=0.8로 높여 경계가 이동하는 예시다.
+같은 데이터를 퍼셉트론과 시그모이드+BCE+L2 규제로 각각 학습한다.
+유닛 스텝은 z=0, 시그모이드는 p=0.5로 두 모델 모두 6/6 분류한다.
 출력: perceptron-data.png, perceptron-boundary.png,
       unit-step-sigmoid-boundary.png (easy-deep-learning-ch04 폴더)
 """
 from pathlib import Path
-import math
 
 import matplotlib
 
@@ -18,6 +17,7 @@ from matplotlib import font_manager
 from matplotlib.lines import Line2D
 
 from ch04_classification_drawio import PASS, FAIL, perceptron, OUT as DIAGRAMS
+from ch05_linear_models import STEP_WEIGHTS, SIGMOID_WEIGHTS, boundary_y
 
 
 OUT = Path(__file__).resolve().parents[2] / "site/public/images/notes/easy-deep-learning-ch04"
@@ -56,10 +56,9 @@ def draw_data(ax):
     ax.tick_params(colors="#444444", labelsize=12)
 
 
-def draw_boundary(ax, color, score_threshold=0):
+def draw_boundary(ax, color, weights):
     x = np.linspace(0, 10, 101)
-    ax.plot(x, 100 - 10 * x + 10 * score_threshold,
-            color=color, linewidth=2.8, zorder=2)
+    ax.plot(x, boundary_y(weights, x), color=color, linewidth=2.8, zorder=2)
 
 
 def save_single(name, boundary=False):
@@ -67,7 +66,7 @@ def save_single(name, boundary=False):
     fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.84)
     draw_data(ax)
     if boundary:
-        draw_boundary(ax, STEP_COLOR)
+        draw_boundary(ax, STEP_COLOR, STEP_WEIGHTS)
         fig.legend([Line2D([0], [0], color=STEP_COLOR, linewidth=2.8)],
                    ["유닛 스텝"], loc="upper center", frameon=False,
                    bbox_to_anchor=(0.55, 0.99))
@@ -79,10 +78,8 @@ def save_comparison():
     fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
     fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.84)
     draw_data(ax)
-    draw_boundary(ax, STEP_COLOR)
-    probability_threshold = 0.8
-    score_threshold = math.log(probability_threshold / (1 - probability_threshold))
-    draw_boundary(ax, SIGMOID_COLOR, score_threshold)
+    draw_boundary(ax, STEP_COLOR, STEP_WEIGHTS)
+    draw_boundary(ax, SIGMOID_COLOR, SIGMOID_WEIGHTS)
     fig.legend([Line2D([0], [0], color=color, linewidth=2.8)
                 for color in (STEP_COLOR, SIGMOID_COLOR)],
                ["유닛 스텝", "시그모이드"], ncol=2, loc="upper center",

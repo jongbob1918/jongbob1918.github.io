@@ -23,9 +23,9 @@ featured: false
 ## 2. 퍼셉트론으로 이진분류
 
 퍼셉트론을 사용하여 공부 시간과 출석률로 시험 합격(1)과 불합격(0)을 예측해 보겠습니다.
-입력노드 $x_1$에는 공부 시간과 $x_2$에는 출석률을 입력합니다. 학생 8명을 예시로 보겠습니다. 파란 원은 합격, 주황 마름모는 불합격입니다.
+입력노드 $x_1$에는 공부 시간과 $x_2$에는 출석률을 입력합니다. 학생 6명을 예시로 보겠습니다. 파란 원은 합격, 주황 마름모는 불합격입니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/perceptron-data.png" alt="공부 시간과 출석률 평면의 합격 학생 4명(파란 원)과 불합격 학생 4명(주황 마름모). 같은 공부 시간에서 경계에 가까운 학생과 먼 학생을 비교할 수 있는 산점도" loading="lazy" width="560" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/perceptron-data.png" alt="공부 시간과 출석률 평면의 합격 학생 3명(파란 원)과 불합격 학생 3명(주황 마름모). 공부 시간과 출석률을 다르게 배치해 경계에 가까운 학생과 먼 학생을 구분한 산점도" loading="lazy" width="560" />
 
 퍼셉트론은 입력값들을 종합한 점수가 기준선(0)을 넘으면 1, 넘지 못하면 0으로 판정하는 **유닛 스텝 함수(Unit Step Function)** 를 사용합니다.
 <img src="../../../../public/images/notes/easy-deep-learning-ch04/unit-step.svg" alt="입력이 0보다 작으면 0, 0 이상이면 1을 출력하는 유닛 스텝 함수 그래프" loading="lazy" width="560" />
@@ -42,7 +42,7 @@ featured: false
 
 학생들의 데이터를 반복해서 확인하며 합격과 불합격을 나누는 경계를 찾습니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/perceptron-boundary.png" alt="학생 8명의 데이터에서 유닛 스텝의 보라색 분류 경계 직선이 합격 학생 4명과 불합격 학생 4명을 나누는 그래프" loading="lazy" width="560" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/perceptron-boundary.png" alt="학생 6명의 데이터에서 유닛 스텝의 보라색 분류 경계 직선이 합격 학생 3명과 불합격 학생 3명을 나누는 그래프" loading="lazy" width="560" />
 
 ### 계단 함수의 한계
 
@@ -108,7 +108,7 @@ $$
 
 같은 점수식에서 유닛 스텝의 기준 $z=0$과 시그모이드의 기준 $p=0.5$는 같은 분류 경계를 만듭니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/unit-step-sigmoid-boundary.png" alt="같은 학생 8명과 점수식을 사용한 선형분류 비교. 왼쪽 유닛 스텝의 보라색 경계와 오른쪽 시그모이드의 초록색 경계가 같은 위치에서 합격과 불합격을 나눈다" loading="lazy" width="720" height="346" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/unit-step-sigmoid-boundary.png" alt="같은 학생 6명과 점수식을 사용한 선형분류 비교. 왼쪽 유닛 스텝의 보라색 경계와 오른쪽 시그모이드의 초록색 경계가 같은 위치에서 합격과 불합격을 나눈다" loading="lazy" width="720" height="346" />
 
 
 ### 직선으로 나눌 수 없는 데이터

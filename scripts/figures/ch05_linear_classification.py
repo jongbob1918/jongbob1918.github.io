@@ -1,4 +1,4 @@
-"""학생 8명의 데이터와 유닛 스텝·시그모이드 분류 경계를 그린다.
+"""학생 6명의 데이터와 유닛 스텝·시그모이드 분류 경계를 그린다.
 
 실행: python3 scripts/figures/ch05_linear_classification.py
 동일한 점수 z = x1 + x2 / 10 - 10에서 unit step의 기준은 z=0,
@@ -43,7 +43,7 @@ def draw_data(ax):
         (PASS, "o", PASS_COLOR), (FAIL, "D", FAIL_COLOR)
     ):
         values = np.asarray(samples)
-        ax.scatter(values[:, 0], values[:, 1], s=95, marker=marker,
+        ax.scatter(values[:, 0], values[:, 1], s=120, marker=marker,
                    color=color, edgecolors="white", linewidths=1, zorder=3)
     ax.set(xlim=(0, 10), ylim=(0, 100), xticks=[0, 2, 4, 6, 8, 10],
            yticks=[0, 20, 40, 60, 80, 100],
@@ -91,7 +91,7 @@ if __name__ == "__main__":
     configure_font()
     OUT.mkdir(parents=True, exist_ok=True)
     DIAGRAMS.mkdir(parents=True, exist_ok=True)
-    # Keep the existing editable draw.io originals on the same eight students.
+    # Keep the editable draw.io originals on the same six students.
     perceptron(False)
     perceptron(True)
     save_single("perceptron-data")

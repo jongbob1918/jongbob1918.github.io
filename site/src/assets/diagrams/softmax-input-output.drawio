@@ -1,0 +1,49 @@
+<mxfile host="drawio">
+  <diagram id="softmax-input-output" name="softmax-input-output">
+    <mxGraphModel dx="800" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="560" pageHeight="350" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="box" value="Softmax" style="rounded=1;whiteSpace=wrap;html=1;arcSize=12;fillColor=#ffffff;strokeColor=#000000;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="180" y="10" width="180" height="320" as="geometry"/>
+        </mxCell>
+        <mxCell id="in1" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="5" y="62" as="sourcePoint"/><mxPoint x="180" y="62" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="in2" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="5" y="170" as="sourcePoint"/><mxPoint x="180" y="170" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="in3" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="5" y="275" as="sourcePoint"/><mxPoint x="180" y="275" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="out1" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="360" y="62" as="sourcePoint"/><mxPoint x="460" y="62" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="out2" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="360" y="170" as="sourcePoint"/><mxPoint x="460" y="170" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="out3" style="endArrow=none;html=1;strokeColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="360" y="280" as="sourcePoint"/><mxPoint x="460" y="280" as="targetPoint"/></mxGeometry>
+        </mxCell>
+        <mxCell id="z1" value="z&lt;sub&gt;1&lt;/sub&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="90" y="22" width="60" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="z2" value="z&lt;sub&gt;2&lt;/sub&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="90" y="130" width="60" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="z3" value="z&lt;sub&gt;3&lt;/sub&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="90" y="235" width="60" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p1" value="p&lt;sub&gt;1&lt;/sub&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="465" y="42" width="60" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p2" value="p&lt;sub&gt;2&lt;/sub&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="465" y="150" width="60" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="p3" value="p&lt;sub&gt;3&lt;/sub&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=28;" vertex="1" parent="1">
+          <mxGeometry x="465" y="260" width="60" height="40" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

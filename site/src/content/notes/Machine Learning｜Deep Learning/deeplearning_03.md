@@ -210,9 +210,11 @@ $$GELU(x) = x \cdot \Phi(x)$$
 점선은 입력을 그대로 출력하는 $y=x$입니다.
 
 <img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-positive.png" alt="양수 구간을 강조한 GELU 곡선과 y=x 점선이 x=3에서 거의 겹치는 그래프" width="60%" loading="lazy" />
+
 - **$x$가 큰 음수일 때 (예: $x = -3$):** $\Phi(-3) \approx 0.001$이므로 출력이 거의 0에 수렴합니다.
 
 <img src="../../../../public/images/notes/linear-nonlinear-activations/gelu-negative.png" alt="음수 구간을 확대한 GELU 곡선에서 x=-3의 출력이 약 -0.004로 0에 가까운 그래프" width="60%" loading="lazy" />
+
 - **$x = 0$ 근처일 때:** $\Phi(x)$가 약 0.5이므로 출력은 약 $0.5x$입니다. $x=0$에서는 출력도 0입니다.
 
 점선은 $y=0.5x$입니다.

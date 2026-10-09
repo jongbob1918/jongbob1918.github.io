@@ -123,13 +123,17 @@ $$
 
 음의 로그를 취하면 교차 엔트로피가 됩니다. BCE는 두 클래스의 정답 분포 $[y\;1-y]$와 예측 분포 $[p\;1-p]$에 대한 교차 엔트로피입니다. [softmax와 교차 엔트로피 참고](https://d2l.ai/chapter_linear-classification/softmax-regression.html)
 
-softmax와 CE를 결합했을 때도 로짓에 대한 미분은 간단합니다.
+### softmax와 함께 미분하기
+
+softmax와 교차 엔트로피를 함께 쓰면, 각 로짓에 대한 손실의 기울기는 앞에서 본 BCE처럼 **예측 확률과 정답의 차이**가 됩니다.
 
 $$
 \frac{\partial L_{\mathrm{CE}}}{\partial z_k}=p_k-y_k
 $$
 
-이 미분을 역전파로 앞선 층에 전달해 가중치와 바이어스를 학습합니다.
+<img src="../../../../public/images/notes/easy-deep-learning-ch05/ce-gradient.png" alt="정답이 강아지일 때 예측 확률 0.665, 0.245, 0.090과 원-핫 정답 1, 0, 0을 나란히 비교하고, 그 차이인 기울기 −0.335, +0.245, +0.090을 막대로 나타낸 그림. 음수인 강아지 로짓은 올라가고 양수인 고양이·토끼 로짓은 내려간다" loading="lazy" width="640" />
+
+이 기울기를 역전파로 앞선 층에 전달해 가중치와 편향을 학습합니다.
 
 ## 참고 자료
 

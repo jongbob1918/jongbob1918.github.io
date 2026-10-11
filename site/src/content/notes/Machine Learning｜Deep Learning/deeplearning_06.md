@@ -134,6 +134,8 @@ $$
 \frac{\partial L_{\mathrm{CE}}}{\partial z_k}=p_k-y_k
 $$
 
+여기서 $p_k = \hat{y}_k = \operatorname{Softmax}(\mathbf{z})_k$는 클래스 $k$에 대한 모델의 예측 확률입니다.
+
 <img src="../../../../public/images/notes/easy-deep-learning-ch05/ce-gradient.png" alt="정답이 강아지일 때 예측 확률 0.665, 0.245, 0.090과 원-핫 정답 1, 0, 0을 나란히 비교하고, 그 차이인 기울기 −0.335, +0.245, +0.090을 막대로 나타낸 그림. 음수인 강아지 로짓은 올라가고 양수인 고양이·토끼 로짓은 내려간다" loading="lazy" width="640" />
 
 이 기울기를 역전파로 앞선 층에 전달해 가중치와 편향을 학습합니다.

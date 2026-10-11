@@ -118,7 +118,7 @@ featured: false
 
 넓은 의미에서는 비지도학습(레이블 없는 데이터를 쓰는 방식으로, 2.3절에서 다룹니다)의 한 종류로 볼 수 있지만, 데이터로부터 입력과 정답에 해당하는 학습 신호를 만든 뒤 지도학습과 유사한 방식으로 모델을 학습한다는 특징이 있어 별도로 구분하기도 합니다.
 
-이때 대표적으로 사용하는 방법이 **사전학습(Pre-training)과 미세조정(Fine-tuning)**입니다.
+이때 대표적으로 사용하는 방법이 <strong>사전학습(Pre-training)과 미세조정(Fine-tuning)</strong>입니다.
 
 먼저 레이블이 없는 대량의 데이터를 이용해 학습 목표를 만들고 모델을 사전학습한 뒤, 실제로 하려는 작업의 레이블이 있는 소량의 데이터를 이용해 모델을 미세조정합니다.
 
@@ -237,7 +237,7 @@ featured: false
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/restaurant-rl-02-reward-update.png" alt="로봇 에이전트가 공사 구간을 피해 맛집에 도착하는 파란 경로. 한 칸 이동할 때마다 1점을 잃고 맛집에서 100점을 받는다" loading="lazy" />
 
-현재 칸에서 어느 방향으로 갈지 정하는 규칙을 **정책(Policy)**이라고 합니다. 이런 학습에 깊은 신경망을 사용하면 **심층 강화학습(Deep Reinforcement Learning)**이 됩니다.
+현재 칸에서 어느 방향으로 갈지 정하는 규칙을 <strong>정책(Policy)</strong>이라고 합니다. 이런 학습에 깊은 신경망을 사용하면 <strong>심층 강화학습(Deep Reinforcement Learning)</strong>이 됩니다.
 
 ## 참고 자료
 

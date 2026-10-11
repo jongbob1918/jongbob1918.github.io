@@ -99,7 +99,7 @@ def ce_loss_curve():
     fig.subplots_adjust(left=0.11, right=0.97, bottom=0.17, top=0.94)
     p = np.linspace(0.005, 1, 1000)
     ax.plot(p, -np.log(p), color="#315f7d", linewidth=2.8)
-    for k, dx, dy in ((0, 0.04, 0.55), (1, 0.06, 0.30), (2, 0.06, 0.45)):
+    for k, dx, dy in ((0, 0.04, 0.55),):
         pc = PROBS[k].round(3)
         ax.scatter(pc, -np.log(pc), s=80, color=COLORS[k], zorder=3)
         ax.text(pc + dx, -np.log(pc) + dy,

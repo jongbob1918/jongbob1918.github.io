@@ -118,11 +118,12 @@ $$
 정답 클래스의 번호를 $c$라 하면 $L_{\mathrm{CE}}=-\ln p_c$입니다. 앞의 softmax 출력 $[0.665,\ 0.245,\ 0.090]$으로 계산하면 다음과 같습니다.
 
 - 정답이 강아지: $-\ln 0.665\approx0.408$
+- 정답이 고양이: $-\ln 0.245\approx1.406$
 - 정답이 토끼: $-\ln 0.090\approx2.408$
 
 정답에 준 확률이 0에 가까울수록 손실은 한없이 커집니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch05/ce-loss-curve.png" alt="정답 클래스에 준 확률 p_c에 따른 손실 −ln p_c 곡선. 정답이 강아지일 때 p=0.665에서 손실 약 0.408, 정답이 토끼일 때 p=0.090에서 손실 약 2.408로 표시되어, 정답 확률이 낮을수록 손실이 급격히 커짐을 보여준다" loading="lazy" width="560" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch05/ce-loss-curve.png" alt="정답 클래스에 준 확률 p_c에 따른 손실 −ln p_c 곡선. 정답이 강아지일 때 p=0.665에서 손실 약 0.408, 정답이 고양이일 때 p=0.245에서 손실 약 1.406, 정답이 토끼일 때 p=0.090에서 손실 약 2.408로 표시되어, 정답 확률이 낮을수록 손실이 급격히 커짐을 보여준다" loading="lazy" width="560" />
 
 
 ### softmax와 함께 미분하기

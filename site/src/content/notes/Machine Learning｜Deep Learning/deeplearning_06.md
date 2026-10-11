@@ -37,7 +37,7 @@ $$\mathbf{z} = [z_1,\ z_2,\ z_3]$$
 
 softmax는 여러 개의 실수를 받아, 모든 출력이 양수이고 합이 1이 되도록 바꾸는 함수입니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch05/softmax-input-output.png" alt="세 로짓 z1, z2, z3를 softmax 함수에 입력해 세 출력 q1, q2, q3로 변환하는 구조" width="432" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch05/softmax-input-output.png" alt="세 로짓 z1, z2, z3를 softmax 함수에 입력해 세 출력 p1, p2, p3로 변환하는 구조" width="432" loading="lazy" />
 
 각 클래스의 확률 $p_k$는 다음과 같습니다.
 

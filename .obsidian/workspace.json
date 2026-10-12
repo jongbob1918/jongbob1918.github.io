@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c43a9c5146ba2f61",
+        "id": "46b2d0d8694606b7",
         "type": "tabs",
         "children": [
           {
-            "id": "16b16631fc79e5bb",
+            "id": "c65657033a743971",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_06"
+              "title": "deeplearning_07"
             }
           }
         ]
@@ -188,39 +188,41 @@
       "bases:새 베이스 생성하기": false
     }
   },
-  "active": "16b16631fc79e5bb",
+  "active": "c65657033a743971",
   "lastOpenFiles": [
-    "scripts/figures/__pycache__/ch05_sigmoid_animation.cpython-312.pyc",
-    "scripts/figures/__pycache__/ch06_multiclass.cpython-312.pyc",
-    "scripts/figures/__pycache__",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "2026-09-13.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/기울기 소실.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
     "dist/assets/videos/roomie-ik-target-control.mp4",
     "dist/assets/videos/roomie-button-click.mp4",
     "dist/assets/videos",
-    "dist/assets/images/physical-ai-second-attempt.png",
-    "dist/assets/images/falcon_zone_access_alert.webp",
-    "dist/assets/images/falcon_zone_access_settings.webp",
-    "dist/assets/images/physical-ai-first-attempt.png",
-    "dist/assets/images/falcon_simulated_airport_scene.png",
-    "dist/assets/images/falcon_dataset_evaluation.webp",
-    "dist/assets/images/nav2-navigation-behavior-tree.source.txt",
-    "dist/assets/images/nav2-navigation-behavior-tree.LICENSE.txt",
-    "dist/assets/images/nav2-navigation-behavior-tree.png",
-    "dist/assets/images/falcon_synthetic_pipeline.webp",
+    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
+    "dist/assets/images/ros1-noetic-to-ros2-humble.png",
+    "dist/assets/images/maxerve-icon.png",
+    "dist/assets/images/lk-patrol-seooreung-channela.jpg",
     "dist/assets/images/roomie_system_architecture.png",
     "dist/assets/images/roomie_gaussian_motion.webp",
-    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
-    "dist/assets/images",
-    "dist/assets",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
-    "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
+    "dist/assets/images/roomie_elevator_flow.png",
+    "dist/assets/images/roomie_arm_principle.png",
+    "dist/assets/images/roomie_arm_hardware.webp",
+    "dist/assets/images/roomie-ik-target-control-poster.jpg",
+    "dist/assets/images/roomie-button-detection-cropped.webp",
+    "dist/projects.json",
+    "dist/script.js",
+    "dist/styles.css",
+    "dist/index.html",
+    "dist/assets/images/nav2-navigation-behavior-tree.source.txt",
+    "dist/assets/images/nav2-navigation-behavior-tree.LICENSE.txt",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
+    "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
     "notes/deep-learning/easy-deep-learning-ch02 2.md",
     "notes/deep-learning/easy-deep-learning-ch02 1.md",
     "notes/deep-learning/easy-deep-learning-ch02.md"

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_07"
+              "title": "deeplearning_08"
             }
           }
         ]
@@ -46,7 +46,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "파일 탐색기"
             }
           },
           {
@@ -179,51 +179,52 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "switcher:빠른 전환기 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 일일 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false,
+      "bases:새 베이스 생성하기": false
     }
   },
   "active": "777d9a3aa216482f",
   "lastOpenFiles": [
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.304cf3e85d96",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.33ddd78dd91e",
-    "site/public/images/notes/easy-deep-learning-ch06/underfit.png",
-    "scripts/figures/ch07_underfit.py",
-    "scripts/figures/ch07_underfit.py.tmp.61644.a7232fcf2e69",
-    "site/public/images/notes/easy-deep-learning-ch06/layer-values-layernorm.png",
-    "scripts/figures/ch07_layernorm.py.tmp.61644.5931ae8fb330",
-    "site/public/images/notes/easy-deep-learning-ch06/layernorm-vs-batchnorm.png",
-    "scripts/figures/ch07_layernorm.py",
-    "scripts/figures/ch07_layernorm.py.tmp.61644.bad62ef9dc20",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md.tmp.68861.8eeaa38b7072",
+    "site/public/images/notes/easy-deep-learning-ch07/dropout-network.png",
+    "scripts/figures/ch08_dropout_network.py",
+    "scripts/figures/ch08_dropout_network.py.tmp.68861.47bc7d7ca168",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md.tmp.68861.08ff8cc307ad",
+    "site/public/images/notes/easy-deep-learning-ch07/dropout-node.png",
+    "scripts/figures/ch08_dropout_node.py",
+    "scripts/figures/ch08_dropout_node.py.tmp.68861.9e902455cac6",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.73b3aa870388",
-    "site/public/images/notes/easy-deep-learning-ch06/batch-values-relu.png",
-    "scripts/figures/ch07_batch_values.py.tmp.61644.7be6d9d8ea21",
-    "scripts/figures/ch07_batch_values.py.tmp.61644.7b729a305f76",
-    "site/public/images/notes/easy-deep-learning-ch06/batch-values-batchnorm.png",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.527cdb54dd4a",
-    "site/public/images/notes/easy-deep-learning-ch06/batchnorm-position.png",
-    "notes/deep-learning/easy-deep-learning-ch02 2.md",
-    "site/public/images/notes/easy-deep-learning-ch06/relu.png",
-    "site/public/images/notes/easy-deep-learning-ch06/sigmoid-max-slope.png",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md.tmp.25026.6b4b1a2b0e24",
+    "site/public/images/notes/easy-deep-learning-ch07/augmentation.png",
+    "scripts/figures/ch08_augmentation.py",
+    "scripts/figures/ch08_augmentation.py.tmp.25026.80d1d5929b65",
+    "site/public/images/notes/easy-deep-learning-ch07/early-stopping.png",
+    "scripts/figures/ch08_early_stopping.py",
+    "scripts/figures/ch08_early_stopping.py.tmp.25026.072906d59dce",
+    "site/public/images/notes/easy-deep-learning-ch07/model-shrink.png",
+    "site/public/images/notes/easy-deep-learning-ch07/overfit.png",
+    "site/public/images/notes/easy-deep-learning-ch06/loss-landscape-skip.png",
+    "Pasted image 20261013114650.png",
+    "Pasted image 20261013114032.png",
+    "site/public/images/notes/easy-deep-learning-ch06/identity-thought-experiment.png",
+    "notes/deep-learning/easy-deep-learning-ch02 2.md",
     "2026-09-13.md",
-    "dist/assets/images/physical-ai-second-attempt.png",
-    "dist/assets/images/falcon_zone_access_alert.webp",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
     "notes/deep-learning/easy-deep-learning-ch02 1.md",
     "notes/deep-learning/easy-deep-learning-ch02.md"
   ]

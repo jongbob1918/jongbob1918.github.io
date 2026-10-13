@@ -5,7 +5,7 @@ description: 모델이 훈련 데이터에만 맞춰지는 과적합을 살펴�
 publishedAt: 2026-10-13
 tags:
   - Deep learning
-draft: true
+draft: false
 featured: false
 ---
 

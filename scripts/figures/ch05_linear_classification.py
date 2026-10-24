@@ -4,7 +4,8 @@
 같은 데이터를 퍼셉트론과 시그모이드+BCE+L2 규제로 각각 학습한다.
 유닛 스텝은 z=0, 시그모이드는 p=0.5로 두 모델 모두 6/6 분류한다.
 출력: perceptron-data.png, perceptron-boundary.png,
-      unit-step-sigmoid-boundary.png (easy-deep-learning-ch04 폴더)
+      perceptron-test.png, unit-step-sigmoid-boundary.png
+      (easy-deep-learning-ch04 폴더)
 """
 from pathlib import Path
 
@@ -16,13 +17,17 @@ import numpy as np
 from matplotlib import font_manager
 from matplotlib.lines import Line2D
 
-from ch04_classification_drawio import PASS, FAIL, perceptron, OUT as DIAGRAMS
+from ch04_classification_drawio import (PASS, FAIL, PASS_FILL, FAIL_FILL,
+                                        perceptron, OUT as DIAGRAMS)
 from ch05_linear_models import STEP_WEIGHTS, SIGMOID_WEIGHTS, boundary_y
 
 
 OUT = Path(__file__).resolve().parents[2] / "site/public/images/notes/easy-deep-learning-ch04"
 PASS_COLOR, FAIL_COLOR = "#315a7a", "#e07b39"
 STEP_COLOR, SIGMOID_COLOR = "#8b5bb5", "#258978"
+TEST_COLOR = "#222222"
+# 학습에 쓰지 않은 새 학생 (공부 시간, 출석률)
+TEST_STUDENT = (7, 85)
 
 
 def configure_font():
@@ -39,10 +44,12 @@ def configure_font():
     plt.rcParams.update({"font.size": 14, "axes.unicode_minus": False})
 
 
-def draw_data(ax):
+def draw_data(ax, points=True):
     for samples, marker, color in (
         (PASS, "o", PASS_COLOR), (FAIL, "D", FAIL_COLOR)
     ):
+        if not points:
+            break
         values = np.asarray(samples)
         ax.scatter(values[:, 0], values[:, 1], s=120, marker=marker,
                    color=color, edgecolors="white", linewidths=1, zorder=3)
@@ -74,6 +81,28 @@ def save_single(name, boundary=False):
     plt.close(fig)
 
 
+def save_test():
+    fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
+    fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.92)
+    draw_data(ax, points=False)
+    x = np.linspace(0, 10, 101)
+    y = np.clip(boundary_y(STEP_WEIGHTS, x), 0, 100)
+    ax.fill_between(x, y, 100, color=PASS_FILL, zorder=0)
+    ax.fill_between(x, 0, y, color=FAIL_FILL, zorder=0)
+    draw_boundary(ax, STEP_COLOR, STEP_WEIGHTS)
+
+    # 같은 공부 시간에서 경계선보다 출석률이 높으면 위쪽이다.
+    study, attendance = TEST_STUDENT
+    on_line = boundary_y(STEP_WEIGHTS, study)
+    ax.annotate("", (study, attendance - 2), xytext=(study, on_line),
+                arrowprops=dict(arrowstyle="->", color=TEST_COLOR,
+                                linestyle="--", linewidth=1.2), zorder=3)
+    ax.scatter(study, attendance, s=320, marker="*", color=TEST_COLOR,
+               edgecolors="white", linewidths=0.8, zorder=4)
+    fig.savefig(OUT / "perceptron-test.png", facecolor="white")
+    plt.close(fig)
+
+
 def save_comparison():
     fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
     fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.84)
@@ -97,4 +126,5 @@ if __name__ == "__main__":
     perceptron(True)
     save_single("perceptron-data")
     save_single("perceptron-boundary", boundary=True)
+    save_test()
     save_comparison()

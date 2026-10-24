@@ -24,7 +24,6 @@ def main():
     ax.text(1.3, 91, '$x_2 = -10x_1 + 100$', fontsize=14, color='#675084',
             bbox={'facecolor': 'white', 'edgecolor': 'none', 'alpha': .9})
     ax.set(xlim=(0, 10), ylim=(0, 100), xlabel='공부 시간 $x_1$ (시간)', ylabel='출석률 $x_2$ (%)')
-    ax.set_title(r'$w_1 = 10,\; w_2 = 1,\; b = -100$', pad=18, fontsize=15)
     ax.spines[['top', 'right']].set_visible(False)
     ax.grid(color='white', alpha=.6)
     ax.set_axisbelow(True)

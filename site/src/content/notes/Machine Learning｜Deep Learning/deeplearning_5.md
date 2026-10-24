@@ -29,7 +29,7 @@ featured: false
 
 ### 데이터 수집
 
-먼저 학생 6명의 데이터를 수집했다고 가정합니다.
+먼저 학생 6명의 데이터, 정답 데이터를 수집했다고 가정해봅니다.
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch04/perceptron-data.png" alt="공부 시간과 출석률 평면의 합격 학생 3명(파란 원)과 불합격 학생 3명(주황 마름모). 공부 시간과 출석률을 다르게 배치해 경계에 가까운 학생과 먼 학생을 구분한 산점도" loading="lazy" width="560" />
 

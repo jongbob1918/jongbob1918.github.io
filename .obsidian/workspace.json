@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_07"
+              "title": "deeplearning_05"
             }
           }
         ]
@@ -190,6 +190,9 @@
   },
   "active": "777d9a3aa216482f",
   "lastOpenFiles": [
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.304cf3e85d96",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.33ddd78dd91e",
     "site/public/images/notes/easy-deep-learning-ch06/underfit.png",
@@ -200,9 +203,6 @@
     "site/public/images/notes/easy-deep-learning-ch06/layernorm-vs-batchnorm.png",
     "scripts/figures/ch07_layernorm.py",
     "scripts/figures/ch07_layernorm.py.tmp.61644.bad62ef9dc20",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.73b3aa870388",
@@ -210,7 +210,6 @@
     "scripts/figures/ch07_batch_values.py.tmp.61644.7be6d9d8ea21",
     "scripts/figures/ch07_batch_values.py.tmp.61644.7b729a305f76",
     "site/public/images/notes/easy-deep-learning-ch06/batch-values-batchnorm.png",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md.tmp.61644.527cdb54dd4a",
     "site/public/images/notes/easy-deep-learning-ch06/batchnorm-position.png",
     "notes/deep-learning/easy-deep-learning-ch02 2.md",
     "site/public/images/notes/easy-deep-learning-ch06/relu.png",

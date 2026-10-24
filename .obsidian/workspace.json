@@ -11,14 +11,10 @@
             "id": "777d9a3aa216482f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "deeplearning_8"
+              "title": "새 탭"
             }
           }
         ]
@@ -99,7 +95,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +114,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +157,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,42 +186,51 @@
   },
   "active": "777d9a3aa216482f",
   "lastOpenFiles": [
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md.tmp.68861.8eeaa38b7072",
-    "site/public/images/notes/easy-deep-learning-ch07/dropout-network.png",
-    "scripts/figures/ch08_dropout_network.py",
-    "scripts/figures/ch08_dropout_network.py.tmp.68861.47bc7d7ca168",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md.tmp.68861.08ff8cc307ad",
-    "site/public/images/notes/easy-deep-learning-ch07/dropout-node.png",
-    "scripts/figures/ch08_dropout_node.py",
-    "scripts/figures/ch08_dropout_node.py.tmp.68861.9e902455cac6",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_1.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_2.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_3.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_5.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_6.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_7.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md.tmp.25026.6b4b1a2b0e24",
-    "site/public/images/notes/easy-deep-learning-ch07/augmentation.png",
-    "scripts/figures/ch08_augmentation.py",
-    "scripts/figures/ch08_augmentation.py.tmp.25026.80d1d5929b65",
-    "site/public/images/notes/easy-deep-learning-ch07/early-stopping.png",
-    "scripts/figures/ch08_early_stopping.py",
-    "scripts/figures/ch08_early_stopping.py.tmp.25026.072906d59dce",
-    "site/public/images/notes/easy-deep-learning-ch07/model-shrink.png",
-    "site/public/images/notes/easy-deep-learning-ch07/overfit.png",
-    "site/public/images/notes/easy-deep-learning-ch06/loss-landscape-skip.png",
-    "Pasted image 20261013114650.png",
-    "Pasted image 20261013114032.png",
-    "site/public/images/notes/easy-deep-learning-ch06/identity-thought-experiment.png",
-    "notes/deep-learning/easy-deep-learning-ch02 2.md",
-    "2026-09-13.md",
+    "dist/assets/videos/roomie-ik-target-control.mp4",
+    "dist/assets/videos/roomie-button-click.mp4",
+    "dist/assets/videos",
+    "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
+    "dist/assets/images/ros1-noetic-to-ros2-humble.png",
+    "dist/assets/images/maxerve-icon.png",
+    "dist/assets/images/lk-patrol-seooreung-channela.jpg",
+    "dist/assets/images/roomie_system_architecture.png",
+    "dist/assets/images/roomie_gaussian_motion.webp",
+    "dist/assets/images/roomie_elevator_flow.png",
+    "dist/assets/images/roomie_arm_principle.png",
+    "dist/assets/images/roomie_arm_hardware.webp",
+    "dist/assets/images/roomie-ik-target-control-poster.jpg",
+    "dist/assets/images/roomie-button-detection-cropped.webp",
+    "dist/projects.json",
+    "dist/script.js",
+    "dist/styles.css",
+    "dist/index.html",
+    "dist/assets/images/nav2-navigation-behavior-tree.source.txt",
+    "dist/assets/images/nav2-navigation-behavior-tree.LICENSE.txt",
+    "dist/assets/images",
     "dist/images/notes/easy-deep-learning-ch04/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "notes/deep-learning/easy-deep-learning-ch02 1.md",
-    "notes/deep-learning/easy-deep-learning-ch02.md"
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_09.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_9.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_7.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_6.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_5.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_3.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_2.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_1.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
+    "notes/deep-learning/easy-deep-learning-ch02 2.md",
+    "2026-09-13.md",
+    "notes/deep-learning/easy-deep-learning-ch02 1.md"
   ]
 }

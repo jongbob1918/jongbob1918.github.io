@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "deeplearning_08"
+              "title": "deeplearning_8"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
+                "file": "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,23 +190,23 @@
   },
   "active": "777d9a3aa216482f",
   "lastOpenFiles": [
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md.tmp.68861.8eeaa38b7072",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md.tmp.68861.8eeaa38b7072",
     "site/public/images/notes/easy-deep-learning-ch07/dropout-network.png",
     "scripts/figures/ch08_dropout_network.py",
     "scripts/figures/ch08_dropout_network.py.tmp.68861.47bc7d7ca168",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md.tmp.68861.08ff8cc307ad",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md.tmp.68861.08ff8cc307ad",
     "site/public/images/notes/easy-deep-learning-ch07/dropout-node.png",
     "scripts/figures/ch08_dropout_node.py",
     "scripts/figures/ch08_dropout_node.py.tmp.68861.9e902455cac6",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_01.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_02.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_03.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_04.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_05.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_06.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_07.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_08.md.tmp.25026.6b4b1a2b0e24",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_1.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_2.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_3.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_5.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_6.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_7.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md",
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md.tmp.25026.6b4b1a2b0e24",
     "site/public/images/notes/easy-deep-learning-ch07/augmentation.png",
     "scripts/figures/ch08_augmentation.py",
     "scripts/figures/ch08_augmentation.py.tmp.25026.80d1d5929b65",

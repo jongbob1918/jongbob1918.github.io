@@ -5,7 +5,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
-from ch05_linear_classification import configure_font
+from ch05_linear_classification import configure_font, PASS, FAIL
 
 
 def main():
@@ -16,6 +16,10 @@ def main():
     ax.fill_between(x, boundary, 100, color='#e1edf5')
     ax.fill_between(x, 0, boundary, color='#fbeadb')
     ax.plot(x, boundary, color='#675084', lw=2.5)
+    for samples, color in ((PASS, '#315a7a'), (FAIL, '#e07b39')):
+        points = np.asarray(samples)
+        ax.scatter(points[:, 0], points[:, 1], s=85, color=color,
+                   edgecolors='white', linewidths=1, zorder=3)
     ax.text(1.3, 91, r'$x_2 = -\frac{w_1}{w_2}x_1 - \frac{b}{w_2}$', fontsize=14, color='#675084',
             bbox={'facecolor': 'white', 'edgecolor': 'none', 'alpha': .9})
     ax.set(xlim=(0, 10), ylim=(0, 100), xlabel='공부 시간 $x_1$ (시간)', ylabel='출석률 $x_2$ (%)')

@@ -5,7 +5,7 @@ description: 층이 깊어질수록 기울기 소실이 왜 일어나는지 살�
 publishedAt: 2026-09-13
 tags:
   - Deep learning
-draft: true
+draft: false
 featured: false
 ---
 

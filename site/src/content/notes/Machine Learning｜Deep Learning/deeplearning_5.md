@@ -88,6 +88,8 @@ $w_2>0$인 경우, 직선보다 위쪽은 1, 경계선과 아래쪽은 0으로 �
 
 **시그모이드**(Sigmoid)는 점수 $z$를 0과 1 사이의 확률 $p$로 바꿉니다.
 
+시그모이드의 형태와 활성화 함수로서의 특징은 [3장 「활성화 함수」의 시그모이드 설명](/notes/deep-learning/linear-nonlinear-activations/#2-시그모이드sigmoid)에서 자세히 다룹니다.
+
 <figure>
   <img src="../../../../public/images/notes/easy-deep-learning-ch04/sigmoid.jpeg" alt="입력이 커질수록 출력이 0에서 1로 부드럽게 증가하고, 입력 0에서 출력 0.5를 지나는 시그모이드 곡선" loading="lazy" width="320" height="204" />
   <figcaption>출처: <a href="https://cs231n.github.io/neural-networks-1/">Stanford CS231n</a>.</figcaption>

@@ -22,7 +22,7 @@ featured: false
 <img src="../../../../public/images/notes/easy-deep-learning-ch05/one-hot-encoding.png" alt="강아지·고양이·토끼 사진을 원-핫 정답 벡터로 바꾼 그림. 벡터 자리는 강아지, 고양이, 토끼 순서이고, 강아지 사진은 [1, 0, 0], 고양이 사진은 [0, 1, 0], 토끼 사진은 [0, 0, 1]처럼 정답 자리만 검은 칸의 1이다" loading="lazy" width="460" />
 그리고 이진분류에서는 출력층에 노드 1개만 필요했지만, 다중분류에서는 라벨이 벡터로 표현됨에 따라 분류해야하는 클래스의 개수만큼 노드가 필요합니다. 
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch05/output-node-comparison.png" alt="이진분류는 고양이 여부를 출력 노드 1개로 판단하고, 다중분류는 강아지·고양이·토끼에 대응하는 출력 노드 3개를 사용한다. 고양이의 정답 라벨은 각각 1과 [0, 1, 0]이다" loading="lazy" width="640" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch05/output-node-comparison.png" alt="앞 층의 노드가 강아지·고양이·토끼에 대응하는 출력 노드 z1, z2, z3에 연결된다. 고양이의 정답 라벨은 [0, 1, 0]이다" loading="lazy" width="400" />
 
 모델은 입력 이미지를 보고 클래스마다 점수 를 하나씩, 총 3개를 계산합니다.
 

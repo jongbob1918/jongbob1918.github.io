@@ -75,7 +75,7 @@ def categorical_distribution():
                              gridspec_kw={"wspace": 0.25, "width_ratios": [3, 2]})
     fig.subplots_adjust(left=0.07, right=0.98, bottom=0.13, top=0.84)
     panels = (
-        (axes[0], "범주형 분포 (K = 3)", CLASSES, PROBS, COLORS,
+        (axes[0], "카데고리 분포 (K = 3)", CLASSES, PROBS, COLORS,
          [f"$p_{k + 1}$ = {v:.3f}" for k, v in enumerate(PROBS)]),
         (axes[1], "베르누이 분포 (K = 2)", ["불합격", "합격"], np.array([0.2, 0.8]),
          ["#e07b39", "#315f7d"], ["$1-p$ = 0.2", "$p$ = 0.8"]),

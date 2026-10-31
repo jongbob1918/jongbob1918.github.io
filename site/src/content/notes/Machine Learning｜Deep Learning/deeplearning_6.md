@@ -91,7 +91,7 @@ $$\frac{\vert{}-1\vert{}}{\vert{}2\vert{} + \vert{}1\vert{} + \vert{}-1\vert{}} 
 
 다중 분류는 이를 **범주형 분포(Categorical distribution, 멀티누이 분포)** 로 자연스럽게 확장한 것입니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch05/categorical-distribution.png" alt="왼쪽은 강아지·고양이·토끼에 확률 p1=0.665, p2=0.245, p3=0.090을 준 범주형 분포(K=3), 오른쪽은 불합격 1−p=0.2, 합격 p=0.8인 베르누이 분포(K=2) 막대그래프. 두 분포 모두 막대 높이의 합이 1이다" loading="lazy" width="640" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch05/categorical-distribution.png" alt="강아지·고양이·토끼에 확률 p1=0.665, p2=0.245, p3=0.090을 준 카데고리 분포(K=3) 막대그래프. 막대 높이의 합은 1이다" loading="lazy" width="460" />
 
 예를 들어 3개 클래스 [강아지, 고양이, 토끼] 중 정답이 강아지($y = [1, 0, 0]$)이고, 모델의 예측 확률이 $[\hat{y}_1, \hat{y}_2, \hat{y}_3]$라고 해봅시다.
 

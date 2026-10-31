@@ -71,25 +71,18 @@ def softmax_example():
 
 
 def categorical_distribution():
-    fig, axes = plt.subplots(1, 2, figsize=(10, 4.2), dpi=200, facecolor="white",
-                             gridspec_kw={"wspace": 0.25, "width_ratios": [3, 2]})
-    fig.subplots_adjust(left=0.07, right=0.98, bottom=0.13, top=0.84)
-    panels = (
-        (axes[0], "카데고리 분포 (K = 3)", CLASSES, PROBS, COLORS,
-         [f"$p_{k + 1}$ = {v:.3f}" for k, v in enumerate(PROBS)]),
-        (axes[1], "베르누이 분포 (K = 2)", ["불합격", "합격"], np.array([0.2, 0.8]),
-         ["#e07b39", "#315f7d"], ["$1-p$ = 0.2", "$p$ = 0.8"]),
-    )
-    for ax, title, names, values, colors, labels in panels:
-        x = np.arange(len(names))
-        ax.bar(x, values, width=0.6, color=colors)
-        for xi, v, label in zip(x, values, labels):
-            ax.text(xi, v + 0.03, label, ha="center", va="bottom", fontsize=12, color=TEXT)
-        ax.set(xticks=x, ylim=(0, 1.05), yticks=[0, 0.5, 1], xlim=(-0.6, len(names) - 0.4))
-        ax.set_xticklabels(names)
-        ax.set_title(title, fontsize=16, color=TEXT, pad=12)
-        style(ax)
-    axes[0].set_ylabel("확률", fontsize=14)
+    fig, ax = plt.subplots(figsize=(6, 4.2), dpi=200, facecolor="white")
+    fig.subplots_adjust(left=0.12, right=0.98, bottom=0.13, top=0.84)
+    x = np.arange(len(CLASSES))
+    ax.bar(x, PROBS, width=0.6, color=COLORS)
+    for xi, v in zip(x, PROBS):
+        ax.text(xi, v + 0.03, f"$p_{xi + 1}$ = {v:.3f}",
+                ha="center", va="bottom", fontsize=12, color=TEXT)
+    ax.set(xticks=x, ylim=(0, 1.05), yticks=[0, 0.5, 1], xlim=(-0.6, len(CLASSES) - 0.4))
+    ax.set_xticklabels(CLASSES)
+    ax.set_title("카데고리 분포 (K = 3)", fontsize=16, color=TEXT, pad=12)
+    ax.set_ylabel("확률", fontsize=14)
+    style(ax)
     fig.savefig(OUT_DIR / "categorical-distribution.png", facecolor="white")
     plt.close(fig)
 

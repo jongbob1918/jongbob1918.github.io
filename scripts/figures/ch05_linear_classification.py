@@ -28,6 +28,10 @@ STEP_COLOR, SIGMOID_COLOR = "#8b5bb5", "#258978"
 TEST_COLOR = "#222222"
 # 학습에 쓰지 않은 새 학생 (공부 시간, 출석률)
 TEST_STUDENT = (7, 85)
+# 유닛 스텝 한계 그림용 샘플: 경계 바로 옆, 경계에서 먼 곳
+NEAR_SAMPLE, FAR_SAMPLE = (5.8, 75), (9.3, 92)
+# 경계에 가장 가까운 합격 데이터 두 점
+NEAREST_PASS = [(4.5, 88), (8, 60)]
 
 
 def configure_font():
@@ -44,9 +48,11 @@ def configure_font():
     plt.rcParams.update({"font.size": 14, "axes.unicode_minus": False})
 
 
-def draw_data(ax, points=True):
+def draw_data(ax, points=True, same_color=False):
     for samples, marker, color in (
-        (PASS, "o", PASS_COLOR), (FAIL, "D", FAIL_COLOR)
+        (PASS, "o", PASS_COLOR),
+        (FAIL, "o" if same_color else "D",
+         PASS_COLOR if same_color else FAIL_COLOR),
     ):
         if not points:
             break
@@ -68,10 +74,10 @@ def draw_boundary(ax, color, weights):
     ax.plot(x, boundary_y(weights, x), color=color, linewidth=2.8, zorder=2)
 
 
-def save_single(name, boundary=False):
+def save_single(name, boundary=False, same_color=False):
     fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
     fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.84)
-    draw_data(ax)
+    draw_data(ax, same_color=same_color)
     if boundary:
         draw_boundary(ax, STEP_COLOR, STEP_WEIGHTS)
         fig.legend([Line2D([0], [0], color=STEP_COLOR, linewidth=2.8)],
@@ -103,6 +109,36 @@ def save_test():
     plt.close(fig)
 
 
+def save_step_limits():
+    """유닛 스텝의 두 한계: 경계 옆·먼 곳이 같은 출력 1, 경계가 데이터에 붙음."""
+    fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
+    fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.92)
+    draw_data(ax)
+    draw_boundary(ax, STEP_COLOR, STEP_WEIGHTS)
+
+    # 학습에 쓰지 않은 두 샘플: 경계 바로 옆과 경계에서 먼 곳. 둘 다 출력 1.
+    for (study, attendance), label, label_xy, align in (
+        (NEAR_SAMPLE, "경계 바로 옆", (6.1, 80), "left"),
+        (FAR_SAMPLE, "경계에서 멀리", (9.0, 91), "right"),
+    ):
+        ax.scatter(study, attendance, s=320, marker="*", color=TEST_COLOR,
+                   edgecolors="white", linewidths=0.8, zorder=4)
+        ax.text(*label_xy, f"{label}\n출력 1", ha=align, va="center",
+                fontsize=12, color=TEST_COLOR, zorder=4)
+
+    # 경계에 가장 가까운 합격 데이터 두 점과 경계 사이의 간격(같은 공부 시간 기준)
+    for study, attendance in NEAREST_PASS:
+        on_line = float(boundary_y(STEP_WEIGHTS, study))
+        ax.annotate("", (study, on_line), xytext=(study, attendance),
+                    arrowprops=dict(arrowstyle="<->", color=STEP_COLOR,
+                                    linewidth=2, mutation_scale=11,
+                                    shrinkA=4, shrinkB=0), zorder=3)
+        ax.text(study + 0.18, (attendance + on_line) / 2, "마진", ha="left",
+                va="center", fontsize=12, color=STEP_COLOR, zorder=4)
+    fig.savefig(OUT / "unit-step-limits.png", facecolor="white")
+    plt.close(fig)
+
+
 def save_comparison():
     fig, ax = plt.subplots(figsize=(7.2, 4.8), dpi=200)
     fig.subplots_adjust(left=0.14, right=0.97, bottom=0.18, top=0.84)
@@ -124,7 +160,8 @@ if __name__ == "__main__":
     # Keep the editable draw.io originals on the same six students.
     perceptron(False)
     perceptron(True)
-    save_single("perceptron-data")
+    save_single("perceptron-data", same_color=True)
     save_single("perceptron-boundary", boundary=True)
     save_test()
     save_comparison()
+    save_step_limits()

@@ -90,13 +90,13 @@ $$f(z) = \begin{cases} 1 & (z > 0) \\ 0 & (z \le 0) \end{cases}$$
 
 - **$z \ne 0$인 모든 구간 (완전한 평지):**
 
-    <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-flat-regions.png" alt="z가 음수인 구간과 양수인 구간의 평평한 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="451" loading="lazy" />
+    <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-flat-regions.png" alt="z가 음수인 구간과 양수인 구간의 평평한 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="401" loading="lazy" />
 
     그래프가 완전히 평평하므로 **도함수가 0**입니다.
 
 - **$z = 0$ 지점 (직각 절벽):**
 
-    <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-discontinuity.png" alt="z=0에서 값이 0에서 1로 수직으로 뛰는 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="461" loading="lazy" />
+    <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-discontinuity.png" alt="z=0에서 값이 0에서 1로 수직으로 뛰는 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="401" loading="lazy" />
 
     값이 0에서 1로 순간 도약해서 기울기가 하나의 값으로 정해지지 않습니다(미분 불가능). 
     한 점뿐이라 학습에서 큰 문제는 아닙니다.

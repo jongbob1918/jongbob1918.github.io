@@ -59,12 +59,13 @@ $$
 x_2=-\frac{w_1}{w_2}x_1-\frac{b}{w_2}
 $$
 
+
 직선보다 위에 분포되어있는 데이터는 1, 아래 데이터는 0으로 분류합니다.
 
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch04/perceptron-decision-regions.png" alt="공부 시간 x1과 출석률 x2 평면에서 x2=-10x1+100 직선보다 위는 출력 1, 경계와 아래는 출력 0으로 나뉘는 그래프" loading="lazy" width="560" />
 
-위 그림처럼, 복잡한 연산을 거치는 것 같지만 기하학적으로는 **"2차원 평면 위에 직선 하나를 긋고, 직선 위쪽 데이터는 합격(1), 아래쪽 데이터는 불합격(0)으로 나누는 것"** 입니다.
+위 그림처럼, 복잡한 연산을 거치는 것 같지만 기하학적으로는 "2차원 평면 위에 직선 하나를 긋고, 직선 위쪽 데이터는 합격(1), 아래쪽 데이터는 불합격(0)으로 나누는 것" 입니다.
 
 이처럼 두 클래스를 갈라놓는 기준선을 **결정 경계(Decision Boundary)** 라고 부르며, 직선이나 평면 형태로 경계를 만들어 분류하는 방식을 **선형 분류(Linear Classification)** 라고 합니다.
 
@@ -97,10 +98,12 @@ $$
 가중치를 수정했을 때 오차가 줄어드는지 확인하는 연속적인 피드백(기울기)을 받을 수 없어, **경사하강법(Gradient Descent)을 통한 가중치 최적화가 불가능**합니다.
 
 - $z \neq 0$ 구간: 미분값이 0인 완전한 평지
+
 <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-flat-regions.png" alt="z가 음수인 구간과 양수인 구간의 평평한 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="409" loading="lazy" />
 
 - $z = 0$ 구간: 불연속 지점으로 수학적 미분이 불가능합니다.
-    <img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-discontinuity.png" alt="z=0에서 값이 0에서 1로 수직으로 뛰는 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="409" loading="lazy" />
+
+<img src="../../../../public/images/notes/linear-nonlinear-activations/unit-step-discontinuity.png" alt="z=0에서 값이 0에서 1로 수직으로 뛰는 부분을 빨간 타원으로 표시한 계단 함수 그래프" width="409" loading="lazy" />
 
 
 **2. 연속적인 확신도(Confidence) 부재 및 일반화 한계**
@@ -133,7 +136,7 @@ $expontial$ 자연 상수
 
 
 ### 시그모이드의 특징
-시그모이드는 확률 형태로 변환함으로써 두 가지 결정적인 이점을 얻습니다.
+시그모이드는 입력값을 0 ~1사이의 확률 형태로 변환함으로써 두 가지 결정적인 이점을 얻습니다.
 
 **1. 문제 상황에 맞춰 합격 기준(임계값)을 유연하게 조절할 수 있습니다.**
 단순히 0.5(50%)를 기준으로 삼는 데 그치지 않고, 판정을 더 엄격하게 하고 싶다면 기준을 0.8로 올리는 등 비즈니스나 도메인 목적에 맞게 의사결정 기준선을 직접 통제할 수 있습니다.

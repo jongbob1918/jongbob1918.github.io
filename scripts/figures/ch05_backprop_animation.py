@@ -34,7 +34,7 @@ def render():
         left.axis('off')
         left.text(.04,.87,['MSE + 시그모이드','BCE + 시그모이드'][i],color=color,fontsize=16,transform=left.transAxes)
         left.text(.04,.52,formulas[i],color=color,fontsize=24,transform=left.transAxes)
-        left.text(.04,.29,'접선의 기울기',color=INK,fontsize=12,transform=left.transAxes)
+        left.text(.04,.29,'가중치로 전달되는 기울기',color=INK,fontsize=11,transform=left.transAxes)
         value_texts.append(left.text(.04,.08,'',color=color,fontsize=25,transform=left.transAxes))
         ax.plot(z_grid,losses[i](z_grid),color=color,lw=2.4)
         ax.set(xlim=(-6,3),ylim=(-.35,6.5),xticks=[-6,-3,0,3],yticks=[0,1,3,6])
@@ -48,7 +48,7 @@ def render():
         tangent,=ax.plot([],[],color='#333333',lw=2.1,zorder=4)
         tangents.append(tangent)
         guides.append(guide);dots.append(dot)
-    axes[-1].set_xlabel('점수 z',color=INK,fontsize=12)
+    axes[-1].set_xlabel('시그모이드 입력 z',color=INK,fontsize=12)
     frames=[]
     for frame in range(85):
         t=frame/84

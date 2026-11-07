@@ -44,7 +44,7 @@ def render():
 
     y0, slope = tangent(ax, 0, 1.4, color=ORANGE, linewidth=3, zorder=5)
     ax.scatter([0], [y0], color=ORANGE, s=60, zorder=6)
-    ax.annotate(f"x=0에서 기울기 {slope:.2f} (최대)\n출력 f(0)=0.5", (0, y0),
+    ax.annotate(f"최대 기울기 {slope:.2f}", (0, y0),
                 xytext=(-150, 48), textcoords="offset points", ha="center",
                 fontsize=13, color=ORANGE, fontweight="bold",
                 arrowprops=dict(arrowstyle="-", color=ORANGE, linewidth=1.2))

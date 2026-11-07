@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300" role="img" aria-labelledby="title desc">
+  <title id="title">역전파에서 작아지는 기울기</title>
+  <desc id="desc">가중치는 모두 1이고 각 단계의 활성화 함수 미분값이 0.25인 단순한 예시. 오른쪽에서 왼쪽으로 전달되는 기울기가 1에서 0.015625까지 줄어든다. 화살표 두께는 크기 변화를 개략적으로 나타낸다.</desc>
+  <rect width="720" height="300" rx="16" fill="#f8fafc"/>
+  <g font-family="'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif" text-anchor="middle">
+    <text x="360" y="35" font-size="20" font-weight="700" fill="#0f172a">각 단계에서 기울기에 0.25가 곱해진다면</text>
+    <text x="360" y="62" font-size="14" fill="#64748b">가중치는 모두 1인 단순한 예</text>
+    <text x="90" y="105" font-size="16" fill="#475569">입력층 쪽</text>
+    <text x="630" y="105" font-size="16" fill="#475569">출력층 쪽</text>
+    <g fill="#2563eb">
+      <path d="M 592 145 H 505 V 136 L 488 153 L 505 170 V 161 H 592 Z"/>
+      <path d="M 412 149 H 323 V 143 L 310 153 L 323 163 V 157 H 412 Z"/>
+      <path d="M 232 151.5 H 141 V 146 L 130 153 L 141 160 V 154.5 H 232 Z"/>
+    </g>
+    <g font-size="15" fill="#475569">
+      <text x="180" y="132">× 0.25</text>
+      <text x="360" y="132">× 0.25</text>
+      <text x="540" y="132">× 0.25</text>
+    </g>
+    <g fill="#fff" stroke="#94a3b8" stroke-width="2">
+      <circle cx="90" cy="153" r="26"/>
+      <circle cx="270" cy="153" r="26"/>
+      <circle cx="450" cy="153" r="26"/>
+      <circle cx="630" cy="153" r="26"/>
+    </g>
+    <g font-size="21" font-weight="700" fill="#1d4ed8">
+      <text x="90" y="211">0.015625</text>
+      <text x="270" y="211">0.0625</text>
+      <text x="450" y="211">0.25</text>
+      <text x="630" y="211">1</text>
+    </g>
+    <text x="360" y="242" font-size="14" fill="#64748b">전달되는 기울기의 크기</text>
+    <path d="M 445 271 H 275 M 283 265 L 275 271 L 283 277" fill="none" stroke="#475569" stroke-width="1.5"/>
+    <text x="360" y="291" font-size="13" fill="#475569">역전파 방향</text>
+  </g>
+</svg>

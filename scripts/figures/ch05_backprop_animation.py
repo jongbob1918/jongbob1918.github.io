@@ -27,9 +27,8 @@ def render():
     colors=[MSE,BCE]
     funcs=[lambda p:2*(p-1)*p*(1-p),lambda p:p-1]
     value_texts=[];dots=[];guides=[];tangents=[]
-    fig.text(.05,.94,r'정답 $y=1$일 때',color=INK,fontsize=17)
-    prediction=fig.text(.05,.875,r'예측값 $p=0.500$',color=INK,fontsize=22)
-    fig.text(.57,.875,'← 정답과 멀어지는 방향',color=INK,fontsize=12)
+    fig.text(.05,.94,r'정답 $y=1$일 때',color=INK,fontsize=15)
+    prediction=fig.text(.05,.875,r'예측값 $p=0.500$',color=INK,fontsize=15)
     for i,(left,ax,color,fn) in enumerate(zip(labels,axes,colors,funcs)):
         left.axis('off')
         left.text(.04,.87,['MSE + 시그모이드','BCE + 시그모이드'][i],color=color,fontsize=16,transform=left.transAxes)

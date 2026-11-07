@@ -8,6 +8,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Circle, FancyBboxPatch
 from ch05_sigmoid_animation import set_korean_font, sigmoid
 
 OUT = Path(__file__).resolve().parents[2] / 'site/public/images/notes/easy-deep-learning-ch04'
@@ -32,33 +33,60 @@ def fraction(ax, x, y, numerator, denominator, top_color, bottom_color):
 
 
 def chain():
-    fig, ax = plt.subplots(figsize=(8, 6.1), dpi=200, facecolor=BG)
-    ax.set(xlim=(0, 10), ylim=(0, 7.7)); ax.axis('off')
-    text(ax, 5, 7.23, '가중치를 조금 바꾸면, 손실은 얼마나 바뀔까?', 19)
-    xs = [1, 3.65, 6.3, 9]
-    for x, symbol, label, color in zip(xs, ['$w_1$', '$z$', '$p$', '$L$'],
-                                      ['가중치', '점수', '예측 확률', '손실'],
-                                      [BLUE, GREEN, YELLOW, RED]):
-        text(ax, x, 5.95, symbol, 36, color)
-        text(ax, x, 5.25, label, 14, MUTED)
-    for left, right in zip(xs[:-1], xs[1:]):
-        arrow(ax, left+.48, 5.95, right-.48, 5.95)
-    text(ax, 5, 4.45, r'$z=w_1x_1+w_2x_2+b\qquad p=\sigma(z)$', 19)
-    text(ax, 5, 3.77, '입력과 나머지 가중치는 고정하고, 변화가 전달되는 길만 봅니다.', 13, MUTED)
-    ax.plot([.6, 9.4], [3.25, 3.25], color='#343b46', lw=1)
-    text(ax, 5, 2.85, '역전파  ·  오른쪽에서 구한 기울기를 차례로 곱합니다', 15)
-    fraction(ax, 1, 1.7, r'$\partial L$', r'$\partial w_1$', RED, BLUE)
-    text(ax, 2.12, 1.7, '$=$', 25)
-    fraction(ax, 3.35, 1.7, r'$\partial z$', r'$\partial w_1$', GREEN, BLUE)
-    text(ax, 4.65, 1.7, r'$\times$', 23)
-    fraction(ax, 5.95, 1.7, r'$\partial p$', r'$\partial z$', YELLOW, GREEN)
-    text(ax, 7.25, 1.7, r'$\times$', 23)
-    fraction(ax, 8.65, 1.7, r'$\partial L$', r'$\partial p$', RED, YELLOW)
-    for x, s in [(3.35, '가중치 → 점수'), (5.95, '점수 → 확률'), (8.65, '확률 → 손실')]:
-        text(ax, x, .85, s, 13, MUTED)
-    arrow(ax, 9.15, .33, 2.85, .33, WHITE)
-    fig.subplots_adjust(left=.03, right=.97, bottom=.025, top=.98)
-    fig.savefig(OUT/'backprop-chain.png', facecolor=BG)
+    # Mid-tone inks keep the transparent diagram legible on light and dark pages.
+    ink, blue, green, gold, red = '#777777', '#2789ba', '#388d63', '#a57816', '#c55b60'
+    fig, ax = plt.subplots(figsize=(10, 5.7), dpi=200)
+    ax.set(xlim=(0, 12), ylim=(0, 6.8), aspect='equal')
+    ax.axis('off')
+    text(ax, 6, 6.35, '가중치에서 손실까지, 무엇이 들어가고 나올까?', 19, ink)
+    for x, y, label in [(1, 5.2, '$x_1$'), (1, 3.5, '$x_2$')]:
+        ax.add_patch(Circle((x, y), .37, fill=False, ec=ink, lw=1.7))
+        text(ax, x, y, label, 22, ink)
+    # Weighted inputs meet at the sum; its output is the sigmoid input z.
+    arrow(ax, 1.38, 5.1, 3.45, 4.48, blue)
+    arrow(ax, 1.38, 3.62, 3.45, 4.22, blue)
+    text(ax, 2.25, 5.1, '$w_1$', 24, blue)
+    text(ax, 2.25, 3.6, '$w_2$', 24, blue)
+    ax.add_patch(Circle((3.9, 4.35), .46, fill=False, ec=green, lw=2))
+    text(ax, 3.9, 4.35, r'$\Sigma$', 25, green)
+    text(ax, 3.9, 5.55, '$b$', 22, green)
+    arrow(ax, 3.9, 5.25, 3.9, 4.85, green)
+    arrow(ax, 4.38, 4.35, 5.52, 4.35, green)
+    text(ax, 4.95, 4.72, '$z$', 26, green)
+    # Sigmoid curve inside the activation node.
+    ax.add_patch(Circle((6.15, 4.35), .58, fill=False, ec=gold, lw=2))
+    t = np.linspace(-4, 4, 100)
+    ax.plot(6.15+t*.105, 4.35+(sigmoid(t)-.5)*.65, color=gold, lw=2)
+    text(ax, 6.15, 3.48, '시그모이드', 13, ink)
+    arrow(ax, 6.76, 4.35, 8.35, 4.35, gold)
+    text(ax, 7.55, 4.78, r'$p=\hat{y}$', 25, gold)
+    ax.add_patch(FancyBboxPatch((8.4, 3.8), 1.7, 1.1,
+                               boxstyle='round,pad=0.04,rounding_size=0.08',
+                               fill=False, ec=red, lw=1.8))
+    text(ax, 9.25, 4.53, '손실 함수', 14, ink)
+    text(ax, 9.25, 4.12, r'$L(p,y)$', 22, red)
+    text(ax, 9.25, 5.65, '정답 $y$', 17, ink)
+    arrow(ax, 9.25, 5.35, 9.25, 4.98, ink)
+    arrow(ax, 10.17, 4.35, 11.45, 4.35, red)
+    text(ax, 11, 4.77, '$L$', 26, red)
+    text(ax, 3.9, 2.85, r'$z=w_1x_1+w_2x_2+b$', 19, green)
+    text(ax, 7.35, 2.85, r'$p=\sigma(z)$', 19, gold)
+    ax.plot([.6, 11.4], [2.36, 2.36], color=ink, lw=.7, alpha=.4)
+    text(ax, 6, 1.98, '역전파: 손실 쪽에서 각 단계의 기울기를 곱합니다', 15, ink)
+    def frac(x, numerator, denominator, c1, c2):
+        text(ax, x, 1.17, numerator, 24, c1)
+        ax.plot([x-.42, x+.42], [.92, .92], color=ink, lw=1.2)
+        text(ax, x, .65, denominator, 24, c2)
+    frac(1.65, r'$\partial L$', r'$\partial w_1$', red, blue)
+    text(ax, 2.85, .92, '$=$', 25, ink)
+    frac(4.1, r'$\partial z$', r'$\partial w_1$', green, blue)
+    text(ax, 5.35, .92, r'$\times$', 23, ink)
+    frac(6.6, r'$\partial p$', r'$\partial z$', gold, green)
+    text(ax, 7.85, .92, r'$\times$', 23, ink)
+    frac(9.1, r'$\partial L$', r'$\partial p$', red, gold)
+    arrow(ax, 9.55, .18, 3.65, .18, ink)
+    fig.subplots_adjust(left=.02, right=.98, bottom=.02, top=.98)
+    fig.savefig(OUT/'backprop-chain.png', transparent=True)
     plt.close(fig)
 
 

@@ -35,10 +35,9 @@ def fraction(ax, x, y, numerator, denominator, top_color, bottom_color):
 def chain():
     # Mid-tone inks keep the transparent diagram legible on light and dark pages.
     ink, blue, green, gold, red = '#777777', '#2789ba', '#388d63', '#a57816', '#c55b60'
-    fig, ax = plt.subplots(figsize=(10, 5.7), dpi=200)
-    ax.set(xlim=(0, 12), ylim=(0, 6.8), aspect='equal')
+    fig, ax = plt.subplots(figsize=(10, 2.7), dpi=200)
+    ax.set(xlim=(0, 12), ylim=(2.95, 6.05), aspect='equal')
     ax.axis('off')
-    text(ax, 6, 6.35, '가중치에서 손실까지, 무엇이 들어가고 나올까?', 19, ink)
     for x, y, label in [(1, 5.2, '$x_1$'), (1, 3.5, '$x_2$')]:
         ax.add_patch(Circle((x, y), .37, fill=False, ec=ink, lw=1.7))
         text(ax, x, y, label, 22, ink)
@@ -69,22 +68,6 @@ def chain():
     arrow(ax, 9.25, 5.35, 9.25, 4.98, ink)
     arrow(ax, 10.17, 4.35, 11.45, 4.35, red)
     text(ax, 11, 4.77, '$L$', 26, red)
-    text(ax, 3.9, 2.85, r'$z=w_1x_1+w_2x_2+b$', 19, green)
-    text(ax, 7.35, 2.85, r'$p=\sigma(z)$', 19, gold)
-    ax.plot([.6, 11.4], [2.36, 2.36], color=ink, lw=.7, alpha=.4)
-    text(ax, 6, 1.98, '역전파: 손실 쪽에서 각 단계의 기울기를 곱합니다', 15, ink)
-    def frac(x, numerator, denominator, c1, c2):
-        text(ax, x, 1.17, numerator, 24, c1)
-        ax.plot([x-.42, x+.42], [.92, .92], color=ink, lw=1.2)
-        text(ax, x, .65, denominator, 24, c2)
-    frac(1.65, r'$\partial L$', r'$\partial w_1$', red, blue)
-    text(ax, 2.85, .92, '$=$', 25, ink)
-    frac(4.1, r'$\partial z$', r'$\partial w_1$', green, blue)
-    text(ax, 5.35, .92, r'$\times$', 23, ink)
-    frac(6.6, r'$\partial p$', r'$\partial z$', gold, green)
-    text(ax, 7.85, .92, r'$\times$', 23, ink)
-    frac(9.1, r'$\partial L$', r'$\partial p$', red, gold)
-    arrow(ax, 9.55, .18, 3.65, .18, ink)
     fig.subplots_adjust(left=.02, right=.98, bottom=.02, top=.98)
     fig.savefig(OUT/'backprop-chain.png', transparent=True)
     plt.close(fig)

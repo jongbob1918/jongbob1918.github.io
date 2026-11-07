@@ -215,7 +215,7 @@ MSE는 아무리 크게 틀려도 손실이 1을 넘지 못하지만, BCE는 틀
 
 시그모이드는 출력이 0이나 1에 가까워지면 기울기가 작아집니다. 이 특성이 MSE와 BCE의 역전파에 어떤 차이를 만드는지 확인해 보겠습니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-chain.png" alt="두 입력 노드 x1과 x2가 가중치 w1과 w2를 거쳐 가중합 노드로 들어간다. 점수 z는 시그모이드로, 예측 p와 정답 y는 손실 함수 박스로 들어가 손실 L이 나온다. 아래 연쇄 법칙은 같은 변수 색으로 연결된다" loading="lazy" width="720" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-chain.png" alt="두 입력 노드 x1과 x2가 가중치 w1과 w2를 거쳐 가중합 노드로 들어간다. 점수 z는 시그모이드로, 예측 p와 정답 y는 손실 함수 박스로 들어가 손실 L이 나온다." loading="lazy" width="720" />
 
 역전파는 **연쇄 법칙**으로 각 단계의 기울기를 곱해 가중치에 대한 손실의 기울기를 구합니다. $w_1$을 기준으로 각 항의 뜻은 다음과 같습니다.
 

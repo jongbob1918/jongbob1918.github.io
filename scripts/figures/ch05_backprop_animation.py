@@ -26,8 +26,8 @@ def render():
     colors=[MSE,BCE]
     funcs=[lambda p:2*(p-1)*p*(1-p),lambda p:p-1]
     value_texts=[];dots=[];guides=[]
-    fig.text(.05,.94,r'정답 $y=1$',color=INK,fontsize=17)
-    prediction=fig.text(.66,.94,r'$p=0.500$',color=INK,fontsize=22)
+    fig.text(.05,.94,r'정답 $y=1$일 때',color=INK,fontsize=17)
+    prediction=fig.text(.57,.94,r'예측값 $p=0.500$',color=INK,fontsize=22)
     for i,(left,ax,color,fn) in enumerate(zip(labels,axes,colors,funcs)):
         left.axis('off')
         left.text(.04,.87,['MSE','BCE'][i],color=color,fontsize=19,transform=left.transAxes)
@@ -48,7 +48,7 @@ def render():
     for frame in range(85):
         t=frame/84
         p=.5-.49*(t*t*(3-2*t))
-        prediction.set_text(f'$p={p:.3f}$')
+        prediction.set_text(f'예측값 $p={p:.3f}$')
         for i,fn in enumerate(funcs):
             val=fn(p)
             value_texts[i].set_text(f'$= {val:.4f}$')

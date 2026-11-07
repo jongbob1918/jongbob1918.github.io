@@ -215,7 +215,7 @@ MSE는 아무리 크게 틀려도 손실이 1을 넘지 못하지만, BCE는 틀
 
 가중치를 고치려면 **가중치가 조금 바뀔 때 손실이 얼마나 바뀌는지** 알아야 합니다. 예측값 $\hat{y}$는 여기서 쓰는 합격 확률 $p$와 같습니다. 입력이 두 개인 뉴런에서 계산 흐름을 따라가 보겠습니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-chain.png" alt="입력 x1과 x2에서 가중합 z, 시그모이드 예측 p, 손실 L로 이어지는 순전파와 반대 방향의 역전파. 가중치에 대한 손실의 미분을 세 기울기의 곱으로 나타낸 식" loading="lazy" width="720" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-chain.png" alt="가중치 w1은 파랑, 점수 z는 초록, 예측 p는 노랑, 손실 L은 빨강으로 연결한 계산 흐름. 같은 색의 변수가 연쇄 법칙의 분자와 분모에 이어진다" loading="lazy" width="720" />
 
 역전파는 **연쇄 법칙**으로 각 단계의 기울기를 곱해 가중치에 대한 손실의 기울기를 구합니다. $w_1$을 기준으로 각 항의 뜻은 다음과 같습니다.
 
@@ -236,9 +236,9 @@ $$
 \end{aligned}
 $$
 
-시그모이드 출력은 $0<p<1$이므로 BCE에서는 분모의 $p(1-p)$와 시그모이드의 미분 항이 약분됩니다. 아래 오른쪽 그래프는 정답이 합격($y=1$)일 때 두 결과를 비교한 것입니다.
+시그모이드 출력은 $0<p<1$이므로 BCE에서는 분모의 $p(1-p)$와 시그모이드의 미분 항이 약분됩니다. 아래는 정답이 합격($y=1$)인데 $p=0.01$로 예측한 지점입니다. **흰 접선이 평평할수록 기울기가 작습니다.** MSE와 BCE의 손실 축은 같은 눈금으로 맞췄습니다.
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-gradients.png" alt="왼쪽은 시그모이드와 양 끝에서 0에 가까워지는 미분값. 오른쪽은 정답 y=1일 때 z에 대한 손실의 기울기로, z가 크게 음수이면 MSE는 0에 가까워지지만 BCE는 -1에 가까워진다" loading="lazy" width="720" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-gradients.png" alt="같은 점수 z 약 -4.60에서 시그모이드, MSE 손실, BCE 손실의 접선을 세로로 비교한다. 시그모이드 기울기는 0.0099, MSE는 -0.0196으로 거의 평평하고 BCE는 -0.99로 내려간다" loading="lazy" width="720" />
 
 정답은 1인데 $p=0.01$로 틀리게 예측했다면, MSE의 $\dfrac{\partial L}{\partial z}$는 약 $-0.0196$, BCE는 $-0.99$입니다. 여기에 같은 입력 $x_1$을 곱하면 가중치에 대한 기울기가 됩니다.
 

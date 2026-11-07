@@ -59,7 +59,7 @@ def chain():
     ax.plot(6.15+t*.105, 4.35+(sigmoid(t)-.5)*.65, color=gold, lw=2)
     text(ax, 6.15, 3.48, '시그모이드', 13, ink)
     arrow(ax, 6.76, 4.35, 8.35, 4.35, gold)
-    text(ax, 7.55, 4.78, r'$p=\hat{y}$', 25, gold)
+    text(ax, 7.55, 4.78, r'$p$', 25, gold)
     ax.add_patch(FancyBboxPatch((8.4, 3.8), 1.7, 1.1,
                                boxstyle='round,pad=0.04,rounding_size=0.08',
                                fill=False, ec=red, lw=1.8))

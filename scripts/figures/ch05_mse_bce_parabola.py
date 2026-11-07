@@ -24,7 +24,7 @@ def render():
     fig, ax = plt.subplots(figsize=(7.2, 4.4), dpi=200, facecolor="white")
     fig.subplots_adjust(left=0.1, right=0.97, bottom=0.17, top=0.94)
 
-    # 확률 p가 있을 수 있는 0~1 구간만 진하게, 바깥은 포물선 모양을 보여 주려고 흐리게 그린다.
+    # 확률 범위는 실선, 범위 밖의 수학적 연장은 흐린 점선으로 그린다.
     ax.axvspan(0, 1, color="#f1f3f5", zorder=0)
     ax.text(0.5, 4.85, "확률 p의 범위", ha="center", fontsize=12, color="#666666")
     outside = np.linspace(-1.2, 3.2, 600)
@@ -33,12 +33,16 @@ def render():
     ax.plot(p, (p - 1) ** 2, color=MSE_COLOR, linewidth=2.8)
     p = np.linspace(np.exp(-5.2), 1, 600)
     ax.plot(p, -np.log(p), color=BCE_COLOR, linewidth=2.8)
+    p_extended = np.linspace(1, 3.2, 300)
+    ax.plot(p_extended, -np.log(p_extended), color=BCE_COLOR,
+            alpha=0.35, linewidth=2, linestyle=DASH)
+    ax.text(1.45, -0.22, "점선: 확률 범위 밖의 함수 연장", fontsize=9, color="#666666")
 
     ax.text(1.75, 1.75, "MSE", fontsize=15, color=MSE_COLOR, fontweight="bold")
     ax.text(0.2, 2.6, "BCE", fontsize=15, color=BCE_COLOR, fontweight="bold")
 
-    ax.set(xlim=(-1.2, 3.2), ylim=(-0.2, 5.2),
-           xticks=[-1, 0, 1, 2, 3], yticks=[0, 1, 2, 3, 4, 5],
+    ax.set(xlim=(-1.2, 3.2), ylim=(-1.4, 5.2),
+           xticks=[-1, 0, 1, 2, 3], yticks=[-1, 0, 1, 2, 3, 4, 5],
            xlabel="예측 p (정답 y = 1)", ylabel="손실")
     ax.spines[["top", "right"]].set_visible(False)
     ax.spines[["left", "bottom"]].set_color("#777777")

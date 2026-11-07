@@ -264,9 +264,9 @@ $$
 $$
 
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-comparison.gif" alt="MSE와 BCE 각각의 최종 기울기 수식 옆에 같은 눈금의 그래프를 배치했다. 정답 y=1에서 예측 p가 0.5에서 0.01로 이동하면 그래프 위 점과 계산값이 함께 움직여 MSE는 -0.0196, BCE는 -0.99에 도달한다" loading="lazy" width="720" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-comparison.gif" alt="정답 y=1에서 점수 z가 낮아지고 예측 p가 0.5에서 0.01로 변한다. 같은 눈금의 손실 곡선 위에서 점과 검은 접선이 움직인다. MSE 접선은 거의 평평해지고 BCE 접선은 기울기를 유지한다" loading="lazy" width="720" />
 
-여기에 같은 입력 $x_1$을 곱하면 가중치에 대한 기울기가 됩니다.
+이 접선의 기울기에 같은 입력 $x_1$을 곱하면 가중치에 대한 기울기가 됩니다.
 
 **MSE는 크게 틀렸어도 시그모이드가 포화되면 기울기가 0에 가까워져 학습이 느려집니다.** 반면 BCE는 이 출력층에서 시그모이드의 작은 미분값 때문에 기울기가 줄어드는 문제를 피합니다. 다만 은닉층을 여러 번 거치며 생기는 기울기 소실까지 해결하는 것은 아닙니다.
 

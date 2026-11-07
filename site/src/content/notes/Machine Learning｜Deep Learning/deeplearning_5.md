@@ -219,28 +219,32 @@ MSE는 아무리 크게 틀려도 손실이 1을 넘지 못하지만, BCE는 틀
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-chain.png" alt="두 입력 노드 x1과 x2가 가중치 w1과 w2를 거쳐 가중합 노드로 들어간다. 점수 z는 시그모이드로, 예측 p와 정답 y는 손실 함수 박스로 들어가 손실 L이 나온다. 아래에는 각 단계의 기울기를 곱하는 합성함수 미분식이 있다." loading="lazy" width="720" />
 
+
 역전파는 **연쇄 법칙**으로 각 단계의 기울기를 곱해 가중치에 대한 손실의 기울기를 구합니다
 
+
+
 - $\dfrac{\partial L}{\partial p}$: 예측값 $p$가 바뀔 때 손실값의 변화율 = 손실 함수의 기울기
+
 - $\dfrac{\partial p}{\partial z}$: 점수 $z$가 바뀔 때 예측값 $p$의 변화율 = 시그모이드 함수의 기울기 $p(1-p)$
+
 - $\dfrac{\partial z}{\partial w_1}$: 가중치 $w_1$이 바뀔 때 점수 $z$의 변화율 = 가중치 $w_1$에 대한 가중합 함수의 기울기 $x_1$
 
 
 
-위 식에서 손실 함수에 따라 달라지는 항은 $\dfrac{\partial L}{\partial p}$입니다. 시그모이드와 가중합의 미분은 같으므로, MSE와 BCE에서 이 항이 어떻게 달라지고 시그모이드의 기울기와 곱해지는지 보겠습니다.
-
-데이터 한 개의 MSE 손실은 $L_{\mathrm{MSE}}=(p-y)^2$로 둡니다.
+위 식에서 손실 함수에 따라 달라지는 항은 $\dfrac{\partial L}{\partial p}$입니다. 
+시그모이드와 가중합의 미분은 같으므로, MSE와 BCE에서 이 항이 어떻게 달라지고 시그모이드의 기울기와 곱해지는지 보겠습니다.
 
 $$
 \begin{aligned}
-\text{MSE:}\quad \frac{\partial L}{\partial z}
-&=\underbrace{2(p-y)}_{\partial L/\partial p}\cdot\underbrace{p(1-p)}_{\partial p/\partial z}\\[6pt]
-\text{BCE:}\quad \frac{\partial L}{\partial z}
-&=\underbrace{\frac{p-y}{p(1-p)}}_{\partial L/\partial p}\cdot\underbrace{p(1-p)}_{\partial p/\partial z}=p-y
+\text{MSE:}\quad &(p-y)^2
+\xrightarrow{\text{미분 시}} 2(p-y)\\[8pt]
+\text{BCE:}\quad &-[y\ln p+(1-y)\ln(1-p)]
+\xrightarrow{\text{미분 시}} \frac{p-y}{p(1-p)}
 \end{aligned}
 $$
 
-시그모이드 출력은 $0<p<1$이므로 BCE에서는 분모의 $p(1-p)$와 시그모이드의 미분 항이 약분됩니다. 아래는 정답이 합격($y=1$)인데 $p=0.01$로 예측한 지점입니다. **흰 접선이 평평할수록 기울기가 작습니다.** MSE와 BCE의 손실 축은 같은 눈금으로 맞췄습니다.
+여기에 시그모이드의 기울기 $p(1-p)$를 곱하면, MSE에는 이 항이 남고 BCE에서는 약분됩니다.
 
 
 

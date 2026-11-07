@@ -32,7 +32,7 @@ def render():
     fig.text(.57,.875,'← 정답과 멀어지는 방향',color=INK,fontsize=12)
     for i,(left,ax,color,fn) in enumerate(zip(labels,axes,colors,funcs)):
         left.axis('off')
-        left.text(.04,.87,['MSE','BCE'][i],color=color,fontsize=19,transform=left.transAxes)
+        left.text(.04,.87,['MSE + 시그모이드','BCE + 시그모이드'][i],color=color,fontsize=16,transform=left.transAxes)
         left.text(.04,.52,formulas[i],color=color,fontsize=24,transform=left.transAxes)
         left.text(.04,.29,'접선의 기울기',color=INK,fontsize=12,transform=left.transAxes)
         value_texts.append(left.text(.04,.08,'',color=color,fontsize=25,transform=left.transAxes))
@@ -49,7 +49,6 @@ def render():
         tangents.append(tangent)
         guides.append(guide);dots.append(dot)
     axes[-1].set_xlabel('점수 z',color=INK,fontsize=12)
-    fig.text(.05,.875,'검은 선: 접선',color=INK,fontsize=12)
     frames=[]
     for frame in range(85):
         t=frame/84

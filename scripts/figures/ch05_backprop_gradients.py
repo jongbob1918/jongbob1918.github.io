@@ -35,8 +35,8 @@ def fraction(ax, x, y, numerator, denominator, top_color, bottom_color):
 def chain():
     # Mid-tone inks keep the transparent diagram legible on light and dark pages.
     ink, blue, green, gold, red = '#777777', '#2789ba', '#388d63', '#a57816', '#c55b60'
-    fig, ax = plt.subplots(figsize=(10, 2.7), dpi=200)
-    ax.set(xlim=(0, 12), ylim=(2.95, 6.05), aspect='equal')
+    fig, ax = plt.subplots(figsize=(10, 4.1), dpi=200)
+    ax.set(xlim=(0, 12), ylim=(1.1, 6.05), aspect='equal')
     ax.axis('off')
     for x, y, label in [(1, 5.2, '$x_1$'), (1, 3.5, '$x_2$')]:
         ax.add_patch(Circle((x, y), .37, fill=False, ec=ink, lw=1.7))
@@ -68,6 +68,17 @@ def chain():
     arrow(ax, 9.25, 5.35, 9.25, 4.98, ink)
     arrow(ax, 10.17, 4.35, 11.45, 4.35, red)
     text(ax, 11, 4.77, '$L$', 26, red)
+    def frac(x, numerator, denominator, c1, c2):
+        text(ax, x, 2.12, numerator, 24, c1)
+        ax.plot([x-.42, x+.42], [1.87, 1.87], color=ink, lw=1.2)
+        text(ax, x, 1.60, denominator, 24, c2)
+    frac(1.65, r'$\partial L$', r'$\partial w_1$', red, blue)
+    text(ax, 2.85, 1.87, '$=$', 25, ink)
+    frac(4.1, r'$\partial z$', r'$\partial w_1$', green, blue)
+    text(ax, 5.35, 1.87, r'$\times$', 23, ink)
+    frac(6.6, r'$\partial p$', r'$\partial z$', gold, green)
+    text(ax, 7.85, 1.87, r'$\times$', 23, ink)
+    frac(9.1, r'$\partial L$', r'$\partial p$', red, gold)
     fig.subplots_adjust(left=.02, right=.98, bottom=.02, top=.98)
     fig.savefig(OUT/'backprop-chain.png', transparent=True)
     plt.close(fig)

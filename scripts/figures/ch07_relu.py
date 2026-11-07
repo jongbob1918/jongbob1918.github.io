@@ -27,11 +27,6 @@ def render():
     ax.plot(x, np.maximum(0, x), color=CURVE, linewidth=3.2, zorder=3)
     ax.scatter([0], [0], color=ORANGE, s=60, zorder=4)
 
-    ax.annotate("음수는 0으로 출력", (-2, 0), xytext=(0, 16), textcoords="offset points",
-                ha="center", fontsize=13, color=ORANGE, fontweight="bold")
-    ax.annotate("양수는 그대로 출력", (2.4, 2.4), xytext=(-12, 8), textcoords="offset points",
-                ha="right", fontsize=13, color=ORANGE, fontweight="bold")
-
     ax.set(xlim=(-4.2, 4.2), ylim=(-0.4, 4.3),
            xticks=[-4, -2, 0, 2, 4], yticks=[0, 2, 4],
            xlabel="입력 x", ylabel="출력 f(x)")

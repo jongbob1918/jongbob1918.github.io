@@ -253,12 +253,13 @@ $$
 
 
 
-여기에 시그모이드의 기울기 $p(1-p)$를 곱하면, MSE에는 이 항이 남고 BCE에서는 약분됩니다.
+여기에 시그모이드의 기울기 $p(1-p)$를 곱하면 아래처럼 BCE는 약분이 됩니다.
+
 
 $$
 \begin{aligned}
 \text{MSE:}\quad &2(p-y)\cdot p(1-p)\\[8pt]
-\text{BCE:}\quad &\frac{p-y}{p(1-p)}\cdot p(1-p)=p-y
+\text{BCE:}\quad &\frac{p-y}{\cancel{p(1-p)}}\cdot \cancel{p(1-p)}=p-y
 \end{aligned}
 $$
 

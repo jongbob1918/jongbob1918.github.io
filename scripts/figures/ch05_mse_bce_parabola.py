@@ -36,7 +36,6 @@ def render():
     p_extended = np.linspace(1, 3.2, 300)
     ax.plot(p_extended, -np.log(p_extended), color=BCE_COLOR,
             alpha=0.35, linewidth=2, linestyle=DASH)
-    ax.text(1.45, -0.22, "점선: 확률 범위 밖의 함수 연장", fontsize=9, color="#666666")
 
     ax.text(1.75, 1.75, "MSE", fontsize=15, color=MSE_COLOR, fontweight="bold")
     ax.text(0.2, 2.6, "BCE", fontsize=15, color=BCE_COLOR, fontweight="bold")

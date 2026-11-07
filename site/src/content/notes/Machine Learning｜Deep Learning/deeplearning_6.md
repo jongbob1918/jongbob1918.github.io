@@ -122,7 +122,7 @@ $$\hat{y}_1^1 \times \hat{y}_2^0 \times \hat{y}_3^0 = \hat{y}_1 \times 1 \times 
 
 클래스가 $K$개일 때, 정답의 우도는 다음과 같습니다. $\prod$는 각 항을 곱한다는 뜻입니다.
 
-$$P(\mathbf{y} \mid \mathbf{x}) = \prod_{c=1}^{K} \hat{y}_c^{y_c}$$
+$$\text{우도} = \prod_{c=1}^{K} \hat{y}_c^{y_c}$$
     
 
 원-핫 벡터의 특성 덕분에, 위 식의 결과는 결국 모델이 실제 정답에 부여한 예측 확률($\hat{y}_{\text{정답}}$) 그 자체가 됩니다.

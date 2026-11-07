@@ -264,7 +264,7 @@ $$
 $$
 
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-comparison.gif" alt="정답 y=1에서 예측 p가 0.5에서 0.01로 이동한다. 시그모이드 기울기는 작아지지만 BCE에서는 같은 항이 약분된다. 마지막 막대는 MSE의 기울기 -0.0196과 BCE의 -0.99를 같은 눈금으로 비교한다" loading="lazy" width="720" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch04/backprop-comparison.gif" alt="MSE와 BCE 각각의 최종 기울기 수식 옆에 같은 눈금의 그래프를 배치했다. 정답 y=1에서 예측 p가 0.5에서 0.01로 이동하면 그래프 위 점과 계산값이 함께 움직여 MSE는 -0.0196, BCE는 -0.99에 도달한다" loading="lazy" width="720" />
 
 여기에 같은 입력 $x_1$을 곱하면 가중치에 대한 기울기가 됩니다.
 

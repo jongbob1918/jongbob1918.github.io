@@ -1,4 +1,7 @@
-"""MSE/BCE의 역전파를 비교하는 GIF. 실행: PYTHONDONTWRITEBYTECODE=1 python3 scripts/figures/ch05_backprop_animation.py"""
+"""예측 p에 따라 MSE/BCE 기울기 그래프 위의 점이 움직이는 GIF.
+
+실행: PYTHONDONTWRITEBYTECODE=1 python3 scripts/figures/ch05_backprop_animation.py
+"""
 from pathlib import Path
 import matplotlib
 matplotlib.use('Agg')
@@ -8,66 +11,57 @@ import numpy as np
 from ch05_sigmoid_animation import set_korean_font
 
 OUT=Path(__file__).resolve().parents[2]/'site/public/images/notes/easy-deep-learning-ch04/backprop-comparison.gif'
-BG='#ffffff'; INK='#555555'; MSE='#c87529'; BCE='#2789ba'; FACTOR='#a17b1e'
+INK='#555555'; MSE='#c87529'; BCE='#2789ba'
+
 
 def render():
     set_korean_font()
     plt.rcParams['mathtext.fontset']='cm'
-    fig,ax=plt.subplots(figsize=(7.2,4.8),dpi=140)
+    fig=plt.figure(figsize=(8,5.3),dpi=140,facecolor='white')
+    grid=fig.add_gridspec(2,2,width_ratios=[1,1.5],left=.04,right=.96,top=.86,bottom=.12,wspace=.12,hspace=.55)
+    labels=[fig.add_subplot(grid[i,0]) for i in range(2)]
+    axes=[fig.add_subplot(grid[i,1]) for i in range(2)]
+    p_grid=np.linspace(0,1,700)
+    formulas=[r'$2(p-y)p(1-p)$',r'$p-y$']
+    colors=[MSE,BCE]
+    funcs=[lambda p:2*(p-1)*p*(1-p),lambda p:p-1]
+    value_texts=[];dots=[];guides=[]
+    fig.text(.05,.94,r'정답 $y=1$',color=INK,fontsize=17)
+    prediction=fig.text(.66,.94,r'$p=0.500$',color=INK,fontsize=22)
+    for i,(left,ax,color,fn) in enumerate(zip(labels,axes,colors,funcs)):
+        left.axis('off')
+        left.text(.04,.87,['MSE','BCE'][i],color=color,fontsize=19,transform=left.transAxes)
+        left.text(.04,.52,formulas[i],color=color,fontsize=24,transform=left.transAxes)
+        value_texts.append(left.text(.04,.12,'',color=color,fontsize=25,transform=left.transAxes))
+        ax.plot(p_grid,fn(p_grid),color=color,lw=2.4)
+        ax.set(xlim=(-.025,1.025),ylim=(-1.06,.08),xticks=[0,.5,1],yticks=[-1,-.5,0])
+        ax.spines[['top','right']].set_visible(False)
+        for side in ['left','bottom']:ax.spines[side].set_color('#aaaaaa')
+        ax.tick_params(colors=INK,labelsize=11)
+        ax.axhline(0,color='#cccccc',lw=.7,zorder=0)
+        ax.set_ylabel('기울기',color=INK,fontsize=12)
+        guide,=ax.plot([.5,.5],[0,fn(.5)],color=color,lw=1,ls=(0,(3,3)),alpha=.65)
+        dot,=ax.plot([.5],[fn(.5)],'o',color=color,markersize=8,mec='white',mew=1.5)
+        guides.append(guide);dots.append(dot)
+    axes[-1].set_xlabel('예측 p',color=INK,fontsize=12)
     frames=[]
-    def text(x,y,s,c=INK,size=18,alpha=1):
-        ax.text(x,y,s,ha='center',va='center',color=c,fontsize=size,alpha=alpha)
-    def clamp(x):return max(0,min(1,x))
-    for frame in range(120):
-        t=frame/119
-        u=clamp((t-.1)/.42);u=u*u*(3-2*u)
-        p=.5-.49*u;s=p*(1-p);m=2*(p-1);b=(p-1)/s
-        ax.clear();ax.set(xlim=(0,720),ylim=(0,480));ax.axis('off')
-        text(100,451,r'정답 $y=1$',size=17)
-        text(550,451,f'$p={p:.4f}$',size=23)
-        ax.plot([100,620],[417,417],color='#cccccc',lw=1)
-        ax.scatter([100+520*p],[417],s=45,color=FACTOR,zorder=5)
-        text(100,395,'0',size=11);text(620,395,'1',size=11)
-        text(280,359,'손실 함수의 기울기',size=13)
-        text(500,359,'시그모이드의 기울기',size=13)
-        text(70,310,'MSE',MSE,18)
-        text(280,315,r'$2(p-y)$',MSE,24)
-        text(400,315,r'$\times$',size=23)
-        text(500,315,r'$p(1-p)$',FACTOR,24)
-        text(280,275,f'{m:.2f}',MSE,16)
-        text(500,275,f'{s:.4f}',FACTOR,16)
-        text(70,207,'BCE',BCE,18)
-        text(280,232,r'$p-y$',BCE,24)
-        ax.plot([220,340],[211,211],color=INK,lw=1)
-        text(280,190,r'$p(1-p)$',FACTOR,24)
-        text(400,211,r'$\times$',size=23)
-        text(500,211,r'$p(1-p)$',FACTOR,24)
-        text(280,151,f'{b:.2f}',BCE,16)
-        text(500,151,f'{s:.4f}',FACTOR,16)
-        c=clamp((t-.57)/.12)
-        if c>0:
-            for x,y in [(220,175),(440,196)]:
-                ax.plot([x,x+120*c],[y,y+30*c],color='#c55b60',lw=2)
-        text(638,211,r'$=p-y$',BCE,23,clamp((t-.69)/.07))
-        a=clamp((t-.78)/.08)
-        if a>0:
-            text(114,97,'전달되는 기울기',size=12,alpha=a)
-            text(114,74,'길이 = 절댓값',size=10,alpha=a)
-            for y,label,v,color in [(96,'MSE',m*s,MSE),(45,'BCE',p-1,BCE)]:
-                text(230,y,label,color,13,a)
-                ax.plot([280,600],[y-13,y-13],color='#dddddd',lw=1,alpha=a)
-                ax.barh(y,320*abs(v),left=280,height=15,color=color,alpha=a)
-                text(656,y,f'{v:.4f}',color,14,a)
-        fig.subplots_adjust(left=.01,right=.99,top=.99,bottom=.01)
+    for frame in range(85):
+        t=frame/84
+        p=.5-.49*(t*t*(3-2*t))
+        prediction.set_text(f'$p={p:.3f}$')
+        for i,fn in enumerate(funcs):
+            val=fn(p)
+            value_texts[i].set_text(f'$= {val:.4f}$')
+            dots[i].set_data([p],[val]);guides[i].set_data([p,p],[0,val])
         fig.canvas.draw()
         frames.append(Image.fromarray(np.asarray(fig.canvas.buffer_rgba())[:,:,:3]).convert('RGB'))
-    # Pause on the initial state and final comparison; no fast reset flash.
-    durations=[100]*len(frames);durations[0]=1200;durations[-1]=3500
-    palette=Image.fromarray(np.concatenate([np.asarray(frames[i]) for i in [0,60,119]],axis=0)).quantize(colors=128)
+    durations=[100]*len(frames);durations[0]=1300;durations[-1]=3500
+    palette=Image.fromarray(np.concatenate([np.asarray(frames[i]) for i in [0,42,84]],axis=0)).quantize(colors=128)
     indexed=[im.quantize(palette=palette,dither=Image.Dither.NONE) for im in frames]
     indexed[0].save(OUT,save_all=True,append_images=indexed[1:],duration=durations,loop=0,optimize=False,disposal=2)
-    frames[60].save('/tmp/ch05-animation-middle.png')
+    frames[0].save('/tmp/ch05-animation-start.png')
     frames[-1].save('/tmp/ch05-animation-end.png')
     plt.close(fig)
+
 
 if __name__=='__main__':render()

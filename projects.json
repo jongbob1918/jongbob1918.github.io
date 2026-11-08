@@ -172,6 +172,33 @@
       ]
     },
     {
+      "slug": "ffw-auto-pick",
+      "category": "side",
+      "order": 1,
+      "detailUrl": "projects/ffw-auto-pick.html",
+      "image": "",
+      "imageAlt": "",
+      "imageFit": "cover",
+      "imageSequence": [],
+      "titleKo": "FFW Auto Pick — 로봇 집기부터 정책 학습까지",
+      "titleEn": "FFW Auto Pick — From Robot Grasping to Policy Training",
+      "overviewKo": "집기 후보 생성, 반복 실행, 성공 판정과 시연 데이터 수집을 연결하고 GR00T 정책 학습으로 확장한 프로젝트",
+      "overviewEn": "Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training",
+      "periodKo": "",
+      "periodEn": "",
+      "teamKo": "",
+      "teamEn": "",
+      "contributionKo": "",
+      "contributionEn": "",
+      "keywords": [
+        "ROS 2",
+        "GraspNet / GSNet",
+        "CenterPose",
+        "GR00T",
+        "Isaac Sim"
+      ]
+    },
+    {
       "slug": "physical-ai-hackathon",
       "category": "side",
       "order": 4,

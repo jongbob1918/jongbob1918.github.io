@@ -195,7 +195,7 @@ featured: false
 <img src="../../../../public/images/notes/easy-deep-learning-ch02/gradient-descent-step.png" alt="손실 곡선을 따라 낮은 지점으로 이동하는 경사하강법의 한 단계" width="460" loading="lazy" />
 
 $$
-\text{새로운 파라미터} \leftarrow \text{현재 파라미터} - \left( \text{학습률} \times \text{손실의 기울기} \right)
+\text{새로운 파라미터} \leftarrow \text{현재 파라미터} - \left( \text{학습률} \cdot \text{손실의 기울기} \right)
 $$
 
 **학습률**은 기울기에 곱해 한 번에 이동하는 보폭을 정하는 계수입니다. 
@@ -246,7 +246,7 @@ $a$로 $\hat{y}$을 만들고, $\hat{y}$으로 손실을 계산합니다.
 
 
 $$
-\frac{\partial \text{Loss}}{\partial a} = \frac{\partial \text{Loss}}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial a}
+\frac{\partial \text{Loss}}{\partial a} = \frac{\partial \text{Loss}}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial a}
 $$
 
 
@@ -429,13 +429,13 @@ SGD는 노이즈나 이상치(Outlier)가 포함된 샘플이 들어오면 기�
 선형 웜업에서는 정해 둔 기간(예: 1,000스텝)의 진행률을 목표 학습률 $K$에 곱합니다.
 
 $$
-\text{현재 보폭} = K \times \left( \frac{\text{현재 스텝}}{\text{목표 웜업 스텝}} \right)
+\text{현재 보폭} = K \cdot \left( \frac{\text{현재 스텝}}{\text{목표 웜업 스텝}} \right)
 $$
 
-- **0스텝:** $K \times \frac{0}{1000} = \mathbf{0}$ (조심스럽게 출발)
-- **100스텝:** $K \times \frac{100}{1000} = \mathbf{0.1 \times K}$
-- **500스텝:** $K \times \frac{500}{1000} = \mathbf{0.5 \times K}$
-- **1,000스텝:** $K \times \frac{1000}{1000} = \mathbf{1.0 \times K}$ (원래 정했던 보폭 $K$ 도달)
+- **0스텝:** $K \cdot \frac{0}{1000} = \mathbf{0}$ (조심스럽게 출발)
+- **100스텝:** $K \cdot \frac{100}{1000} = \mathbf{0.1 \cdot K}$
+- **500스텝:** $K \cdot \frac{500}{1000} = \mathbf{0.5 \cdot K}$
+- **1,000스텝:** $K \cdot \frac{1000}{1000} = \mathbf{1.0 \cdot K}$ (원래 정했던 보폭 $K$ 도달)
 
 
 
@@ -461,7 +461,7 @@ SGD와 미니배치는 지금 계산한 기울기만 보고 움직입니다. 그
 여러 배치에서 같은 방향의 기울기가 반복되면 그 방향으로 속도가 붙고, 반대 방향으로 번갈아 흔들리는 성분은 부호가 상쇄되어 진동이 줄어듭니다.
 
 $$
-\text{속도(관성)} = \gamma \times (\text{이전 속도}) + \eta \times (\text{현재 기울기})
+\text{속도(관성)} = \gamma \cdot (\text{이전 속도}) + \eta \cdot (\text{현재 기울기})
 $$
 
 $$
@@ -502,11 +502,11 @@ $$
 
 **공식**
 $$
-\text{기울기 제곱 평균}_t = \text{과거 유지 비율} \times \text{기울기 제곱 평균}_{t-1} + (1 - \text{과거 유지 비율}) \times (\text{현재 기울기})^2
+\text{기울기 제곱 평균}_t = \text{과거 유지 비율} \cdot \text{기울기 제곱 평균}_{t-1} + (1 - \text{과거 유지 비율}) \cdot (\text{현재 기울기})^2
 $$
 
 $$
-\text{새로운 가중치}_{t+1} = \text{현재 가중치}_t - \frac{\text{기본 학습률}}{\sqrt{\text{기울기 제곱 평균}_t + \text{안전값}}} \times \text{현재 기울기}
+\text{새로운 가중치}_{t+1} = \text{현재 가중치}_t - \frac{\text{기본 학습률}}{\sqrt{\text{기울기 제곱 평균}_t + \text{안전값}}} \cdot \text{현재 기울기}
 $$
 
 안전값 **$\epsilon$** 은 0으로 나누는 오류를 막기 위해 더하는 작은 상수입니다. 여기서는 제곱근 안에 넣었으며, 구현에 따라 제곱근 밖에 더하기도 합니다.

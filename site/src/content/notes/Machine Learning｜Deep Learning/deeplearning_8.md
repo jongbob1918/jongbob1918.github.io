@@ -98,7 +98,7 @@ $$\text{Total Loss} = \text{Loss}_{\text{기존}} + \frac{\lambda}{p} \lVert w \
     - $p=1$: **L1 규제(Lasso)** $\rightarrow \text{Loss} + \lambda \lVert w \rVert_1$
     - $p=2$: **L2 규제(Ridge, Weight Decay)** $\rightarrow \text{Loss} + \frac{\lambda}{2} \lVert w \rVert_2^2$
 
-$\lambda$가 0이면 $\text{Loss} + 0 \times \lVert w \rVert_2^2 = \text{Loss}$가 되어 규제가 적용되지 않습니다.
+$\lambda$가 0이면 $\text{Loss} + 0 \cdot \lVert w \rVert_2^2 = \text{Loss}$가 되어 규제가 적용되지 않습니다.
 
 반대로 $\lambda$가 매우 크면 원래 손실보다 파라미터 크기를 줄이는 데 집중하게 되어, 이번에는 데이터를 충분히 따라가지 못합니다.
 

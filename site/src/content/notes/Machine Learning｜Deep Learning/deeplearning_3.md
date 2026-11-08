@@ -103,7 +103,7 @@ $$f(z) = \begin{cases} 1 & (z > 0) \\ 0 & (z \le 0) \end{cases}$$
 
 2장에서 우리는 연쇄 법칙으로 오차 신호를 거꾸로 전달하며 가중치를 고쳤습니다.
 
-$$\frac{\partial \text{Loss}}{\partial w} = \frac{\partial \text{Loss}}{\partial \hat{y}} \times \frac{\partial \hat{y}}{\partial z} \times \frac{\partial z}{\partial w}$$
+$$\frac{\partial \text{Loss}}{\partial w} = \frac{\partial \text{Loss}}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial z} \cdot \frac{\partial z}{\partial w}$$
 
 계단 함수를 거치면 가운데 항 $\frac{\partial \hat{y}}{\partial z}$이 **0**이 되어 곱 전체가 0이 됩니다.
 오차 신호가 뒤로 전달되지 않으니 가중치 갱신식($w_{\text{new}} \leftarrow w_{\text{old}} - \eta \cdot \text{기울기}$)에서 기울기가 0이 되어 가중치가 바뀌지 않습니다.

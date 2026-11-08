@@ -117,12 +117,12 @@ $$\frac{\vert{}-1\vert{}}{\vert{}2\vert{} + \vert{}1\vert{} + \vert{}-1\vert{}} 
 
 이를 위해 **지수의 성질($x^1 = x, x^0 = 1$)**을 스위치처럼 활용합니다.
 
-$$\hat{y}_1^{y_1} \times \hat{y}_2^{y_2} \times \hat{y}_3^{y_3}$$
+$$\hat{y}_1^{y_1} \cdot \hat{y}_2^{y_2} \cdot \hat{y}_3^{y_3}$$
 
 
 예시로 정답 원-핫 벡터($y = [1, 0, 0]$)를 지수에 대입해 보면 :
 
-$$\hat{y}_1^1 \times \hat{y}_2^0 \times \hat{y}_3^0 = \hat{y}_1 \times 1 \times 1 = \hat{y}_1$$
+$$\hat{y}_1^1 \cdot \hat{y}_2^0 \cdot \hat{y}_3^0 = \hat{y}_1 \cdot 1 \cdot 1 = \hat{y}_1$$
 
 
 오답 클래스는 지수가 0이 되어 1로 사라지고, **오직 정답 클래스의 예측 확률($\hat{y}_1$)만 결과로 남습니다.**

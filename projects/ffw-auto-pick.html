@@ -1,0 +1,422 @@
+<!doctype html>
+<!-- Generated from project-data/ffw-auto-pick.md by templates/project-detail.mjs. -->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="집기 후보 생성, 반복 실행, 성공 판정과 시연 데이터 수집을 연결하고 GR00T 정책 학습으로 확장한 프로젝트">
+  <title>FFW AUTO PICK — Jongmyung Kim</title>
+  <link rel="icon" type="image/png" href="../favicon.png?v=4">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=20260925-17">
+</head>
+<body data-page="project-detail" data-title-ko="FFW Auto Pick — 로봇 집기부터 정책 학습까지 — Jongmyung Kim" data-title-en="FFW Auto Pick — From Robot Grasping to Policy Training — Jongmyung Kim" data-description-ko="집기 후보 생성, 반복 실행, 성공 판정과 시연 데이터 수집을 연결하고 GR00T 정책 학습으로 확장한 프로젝트" data-description-en="Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training">
+  <div class="reading-progress" aria-hidden="true"></div>
+  <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
+
+  <main class="wrap case-page">
+    <a class="back" href="../index.html#side-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
+    <div class="project-language" data-language-content="ko">
+    <header class="project-header">
+      <h1>FFW Auto Pick — 로봇 집기부터 정책 학습까지</h1>
+      <div class="meta"></div>
+      <p class="project-skills">ROS 2 · GraspNet / GSNet · CenterPose · GR00T · Isaac Sim</p>
+      
+    </header>
+
+    <section class="project-overview" id="overview-ko">
+      <h2>Overview</h2>
+      <p class="lead">로봇 집기 정책을 학습하려면 반복 가능한 동작과 검증된 시연 데이터가 필요합니다. FFW 로봇의 집기 후보 생성, 모션 실행, 성공 판정과 녹화를 하나의 자동 수집 흐름으로 연결했습니다. GraspNet과 CenterPose 기반 수집 방식을 비교하고, 각 방식으로 얻은 데이터로 GR00T 정책을 학습했습니다.</p><div class="overview-note"><h3>포트폴리오 초안</h3><p>현재는 이야기의 구조와 확인된 결과를 정리한 스켈레톤입니다. 각 절에 데모, 실험 조건과 구현 근거를 보완할 예정입니다.</p><p>결과는 시뮬레이션 수집과 학습 완료 기록을 기준으로 합니다. 학습한 정책의 실행 성능과 실물 집기 성능은 별도로 검증해야 합니다.</p></div>
+    </section>
+
+    
+
+    <div class="case-layout">
+      <article class="case-study">
+        <section class="case-section" id="ko-집기에서-학습-데이터까지">
+          <div class="case-heading"><h2>집기에서 학습 데이터까지</h2></div>
+          <p>이 프로젝트의 목표는 집기 후보를 실제 동작과 저장 가능한 시연으로 연결하는 것입니다. 기존 인식 모델과 정책 학습 프레임워크를 활용하고, 그 사이의 실행·검증·수집 과정을 구성했습니다.</p>
+<div class="role-grid"><div class="info-card"><strong>인식과 실행</strong><span>후보 생성부터 접근·파지·들기까지 연결</span></div><div class="info-card"><strong>반복 수집</strong><span>성공 판정과 녹화 결과를 에피소드에 연결</span></div><div class="info-card"><strong>정책 학습</strong><span>수집 데이터 검증과 GR00T 학습</span></div></div><blockquote>
+<p><strong>추가할 자료:</strong> 전체 동작 데모, 개발 기간, 협업 범위와 직접 담당한 구현.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-반복-가능한-집기를-만들려면">
+          <div class="case-heading"><h2>반복 가능한 집기를 만들려면</h2></div>
+          <p>집기 후보가 생성되어도 로봇이 도달하지 못하거나, 물체를 들어 올리지 못할 수 있습니다. 모션 명령이 끝났다는 사실만으로 성공 데이터를 판정할 수 없습니다.</p>
+<p>후보 선택, 실행 실패, 물체 상승과 녹화 저장을 구분해 관측하는 것이 출발점이었습니다.</p>
+<blockquote>
+<p><strong>추가할 자료:</strong> 초기 실행 흐름과 실패 사례, 자동화 전 수집 과정, 성공의 정의.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-두-인식-경로와-하나의-실행-흐름">
+          <div class="case-heading"><h2>두 인식 경로와 하나의 실행 흐름</h2></div>
+          <table>
+<thead>
+<tr>
+<th>단계</th>
+<th>입력과 역할</th>
+<th>다음 단계로 전달하는 것</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>장면 입력</td>
+<td>RGB·깊이 영상, 점군, 카메라와 로봇 좌표 관계</td>
+<td>대상 위치와 장면 정보</td>
+</tr>
+<tr>
+<td>후보 생성</td>
+<td>GraspNet 기반 경로 또는 CenterPose + 병 전용 규칙</td>
+<td>파지 위치·방향·폭</td>
+</tr>
+<tr>
+<td>실행</td>
+<td>Auto Recorder에서 역기구학(IK) 사전검사, 접근·파지·들기</td>
+<td>동작 상태와 녹화</td>
+</tr>
+<tr>
+<td>수집</td>
+<td>장면 초기화, 성공 판정, 에피소드 식별</td>
+<td>성공 시연 목록과 실패 기록</td>
+</tr>
+<tr>
+<td>학습</td>
+<td>데이터 변환, 카메라 입력 검증, GR00T 학습</td>
+<td>체크포인트와 학습 기록</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>추가할 자료:</strong> 두 후보 서버가 공통 실행 경로에 연결되는 구성도, 취소·실패 처리 흐름.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-graspnet-후보를-실제-집기로-연결하기">
+          <div class="case-heading"><h2>GraspNet 후보를 실제 집기로 연결하기</h2></div>
+          <p>선택한 대상점으로 파지 위치를 이동하는 휴리스틱을 고정된 세 위치에서 비교했습니다. 각 위치에서 ON/OFF 조건을 20회씩 실행했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>조건</th>
+<th>왼쪽</th>
+<th>중앙</th>
+<th>오른쪽</th>
+<th>전체</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>휴리스틱 ON</td>
+<td>14/20</td>
+<td>14/20</td>
+<td>18/20</td>
+<td>46/60</td>
+</tr>
+<tr>
+<td>휴리스틱 OFF</td>
+<td>12/20</td>
+<td>6/20</td>
+<td>20/20</td>
+<td>38/60</td>
+</tr>
+</tbody></table>
+<p>전체 성공 수는 증가했지만 오른쪽 위치에서는 감소했습니다. 이 결과는 해당 배치에서의 시뮬레이션 집기·저장 판정이며, 모든 배치에 대한 개선을 의미하지 않습니다.</p>
+<blockquote>
+<p><strong>추가할 자료:</strong> ON/OFF 후보 시각화, 초기 조건 일치 근거, 실패 영상과 실제 궤적 비교.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-centerpose-자세-오차를-분리해서-확인하기">
+          <div class="case-heading"><h2>CenterPose 자세 오차를 분리해서 확인하기</h2></div>
+          <p>초기 DLA34 모델 실험에서는 거의 수직인 병의 추정 축이 약 15° 기울어졌습니다. 전처리와 카메라 투영을 확인했고, 알려진 3D 표식 54개에서 평균 투영 오차 약 0.66px를 측정했습니다. 당시 자세 오차의 정확한 원인은 확정하지 못했습니다.</p>
+<p>이후 수집 구현은 FAN 모델, 고정 물체 크기, 깊이 보정과 고정 파지 방향을 사용합니다. 초기 자세 진단과 현재 병 전용 파지 전략은 구분해서 설명합니다.</p>
+<blockquote>
+<p><strong>추가할 자료:</strong> 기울어진 추정 박스, 투영 검증 이미지, 버전별 변경 이유와 병 자세 제약.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-실패를-기록하면서-시연을-자동-수집하기">
+          <div class="case-heading"><h2>실패를 기록하면서 시연을 자동 수집하기</h2></div>
+          <p>반복 수집은 장면 초기화부터 실행 결과 저장까지 연결합니다. 문서화된 성공 기준은 대상 병이 지정 구간에서 3.5cm 이상 상승해 0.5초 유지되고 녹화 저장까지 완료되는 것입니다.</p>
+<p>명령 완료, 물체 상승, 저장 완료를 구분하고 실패 시도도 기록합니다. 성공 에피소드만 학습 목록에 포함합니다.</p>
+<blockquote>
+<p><strong>추가할 자료:</strong> 성공·실패 판정 타임라인, 결과 파일 저장 경쟁 조건과 재개 처리, 실험별 설정 및 에피소드 연결 예시.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-수집-결과와-정책-학습">
+          <div class="case-heading"><h2>수집 결과와 정책 학습</h2></div>
+          <p>최신 수집 완료 집계에는 각 방식의 300회 시도와 다음 결과가 기록되어 있습니다. 비교 대상은 후처리와 파지 규칙을 포함한 전체 수집 파이프라인입니다.</p>
+<table>
+<thead>
+<tr>
+<th>수집 방식</th>
+<th>시도</th>
+<th>성공 에피소드</th>
+<th>수집 성공률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GraspNet 기반</td>
+<td>300</td>
+<td>225</td>
+<td>75.0%</td>
+</tr>
+<tr>
+<td>CenterPose + 병 전용 규칙</td>
+<td>300</td>
+<td>248</td>
+<td>82.7%</td>
+</tr>
+</tbody></table>
+<p>각 데이터셋에서 머리 카메라 1개와 손목 카메라 2개를 학습 입력으로 사용했습니다. GR00T 학습은 각각 150,000스텝 완료 기록이 있습니다. 수집 성공률과 학습한 정책의 실행 성공률은 서로 다른 지표입니다.</p>
+<blockquote>
+<p><strong>추가할 자료:</strong> 원시 시도별 집계와 배치 조건, 실패 유형, 학습 곡선, 데이터·설정 버전. 데이터 수가 다른 두 학습의 비교 조건도 명시합니다.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="ko-다음에-검증할-것">
+          <div class="case-heading"><h2>다음에 검증할 것</h2></div>
+          <table>
+<thead>
+<tr>
+<th>남은 질문</th>
+<th>필요한 검증</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>학습한 정책이 실제로 집기를 수행하는가?</td>
+<td>학습에 쓰지 않은 배치에서 정책 실행 평가</td>
+</tr>
+<tr>
+<td>수집 방식이 정책 성능에 어떤 영향을 주는가?</td>
+<td>데이터 수와 평가 조건을 맞춘 비교</td>
+</tr>
+<tr>
+<td>병 전용 규칙의 적용 범위는 어디까지인가?</td>
+<td>병 종류·기울기·주변 물체 조건별 평가</td>
+</tr>
+<tr>
+<td>시뮬레이션 결과가 실물에서도 유지되는가?</td>
+<td>실물 센서·좌표계·그리퍼 조건에서 별도 검증</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>추가할 자료:</strong> 우선순위가 정해진 평가 계획과 실제 수행 결과. 미실시 항목은 완료 성과와 구분합니다.</p>
+</blockquote>
+
+        </section>
+      </article>
+    </div>
+  </div>
+    <div class="project-language" data-language-content="en" hidden>
+    <header class="project-header">
+      <h1>FFW Auto Pick — From Robot Grasping to Policy Training</h1>
+      <div class="meta"></div>
+      <p class="project-skills">ROS 2 · GraspNet / GSNet · CenterPose · GR00T · Isaac Sim</p>
+      
+    </header>
+
+    <section class="project-overview" id="overview-en">
+      <h2>Overview</h2>
+      <p class="lead">Training a robot grasping policy requires repeatable motions and verified demonstrations. This project connects grasp generation, motion execution, success evaluation and recording into an automated collection workflow for the FFW robot. GraspNet-based and CenterPose-based collection pipelines were compared, and their datasets were used separately to train GR00T policies.</p><div class="overview-note"><h3>Portfolio outline</h3><p>This draft establishes the story and recorded results. Demonstrations, experimental conditions and implementation evidence will be added to each section.</p><p>Results cover simulation collection and recorded training completion. Trained-policy performance and physical grasping performance require separate evaluation.</p></div>
+    </section>
+
+    
+
+    <div class="case-layout">
+      <article class="case-study">
+        <section class="case-section" id="en-from-grasps-to-training-data">
+          <div class="case-heading"><h2>From grasps to training data</h2></div>
+          <p>The goal is to turn grasp candidates into executable actions and recorded demonstrations. Existing perception models and policy frameworks provide the foundation; execution, validation and collection connect them.</p>
+<div class="role-grid"><div class="info-card"><strong>Perception and execution</strong><span>Connect candidates to approach, grasp and lift</span></div><div class="info-card"><strong>Repeated collection</strong><span>Link success decisions and recordings to episodes</span></div><div class="info-card"><strong>Policy training</strong><span>Validate collected data and train GR00T</span></div></div><blockquote>
+<p><strong>To add:</strong> End-to-end demonstration, project dates, collaboration scope and individual contributions.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-making-grasping-repeatable">
+          <div class="case-heading"><h2>Making grasping repeatable</h2></div>
+          <p>A generated grasp may be unreachable or fail to lift the object. A completed motion command alone cannot identify a successful demonstration.</p>
+<p>The starting point was to observe candidate selection, execution failures, object lift and recording completion separately.</p>
+<blockquote>
+<p><strong>To add:</strong> Initial workflow, representative failures, collection process before automation and success definition.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-two-perception-paths-one-execution-workflow">
+          <div class="case-heading"><h2>Two perception paths, one execution workflow</h2></div>
+          <table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Input and responsibility</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scene input</td>
+<td>RGB, depth, point cloud and camera-to-robot transforms</td>
+<td>Target position and scene information</td>
+</tr>
+<tr>
+<td>Candidate generation</td>
+<td>GraspNet or CenterPose with bottle-specific rules</td>
+<td>Grasp position, orientation and width</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>Auto Recorder: inverse kinematics (IK) checks, approach, grasp and lift</td>
+<td>Motion state and recordings</td>
+</tr>
+<tr>
+<td>Collection</td>
+<td>Scene reset, success evaluation and episode identification</td>
+<td>Successful demonstrations and failure records</td>
+</tr>
+<tr>
+<td>Training</td>
+<td>Data conversion, camera validation and GR00T training</td>
+<td>Checkpoints and training records</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>To add:</strong> Architecture showing both candidate servers and the shared execution path, including cancellation and cleanup.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-connecting-graspnet-candidates-to-executable-grasps">
+          <div class="case-heading"><h2>Connecting GraspNet candidates to executable grasps</h2></div>
+          <p>A heuristic that moves the grasp position to the selected target point was tested at three fixed positions, with 20 attempts per condition at each position.</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Left</th>
+<th>Center</th>
+<th>Right</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Heuristic ON</td>
+<td>14/20</td>
+<td>14/20</td>
+<td>18/20</td>
+<td>46/60</td>
+</tr>
+<tr>
+<td>Heuristic OFF</td>
+<td>12/20</td>
+<td>6/20</td>
+<td>20/20</td>
+<td>38/60</td>
+</tr>
+</tbody></table>
+<p>Total successes increased, but the right position regressed. These are simulation grasp-and-save outcomes for the tested layouts, not evidence of improvement across all layouts.</p>
+<blockquote>
+<p><strong>To add:</strong> Candidate visualizations, matched initial-condition evidence, failure videos and measured trajectories.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-isolating-the-centerpose-orientation-error">
+          <div class="case-heading"><h2>Isolating the CenterPose orientation error</h2></div>
+          <p>An early DLA34 experiment estimated approximately 15° of tilt for an almost upright bottle. Preprocessing and camera projection were checked; 54 known 3D markers produced a mean projection error of approximately 0.66 px. The exact cause of the pose error remained unresolved.</p>
+<p>The later collection implementation uses a FAN model, fixed object dimensions, depth correction and a fixed grasp orientation. The initial diagnostic and the current bottle-specific grasp strategy are distinct stages.</p>
+<blockquote>
+<p><strong>To add:</strong> Predicted box visualization, projection checks, reasons for version changes and upright-bottle assumptions.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-collecting-demonstrations-while-recording-failures">
+          <div class="case-heading"><h2>Collecting demonstrations while recording failures</h2></div>
+          <p>The repeated workflow connects scene reset to outcome persistence. The documented success rule requires the bottle to rise at least 3.5 cm for 0.5 seconds during the specified interval, with recording successfully saved.</p>
+<p>Command completion, object lift and recording completion are checked separately. Failed attempts remain in the records; only successful episodes enter the training list.</p>
+<blockquote>
+<p><strong>To add:</strong> Evaluation timeline, outcome-file race condition and resume handling, configuration and episode traceability examples.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-collection-results-and-policy-training">
+          <div class="case-heading"><h2>Collection results and policy training</h2></div>
+          <p>The latest completion summary records 300 attempts per method. These results compare complete collection pipelines, including postprocessing and grasp rules.</p>
+<table>
+<thead>
+<tr>
+<th>Collection method</th>
+<th>Attempts</th>
+<th>Successful episodes</th>
+<th>Collection success rate</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GraspNet-based</td>
+<td>300</td>
+<td>225</td>
+<td>75.0%</td>
+</tr>
+<tr>
+<td>CenterPose + bottle-specific rules</td>
+<td>300</td>
+<td>248</td>
+<td>82.7%</td>
+</tr>
+</tbody></table>
+<p>Each dataset uses one head camera and two wrist cameras as training inputs. Both GR00T runs have completion records at 150,000 steps. Collection success and trained-policy execution success are separate metrics.</p>
+<blockquote>
+<p><strong>To add:</strong> Per-attempt evidence, layout conditions, failure categories, training curves and data/configuration versions. Explain the unequal training dataset sizes.</p>
+</blockquote>
+
+        </section>
+
+        <section class="case-section" id="en-what-remains-to-be-evaluated">
+          <div class="case-heading"><h2>What remains to be evaluated</h2></div>
+          <table>
+<thead>
+<tr>
+<th>Open question</th>
+<th>Required evaluation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Can the trained policy execute a grasp?</td>
+<td>Policy rollouts on held-out layouts</td>
+</tr>
+<tr>
+<td>How does collection method affect policy performance?</td>
+<td>Matched dataset sizes and evaluation conditions</td>
+</tr>
+<tr>
+<td>Where do bottle-specific rules apply?</td>
+<td>Tests across bottle types, tilt and clutter</td>
+</tr>
+<tr>
+<td>Do simulation results transfer to hardware?</td>
+<td>Separate physical sensor, transform and gripper validation</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>To add:</strong> Prioritized evaluation plan and measured outcomes. Keep pending work separate from completed results.</p>
+</blockquote>
+
+        </section>
+      </article>
+    </div>
+  </div>
+  </main>
+  <script src="../script.js?v=20260925-13"></script>
+</body>
+</html>

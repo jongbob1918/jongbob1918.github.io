@@ -104,6 +104,7 @@ h1, h2, h3, p { margin-top: 0; }
 .article h2 { scroll-margin-top: 86px; margin: 52px 0 16px; color: var(--ink); font-size: 1.48rem; letter-spacing: -.035em; }
 .article h3 { scroll-margin-top: 86px; margin: 34px 0 12px; color: var(--ink); font-size: 1.1rem; }
 .article p, .article li { font-size: .94rem; }
+.article .note-blank-lines { height: calc(var(--blank-lines) * 1.41rem); }
 .article li + li { margin-top: 5px; }
 .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .article code { padding: 2px 5px; border-radius: 3px; background: var(--soft); font-size: .88em; }

@@ -3,6 +3,7 @@ import remarkMath from 'remark-math';
 import remarkBreaks from 'remark-breaks';
 import rehypeKatex from 'rehype-katex';
 import resolveNoteImages from './src/plugins/resolve-note-images.mjs';
+import preserveBlankLines from './src/plugins/preserve-blank-lines.mjs';
 
 export default defineConfig({
   site: 'https://jongbob1918.github.io',
@@ -18,7 +19,7 @@ export default defineConfig({
     }))
   },
   markdown: {
-    remarkPlugins: [remarkMath, remarkBreaks, resolveNoteImages],
+    remarkPlugins: [remarkMath, remarkBreaks, resolveNoteImages, preserveBlankLines],
     rehypePlugins: [[rehypeKatex, { strict: 'error', throwOnError: true }]]
   }
 });

@@ -3,7 +3,6 @@
   <desc id="desc">가중치는 모두 1이고 각 단계의 활성화 함수 미분값이 0.25인 단순한 예시. 오른쪽에서 왼쪽으로 전달되는 기울기가 1에서 0.015625까지 줄어든다. 화살표 두께는 크기 변화를 개략적으로 나타낸다.</desc>
   <rect width="720" height="300" rx="16" fill="#f8fafc"/>
   <g font-family="'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif" text-anchor="middle">
-    <text x="360" y="62" font-size="14" fill="#64748b">가중치는 모두 1인 단순한 예</text>
     <text x="90" y="105" font-size="16" fill="#475569">입력층 쪽</text>
     <text x="630" y="105" font-size="16" fill="#475569">출력층 쪽</text>
     <g fill="#2563eb">
@@ -28,7 +27,6 @@
       <text x="450" y="211">0.25</text>
       <text x="630" y="211">1</text>
     </g>
-    <text x="360" y="242" font-size="14" fill="#64748b">전달되는 기울기의 크기</text>
     <path d="M 445 271 H 275 M 283 265 L 275 271 L 283 277" fill="none" stroke="#475569" stroke-width="1.5"/>
     <text x="360" y="291" font-size="13" fill="#475569">역전파 방향</text>
   </g>

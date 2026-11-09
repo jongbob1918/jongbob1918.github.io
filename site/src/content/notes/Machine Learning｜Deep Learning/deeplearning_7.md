@@ -16,7 +16,7 @@ featured: false
 
 
 
-<img src="../../../../public/images/notes/easy-deep-learning-ch06/vanishing-gradient.svg" alt="출력층 쪽에서 입력층 쪽으로 역전파할 때, 각 단계에서 0.25를 곱하면 전달되는 기울기가 1, 0.25, 0.0625, 0.015625로 줄어들고 왼쪽 화살표도 가늘어지는 그림. 가중치는 모두 1인 단순한 예시" width="720" height="300" loading="lazy" />
+<img src="../../../../public/images/notes/easy-deep-learning-ch06/vanishing-gradient.svg" alt="각 층에 노드 세 개가 연결된 네 층의 신경망. 파란색으로 강조한 한 경로에서 역전파할 때, 가중치 1과 활성화 함수 미분값 0.25를 곱하며 값이 1, 0.25, 0.0625, 0.015625로 줄어들고 왼쪽 화살표도 가늘어지는 예시. 여러 경로를 합산한 전체 기울기는 아님" width="720" height="300" loading="lazy" />
 
 
 

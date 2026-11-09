@@ -52,9 +52,15 @@ featured: false
 
 소프트맥스는 앞의 모델이 출력한 값들을 받아, 모든 출력이 0과 1 사이의 양수이면서 데이터의 총합이 1이 되도록 변환하는 함수입니다.
 
+
+
 <img src="../../../../public/images/notes/easy-deep-learning-ch05/softmax-input-output.png" alt="세 로짓 z1, z2, z3를 softmax 함수에 입력해 세 출력 p1, p2, p3로 변환하는 구조" width="432" loading="lazy" />
 
+
+
 각 클래스의 확률 $p_k$는 다음과 같습니다.
+
+
 
 $$
 p_1=\frac{e^{z_1}}{e^{z_1}+e^{z_2}+e^{z_3}}
@@ -67,6 +73,10 @@ $$
 $$
 p_3=\frac{e^{z_3}}{e^{z_1}+e^{z_2}+e^{z_3}}
 $$
+
+
+
+
 
 
 #### 소프트맥스 계산 과정

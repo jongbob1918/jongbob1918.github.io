@@ -116,10 +116,9 @@ featured: false
 
 ## 6. 규제(Regularization)
 
-규제는 학습할 때 손실 함수에 파라미터 크기를 벌점(penalty)으로 더하는 방법입니다. 
+규제는 학습할 때 손실 함수에 파라미터 크기에 따라 벌점(penalty)으로 더하는 방법입니다. 
 파라미터가 지나치게 커지는 것을 막아, 훈련 데이터의 사소한 노이즈까지 맞추는 과적합을 줄입니다. 
 
-이름이 비슷하지만 [7장의 배치 정규화](/notes/deep-learning/easy-deep-learning-ch06/#4-배치-정규화)(normalization)와는 다른 개념입니다.
 
 $$\text{Total Loss} = \text{Loss}_{\text{기존}} + \frac{\lambda}{p} \lVert w \rVert_p^p$$
 

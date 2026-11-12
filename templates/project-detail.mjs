@@ -32,7 +32,13 @@ const renderDemo = (demo, language) => {
     media = `<div class="video-embed"><iframe src="${escapeHtml(demo.src)}" title="${escapeHtml(demo.title || demo.alt || (language === 'ko' ? '프로젝트 시연 영상' : 'Project demonstration video'))}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
   } else {
     media = `<img src="${escapeHtml(demo.src)}" alt="${escapeHtml(demo.alt || '')}"${sequenceAttribute}>`;
-    if (demo.href) media = `<a href="${escapeHtml(demo.href)}" target="_blank" rel="noopener noreferrer">${media}</a>`;
+    if (demo.href) {
+      const isYouTube = /^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//i.test(demo.href);
+      const label = language === 'ko' ? 'YouTube에서 보기' : 'Watch on YouTube';
+      const overlay = isYouTube ? `<span class="demo-play" aria-hidden="true"><svg viewBox="0 0 68 48"><rect width="68" height="48" rx="12" fill="#ff0000"/><path d="M27 14v20l18-10Z" fill="#fff"/></svg><span>${label}</span></span>` : '';
+      const attributes = isYouTube ? ` class="demo-video-link" aria-label="${label} (${language === 'ko' ? '새 탭에서 열기' : 'opens in a new tab'})"` : '';
+      media = `<a href="${escapeHtml(demo.href)}" target="_blank" rel="noopener noreferrer"${attributes}>${media}${overlay}</a>`;
+    }
   }
 
   return `<section class="demo-section" id="demo-${language}"><figure class="feature-media">${media}</figure></section>`;

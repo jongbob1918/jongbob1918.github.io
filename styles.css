@@ -116,7 +116,7 @@ h3 { font-size: 1rem; }
 .project-context { display: block; margin-bottom: 5px; color: var(--muted); font-size: .7rem; font-weight: 650; line-height: 1.5; }
 .keywords { margin-bottom: 10px; color: var(--accent); font-size: .76rem; font-weight: 600; line-height: 1.6; letter-spacing: -.01em; }
 .result { max-width: 650px; margin-bottom: 8px; color: var(--text); font-size: .88rem; }
-.side-project-list { grid-template-columns: repeat(2,minmax(0,255px)); justify-content: start; gap: 18px; }
+.side-project-list { grid-template-columns: repeat(auto-fit,minmax(min(100%,255px),1fr)); gap: 18px; }
 .side-project-list .project-row { display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: auto 1fr; gap: 0; height: 100%; max-width: none; aspect-ratio: auto; padding: 0; overflow: hidden; border-radius: var(--radius-small); background: var(--paper); box-shadow: 0 8px 22px rgba(16,24,40,.07); transition: box-shadow .24s ease, transform .24s ease; }
 .side-project-list .project-row:hover, .side-project-list .project-row:focus-within { box-shadow: var(--shadow); transform: translateY(-2px); }
 .side-project-list .project-copy { border-radius: 0; width: 100%; min-height: 0; display: block; align-self: stretch; margin: -27px 0 0; padding: 34px 16px 18px; background: linear-gradient(to bottom, transparent 0, var(--paper) 27px, var(--paper) 100%); box-shadow: none; transform: none; }
@@ -356,7 +356,7 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
   .project-copy { display: block; margin: 0 10px; padding: 18px; box-shadow: 0 6px 16px rgba(0,0,0,.07); }
   .project-list[data-project-layout="main"] .result { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
   .project-row:hover .project-copy, .project-row:focus-within .project-copy { transform: none; }
-  .side-project-list { grid-template-columns: minmax(0,360px); gap: 14px; }
+  .side-project-list { gap: 14px; }
   .side-project-list .project-row { display: grid; height: auto; aspect-ratio: auto; padding: 0; }
   .project-overlay { align-items: end; justify-items: end; padding: 12px; background: linear-gradient(transparent 45%, rgba(16,24,40,.74)); opacity: 1; }
   .project-overlay span { padding: 6px 10px; font-size: .68rem; transform: none; }

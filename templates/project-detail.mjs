@@ -35,7 +35,7 @@ const renderDemo = (demo, language) => {
     if (demo.href) {
       const isYouTube = /^https:\/\/(?:www\.)?(?:youtube\.com|youtu\.be)\//i.test(demo.href);
       const label = language === 'ko' ? 'YouTube에서 보기' : 'Watch on YouTube';
-      const overlay = isYouTube ? `<span class="demo-play" aria-hidden="true"><svg viewBox="0 0 68 48"><rect width="68" height="48" rx="12" fill="#ff0000"/><path d="M27 14v20l18-10Z" fill="#fff"/></svg><span>${label}</span></span>` : '';
+      const overlay = isYouTube ? `<span class="demo-play" aria-hidden="true"><svg viewBox="0 0 68 48"><rect width="68" height="48" rx="12" fill="#ff0000"/><path d="M27 14v20l18-10Z" fill="#fff"/></svg></span>` : '';
       const attributes = isYouTube ? ` class="demo-video-link" aria-label="${label} (${language === 'ko' ? '새 탭에서 열기' : 'opens in a new tab'})"` : '';
       media = `<a href="${escapeHtml(demo.href)}" target="_blank" rel="noopener noreferrer"${attributes}>${media}${overlay}</a>`;
     }

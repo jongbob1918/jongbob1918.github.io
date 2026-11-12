@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="집기 후보 생성, 반복 실행, 성공 판정과 시연 데이터 수집을 연결하고 GR00T 정책 학습으로 확장한 프로젝트">
+  <meta name="description" content="수동 시연의 병목을 해결하기 위해 ROBOTIS AI Worker 데이터 취득 자동화 파이프라인을 구축하고, VLA 모델 기반의 조작 정책 학습까지 연결한 End-to-End 프로젝트">
   <title>FFW AUTO PICK — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-17">
 </head>
-<body data-page="project-detail" data-title-ko="FFW Auto Pick — 로봇 집기부터 정책 학습까지 — Jongmyung Kim" data-title-en="FFW Auto Pick — From Robot Grasping to Policy Training — Jongmyung Kim" data-description-ko="집기 후보 생성, 반복 실행, 성공 판정과 시연 데이터 수집을 연결하고 GR00T 정책 학습으로 확장한 프로젝트" data-description-en="Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training">
+<body data-page="project-detail" data-title-ko="AI worker — Jongmyung Kim" data-title-en="FFW Auto Pick — From Robot Grasping to Policy Training — Jongmyung Kim" data-description-ko="수동 시연의 병목을 해결하기 위해 ROBOTIS AI Worker 데이터 취득 자동화 파이프라인을 구축하고, VLA 모델 기반의 조작 정책 학습까지 연결한 End-to-End 프로젝트" data-description-en="Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -20,7 +20,7 @@
     <a class="back" href="../index.html#side-projects" aria-label="프로젝트 목록으로 돌아가기" data-label-ko="프로젝트 목록으로 돌아가기" data-label-en="Back to project list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2Z"/></svg></a>
     <div class="project-language" data-language-content="ko">
     <header class="project-header">
-      <h1>FFW Auto Pick — 로봇 집기부터 정책 학습까지</h1>
+      <h1>AI worker</h1>
       <div class="meta"></div>
       <p class="project-skills">ROS 2 · GraspNet / GSNet · CenterPose · GR00T · Isaac Sim</p>
       
@@ -28,22 +28,13 @@
 
     <section class="project-overview" id="overview-ko">
       <h2>Overview</h2>
-      <p class="lead">로봇 집기 정책을 학습하려면 반복 가능한 동작과 검증된 시연 데이터가 필요합니다. FFW 로봇의 집기 후보 생성, 모션 실행, 성공 판정과 녹화를 하나의 자동 수집 흐름으로 연결했습니다. GraspNet과 CenterPose 기반 수집 방식을 비교하고, 각 방식으로 얻은 데이터로 GR00T 정책을 학습했습니다.</p><div class="overview-note"><h3>포트폴리오 초안</h3><p>현재는 이야기의 구조와 확인된 결과를 정리한 스켈레톤입니다. 각 절에 데모, 실험 조건과 구현 근거를 보완할 예정입니다.</p><p>결과는 시뮬레이션 수집과 학습 완료 기록을 기준으로 합니다. 학습한 정책의 실행 성능과 실물 집기 성능은 별도로 검증해야 합니다.</p></div>
+      <p class="lead">클릭 한 번으로 파지 실행부터 데이터 저장까지 완료되는 ROBOTIS AI Worker 데이터 취득 자동화 파이프라인을 구축했습니다. 대상 클릭 시 파지 추론(GraspNet·CenterPose), 모션 실행, 성공 판정 및 녹화가 단일 루프로 수행되며, 각 수집 데이터셋으로 GR00T 정책 학습·비교까지 완료했습니다.</p><div class="overview-note"><h3>포트폴리오 초안</h3><p>현재는 이야기의 구조와 확인된 결과를 정리한 스켈레톤입니다. 각 절에 데모, 실험 조건과 구현 근거를 보완할 예정입니다.</p><p>결과는 시뮬레이션 수집과 학습 완료 기록을 기준으로 합니다. 학습한 정책의 실행 성능과 실물 집기 성능은 별도로 검증해야 합니다.</p></div>
     </section>
 
     
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-집기에서-학습-데이터까지">
-          <div class="case-heading"><h2>집기에서 학습 데이터까지</h2></div>
-          <p>이 프로젝트의 목표는 집기 후보를 실제 동작과 저장 가능한 시연으로 연결하는 것입니다. 기존 인식 모델과 정책 학습 프레임워크를 활용하고, 그 사이의 실행·검증·수집 과정을 구성했습니다.</p>
-<div class="role-grid"><div class="info-card"><strong>인식과 실행</strong><span>후보 생성부터 접근·파지·들기까지 연결</span></div><div class="info-card"><strong>반복 수집</strong><span>성공 판정과 녹화 결과를 에피소드에 연결</span></div><div class="info-card"><strong>정책 학습</strong><span>수집 데이터 검증과 GR00T 학습</span></div></div><blockquote>
-<p><strong>추가할 자료:</strong> 전체 동작 데모, 개발 기간, 협업 범위와 직접 담당한 구현.</p>
-</blockquote>
-
-        </section>
-
         <section class="case-section" id="ko-반복-가능한-집기를-만들려면">
           <div class="case-heading"><h2>반복 가능한 집기를 만들려면</h2></div>
           <p>집기 후보가 생성되어도 로봇이 도달하지 못하거나, 물체를 들어 올리지 못할 수 있습니다. 모션 명령이 끝났다는 사실만으로 성공 데이터를 판정할 수 없습니다.</p>

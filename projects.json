@@ -181,7 +181,7 @@
       "imageFit": "cover",
       "imageSequence": [],
       "titleKo": "AI worker 기반 Physical AI 자동 데이터 수집 파이프라인 구축",
-      "titleEn": "FFW Auto Recorder — From Robot Grasping to Policy Training",
+      "titleEn": "AI Worker Auto Recorder — From Robot Grasping to Policy Training",
       "overviewKo": "ROBOTIS AI Worker의 학습 데이터를 자동으로 수집·검증하는 파이프라인을 구축하고, 이를 통해 VLA 모델을 학습한 프로젝트",
       "overviewEn": "Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training",
       "periodKo": "",
@@ -192,10 +192,12 @@
       "contributionEn": "",
       "keywords": [
         "ROS 2",
-        "GraspNet / GSNet",
         "CenterPose",
         "GR00T",
-        "Isaac Sim"
+        "Isaac Sim",
+        "Graspnet",
+        "VLA",
+        "AI Worker"
       ]
     },
     {

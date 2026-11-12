@@ -5,14 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="ROBOTIS AI Worker의 학습 데이터를 자동으로 수집·검증하는 파이프라인을 구축하고, 이를 통해 VLA 모델을 학습한 프로젝트">
-  <title>FFW Auto Recorder — Jongmyung Kim</title>
+  <title>AI Worker Auto Recorder — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20260925-17">
 </head>
-<body data-page="project-detail" data-title-ko="AI worker 기반 Physical AI 자동 데이터 수집 파이프라인 구축 — Jongmyung Kim" data-title-en="FFW Auto Recorder — From Robot Grasping to Policy Training — Jongmyung Kim" data-description-ko="ROBOTIS AI Worker의 학습 데이터를 자동으로 수집·검증하는 파이프라인을 구축하고, 이를 통해 VLA 모델을 학습한 프로젝트" data-description-en="Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training">
+<body data-page="project-detail" data-title-ko="AI worker 기반 Physical AI 자동 데이터 수집 파이프라인 구축 — Jongmyung Kim" data-title-en="AI Worker Auto Recorder — From Robot Grasping to Policy Training — Jongmyung Kim" data-description-ko="ROBOTIS AI Worker의 학습 데이터를 자동으로 수집·검증하는 파이프라인을 구축하고, 이를 통해 VLA 모델을 학습한 프로젝트" data-description-en="Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -22,7 +22,7 @@
     <header class="project-header">
       <h1>AI worker 기반 Physical AI 자동 데이터 수집 파이프라인 구축</h1>
       <div class="meta"></div>
-      <p class="project-skills">ROS 2 · GraspNet / GSNet · CenterPose · GR00T · Isaac Sim</p>
+      <p class="project-skills">ROS 2 · CenterPose · GR00T · Isaac Sim · Graspnet · VLA · AI Worker</p>
       
     </header>
 
@@ -35,6 +35,22 @@
 
     <div class="case-layout">
       <article class="case-study">
+        <section class="case-section" id="ko-problem-statement">
+          <div class="case-heading"><h2>Problem Statement</h2></div>
+          <p>왜 이게 문제인지, 기존 방법은 왜 안 되는지. 본인 경험(오퍼레이터)에서 출발하면 설득력이 생깁니다.</p>
+<ol start="2">
+<li><strong>접근</strong>: 시스템 다이어그램 한 장과 핵심 설계 결정 2~3개. 결정마다 &quot;왜 이걸 골랐고 대안은 뭐였는지&quot;를 적습니다.</li>
+<li><strong>실험</strong>: 무엇을 무엇과 비교했는지, 지표와 조건(시행 횟수, 환경)을 표 하나로.</li>
+<li><strong>결과</strong>: 표와 영상. 숫자마다 해석을 한 줄씩 붙입니다.</li>
+<li><strong>실패 분석</strong>: 안 된 경우를 유형별로 나누고 원인 가설과 검증을 적습니다.</li>
+<li><strong>한계와 다음 단계</strong>: 구멍을 본인이 먼저 말하고, 다음에 할 일을 우선순위로.</li>
+</ol>
+<div class="role-grid"><div class="info-card"><strong>인식과 실행</strong><span>후보 생성부터 접근·파지·들기까지 연결</span></div><div class="info-card"><strong>반복 수집</strong><span>성공 판정과 녹화 결과를 에피소드에 연결</span></div><div class="info-card"><strong>정책 학습</strong><span>수집 데이터 검증과 GR00T 학습</span></div></div><blockquote>
+<p><strong>추가할 자료:</strong> 전체 동작 데모, 개발 기간, 협업 범위와 직접 담당한 구현.</p>
+</blockquote>
+
+        </section>
+
         <section class="case-section" id="ko-반복-가능한-집기를-만들려면">
           <div class="case-heading"><h2>반복 가능한 집기를 만들려면</h2></div>
           <p>집기 후보가 생성되어도 로봇이 도달하지 못하거나, 물체를 들어 올리지 못할 수 있습니다. 모션 명령이 끝났다는 사실만으로 성공 데이터를 판정할 수 없습니다.</p>
@@ -210,15 +226,15 @@
   </div>
     <div class="project-language" data-language-content="en" hidden>
     <header class="project-header">
-      <h1>FFW Auto Recorder — From Robot Grasping to Policy Training</h1>
+      <h1>AI Worker Auto Recorder — From Robot Grasping to Policy Training</h1>
       <div class="meta"></div>
-      <p class="project-skills">ROS 2 · GraspNet / GSNet · CenterPose · GR00T · Isaac Sim</p>
+      <p class="project-skills">ROS 2 · CenterPose · GR00T · Isaac Sim · Graspnet · VLA · AI Worker</p>
       
     </header>
 
     <section class="project-overview" id="overview-en">
       <h2>Overview</h2>
-      <p class="lead">Training a robot grasping policy requires repeatable motions and verified demonstrations. This project connects grasp generation, motion execution, success evaluation and recording into an automated collection workflow for the FFW robot. GraspNet-based and CenterPose-based collection pipelines were compared, and their datasets were used separately to train GR00T policies.</p><div class="overview-note"><h3>Portfolio outline</h3><p>This draft establishes the story and recorded results. Demonstrations, experimental conditions and implementation evidence will be added to each section.</p><p>Results cover simulation collection and recorded training completion. Trained-policy performance and physical grasping performance require separate evaluation.</p></div>
+      <p class="lead">Training a robot grasping policy requires repeatable motions and verified demonstrations. This project connects grasp generation, motion execution, success evaluation and recording into an automated collection workflow for the AI Worker robot. GraspNet-based and CenterPose-based collection pipelines were compared, and their datasets were used separately to train GR00T policies.</p><div class="overview-note"><h3>Portfolio outline</h3><p>This draft establishes the story and recorded results. Demonstrations, experimental conditions and implementation evidence will be added to each section.</p><p>Results cover simulation collection and recorded training completion. Trained-policy performance and physical grasping performance require separate evaluation.</p></div>
     </section>
 
     

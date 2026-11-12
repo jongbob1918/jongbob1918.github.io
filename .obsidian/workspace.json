@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "fe3c8f61895b851f",
+        "id": "2c1a157953cd6865",
         "type": "tabs",
         "children": [
           {
-            "id": "fb2f40d573b9ae76",
+            "id": "395414693bd33437",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "project-data/ffw-auto-recorder.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "ffw-auto-recorder"
+              "title": "New tab"
             }
           }
         ]
@@ -188,7 +184,7 @@
       "bases:Create new base": false
     }
   },
-  "active": "fb2f40d573b9ae76",
+  "active": "395414693bd33437",
   "lastOpenFiles": [
     "dist/assets/videos/roomie-ik-target-control.mp4",
     "dist/assets/videos/roomie-button-click.mp4",
@@ -209,13 +205,20 @@
     "dist/assets/images/ros1-noetic-to-ros2-humble.prompt.txt",
     "dist/assets/images",
     "dist/assets",
+    "project-data/ffw-auto-recorder.md",
+    "project-data/lk-patrol.md",
+    "project-data/lk-ros.md",
+    "project-data/roomie.md",
+    "project-data/physical-ai-hackathon.md",
+    "project-data/templates/project-template.md",
+    "project-data/templates/project-template-en.md",
+    "project-data/falcon.md",
+    "project-data/javis.md",
+    "project-data/elevator-mcu.md",
+    "project-data/README.md",
     "dist/projects.json",
     "dist/script.js",
     "project-data/en/ffw-auto-recorder.md",
-    "project-data/physical-ai-hackathon.md",
-    "project-data/lk-ros.md",
-    "project-data/lk-patrol.md",
-    "project-data/ffw-auto-recorder.md",
     "DEPLOY.md",
     "2026-09-13.md",
     "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_8.md",
@@ -228,13 +231,6 @@
     "dist/images/notes/easy-deep-learning-ch02/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch03/SOURCES.md",
     "dist/images/notes/easy-deep-learning-ch01/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_3.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_9.md",
-    "project-data/en/ffw-auto-pick.md",
-    "site/public/images/notes/easy-deep-learning-ch05/SOURCES.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_09.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_2.md",
-    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_1.md"
+    "site/src/content/notes/Machine Learning｜Deep Learning/deeplearning_4.md"
   ]
 }

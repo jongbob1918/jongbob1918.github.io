@@ -1,10 +1,10 @@
 ---
 slug: ffw-auto-recorder
-title: FFW Auto Recorder — From Robot Grasping to Policy Training
+title: AI Worker Auto Recorder — From Robot Grasping to Policy Training
 description: Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training
 overview: >-
   Training a robot grasping policy requires repeatable motions and verified demonstrations.
-  This project connects grasp generation, motion execution, success evaluation and recording into an automated collection workflow for the FFW robot.
+  This project connects grasp generation, motion execution, success evaluation and recording into an automated collection workflow for the AI Worker robot.
   GraspNet-based and CenterPose-based collection pipelines were compared, and their datasets were used separately to train GR00T policies.
 overviewNote:
   title: Portfolio outline

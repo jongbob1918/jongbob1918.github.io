@@ -1,10 +1,10 @@
 ---
-slug: ffw-auto-pick
-shortName: FFW AUTO PICK
+slug: ffw-auto-recorder
+shortName: FFW Auto Recorder
 category: side
 order: 1
-title: AI worker
-description: 수동 시연의 병목을 해결하기 위해 ROBOTIS AI Worker 데이터 취득 자동화 파이프라인을 구축하고, VLA 모델 기반의 조작 정책 학습까지 연결한 End-to-End 프로젝트
+title: AI worker 기반 Physical AI 자동 데이터 수집 파이프라인 구축
+description: ROBOTIS AI Worker의 학습 데이터를 자동으로 수집·검증하는 파이프라인을 구축하고, 이를 통해 VLA 모델을 학습한 프로젝트
 skills:
   - ROS 2
   - GraspNet / GSNet

@@ -1,6 +1,6 @@
 ---
-slug: ffw-auto-pick
-title: FFW Auto Pick — From Robot Grasping to Policy Training
+slug: ffw-auto-recorder
+title: FFW Auto Recorder — From Robot Grasping to Policy Training
 description: Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training
 overview: >-
   Training a robot grasping policy requires repeatable motions and verified demonstrations.

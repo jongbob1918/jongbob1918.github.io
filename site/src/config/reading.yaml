@@ -1,4 +1,4 @@
-# All reading sizes and spacing are defined here, in px unless unitless.
+# Reading sizes and spacing in px; line-height and weight are unitless.
 shared:
   content-width: 760
   page-gutter: 20
@@ -8,22 +8,46 @@ shared:
   toc-line-height: 1.6
   toc-gap: 8
   caption-gap: 8
-  heading-after: 16
+  heading-line-height: 1.4
+  h2-weight: 700
+  h3-weight: 700
+  h4-weight: 700
+  h5-weight: 700
+  h6-weight: 600
+  h2-after: 24
+  h3-after: 16
+  h4-after: 12
+  h5-after: 8
+  h6-after: 8
   mobile-breakpoint: 767
   toc-breakpoint: 1256
 desktop:
   body-size: 18
-  h2-size: 28
-  h3-size: 22
+  h2-size: 32
+  h3-size: 24
+  h4-size: 20
+  h5-size: 18
+  h6-size: 18
+  h2-before: 64
+  h3-before: 48
+  h4-before: 28
+  h5-before: 24
+  h6-before: 20
   paragraph-gap: 18
   math-gap: 24
   figure-gap: 32
-  heading-before: 40
 mobile:
   body-size: 17
-  h2-size: 24
-  h3-size: 20
+  h2-size: 28
+  h3-size: 22
+  h4-size: 19
+  h5-size: 17
+  h6-size: 17
+  h2-before: 48
+  h3-before: 40
+  h4-before: 24
+  h5-before: 20
+  h6-before: 16
   paragraph-gap: 17
   math-gap: 20
   figure-gap: 24
-  heading-before: 32

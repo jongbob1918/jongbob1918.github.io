@@ -16,14 +16,35 @@
 }
 /* Collapsing block margins use the larger adjacent gap, never their sum. */
 .article :where(p, ul, ol, pre, blockquote, table, details) { margin: var(--reading-paragraph-gap) 0; }
-.article > :first-child { margin-top: 0; }
 .article :where(h2, h3, h4, h5, h6) {
-  scroll-margin-top: 86px; margin: var(--reading-heading-before) 0 var(--reading-heading-after);
-  color: var(--ink); letter-spacing: normal; line-height: 1.4;
+  scroll-margin-top: 86px; color: var(--ink); letter-spacing: normal;
+  line-height: var(--reading-heading-line-height);
 }
-.article h2 { font-size: var(--reading-h2-size); }
-.article :where(h3, h4, h5, h6) { font-size: var(--reading-h3-size); }
-.article :where(h2, h3, h4, h5, h6) + * { margin-top: var(--reading-heading-after); }
+.article h2 {
+  font-size: var(--reading-h2-size); font-weight: var(--reading-h2-weight);
+  margin: var(--reading-h2-before) 0 var(--reading-h2-after);
+}
+.article h2 + * { --preceding-heading-gap: var(--reading-h2-after); }
+.article h3 {
+  font-size: var(--reading-h3-size); font-weight: var(--reading-h3-weight);
+  margin: var(--reading-h3-before) 0 var(--reading-h3-after);
+}
+.article h3 + * { --preceding-heading-gap: var(--reading-h3-after); }
+.article h4 {
+  font-size: var(--reading-h4-size); font-weight: var(--reading-h4-weight);
+  margin: var(--reading-h4-before) 0 var(--reading-h4-after);
+}
+.article h4 + * { --preceding-heading-gap: var(--reading-h4-after); }
+.article h5 {
+  font-size: var(--reading-h5-size); font-weight: var(--reading-h5-weight);
+  margin: var(--reading-h5-before) 0 var(--reading-h5-after);
+}
+.article h5 + * { --preceding-heading-gap: var(--reading-h5-after); }
+.article h6 {
+  font-size: var(--reading-h6-size); font-weight: var(--reading-h6-weight);
+  margin: var(--reading-h6-before) 0 var(--reading-h6-after);
+}
+.article h6 + * { --preceding-heading-gap: var(--reading-h6-after); }
 .article :where(p, li) { font-size: inherit; }
 .article li + li { margin-top: var(--reading-toc-gap); }
 .article blockquote { padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
@@ -41,9 +62,15 @@
 .article .katex-display .hangul_fallback { font-size: .8em; }
 .article table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: inherit; }
 .article details { padding: 16px 20px; border: 1px solid var(--line); border-radius: 6px; }
-.article details[open] summary { margin-bottom: var(--reading-heading-after); }
-.article-toc { position: sticky; top: 96px; align-self: start; margin-block: var(--reading-heading-before); padding-left: 16px; border-left: 1px solid var(--line); font-size: var(--reading-toc-size); line-height: var(--reading-toc-line-height); }
+.article details[open] summary { margin-bottom: var(--reading-h3-after); }
+.article-toc { position: sticky; top: 96px; align-self: start; margin-block: var(--reading-h3-before); padding-left: 16px; border-left: 1px solid var(--line); font-size: var(--reading-toc-size); line-height: var(--reading-toc-line-height); }
 .article-toc > p { margin-bottom: var(--reading-toc-gap); color: var(--ink); font-size: inherit; font-weight: 700; }
 .article-toc ol { margin: 0; padding: 0; list-style: none; }
 .article-toc li { margin: 0; color: var(--text); font-size: inherit; }
 .article-toc li + li { margin-top: var(--reading-toc-gap); }
+
+/* Keep a heading with its explanation, even when the next block is math or a figure. */
+.article :is(h2, h3, h4, h5, h6) + :is(p, ul, ol, pre, blockquote, table, details, figure, img, .katex-display, h2, h3, h4, h5, h6) {
+  margin-top: var(--preceding-heading-gap);
+}
+.article > :first-child { margin-top: 0; }

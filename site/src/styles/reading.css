@@ -1,0 +1,49 @@
+/* Shared article rendering; dimensions come from config/reading.yaml. */
+.article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.article code { padding: 2px 5px; border-radius: 3px; background: var(--soft); font-size: .88em; }
+.article pre { overflow-x: auto; padding: 20px; color: #e4e7ec; border: 1px solid var(--line); background: #111827; }
+.article pre code { padding: 0; background: transparent; }
+.article th, .article td { min-width: 110px; padding: 12px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.article th { color: var(--ink); background: var(--soft); }
+.article summary { color: var(--ink); font-weight: 600; cursor: pointer; }
+.article-toc li.depth-3 { padding-left: 10px; }
+.article-toc a:hover { color: var(--accent); }
+.article {
+  min-width: 0; padding: 18px 0 95px; color: var(--text);
+  font-size: var(--reading-body-size); line-height: var(--reading-line-height);
+  letter-spacing: normal; word-spacing: normal; text-align: left;
+  display: flow-root;
+}
+/* Collapsing block margins use the larger adjacent gap, never their sum. */
+.article :where(p, ul, ol, pre, blockquote, table, details) { margin: var(--reading-paragraph-gap) 0; }
+.article > :first-child { margin-top: 0; }
+.article :where(h2, h3, h4, h5, h6) {
+  scroll-margin-top: 86px; margin: var(--reading-heading-before) 0 var(--reading-heading-after);
+  color: var(--ink); letter-spacing: normal; line-height: 1.4;
+}
+.article h2 { font-size: var(--reading-h2-size); }
+.article :where(h3, h4, h5, h6) { font-size: var(--reading-h3-size); }
+.article :where(h2, h3, h4, h5, h6) + * { margin-top: var(--reading-heading-after); }
+.article :where(p, li) { font-size: inherit; }
+.article li + li { margin-top: var(--reading-toc-gap); }
+.article blockquote { padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
+.article img { max-width: 100%; height: auto; }
+.article :where(figure, p:has(> img:only-child), p:has(> a:only-child > img:only-child), img) { margin-block: var(--reading-figure-gap); }
+.article figure { margin-inline: 0; }
+.article :where(figure, p) img { display: block; margin: 0 auto; }
+.article > img { display: block; margin-inline: auto; }
+.article figure img { background: #fff; }
+.article figure > p { margin: 0; }
+.article figcaption { margin-top: var(--reading-caption-gap); color: var(--muted); font-size: var(--reading-caption-size); line-height: var(--reading-toc-line-height); }
+.article .katex-display { margin: var(--reading-math-gap) 0; overflow-x: auto; overflow-y: hidden; padding: .5em 0; }
+.article p:has(> .katex-display:only-child) { margin: var(--reading-math-gap) 0; }
+.article p > .katex-display:only-child { margin: 0; }
+.article .katex-display .hangul_fallback { font-size: .8em; }
+.article table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: inherit; }
+.article details { padding: 16px 20px; border: 1px solid var(--line); border-radius: 6px; }
+.article details[open] summary { margin-bottom: var(--reading-heading-after); }
+.article-toc { position: sticky; top: 96px; align-self: start; margin-block: var(--reading-heading-before); padding-left: 16px; border-left: 1px solid var(--line); font-size: var(--reading-toc-size); line-height: var(--reading-toc-line-height); }
+.article-toc > p { margin-bottom: var(--reading-toc-gap); color: var(--ink); font-size: inherit; font-weight: 700; }
+.article-toc ol { margin: 0; padding: 0; list-style: none; }
+.article-toc li { margin: 0; color: var(--text); font-size: inherit; }
+.article-toc li + li { margin-top: var(--reading-toc-gap); }

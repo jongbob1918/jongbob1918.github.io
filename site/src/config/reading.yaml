@@ -1,0 +1,29 @@
+# All reading sizes and spacing are defined here, in px unless unitless.
+shared:
+  content-width: 760
+  page-gutter: 20
+  toc-size: 16
+  caption-size: 14
+  line-height: 1.75
+  toc-line-height: 1.6
+  toc-gap: 8
+  caption-gap: 8
+  heading-after: 16
+  mobile-breakpoint: 767
+  toc-breakpoint: 1256
+desktop:
+  body-size: 18
+  h2-size: 28
+  h3-size: 22
+  paragraph-gap: 18
+  math-gap: 24
+  figure-gap: 32
+  heading-before: 40
+mobile:
+  body-size: 17
+  h2-size: 24
+  h3-size: 20
+  paragraph-gap: 17
+  math-gap: 20
+  figure-gap: 24
+  heading-before: 32

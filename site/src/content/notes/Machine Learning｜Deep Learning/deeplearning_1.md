@@ -39,7 +39,7 @@ featured: false
 
 ### 딥러닝(Deep Learning)
 
-**딥러닝**은 머신러닝의 한 분야입니다. **깊은 인공 신경망(Deep Neural Network)** 을 이용해 데이터의 특징과 판단 기준을 학습합니다. **특징**은 주어진 작업에 필요한 정보입니다. 예를 들어 강아지와 고양이를 구분할 때는 귀 모양이나 털 무늬가 특징이 될 수 있습니다.
+**딥러닝**은 머신러닝의 한 분야입니다. <strong>깊은 인공 신경망(Deep Neural Network)</strong>을 이용해 데이터의 특징과 판단 기준을 학습합니다. **특징**은 주어진 작업에 필요한 정보입니다. 예를 들어 강아지와 고양이를 구분할 때는 귀 모양이나 털 무늬가 특징이 될 수 있습니다.
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/deep-learning-classification.png" alt="강아지와 고양이 이미지를 입력층, 은닉층, 출력층으로 처리하는 심층 신경망" loading="lazy" />
 
@@ -71,6 +71,7 @@ featured: false
 **지도학습**은 입력 데이터에 정답을 붙이고, 예측과 정답의 차이를 줄이도록 학습하는 방식입니다.
 
 입력 데이터에 정답을 붙이는 작업을 **데이터 레이블링**(Data Labeling)이라고 합니다.
+
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/data-labeling.png" alt="지도학습을 위한 데이터 레이블링 예시" width="480" loading="lazy" />
 
 ### 지도학습의 종류
@@ -80,10 +81,9 @@ featured: false
 사진에 무엇이 있는지만 알면 되는지, 어디에 몇 개 있는지도 알아야 하는지에 따라 작업이 달라집니다.
 
 - **분류(classification):** 이미지가 무엇을 나타내는지 클래스를 예측합니다.
-
 - **객체 위치 추정(localization):** 대상 객체의 위치를 예측합니다. 보통 경계 상자로 표시합니다.
-
 - **객체 탐지(object detection):** 한 이미지에 있는 여러 객체의 종류와 위치를 함께 예측합니다.
+
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/classification-localization-detection.png" alt="이미지 분류와 객체 위치 추정 및 탐지 비교" loading="lazy" />
 
 연속된 숫자(예: 영상 수익)를 예측하는 **회귀**(regression)도 지도학습입니다. [2장](/notes/deep-learning/easy-deep-learning-ch02/)에서 다룹니다.
@@ -93,10 +93,10 @@ featured: false
 경계 상자만으로는 물체의 정확한 모양을 표현하기 어렵습니다. **분할**은 픽셀 단위로 영역을 구분합니다.
 
 - **의미 분할(semantic segmentation):** 모든 픽셀에 대해 어떤 클래스에 속하는지 판단합니다.
-
 - **인스턴스 분할(instance segmentation):** 같은 클래스라도 개별 객체를 구분합니다. 사람 두 명이 있으면 각각 다른 영역으로 표시합니다.
 
 구현 예시: 객체 탐지 → 각 객체 영역의 픽셀 분할
+
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/image-segmentation.png" alt="이미지의 픽셀 영역을 구분하는 분할 예시" loading="lazy" />
 
 #### 자세 추정과 얼굴 랜드마크 탐지
@@ -126,10 +126,10 @@ featured: false
 
 <img src="../../../../public/images/notes/easy-deep-learning-ch01/pretraining-finetuning.png" alt="프리텍스트 작업으로 사전학습한 모델을 다운스트림 작업으로 전이하고 미세조정하는 과정" width="578" loading="lazy" />
 
-| 단계                | 학습 내용                                                                                                              | 사용하는 데이터           |
+| 단계 | 학습 내용 | 사용하는 데이터 |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------ |
-| 사전학습(Pretraining) | 가짜 연습 문제(Pretext Task)를 풀며 특징 학습<br>Predictor : 가짜 연습 문제(Pretext Task)를 풀기 위한 **예측 모듈**                           | 레이블이 없는 대량의 데이터    |
-| 미세조정(Fine-tuning) | 실제로 풀려는 다운스트림 작업(Downstream Task)에 맞게 모델 조정<br> Predictor : 우리가 진짜 풀고 싶은 실전 문제(Downstream Task)를 위한 **출력 모듈** | 해당 작업의 레이블이 있는 데이터 |
+| 사전학습(Pretraining) | 가짜 연습 문제(Pretext Task)를 풀며 특징 학습<br>Predictor: 가짜 연습 문제(Pretext Task)를 풀기 위한 **예측 모듈** | 레이블이 없는 대량의 데이터 |
+| 미세조정(Fine-tuning) | 실제로 풀려는 다운스트림 작업(Downstream Task)에 맞게 모델 조정<br> Predictor: 우리가 진짜 풀고 싶은 실전 문제(Downstream Task)를 위한 **출력 모듈** | 해당 작업의 레이블이 있는 데이터 |
 
 사전학습 방식은 대표적으로 두 가지로 나뉩니다.
 
@@ -142,15 +142,15 @@ featured: false
 ##### 이미지에서 예시
 
 - **Context Prediction · 위치 관계 예측**
-	이미지에 정답 레이블이 없어도 어디에서 잘라낸 조각인지는 알 수 있습니다.
-	 이 위치 정보를 학습 목표로 사용하는 방법이 **Context Prediction**입니다.
-	 작은 이미지 영역인 패치 사이의 상대 위치를 예측합니다.
+  이미지에 정답 레이블이 없어도 어디에서 잘라낸 조각인지는 알 수 있습니다.
+  이 위치 정보를 학습 목표로 사용하는 방법이 **Context Prediction**입니다.
+  작은 이미지 영역인 패치 사이의 상대 위치를 예측합니다.
 
-	순서
+  순서
 
-	1. 이미지에서 기준 패치를 무작위로 선택합니다.
-	2. 기준 패치 주변에서 같은 크기의 패치를 선택합니다.
-	3. 두 패치를 입력하고, 주변 패치가 기준 패치의 어느 방향에 있었는지 예측합니다.
+  1. 이미지에서 기준 패치를 무작위로 선택합니다.
+  2. 기준 패치 주변에서 같은 크기의 패치를 선택합니다.
+  3. 두 패치를 입력하고, 주변 패치가 기준 패치의 어느 방향에 있었는지 예측합니다.
 
 <figure>
   <img src="../../../../public/images/notes/easy-deep-learning-ch01/context-prediction.jpg" alt="고양이 코의 기준 패치와 귀 패치로 상대 위치 3번을 예측하는 Context Prediction 원 저자 그림" width="1024" loading="lazy" />
@@ -213,19 +213,18 @@ featured: false
 활용 예시: 고차원 데이터 시각화, 계산량 감소
 
 - **PCA(Principal Component Analysis):** 데이터의 분산을 최대로 보존하는 축으로 투영해 차원을 축소하는 기법입니다.
-	- 분산이 사라지면 데이터들이 다 똑같아 보여서 구별하지 못하기 때문입니다.
-
+  - 분산이 사라지면 데이터들이 다 똑같아 보여서 구별하지 못하기 때문입니다.
 - **SVD(Singular Value Decomposition):** 복잡한 직사각형 숫자 표(행렬)를 3개의 단순한 부품 표로 쪼개는 기술입니다. 일부 성분을 남기는 근사나 PCA 계산에 활용할 수 있습니다.
 
 [군집화·차원 축소 참고 문서](https://scikit-learn.org/stable/unsupervised_learning.html)
 
 ### 2.4 강화학습
 
-**강화학습(Reinforcement Learning)** 은 행동을 시도하고, 그 결과로 받은 보상을 바탕으로 다음 선택을 바꾸는 학습 방식입니다.
+<strong>강화학습(Reinforcement Learning)</strong>은 행동을 시도하고, 그 결과로 받은 보상을 바탕으로 다음 선택을 바꾸는 학습 방식입니다.
 
 #### 맛집까지 가는 길을 배우는 로봇
 
-5×5 지도에서 맛집을 찾는 로봇을 생각해 보겠습니다. 로봇은 행동을 선택하는 **에이전트(Agent)** 이고, 지도와 보상 규칙은 **환경(Environment)** 입니다. 로봇이 있는 칸은 **상태(State)**, 위·아래·왼쪽·오른쪽으로 한 칸 움직이는 것은 **행동(Action)** 입니다.
+5×5 지도에서 맛집을 찾는 로봇을 생각해 보겠습니다. 로봇은 행동을 선택하는 <strong>에이전트(Agent)</strong>이고, 지도와 보상 규칙은 <strong>환경(Environment)</strong>입니다. 로봇이 있는 칸은 **상태(State)**, 위·아래·왼쪽·오른쪽으로 한 칸 움직이는 것은 <strong>행동(Action)</strong>입니다.
 
 맛집에 도착하면 `+100`, 공사 구간에 들어가면 `−20`을 받습니다. 어느 방향이든 한 칸 이동할 때마다 `−1`도 받습니다.
 
@@ -242,7 +241,6 @@ featured: false
 ## 참고 자료
 
 - [NeurIPS 2021 · Self-Supervised Learning: Self-Prediction and Contrastive Learning](https://nips.cc/media/neurips-2021/Slides/21895.pdf).
-
 - 혁펜하임, 『이지 딥러닝』, 챕터 1.
 - Doersch et al., [Context Prediction](https://arxiv.org/abs/1505.05192), 2015.
 - Chen et al., [SimCLR](https://arxiv.org/abs/2002.05709), 2020.

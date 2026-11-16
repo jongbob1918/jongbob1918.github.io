@@ -1,5 +1,5 @@
 ---
-slug: ffw-auto-recorder
+slug: ai-worker-auto-recorder
 shortName: AI Worker Auto Recorder
 category: side
 order: 1
@@ -28,7 +28,11 @@ overviewNote:
 
 
 ## Problem Statement
-왜 이게 문제인지, 기존 방법은 왜 안 되는지. 본인 경험(오퍼레이터)에서 출발하면 설득력이 생깁니다.
+로보티즈에서 ai worker데이터 수집 업무를 하면서 , 데이터 수집시  발생하는 로봇의 비용 , 취득하는 인적비용 들이 많이 들어가는것을 알게 되었음 
+
+
+
+이 비용을 줄일 수 있으면 좋겟다는 관점에서 픽엔 플레이스같은 간단한 테스크에서는 스스로 자동으로 집고 녹화하여서 데이터를 취득할수있도록 하는 파이프라인이 만들어볼려고함. 
 
 
 

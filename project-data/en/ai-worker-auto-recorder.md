@@ -1,5 +1,5 @@
 ---
-slug: ffw-auto-recorder
+slug: ai-worker-auto-recorder
 title: AI Worker Auto Recorder — From Robot Grasping to Policy Training
 description: Connecting grasp generation, repeated execution, success evaluation and demonstration collection to GR00T policy training
 overview: >-

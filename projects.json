@@ -172,10 +172,10 @@
       ]
     },
     {
-      "slug": "ffw-auto-recorder",
+      "slug": "ai-worker-auto-recorder",
       "category": "side",
       "order": 1,
-      "detailUrl": "projects/ffw-auto-recorder.html",
+      "detailUrl": "projects/ai-worker-auto-recorder.html",
       "image": "",
       "imageAlt": "",
       "imageFit": "cover",

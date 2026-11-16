@@ -82,18 +82,18 @@ featured: false
 
 학습시 입력데이터를 받은 모델이 출력하는 예측값과 정답값의 오차인 손실값이 나옵니다.
 
-![[Pasted image 20261115220328.png]]
+<img src="../../../../public/images/notes/easy-deep-learning-ch07/regularization-base-loss.png" alt="입력 데이터를 신경망에 통과시킨 예측값과 정답으로 기존 손실을 계산하는 흐름" loading="lazy" />
 
 
 추가로 각 각중치의 크기를 더하고 사람이 설정하는 규제강도 값을 곱하여 규제항이라는 패널티값을 만듭니다.
 
-![[Pasted image 20261115221952.png]]
+<img src="../../../../public/images/notes/easy-deep-learning-ch07/regularization-weight-penalty.png" alt="가중치 절댓값의 합 9.5에 규제 강도 0.1을 곱해 규제항 0.95를 계산하는 과정" loading="lazy" />
 
 
 
 
 이값을 기존Loss값과 더하여서 Total Loss를 만듭니다.
-![[Pasted image 20261115222241.png]]
+<img src="../../../../public/images/notes/easy-deep-learning-ch07/regularization-total-loss.png" alt="기존 손실과 규제항을 더해 전체 손실을 만드는 흐름" loading="lazy" />
 
 
 이 Total Loss를 줄이는 방향으로 각 가중치를 업데이트합니다. 

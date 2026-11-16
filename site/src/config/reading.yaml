@@ -23,31 +23,31 @@ shared:
   toc-breakpoint: 1256
 desktop:
   body-size: 18
-  h2-size: 32
+  h2-size: 30
   h3-size: 24
   h4-size: 20
-  h5-size: 18
-  h6-size: 18
-  h2-before: 64
-  h3-before: 48
-  h4-before: 28
-  h5-before: 24
-  h6-before: 20
-  paragraph-gap: 18
+  h5-size: 17
+  h6-size: 16
+  h2-before: 80
+  h3-before: 56
+  h4-before: 40
+  h5-before: 32
+  h6-before: 28
+  paragraph-gap: 24
   math-gap: 24
   figure-gap: 32
 mobile:
   body-size: 17
-  h2-size: 28
+  h2-size: 26
   h3-size: 22
   h4-size: 19
-  h5-size: 17
-  h6-size: 17
-  h2-before: 48
-  h3-before: 40
-  h4-before: 24
-  h5-before: 20
-  h6-before: 16
-  paragraph-gap: 17
+  h5-size: 16
+  h6-size: 15
+  h2-before: 64
+  h3-before: 48
+  h4-before: 34
+  h5-before: 28
+  h6-before: 24
+  paragraph-gap: 22
   math-gap: 20
   figure-gap: 24

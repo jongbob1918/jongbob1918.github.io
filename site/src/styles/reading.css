@@ -1,6 +1,6 @@
 /* Shared article rendering; dimensions come from config/reading.yaml. */
 .article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-.article code { padding: 2px 5px; border-radius: 3px; background: var(--soft); font-size: .88em; }
+.article code { padding: 2px 5px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 8%, transparent); font-size: .88em; }
 .article pre { overflow-x: auto; padding: 20px; color: #e4e7ec; border: 1px solid var(--line); background: #111827; }
 .article pre code { padding: 0; background: transparent; }
 .article th, .article td { min-width: 110px; padding: 12px 14px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
@@ -45,7 +45,7 @@
   margin: var(--reading-h6-before) 0 var(--reading-h6-after);
 }
 .article h6 + * { --preceding-heading-gap: var(--reading-h6-after); }
-.article :where(p, li) { font-size: inherit; }
+.article :where(p, li) { font-size: inherit; text-wrap: pretty; }
 .article li + li { margin-top: var(--reading-toc-gap); }
 .article blockquote { padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-soft); }
 .article img { max-width: 100%; height: auto; }

@@ -1,0 +1,26 @@
+/* 블로그(site/src/config/reading.yaml)와 같은 글 크기·간격 사다리. 값을 바꾸면 양쪽을 함께 맞춘다. */
+body {
+  --font-text-size: 18px;
+  --line-height-normal: 1.75;
+  --file-line-width: 760px;
+  --p-spacing: 24px;
+  --h2-size: 1.667em; --h3-size: 1.333em; --h4-size: 1.111em; --h5-size: .944em; --h6-size: .889em;
+  --h2-weight: 700; --h3-weight: 700; --h4-weight: 700; --h5-weight: 700; --h6-weight: 600;
+  --h2-line-height: 1.4; --h3-line-height: 1.4; --h4-line-height: 1.4; --h5-line-height: 1.4; --h6-line-height: 1.4;
+}
+.markdown-rendered, .markdown-source-view.mod-cm6 .cm-content { word-break: keep-all; text-wrap: pretty; }
+
+/* 읽기 보기: 제목 위 여백 = 단계 사다리, 아래 여백은 제목에 붙게 */
+.markdown-rendered h2 { margin-block: 80px 24px; }
+.markdown-rendered h3 { margin-block: 56px 16px; }
+.markdown-rendered h4 { margin-block: 40px 12px; }
+.markdown-rendered h5 { margin-block: 32px 8px; }
+.markdown-rendered h6 { margin-block: 28px 8px; }
+.markdown-rendered :is(h2, h3, h4, h5, h6) + * { margin-block-start: 0; }
+
+/* 라이브 프리뷰·편집 보기: 같은 위 여백 */
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-2 { padding-top: 80px; padding-bottom: 24px; }
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-3 { padding-top: 56px; padding-bottom: 16px; }
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-4 { padding-top: 40px; padding-bottom: 12px; }
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-5 { padding-top: 32px; padding-bottom: 8px; }
+.markdown-source-view.mod-cm6 .cm-line.HyperMD-header-6 { padding-top: 28px; padding-bottom: 8px; }

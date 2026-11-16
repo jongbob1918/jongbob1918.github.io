@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
+import remarkBreaks from 'remark-breaks';
 import rehypeKatex from 'rehype-katex';
 import resolveNoteImages from './src/plugins/resolve-note-images.mjs';
 
@@ -17,7 +18,7 @@ export default defineConfig({
     }))
   },
   markdown: {
-    remarkPlugins: [remarkMath, resolveNoteImages],
+    remarkPlugins: [remarkMath, remarkBreaks, resolveNoteImages],
     rehypePlugins: [[rehypeKatex, { strict: 'error', throwOnError: true }]]
   }
 });

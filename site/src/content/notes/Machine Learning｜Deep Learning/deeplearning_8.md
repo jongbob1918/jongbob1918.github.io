@@ -98,6 +98,10 @@ featured: false
 
 이 Total Loss를 줄이는 방향으로 각 가중치를 업데이트합니다. 
 
+
+
+
+
 💡 심화 내용 (가볍게 읽고 넘어가셔도 좋습니다)
 원리를 조금 더 자세히 살펴보겠습니다. 구한 Total Loss를 바탕으로 역전파(Backpropagation)를 통해 기울기(Gradient)를 계산합니다. 덧셈 노드의 역전파 특성상 Total Loss의 기울기는 기존 Loss와 규제항 양쪽으로 똑같이 전달(복사)됩니다.
 

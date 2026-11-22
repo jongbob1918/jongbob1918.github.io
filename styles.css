@@ -401,7 +401,8 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
 .header-inner > .nav-utilities { flex-shrink: 0; gap: 6px; margin: 0; padding-left: 18px; }
 #key-projects { background: var(--paper); }
 #project-categories > .project-subgroup { width: 100%; margin-inline: 0; padding: 24px 0; border-radius: 0; background: var(--soft); }
-#project-categories > .project-subgroup + .project-subgroup { margin-top: 26px; }
+#project-categories > .project-subgroup + .project-subgroup { margin-top: 0; }
+#project-categories > .project-subgroup:nth-child(even) { background: var(--paper); }
 .organization-title { margin: 0 0 20px; color: var(--text); font-size: .9rem; letter-spacing: .04em; }
 .organization-title { color: var(--category-color, var(--text)); }
 html[data-theme="dark"] .organization-title { color: var(--category-dark-color, var(--text)); }

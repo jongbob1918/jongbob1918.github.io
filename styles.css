@@ -195,7 +195,6 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .project-repository:hover { color: #303633; border-color: #fff; background: #fff; transform: translateY(-2px); }
 .project-overview, .demo-section, .case-layout { width: 100%; max-width: var(--case-content-width); margin-right: auto; margin-left: auto; }
 .project-overview { margin-bottom: 56px; }
-.project-overview h2 { margin-bottom: 16px; font-size: clamp(1.35rem, 2.5vw, 1.75rem); }
 .lead { margin-bottom: 16px; color: var(--text); font-size: clamp(1rem, 2vw, 1.14rem); }
 .overview-context { color: var(--text); }
 .overview-note { margin-top: 28px; padding: 20px 22px; border-left: 3px solid var(--accent); background: var(--accent-soft); }

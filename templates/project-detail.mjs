@@ -66,7 +66,6 @@ const renderLocalizedProject = (project, sharedProject, language) => {
     </header>
 
     ${project.overview ? `<section class="project-overview" id="overview-${language}">
-      <h2>Overview</h2>
       <p class="lead">${escapeHtml(project.overview)}</p>${renderOverviewNote(project.overviewNote)}
     </section>` : ''}
 

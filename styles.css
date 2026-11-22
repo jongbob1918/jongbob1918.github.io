@@ -10,7 +10,7 @@
   --accent: #175cd3;
   --accent-soft: #eff8ff;
   --max: 1080px;
-  --project-max: 880px;
+  --project-max: 1040px;
   --shadow: 0 18px 44px rgba(16, 24, 40, .09);
   --header-bg: rgba(255,255,255,.9);
   --disabled: #a7adb6;
@@ -116,13 +116,13 @@ h3 { font-size: 1rem; }
 .project-context { display: block; margin-bottom: 5px; color: var(--muted); font-size: .7rem; font-weight: 650; line-height: 1.5; }
 .keywords { margin-bottom: 10px; color: var(--accent); font-size: .76rem; font-weight: 600; line-height: 1.6; letter-spacing: -.01em; }
 .result { max-width: 650px; margin-bottom: 8px; color: var(--text); font-size: .88rem; }
-.side-project-list { grid-template-columns: repeat(auto-fill,minmax(min(100%,255px),1fr)); gap: 18px; }
+.side-project-list { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; }
 .side-project-list .project-row { display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: auto 1fr; gap: 0; height: 100%; max-width: none; aspect-ratio: auto; padding: 0; overflow: hidden; border-radius: var(--radius-small); background: var(--paper); box-shadow: 0 8px 22px rgba(16,24,40,.07); transition: box-shadow .24s ease, transform .24s ease; }
 .side-project-list .project-row:hover, .side-project-list .project-row:focus-within { box-shadow: var(--shadow); transform: translateY(-2px); }
-.side-project-list .project-copy { border-radius: 0; width: 100%; min-height: 0; display: block; align-self: stretch; margin: -27px 0 0; padding: 34px 16px 18px; background: linear-gradient(to bottom, transparent 0, var(--paper) 27px, var(--paper) 100%); box-shadow: none; transform: none; }
+.side-project-list .project-copy { border-radius: 0; width: 100%; display: block; align-self: stretch; margin: -27px 0 0; min-height: 18rem; padding: 36px 20px 22px; background: linear-gradient(to bottom, transparent 0, var(--paper) 27px, var(--paper) 100%); box-shadow: none; transform: none; }
 .side-project-list .project-row:hover .project-copy, .side-project-list .project-row:focus-within .project-copy { box-shadow: none; transform: none; }
 .side-project-list .project-media { border-radius: 0; width: 100%; min-height: 0; height: auto; aspect-ratio: 16/9; border: 0; }
-.side-project-list .project-title { margin-bottom: 5px; font-size: .98rem; }
+.side-project-list .project-title { margin-bottom: 6px; font-size: 1.02rem; }
 .side-project-list .keywords { margin-bottom: 7px; font-size: .65rem; line-height: 1.5; }
 .side-project-list .result { display: -webkit-box; margin-bottom: 0; overflow: hidden; font-size: .78rem; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
 .project-data-error { margin: 0; padding: 24px; color: var(--muted); background: var(--paper); border-radius: 10px; }
@@ -448,15 +448,24 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
 .project-list[data-project-layout="main"] .project-copy { padding: 16px 22px; }
 .project-list[data-project-layout="main"] .project-title { font-size: 1.08rem; line-height: 1.4; }
 .project-copy .keywords { margin-bottom: 0; }
-.side-project-list .card-meta { font-size: .65rem; }
-.side-project-list .card-contribution { font-size: .74rem; }
+.side-project-list .card-meta { font-size: .68rem; }
+.side-project-list .card-contribution { font-size: .76rem; }
 
 @media (min-width: 761px) and (max-width: 1000px) {
   .project-list[data-project-layout="main"] .project-row { height: 260px; }
 }
 
 .card-overview { margin: 8px 0 0; white-space: normal; overflow-wrap: anywhere; color: var(--muted); font-size: .73rem; line-height: 1.5; }
-.side-project-list .card-overview { font-size: .68rem; }
+.side-project-list .card-overview { font-size: .72rem; }
+
+/* Every compact card keeps one size: fixed 3 columns, 16:9 image, clamped text. */
+.side-project-list .project-title, .side-project-list .card-meta, .side-project-list .card-contribution, .side-project-list .keywords, .side-project-list .card-overview { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; }
+.side-project-list .project-title { -webkit-line-clamp: 2; }
+.side-project-list .card-meta, .side-project-list .card-contribution, .side-project-list .keywords { -webkit-line-clamp: 2; }
+.side-project-list .card-overview { -webkit-line-clamp: 3; }
+@media (max-width: 1100px) { .side-project-list .project-copy { min-height: 19.5rem; } }
+@media (max-width: 900px) { .side-project-list { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 560px) { .side-project-list { grid-template-columns: minmax(0,1fr); } }
 
 /* Let the longest card determine a common height without clipping its text. */
 .project-list[data-project-layout="main"] { grid-auto-rows: 1fr; }

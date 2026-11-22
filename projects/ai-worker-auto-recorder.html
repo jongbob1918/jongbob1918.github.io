@@ -41,7 +41,8 @@
 <p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름"></p>
 <p>파지 추론은 graspnet모델을 사용합니다. 별도 Docker 컨테이너로 띄워 cyclo의 supervisior_api로 실행, 종료를 감독합니다. </p>
 <h4>상세 시스템 흐름도</h4>
-<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조" loading="lazy"></figure>
+<p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조"></p>
+
         </section>
 
         <section class="case-section" id="ko-data-collection">
@@ -208,7 +209,8 @@
 </tr>
 </tbody></table>
 <p>Grasp inference runs in <code>grasp_server</code>, a separate Docker container. The auto recording node (<code>/auto_recorder_node</code>) takes grasp candidates computed from the point cloud around the clicked point, then starts recording, approaches, grasps, closes the gripper, lifts and saves the recording in order.</p>
-<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands" loading="lazy"></figure>
+<p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands"></p>
+
         </section>
 
         <section class="case-section" id="en-data-collection">

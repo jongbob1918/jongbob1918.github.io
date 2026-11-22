@@ -43,7 +43,7 @@ ROBOTIS의 로봇 소프트웨어 Cyclo 중 데이터 수집·관리를 맡는 C
 파지 추론은 graspnet모델을 사용합니다. 별도 Docker 컨테이너로 띄워 cyclo의 supervisior_api로 실행, 종료를 감독합니다. 
 #### 상세 시스템 흐름도 
 
-<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조" loading="lazy"></figure>
+![웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조](../assets/images/ai-worker-auto-record-architecture.webp)
 
 ## Data Collection
 

@@ -222,8 +222,6 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .media-grid .feature-media { min-width: 0; background: var(--soft); }
 .media-grid .feature-media img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #fff; }
 .pr-comparison .feature-media img { aspect-ratio: 6 / 5; }
-.wide-media { position: relative; left: 50%; width: min(1200px, calc(100vw - 48px)); max-width: none; margin: 28px 0; transform: translateX(-50%); }
-.case-section .wide-media img { display: block; width: 100%; max-width: none; height: auto; border: 1px solid var(--line); background: #fff; }
 .zoomable { cursor: zoom-in; }
 html:has(.image-lightbox[open]) { overflow: hidden; }
 .image-lightbox { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; overflow: auto; background: rgba(8,12,18,.92); }

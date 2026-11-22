@@ -6,21 +6,21 @@
       "titleKo": "Physical AI",
       "titleEn": "Physical AI",
       "priority": 1,
-      "layout": "main"
+      "layout": "compact"
     },
     {
       "id": "lk",
       "titleKo": "LK ROBOTICS",
       "titleEn": "LK ROBOTICS",
       "priority": 2,
-      "layout": "main"
+      "layout": "compact"
     },
     {
       "id": "addinedu",
       "titleKo": "ADDINEDU",
       "titleEn": "ADDINEDU",
       "priority": 3,
-      "layout": "main",
+      "layout": "compact",
       "color": "#174b88",
       "darkColor": "#8cc8ff"
     },

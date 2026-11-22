@@ -1,6 +1,6 @@
 [
-  { "id": "physical-ai", "titleKo": "Physical AI", "titleEn": "Physical AI", "priority": 1, "layout": "main" },
-  { "id": "lk", "titleKo": "LK ROBOTICS", "titleEn": "LK ROBOTICS", "priority": 2, "layout": "main" },
-  { "id": "addinedu", "titleKo": "ADDINEDU", "titleEn": "ADDINEDU", "priority": 3, "layout": "main", "color": "#174b88", "darkColor": "#8cc8ff" },
+  { "id": "physical-ai", "titleKo": "Physical AI", "titleEn": "Physical AI", "priority": 1, "layout": "compact" },
+  { "id": "lk", "titleKo": "LK ROBOTICS", "titleEn": "LK ROBOTICS", "priority": 2, "layout": "compact" },
+  { "id": "addinedu", "titleKo": "ADDINEDU", "titleEn": "ADDINEDU", "priority": 3, "layout": "compact", "color": "#174b88", "darkColor": "#8cc8ff" },
   { "id": "side", "titleKo": "Side", "titleEn": "Side", "priority": 4, "layout": "compact" }
 ]

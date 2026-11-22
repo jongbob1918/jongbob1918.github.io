@@ -7,7 +7,7 @@ title: AI Worker Auto Recorder — 텔레오퍼레이션 없이 학습 데이터
 description: 사람이 조종하지 않고 AI Worker가 스스로 병을 집어 시연 629개를 모으고, 그 데이터로 GR00T 정책을 학습·평가한 시뮬레이션 프로젝트
 period: "2026.09–11"
 team: 1명 (개인 프로젝트)
-role: ROBOTIS 오픈소스 기반 자동 수집 파이프라인 구현, 학습과 평가
+role: ""
 skills:
   - ROS 2
   - Isaac Sim

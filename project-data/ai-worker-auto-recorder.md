@@ -1,7 +1,7 @@
 ---
 slug: ai-worker-auto-recorder
 shortName: AI Worker Auto Recorder
-category: side
+category: physical-ai
 order: 1
 title: AI Worker Auto Recorder — 텔레오퍼레이션 없이 학습 데이터를 모으는 파이프라인
 description: 사람이 조종하지 않고 AI Worker가 스스로 병을 집어 시연 629개를 모으고, 그 데이터로 GR00T 정책을 학습·평가한 시뮬레이션 프로젝트

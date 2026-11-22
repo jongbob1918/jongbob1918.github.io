@@ -2,17 +2,24 @@
   "version": 1,
   "categories": [
     {
+      "id": "physical-ai",
+      "titleKo": "피지컬 AI",
+      "titleEn": "Physical AI",
+      "priority": 1,
+      "layout": "main"
+    },
+    {
       "id": "lk",
       "titleKo": "LK ROBOTICS",
       "titleEn": "LK ROBOTICS",
-      "priority": 1,
+      "priority": 2,
       "layout": "main"
     },
     {
       "id": "addinedu",
       "titleKo": "ADDINEDU",
       "titleEn": "ADDINEDU",
-      "priority": 2,
+      "priority": 3,
       "layout": "main",
       "color": "#174b88",
       "darkColor": "#8cc8ff"
@@ -21,11 +28,40 @@
       "id": "side",
       "titleKo": "Side",
       "titleEn": "Side",
-      "priority": 3,
+      "priority": 4,
       "layout": "compact"
     }
   ],
   "projects": [
+    {
+      "slug": "ai-worker-auto-recorder",
+      "category": "physical-ai",
+      "order": 1,
+      "detailUrl": "projects/ai-worker-auto-recorder.html",
+      "image": "assets/images/ai-worker-fixed40-locations.webp",
+      "imageAlt": "40개 위치에 놓을 병 배치를 위에서 내려다본 Isaac Lab 장면. 5줄 × 8열 격자 아래쪽에 로봇 몸체가 보인다",
+      "imageFit": "cover",
+      "imageSequence": [],
+      "titleKo": "AI Worker Auto Recorder — 텔레오퍼레이션 없이 학습 데이터를 모으는 파이프라인",
+      "titleEn": "AI Worker Auto Recorder — Collecting Training Data Without Teleoperation",
+      "overviewKo": "사람이 조종하지 않고 AI Worker가 스스로 병을 집어 시연 629개를 모으고, 그 데이터로 GR00T 정책을 학습·평가한 시뮬레이션 프로젝트",
+      "overviewEn": "An AI Worker that grasps bottles on its own to collect 629 demonstrations, then trains and evaluates GR00T policies on them in simulation",
+      "periodKo": "2026.09–11",
+      "periodEn": "2026.09–11",
+      "teamKo": "1명 (개인 프로젝트)",
+      "teamEn": "1 person (personal project)",
+      "contributionKo": "ROBOTIS 오픈소스 기반 자동 수집 파이프라인 구현, 학습과 평가",
+      "contributionEn": "Built the automatic collection pipeline on ROBOTIS open source, then trained and evaluated policies",
+      "keywords": [
+        "ROS 2",
+        "Isaac Sim",
+        "GraspNet",
+        "CenterPose",
+        "GR00T",
+        "VLA",
+        "AI Worker"
+      ]
+    },
     {
       "slug": "lk-patrol",
       "category": "lk",
@@ -169,35 +205,6 @@
         "OpenCV",
         "Homography",
         "Python"
-      ]
-    },
-    {
-      "slug": "ai-worker-auto-recorder",
-      "category": "side",
-      "order": 1,
-      "detailUrl": "projects/ai-worker-auto-recorder.html",
-      "image": "assets/images/ai-worker-fixed40-locations.webp",
-      "imageAlt": "40개 위치에 놓을 병 배치를 위에서 내려다본 Isaac Lab 장면. 5줄 × 8열 격자 아래쪽에 로봇 몸체가 보인다",
-      "imageFit": "cover",
-      "imageSequence": [],
-      "titleKo": "AI Worker Auto Recorder — 텔레오퍼레이션 없이 학습 데이터를 모으는 파이프라인",
-      "titleEn": "AI Worker Auto Recorder — Collecting Training Data Without Teleoperation",
-      "overviewKo": "사람이 조종하지 않고 AI Worker가 스스로 병을 집어 시연 629개를 모으고, 그 데이터로 GR00T 정책을 학습·평가한 시뮬레이션 프로젝트",
-      "overviewEn": "An AI Worker that grasps bottles on its own to collect 629 demonstrations, then trains and evaluates GR00T policies on them in simulation",
-      "periodKo": "2026.09–11",
-      "periodEn": "2026.09–11",
-      "teamKo": "1명 (개인 프로젝트)",
-      "teamEn": "1 person (personal project)",
-      "contributionKo": "ROBOTIS 오픈소스 기반 자동 수집 파이프라인 구현, 학습과 평가",
-      "contributionEn": "Built the automatic collection pipeline on ROBOTIS open source, then trained and evaluated policies",
-      "keywords": [
-        "ROS 2",
-        "Isaac Sim",
-        "GraspNet",
-        "CenterPose",
-        "GR00T",
-        "VLA",
-        "AI Worker"
       ]
     },
     {

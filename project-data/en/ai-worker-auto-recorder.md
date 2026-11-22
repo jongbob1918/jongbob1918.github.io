@@ -36,7 +36,7 @@ By repository records, I made 96 commits alone between September 5 and October 2
 
 Grasp inference runs in `grasp_server`, a separate Docker container. The auto recording node (`/auto_recorder_node`) takes grasp candidates computed from the point cloud around the clicked point, then starts recording, approaches, grasps, closes the gripper, lifts and saves the recording in order.
 
-![Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands](../assets/images/ai-worker-auto-record-architecture.webp)
+<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands" loading="lazy"></figure>
 
 ## Data Collection
 

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20260925-17">
+  <link rel="stylesheet" href="../styles.css?v=20261122-1">
 </head>
 <body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Teleop-Free Data Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Teleop-Free Data Pipeline — Jongmyung Kim" data-description-ko="ROBOTIS AI Worker 환경에서 GraspNet 파지 모델과 IK 솔버, 자동 성공 검증을 결합해 수동 텔레오퍼레이션 없이 VLA 학습용 데이터를 생성합니다." data-description-en="Combines the GraspNet grasp model, an IK solver and automatic success checks on the ROBOTIS AI Worker to generate VLA training data without manual teleoperation.">
   <div class="reading-progress" aria-hidden="true"></div>
@@ -40,18 +40,20 @@
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div><p>웹 화면에서 대상 병을 한 번 클릭하면 파지 추론, 파지 동작 생성, 실행과 녹화 저장이 사람 개입 없이 이어집니다.</p>
 <p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름"></p>
 <p>파지 추론은 graspnet모델을 사용합니다. 별도 Docker 컨테이너로 띄워 cyclo의 supervisior_api로 실행, 종료를 감독합니다. </p>
-<h4>상세 시스템 다이어그램</h4>
-<p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조"></p>
-
+<h4>상세 시스템 흐름도</h4>
+<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="ko-data-collection">
           <div class="case-heading"><h2>Data Collection</h2></div>
-          <p>실제 IKEA 가구가 배치된 탕비실을 시뮬레이션 에셋으로 불러오고 병을 추가로 렌더링해, 자동 수집 파이프라인을 시뮬레이션과 연동했습니다. 현재 대상은 녹차병 1종입니다.</p>
+          <p>실제 IKEA 가구가 배치된 탕비실을 시뮬레이션 에셋으로 불러오고 병을 추가로 렌더링해, 자동 수집 파이프라인을 시뮬레이션과 연동했습니다. 현재 대상은 녹차병 1종입니다.<br>플라스틱 녹차병을 픽하는 데이터 </p>
+<p>시뮬레이션 전체 사진 </p>
+<p>배치도<br><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다"></p>
+<p>수집하는 동영상 편집해서 </p>
+<p>아래는 구조를 먼가 바꾸어야할거 같다 . 기존이랑 안맞다 </p>
 <h3>GraspNet과 CenterPose 비교</h3>
 <p>파지 후보 생성기로 GraspNet을 먼저 썼고, 결과가 고르지 않아 CenterPose(물체 자세 추정 모델)를 연결해 비교했습니다. CenterPose는 똑바로 선 병의 자세가 약 14~15° 기울어져 나오는 문제가 남아 있어, 병이 서 있다는 전제의 전용 파지 규칙을 함께 씁니다. 카메라 입력과 투영은 표식 9개를 6개 프레임에서 비교해 평균 0.66px 이내로 일치했으므로 원인이 아닙니다.</p>
 <p>처음에는 무작위 배치로 비교해 결과 해석이 갈렸습니다. 그래서 병 위치를 5줄 × 8열 격자 40곳으로 고정하고, 위치마다 방식별 10회씩 반복했습니다.</p>
-<p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다"></p>
 <table>
 <thead>
 <tr>
@@ -206,8 +208,7 @@
 </tr>
 </tbody></table>
 <p>Grasp inference runs in <code>grasp_server</code>, a separate Docker container. The auto recording node (<code>/auto_recorder_node</code>) takes grasp candidates computed from the point cloud around the clicked point, then starts recording, approaches, grasps, closes the gripper, lifts and saves the recording in order.</p>
-<p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands"></p>
-
+<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands" loading="lazy"></figure>
         </section>
 
         <section class="case-section" id="en-data-collection">
@@ -327,6 +328,6 @@
     </div>
   </div>
   </main>
-  <script src="../script.js?v=20260925-13"></script>
+  <script src="../script.js?v=20261122-1"></script>
 </body>
 </html>

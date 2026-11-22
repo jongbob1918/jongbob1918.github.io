@@ -41,21 +41,34 @@ ROBOTIS의 로봇 소프트웨어 Cyclo 중 데이터 수집·관리를 맡는 C
 ![대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름](../assets/images/ai-worker-auto-record-pipeline.webp)
 
 파지 추론은 graspnet모델을 사용합니다. 별도 Docker 컨테이너로 띄워 cyclo의 supervisior_api로 실행, 종료를 감독합니다. 
-#### 상세 시스템 다이어그램 
+#### 상세 시스템 흐름도 
 
-![웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조](../assets/images/ai-worker-auto-record-architecture.webp)
+<figure class="wide-media"><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조" loading="lazy"></figure>
 
 ## Data Collection
 
 실제 IKEA 가구가 배치된 탕비실을 시뮬레이션 에셋으로 불러오고 병을 추가로 렌더링해, 자동 수집 파이프라인을 시뮬레이션과 연동했습니다. 현재 대상은 녹차병 1종입니다.
+플라스틱 녹차병을 픽하는 데이터 
 
+시뮬레이션 전체 사진 
+
+배치도
+![Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다](../assets/images/ai-worker-fixed40-locations.webp)
+
+
+수집하는 동영상 편집해서 
+
+
+
+
+아래는 구조를 먼가 바꾸어야할거 같다 . 기존이랑 안맞다 
 ### GraspNet과 CenterPose 비교
 
 파지 후보 생성기로 GraspNet을 먼저 썼고, 결과가 고르지 않아 CenterPose(물체 자세 추정 모델)를 연결해 비교했습니다. CenterPose는 똑바로 선 병의 자세가 약 14~15° 기울어져 나오는 문제가 남아 있어, 병이 서 있다는 전제의 전용 파지 규칙을 함께 씁니다. 카메라 입력과 투영은 표식 9개를 6개 프레임에서 비교해 평균 0.66px 이내로 일치했으므로 원인이 아닙니다.
 
 처음에는 무작위 배치로 비교해 결과 해석이 갈렸습니다. 그래서 병 위치를 5줄 × 8열 격자 40곳으로 고정하고, 위치마다 방식별 10회씩 반복했습니다.
 
-![Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다](../assets/images/ai-worker-fixed40-locations.webp)
+
 
 | 수집 | 시도 | 성공 시연 |
 | --- | --- | --- |

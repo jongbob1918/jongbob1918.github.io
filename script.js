@@ -311,3 +311,55 @@ if (!document.querySelector('.site-footer')) {
       <div class="wrap footer-inner"><span data-copy-ko="© 2026 김종명" data-copy-en="© 2026 Jongmyung Kim">© 2026 Jongmyung Kim</span></div>
     </footer>`);
 }
+
+// 상세 페이지 본문 이미지를 클릭하면 화면 위에 크게 띄운다. 링크 안의 이미지는 제외한다.
+if (isProjectDetail) {
+  const zoomables = [...document.querySelectorAll('.case-section img, .demo-section img')].filter(img => !img.closest('a'));
+  if (zoomables.length) {
+    const box = document.createElement('dialog');
+    box.className = 'image-lightbox';
+    box.innerHTML = '<button type="button" class="image-lightbox-close" aria-label="Close">×</button><div class="image-lightbox-frame"><img alt=""></div>';
+    document.body.append(box);
+    const frame = box.querySelector('.image-lightbox-frame');
+    const big = box.querySelector('img');
+
+    const setZoom = (on, event) => {
+      if (!on) {
+        box.classList.remove('is-zoomed');
+        big.style.width = '';
+        box.scrollTo(0, 0);
+        return;
+      }
+      const before = big.getBoundingClientRect();
+      const x = event ? event.clientX : before.left + before.width / 2;
+      const y = event ? event.clientY : before.top + before.height / 2;
+      const rx = (x - before.left) / before.width;
+      const ry = (y - before.top) / before.height;
+      box.classList.add('is-zoomed');
+      big.style.width = `${Math.max(big.naturalWidth, before.width * 1.6)}px`;
+      const after = big.getBoundingClientRect();
+      box.scrollLeft += after.left + rx * after.width - x;
+      box.scrollTop += after.top + ry * after.height - y;
+    };
+
+    const open = img => {
+      big.src = img.currentSrc || img.src;
+      big.alt = img.alt;
+      setZoom(false);
+      box.showModal();
+    };
+
+    zoomables.forEach(img => {
+      img.classList.add('zoomable');
+      img.tabIndex = 0;
+      img.addEventListener('click', () => open(img));
+      img.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); open(img); }
+      });
+    });
+    big.addEventListener('click', event => setZoom(!box.classList.contains('is-zoomed'), event));
+    box.addEventListener('click', event => { if (event.target === box || event.target === frame) box.close(); });
+    box.querySelector('.image-lightbox-close').addEventListener('click', () => box.close());
+    box.addEventListener('close', () => setZoom(false));
+  }
+}

@@ -1,4 +1,6 @@
 {
   "showRibbon": true,
-  "enabledCssSnippets": ["reading"]
+  "enabledCssSnippets": [
+    "reading"
+  ]
 }

@@ -24,7 +24,6 @@ demo:
   href: https://www.youtube.com/watch?v=kHgA8jEmoCw&t=22s
 ---
 
-## Problem Statement
 
 고양 서오릉은 [전체 면적이 약 187만 m²인 유적지](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0)로, 수림과 수풀·잔디가 넓게 분포되어 있고, 산책로는 대부분 흙길이며 경사와 요철이 많고, 비가 오면 흙이 유실돼 지형도 달라집니다.
 

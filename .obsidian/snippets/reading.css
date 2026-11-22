@@ -24,3 +24,8 @@ body {
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-4 { padding-top: 40px; padding-bottom: 12px; }
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-5 { padding-top: 32px; padding-bottom: 8px; }
 .markdown-source-view.mod-cm6 .cm-line.HyperMD-header-6 { padding-top: 28px; padding-bottom: 8px; }
+
+/* 프로젝트 상세(styles.css)와 같은 이미지 2열 배치 */
+.markdown-rendered .media-grid, .markdown-source-view .media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 22px 0; }
+.markdown-rendered .media-grid figure, .markdown-source-view .media-grid figure { margin: 0; min-width: 0; }
+.markdown-rendered .media-grid img, .markdown-source-view .media-grid img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #fff; }

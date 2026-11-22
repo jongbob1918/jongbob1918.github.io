@@ -1,35 +1,32 @@
 ---
 slug: ai-worker-auto-recorder
-title: AI Worker Auto Recorder — Collecting Training Data Without Teleoperation
-description: An AI Worker that grasps bottles on its own to collect 629 demonstrations, then trains and evaluates GR00T policies on them in simulation
-period: "2026.09–11"
-team: 1 person (personal project)
-role: Built the automatic collection pipeline on ROBOTIS open source, then trained and evaluated policies
+title: "ROBOTIS AI Worker: Teleop-Free Data Pipeline"
+description: Combines the GraspNet grasp model, an IK solver and automatic success checks on the ROBOTIS AI Worker to generate VLA training data without manual teleoperation.
+period: 2026.09–11
+team: Personal project
+role: ""
 card:
   imageAlt: Top-down Isaac Lab scene with 40 bottles in a 5-row by 8-column grid and the robot body at the bottom
-overview: >-
-  Collecting robot demonstrations by teleoperation turns a person's working time directly into cost.
-  On top of ROBOTIS open source, I built a pipeline in which the AI Worker grasps bottles on its own and saves only the successful episodes.
-  Running with no human involvement for about 6 hours, it made 800 attempts and collected 629 successful demonstrations (2.98 hours of recording); a policy trained on each dataset succeeded in 75 of 120 simulated evaluation trials across 40 positions.
+overview: Vision-Language-Action (VLA) models and imitation learning now enable precise robot control in physical AI, but collecting high-quality training data by manual teleoperation costs a great deal of time and money. To remove this bottleneck, I extended ROBOTIS open source with a grasp estimation model and rule-based motion planning, building an autonomous collection pipeline in which the ROBOTIS AI Worker grasps objects on its own and keeps only successful episodes. Over about 6 hours it made 800 attempts and collected 629 successful demonstrations (2.98 hours of recording, 78.6% success rate). A VLA policy trained only on this data reached a 62.5% (75/120) grasp success rate in my own simulation evaluation across 40 positions.
 ---
 
-## Without spending teleoperator hours on every demonstration
+<!-- TODO Hero video (to be recorded), four-way split: ① clicking the target bottle in the browser ② Isaac Sim ③ RViz point cloud + grasp candidates ④ RViz robot model + point cloud + final grasp + trajectory -->
 
-While collecting AI Worker data at ROBOTIS, I found that the largest cost was a person having to stay with the robot for every demonstration. In my own work, an 8-hour day produced about 3 hours of recorded demonstrations without breaks, or about 1.5 hours with regular breaks.
+## System Setup
 
-For a simple task like picking a bottle, I let the robot grasp and record by itself. The table compares both in the same unit.
+One click on a bottle in the web UI runs grasp inference, grasp motion generation, execution and recording without further human input.
 
-| Collection method | Person | Elapsed time | Recorded duration |
-| --- | --- | --- | --- |
-| Teleoperation (no breaks) | Required | 8 hours | About 3 hours |
-| Teleoperation (regular breaks) | Required | 8 hours | About 1.5 hours |
-| Automatic collection | Not required | About 6 hours (from logs) | 2.98 hours (629 episodes) |
+![Four-stage automatic recording flow of target selection, grasp inference, grasp motion generation and execution with recording, where camera images and joint states are saved through cyclo_data](../assets/images/ai-worker-auto-record-pipeline.webp)
 
-The teleoperation figures come from my own work experience; the automatic figure comes from logged start and end times. I did not compare data quality. No policy was trained on teleoperation data, so I cannot claim that automatic collection replaces teleoperation.
+A finished motion command alone does not show a successful grasp, so command completion, object lift and save completion are checked separately. Only attempts where the bottle rises at least 3.5 cm, stays up for 0.5 s and finishes saving become successful demonstrations; failed attempts are logged but excluded from training.
 
-## What I built on top of the open source
+### Detailed system diagram
 
-I modified and implemented this alone on ROBOTIS open source: the AI Worker control software, the `cyclo_intelligence` training server and the `cyclo_lab` simulation environment. By repository records, I made 96 commits between September 5 and October 22, 2026, and added a new automatic collection package of about 3,700 lines.
+The pipeline builds on two parts of Cyclo, the ROBOTIS robot software: Cyclo Intelligence for data collection and management, and Cyclo Control for motion planning and control. On top of them, I added a pipeline that runs grasp inference, motion planning and recording to the end from a single click.
+
+<div class="media-grid"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering TCP control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div>
+
+By repository records, I made 96 commits alone between September 5 and October 22, 2026, and added a new automatic collection package of about 3,700 lines.
 
 | Provided by open source | Implemented or modified by me |
 | --- | --- |
@@ -37,97 +34,62 @@ I modified and implemented this alone on ROBOTIS open source: the AI Worker cont
 | Isaac simulation environment and robot USD (3D scene file) | Four-camera setup, coordinate alignment and sensor topics |
 | GraspNet, CenterPose and GR00T models | Connecting both candidate generators to one workflow, success evaluation and evaluation procedure |
 
-## From one attempt to one demonstration
+Grasp inference runs in `grasp_server`, a separate Docker container. The auto recording node (`/auto_recorder_node`) takes grasp candidates computed from the point cloud around the clicked point, then starts recording, approaches, grasps, closes the gripper, lifts and saves the recording in order.
 
-| Stage | Input and responsibility | Passed on |
-| --- | --- | --- |
-| Scene input | RGB and depth images, point cloud, camera-to-robot transforms | Target bottle position and scene information |
-| Candidate generation | GraspNet or CenterPose (with bottle-specific rules) | Grasp position, orientation and width |
-| Execution | Inverse kinematics (IK, computing arm joint angles) pre-check, approach, grasp and lift | Motion state and recording |
-| Success evaluation | Did the bottle rise at least 3.5 cm, stay up for 0.5 s and finish saving? | Successful demonstration list, failure records |
-| Training | Convert successful demonstrations only; one head and two wrist cameras as input | GR00T checkpoint |
+![Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands](../assets/images/ai-worker-auto-record-architecture.webp)
 
-A finished motion command alone does not show success, so command completion, object lift and save completion are checked separately. Failed attempts stay in the records and only successful demonstrations are used for training. When no candidate passes the IK pre-check, the attempt ends after one candidate-generation try.
+## Data Collection
 
-## Connecting two candidate generators to one workflow
+I loaded a break room furnished with real IKEA furniture as a simulation asset, rendered bottles into it and connected the automatic collection pipeline to the simulation. The only object so far is one green tea bottle.
 
-I used GraspNet first. Its results were uneven, so I received CenterPose (an object pose estimation model) to compare. The two have different inputs and assumptions, so a comparison criterion had to come first.
+### Comparing GraspNet and CenterPose
 
-For GraspNet, I switched a heuristic that shifts the grasp toward the selected target point on and off, 20 trials each at three fixed positions. All 60 pairs of initial conditions across the 120 trials were confirmed to match.
+I used GraspNet first as the grasp candidate generator. Its results were uneven, so I connected CenterPose (an object pose estimation model) for comparison. CenterPose still reports an upright bottle tilted by about 14 to 15 degrees, so it is paired with a bottle-specific grasp rule that assumes the bottle is standing. Camera input and projection are not the cause: 9 markers across 6 frames matched the rendered projection to a mean of 0.66 px.
 
-| Condition | Left | Center | Right | Total |
-| --- | --- | --- | --- | --- |
-| Heuristic ON | 14/20 | 14/20 | 18/20 | 46/60 |
-| Heuristic OFF | 12/20 | 6/20 | 20/20 | 38/60 |
+Comparing on random layouts at first led to diverging interpretations. I then fixed the bottle at 40 positions in a 5-row by 8-column grid and repeated each position 10 times per method.
 
-The total rose but the right position fell. This is a simulation result for one layout, so I did not conclude whether to keep or remove the heuristic.
-
-For CenterPose, a bottle standing upright came out tilted by about 14 to 15 degrees, and I did not resolve it. To test whether the camera input conversion was the cause, I compared 9 markers across 6 frames against the rendered projection and they matched to a mean of 0.66 px (maximum 0.90 px). That rules out the input and projection. As of the October 28 record, I had not found the stage that produces the error. Current collection uses the FAN model with a bottle-specific grasp rule that assumes the bottle is standing.
-
-## Fixing conditions at 40 positions
-
-At first there was no "consistency" criterion for comparing the two methods, so interpretations diverged. I fixed the bottle at 40 positions in a 5-row by 8-column grid and repeated each position 10 times per method.
-
-![Top-down Isaac Lab view of 40 bottles placed in a 5-row by 8-column grid, with the AI Worker body at the bottom](../assets/images/ai-worker-fixed40-locations.webp)
-
-The scene above places all 40 bottles together only to show the positions; evaluation used one bottle at a time.
+![Top-down Isaac Lab view of 40 bottles in a 5-row by 8-column grid with the AI Worker body at the bottom; all bottles are shown together only to mark the positions, and evaluation used one bottle at a time](../assets/images/ai-worker-fixed40-locations.webp)
 
 | Collection | Attempts | Successful demonstrations |
 | --- | --- | --- |
-| Round 1 GraspNet (random initial layout) | 300 | 225 (75.0%) |
-| Round 1 CenterPose (random initial layout) | 300 | 248 (82.7%) |
+| Round 1 GraspNet (random layout) | 300 | 225 (75.0%) |
+| Round 1 CenterPose (random layout) | 300 | 248 (82.7%) |
 | Round 2 GraspNet (40 fixed positions) | 400 | 310 (77.5%) |
 | Round 2 CenterPose (40 fixed positions) | 400 | 319 (79.8%) |
 
-In round 1, CenterPose was 7.7 percentage points higher; in round 2, the gap shrank to 2.3 points. The scene setups differ, so I cannot confirm that fixing positions caused the change.
+The gap between the two methods shrank from 7.7 percentage points in round 1 to 2.3 in round 2. The scene setups also differ, so I cannot confirm that fixing positions caused the change.
 
-## Failures clustered in the farthest row
+Of the 171 round-2 failures, 169 were cases where inverse kinematics (IK, computing arm joint angles for a target pose) rejected every candidate. The farthest row (X=0.295 m) succeeded in only 27 of 160 attempts, while the X=0.430 m and 0.475 m rows succeeded every time. I did not pre-check the 40 positions with IK, so I could not separate joint limits from collisions as the cause.
 
-Of the 171 failures in the 800 round-2 attempts, 169 were IK candidate rejections, 1 was a recording initialization error and 1 was an interruption. In the farthest row (X=0.295 m), 133 of 160 attempts failed, leaving 27 successes, while the X=0.430 m and 0.475 m rows succeeded in all 160 attempts each.
+## Policy & Training
 
-I suspect distance and grasp direction, but I have not confirmed joint limits, collisions or the rejection stage. I did not pre-check all 40 positions with IK, which made isolating the cause harder.
+I trained NVIDIA GR00T N1.7 (a VLA model that outputs actions from images, language and robot state) separately on the two round-2 datasets. Inputs are one head camera and two wrist cameras.
 
-## Evaluating the trained policies on the same 40 positions
+On one RTX 5090 (32 GB), the default configuration ran out of memory at the first optimizer step and never completed an update. Keeping the frozen language and vision parts (the backbone) in FP32 still ran out of memory even with fused AdamW; loading the backbone in BF16 (16-bit floating point) together with fused AdamW let training run.
 
-I trained NVIDIA GR00T N1.7 (a Vision-Language-Action model that outputs actions from images, language and robot state) for 150,000 steps on each dataset. The language model and vision encoder stayed frozen, and about 1.62 billion of roughly 3.14 billion parameters (the connector and action generator) were trained. Batch size was 8 and the learning rate 0.0001.
+The language model and vision encoder stayed frozen, and about 1.62 billion of roughly 3.14 billion parameters (the connector and action generator) were trained, with batch size 8 and learning rate 0.0001 for 150,000 steps.
 
-Evaluation covers 40 positions × 3 trials × 2 models, 240 trials in total. Each trial lasts 30 seconds with the same success rule as collection. It reuses the positions seen in training, so it does not measure generalization to new positions.
+### Simulation evaluation
+
+Evaluation covers the same 40 positions × 3 trials × 2 models, 240 trials in total. Each trial lasts 30 seconds with the same success rule as collection. It reuses the training positions, so it does not measure generalization to new positions.
 
 | Policy training data | Overall | X=0.295 | X=0.340 | X=0.385 | X=0.430 | X=0.475 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 310 GraspNet demonstrations | 75/120 | 5/24 | 11/24 | 19/24 | 22/24 | 18/24 |
 | 319 CenterPose demonstrations | 75/120 | 1/24 | 14/24 | 20/24 | 22/24 | 18/24 |
 
-Overall successes were equal but differed by row. At 22 of 40 positions the two models had the same success count; 7 positions failed all three trials for both, and 14 succeeded all three for both. The farthest row had the lowest policy success and also the fewest successes during collection. Too little training data there may be the cause, but I have not tested it. With 3 trials per position and 24 per row, the sample is small, so I do not generalize row-level differences.
+Overall successes were equal but differed by row. The row with the lowest policy success was the farthest row, which also had the fewest successful demonstrations during collection. With 3 trials per position, the sample is too small to generalize row-level differences.
 
-## When the evaluation itself was wrong
+In the first evaluation, both policies almost never succeeded. I found that the controller holding the stored pose kept sending arm commands while paused. I disabled it, confirmed before every trial that no external arm command was present, and re-evaluated; the table above is that result.
 
-In the first evaluation, the policy trained on GraspNet demonstrations succeeded once in 120 trials, and the CenterPose policy succeeded in 0 of 39 trials before stopping on a save error. Before concluding the models were bad, I checked and found the controller holding the stored pose was still sending arm commands while paused. They may have competed with the trained policy's commands, so the result could not be read as pure model performance.
+### Limitations
 
-I disabled that controller, confirmed before every trial that no external arm command existed, and re-evaluated; the table above is that result. I do not use the first evaluation as model performance.
+Arm jitter made some test results unreliable.
 
-## When training could not even start for lack of memory
-
-On one RTX 5090 (32 GB), the default configuration ran out of memory at the first Adam optimizer step for batch sizes 1, 2 and 4, so no update completed. Loading the frozen parts in BF16 (16-bit floating point) and using fused AdamW, just those two changes, let all three batch sizes finish 10 minutes of training and save a checkpoint.
-
-| Actual batch | Steps in 10 minutes | Samples per second | Peak GPU use |
-| --- | --- | --- | --- |
-| 1 | 5,142 | 8.57 | 30.12 GiB |
-| 2 | 4,679 | 15.60 | 30.23 GiB |
-| 4 | 3,939 | 26.26 | 30.68 GiB |
-
-This measurement uses the official demo data (two cameras, six-dimensional actions), not AI Worker data. Batch 4 left only about 1.2 GiB free, so adding cameras could run out again; the actual AI Worker training (three camera inputs) finished with the same settings at batch 8. Keeping the backbone in FP32 still ran out of memory even with fused AdamW.
-
-## What I cannot claim yet
-
-- All results are from simulation. I did not evaluate on a physical robot.
-- There is one evaluated policy per dataset (no training repeats), and evaluation reuses the training positions.
-- The success rule ends at a 3.5 cm lift held for 0.5 seconds; I did not check whether the bottle stays lifted afterwards.
-- The only object is one green tea bottle.
-
-| Open question | Required evaluation |
+| Limitation | Next validation |
 | --- | --- |
-| Does the trained policy also grasp at new positions? | Evaluate at positions not used in training |
-| Is the farthest row weak because of too little data? | IK pre-check of all 40 positions; retrain with equal per-position counts |
-| Is automatic data as good as teleoperation data? | Compare with a policy trained on the same amount of teleoperation data |
-| Do simulation results hold on the real robot? | Separate evaluation with physical sensors, frames and gripper |
+| All results are from simulation | Separate evaluation with physical sensors, frames and gripper |
+| Evaluated only at training positions, with one training run per dataset | Evaluate at positions not used in training |
+| The cause of the farthest row's weakness is not isolated | IK pre-check of all 40 positions; retrain with equal per-position counts |
+| Not compared with teleoperation data quality | Compare with a policy trained on the same amount of teleoperation data |
+| Success ends at a 0.5 s hold, with one green tea bottle as the only object | Add a full-carry success rule and more object types |

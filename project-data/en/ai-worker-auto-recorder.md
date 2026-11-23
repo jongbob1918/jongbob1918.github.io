@@ -1,12 +1,12 @@
 ---
 slug: ai-worker-auto-recorder
-title: "ROBOTIS AI Worker: Teleop-Free Data Pipeline"
+title: "ROBOTIS AI Worker: Autonomous Data Collection Pipeline"
 description: Combines the GraspNet grasp model, an IK solver and automatic success checks on the ROBOTIS AI Worker to generate VLA training data without manual teleoperation.
 period: 2026.09–11
 team: Personal project
 role: ""
 card:
-  imageAlt: Automatic recording demo at 2x speed. While Auto Pick runs in the web UI, the AI Worker picks up the bottle in Isaac Lab and RViz shows GraspNet grasp candidates
+  imageAlt: "An Autonomous Data Collection Pipeline title card, then a click on the target bottle in the web UI that starts Auto Pick, then an 8x-speed Isaac Lab scene where the AI Worker reaches for bottles at different positions"
 overview: Vision-Language-Action (VLA) models and imitation learning now enable precise robot control in physical AI, but collecting high-quality training data by manual teleoperation costs a great deal of time and money. To remove this bottleneck, I extended ROBOTIS open source with a grasp estimation model and rule-based motion planning, building an autonomous collection pipeline in which the ROBOTIS AI Worker grasps objects on its own and keeps only successful episodes. Over about 6 hours it made 800 attempts and collected 629 successful demonstrations (2.98 hours of recording, 78.6% success rate). A VLA policy trained only on this data reached a 62.5% (75/120) grasp success rate in my own simulation evaluation across 40 positions.
 demo:
   type: video

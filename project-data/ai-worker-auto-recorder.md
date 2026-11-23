@@ -3,7 +3,7 @@ slug: ai-worker-auto-recorder
 shortName: AI Worker Auto Recorder
 category: physical-ai
 order: 1
-title: "ROBOTIS AI Worker: Teleop-Free Data Pipeline"
+title: "ROBOTIS AI Worker: Autonomous Data Collection Pipeline"
 description: ROBOTIS AI Worker 환경에서 GraspNet 파지 모델과 IK 솔버, 자동 성공 검증을 결합해 수동 텔레오퍼레이션 없이 VLA 학습용 데이터를 생성합니다.
 period: 2026.09–11
 team: 개인 프로젝트
@@ -17,9 +17,9 @@ skills:
   - VLA
   - AI Worker
 card:
-  image: assets/images/ai-worker-auto-record-hero-poster.webp
-  video: assets/videos/ai-worker-auto-record-hero.mp4
-  imageAlt: 2배속 자동 녹화 시연. 웹 화면에서 Auto Pick이 동작하는 동안 Isaac Lab에서 AI Worker가 병을 집어 들고, RViz에 GraspNet 파지 후보가 표시된다
+  image: assets/images/ai-worker-card-thumbnail.webp
+  video: assets/videos/ai-worker-card.mp4
+  imageAlt: Autonomous Data Collection Pipeline 제목 화면 뒤로, 웹 화면에서 대상 병을 클릭해 Auto Pick이 시작되고 Isaac Lab에서 AI Worker가 여러 위치의 병을 차례로 집으러 가는 8배속 수집 장면
   imageFit: cover
 overview: 최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌지만, 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했으며, 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.
 demo:

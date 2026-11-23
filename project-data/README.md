@@ -98,7 +98,11 @@ demo:
   type: video
   src: ../assets/videos/project-demo.mp4
   poster: ../assets/images/project-poster.png
+  autoplay: true
+  alt: 영상에 보이는 장면 설명
 ```
+
+`autoplay: true`는 소리 없이 자동재생하고 반복합니다. 짧은 무음 히어로 영상에만 사용합니다. `alt`는 영상의 `aria-label`로 들어갑니다.
 
 YouTube 영상은 Embed 주소를 사용합니다.
 

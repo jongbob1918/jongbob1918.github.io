@@ -21,24 +21,25 @@ card:
   imageAlt: 40개 위치에 놓을 병 배치를 위에서 내려다본 Isaac Lab 장면. 5줄 × 8열 격자 아래쪽에 로봇 몸체가 보인다
   imageFit: cover
 overview: 최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌지만, 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했으며, 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.
+demo:
+  type: video
+  src: ../assets/videos/ai-worker-auto-record-hero.mp4
+  poster: ../assets/images/ai-worker-auto-record-hero-poster.webp
+  autoplay: true
+  alt: 2배속 자동 녹화 시연. 왼쪽 웹 화면에서 Auto Pick이 동작하는 동안 오른쪽 위 Isaac Lab에서 AI Worker가 병을 집어 들고, 오른쪽 아래 RViz에 병 점군과 GraspNet 파지 후보가 표시된다
 ---
-
-<!-- TODO 히어로 영상(촬영 예정), 사분할 화면: ① 브라우저에서 대상 병 클릭 ② Isaac Sim ③ RViz 점군 + 파지 후보 ④ RViz 로봇 모델 + 점군 + 최종 파지 + 궤적 -->
 
 ## System Setup
 
+기존 ROBOTIS의 오픈소스 소프트웨어 위에 추가로 브라우저에서 화면 클릭시 데이터 자동수집하는 파이프라인 구축
 
-
-ROBOTIS의 로봇 소프트웨어 Cyclo 중 데이터 수집·관리를 맡는 Cyclo Intelligence와 모션 플래닝·제어를 맡는 Cyclo Control을 기반으로 삼았습니다. 그 위에 파지 추론부터 동작 계획, 녹화 종료까지 클릭 한 번으로 진행하는 파이프라인을 추가로 구축했습니다.
+Cyclo Intelligence : 데이터 수집·관리
+Cyclo Control : 모션 플래닝·제어
 
 <div class="media-grid"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div>
 
-
-웹 화면에서 대상 병을 한 번 클릭하면 파지 추론, 파지 동작 생성, 실행과 녹화 저장이 사람 개입 없이 이어집니다.
-
-
-
 ![대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름](../assets/images/ai-worker-auto-record-pipeline.webp)
+
 
 파지 추론은 graspnet모델을 사용합니다. 별도 Docker 컨테이너로 띄워 cyclo의 supervisior_api로 실행, 종료를 감독합니다. 
 #### 상세 시스템 흐름도 
@@ -46,14 +47,16 @@ ROBOTIS의 로봇 소프트웨어 Cyclo 중 데이터 수집·관리를 맡는 C
 ![웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조](../assets/images/ai-worker-auto-record-architecture.webp)
 
 ## Data Collection
+### Task: pick plastic bottle
 
-실제 IKEA 가구가 배치된 탕비실을 시뮬레이션 에셋으로 불러오고 병을 추가로 렌더링해, 자동 수집 파이프라인을 시뮬레이션과 연동했습니다. 현재 대상은 녹차병 1종입니다.
+
+
 플라스틱 녹차병을 픽하는 데이터 
 
 시뮬레이션 전체 사진 
 
 배치도
-![Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다](../assets/images/ai-worker-fixed40-locations.webp)
+
 
 
 수집하는 동영상 편집해서 

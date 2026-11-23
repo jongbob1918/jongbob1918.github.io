@@ -8,9 +8,13 @@ role: ""
 card:
   imageAlt: Top-down Isaac Lab scene with 40 bottles in a 5-row by 8-column grid and the robot body at the bottom
 overview: Vision-Language-Action (VLA) models and imitation learning now enable precise robot control in physical AI, but collecting high-quality training data by manual teleoperation costs a great deal of time and money. To remove this bottleneck, I extended ROBOTIS open source with a grasp estimation model and rule-based motion planning, building an autonomous collection pipeline in which the ROBOTIS AI Worker grasps objects on its own and keeps only successful episodes. Over about 6 hours it made 800 attempts and collected 629 successful demonstrations (2.98 hours of recording, 78.6% success rate). A VLA policy trained only on this data reached a 62.5% (75/120) grasp success rate in my own simulation evaluation across 40 positions.
+demo:
+  type: video
+  src: ../assets/videos/ai-worker-auto-record-hero.mp4
+  poster: ../assets/images/ai-worker-auto-record-hero-poster.webp
+  autoplay: true
+  alt: Automatic recording demo at 2x speed. While Auto Pick runs in the web UI on the left, the AI Worker picks up the bottle in Isaac Lab at top right, and RViz at bottom right shows the bottle point cloud and GraspNet grasp candidates
 ---
-
-<!-- TODO Hero video (to be recorded), four-way split: ① clicking the target bottle in the browser ② Isaac Sim ③ RViz point cloud + grasp candidates ④ RViz robot model + point cloud + final grasp + trajectory -->
 
 ## System Setup
 

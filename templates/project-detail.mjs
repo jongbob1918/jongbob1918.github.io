@@ -27,7 +27,9 @@ const renderDemo = (demo, language) => {
 
   if (type === 'video') {
     const poster = demo.poster ? ` poster="${escapeHtml(demo.poster)}"` : '';
-    media = `<video controls preload="metadata"${poster}><source src="${escapeHtml(demo.src)}">${language === 'ko' ? '이 브라우저는 동영상 재생을 지원하지 않습니다.' : 'Your browser does not support video playback.'}</video>`;
+    const label = demo.alt ? ` aria-label="${escapeHtml(demo.alt)}"` : '';
+    const playback = demo.autoplay ? ' autoplay muted loop playsinline' : '';
+    media = `<video controls preload="metadata"${playback}${poster}${label}><source src="${escapeHtml(demo.src)}">${language === 'ko' ? '이 브라우저는 동영상 재생을 지원하지 않습니다.' : 'Your browser does not support video playback.'}</video>`;
   } else if (type === 'youtube') {
     media = `<div class="video-embed"><iframe src="${escapeHtml(demo.src)}" title="${escapeHtml(demo.title || demo.alt || (language === 'ko' ? '프로젝트 시연 영상' : 'Project demonstration video'))}" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>`;
   } else {

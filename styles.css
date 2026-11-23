@@ -103,8 +103,9 @@ h3 { font-size: 1rem; }
 .project-row { position: relative; display: grid; grid-template-columns: minmax(0,.95fr) minmax(280px,1.05fr); gap: 0; max-width: var(--project-max); width: 100%; margin-inline: auto; padding: 12px 12px 12px 0; overflow: visible; border: 0; border-radius: var(--radius-large); background: transparent; box-shadow: none; cursor: pointer; }
 .project-row::before { display: none; }
 .project-media { border-radius: var(--radius-large); position: relative; z-index: 1; min-height: 225px; height: 100%; display: block; overflow: hidden; background: var(--soft); border: 0; }
-.project-media img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .7s cubic-bezier(.2,.3,0,1); }
-.project-row:hover .project-media img, .project-row:focus-within .project-media img { transform: scale(1.008); }
+.project-media img, .project-media video { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .7s cubic-bezier(.2,.3,0,1); }
+.project-row:hover .project-media img, .project-row:focus-within .project-media img, .project-row:hover .project-media video, .project-row:focus-within .project-media video { transform: scale(1.008); }
+.project-media video { object-position: right center; }
 .project-overlay { position: absolute; inset: 0; display: grid; place-items: center; color: white; background: rgba(16,24,40,.72); opacity: 0; transition: opacity .25s ease; }
 .project-overlay span { padding: 9px 14px; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; font-size: .76rem; font-weight: 750; letter-spacing: .02em; transform: translateY(8px); transition: transform .25s ease; }
 .project-row:hover .project-overlay, .project-row:focus-within .project-overlay { opacity: 1; }
@@ -222,6 +223,8 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .media-grid .feature-media { min-width: 0; background: var(--soft); }
 .media-grid .feature-media img { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #fff; }
 .pr-comparison .feature-media img { aspect-ratio: 6 / 5; }
+.media-grid-wide { position: relative; left: 50%; width: min(calc(var(--case-content-width) * 1.2), calc(100vw - 48px)); gap: 6px; transform: translateX(-50%); }
+.media-grid-wide .feature-media img { aspect-ratio: auto; height: auto; max-height: none; object-fit: fill; }
 .zoomable { cursor: zoom-in; }
 html:has(.image-lightbox[open]) { overflow: hidden; }
 .image-lightbox { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; overflow: auto; background: rgba(8,12,18,.92); }
@@ -386,6 +389,7 @@ html[data-theme="dark"] .limitation { background: #3b2a12; color: #fedf89; }
   .project-overview { margin-bottom: 44px; }
   .demo-section { margin-bottom: 52px; }
   .role-grid, .metric-grid, .evidence-grid, .media-grid { grid-template-columns: 1fr; }
+  .media-grid-wide { left: auto; width: 100%; transform: none; }
   .system-architecture { grid-template-columns: 1fr; padding: 15px; }
   .bidirectional-links { gap: 8px; }
   .bidirectional-links div { display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -479,7 +483,7 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
 /* Let the longest card determine a common height without clipping its text. */
 .project-list[data-project-layout="main"] { grid-auto-rows: 1fr; }
 .project-list[data-project-layout="main"] .project-row { height: auto; min-height: 220px; }
-.project-list[data-project-layout="main"] .project-media img { position: absolute; inset: 0; }
+.project-list[data-project-layout="main"] .project-media img, .project-list[data-project-layout="main"] .project-media video { position: absolute; inset: 0; }
 @media (max-width: 760px) {
   .project-list[data-project-layout="main"] { grid-auto-rows: auto; }
   .project-list[data-project-layout="main"] .project-row { min-height: 0; }

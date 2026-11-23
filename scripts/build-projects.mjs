@@ -105,7 +105,8 @@ for (const file of files) {
   const card = data.card ?? {};
   if (typeof card !== 'object' || Array.isArray(card)) throw new Error(`${file}: card must be an object`);
   validateSkills(card.skills, 'card.skills', file);
-  for (const field of ['image', 'imageAlt']) optionalText(card[field], `card.${field}`, file);
+  for (const field of ['image', 'imageAlt', 'video']) optionalText(card[field], `card.${field}`, file);
+  if (card.video) requireText(card.image, 'card.image (video poster)', file);
   if (card.image) requireText(card.imageAlt, 'card.imageAlt', file);
   if (card.imageFit !== undefined && !['cover', 'contain'].includes(card.imageFit)) throw new Error(`${file}: card.imageFit must be cover or contain`);
   if (card.sequence !== undefined && !Array.isArray(card.sequence)) throw new Error(`${file}: card.sequence must be a list`);
@@ -125,6 +126,7 @@ for (const file of files) {
     order: project.order ?? 999,
     detailUrl: hasDetail ? `projects/${project.slug}.html` : null,
     image: card.image ?? '',
+    video: card.video ?? '',
     imageAlt: card.imageAlt ?? '',
     imageFit: card.imageFit ?? 'cover',
     imageSequence: card.sequence ?? [],

@@ -36,10 +36,8 @@
       <article class="case-study">
         <section class="case-section" id="ko-system-setup">
           <div class="case-heading"><h2>System Setup</h2></div>
-          <p>기존 ROBOTIS의 오픈소스 소프트웨어 위에 추가로 브라우저에서 화면 클릭시 데이터 자동수집하는 파이프라인 구축</p>
-<p>Cyclo Intelligence : 데이터 수집·관리<br>Cyclo Control : 모션 플래닝·제어</p>
-<div class="media-grid"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div><p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름"></p>
-<p>파지 추론은 graspnet모델을 사용합니다. 별도 Docker 컨테이너로 띄워 cyclo의 supervisior_api로 실행, 종료를 감독합니다. </p>
+          <p>기존 ROBOTIS의 오픈소스 소프트웨어 위에 추가로 브라우저에서 화면 클릭시 데이터 자동수집하는 파이프라인 구축<br>했습니다.<br><strong>Cyclo Intelligence</strong> : 데이터 수집·관리<br><strong>Cyclo Control</strong>: 모션 플래닝·제어</p>
+<div class="media-grid media-grid-wide"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div><p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름"></p>
 <h4>상세 시스템 흐름도</h4>
 <p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조"></p>
 
@@ -48,14 +46,10 @@
         <section class="case-section" id="ko-data-collection">
           <div class="case-heading"><h2>Data Collection</h2></div>
           <h3>Task: pick plastic bottle</h3>
-<p>플라스틱 녹차병을 픽하는 데이터 </p>
-<p>시뮬레이션 전체 사진 </p>
-<p>배치도</p>
-<p>수집하는 동영상 편집해서 </p>
-<p>아래는 구조를 먼가 바꾸어야할거 같다 . 기존이랑 안맞다 </p>
-<h3>GraspNet과 CenterPose 비교</h3>
-<p>파지 후보 생성기로 GraspNet을 먼저 썼고, 결과가 고르지 않아 CenterPose(물체 자세 추정 모델)를 연결해 비교했습니다. CenterPose는 똑바로 선 병의 자세가 약 14~15° 기울어져 나오는 문제가 남아 있어, 병이 서 있다는 전제의 전용 파지 규칙을 함께 씁니다. 카메라 입력과 투영은 표식 9개를 6개 프레임에서 비교해 평균 0.66px 이내로 일치했으므로 원인이 아닙니다.</p>
-<p>처음에는 무작위 배치로 비교해 결과 해석이 갈렸습니다. 그래서 병 위치를 5줄 × 8열 격자 40곳으로 고정하고, 위치마다 방식별 10회씩 반복했습니다.</p>
+<p><video controls autoplay muted loop playsinline preload="metadata" aria-label="8배속 연속 자동 수집. Isaac Lab 정면 시점에서 AI Worker가 테이블 위 여러 위치에 놓인 병을 차례로 집어 드는 시도를 반복한다"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
+<h3>GraspNet과 CenterPose</h3>
+<p>배치도<br><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다"></p>
+<p>각 방법들 명시 하고 나눠서<br>배치에서 성공률 을 배치마다 횟수 히스토그램으로 하자<br>아래표도 위 에 중복되면 삭제하고 위로 재구성</p>
 <table>
 <thead>
 <tr>
@@ -85,16 +79,17 @@
 <td>319 (79.8%)</td>
 </tr>
 </tbody></table>
+<p>파지 후보 생성기로 GraspNet을 먼저 썼고, 결과가 고르지 않아 CenterPose(물체 자세 추정 모델)를 연결해 비교했습니다. CenterPose는 똑바로 선 병의 자세가 약 14~15° 기울어져 나오는 문제가 남아 있어, 병이 서 있다는 전제의 전용 파지 규칙을 함께 씁니다. 카메라 입력과 투영은 표식 9개를 6개 프레임에서 비교해 평균 0.66px 이내로 일치했으므로 원인이 아닙니다.</p>
+<p>처음에는 무작위 배치로 비교해 결과 해석이 갈렸습니다. 그래서 병 위치를 5줄 × 8열 격자 40곳으로 고정하고, 위치마다 방식별 10회씩 반복했습니다.</p>
+<p>그리고 해당 데이터셋 궤적 시각화 둘다 </p>
 <p>두 방식의 차이는 1차 7.7%p에서 2차 2.3%p로 줄었습니다. 장면 구성도 달라서 위치 고정의 효과인지는 확정하지 못했습니다.</p>
-<p>2차 실패 171건 중 169건은 역기구학(IK, 목표 자세에 맞는 팔 관절 각도 계산)에서 후보가 모두 탈락한 경우였습니다. 가장 먼 줄(X=0.295m)은 160시도 중 27회만 성공했고, X=0.430m와 0.475m 줄은 모두 성공했습니다. 40개 위치를 IK로 미리 검증하지 않아 관절 한계와 충돌 중 무엇이 원인인지는 분리하지 못했습니다.</p>
+<p>2차 실패 171건 중 169건은 역기구학(IK, 목표 자세에 맞는 팔 관절 각도 계산)에서 후보가 모두 탈락한 경우였습니다. 가장 먼 줄(X=0.295m)은 160시도 중 27회만 성공했고, X=0.430m와 0.475m 줄은 모두 성공했습니다. 40개 위치를 IK로 미리 검증하지 않아 관절 한계와 충돌 중 무엇이 원인인지는 분리하지 못했습니다.<br>위에는 먼가 말이 많ㄴ네</p>
 
         </section>
 
         <section class="case-section" id="ko-policy-training">
           <div class="case-heading"><h2>Policy &amp; Training</h2></div>
-          <p>2차 수집의 두 데이터셋으로 NVIDIA GR00T N1.7(영상·언어·로봇 상태를 보고 동작을 출력하는 VLA 모델, Vision-Language-Action)을 각각 학습했습니다. 입력은 머리 카메라 1개와 손목 카메라 2개입니다.</p>
-<p>RTX 5090(32GB) 한 장에서는 기본 설정이 첫 최적화 단계에서 메모리가 부족해 한 번도 갱신하지 못했습니다. 고정한 언어·영상 부분(백본)을 FP32로 두면 fused AdamW를 써도 부족했고, 백본을 BF16(16비트 부동소수점)으로 불러오고 fused AdamW를 함께 쓰자 학습이 진행됐습니다.</p>
-<p>언어 모델과 영상 인코더는 고정하고, 약 31.4억 개 파라미터 중 약 16.2억 개(연결부와 동작 생성부)만 학습했습니다. 배치 크기 8, 학습률 0.0001로 150,000스텝 학습했습니다.</p>
+          <p>트레이닝 model : NVIDIA GR00T N1.7<br>학습 GPU : RTX 5090(32GB)<br>문제 :<br>고정한 언어·영상 부분(백본)을 FP32로 두면 fused AdamW를 써도 부족했고, 백본을 BF16(16비트 부동소수점)으로 불러오고 fused AdamW를 함께 쓰자 학습이 진행<br>언어 모델과 영상 인코더는 고정하고, 약 31.4억 개 파라미터 중 약 16.2억 개(연결부와 동작 생성부)만 학습<br>배치 크기 8,<br>학습률 0.0001<br>150,000스텝<br>위에도 위 느낌처럼 교정</p>
 <h3>시뮬레이션 평가</h3>
 <p>평가는 수집과 같은 40개 위치 × 3회 × 2모델, 총 240회입니다. 시도당 30초이고 성공 기준은 수집과 같습니다. 학습에 쓴 위치를 다시 썼으므로 새 위치에 대한 일반화 성능은 아닙니다.</p>
 <table>
@@ -132,34 +127,6 @@
 <p>첫 평가에서는 두 정책 모두 거의 성공하지 못했습니다. 확인해 보니 저장 자세를 유지하는 컨트롤러가 일시정지 중에도 팔 명령을 내고 있었습니다. 이 컨트롤러를 끄고 매 시도 전에 외부 팔 명령이 없음을 확인한 뒤 다시 평가한 결과가 위 표입니다.</p>
 <h3>한계점</h3>
 <p>떨림발생 으로 인한 테스트 부정확 성 이 보임</p>
-<table>
-<thead>
-<tr>
-<th>한계</th>
-<th>다음 검증</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>모든 결과가 시뮬레이션이다</td>
-<td>실물 센서·좌표계·그리퍼 조건에서 별도 평가</td>
-</tr>
-<tr>
-<td>학습 위치에서만 평가했고, 데이터셋마다 정책을 한 번만 학습했다</td>
-<td>학습에 쓰지 않은 위치에서 평가</td>
-</tr>
-<tr>
-<td>가장 먼 줄의 부진 원인을 분리하지 못했다</td>
-<td>40개 위치 IK 사전 검증, 위치별 수집 수를 맞춘 재학습</td>
-</tr>
-<tr>
-<td>텔레오퍼레이션 데이터와 품질을 비교하지 않았다</td>
-<td>같은 양의 텔레오퍼레이션 데이터로 학습한 정책과 비교</td>
-</tr>
-<tr>
-<td>성공 기준이 0.5초 유지까지이고, 대상이 녹차병 1종이다</td>
-<td>운반 완료 기준 추가, 물체 종류 확대</td>
-</tr>
-</tbody></table>
 
         </section>
       </article>
@@ -188,7 +155,7 @@
 <p>A finished motion command alone does not show a successful grasp, so command completion, object lift and save completion are checked separately. Only attempts where the bottle rises at least 3.5 cm, stays up for 0.5 s and finishes saving become successful demonstrations; failed attempts are logged but excluded from training.</p>
 <h3>Detailed system diagram</h3>
 <p>The pipeline builds on two parts of Cyclo, the ROBOTIS robot software: Cyclo Intelligence for data collection and management, and Cyclo Control for motion planning and control. On top of them, I added a pipeline that runs grasp inference, motion planning and recording to the end from a single click.</p>
-<div class="media-grid"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering TCP control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div><p>By repository records, I made 96 commits alone between September 5 and October 22, 2026, and added a new automatic collection package of about 3,700 lines.</p>
+<div class="media-grid media-grid-wide"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering TCP control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div><p>By repository records, I made 96 commits alone between September 5 and October 22, 2026, and added a new automatic collection package of about 3,700 lines.</p>
 <table>
 <thead>
 <tr>

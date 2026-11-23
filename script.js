@@ -201,7 +201,7 @@ const renderProjects = () => {
       const openLabel = activeLanguage === 'ko' ? `${projectName} 프로젝트 열기` : `Open the ${projectName} project`;
       return `<article id="project-${escapeHtml(project.slug)}" class="project-row${sideClass}${url ? '' : ' project-summary'}${project.image ? '' : ' project-text-only'}" ${url ? `data-href="${url}" tabindex="0" role="link" aria-label="${openLabel}"` : ''}>
         ${project.image ? `<${url ? 'a' : 'div'} class="project-media" data-image-fit="${escapeHtml(project.imageFit)}" ${url ? `href="${url}" aria-label="${openLabel}"` : ''}>
-          <img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}"${project.imageSequence?.length > 1 ? ` data-media-sequence="${escapeHtml(JSON.stringify(project.imageSequence))}"` : ''}>
+          ${project.video ? `<video src="${escapeHtml(project.video)}" poster="${escapeHtml(project.image)}" aria-label="${escapeHtml(project.imageAlt)}" autoplay muted loop playsinline preload="${loading === 'eager' ? 'auto' : 'metadata'}"></video>` : `<img src="${escapeHtml(project.image)}" alt="${escapeHtml(project.imageAlt)}" loading="${loading}"${project.imageSequence?.length > 1 ? ` data-media-sequence="${escapeHtml(JSON.stringify(project.imageSequence))}"` : ''}>`}
           ${url ? `<span class="project-overlay"><span>${copy.viewProject}</span></span>` : ''}
         </${url ? 'a' : 'div'}>` : ''}
         <div class="project-copy">

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 약 6시간 동안 800회 시도해 성공 데모 629개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.">
+  <meta name="description" content="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.">
   <title>AI Worker Auto Recorder — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20261122-1">
 </head>
-<body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-description-ko="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 약 6시간 동안 800회 시도해 성공 데모 629개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다." data-description-en="Replaces human teleoperation with a grasp estimation model and motion planning. One click carries a grasp through to recording, and in simulation repeated collection runs automatically.">
+<body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-description-ko="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다." data-description-en="Replaces human teleoperation with a grasp estimation model and motion planning. One click carries a grasp through to recording, and in simulation repeated collection runs automatically.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -27,7 +27,7 @@
     </header>
 
     <section class="project-overview" id="overview-ko">
-      <p class="lead">VLA(Vision-Language-Action) 모델을 모방학습으로 학습하려면 시연 데이터가 많이 필요한데, 사람이 원격 조종으로 모으면 시간과 비용이 큽니다. 이 수집 과정을 로봇이 대신할 수 있는지 확인하려고, ROBOTIS 오픈소스 위에 파지 추정 모델과 규칙 기반 모션 플래닝을 붙여 AI Worker가 스스로 병을 집고 성공한 시도만 저장하는 파이프라인을 만들었습니다. Isaac Lab 시뮬레이션에서 녹차병 한 종류로 800회를 시도해 성공 데모 629개를 모았고, 이 데이터만으로 학습한 VLA 정책을 직접 만든 40개 위치 평가에 돌려 120회 중 75회 파지에 성공했습니다.</p>
+      <p class="lead">VLA(Vision-Language-Action) 모델을 모방학습으로 학습하려면 시연 데이터가 많이 필요한데, 사람이 원격 조종으로 모으면 시간과 비용이 큽니다. 이 수집 과정을 로봇이 대신할 수 있는지 확인하려고, ROBOTIS 오픈소스 위에 파지 추정 모델과 규칙 기반 모션 플래닝을 붙여 AI Worker가 스스로 병을 집고 성공한 시도만 저장하는 파이프라인을 만들었습니다. Isaac Lab 시뮬레이션에서 녹차병 한 종류로 400회를 시도해 성공 데모 319개를 모았고, 이 데이터만으로 학습한 VLA 정책을 직접 만든 40개 위치 평가에 돌려 120회 중 75회 파지에 성공했습니다.</p>
     </section>
 
     <section class="demo-section" id="demo-ko"><figure class="feature-media"><video controls preload="metadata" autoplay muted loop playsinline poster="../assets/images/ai-worker-auto-record-hero-poster.webp" aria-label="2배속 자동 녹화 시연. 왼쪽 웹 화면에서 Auto Pick이 동작하는 동안 오른쪽 위 Isaac Lab에서 AI Worker가 병을 집어 들고, 오른쪽 아래 RViz에 병 점군과 GraspNet 파지 후보가 표시된다"><source src="../assets/videos/ai-worker-auto-record-hero.mp4">이 브라우저는 동영상 재생을 지원하지 않습니다.</video></figure></section>
@@ -40,58 +40,264 @@
 <div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div><p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름"></p>
 <h4>상세 시스템 흐름도</h4>
 <p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조"></p>
+<h3>데이터 수집</h3>
+<h4>Task: pick plastic bottle</h4>
+<p><video controls autoplay muted loop playsinline preload="metadata" aria-label="8배속 연속 자동 수집. Isaac Lab 정면 시점에서 AI Worker가 테이블 위 여러 위치에 놓인 병을 차례로 집어 드는 시도를 반복한다"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
+<p>병 위치를 5줄 × 8열 격자로 고정하고, 위치마다 10회씩 총 400회를 시도해 성공 시연 319개(79.8%)를 모았습니다. 성공 기준은 3.5cm 이상 들어 0.5초 유지하고 녹화가 저장된 경우입니다. </p>
+<p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다"></p>
+<h3>모델 학습</h3>
+<p>트레이닝 model : NVIDIA GR00T N1.7<br>학습 GPU : RTX 5090(32GB)<br>언어 모델과 영상 인코더는 고정하고, 약 31.4억 개 파라미터 중 약 16.2억 개(연결부와 동작 생성부)만 학습<br>배치 크기 8,<br>학습률 0.0001<br>150,000스텝</p>
 
         </section>
 
-        <section class="case-section" id="ko-data-collection">
-          <div class="case-heading"><h2>Data Collection</h2></div>
-          <h3>Task: pick plastic bottle</h3>
-<p><video controls autoplay muted loop playsinline preload="metadata" aria-label="8배속 연속 자동 수집. Isaac Lab 정면 시점에서 AI Worker가 테이블 위 여러 위치에 놓인 병을 차례로 집어 드는 시도를 반복한다"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
-<h3>GraspNet과 CenterPose</h3>
-<p>배치도<br><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다"></p>
-<p>각 방법들 명시 하고 나눠서<br>배치에서 성공률 을 배치마다 횟수 히스토그램으로 하자<br>아래표도 위 에 중복되면 삭제하고 위로 재구성</p>
+        <section class="case-section" id="ko-평가">
+          <div class="case-heading"><h2>평가</h2></div>
+          <h4>시뮬레이션</h4>
+<p>수집한 시연 319개로 학습한 정책을 수집과 같은 40개 위치에서 위치당 3회씩 평가했습니다. 시도당 30초이고 성공 기준은 수집과 같습니다. 학습에 쓴 위치를 다시 썼으므로 새 위치에 대한 일반화 성능은 아닙니다.</p>
 <table>
 <thead>
 <tr>
-<th>수집</th>
-<th>시도</th>
-<th>성공 시연</th>
+<th></th>
+<th>전체</th>
+<th>X=0.295</th>
+<th>X=0.340</th>
+<th>X=0.385</th>
+<th>X=0.430</th>
+<th>X=0.475</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>1차 GraspNet (무작위 배치)</td>
-<td>300</td>
-<td>225 (75.0%)</td>
+<td>정책 성공</td>
+<td><strong>75/120 (62.5%)</strong></td>
+<td>1/24</td>
+<td>14/24</td>
+<td>20/24</td>
+<td>22/24</td>
+<td>18/24</td>
 </tr>
 <tr>
-<td>1차 CenterPose (무작위 배치)</td>
-<td>300</td>
-<td>248 (82.7%)</td>
-</tr>
-<tr>
-<td>2차 GraspNet (40위치 고정)</td>
-<td>400</td>
-<td>310 (77.5%)</td>
-</tr>
-<tr>
-<td>2차 CenterPose (40위치 고정)</td>
-<td>400</td>
-<td>319 (79.8%)</td>
+<td>수집 성공 (참고)</td>
+<td>319/400</td>
+<td>9/80</td>
+<td>70/80</td>
+<td>80/80</td>
+<td>80/80</td>
+<td>80/80</td>
 </tr>
 </tbody></table>
-<p>파지 후보 생성기로 GraspNet을 먼저 썼고, 결과가 고르지 않아 CenterPose(물체 자세 추정 모델)를 연결해 비교했습니다. CenterPose는 똑바로 선 병의 자세가 약 14~15° 기울어져 나오는 문제가 남아 있어, 병이 서 있다는 전제의 전용 파지 규칙을 함께 씁니다. 카메라 입력과 투영은 표식 9개를 6개 프레임에서 비교해 평균 0.66px 이내로 일치했으므로 원인이 아닙니다.</p>
-<p>처음에는 무작위 배치로 비교해 결과 해석이 갈렸습니다. 그래서 병 위치를 5줄 × 8열 격자 40곳으로 고정하고, 위치마다 방식별 10회씩 반복했습니다.</p>
-<p>그리고 해당 데이터셋 궤적 시각화 둘다 </p>
-<p>두 방식의 차이는 1차 7.7%p에서 2차 2.3%p로 줄었습니다. 장면 구성도 달라서 위치 고정의 효과인지는 확정하지 못했습니다.</p>
-<p>2차 실패 171건 중 169건은 역기구학(IK, 목표 자세에 맞는 팔 관절 각도 계산)에서 후보가 모두 탈락한 경우였습니다. 가장 먼 줄(X=0.295m)은 160시도 중 27회만 성공했고, X=0.430m와 0.475m 줄은 모두 성공했습니다. 40개 위치를 IK로 미리 검증하지 않아 관절 한계와 충돌 중 무엇이 원인인지는 분리하지 못했습니다.<br>위에는 먼가 말이 많ㄴ네</p>
+<p>가장 먼 줄(X=0.295m)은 수집 시연이 9개뿐이었고 정책 성공도 1/24에 그쳤습니다. 이 줄의 원인인 팔 도달 범위(IK)는 남은 문제에 정리했습니다. 위치당 3회로 표본이 작아 줄 단위 차이는 일반화하지 않습니다.</p>
 
         </section>
 
-        <section class="case-section" id="ko-policy-training">
-          <div class="case-heading"><h2>Policy &amp; Training</h2></div>
-          <p>트레이닝 model : NVIDIA GR00T N1.7<br>학습 GPU : RTX 5090(32GB)<br>문제 :<br>고정한 언어·영상 부분(백본)을 FP32로 두면 fused AdamW를 써도 부족했고, 백본을 BF16(16비트 부동소수점)으로 불러오고 fused AdamW를 함께 쓰자 학습이 진행<br>언어 모델과 영상 인코더는 고정하고, 약 31.4억 개 파라미터 중 약 16.2억 개(연결부와 동작 생성부)만 학습<br>배치 크기 8,<br>학습률 0.0001<br>150,000스텝<br>위에도 위 느낌처럼 교정</p>
-<h3>시뮬레이션 평가</h3>
-<p>평가는 수집과 같은 40개 위치 × 3회 × 2모델, 총 240회입니다. 시도당 30초이고 성공 기준은 수집과 같습니다. 학습에 쓴 위치를 다시 썼으므로 새 위치에 대한 일반화 성능은 아닙니다.</p>
+        <section class="case-section" id="ko-challenge-1-파지-후보-생성기-선택-graspnet-vs-centerpose">
+          <div class="case-heading"><h2>Challenge 1: 파지 후보 생성기 선택 (GraspNet vs CenterPose)</h2></div>
+          <h4>문제</h4>
+<p>GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았습니다. 클릭한 병을 어떤 자세로 잡을지 후보를 만드는 단계에 CenterPose 방식을 붙여 같은 조건에서 비교했습니다.<br><strong>질문: 후보 생성기를 바꾸면 수집 결과와 학습된 정책이 달라지는가?</strong><br>범위: Isaac Lab 시뮬레이션, 서 있는 녹차병 1종. 실물 로봇과 다른 물체는 남은 문제에 두었습니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GraspNet (GSNet)</th>
+<th>CenterPose + 고정 파지 규칙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>입력</td>
+<td>클릭 주변 점군</td>
+<td>RGB 이미지 + depth</td>
+</tr>
+<tr>
+<td>출력</td>
+<td>6자유도 파지 후보 여러 개와 점수</td>
+<td>병 3D 박스 → 중심 위치</td>
+</tr>
+<tr>
+<td>파지 방향</td>
+<td>모델이 후보마다 추정</td>
+<td>고정 규칙 (추정 자세는 쓰지 않음)</td>
+</tr>
+<tr>
+<td>물체 가정</td>
+<td>없음</td>
+<td>서 있는 병</td>
+</tr>
+<tr>
+<td>충돌 검사</td>
+<td>점군 기준 필터</td>
+<td>없음 (IK 검증만)</td>
+</tr>
+<tr>
+<td>연산</td>
+<td>GPU (CUDA)</td>
+<td>CPU (ONNX Runtime)</td>
+</tr>
+</tbody></table>
+<h4>확인 1: 40위치 고정 × 위치당 10회 수집 비교</h4>
+<p>위치 영향과 생성기 영향을 나눠 보려고 병 위치를 고정하고, 위치마다 방식별로 10회씩 시도했습니다.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GraspNet</th>
+<th>CenterPose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>성공</td>
+<td>310/400 (77.5%)</td>
+<td>319/400 (79.8%)</td>
+</tr>
+<tr>
+<td>X=0.295m (가장 먼 줄)</td>
+<td><strong>18/80</strong></td>
+<td>9/80</td>
+</tr>
+<tr>
+<td>X=0.340m</td>
+<td>53/80</td>
+<td><strong>70/80</strong></td>
+</tr>
+<tr>
+<td>X=0.385·0.430·0.475m</td>
+<td>239/240</td>
+<td>240/240</td>
+</tr>
+<tr>
+<td>같은 위치 반복 시 파지 위치 편차 (중앙값 / 상위 10%)</td>
+<td>3.5mm / 8.5mm</td>
+<td><strong>0.3mm / 0.9mm</strong></td>
+</tr>
+<tr>
+<td>같은 위치 반복 시 파지 방향 편차 (중앙값 / 상위 10%)</td>
+<td>2.6° / 8.9°</td>
+<td><strong>0.0° / 0.0°</strong></td>
+</tr>
+<tr>
+<td>최대 들기 높이 중앙값</td>
+<td>5.3cm</td>
+<td>5.4cm</td>
+</tr>
+<tr>
+<td>시도당 소요 시간 중앙값</td>
+<td>28.6초</td>
+<td>27.6초</td>
+</tr>
+</tbody></table>
+<p>편차는 성공한 시도의 Grasp 목표 자세를 위치별로 모아, 위치 표준편차와 평균 방향으로부터의 각도 차이로 계산했습니다(2회 이상 성공한 위치만: GraspNet 34곳, CenterPose 32곳).</p>
+<p><img src="../assets/images/ai-worker-grasp-success-grid.webp" alt="40개 위치별 성공 횟수를 5줄 × 8열 격자로 나타낸 두 개의 히트맵. GraspNet 310/400은 가장 먼 줄 X=0.295m에서 양 끝 위치만 6·3·9회 성공하고 X=0.340m 줄 가운데가 0~6회다. CenterPose 319/400은 가장 먼 줄에서 한 위치만 9회 성공하고 X=0.340m 줄은 한 위치를 빼고 모두 10회다. X=0.385m 이후 줄은 두 방식 모두 거의 10회다"></p>
+<p><img src="../assets/images/ai-worker-grasp-consistency.webp" alt="같은 위치를 반복했을 때 파지 목표 자세의 편차. 점 하나가 위치 하나다. 위치 편차 중앙값은 CenterPose 0.3mm, GraspNet 3.5mm이고 GraspNet은 최대 약 11mm까지 퍼진다. 방향 편차 중앙값은 CenterPose 0.0°, GraspNet 2.6°이고 GraspNet은 최대 약 13°까지 퍼진다"></p>
+<p><img src="../assets/images/ai-worker-grasp-p20.webp" alt="같은 위치 p20에서 녹화된 파지 순간을 3D로 다시 그린 장면. 왼쪽은 CenterPose(파랑), 오른쪽은 GraspNet(주황) 그리퍼가 녹차병 몸통을 잡고 있다"></p>
+<p>실패 171건 중 169건은 IK 탈락이었고, 가장 먼 줄(X=0.295m)에 몰렸습니다(성공 27/160). X=0.430·0.475m 줄은 모두 성공했습니다. 관절 한계 때문인지 충돌 때문인지는 분리하지 못했습니다.</p>
+<h4>확인 2: CenterPose의 한계</h4>
+<p><strong>1. 자세가 기울어 나오고, 멀수록 더 기울어짐.</strong> 위 실험 400회에서 서 있는 병의 추정 높이축이 수직에서 벗어난 각도를 줄별로 계산했습니다.</p>
+<table>
+<thead>
+<tr>
+<th>줄</th>
+<th>카메라까지 거리</th>
+<th>내려다보는 각도</th>
+<th>기울기 중앙값 (상위 10%)</th>
+<th>수평 중심 오차 중앙값</th>
+<th>수집 성공</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>X=0.295m</td>
+<td>0.78m</td>
+<td>44°</td>
+<td>25.7° (35.4°)</td>
+<td>17mm</td>
+<td>9/80</td>
+</tr>
+<tr>
+<td>X=0.340m</td>
+<td>0.74m</td>
+<td>46°</td>
+<td>24.4° (33.3°)</td>
+<td>19mm</td>
+<td>70/80</td>
+</tr>
+<tr>
+<td>X=0.385m</td>
+<td>0.71m</td>
+<td>48°</td>
+<td>19.9° (31.9°)</td>
+<td>11mm</td>
+<td>80/80</td>
+</tr>
+<tr>
+<td>X=0.430m</td>
+<td>0.69m</td>
+<td>51°</td>
+<td>17.7° (24.0°)</td>
+<td>10mm</td>
+<td>80/80</td>
+</tr>
+<tr>
+<td>X=0.475m</td>
+<td>0.66m</td>
+<td>54°</td>
+<td>13.6° (20.9°)</td>
+<td>10mm</td>
+<td>80/80</td>
+</tr>
+</tbody></table>
+<p><img src="../assets/images/ai-worker-centerpose-tilt.webp" alt="줄별 CenterPose 추정 병 축 기울기 분포. 카메라에서 가까운 X=0.475m 줄 중앙값 13.6°에서 가장 먼 X=0.295m 줄 25.7°까지 멀어질수록 커진다. 실제 병 기울기는 0°다"></p>
+<p><img src="../assets/images/ai-worker-centerpose-near-far.webp" alt="머리 카메라 영상 위에 CenterPose 추정 3D 박스를 겹친 두 장면. 가까운 줄(카메라 0.66m)은 추정 기울기 14.8°, 가장 먼 줄(0.78m)은 26.7°다. 흰 선은 시뮬레이션 정답으로 투영한 실제 수직축이고, 노란 추정 높이 방향이 이 선에서 벗어나 있다"></p>
+<p>카메라에서 멀수록 기울기와 중심 오차가 커졌습니다. 다만 멀수록 카메라가 덜 내려다보게 되므로, 거리 때문인지 보는 각도 때문인지는 나누지 못했습니다. 카메라 자체는 원인이 아닙니다. 알려진 표식 9개를 6프레임에서 투영해 평균 0.66px로 일치했습니다. 그래서 추정 방향은 버리고 중심 위치만 쓰며, 방향은 서 있는 병 전용 규칙으로 정했습니다. 이 비교는 <strong>범용 파지 모델과 병 전용 규칙의 비교</strong>입니다.</p>
+<p><strong>2. 물체 종류마다 모델이 따로 필요하고, 점수로 종류를 가리지 못함.</strong> CenterPose는 병·시리얼 상자처럼 범주별로 모델이 나뉩니다. 쇼룸 에셋 11종 × 회전 3개로 시험했을 때(추가 학습 없음, 임계값 0.3) 병 모델은 플라스틱 병뿐 아니라 커피캔 5종(15/15장)과 과자 봉지(땅콩 3/3, 군밤 2/3)에도 병으로 반응했습니다.</p>
+<p><strong>3. 화면에서 작게 보이면 검출하지 못함.</strong> 같은 시험에서 카메라 전체 화면(672×376)을 넣으면 병 9장 중 0장, 병 주변을 잘라 넣으면 9장 모두 검출했습니다. 수집 실험은 1280×720에서 병이 약 160~180px 높이로 보여 검출됐습니다.</p>
+<p><img src="../assets/images/ai-worker-centerpose-categories.webp" alt="CenterPose 병 모델 검출 결과. 각 줄 왼쪽은 머리 카메라 전체 화면이고 오른쪽 세 칸은 물체 주변을 확대한 0°·90°·180° 입력이다. 녹차병, 커피캔 TOP 더 블랙, 땅콩 믹스 봉지 모두 확대 입력에서 bottle 점수 0.4~0.93으로 3D 박스가 그려지고, 젤리 봉지는 90°에서만 검출된다"></p>
+<p><img src="../assets/images/ai-worker-centerpose-camera-check.webp" alt="카메라 투영 검증. 렌더 화면의 표식 9개 중심과 CameraInfo로 투영한 위치가 0.52~0.90px 차이로 겹친다"></p>
+<blockquote>
+<p>그림 예정: 누운 병에서 CenterPose·GraspNet 후보 비교 캡처 (미촬영)</p>
+</blockquote>
+<h4>결정</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GraspNet</th>
+<th>CenterPose + 규칙</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>장점</td>
+<td>가장 먼 줄에서 2배 성공 (18 vs 9/80)</td>
+<td>같은 위치면 거의 같은 파지 (편차 0.3mm·0°)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>X=0.340m 줄에서 더 많이 성공 (70 vs 53/80)</td>
+</tr>
+<tr>
+<td>단점</td>
+<td>파지 자세가 시도마다 다름 (편차 3.5mm·2.6°, 상위 10% 8.5mm·8.9°)</td>
+<td>추정 자세가 14~26° 기울어 방향을 쓸 수 없음 (멀수록 악화)</td>
+</tr>
+<tr>
+<td></td>
+<td>X=0.340m 줄 53/80</td>
+<td>가장 먼 줄 9/80</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>병 모델이 캔·봉지에도 반응, 작게 보이면 미검출</td>
+</tr>
+<tr>
+<td>전체 수집 성공</td>
+<td>310/400</td>
+<td>319/400 (차이 9회, 뚜렷한 우열로 보기 어려움)</td>
+</tr>
+<tr>
+<td>학습된 정책</td>
+<td>75/120</td>
+<td>75/120</td>
+</tr>
+</tbody></table>
+<p>학습된 정책을 줄별로 보면 다음과 같습니다(위치당 3회).</p>
 <table>
 <thead>
 <tr>
@@ -123,10 +329,36 @@
 <td>18/24</td>
 </tr>
 </tbody></table>
-<p>전체 성공 횟수는 같았지만 줄별로는 달랐습니다. 정책 성공이 가장 낮은 줄은 수집 단계에서도 성공 시연이 가장 적었던 가장 먼 줄이었습니다. 위치당 3회로 표본이 작아 줄 단위 차이는 일반화하지 않습니다.</p>
-<p>첫 평가에서는 두 정책 모두 거의 성공하지 못했습니다. 확인해 보니 저장 자세를 유지하는 컨트롤러가 일시정지 중에도 팔 명령을 내고 있었습니다. 이 컨트롤러를 끄고 매 시도 전에 외부 팔 명령이 없음을 확인한 뒤 다시 평가한 결과가 위 표입니다.</p>
-<h3>한계점</h3>
-<p>떨림발생 으로 인한 테스트 부정확 성 이 보임</p>
+<ul>
+<li><strong>정책 성능은 같았습니다.</strong> 수집 단계의 차이가 학습 결과까지 이어지지는 않았습니다.</li>
+<li><strong>&quot;결과가 고르지 않다&quot;는 피드백은 측정으로 확인됐습니다.</strong> GraspNet은 같은 위치에서도 파지 자세가 달랐습니다.</li>
+<li><strong>가장 큰 병목은 생성기가 아니라 팔이 닿는 범위(IK)였습니다.</strong> 실패 171건 중 169건.</li>
+<li><strong>테스트하지 않은 것:</strong> 누운 병, 다른 형상에서 GraspNet의 파지 성공, 실물 로봇. 수집은 녹차병 1종 시뮬레이션 결과입니다.</li>
+</ul>
+<p>서 있는 병 한 종류를 모으는 이번 수집에는 CenterPose 방식이 맞습니다. GraspNet의 범용성은 다른 형상 태스크에서 검증할 다음 단계입니다.</p>
+
+        </section>
+
+        <section class="case-section" id="ko-challenge-2-학습-메모리-부족">
+          <div class="case-heading"><h2>Challenge 2: 학습 메모리 부족</h2></div>
+          <h4>문제</h4>
+<p>RTX 5090(32GB)에서 GR00T N1.7 학습이 메모리 부족으로 진행되지 않았습니다.</p>
+<h4>확인</h4>
+<p>고정한 언어·영상 부분(백본)을 FP32로 두면 fused AdamW를 써도 부족했습니다.</p>
+<h4>해결</h4>
+<p>백본을 BF16(16비트 부동소수점)으로 불러오고 fused AdamW를 함께 썼습니다.</p>
+<h4>결과</h4>
+<p>학습이 진행되어 150,000스텝까지 학습했습니다.</p>
+<!-- 메모: 위에도 위 느낌처럼 교정 -->
+        </section>
+
+        <section class="case-section" id="ko-남은-문제">
+          <div class="case-heading"><h2>남은 문제</h2></div>
+          <ul>
+<li><strong>떨림:</strong> 떨림 발생으로 테스트가 부정확해 보임</li>
+<li><strong>팔이 닿는 범위(IK):</strong> 두 방식 800회의 수집 실패 171건 중 169건이 IK 탈락이고, 가장 먼 줄에 몰림. 관절 한계와 충돌 중 어느 쪽인지 분리하지 못함</li>
+<li><strong>검증하지 않은 조건:</strong> 누운 병, 다른 형상, 실물 로봇</li>
+</ul>
 
         </section>
       </article>

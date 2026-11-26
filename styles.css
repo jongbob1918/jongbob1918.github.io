@@ -190,6 +190,10 @@ html[data-theme="dark"] .project-header { background: #242826; }
 .meta span { padding: 0; border: 0; color: #d3d8d5; background: transparent; font-size: .83rem; }
 .meta strong { margin-right: 4px; color: #fff; }
 .project-skills { margin: 0 0 20px; color: var(--project-skills-color); font-size: .86rem; font-weight: 700; }
+html .project-header.project-header-plain { max-width: var(--case-content-width); margin-inline: auto; padding: 0; background: transparent; }
+.project-header-plain h1 { color: #000; }
+html[data-theme="dark"] .project-header-plain h1 { color: var(--ink); }
+.project-header-plain .project-skills { color: var(--accent); }
 .project-repository { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; color: #fff; transition: color .2s, border-color .2s, background .2s, transform .2s; }
 .project-repository svg { width: 20px; height: 20px; fill: currentColor; }
 .project-repository:hover { color: #303633; border-color: #fff; background: #fff; transform: translateY(-2px); }

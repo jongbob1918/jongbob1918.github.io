@@ -59,7 +59,7 @@ const renderLocalizedProject = (project, sharedProject, language) => {
   const repositoryLabel = language === 'ko' ? `${sharedProject.shortName} GitHub 저장소 열기` : `Open the ${sharedProject.shortName} GitHub repository`;
   const demo = project.demo ?? sharedProject.demo;
   return `<div class="project-language" data-language-content="${language}"${language === 'en' ? ' hidden' : ''}>
-    <header class="project-header">
+    <header class="project-header${sharedProject.plainHeader ? ' project-header-plain' : ''}">
       <h1>${escapeHtml(project.title)}</h1>
       <div class="meta">${project.context ? `<span><strong>${contextLabel}:</strong> ${escapeHtml(project.context)}</span>` : ''}${project.team ? `<span><strong>${teamLabel}:</strong> ${escapeHtml(project.team)}</span>` : ''}${project.period ? `<span><strong>${periodLabel}:</strong> ${escapeHtml(project.period)}</span>` : ''}${project.role ? `<span><strong>${roleLabel}:</strong> ${escapeHtml(project.role)}</span>` : ''}</div>
       ${sharedProject.skills.length ? `<p class="project-skills">${sharedProject.skills.map(escapeHtml).join(' · ')}</p>` : ''}
@@ -92,7 +92,7 @@ export const renderProjectDetail = (project, translations, sourceFile = `${proje
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=20261122-1">
+  <link rel="stylesheet" href="../styles.css?v=20261126-2">
 </head>
 <body data-page="project-detail" data-title-ko="${escapeHtml(translations.ko.title)} — Jongmyung Kim" data-title-en="${escapeHtml(translations.en.title)} — Jongmyung Kim" data-description-ko="${escapeHtml(translations.ko.description)}" data-description-en="${escapeHtml(translations.en.description)}">
   <div class="reading-progress" aria-hidden="true"></div>

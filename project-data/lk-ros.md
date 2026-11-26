@@ -4,6 +4,7 @@ category: lk
 order: 3
 detail: true
 collapsibleSections: true
+plainHeader: true
 title: 로봇 소프트웨어 ROS 2 전환
 description: ROS 1 Noetic 시스템을 ROS 2 Humble로 전환했습니다. 필요한 알고리즘을 포팅하고 행동 트리 기반 의사결정과 기능별 모듈화를 도입해 여러 로봇에서 재사용할 수 있도록 설계했습니다.
 skills:

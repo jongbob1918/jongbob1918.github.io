@@ -86,6 +86,7 @@ for (const file of files) {
   validateOrder(data.order ?? 999, 'order', file);
   if (data.detail !== undefined && typeof data.detail !== 'boolean') throw new Error(`${file}: detail must be true or false`);
   if (data.collapsibleSections !== undefined && typeof data.collapsibleSections !== 'boolean') throw new Error(`${file}: collapsibleSections must be true or false`);
+  if (data.plainHeader !== undefined && typeof data.plainHeader !== 'boolean') throw new Error(`${file}: plainHeader must be true or false`);
   const englishFile = `en/${data.slug}.md`;
   const { data: englishData, content: englishContent } = matter(await readFile(join(englishDataDirectory, `${data.slug}.md`), 'utf8'));
   if (englishData.slug !== data.slug) throw new Error(`${englishFile}: slug must match ${data.slug}`);

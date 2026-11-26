@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20261122-1">
 </head>
-<body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-description-ko="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다." data-description-en="Replaces human teleoperation with a grasp estimation model and motion planning. One click carries a grasp through to recording, and in simulation repeated collection runs automatically.">
+<body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-description-ko="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다." data-description-en="I combined grasp estimation with rule-based motion planning so the ROBOTIS AI Worker can pick up objects and save successful episodes automatically. I collected 319 successful demonstrations in 400 attempts in Isaac Lab. A Vision-Language-Action (VLA) policy trained on that dataset achieved a 62.5% grasp success rate in a 40-position evaluation.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -286,7 +286,7 @@
     </header>
 
     <section class="project-overview" id="overview-en">
-      <p class="lead">Teaching a robot to pick up objects takes many demonstrations, which are time-consuming to collect by teleoperation. I extended ROBOTIS’s open-source software so a click on a bottle in the web interface makes the AI Worker pick it up and save successful attempts. In Isaac Lab, I trained and evaluated separate policies on demonstrations from two grasp candidate generators.</p>
+      <p class="lead">Vision-Language-Action (VLA) models and imitation learning have made precise robot control possible, but collecting high-quality training data through manual teleoperation takes considerable time and money. I extended ROBOTIS&#39;s open-source software with a grasp estimation model and rule-based motion planning so the AI Worker could pick up objects on its own and save only successful episodes. In about six hours, the pipeline logged 800 attempts and saved 629 successful demonstrations (2.98 hours of recorded footage, a 78.6% success rate). I trained a separate VLA policy on each of the two datasets, and both achieved a 62.5% grasp success rate (75 of 120 attempts) in a custom simulation evaluation across 40 positions.</p>
     </section>
 
     <section class="demo-section" id="demo-en"><figure class="feature-media"><video controls preload="metadata" autoplay muted loop playsinline poster="../assets/images/ai-worker-auto-record-hero-poster.webp" aria-label="Automatic recording demo at 2x speed. While Auto Pick runs in the web UI on the left, the AI Worker picks up the bottle in Isaac Lab at top right, and RViz at bottom right shows the bottle point cloud and GraspNet grasp candidates"><source src="../assets/videos/ai-worker-auto-record-hero.mp4">Your browser does not support video playback.</video></figure></section>
@@ -295,98 +295,196 @@
       <article class="case-study">
         <details class="case-section case-disclosure" id="en-system-setup">
           <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>One click on a bottle in the web UI runs grasp inference, grasp motion generation, execution and recording without further human input.</p>
-<p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="Four-stage automatic recording flow of target selection, grasp inference, grasp motion generation and execution with recording, where camera images and joint states are saved through cyclo_data"></p>
-<p>A finished motion command alone does not show a successful grasp, so command completion, object lift and save completion are checked separately. Only attempts where the bottle rises at least 3.5 cm, stays up for 0.5 s and finishes saving become successful demonstrations; failed attempts are logged but excluded from training.</p>
+          <div class="case-disclosure-body"><p>I built the automatic collection pipeline as a personal project on top of ROBOTIS&#39;s open-source software. Cyclo Intelligence handles data collection and management, and Cyclo Control handles motion planning and control.</p>
+<p>Clicking a bottle in the browser generates grasp candidates from the surrounding point cloud, then triggers the approach, grasp, lift and recording sequence. An attempt is saved as a training demonstration only if the bottle is lifted at least 3.5 cm, held for 0.5 seconds and the recording is saved.</p>
+<div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering tool center point control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div><p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="Four stages of automatic recording: target selection, grasp inference, motion generation, and execution with recording. Camera images and joint states are saved through cyclo_data"></p>
 <h3>Detailed system diagram</h3>
-<p>The pipeline builds on two parts of Cyclo, the ROBOTIS robot software. Cyclo Intelligence handles data collection and management. Cyclo Control handles motion planning and control. On top of them, I added a pipeline that runs grasp inference, motion planning and recording to the end from a single click.</p>
-<div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering TCP control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div><p>By repository records, I made 96 commits alone between September 5 and October 22, 2026, and added a new automatic collection package of about 3,700 lines.</p>
-<table>
-<thead>
-<tr>
-<th>Provided by open source</th>
-<th>Implemented or modified by me</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AI Worker robot model and ROS 2 control</td>
-<td>Collection execution from grasp candidates through approach, lift and recording</td>
-</tr>
-<tr>
-<td>Isaac simulation environment and robot USD (3D scene file)</td>
-<td>Four-camera setup, coordinate alignment and sensor topics</td>
-</tr>
-<tr>
-<td>GraspNet, CenterPose and GR00T models</td>
-<td>Connecting both candidate generators to one workflow, success evaluation and evaluation procedure</td>
-</tr>
-</tbody></table>
-<p>Grasp inference runs in <code>grasp_server</code>, a separate Docker container. The auto recording node (<code>/auto_recorder_node</code>) takes grasp candidates computed from the point cloud around the clicked point, then starts recording, approaches, grasps, closes the gripper, lifts and saves the recording in order.</p>
-<p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands"></p>
+<p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="A browser click reaches auto_recorder_node in cyclo_intelligence. GraspNet candidates from grasp_server trigger an eight-step sequence in the AI Worker controllers, while cyclo_data records sensor data and commands"></p>
 <h3>Collecting bottle grasps</h3>
-<p>I loaded a break room furnished with real IKEA furniture as a simulation asset, rendered bottles into it and connected the automatic collection pipeline to the simulation. The only object so far is one green tea bottle.</p>
-<p>Comparing on random layouts at first led to diverging interpretations. I then fixed the bottle at 40 positions in a 5-row by 8-column grid and repeated each position 10 times per method.</p>
-<p><video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly picks up bottles placed at different positions on the table in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
-<p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Top-down Isaac Lab view of 40 bottles in a 5-row by 8-column grid with the AI Worker body at the bottom; all bottles are shown together only to mark the positions, and evaluation used one bottle at a time"></p>
+<p><video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly attempts to pick up the bottle at different table positions in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
+<p>I fixed the bottle positions in a five-row, eight-column grid and ran ten attempts per position for each grasp candidate generator.</p>
+<p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Top-down view of the 40 test positions in Isaac Lab. All bottles are visible to show the grid, and each trial used one bottle"></p>
 </div>
         </details>
 
         <section class="case-section" id="en-result">
           <div class="case-heading"><h2>Result</h2></div>
-          <p>In Isaac Lab, I collected grasp demonstrations using one type of upright green tea bottle placed at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).</p>
-<p>I trained a separate Vision-Language-Action (VLA) policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation, using the same 40 positions as collection.</p>
+          <p>In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).</p>
+<p>I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.</p>
 
         </section>
 
         <details class="case-section case-disclosure" id="en-challenge-1-comparing-grasp-candidate-generators">
           <summary class="case-heading"><h2>Challenge 1: Comparing grasp candidate generators</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
-<p>I used GraspNet first as the grasp candidate generator. Its results were uneven, so I connected CenterPose (an object pose estimation model) for comparison. CenterPose estimated the bottle’s tilt at a median of 13.6° in the nearest row and 25.7° in the farthest row. I used its estimated center and set the grasp direction with a rule for upright bottles. As a projection check, 9 markers across 6 frames differed from their rendered positions by 0.66 px on average.</p>
-<h3>Collection comparison</h3>
+<p>I received feedback that GraspNet produced inconsistent grasps. I added CenterPose as a second way to generate a grasp pose for the selected bottle and compared the two under the same conditions.</p>
 <table>
 <thead>
 <tr>
-<th>Collection</th>
-<th>Attempts</th>
-<th>Successful demonstrations</th>
+<th></th>
+<th>GraspNet (GSNet)</th>
+<th>CenterPose with a fixed grasp rule</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Round 1 GraspNet (random layout)</td>
-<td>300</td>
-<td>225 (75.0%)</td>
+<td>Input</td>
+<td>Point cloud around the selected point</td>
+<td>Color and depth images</td>
 </tr>
 <tr>
-<td>Round 1 CenterPose (random layout)</td>
-<td>300</td>
-<td>248 (82.7%)</td>
+<td>Output</td>
+<td>Multiple six-degree-of-freedom grasp poses with scores</td>
+<td>Bottle&#39;s 3D bounding box, used to find its center</td>
 </tr>
 <tr>
-<td>Round 2 GraspNet (40 fixed positions)</td>
-<td>400</td>
-<td>310 (77.5%)</td>
+<td>Grasp orientation</td>
+<td>Estimated for each candidate</td>
+<td>Fixed rule for upright bottles</td>
 </tr>
 <tr>
-<td>Round 2 CenterPose (40 fixed positions)</td>
-<td>400</td>
-<td>319 (79.8%)</td>
+<td>Object assumption</td>
+<td>No bottle-specific assumption</td>
+<td>Upright bottle</td>
+</tr>
+<tr>
+<td>Collision check</td>
+<td>Point-cloud filter</td>
+<td>Inverse kinematics (IK) validation only</td>
+</tr>
+<tr>
+<td>Inference</td>
+<td>GPU (CUDA)</td>
+<td>CPU (ONNX Runtime)</td>
 </tr>
 </tbody></table>
-<p>The gap between the two methods shrank from 7.7 percentage points in round 1 to 2.3 in round 2. The scene setups also differ, so I cannot confirm that fixing positions caused the change.</p>
-<p>Of the 171 round-2 failures, 169 were cases where inverse kinematics (IK, computing arm joint angles for a target pose) rejected every candidate. The farthest row (X=0.295 m) succeeded in only 27 of 160 attempts, while the X=0.430 m and 0.475 m rows succeeded every time. I did not pre-check the 40 positions with IK, so I could not separate joint limits from collisions as the cause.</p>
-<h3>Policy evaluation</h3>
-<p>I trained NVIDIA GR00T N1.7 (a VLA model that outputs actions from images, language and robot state) separately on the two round-2 datasets. Inputs are one head camera and two wrist cameras.</p>
-<p>I evaluated each policy in three trials per position. Each trial lasted 30 seconds and used the same success rule as collection.</p>
+<h3>Collection at fixed positions</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GraspNet</th>
+<th>CenterPose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Successful grasps</td>
+<td>310/400 (77.5%)</td>
+<td>319/400 (79.8%)</td>
+</tr>
+<tr>
+<td>X = 0.295 m (farthest row)</td>
+<td><strong>18/80</strong></td>
+<td>9/80</td>
+</tr>
+<tr>
+<td>X = 0.340 m</td>
+<td>53/80</td>
+<td><strong>70/80</strong></td>
+</tr>
+<tr>
+<td>X = 0.385, 0.430 and 0.475 m</td>
+<td>239/240</td>
+<td>240/240</td>
+</tr>
+<tr>
+<td>Grasp position variation at the same location (median / 90th percentile)</td>
+<td>3.5 mm / 8.5 mm</td>
+<td><strong>0.3 mm / 0.9 mm</strong></td>
+</tr>
+<tr>
+<td>Grasp orientation variation at the same location (median / 90th percentile)</td>
+<td>2.6° / 8.9°</td>
+<td><strong>0.0° / 0.0°</strong></td>
+</tr>
+<tr>
+<td>Median maximum lift height</td>
+<td>5.3 cm</td>
+<td>5.4 cm</td>
+</tr>
+<tr>
+<td>Median time per attempt</td>
+<td>28.6 s</td>
+<td>27.6 s</td>
+</tr>
+</tbody></table>
+<p>I grouped the target grasp poses from successful attempts by location. I measured position variation using standard deviation and orientation variation as the angular deviation from the mean orientation. The analysis used locations with at least two successes, covering 34 for GraspNet and 32 for CenterPose.</p>
+<p><img src="../assets/images/ai-worker-grasp-success-grid.webp" alt="Two heatmaps compare successful grasps across 40 positions. GraspNet does better in the farthest row at X = 0.295 m, CenterPose does better at X = 0.340 m, and both are nearly perfect across the three closest rows"></p>
+<p><img src="../assets/images/ai-worker-grasp-consistency.webp" alt="Each point represents one bottle location. Median position variation is 0.3 mm for CenterPose and 3.5 mm for GraspNet. Median orientation variation is 0.0° and 2.6°, respectively"></p>
+<p><img src="../assets/images/ai-worker-grasp-p20.webp" alt="3D reconstructions of both grippers enclosing the green tea bottle at position p20, with CenterPose in blue and GraspNet in orange"></p>
+<p>In 169 of the 171 failed attempts, inverse kinematics rejected every candidate while computing arm joint angles for the target pose. Failures clustered in the farthest row (27 successes in 160 attempts). Every attempt at X = 0.430 m and X = 0.475 m succeeded. I could not isolate joint limits from collisions as the cause.</p>
+<h3>Limits of CenterPose estimates</h3>
+<p><strong>Estimated tilt increased at farther positions.</strong> Across the 400 CenterPose attempts, I measured the angle between the estimated vertical axis and the true upright axis for each row.</p>
+<table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Distance to camera</th>
+<th>Downward viewing angle</th>
+<th>Tilt (median / 90th percentile)</th>
+<th>Median horizontal center error</th>
+<th>Successful grasps</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>X = 0.295 m</td>
+<td>0.78 m</td>
+<td>44°</td>
+<td>25.7° / 35.4°</td>
+<td>17 mm</td>
+<td>9/80</td>
+</tr>
+<tr>
+<td>X = 0.340 m</td>
+<td>0.74 m</td>
+<td>46°</td>
+<td>24.4° / 33.3°</td>
+<td>19 mm</td>
+<td>70/80</td>
+</tr>
+<tr>
+<td>X = 0.385 m</td>
+<td>0.71 m</td>
+<td>48°</td>
+<td>19.9° / 31.9°</td>
+<td>11 mm</td>
+<td>80/80</td>
+</tr>
+<tr>
+<td>X = 0.430 m</td>
+<td>0.69 m</td>
+<td>51°</td>
+<td>17.7° / 24.0°</td>
+<td>10 mm</td>
+<td>80/80</td>
+</tr>
+<tr>
+<td>X = 0.475 m</td>
+<td>0.66 m</td>
+<td>54°</td>
+<td>13.6° / 20.9°</td>
+<td>10 mm</td>
+<td>80/80</td>
+</tr>
+</tbody></table>
+<p><img src="../assets/images/ai-worker-centerpose-tilt.webp" alt="Distribution of estimated bottle tilt by row. Median tilt rises from 13.6° in the closest row to 25.7° in the farthest row. The bottle was upright throughout"></p>
+<p><img src="../assets/images/ai-worker-centerpose-near-far.webp" alt="CenterPose bounding boxes overlaid on two head-camera views. The yellow estimated vertical axis departs from the white ground-truth axis by 14.8° at 0.66 m and 26.7° at 0.78 m"></p>
+<p>The farther rows generally showed larger tilt and center errors. As the bottle moved farther away, the camera also viewed it from a shallower angle, so the effects of distance and angle could not be separated. I checked the projection by comparing nine markers over six frames with the rendered positions. The mean difference was 0.66 px. I used CenterPose&#39;s estimated center and set the grasp orientation with a rule for upright bottles.</p>
+<p><strong>The bottle model also responded to cans and bags.</strong> CenterPose uses separate models for different object categories. At a threshold of 0.3, I tested 11 showroom assets at three rotations each without additional training. The bottle model detected five coffee can designs as bottles in all 15 views. It also responded to a peanut snack bag in three of three views and a chestnut snack bag in two of three.</p>
+<p><strong>Small bottles in the image were missed.</strong> With the full 672 × 376 image as input, the bottle model detected zero of nine bottle views. Cropping around the bottle raised detection to nine of nine. During collection at 1280 × 720, the bottle was approximately 160–180 px tall and was detected.</p>
+<p><img src="../assets/images/ai-worker-centerpose-categories.webp" alt="Head-camera images and crops at three rotations show the bottle model drawing 3D boxes around green tea bottles, coffee cans and snack bags"></p>
+<p><img src="../assets/images/ai-worker-centerpose-camera-check.webp" alt="The projected centers of nine markers align with the rendered positions within 0.52–0.90 px"></p>
+<h3>Comparing trained policies</h3>
+<p>I evaluated each policy three times at each of the same 40 positions. Each trial lasted up to 30 seconds and used the same success criterion as collection.</p>
 <table>
 <thead>
 <tr>
 <th>Policy training data</th>
 <th>Overall</th>
-<th>X=0.295</th>
-<th>X=0.340</th>
-<th>X=0.385</th>
-<th>X=0.430</th>
-<th>X=0.475</th>
+<th>X = 0.295</th>
+<th>X = 0.340</th>
+<th>X = 0.385</th>
+<th>X = 0.430</th>
+<th>X = 0.475</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -408,58 +506,31 @@
 <td>18/24</td>
 </tr>
 </tbody></table>
-<p>Overall successes were equal but differed by row. The row with the lowest policy success was the farthest row, which also had the fewest successful demonstrations during collection. With 3 trials per position, the sample is too small to generalize row-level differences.</p>
+<p>CenterPose produced more consistent grasp poses at the same position. The two policies achieved the same total number of successful grasps, with differences across rows based on three trials per position. I used CenterPose to collect demonstrations for upright bottles. GraspNet still needs evaluation on objects with other shapes.</p>
 </div>
         </details>
 
         <details class="case-section case-disclosure" id="en-challenge-2-training-memory-limits">
           <summary class="case-heading"><h2>Challenge 2: Training memory limits</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
-<p>On one RTX 5090 (32 GB), the default configuration ran out of memory at the first optimizer step. Using fused AdamW still exceeded the memory limit with the frozen language and vision backbone in 32-bit floating point (FP32).</p>
+<p>Training NVIDIA GR00T N1.7 on one RTX 5090 (32 GB) ran out of memory at the first optimizer step. Fused AdamW still exceeded available memory with the frozen language and vision backbone in 32-bit floating point (FP32).</p>
 <h3>Solution</h3>
-<p>I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. I trained approximately 1.62 billion of 3.14 billion parameters in the connector and action generator.</p>
+<p>I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. Of the model&#39;s 3.14 billion parameters, I trained about 1.62 billion in the connector and action generator.</p>
 <h3>Result</h3>
-<p>Training completed 150,000 steps with batch size 8 and a learning rate of 0.0001.</p>
+<p>Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.</p>
 </div>
         </details>
 
         <details class="case-section case-disclosure" id="en-challenge-3-arm-command-interference-during-evaluation">
           <summary class="case-heading"><h2>Challenge 3: Arm command interference during evaluation</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>In the first evaluation, both policies almost never succeeded. I found that the controller holding the stored pose kept sending arm commands while paused. I disabled it, confirmed before every trial that no external arm command was present, and re-evaluated; the table above is that result.</p>
+          <div class="case-disclosure-body"><p>In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.</p>
 </div>
         </details>
 
         <details class="case-section case-disclosure" id="en-limitations">
           <summary class="case-heading"><h2>Limitations</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>Arm jitter made some test results unreliable.</p>
-<table>
-<thead>
-<tr>
-<th>Limitation</th>
-<th>Next validation</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>All results are from simulation</td>
-<td>Separate evaluation with physical sensors, frames and gripper</td>
-</tr>
-<tr>
-<td>Evaluated only at training positions, with one training run per dataset</td>
-<td>Evaluate at positions not used in training</td>
-</tr>
-<tr>
-<td>The cause of the farthest row&#39;s weakness is not isolated</td>
-<td>IK pre-check of all 40 positions; retrain with equal per-position counts</td>
-</tr>
-<tr>
-<td>Not compared with teleoperation data quality</td>
-<td>Compare with a policy trained on the same amount of teleoperation data</td>
-</tr>
-<tr>
-<td>Success ends at a 0.5 s hold, with one green tea bottle as the only object</td>
-<td>Add a full-carry success rule and more object types</td>
-</tr>
-</tbody></table>
+          <div class="case-disclosure-body"><p>Arm jitter affected some trials. I could not determine whether joint limits or collisions caused the inverse kinematics rejections concentrated in the farthest row.</p>
+<p>Positions outside the training set, bottles lying on their sides, other object shapes and a physical robot still need testing.</p>
 </div>
         </details>
       </article>

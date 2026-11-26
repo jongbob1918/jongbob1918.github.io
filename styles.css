@@ -468,11 +468,10 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
 .card-overview { margin: 8px 0 0; white-space: normal; overflow-wrap: anywhere; color: var(--muted); font-size: .73rem; line-height: 1.5; }
 .side-project-list .card-overview { font-size: .72rem; }
 
-/* Every compact card keeps one size: fixed 3 columns, 16:9 image, clamped text. */
-.side-project-list .project-title, .side-project-list .card-meta, .side-project-list .card-contribution, .side-project-list .keywords, .side-project-list .card-overview { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; }
+/* Keep compact card titles and metadata within two lines. */
+.side-project-list .project-title, .side-project-list .card-meta, .side-project-list .card-contribution, .side-project-list .keywords { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; }
 .side-project-list .project-title { -webkit-line-clamp: 2; }
 .side-project-list .card-meta, .side-project-list .card-contribution, .side-project-list .keywords { -webkit-line-clamp: 2; }
-.side-project-list .card-overview { -webkit-line-clamp: 3; }
 @media (max-width: 1100px) { .side-project-list .project-copy { min-height: 19.5rem; } }
 @media (max-width: 900px) { .side-project-list { grid-template-columns: repeat(2,minmax(0,1fr)); } }
 @media (max-width: 560px) { .side-project-list { grid-template-columns: minmax(0,1fr); } }

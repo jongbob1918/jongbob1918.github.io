@@ -22,7 +22,7 @@ card:
   video: assets/videos/ai-worker-card.mp4
   imageAlt: Autonomous Data Collection Pipeline 제목 화면 뒤로, 웹 화면에서 대상 병을 클릭해 Auto Pick이 시작되고 Isaac Lab에서 AI Worker가 여러 위치의 병을 차례로 집으러 가는 8배속 수집 장면
   imageFit: cover
-overview: 로봇에게 물체를 집는 법을 가르치려면 사람이 원격 조종으로 시연 데이터를 만들어야 해 시간과 비용이 듭니다. ROBOTIS 오픈소스를 확장해 브라우저에서 병을 클릭하면 AI Worker가 스스로 병을 집고 성공한 시도만 저장하도록 만들었습니다. Isaac Lab에서 두 파지 후보 생성기로 모은 시연을 각각 학습에 사용하고, 학습한 정책의 파지 성공률을 비교했습니다.
+overview: 최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌지만, 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했으며, 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.
 demo:
   type: video
   src: ../assets/videos/ai-worker-auto-record-hero.mp4

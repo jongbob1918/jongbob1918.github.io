@@ -29,7 +29,7 @@ test('categories, optional content, validation and generated-page lifecycle', as
     const lateProject = join(fixture, 'project-data/late.md');
     const lateSource = await readFile(lateProject, 'utf8');
     await writeFile(lateProject, lateSource.replace('title: 제목\n', 'title: 제목\ncollapsibleSections: true\n'));
-    const sections = '\n## Result\n\nVerified outcome.\n\n## System Setup\n\nImplementation details.\n';
+    const sections = '\n## System Setup\n\nImplementation details.\n\n## Result\n\nVerified outcome.\n';
     await appendFile(lateProject, sections);
     await appendFile(join(fixture, 'project-data/en/late.md'), sections);
     await saveProject('early', 'new-category', 1);
@@ -48,11 +48,11 @@ test('categories, optional content, validation and generated-page lifecycle', as
     assert.ok(!html.includes('class="project-repository"'));
     assert.ok(!html.includes('class="project-overview"'));
     for (const language of ['ko', 'en']) {
-      const resultSection = `<section class="case-section" id="${language}-result">`;
+      const resultSection = `<details class="case-section case-disclosure" id="${language}-result">`;
       const setupSection = `<details class="case-section case-disclosure" id="${language}-system-setup">`;
       assert.ok(html.includes(resultSection));
       assert.ok(html.includes(setupSection));
-      assert.ok(html.indexOf(resultSection) < html.indexOf(setupSection));
+      assert.ok(html.indexOf(setupSection) < html.indexOf(resultSection));
     }
 
     categories[0].priority = 1;

@@ -5,7 +5,7 @@ const escapeHtml = value => String(value).replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 })[character]);
 
-const renderSections = (sections, language, collapsible = false) => sections.map(section => collapsible && section.id !== 'result' ? `
+const renderSections = (sections, language, collapsible = false) => sections.map(section => collapsible ? `
         <details class="case-section case-disclosure" id="${escapeHtml(`${language}-${section.id}`)}">
           <summary class="case-heading"><h2>${escapeHtml(section.title)}</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">${language === 'ko' ? '상세 펼치기' : 'Show details'}</span><span class="when-open">${language === 'ko' ? '접기' : 'Hide details'}</span></span></summary>
           <div class="case-disclosure-body">${section.body}</div>

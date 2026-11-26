@@ -5,7 +5,7 @@ category: physical-ai
 order: 1
 collapsibleSections: true
 title: "ROBOTIS AI Worker: Autonomous Data Collection Pipeline"
-description: 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.
+description: 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision Language Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.
 period: 2026.09–11
 team: 개인 프로젝트
 role: ""
@@ -22,7 +22,7 @@ card:
   video: assets/videos/ai-worker-card.mp4
   imageAlt: Autonomous Data Collection Pipeline 제목 화면 뒤로, 웹 화면에서 대상 병을 클릭해 Auto Pick이 시작되고 Isaac Lab에서 AI Worker가 여러 위치의 병을 차례로 집으러 가는 8배속 수집 장면
   imageFit: cover
-overview: 최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌지만, 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했으며, 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.
+overview: 최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌습니다. 하지만 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했습니다. 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.
 demo:
   type: video
   src: ../assets/videos/ai-worker-auto-record-hero.mp4
@@ -31,20 +31,22 @@ demo:
   alt: 2배속 자동 녹화 시연. 왼쪽 웹 화면에서 Auto Pick이 동작하는 동안 오른쪽 위 Isaac Lab에서 AI Worker가 병을 집어 들고, 오른쪽 아래 RViz에 병 점군과 GraspNet 파지 후보가 표시된다
 ---
 
-## System Setup
+## Pipeline
 
-개인 프로젝트로 ROBOTIS 오픈소스 위에 자동 수집 파이프라인을 구현했습니다. 데이터 수집과 관리는 Cyclo Intelligence, 경로 계획과 제어는 Cyclo Control을 사용했습니다.
+### Data Collection
+
+개인 프로젝트로 ROBOTIS 오픈소스 위에 후보 선택부터 녹화 저장까지 이어지는 8단계 자동 수집 파이프라인을 구현했습니다. 데이터 수집과 관리는 Cyclo Intelligence, 경로 계획과 제어는 Cyclo Control을 사용했습니다.
 
 브라우저에서 병을 클릭하면 주변 점군으로 파지 후보를 만들고, 접근·파지·들어 올리기·녹화를 이어서 실행합니다. 병을 3.5 cm 이상 들어 0.5초간 유지하고 녹화까지 완료된 시도만 학습용 시연으로 저장합니다.
 
 <div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div>
 
 ![대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름](../assets/images/ai-worker-auto-record-pipeline.webp)
-### 상세 시스템 흐름도
+#### 상세 시스템 흐름도
 
 ![웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조](../assets/images/ai-worker-auto-record-architecture.webp)
 
-### 병 파지 시연 수집
+#### 병 파지 시연 수집
 
 <video controls autoplay muted loop playsinline preload="metadata" aria-label="8배속 연속 자동 수집. Isaac Lab 정면 시점에서 AI Worker가 테이블 위 여러 위치에 놓인 병을 차례로 집어 드는 시도를 반복한다"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video>
 
@@ -53,9 +55,6 @@ demo:
 
 ![Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다](../assets/images/ai-worker-fixed40-locations.webp)
 
-## Challenge 1: 파지 후보 생성기 비교
-
-### 문제
 GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았습니다. 클릭한 병을 어떤 자세로 잡을지 후보를 만드는 단계에 CenterPose 방식을 붙여 같은 조건에서 비교했습니다.
 
 
@@ -68,7 +67,25 @@ GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았�
 | 충돌 검사 | 점군 기준 필터            | 없음 (IK 검증만)           |
 | 연산    | GPU (CUDA)          | CPU (ONNX Runtime)    |
 
-### 고정 위치 수집 비교
+서 있는 병 수집에는 CenterPose의 중심 위치와 고정된 파지 방향 규칙을 사용했습니다. 추정 방향의 기울어짐과 반복 파지 편차를 확인한 결과에 따른 결정입니다.
+
+### Training
+
+RTX 5090(32 GB) 한 장에서 NVIDIA GR00T N1.7 학습을 시작했지만 첫 최적화 단계에서 메모리가 부족했습니다. 고정한 언어·영상 백본을 32비트(FP32)로 유지하면 fused AdamW를 적용한 뒤에도 같은 문제가 발생했습니다.
+
+언어·영상 백본은 16비트 부동소수점(BF16)으로 불러와 고정하고 fused AdamW를 적용했습니다. 약 31.4억 개 파라미터 중 연결부와 동작 생성부 약 16.2억 개를 학습했습니다.
+
+배치 크기 8, 학습률 0.0001로 150,000스텝까지 학습을 완료했습니다.
+
+### Inference & Evaluation
+
+정책 추론은 30 Hz, 로봇 제어 루프는 100 Hz로 실행했습니다. 수집과 같은 40개 위치에서 정책마다 위치당 3회, 총 120회 평가했습니다. 시도당 제한 시간은 30초이며, 병을 3.5 cm 이상 들어 0.5초 유지하면 성공으로 판정했습니다.
+
+첫 평가에서는 두 정책 모두 거의 파지하지 못했습니다. 팔을 저장된 자세로 유지하는 제어기가 일시 정지 상태에서도 명령을 보내고 있었습니다. 해당 제어기를 비활성화하고 매 시도 전에 외부 팔 명령이 없는지 확인한 뒤 정책을 다시 평가했습니다.
+
+## Results and Analysis
+
+### Data Quality: GraspNet vs CenterPose
 
 |  | GraspNet | CenterPose |
 | --- | --- | --- |
@@ -85,13 +102,11 @@ GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았�
 
 ![40개 위치별 성공 횟수를 5줄 × 8열 격자로 나타낸 두 개의 히트맵. GraspNet 310/400은 가장 먼 줄 X=0.295m에서 양 끝 위치만 6·3·9회 성공하고 X=0.340m 줄 가운데가 0~6회다. CenterPose 319/400은 가장 먼 줄에서 한 위치만 9회 성공하고 X=0.340m 줄은 한 위치를 빼고 모두 10회다. X=0.385m 이후 줄은 두 방식 모두 거의 10회다](../assets/images/ai-worker-grasp-success-grid.webp)
 
-![같은 위치를 반복했을 때 파지 목표 자세의 편차. 점 하나가 위치 하나다. 위치 편차 중앙값은 CenterPose 0.3mm, GraspNet 3.5mm이고 GraspNet은 최대 약 11mm까지 퍼진다. 방향 편차 중앙값은 CenterPose 0.0°, GraspNet 2.6°이고 GraspNet은 최대 약 13°까지 퍼진다](../assets/images/ai-worker-grasp-consistency.webp)
-
-![같은 위치 p20에서 녹화된 파지 순간을 3D로 다시 그린 장면. 왼쪽은 CenterPose(파랑), 오른쪽은 GraspNet(주황) 그리퍼가 녹차병 몸통을 잡고 있다](../assets/images/ai-worker-grasp-p20.webp)
-
 실패 171건 중 169건은 목표 자세에 맞는 팔 관절 각도를 구하는 역기구학(Inverse Kinematics, IK) 단계에서 후보가 모두 탈락한 경우였고, 가장 먼 줄(X=0.295m)에 몰렸습니다(성공 27/160). X=0.430·0.475m 줄은 모두 성공했습니다. 관절 한계 때문인지 충돌 때문인지는 분리하지 못했습니다.
 
-### CenterPose 추정의 한계
+<details class="validation-appendix">
+<summary>CenterPose 상세 검증</summary>
+
 **1. 자세가 기울어 나오고, 멀수록 더 기울어짐.** 위 실험 400회에서 서 있는 병의 추정 높이축이 수직에서 벗어난 각도를 줄별로 계산했습니다.
 
 | 줄 | 카메라까지 거리 | 내려다보는 각도 | 기울기 중앙값 (상위 10%) | 수평 중심 오차 중앙값 | 수집 성공 |
@@ -116,7 +131,9 @@ GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았�
 
 ![카메라 투영 검증. 렌더 화면의 표식 9개 중심과 CameraInfo로 투영한 위치가 0.52~0.90px 차이로 겹친다](../assets/images/ai-worker-centerpose-camera-check.webp)
 
-### 학습된 정책 비교
+</details>
+
+### Sim-to-Sim VLA Baseline
 
 각 데이터로 별도로 학습한 정책을 같은 40개 위치에서 위치당 3회 평가했습니다. 시도당 제한 시간은 30초이며 성공 기준은 수집과 같습니다.
 
@@ -127,32 +144,26 @@ GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았�
 
 CenterPose 방식은 같은 위치에서 파지 자세 편차가 작았습니다. 두 정책의 전체 파지 성공 횟수는 같았고, 위치별 결과에는 차이가 있었습니다. 위치당 평가 횟수는 3회였습니다. 서 있는 병의 시연 수집에는 CenterPose 방식을 사용했습니다. GraspNet의 다른 형상 파지 성능은 추가 검증이 필요합니다.
 
-## Challenge 2: 학습 메모리 부족
+팔 떨림이 일부 시도에 영향을 줬습니다. 정책 실패를 떨림, 도달 범위, 충돌 등 원인별로 분류하지 못해, 떨림이 성공률에 미친 영향은 아직 수치로 분리하지 못했습니다.
 
-### 문제
+### Action Chunking & Jitter Reduction
 
-RTX 5090(32 GB) 한 장에서 NVIDIA GR00T N1.7 학습을 시작했지만 첫 최적화 단계에서 메모리가 부족했습니다. 고정한 언어·영상 백본을 32비트(FP32)로 유지하면 fused AdamW를 적용한 뒤에도 같은 문제가 발생했습니다.
+Phase 2에서 청크 경계의 명령 변화와 팔 떨림을 측정하고, 청크 블렌딩·스무딩 적용 전후를 같은 평가 조건으로 비교할 계획입니다.
 
-### 해결
+### Sim-to-Real Transfer
 
-언어·영상 백본은 16비트 부동소수점(BF16)으로 불러와 고정하고 fused AdamW를 적용했습니다. 약 31.4억 개 파라미터 중 연결부와 동작 생성부 약 16.2억 개를 학습했습니다.
+Phase 3에서 실물 AI Worker로 정책을 옮기고, 센서·좌표계·제어 주기 차이가 파지에 미치는 영향을 검증할 계획입니다.
 
-### Result
-
-배치 크기 8, 학습률 0.0001로 150,000스텝까지 학습을 완료했습니다.
-
-## Challenge 3: 평가 중 팔 명령 간섭
-
-첫 평가에서는 두 정책 모두 거의 파지하지 못했습니다. 팔을 저장된 자세로 유지하는 제어기가 일시 정지 상태에서도 명령을 보내고 있었습니다. 해당 제어기를 비활성화하고 매 시도 전에 외부 팔 명령이 없는지 확인한 뒤 정책을 다시 평가했습니다.
-
-## Result
-
-Isaac Lab에서 서 있는 녹차병 한 종류를 40개 위치에 놓고 자동으로 파지 시연을 수집했습니다. CenterPose와 병 전용 파지 규칙으로 400회 중 319개(79.8%), GraspNet으로 400회 중 310개(77.5%)의 성공 시연을 저장했습니다.
-
-각 데이터로 따로 학습한 시각·언어·행동 모델(Vision-Language-Action, VLA)은 같은 40개 위치에서 각각 120회 중 75회(62.5%) 파지에 성공했습니다. 평가는 시뮬레이션에서 수집에 사용한 위치를 재사용했습니다.
-
-## 남은 문제
+## Next Steps
 
 로봇 팔 떨림이 일부 시험에 영향을 줬습니다. 가장 먼 줄에 집중된 역기구학 탈락은 관절 한계와 충돌 중 어느 쪽이 원인인지 구분하지 못했습니다.
 
 학습에 사용하지 않은 위치, 누운 병과 다른 형상, 실물 로봇은 추가 검증이 필요합니다.
+
+다음 실험에서는 역기구학 탈락을 관절 한계와 충돌로 구분하고, 미학습 위치·다른 형상으로 평가를 확장합니다. 청크 블렌딩과 스무딩으로 떨림을 줄인 뒤 실물 AI Worker에서 전이를 검증할 계획입니다.
+
+## Code
+
+자동 수집 파이프라인의 기반으로 사용한 ROBOTIS 소프트웨어입니다.
+
+[GitHub · Cyclo Intelligence](https://github.com/ROBOTIS-GIT/cyclo_intelligence)

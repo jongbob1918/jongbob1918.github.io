@@ -45,7 +45,7 @@
       "imageSequence": [],
       "titleKo": "ROBOTIS AI Worker: Autonomous Data Collection Pipeline",
       "titleEn": "ROBOTIS AI Worker: Autonomous Data Collection Pipeline",
-      "overviewKo": "파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.",
+      "overviewKo": "파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision Language Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.",
       "overviewEn": "I combined grasp estimation with rule-based motion planning so the ROBOTIS AI Worker can pick up objects and save successful episodes automatically. I collected 319 successful demonstrations in 400 attempts in Isaac Lab. A Vision-Language-Action (VLA) policy trained on that dataset achieved a 62.5% grasp success rate in a 40-position evaluation.",
       "periodKo": "2026.09–11",
       "periodEn": "2026.09–11",

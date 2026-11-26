@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.">
+  <meta name="description" content="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision Language Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다.">
   <title>AI Worker Auto Recorder — Jongmyung Kim</title>
   <link rel="icon" type="image/png" href="../favicon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css?v=20261126-3">
 </head>
-<body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-description-ko="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision-Language-Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다." data-description-en="I combined grasp estimation with rule-based motion planning so the ROBOTIS AI Worker can pick up objects and save successful episodes automatically. I collected 319 successful demonstrations in 400 attempts in Isaac Lab. A Vision-Language-Action (VLA) policy trained on that dataset achieved a 62.5% grasp success rate in a 40-position evaluation.">
+<body data-page="project-detail" data-title-ko="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-title-en="ROBOTIS AI Worker: Autonomous Data Collection Pipeline — Jongmyung Kim" data-description-ko="파지 추정 모델과 규칙 기반 모션 플래닝을 결합해, ROBOTIS AI Worker가 스스로 물체를 집고 성공한 에피소드만 저장하는 자율 데이터 수집 파이프라인입니다. Isaac Lab에서 400회 시도해 성공 데모 319개를 모았고, 이 데이터로만 학습한 VLA(Vision Language Action) 정책은 40개 위치 평가에서 62.5%의 파지 성공률을 냈습니다." data-description-en="I combined grasp estimation with rule-based motion planning so the ROBOTIS AI Worker can pick up objects and save successful episodes automatically. I collected 319 successful demonstrations in 400 attempts in Isaac Lab. A Vision-Language-Action (VLA) policy trained on that dataset achieved a 62.5% grasp success rate in a 40-position evaluation.">
   <div class="reading-progress" aria-hidden="true"></div>
   <header class="site-header"><div class="wrap header-inner"><a class="name" href="../index.html">Jongmyung Kim</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span></button><nav class="nav" aria-label="주요 메뉴"><a href="../index.html#profile" data-copy-ko="소개" data-copy-en="About">About</a><a href="../index.html#key-projects">Projects</a><a href="../index.html#about">Background</a></nav></div></header>
 
@@ -30,28 +30,23 @@
 
     <section class="project-overview" id="overview-ko">
       <div class="case-heading"><h2>개요</h2></div>
-      <p class="lead">최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌지만, 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했으며, 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.</p>
+      <p class="lead">최근 피지컬 AI 분야에서는 VLA 모델과 모방학습을 통해 정교한 로봇 제어가 가능해졌습니다. 하지만 고품질 학습 데이터를 수동 텔레오퍼레이션으로 확보하는 데 막대한 비용과 시간이 소모됩니다. 이 병목을 해결하기 위해, 기존 로보티즈 오픈소스 기반에 파지 추정 모델과 규칙 기반 모션 플래닝을 결합해 ROBOTIS AI Worker가 스스로 물체를 파지하고 성공한 에피소드만 선별·저장하는 자율 데이터 수집 파이프라인을 추가 구축했습니다. 약 6시간 동안 800회 시도를 수행해 629개의 성공 데모(순수 녹화 2.98시간 분량, 성공률 78.6%)를 확보했습니다. 해당 데이터만으로 학습한 VLA 정책은 40개 위치에 대한 자체 시뮬레이션 평가에서 62.5%(75/120회)의 파지 성공률을 달성했습니다.</p>
     </section>
 
     <div class="case-layout">
       <article class="case-study">
-        <details class="case-section case-disclosure" id="ko-system-setup">
-          <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>개인 프로젝트로 ROBOTIS 오픈소스 위에 자동 수집 파이프라인을 구현했습니다. 데이터 수집과 관리는 Cyclo Intelligence, 경로 계획과 제어는 Cyclo Control을 사용했습니다.</p>
+        <details class="case-section case-disclosure" id="ko-pipeline">
+          <summary class="case-heading"><h2>Pipeline</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><h3>Data Collection</h3>
+<p>개인 프로젝트로 ROBOTIS 오픈소스 위에 후보 선택부터 녹화 저장까지 이어지는 8단계 자동 수집 파이프라인을 구현했습니다. 데이터 수집과 관리는 Cyclo Intelligence, 경로 계획과 제어는 Cyclo Control을 사용했습니다.</p>
 <p>브라우저에서 병을 클릭하면 주변 점군으로 파지 후보를 만들고, 접근·파지·들어 올리기·녹화를 이어서 실행합니다. 병을 3.5 cm 이상 들어 0.5초간 유지하고 녹화까지 완료된 시도만 학습용 시연으로 저장합니다.</p>
 <div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 데이터 수집·정제·모델 추론을 맡는 Cyclo Intelligence를 강조한 화면" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo 소프트웨어 구성 중 TCP 제어·MoveJ 관절 제어·충돌 회피를 맡는 Cyclo Control을 강조한 화면" loading="lazy"></figure></div><p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="대상 선택, 파지 추론, 파지 동작 생성, 실행·리코딩의 4단계와 카메라 이미지·관절 상태가 cyclo_data를 거쳐 저장되는 자동 녹화 흐름"></p>
-<h3>상세 시스템 흐름도</h3>
+<h4>상세 시스템 흐름도</h4>
 <p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="웹 화면 클릭이 cyclo_intelligence의 auto_recorder_node로 전달되고, grasp_server의 GraspNet 추론 결과로 ai_worker 컨트롤러가 8단계 파지 동작을 실행하며 cyclo_data가 센서·명령을 기록하는 상세 구조"></p>
-<h3>병 파지 시연 수집</h3>
+<h4>병 파지 시연 수집</h4>
 <p><video controls autoplay muted loop playsinline preload="metadata" aria-label="8배속 연속 자동 수집. Isaac Lab 정면 시점에서 AI Worker가 테이블 위 여러 위치에 놓인 병을 차례로 집어 드는 시도를 반복한다"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
 <p>병 위치를 5줄 × 8열 격자로 고정하고, 각 위치에서 파지 후보 생성기마다 10회씩 반복했습니다.</p>
 <p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Isaac Lab에서 5줄 × 8열 격자로 놓은 병 40개를 위에서 내려다본 장면. 위치를 보여주려고 한꺼번에 놓았고, 평가는 한 번에 병 1개로 진행했다"></p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="ko-challenge-1-파지-후보-생성기-비교">
-          <summary class="case-heading"><h2>Challenge 1: 파지 후보 생성기 비교</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><h3>문제</h3>
 <p>GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았습니다. 클릭한 병을 어떤 자세로 잡을지 후보를 만드는 단계에 CenterPose 방식을 붙여 같은 조건에서 비교했습니다.</p>
 <table>
 <thead>
@@ -92,7 +87,20 @@
 <td>CPU (ONNX Runtime)</td>
 </tr>
 </tbody></table>
-<h3>고정 위치 수집 비교</h3>
+<p>서 있는 병 수집에는 CenterPose의 중심 위치와 고정된 파지 방향 규칙을 사용했습니다. 추정 방향의 기울어짐과 반복 파지 편차를 확인한 결과에 따른 결정입니다.</p>
+<h3>Training</h3>
+<p>RTX 5090(32 GB) 한 장에서 NVIDIA GR00T N1.7 학습을 시작했지만 첫 최적화 단계에서 메모리가 부족했습니다. 고정한 언어·영상 백본을 32비트(FP32)로 유지하면 fused AdamW를 적용한 뒤에도 같은 문제가 발생했습니다.</p>
+<p>언어·영상 백본은 16비트 부동소수점(BF16)으로 불러와 고정하고 fused AdamW를 적용했습니다. 약 31.4억 개 파라미터 중 연결부와 동작 생성부 약 16.2억 개를 학습했습니다.</p>
+<p>배치 크기 8, 학습률 0.0001로 150,000스텝까지 학습을 완료했습니다.</p>
+<h3>Inference &amp; Evaluation</h3>
+<p>정책 추론은 30 Hz, 로봇 제어 루프는 100 Hz로 실행했습니다. 수집과 같은 40개 위치에서 정책마다 위치당 3회, 총 120회 평가했습니다. 시도당 제한 시간은 30초이며, 병을 3.5 cm 이상 들어 0.5초 유지하면 성공으로 판정했습니다.</p>
+<p>첫 평가에서는 두 정책 모두 거의 파지하지 못했습니다. 팔을 저장된 자세로 유지하는 제어기가 일시 정지 상태에서도 명령을 보내고 있었습니다. 해당 제어기를 비활성화하고 매 시도 전에 외부 팔 명령이 없는지 확인한 뒤 정책을 다시 평가했습니다.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="ko-results-and-analysis">
+          <summary class="case-heading"><h2>Results and Analysis</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><h3>Data Quality: GraspNet vs CenterPose</h3>
 <table>
 <thead>
 <tr>
@@ -144,11 +152,9 @@
 </tbody></table>
 <p>편차는 성공한 시도의 Grasp 목표 자세를 위치별로 모아, 위치 표준편차와 평균 방향으로부터의 각도 차이로 계산했습니다(2회 이상 성공한 위치만: GraspNet 34곳, CenterPose 32곳).</p>
 <p><img src="../assets/images/ai-worker-grasp-success-grid.webp" alt="40개 위치별 성공 횟수를 5줄 × 8열 격자로 나타낸 두 개의 히트맵. GraspNet 310/400은 가장 먼 줄 X=0.295m에서 양 끝 위치만 6·3·9회 성공하고 X=0.340m 줄 가운데가 0~6회다. CenterPose 319/400은 가장 먼 줄에서 한 위치만 9회 성공하고 X=0.340m 줄은 한 위치를 빼고 모두 10회다. X=0.385m 이후 줄은 두 방식 모두 거의 10회다"></p>
-<p><img src="../assets/images/ai-worker-grasp-consistency.webp" alt="같은 위치를 반복했을 때 파지 목표 자세의 편차. 점 하나가 위치 하나다. 위치 편차 중앙값은 CenterPose 0.3mm, GraspNet 3.5mm이고 GraspNet은 최대 약 11mm까지 퍼진다. 방향 편차 중앙값은 CenterPose 0.0°, GraspNet 2.6°이고 GraspNet은 최대 약 13°까지 퍼진다"></p>
-<p><img src="../assets/images/ai-worker-grasp-p20.webp" alt="같은 위치 p20에서 녹화된 파지 순간을 3D로 다시 그린 장면. 왼쪽은 CenterPose(파랑), 오른쪽은 GraspNet(주황) 그리퍼가 녹차병 몸통을 잡고 있다"></p>
 <p>실패 171건 중 169건은 목표 자세에 맞는 팔 관절 각도를 구하는 역기구학(Inverse Kinematics, IK) 단계에서 후보가 모두 탈락한 경우였고, 가장 먼 줄(X=0.295m)에 몰렸습니다(성공 27/160). X=0.430·0.475m 줄은 모두 성공했습니다. 관절 한계 때문인지 충돌 때문인지는 분리하지 못했습니다.</p>
-<h3>CenterPose 추정의 한계</h3>
-<p><strong>1. 자세가 기울어 나오고, 멀수록 더 기울어짐.</strong> 위 실험 400회에서 서 있는 병의 추정 높이축이 수직에서 벗어난 각도를 줄별로 계산했습니다.</p>
+<details class="validation-appendix">
+<summary>CenterPose 상세 검증</summary><p><strong>1. 자세가 기울어 나오고, 멀수록 더 기울어짐.</strong> 위 실험 400회에서 서 있는 병의 추정 높이축이 수직에서 벗어난 각도를 줄별로 계산했습니다.</p>
 <table>
 <thead>
 <tr>
@@ -208,7 +214,7 @@
 <p><strong>3. 화면에서 작게 보이면 검출하지 못함.</strong> 같은 시험에서 카메라 전체 화면(672×376)을 넣으면 병 9장 중 0장, 병 주변을 잘라 넣으면 9장 모두 검출했습니다. 수집 실험은 1280×720에서 병이 약 160~180px 높이로 보여 검출됐습니다.</p>
 <p><img src="../assets/images/ai-worker-centerpose-categories.webp" alt="CenterPose 병 모델 검출 결과. 각 줄 왼쪽은 머리 카메라 전체 화면이고 오른쪽 세 칸은 물체 주변을 확대한 0°·90°·180° 입력이다. 녹차병, 커피캔 TOP 더 블랙, 땅콩 믹스 봉지 모두 확대 입력에서 bottle 점수 0.4~0.93으로 3D 박스가 그려지고, 젤리 봉지는 90°에서만 검출된다"></p>
 <p><img src="../assets/images/ai-worker-centerpose-camera-check.webp" alt="카메라 투영 검증. 렌더 화면의 표식 9개 중심과 CameraInfo로 투영한 위치가 0.52~0.90px 차이로 겹친다"></p>
-<h3>학습된 정책 비교</h3>
+</details><h3>Sim-to-Sim VLA Baseline</h3>
 <p>각 데이터로 별도로 학습한 정책을 같은 40개 위치에서 위치당 3회 평가했습니다. 시도당 제한 시간은 30초이며 성공 기준은 수집과 같습니다.</p>
 <table>
 <thead>
@@ -242,37 +248,26 @@
 </tr>
 </tbody></table>
 <p>CenterPose 방식은 같은 위치에서 파지 자세 편차가 작았습니다. 두 정책의 전체 파지 성공 횟수는 같았고, 위치별 결과에는 차이가 있었습니다. 위치당 평가 횟수는 3회였습니다. 서 있는 병의 시연 수집에는 CenterPose 방식을 사용했습니다. GraspNet의 다른 형상 파지 성능은 추가 검증이 필요합니다.</p>
+<p>팔 떨림이 일부 시도에 영향을 줬습니다. 정책 실패를 떨림, 도달 범위, 충돌 등 원인별로 분류하지 못해, 떨림이 성공률에 미친 영향은 아직 수치로 분리하지 못했습니다.</p>
+<h3>Action Chunking &amp; Jitter Reduction</h3>
+<p>Phase 2에서 청크 경계의 명령 변화와 팔 떨림을 측정하고, 청크 블렌딩·스무딩 적용 전후를 같은 평가 조건으로 비교할 계획입니다.</p>
+<h3>Sim-to-Real Transfer</h3>
+<p>Phase 3에서 실물 AI Worker로 정책을 옮기고, 센서·좌표계·제어 주기 차이가 파지에 미치는 영향을 검증할 계획입니다.</p>
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-challenge-2-학습-메모리-부족">
-          <summary class="case-heading"><h2>Challenge 2: 학습 메모리 부족</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><h3>문제</h3>
-<p>RTX 5090(32 GB) 한 장에서 NVIDIA GR00T N1.7 학습을 시작했지만 첫 최적화 단계에서 메모리가 부족했습니다. 고정한 언어·영상 백본을 32비트(FP32)로 유지하면 fused AdamW를 적용한 뒤에도 같은 문제가 발생했습니다.</p>
-<h3>해결</h3>
-<p>언어·영상 백본은 16비트 부동소수점(BF16)으로 불러와 고정하고 fused AdamW를 적용했습니다. 약 31.4억 개 파라미터 중 연결부와 동작 생성부 약 16.2억 개를 학습했습니다.</p>
-<h3>Result</h3>
-<p>배치 크기 8, 학습률 0.0001로 150,000스텝까지 학습을 완료했습니다.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="ko-challenge-3-평가-중-팔-명령-간섭">
-          <summary class="case-heading"><h2>Challenge 3: 평가 중 팔 명령 간섭</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>첫 평가에서는 두 정책 모두 거의 파지하지 못했습니다. 팔을 저장된 자세로 유지하는 제어기가 일시 정지 상태에서도 명령을 보내고 있었습니다. 해당 제어기를 비활성화하고 매 시도 전에 외부 팔 명령이 없는지 확인한 뒤 정책을 다시 평가했습니다.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="ko-result">
-          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>Isaac Lab에서 서 있는 녹차병 한 종류를 40개 위치에 놓고 자동으로 파지 시연을 수집했습니다. CenterPose와 병 전용 파지 규칙으로 400회 중 319개(79.8%), GraspNet으로 400회 중 310개(77.5%)의 성공 시연을 저장했습니다.</p>
-<p>각 데이터로 따로 학습한 시각·언어·행동 모델(Vision-Language-Action, VLA)은 같은 40개 위치에서 각각 120회 중 75회(62.5%) 파지에 성공했습니다. 평가는 시뮬레이션에서 수집에 사용한 위치를 재사용했습니다.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="ko-남은-문제">
-          <summary class="case-heading"><h2>남은 문제</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+        <details class="case-section case-disclosure" id="ko-next-steps">
+          <summary class="case-heading"><h2>Next Steps</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><p>로봇 팔 떨림이 일부 시험에 영향을 줬습니다. 가장 먼 줄에 집중된 역기구학 탈락은 관절 한계와 충돌 중 어느 쪽이 원인인지 구분하지 못했습니다.</p>
 <p>학습에 사용하지 않은 위치, 누운 병과 다른 형상, 실물 로봇은 추가 검증이 필요합니다.</p>
+<p>다음 실험에서는 역기구학 탈락을 관절 한계와 충돌로 구분하고, 미학습 위치·다른 형상으로 평가를 확장합니다. 청크 블렌딩과 스무딩으로 떨림을 줄인 뒤 실물 AI Worker에서 전이를 검증할 계획입니다.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="ko-code">
+          <summary class="case-heading"><h2>Code</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>자동 수집 파이프라인의 기반으로 사용한 ROBOTIS 소프트웨어입니다.</p>
+<p><a href="https://github.com/ROBOTIS-GIT/cyclo_intelligence">GitHub · Cyclo Intelligence</a></p>
 </div>
         </details>
       </article>
@@ -295,23 +290,18 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <details class="case-section case-disclosure" id="en-system-setup">
-          <summary class="case-heading"><h2>System Setup</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>I built the automatic collection pipeline as a personal project on top of ROBOTIS&#39;s open-source software. Cyclo Intelligence handles data collection and management, and Cyclo Control handles motion planning and control.</p>
+        <details class="case-section case-disclosure" id="en-pipeline">
+          <summary class="case-heading"><h2>Pipeline</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><h3>Data Collection</h3>
+<p>I built an eight-stage automatic collection pipeline, from grasp candidate selection through recording, as a personal project on top of ROBOTIS&#39;s open-source software. Cyclo Intelligence handles data collection and management, and Cyclo Control handles motion planning and control.</p>
 <p>Clicking a bottle in the browser generates grasp candidates from the surrounding point cloud, then triggers the approach, grasp, lift and recording sequence. An attempt is saved as a training demonstration only if the bottle is lifted at least 3.5 cm, held for 0.5 seconds and the recording is saved.</p>
 <div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering tool center point control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div><p><img src="../assets/images/ai-worker-auto-record-pipeline.webp" alt="Four stages of automatic recording: target selection, grasp inference, motion generation, and execution with recording. Camera images and joint states are saved through cyclo_data"></p>
-<h3>Detailed system diagram</h3>
+<h4>Detailed system diagram</h4>
 <p><img src="../assets/images/ai-worker-auto-record-architecture.webp" alt="A browser click reaches auto_recorder_node in cyclo_intelligence. GraspNet candidates from grasp_server trigger an eight-step sequence in the AI Worker controllers, while cyclo_data records sensor data and commands"></p>
-<h3>Collecting bottle grasps</h3>
+<h4>Collecting bottle grasps</h4>
 <p><video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly attempts to pick up the bottle at different table positions in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
 <p>I fixed the bottle positions in a five-row, eight-column grid and ran ten attempts per position for each grasp candidate generator.</p>
 <p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Top-down view of the 40 test positions in Isaac Lab. All bottles are visible to show the grid, and each trial used one bottle"></p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="en-challenge-1-comparing-grasp-candidate-generators">
-          <summary class="case-heading"><h2>Challenge 1: Comparing grasp candidate generators</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><h3>Problem</h3>
 <p>I received feedback that GraspNet produced inconsistent grasps. I added CenterPose as a second way to generate a grasp pose for the selected bottle and compared the two under the same conditions.</p>
 <table>
 <thead>
@@ -352,7 +342,20 @@
 <td>CPU (ONNX Runtime)</td>
 </tr>
 </tbody></table>
-<h3>Collection at fixed positions</h3>
+<p>For upright-bottle collection, I used the center estimated by CenterPose with a fixed grasp orientation. This decision followed checks of estimated tilt and repeated grasp variation.</p>
+<h3>Training</h3>
+<p>Training NVIDIA GR00T N1.7 on one RTX 5090 (32 GB) ran out of memory at the first optimizer step. Fused AdamW still exceeded available memory with the frozen language and vision backbone in 32-bit floating point (FP32).</p>
+<p>I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. Of the model&#39;s 3.14 billion parameters, I trained about 1.62 billion in the connector and action generator.</p>
+<p>Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.</p>
+<h3>Inference &amp; Evaluation</h3>
+<p>Policy inference ran at 30 Hz and the robot control loop at 100 Hz. Each policy was evaluated three times at each of the same 40 collection positions, giving 120 trials per policy. Each trial lasted up to 30 seconds. Success required lifting the bottle at least 3.5 cm and holding it for 0.5 seconds.</p>
+<p>In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="en-results-and-analysis">
+          <summary class="case-heading"><h2>Results and Analysis</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><h3>Data Quality: GraspNet vs CenterPose</h3>
 <table>
 <thead>
 <tr>
@@ -404,11 +407,9 @@
 </tbody></table>
 <p>I grouped the target grasp poses from successful attempts by location. I measured position variation using standard deviation and orientation variation as the angular deviation from the mean orientation. The analysis used locations with at least two successes, covering 34 for GraspNet and 32 for CenterPose.</p>
 <p><img src="../assets/images/ai-worker-grasp-success-grid.webp" alt="Two heatmaps compare successful grasps across 40 positions. GraspNet does better in the farthest row at X = 0.295 m, CenterPose does better at X = 0.340 m, and both are nearly perfect across the three closest rows"></p>
-<p><img src="../assets/images/ai-worker-grasp-consistency.webp" alt="Each point represents one bottle location. Median position variation is 0.3 mm for CenterPose and 3.5 mm for GraspNet. Median orientation variation is 0.0° and 2.6°, respectively"></p>
-<p><img src="../assets/images/ai-worker-grasp-p20.webp" alt="3D reconstructions of both grippers enclosing the green tea bottle at position p20, with CenterPose in blue and GraspNet in orange"></p>
 <p>In 169 of the 171 failed attempts, inverse kinematics rejected every candidate while computing arm joint angles for the target pose. Failures clustered in the farthest row (27 successes in 160 attempts). Every attempt at X = 0.430 m and X = 0.475 m succeeded. I could not isolate joint limits from collisions as the cause.</p>
-<h3>Limits of CenterPose estimates</h3>
-<p><strong>Estimated tilt increased at farther positions.</strong> Across the 400 CenterPose attempts, I measured the angle between the estimated vertical axis and the true upright axis for each row.</p>
+<details class="validation-appendix">
+<summary>Detailed CenterPose validation</summary><p><strong>Estimated tilt increased at farther positions.</strong> Across the 400 CenterPose attempts, I measured the angle between the estimated vertical axis and the true upright axis for each row.</p>
 <table>
 <thead>
 <tr>
@@ -468,7 +469,7 @@
 <p><strong>Small bottles in the image were missed.</strong> With the full 672 × 376 image as input, the bottle model detected zero of nine bottle views. Cropping around the bottle raised detection to nine of nine. During collection at 1280 × 720, the bottle was approximately 160–180 px tall and was detected.</p>
 <p><img src="../assets/images/ai-worker-centerpose-categories.webp" alt="Head-camera images and crops at three rotations show the bottle model drawing 3D boxes around green tea bottles, coffee cans and snack bags"></p>
 <p><img src="../assets/images/ai-worker-centerpose-camera-check.webp" alt="The projected centers of nine markers align with the rendered positions within 0.52–0.90 px"></p>
-<h3>Comparing trained policies</h3>
+</details><h3>Sim-to-Sim VLA Baseline</h3>
 <p>I evaluated each policy three times at each of the same 40 positions. Each trial lasted up to 30 seconds and used the same success criterion as collection.</p>
 <table>
 <thead>
@@ -502,37 +503,26 @@
 </tr>
 </tbody></table>
 <p>CenterPose produced more consistent grasp poses at the same position. The two policies achieved the same total number of successful grasps, with differences across rows based on three trials per position. I used CenterPose to collect demonstrations for upright bottles. GraspNet still needs evaluation on objects with other shapes.</p>
+<p>Arm jitter affected some trials. Policy failures have yet to be classified by jitter, reachability and collisions, so the effect of jitter on success rate has not been quantified.</p>
+<h3>Action Chunking &amp; Jitter Reduction</h3>
+<p>Phase 2 will measure command changes at action chunk boundaries and arm jitter, then compare chunk blending and smoothing against the baseline under the same evaluation conditions.</p>
+<h3>Sim-to-Real Transfer</h3>
+<p>Phase 3 will transfer the policy to a physical AI Worker and evaluate the effects of sensor, coordinate frame and control timing differences.</p>
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="en-challenge-2-training-memory-limits">
-          <summary class="case-heading"><h2>Challenge 2: Training memory limits</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><h3>Problem</h3>
-<p>Training NVIDIA GR00T N1.7 on one RTX 5090 (32 GB) ran out of memory at the first optimizer step. Fused AdamW still exceeded available memory with the frozen language and vision backbone in 32-bit floating point (FP32).</p>
-<h3>Solution</h3>
-<p>I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. Of the model&#39;s 3.14 billion parameters, I trained about 1.62 billion in the connector and action generator.</p>
-<h3>Result</h3>
-<p>Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="en-challenge-3-arm-command-interference-during-evaluation">
-          <summary class="case-heading"><h2>Challenge 3: Arm command interference during evaluation</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="en-result">
-          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).</p>
-<p>I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="en-limitations">
-          <summary class="case-heading"><h2>Limitations</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+        <details class="case-section case-disclosure" id="en-next-steps">
+          <summary class="case-heading"><h2>Next Steps</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><p>Arm jitter affected some trials. I could not determine whether joint limits or collisions caused the inverse kinematics rejections concentrated in the farthest row.</p>
 <p>Positions outside the training set, bottles lying on their sides, other object shapes and a physical robot still need testing.</p>
+<p>The next experiments will separate joint-limit failures from collisions and extend evaluation to unseen positions and other object shapes. I plan to evaluate chunk blending and smoothing before testing transfer to a physical AI Worker.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="en-code">
+          <summary class="case-heading"><h2>Code</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>ROBOTIS software used as the foundation for the automatic collection pipeline.</p>
+<p><a href="https://github.com/ROBOTIS-GIT/cyclo_intelligence">GitHub · Cyclo Intelligence</a></p>
 </div>
         </details>
       </article>

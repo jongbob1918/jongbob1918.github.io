@@ -16,9 +16,11 @@ demo:
   alt: Automatic recording demo at 2x speed. While Auto Pick runs in the web UI on the left, the AI Worker picks up the bottle in Isaac Lab at top right, and RViz at bottom right shows the bottle point cloud and GraspNet grasp candidates
 ---
 
-## System Setup
+## Pipeline
 
-I built the automatic collection pipeline as a personal project on top of ROBOTIS's open-source software. Cyclo Intelligence handles data collection and management, and Cyclo Control handles motion planning and control.
+### Data Collection
+
+I built an eight-stage automatic collection pipeline, from grasp candidate selection through recording, as a personal project on top of ROBOTIS's open-source software. Cyclo Intelligence handles data collection and management, and Cyclo Control handles motion planning and control.
 
 Clicking a bottle in the browser generates grasp candidates from the surrounding point cloud, then triggers the approach, grasp, lift and recording sequence. An attempt is saved as a training demonstration only if the bottle is lifted at least 3.5 cm, held for 0.5 seconds and the recording is saved.
 
@@ -26,21 +28,17 @@ Clicking a bottle in the browser generates grasp candidates from the surrounding
 
 ![Four stages of automatic recording: target selection, grasp inference, motion generation, and execution with recording. Camera images and joint states are saved through cyclo_data](../assets/images/ai-worker-auto-record-pipeline.webp)
 
-### Detailed system diagram
+#### Detailed system diagram
 
 ![A browser click reaches auto_recorder_node in cyclo_intelligence. GraspNet candidates from grasp_server trigger an eight-step sequence in the AI Worker controllers, while cyclo_data records sensor data and commands](../assets/images/ai-worker-auto-record-architecture.webp)
 
-### Collecting bottle grasps
+#### Collecting bottle grasps
 
 <video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly attempts to pick up the bottle at different table positions in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video>
 
 I fixed the bottle positions in a five-row, eight-column grid and ran ten attempts per position for each grasp candidate generator.
 
 ![Top-down view of the 40 test positions in Isaac Lab. All bottles are visible to show the grid, and each trial used one bottle](../assets/images/ai-worker-fixed40-locations.webp)
-
-## Challenge 1: Comparing grasp candidate generators
-
-### Problem
 
 I received feedback that GraspNet produced inconsistent grasps. I added CenterPose as a second way to generate a grasp pose for the selected bottle and compared the two under the same conditions.
 
@@ -53,7 +51,25 @@ I received feedback that GraspNet produced inconsistent grasps. I added CenterPo
 | Collision check | Point-cloud filter | Inverse kinematics (IK) validation only |
 | Inference | GPU (CUDA) | CPU (ONNX Runtime) |
 
-### Collection at fixed positions
+For upright-bottle collection, I used the center estimated by CenterPose with a fixed grasp orientation. This decision followed checks of estimated tilt and repeated grasp variation.
+
+### Training
+
+Training NVIDIA GR00T N1.7 on one RTX 5090 (32 GB) ran out of memory at the first optimizer step. Fused AdamW still exceeded available memory with the frozen language and vision backbone in 32-bit floating point (FP32).
+
+I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. Of the model's 3.14 billion parameters, I trained about 1.62 billion in the connector and action generator.
+
+Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.
+
+### Inference & Evaluation
+
+Policy inference ran at 30 Hz and the robot control loop at 100 Hz. Each policy was evaluated three times at each of the same 40 collection positions, giving 120 trials per policy. Each trial lasted up to 30 seconds. Success required lifting the bottle at least 3.5 cm and holding it for 0.5 seconds.
+
+In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.
+
+## Results and Analysis
+
+### Data Quality: GraspNet vs CenterPose
 
 | | GraspNet | CenterPose |
 | --- | --- | --- |
@@ -70,13 +86,10 @@ I grouped the target grasp poses from successful attempts by location. I measure
 
 ![Two heatmaps compare successful grasps across 40 positions. GraspNet does better in the farthest row at X = 0.295 m, CenterPose does better at X = 0.340 m, and both are nearly perfect across the three closest rows](../assets/images/ai-worker-grasp-success-grid.webp)
 
-![Each point represents one bottle location. Median position variation is 0.3 mm for CenterPose and 3.5 mm for GraspNet. Median orientation variation is 0.0° and 2.6°, respectively](../assets/images/ai-worker-grasp-consistency.webp)
-
-![3D reconstructions of both grippers enclosing the green tea bottle at position p20, with CenterPose in blue and GraspNet in orange](../assets/images/ai-worker-grasp-p20.webp)
-
 In 169 of the 171 failed attempts, inverse kinematics rejected every candidate while computing arm joint angles for the target pose. Failures clustered in the farthest row (27 successes in 160 attempts). Every attempt at X = 0.430 m and X = 0.475 m succeeded. I could not isolate joint limits from collisions as the cause.
 
-### Limits of CenterPose estimates
+<details class="validation-appendix">
+<summary>Detailed CenterPose validation</summary>
 
 **Estimated tilt increased at farther positions.** Across the 400 CenterPose attempts, I measured the angle between the estimated vertical axis and the true upright axis for each row.
 
@@ -102,7 +115,9 @@ The farther rows generally showed larger tilt and center errors. As the bottle m
 
 ![The projected centers of nine markers align with the rendered positions within 0.52–0.90 px](../assets/images/ai-worker-centerpose-camera-check.webp)
 
-### Comparing trained policies
+</details>
+
+### Sim-to-Sim VLA Baseline
 
 I evaluated each policy three times at each of the same 40 positions. Each trial lasted up to 30 seconds and used the same success criterion as collection.
 
@@ -113,32 +128,26 @@ I evaluated each policy three times at each of the same 40 positions. Each trial
 
 CenterPose produced more consistent grasp poses at the same position. The two policies achieved the same total number of successful grasps, with differences across rows based on three trials per position. I used CenterPose to collect demonstrations for upright bottles. GraspNet still needs evaluation on objects with other shapes.
 
-## Challenge 2: Training memory limits
+Arm jitter affected some trials. Policy failures have yet to be classified by jitter, reachability and collisions, so the effect of jitter on success rate has not been quantified.
 
-### Problem
+### Action Chunking & Jitter Reduction
 
-Training NVIDIA GR00T N1.7 on one RTX 5090 (32 GB) ran out of memory at the first optimizer step. Fused AdamW still exceeded available memory with the frozen language and vision backbone in 32-bit floating point (FP32).
+Phase 2 will measure command changes at action chunk boundaries and arm jitter, then compare chunk blending and smoothing against the baseline under the same evaluation conditions.
 
-### Solution
+### Sim-to-Real Transfer
 
-I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. Of the model's 3.14 billion parameters, I trained about 1.62 billion in the connector and action generator.
+Phase 3 will transfer the policy to a physical AI Worker and evaluate the effects of sensor, coordinate frame and control timing differences.
 
-### Result
-
-Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.
-
-## Challenge 3: Arm command interference during evaluation
-
-In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.
-
-## Result
-
-In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).
-
-I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.
-
-## Limitations
+## Next Steps
 
 Arm jitter affected some trials. I could not determine whether joint limits or collisions caused the inverse kinematics rejections concentrated in the farthest row.
 
 Positions outside the training set, bottles lying on their sides, other object shapes and a physical robot still need testing.
+
+The next experiments will separate joint-limit failures from collisions and extend evaluation to unseen positions and other object shapes. I plan to evaluate chunk blending and smoothing before testing transfer to a physical AI Worker.
+
+## Code
+
+ROBOTIS software used as the foundation for the automatic collection pipeline.
+
+[GitHub · Cyclo Intelligence](https://github.com/ROBOTIS-GIT/cyclo_intelligence)

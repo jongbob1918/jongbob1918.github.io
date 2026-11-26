@@ -16,12 +16,6 @@ demo:
   alt: Automatic recording demo at 2x speed. While Auto Pick runs in the web UI on the left, the AI Worker picks up the bottle in Isaac Lab at top right, and RViz at bottom right shows the bottle point cloud and GraspNet grasp candidates
 ---
 
-## Result
-
-In Isaac Lab, I collected grasp demonstrations using one type of upright green tea bottle placed at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).
-
-I trained a separate Vision-Language-Action (VLA) policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation, using the same 40 positions as collection.
-
 ## System Setup
 
 One click on a bottle in the web UI runs grasp inference, grasp motion generation, execution and recording without further human input.
@@ -57,6 +51,12 @@ Comparing on random layouts at first led to diverging interpretations. I then fi
 <video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly picks up bottles placed at different positions on the table in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video>
 
 ![Top-down Isaac Lab view of 40 bottles in a 5-row by 8-column grid with the AI Worker body at the bottom; all bottles are shown together only to mark the positions, and evaluation used one bottle at a time](../assets/images/ai-worker-fixed40-locations.webp)
+
+## Result
+
+In Isaac Lab, I collected grasp demonstrations using one type of upright green tea bottle placed at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).
+
+I trained a separate Vision-Language-Action (VLA) policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation, using the same 40 positions as collection.
 
 ## Challenge 1: Comparing grasp candidate generators
 

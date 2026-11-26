@@ -12,10 +12,6 @@ demo:
   href: https://www.youtube.com/watch?v=kHgA8jEmoCw&t=22s
 ---
 
-## Result
-
-After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.
-
 ## System Setup
 
 Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Most walking trails are dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.
@@ -29,6 +25,10 @@ The upper-level navigation module sends velocity commands to a reinforcement-lea
 I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.
 
 See [Robot software migration to ROS 2](lk-ros.html) for the migration process.
+
+## Result
+
+After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.
 
 ## Challenge 1: Localization errors in outdoor environments
 

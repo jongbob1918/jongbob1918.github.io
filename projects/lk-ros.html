@@ -34,16 +34,16 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="ko-기존-방식">
-          <div class="case-heading"><h2>기존 방식</h2></div>
-          <p>기존 시스템은 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 1 Noetic과 자율주행 패키지 move_base를 사용했습니다. 로봇의 동작은 상태 머신(State Machine)으로 관리했습니다.</p>
+        <details class="case-section case-disclosure" id="ko-기존-방식">
+          <summary class="case-heading"><h2>기존 방식</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>기존 시스템은 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 1 Noetic과 자율주행 패키지 move_base를 사용했습니다. 로봇의 동작은 상태 머신(State Machine)으로 관리했습니다.</p>
 <p>ROS 1의 유지보수 지원이 종료됐습니다. move_base에서 선택할 수 있는 주행 알고리즘과 기존 시스템 구조에도 서비스 확장의 제약이 있었습니다.</p>
+</div>
+        </details>
 
-        </section>
-
-        <section class="case-section" id="ko-개선-방식">
-          <div class="case-heading"><h2>개선 방식</h2></div>
-          <p>3차원 레이저 센서인 3D LiDAR(Light Detection and Ranging)로 지도를 만들며 동시에 위치를 추정하는 알고리즘(SLAM, Simultaneous Localization and Mapping)과 사전 지도에서 현재 위치를 찾는 기능을 선별해 ROS 2 Humble로 옮겼습니다.</p>
+        <details class="case-section case-disclosure" id="ko-개선-방식">
+          <summary class="case-heading"><h2>개선 방식</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>3차원 레이저 센서인 3D LiDAR(Light Detection and Ranging)로 지도를 만들며 동시에 위치를 추정하는 알고리즘(SLAM, Simultaneous Localization and Mapping)과 사전 지도에서 현재 위치를 찾는 기능을 선별해 ROS 2 Humble로 옮겼습니다.</p>
 <p>경로 계획과 주행 제어는 Nav2(Navigation2)를 중심으로 구성했습니다.</p>
 <p>상태 머신 기반 의사결정 구조를 변경해, 조건 확인과 행동 실행을 트리로 구성하는 행동 트리(Behavior Tree)를 도입했습니다.</p>
 <figure class="feature-media"><a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/nav2-navigation-behavior-tree.png" alt="Nav2 공식 행동 트리 예시: NavigateWithReplanning 아래에 경로 계획 ComputePathToPose와 경로 추종 FollowPath가 연결된 구조" loading="lazy"></a></figure><p>의사결정과 개별 기능을 분리하고, 시스템을 다음 네 모듈로 나눴습니다.</p>
@@ -72,8 +72,8 @@
 </tr>
 </tbody></table>
 <p>이 구조를 바탕으로 여러 로봇에서 각 모듈을 재사용할 수 있도록 설계했습니다.</p>
-
-        </section>
+</div>
+        </details>
       </article>
     </div>
   </div>
@@ -93,16 +93,16 @@
 
     <div class="case-layout">
       <article class="case-study">
-        <section class="case-section" id="en-previous-approach">
-          <div class="case-heading"><h2>Previous Approach</h2></div>
-          <p>The existing system used the Robot Operating System (ROS) 1 Noetic framework and the move_base navigation package. A state machine managed robot behavior.</p>
+        <details class="case-section case-disclosure" id="en-previous-approach">
+          <summary class="case-heading"><h2>Previous Approach</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>The existing system used the Robot Operating System (ROS) 1 Noetic framework and the move_base navigation package. A state machine managed robot behavior.</p>
 <p>Maintenance support for ROS 1 had ended. The navigation algorithms available through move_base and the existing system structure limited further service development.</p>
+</div>
+        </details>
 
-        </section>
-
-        <section class="case-section" id="en-improved-approach">
-          <div class="case-heading"><h2>Improved Approach</h2></div>
-          <p>I ported the mapping and localization components needed by the new system to ROS 2 Humble. These included simultaneous localization and mapping (SLAM) using a 3D Light Detection and Ranging (LiDAR) sensor, and localization against prebuilt maps.</p>
+        <details class="case-section case-disclosure" id="en-improved-approach">
+          <summary class="case-heading"><h2>Improved Approach</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>I ported the mapping and localization components needed by the new system to ROS 2 Humble. These included simultaneous localization and mapping (SLAM) using a 3D Light Detection and Ranging (LiDAR) sensor, and localization against prebuilt maps.</p>
 <p>Path planning and motion control were organized around Navigation2 (Nav2).</p>
 <p>I replaced the state-machine-based decision structure with a behavior tree, which organizes condition checks and action execution into a tree.</p>
 <figure class="feature-media"><a href="https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/detailed_behavior_tree_walkthrough/detailed_behavior_tree_walkthrough/" target="_blank" rel="noopener noreferrer"><img src="../assets/images/nav2-navigation-behavior-tree.png" alt="Official Nav2 behavior tree example connecting ComputePathToPose and FollowPath under NavigateWithReplanning" loading="lazy"></a></figure><p>I separated decision-making from individual functions and organized the system into four modules.</p>
@@ -131,8 +131,8 @@
 </tr>
 </tbody></table>
 <p>The modular structure was designed to support reuse across multiple robots.</p>
-
-        </section>
+</div>
+        </details>
       </article>
     </div>
   </div>

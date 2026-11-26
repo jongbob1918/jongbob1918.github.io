@@ -23,15 +23,15 @@ overview: >-
   회사 로봇 소프트웨어의 ROS 2 Humble 기반 전환 작업을 담당했습니다.
 ---
 
-## Problem Statement
+## 기존 방식
 
 기존 시스템은 로봇 소프트웨어 프레임워크인 ROS(Robot Operating System) 1 Noetic과 자율주행 패키지 move_base를 사용했습니다. 로봇의 동작은 상태 머신(State Machine)으로 관리했습니다.
 
-기존 ROS 1의 유지보수 지원이 종료되고, move_base 기반 구성에서 사용할 수 있는 알고리즘과 시스템 구조에도 서비스 확장의 한계가 있었습니다. 이에 ROS 2 Humble로 전환하고 자율주행과 의사결정 구조를 재설계했습니다.
+ROS 1의 유지보수 지원이 종료됐습니다. move_base에서 선택할 수 있는 주행 알고리즘과 기존 시스템 구조에도 서비스 확장의 제약이 있었습니다.
 
-## ROS 2 포팅
+## 개선 방식
 
-기존 코드 전체를 옮기기보다 새 시스템에 필요한 부분을 선별했습니다. 3차원 레이저 센서인 3D LiDAR(Light Detection and Ranging)를 이용한 지도 작성·동시 위치 추정 알고리즘(SLAM, Simultaneous Localization and Mapping)과 사전 지도 기반 위치 추정(Localization) 등을 ROS 2 Humble로 포팅했습니다.
+3차원 레이저 센서인 3D LiDAR(Light Detection and Ranging)로 지도를 만들며 동시에 위치를 추정하는 알고리즘(SLAM, Simultaneous Localization and Mapping)과 사전 지도에서 현재 위치를 찾는 기능을 선별해 ROS 2 Humble로 옮겼습니다.
 
 경로 계획과 주행 제어는 Nav2(Navigation2)를 중심으로 구성했습니다.
 

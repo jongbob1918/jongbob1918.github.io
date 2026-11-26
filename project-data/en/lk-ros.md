@@ -10,15 +10,15 @@ demo:
   alt: Software migration from ROS 1 Noetic on the left to ROS 2 Humble on the right
 ---
 
-## Problem Statement
+## Previous Approach
 
 The existing system used the Robot Operating System (ROS) 1 Noetic framework and the move_base navigation package. A state machine managed robot behavior.
 
-Maintenance support for ROS 1 had ended, and the algorithms available in the move_base configuration and its system structure limited further service development. I migrated the system to ROS 2 Humble and redesigned navigation and decision-making.
+Maintenance support for ROS 1 had ended. The navigation algorithms available through move_base and the existing system structure limited further service development.
 
-## Porting to ROS 2
+## Improved Approach
 
-I selected the components needed by the new system rather than porting the entire codebase. These included simultaneous localization and mapping (SLAM) using a 3D Light Detection and Ranging (LiDAR) sensor, and localization against prebuilt maps. I ported these components to ROS 2 Humble.
+I ported the mapping and localization components needed by the new system to ROS 2 Humble. These included simultaneous localization and mapping (SLAM) using a 3D Light Detection and Ranging (LiDAR) sensor, and localization against prebuilt maps.
 
 Path planning and motion control were organized around Navigation2 (Nav2).
 

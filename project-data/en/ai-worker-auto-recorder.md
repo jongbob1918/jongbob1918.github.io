@@ -7,7 +7,7 @@ team: Personal project
 role: ""
 card:
   imageAlt: "An Autonomous Data Collection Pipeline title card, then a click on the target bottle in the web UI that starts Auto Pick, then an 8x-speed Isaac Lab scene where the AI Worker reaches for bottles at different positions"
-overview: Training a Vision-Language-Action (VLA) model by imitation learning needs many demonstrations, and collecting them by human teleoperation takes a lot of time and money. To see whether a robot could take over this collection, I added a grasp estimation model and rule-based motion planning on top of ROBOTIS open source, building a pipeline in which the AI Worker picks up a bottle on its own and keeps only successful attempts. In Isaac Lab simulation, with a single type of green tea bottle, it made 800 attempts and collected 629 successful demonstrations. A VLA policy trained only on this data succeeded in 75 of 120 grasps on a 40-position evaluation I designed.
+overview: Teaching a robot to pick up objects takes many demonstrations, which are time-consuming to collect by teleoperation. I extended ROBOTIS’s open-source software so a click on a bottle in the web interface makes the AI Worker pick it up and save successful attempts. In Isaac Lab, I trained and evaluated separate policies on demonstrations from two grasp candidate generators.
 demo:
   type: video
   src: ../assets/videos/ai-worker-auto-record-hero.mp4
@@ -15,6 +15,12 @@ demo:
   autoplay: true
   alt: Automatic recording demo at 2x speed. While Auto Pick runs in the web UI on the left, the AI Worker picks up the bottle in Isaac Lab at top right, and RViz at bottom right shows the bottle point cloud and GraspNet grasp candidates
 ---
+
+## Result
+
+In Isaac Lab, I collected grasp demonstrations using one type of upright green tea bottle placed at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).
+
+I trained a separate Vision-Language-Action (VLA) policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation, using the same 40 positions as collection.
 
 ## System Setup
 
@@ -26,7 +32,7 @@ A finished motion command alone does not show a successful grasp, so command com
 
 ### Detailed system diagram
 
-The pipeline builds on two parts of Cyclo, the ROBOTIS robot software: Cyclo Intelligence for data collection and management, and Cyclo Control for motion planning and control. On top of them, I added a pipeline that runs grasp inference, motion planning and recording to the end from a single click.
+The pipeline builds on two parts of Cyclo, the ROBOTIS robot software. Cyclo Intelligence handles data collection and management. Cyclo Control handles motion planning and control. On top of them, I added a pipeline that runs grasp inference, motion planning and recording to the end from a single click.
 
 <div class="media-grid media-grid-natural"><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-intelligence.webp" alt="ROBOTIS Cyclo software stack with Cyclo Intelligence highlighted, covering data collection, data curation and model inference" loading="lazy"></figure><figure class="feature-media"><img src="../assets/images/ai-worker-cyclo-control.webp" alt="ROBOTIS Cyclo software stack with Cyclo Control highlighted, covering TCP control, MoveJ joint control and collision avoidance" loading="lazy"></figure></div>
 
@@ -42,17 +48,23 @@ Grasp inference runs in `grasp_server`, a separate Docker container. The auto re
 
 ![Detailed architecture where a web UI click reaches auto_recorder_node in cyclo_intelligence, grasp_server returns GraspNet candidates, ai_worker controllers execute an 8-step grasp sequence and cyclo_data records sensors and commands](../assets/images/ai-worker-auto-record-architecture.webp)
 
-## Data Collection
+### Collecting bottle grasps
 
 I loaded a break room furnished with real IKEA furniture as a simulation asset, rendered bottles into it and connected the automatic collection pipeline to the simulation. The only object so far is one green tea bottle.
 
-### Comparing GraspNet and CenterPose
-
-I used GraspNet first as the grasp candidate generator. Its results were uneven, so I connected CenterPose (an object pose estimation model) for comparison. CenterPose still reports an upright bottle tilted by about 14 to 15 degrees, so it is paired with a bottle-specific grasp rule that assumes the bottle is standing. Camera input and projection are not the cause: 9 markers across 6 frames matched the rendered projection to a mean of 0.66 px.
-
 Comparing on random layouts at first led to diverging interpretations. I then fixed the bottle at 40 positions in a 5-row by 8-column grid and repeated each position 10 times per method.
 
+<video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly picks up bottles placed at different positions on the table in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video>
+
 ![Top-down Isaac Lab view of 40 bottles in a 5-row by 8-column grid with the AI Worker body at the bottom; all bottles are shown together only to mark the positions, and evaluation used one bottle at a time](../assets/images/ai-worker-fixed40-locations.webp)
+
+## Challenge 1: Comparing grasp candidate generators
+
+### Problem
+
+I used GraspNet first as the grasp candidate generator. Its results were uneven, so I connected CenterPose (an object pose estimation model) for comparison. CenterPose estimated the bottle’s tilt at a median of 13.6° in the nearest row and 25.7° in the farthest row. I used its estimated center and set the grasp direction with a rule for upright bottles. As a projection check, 9 markers across 6 frames differed from their rendered positions by 0.66 px on average.
+
+### Collection comparison
 
 | Collection | Attempts | Successful demonstrations |
 | --- | --- | --- |
@@ -65,17 +77,11 @@ The gap between the two methods shrank from 7.7 percentage points in round 1 to 
 
 Of the 171 round-2 failures, 169 were cases where inverse kinematics (IK, computing arm joint angles for a target pose) rejected every candidate. The farthest row (X=0.295 m) succeeded in only 27 of 160 attempts, while the X=0.430 m and 0.475 m rows succeeded every time. I did not pre-check the 40 positions with IK, so I could not separate joint limits from collisions as the cause.
 
-## Policy & Training
+### Policy evaluation
 
 I trained NVIDIA GR00T N1.7 (a VLA model that outputs actions from images, language and robot state) separately on the two round-2 datasets. Inputs are one head camera and two wrist cameras.
 
-On one RTX 5090 (32 GB), the default configuration ran out of memory at the first optimizer step and never completed an update. Keeping the frozen language and vision parts (the backbone) in FP32 still ran out of memory even with fused AdamW; loading the backbone in BF16 (16-bit floating point) together with fused AdamW let training run.
-
-The language model and vision encoder stayed frozen, and about 1.62 billion of roughly 3.14 billion parameters (the connector and action generator) were trained, with batch size 8 and learning rate 0.0001 for 150,000 steps.
-
-### Simulation evaluation
-
-Evaluation covers the same 40 positions × 3 trials × 2 models, 240 trials in total. Each trial lasts 30 seconds with the same success rule as collection. It reuses the training positions, so it does not measure generalization to new positions.
+I evaluated each policy in three trials per position. Each trial lasted 30 seconds and used the same success rule as collection.
 
 | Policy training data | Overall | X=0.295 | X=0.340 | X=0.385 | X=0.430 | X=0.475 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -84,9 +90,25 @@ Evaluation covers the same 40 positions × 3 trials × 2 models, 240 trials in t
 
 Overall successes were equal but differed by row. The row with the lowest policy success was the farthest row, which also had the fewest successful demonstrations during collection. With 3 trials per position, the sample is too small to generalize row-level differences.
 
+## Challenge 2: Training memory limits
+
+### Problem
+
+On one RTX 5090 (32 GB), the default configuration ran out of memory at the first optimizer step. Using fused AdamW still exceeded the memory limit with the frozen language and vision backbone in 32-bit floating point (FP32).
+
+### Solution
+
+I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. I trained approximately 1.62 billion of 3.14 billion parameters in the connector and action generator.
+
+### Result
+
+Training completed 150,000 steps with batch size 8 and a learning rate of 0.0001.
+
+## Challenge 3: Arm command interference during evaluation
+
 In the first evaluation, both policies almost never succeeded. I found that the controller holding the stored pose kept sending arm commands while paused. I disabled it, confirmed before every trial that no external arm command was present, and re-evaluated; the table above is that result.
 
-### Limitations
+## Limitations
 
 Arm jitter made some test results unreliable.
 

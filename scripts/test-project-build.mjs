@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, copyFile, writeFile, readFile, symlink, unlink, access, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, copyFile, appendFile, writeFile, readFile, symlink, unlink, access, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -26,6 +26,12 @@ test('categories, optional content, validation and generated-page lifecycle', as
     const catalog = async () => JSON.parse(await readFile(join(fixture, 'projects.json'), 'utf8'));
     await saveCategories();
     await saveProject('late', 'new-category', 2, true);
+    const lateProject = join(fixture, 'project-data/late.md');
+    const lateSource = await readFile(lateProject, 'utf8');
+    await writeFile(lateProject, lateSource.replace('title: 제목\n', 'title: 제목\ncollapsibleSections: true\n'));
+    const sections = '\n## Result\n\nVerified outcome.\n\n## System Setup\n\nImplementation details.\n';
+    await appendFile(lateProject, sections);
+    await appendFile(join(fixture, 'project-data/en/late.md'), sections);
     await saveProject('early', 'new-category', 1);
     await saveProject('compact', 'first', 9);
     let result = build();
@@ -41,6 +47,13 @@ test('categories, optional content, validation and generated-page lifecycle', as
     assert.ok(!html.includes('undefined'));
     assert.ok(!html.includes('class="project-repository"'));
     assert.ok(!html.includes('class="project-overview"'));
+    for (const language of ['ko', 'en']) {
+      const resultSection = `<section class="case-section" id="${language}-result">`;
+      const setupSection = `<details class="case-section case-disclosure" id="${language}-system-setup">`;
+      assert.ok(html.includes(resultSection));
+      assert.ok(html.includes(setupSection));
+      assert.ok(html.indexOf(resultSection) < html.indexOf(setupSection));
+    }
 
     categories[0].priority = 1;
     categories[1].priority = 3;

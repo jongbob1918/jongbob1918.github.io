@@ -12,19 +12,23 @@ demo:
   href: https://www.youtube.com/watch?v=kHgA8jEmoCw&t=22s
 ---
 
-## Problem Statement
+## Result
+
+After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.
+
+## System Setup
 
 Seooreung in Goyang is a [heritage site covering approximately 1.87 million m²](https://heritage.go.kr/heri/cul/culSelectDetail.do?ccbaAsno=0001980000000&ccbaCpno=1333101980000&ccbaCtcd=31&ccbaKdcd=13&pageNo=1_1_1_0), with extensive woodland, undergrowth, and lawns. Most walking trails are dirt paths with slopes and uneven ground. Rain can wash away soil and change the terrain.
 
 The task was to maintain localization and repeatedly navigate a 2 km patrol route in this environment.
-
-## System Setup
 
 The wheeled biped robot used the Robot Operating System (ROS) 2 framework and the Navigation2 (Nav2) navigation stack. I used 3D Light Detection and Ranging (LiDAR) and camera data for simultaneous localization and mapping (SLAM) and autonomous navigation.
 
 The upper-level navigation module sends velocity commands to a reinforcement-learning-based low-level controller that controls the wheeled biped robot’s locomotion. The upper-level module uses a Model Predictive Path Integral (MPPI) controller to evaluate candidate trajectories and generate velocity commands.
 
 I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.
+
+See [Robot software migration to ROS 2](lk-ros.html) for the migration process.
 
 ## Challenge 1: Localization errors in outdoor environments
 
@@ -113,7 +117,3 @@ The existing navigation logic kept driving by planning a path around obstacles, 
 ### Solution
 
 I set a safety zone around the robot so that it stops when a person enters the zone and resumes driving when the zone is clear.
-
-## Field Validation
-
-After checking localization settings and matching results on recorded data, I completed multiple round trips along the patrol route at Seooreung. I used both replay experiments and field runs to improve localization stability.

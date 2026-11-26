@@ -67,11 +67,12 @@ const renderLocalizedProject = (project, sharedProject, language) => {
       <p class="project-links">${project.links.map(link => `<a href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join(' · ')}</p>` : ''}
     </header>
 
+    ${renderDemo(demo, language)}
+
     ${project.overview ? `<section class="project-overview" id="overview-${language}">
+      <div class="case-heading"><h2>${language === 'ko' ? '개요' : 'Overview'}</h2></div>
       <p class="lead">${escapeHtml(project.overview)}</p>${renderOverviewNote(project.overviewNote)}
     </section>` : ''}
-
-    ${renderDemo(demo, language)}
 
     <div class="case-layout">
       <article class="case-study">${renderSections(project.sections, language, sharedProject.collapsibleSections)}

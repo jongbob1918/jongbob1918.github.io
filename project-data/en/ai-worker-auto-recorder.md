@@ -38,12 +38,6 @@ I fixed the bottle positions in a five-row, eight-column grid and ran ten attemp
 
 ![Top-down view of the 40 test positions in Isaac Lab. All bottles are visible to show the grid, and each trial used one bottle](../assets/images/ai-worker-fixed40-locations.webp)
 
-## Result
-
-In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).
-
-I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.
-
 ## Challenge 1: Comparing grasp candidate generators
 
 ### Problem
@@ -136,6 +130,12 @@ Training completed 150,000 steps with a batch size of 8 and a learning rate of 0
 ## Challenge 3: Arm command interference during evaluation
 
 In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.
+
+## Result
+
+In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).
+
+I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.
 
 ## Limitations
 

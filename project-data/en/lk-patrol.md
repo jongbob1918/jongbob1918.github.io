@@ -26,10 +26,6 @@ I applied a precise alignment algorithm so the robot could safely enter its desi
 
 See [Robot software migration to ROS 2](lk-ros.html) for the migration process.
 
-## Result
-
-After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.
-
 ## Challenge 1: Localization errors in outdoor environments
 
 ### Problem
@@ -117,3 +113,7 @@ The existing navigation logic kept driving by planning a path around obstacles, 
 ### Solution
 
 I set a safety zone around the robot so that it stops when a person enters the zone and resumes driving when the zone is clear.
+
+## Result
+
+After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.

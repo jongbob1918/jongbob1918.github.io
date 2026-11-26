@@ -45,12 +45,6 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-result">
-          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>센서 기록을 재생해 위치 추정 설정과 지도 정합 결과를 확인한 뒤, 고양 서오릉의 2 km 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다.</p>
-</div>
-        </details>
-
         <details class="case-section case-disclosure" id="ko-challenge-1-야외환경에서의-위치-추정-틀어짐">
           <summary class="case-heading"><h2>Challenge 1: 야외환경에서의 위치 추정 틀어짐</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>Problem</h3>
@@ -114,6 +108,12 @@
 <p>로봇 주변에 안전 범위를 설정해 사람이 들어오면 정지하고, 범위 안에 사람이 없어지면 주행을 재개하도록 했습니다.</p>
 </div>
         </details>
+
+        <details class="case-section case-disclosure" id="ko-result">
+          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>센서 기록을 재생해 위치 추정 설정과 지도 정합 결과를 확인한 뒤, 고양 서오릉의 2 km 순찰 경로에서 여러 차례 왕복 주행을 완료했습니다.</p>
+</div>
+        </details>
       </article>
     </div>
   </div>
@@ -142,12 +142,6 @@
 <p>The upper-level navigation module sends velocity commands to a reinforcement-learning-based low-level controller that controls the wheeled biped robot’s locomotion. The upper-level module uses a Model Predictive Path Integral (MPPI) controller to evaluate candidate trajectories and generate velocity commands.</p>
 <p>I applied a precise alignment algorithm so the robot could safely enter its designated waiting area and remain there.</p>
 <p>See <a href="lk-ros.html">Robot software migration to ROS 2</a> for the migration process.</p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="en-result">
-          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.</p>
 </div>
         </details>
 
@@ -212,6 +206,12 @@
 <p>The existing navigation logic kept driving by planning a path around obstacles, even when many were present. During busy visiting hours at Seooreung, some visitors approached the robot or surrounded it out of curiosity. Because people move unpredictably, I judged that the robot could still collide with someone while driving around them.</p>
 <h3>Solution</h3>
 <p>I set a safety zone around the robot so that it stops when a person enters the zone and resumes driving when the zone is clear.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="en-result">
+          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>After replaying recorded sensor data to check localization settings and map matching, I completed multiple round trips along the 2 km patrol route at Seooreung in Goyang.</p>
 </div>
         </details>
       </article>

@@ -49,13 +49,6 @@
 </div>
         </details>
 
-        <details class="case-section case-disclosure" id="ko-result">
-          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
-          <div class="case-disclosure-body"><p>Isaac Lab에서 서 있는 녹차병 한 종류를 40개 위치에 놓고 자동으로 파지 시연을 수집했습니다. CenterPose와 병 전용 파지 규칙으로 400회 중 319개(79.8%), GraspNet으로 400회 중 310개(77.5%)의 성공 시연을 저장했습니다.</p>
-<p>각 데이터로 따로 학습한 시각·언어·행동 모델(Vision-Language-Action, VLA)은 같은 40개 위치에서 각각 120회 중 75회(62.5%) 파지에 성공했습니다. 평가는 시뮬레이션에서 수집에 사용한 위치를 재사용했습니다.</p>
-</div>
-        </details>
-
         <details class="case-section case-disclosure" id="ko-challenge-1-파지-후보-생성기-비교">
           <summary class="case-heading"><h2>Challenge 1: 파지 후보 생성기 비교</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><h3>문제</h3>
@@ -269,6 +262,13 @@
 </div>
         </details>
 
+        <details class="case-section case-disclosure" id="ko-result">
+          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
+          <div class="case-disclosure-body"><p>Isaac Lab에서 서 있는 녹차병 한 종류를 40개 위치에 놓고 자동으로 파지 시연을 수집했습니다. CenterPose와 병 전용 파지 규칙으로 400회 중 319개(79.8%), GraspNet으로 400회 중 310개(77.5%)의 성공 시연을 저장했습니다.</p>
+<p>각 데이터로 따로 학습한 시각·언어·행동 모델(Vision-Language-Action, VLA)은 같은 40개 위치에서 각각 120회 중 75회(62.5%) 파지에 성공했습니다. 평가는 시뮬레이션에서 수집에 사용한 위치를 재사용했습니다.</p>
+</div>
+        </details>
+
         <details class="case-section case-disclosure" id="ko-남은-문제">
           <summary class="case-heading"><h2>남은 문제</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">상세 펼치기</span><span class="when-open">접기</span></span></summary>
           <div class="case-disclosure-body"><p>로봇 팔 떨림이 일부 시험에 영향을 줬습니다. 가장 먼 줄에 집중된 역기구학 탈락은 관절 한계와 충돌 중 어느 쪽이 원인인지 구분하지 못했습니다.</p>
@@ -306,13 +306,6 @@
 <p><video controls autoplay muted loop playsinline preload="metadata" aria-label="Automatic collection at 8x speed. The AI Worker repeatedly attempts to pick up the bottle at different table positions in Isaac Lab"><source src="../assets/videos/ai-worker-auto-recorder-8x.mp4" type="video/mp4"></video></p>
 <p>I fixed the bottle positions in a five-row, eight-column grid and ran ten attempts per position for each grasp candidate generator.</p>
 <p><img src="../assets/images/ai-worker-fixed40-locations.webp" alt="Top-down view of the 40 test positions in Isaac Lab. All bottles are visible to show the grid, and each trial used one bottle"></p>
-</div>
-        </details>
-
-        <details class="case-section case-disclosure" id="en-result">
-          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
-          <div class="case-disclosure-body"><p>In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).</p>
-<p>I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.</p>
 </div>
         </details>
 
@@ -526,6 +519,13 @@
         <details class="case-section case-disclosure" id="en-challenge-3-arm-command-interference-during-evaluation">
           <summary class="case-heading"><h2>Challenge 3: Arm command interference during evaluation</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
           <div class="case-disclosure-body"><p>In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.</p>
+</div>
+        </details>
+
+        <details class="case-section case-disclosure" id="en-result">
+          <summary class="case-heading"><h2>Result</h2><span class="case-disclosure-action" aria-hidden="true"><span class="when-closed">Show details</span><span class="when-open">Hide details</span></span></summary>
+          <div class="case-disclosure-body"><p>In Isaac Lab, I collected grasp demonstrations with one type of upright green tea bottle at 40 fixed positions. CenterPose with a bottle-specific grasp rule saved 319 successful demonstrations in 400 attempts (79.8%). GraspNet saved 310 in 400 attempts (77.5%).</p>
+<p>I trained a separate VLA policy on each dataset. Both policies succeeded in 75 of 120 grasps (62.5%) in simulation. The evaluation reused the 40 collection positions.</p>
 </div>
         </details>
 

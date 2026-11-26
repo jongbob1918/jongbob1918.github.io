@@ -92,6 +92,8 @@
 <p>RTX 5090(32 GB) 한 장에서 NVIDIA GR00T N1.7 학습을 시작했지만 첫 최적화 단계에서 메모리가 부족했습니다. 고정한 언어·영상 백본을 32비트(FP32)로 유지하면 fused AdamW를 적용한 뒤에도 같은 문제가 발생했습니다.</p>
 <p>언어·영상 백본은 16비트 부동소수점(BF16)으로 불러와 고정하고 fused AdamW를 적용했습니다. 약 31.4억 개 파라미터 중 연결부와 동작 생성부 약 16.2억 개를 학습했습니다.</p>
 <p>배치 크기 8, 학습률 0.0001로 150,000스텝까지 학습을 완료했습니다.</p>
+<p>GraspNet 시연 310개와 CenterPose 시연 319개로 각각 학습한 손실을 1,000스텝 구간 평균으로 표시했습니다. 마지막 10,000스텝 평균 손실은 각각 0.00241, 0.00224입니다. 학습 데이터의 손실이며, 실제 파지 성능은 아래 평가에서 확인했습니다.</p>
+<p><img src="../assets/images/ai-worker-training-loss.webp" alt="GraspNet 시연 310개와 CenterPose 시연 319개로 학습한 GR00T N1.7의 손실 곡선. 150,000스텝까지 두 정책의 손실이 감소하며, 세로축은 로그 스케일이고 각 점은 1,000스텝 구간 평균이다"></p>
 <h3>Inference &amp; Evaluation</h3>
 <p>정책 추론은 30 Hz, 로봇 제어 루프는 100 Hz로 실행했습니다. 수집과 같은 40개 위치에서 정책마다 위치당 3회, 총 120회 평가했습니다. 시도당 제한 시간은 30초이며, 병을 3.5 cm 이상 들어 0.5초 유지하면 성공으로 판정했습니다.</p>
 <p>첫 평가에서는 두 정책 모두 거의 파지하지 못했습니다. 팔을 저장된 자세로 유지하는 제어기가 일시 정지 상태에서도 명령을 보내고 있었습니다. 해당 제어기를 비활성화하고 매 시도 전에 외부 팔 명령이 없는지 확인한 뒤 정책을 다시 평가했습니다.</p>
@@ -347,6 +349,8 @@
 <p>Training NVIDIA GR00T N1.7 on one RTX 5090 (32 GB) ran out of memory at the first optimizer step. Fused AdamW still exceeded available memory with the frozen language and vision backbone in 32-bit floating point (FP32).</p>
 <p>I loaded the frozen backbone in 16-bit floating point (BF16) and used fused AdamW. Of the model&#39;s 3.14 billion parameters, I trained about 1.62 billion in the connector and action generator.</p>
 <p>Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.</p>
+<p>The curves show training loss averaged over 1,000-step intervals for the policies trained on 310 GraspNet demonstrations and 319 CenterPose demonstrations. Mean loss over the final 10,000 steps was 0.00241 and 0.00224, respectively. These are training losses; grasp performance is measured in the evaluation below.</p>
+<p><img src="../assets/images/ai-worker-training-loss.webp" alt="GR00T N1.7 training loss for 310 GraspNet demonstrations and 319 CenterPose demonstrations. Both curves decrease through 150,000 steps; each point is a 1,000-step mean on a logarithmic vertical axis"></p>
 <h3>Inference &amp; Evaluation</h3>
 <p>Policy inference ran at 30 Hz and the robot control loop at 100 Hz. Each policy was evaluated three times at each of the same 40 collection positions, giving 120 trials per policy. Each trial lasted up to 30 seconds. Success required lifting the bottle at least 3.5 cm and holding it for 0.5 seconds.</p>
 <p>In the first evaluation, both policies rarely succeeded. The controller that held the arm at a stored pose kept sending commands while paused. I disabled it, verified before each attempt that the arm was receiving no external commands, and ran the evaluation again.</p>

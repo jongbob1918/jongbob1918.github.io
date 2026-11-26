@@ -61,6 +61,10 @@ I loaded the frozen backbone in 16-bit floating point (BF16) and used fused Adam
 
 Training completed 150,000 steps with a batch size of 8 and a learning rate of 0.0001.
 
+The curves show training loss averaged over 1,000-step intervals for the policies trained on 310 GraspNet demonstrations and 319 CenterPose demonstrations. Mean loss over the final 10,000 steps was 0.00241 and 0.00224, respectively. These are training losses; grasp performance is measured in the evaluation below.
+
+![GR00T N1.7 training loss for 310 GraspNet demonstrations and 319 CenterPose demonstrations. Both curves decrease through 150,000 steps; each point is a 1,000-step mean on a logarithmic vertical axis](../assets/images/ai-worker-training-loss.webp)
+
 ### Inference & Evaluation
 
 Policy inference ran at 30 Hz and the robot control loop at 100 Hz. Each policy was evaluated three times at each of the same 40 collection positions, giving 120 trials per policy. Each trial lasted up to 30 seconds. Success required lifting the bottle at least 3.5 cm and holding it for 0.5 seconds.

@@ -69,21 +69,25 @@ GraspNet으로 모은 수집 결과가 고르지 않다는 피드백을 받았�
 
 서 있는 병 수집에는 CenterPose의 중심 위치와 고정된 파지 방향 규칙을 사용했습니다. 추정 방향의 기울어짐과 반복 파지 편차를 확인한 결과에 따른 결정입니다.
 
-### Training
+### GR00T 학습
 
-RTX 5090(32 GB) 한 장에서 NVIDIA GR00T N1.7 학습을 시작했지만 첫 최적화 단계에서 메모리가 부족했습니다. 고정한 언어·영상 백본을 32비트(FP32)로 유지하면 fused AdamW를 적용한 뒤에도 같은 문제가 발생했습니다.
+GraspNet 시연 310개와 CenterPose 시연 319개로 GR00T N1.7 정책을 각각 학습했습니다. 언어·영상 백본은 고정하고, 연결부와 동작 생성부만 미세 조정했습니다(약 16.2억 파라미터).
 
-언어·영상 백본은 16비트 부동소수점(BF16)으로 불러와 고정하고 fused AdamW를 적용했습니다. 약 31.4억 개 파라미터 중 연결부와 동작 생성부 약 16.2억 개를 학습했습니다.
-
-배치 크기 8, 학습률 0.0001로 150,000스텝까지 학습을 완료했습니다.
-
-GraspNet 시연 310개와 CenterPose 시연 319개로 각각 학습한 손실을 1,000스텝 구간 평균으로 표시했습니다. 마지막 10,000스텝 평균 손실은 각각 0.00241, 0.00224입니다. 학습 데이터의 손실이며, 실제 파지 성능은 아래 평가에서 확인했습니다.
+첫 학습 단계에서 GPU 메모리가 부족해 고정한 백본을 16비트(BF16)로 불러오고 fused AdamW를 적용했습니다. RTX 5090(32 GB) 한 장에서 배치 크기 8, 학습률 0.0001로 정책마다 15만 스텝을 학습했습니다.
 
 ![GraspNet 시연 310개와 CenterPose 시연 319개로 학습한 GR00T N1.7의 손실 곡선. 150,000스텝까지 두 정책의 손실이 감소하며, 세로축은 로그 스케일이고 각 점은 1,000스텝 구간 평균이다](../assets/images/ai-worker-training-loss.webp)
 
 ### Inference
 
-<div class="policy-flow"><span>관절 목표값<small>30 Hz</small></span><i aria-hidden="true">→</i><span>선형 보간</span><i aria-hidden="true">→</i><span>제어 명령<small>100 Hz</small></span></div>
+GR00T는 머리와 양쪽 손목의 카메라 영상, 로봇 상태, 작업 지시를 받아 여러 시점의 동작을 한 번에 예측합니다.
+
+<div class="policy-flow">
+  <span><strong>GR00T N1.7</strong><small>관절 목표값 · 30 Hz</small></span>
+  <i aria-hidden="true"></i>
+  <span><strong>제어 루프</strong><small>선형 보간 · 100 Hz</small></span>
+  <i aria-hidden="true"></i>
+  <span><strong>AI Worker</strong><small>Isaac Lab 시뮬레이션</small></span>
+</div>
 
 ## Results and Analysis
 

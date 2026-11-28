@@ -81,11 +81,9 @@ GraspNet 시연 310개와 CenterPose 시연 319개로 각각 학습한 손실을
 
 ![GraspNet 시연 310개와 CenterPose 시연 319개로 학습한 GR00T N1.7의 손실 곡선. 150,000스텝까지 두 정책의 손실이 감소하며, 세로축은 로그 스케일이고 각 점은 1,000스텝 구간 평균이다](../assets/images/ai-worker-training-loss.webp)
 
-### Inference & Evaluation
+### Inference
 
-정책 추론은 30 Hz, 로봇 제어 루프는 100 Hz로 실행했습니다. 수집과 같은 40개 위치에서 정책마다 위치당 3회, 총 120회 평가했습니다. 시도당 제한 시간은 30초이며, 병을 3.5 cm 이상 들어 0.5초 유지하면 성공으로 판정했습니다.
-
-첫 평가에서는 두 정책 모두 거의 파지하지 못했습니다. 팔을 저장된 자세로 유지하는 제어기가 일시 정지 상태에서도 명령을 보내고 있었습니다. 해당 제어기를 비활성화하고 매 시도 전에 외부 팔 명령이 없는지 확인한 뒤 정책을 다시 평가했습니다.
+<div class="policy-flow"><span>관절 목표값<small>30 Hz</small></span><i aria-hidden="true">→</i><span>선형 보간</span><i aria-hidden="true">→</i><span>제어 명령<small>100 Hz</small></span></div>
 
 ## Results and Analysis
 

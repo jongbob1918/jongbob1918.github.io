@@ -515,3 +515,18 @@ html[data-theme="dark"] .organization-title { color: var(--category-dark-color, 
   .profile-identity h1 { font-size: 1.4rem; }
   .profile-identity .profile-role { font-size: .78rem; }
 }
+
+.policy-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.3rem;
+  max-width: 32rem;
+  padding: 0.8rem 0;
+  border-block: 1px solid currentColor;
+  text-align: center;
+  word-break: keep-all;
+}
+.policy-flow span { flex: 1; font-weight: 600; }
+.policy-flow small { display: block; font-weight: 400; }
+.policy-flow i { font-style: normal; }

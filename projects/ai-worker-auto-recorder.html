@@ -94,12 +94,20 @@
 <p><img src="../assets/images/ai-worker-training-loss.webp" alt="GraspNet 시연 310개와 CenterPose 시연 319개로 학습한 GR00T N1.7의 손실 곡선. 150,000스텝까지 두 정책의 손실이 감소하며, 세로축은 로그 스케일이고 각 점은 1,000스텝 구간 평균이다"></p>
 <h3>Inference</h3>
 <p>GR00T는 머리와 양쪽 손목의 카메라 영상, 로봇 상태, 작업 지시를 받아 여러 시점의 동작을 한 번에 예측합니다.</p>
-<div class="policy-flow" role="img" aria-label="GR00T가 30 Hz 간격으로 예측한 관절 목표값 사이를 제어 루프가 선형 보간해 Isaac Lab의 AI Worker에 100 Hz로 명령을 보낸다.">
-  <div class="policy-stage"><strong>GR00T N1.7</strong><svg viewBox="0 0 176 92" aria-hidden="true"><path d="M9 12V82H169" fill="none" stroke="#bfccd8"/><circle cx="16" cy="73" r="5" fill="white" stroke="#174674" stroke-width="2"/><circle cx="64" cy="42" r="5" fill="white" stroke="#174674" stroke-width="2"/><circle cx="112" cy="56" r="5" fill="white" stroke="#174674" stroke-width="2"/><circle cx="160" cy="20" r="5" fill="white" stroke="#174674" stroke-width="2"/></svg><span>관절 목표값 · 30 Hz</span></div>
-  <i aria-hidden="true"></i>
-  <div class="policy-stage"><strong>제어 루프</strong><svg viewBox="0 0 176 92" aria-hidden="true"><path d="M9 12V82H169" fill="none" stroke="#bfccd8"/><path d="M16 73 L64 42 L112 56 L160 20" fill="none" stroke="#69a9df" stroke-width="2"/><circle cx="16.0" cy="73.0" r="3" fill="#2179bc"/><circle cx="30.4" cy="63.7" r="3" fill="#2179bc"/><circle cx="44.8" cy="54.4" r="3" fill="#2179bc"/><circle cx="59.2" cy="45.1" r="3" fill="#2179bc"/><circle cx="73.6" cy="44.8" r="3" fill="#2179bc"/><circle cx="88.0" cy="49.0" r="3" fill="#2179bc"/><circle cx="102.4" cy="53.2" r="3" fill="#2179bc"/><circle cx="116.8" cy="52.4" r="3" fill="#2179bc"/><circle cx="131.2" cy="41.6" r="3" fill="#2179bc"/><circle cx="145.6" cy="30.8" r="3" fill="#2179bc"/><circle cx="160.0" cy="20.0" r="3" fill="#2179bc"/><circle cx="16" cy="73" r="4" fill="white" stroke="#174674" stroke-width="2"/><circle cx="64" cy="42" r="4" fill="white" stroke="#174674" stroke-width="2"/><circle cx="112" cy="56" r="4" fill="white" stroke="#174674" stroke-width="2"/><circle cx="160" cy="20" r="4" fill="white" stroke="#174674" stroke-width="2"/></svg><span>선형 보간 · 100 Hz</span></div>
-  <i aria-hidden="true"></i>
-  <div class="policy-stage"><strong>AI Worker</strong><img src="../assets/images/ai-worker-inference-scene.webp" alt="" loading="lazy"><span>Isaac Lab 시뮬레이션</span></div>
+<div class="inference-setup" role="img" aria-label="Isaac Lab의 AI Worker가 머리·양손목 카메라 영상과 로봇 상태를 ROS 2로 전달한다. GR00T N1.7은 작업 지시와 관측값으로 30 Hz 간격의 관절 목표값을 예측하고, 제어 루프가 선형 보간한 명령을 100 Hz로 돌려보낸다.">
+  <div class="sim-terminal">
+    <div class="terminal-heading">Isaac Lab <small>시뮬레이터</small></div>
+    <div class="sim-viewport"><img src="../assets/images/ai-worker-inference-scene.webp" alt=""><b>AI Worker</b></div>
+  </div>
+  <div class="ros-link">
+    <strong>ROS 2</strong>
+    <span class="signal observation">카메라 영상 · 로봇 상태</span>
+    <span class="signal command">제어 명령 · 100 Hz</span>
+  </div>
+  <div class="runtime-terminal">
+    <div class="terminal-heading">정책 런타임</div>
+    <div class="runtime-stack"><small>작업 지시 + 관측값</small><b>GR00T N1.7</b><span>↓ 관절 목표값 · 30 Hz</span><b>제어 루프 <small>선형 보간</small></b></div>
+  </div>
 </div></div>
         </details>
 
